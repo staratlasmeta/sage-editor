@@ -1,0 +1,91 @@
+## Tiered Build Variants (Min | Mid | Max)
+
+*Order inside a tier: **Components → Modules → Weapons → Counter‑measures → Missiles → Drones***
+
+---
+
+### Scanning
+
+* **Min** (T1) — Components: Scanner Array
+* **Mid** (T3) — Components: Heat Sink · Power Core · Scanner Array  |  Drones: Scan Drones
+* **Max** (T5) — Components: Heat Sink · Power Core · Subwarp Engine · Warp Drive · Maneuvering Thrusters · Scanner Array · Drone Port · Hull Reinforcement · Shield Generator  |  Drones: Scan Drones
+
+### Salvage
+
+* **Min** (T1) — Components: Salvage Rig · Tractor Beam
+* **Mid** (T3) — Components: Heat Sink · Power Core · Salvage Rig · Tractor Beam · Tow Rig · Cargo Module  |  Drones: Salvage Drones
+* **Max** (T5) — Components: Heat Sink · Power Core · Subwarp Engine · Warp Drive · Maneuvering Thrusters · Salvage Rig · Tractor Beam · Tow Rig · Cargo Module · Drone Port · Hull Reinforcement · Shield Generator  |  Drones: Salvage Drones
+
+### Repair
+
+* **Min** (T1) — Components: Repair Rig  |  Counter‑measures: Healing Nanobots
+* **Mid** (T3) — Components: Heat Sink · Power Core · Repair Rig  |  Counter‑measures: Healing Nanobots  |  Drones: Repair Drones
+* **Max** (T5) — Components: Heat Sink · Power Core · Repair Rig · Drone Port · Hull Reinforcement · Shield Generator  |  Counter‑measures: Healing Nanobots  |  Drones: Repair Drones
+
+### Rescue
+
+* **Min** (T1) — Components: Rescue Rig  |  Modules: Passenger Module
+* **Mid** (T3) — Components: Heat Sink · Power Core · Rescue Rig  |  Modules: Passenger Module  |  Drones: Rescue Drones
+* **Max** (T5) — Components: Heat Sink · Power Core · Rescue Rig · Drone Port · Hull Reinforcement · Shield Generator  |  Modules: Passenger Module  |  Drones: Rescue Drones
+
+### Fast Freight
+
+* **Min** (T1) — Components: Subwarp Engine · Warp Drive · Fuel Module
+* **Mid** (T3) — Components: Heat Sink · Power Core · Subwarp Engine · Warp Drive · Maneuvering Thrusters · Tractor Beam · Tow Rig · Fuel Module  |  Drones: Freight Drones
+* **Max** (T5) — Components: Heat Sink · Power Core · Shield Generator · Subwarp Engine · Warp Drive · Maneuvering Thrusters · Tractor Beam · Tow Rig · Fuel Module · Drone Port  |  Drones: Freight Drones
+
+### Cargo Boost
+
+* **Min** (T1) — Components: Cargo Module
+* **Mid** (T3) — Components: Heat Sink · Power Core · Subwarp Engine · Tractor Beam · Tow Rig · Cargo Module  |  Drones: Freight Drones
+* **Max** (T5) — Components: Heat Sink · Power Core · Subwarp Engine · Tractor Beam · Tow Rig · Cargo Module · Drone Port  |  Drones: Freight Drones
+
+### Mining
+
+* **Min** (T1) — Components: Mining Rig · Tractor Beam  |  Modules: Cargo Module
+* **Mid** (T3) — Components: Heat Sink · Power Core · Mining Rig · Tractor Beam · Cargo Module  |  Drones: Mining Drones
+* **Max** (T5) — Components: Heat Sink · Power Core · Subwarp Engine · Warp Drive · Maneuvering Thrusters · Mining Rig · Tractor Beam · Cargo Module · Drone Port · Hull Reinforcement · Shield Generator  |  Weapons: Heat Weapon · Shockwave Weapon  |  Drones: Mining Drones
+
+*Heat and Shockwave weapons help fracture asteroids faster on Mid/Max builds.*
+
+### Kinetic Damage
+
+* **Min** (T1) — Modules: Ammo Module  |  Weapons: Kinetic Weapon
+* **Mid** (T3) — Components: Heat Sink · Power Core · Missile Bay  |  Modules: Ammo Module  |  Weapons: Kinetic Weapon  |  Counter‑measures: Flare  |  Missiles: Explosive Missiles  |  Drones: Combat Kinetic Drones
+* **Max** (T5) — Components: Heat Sink · Power Core · Subwarp Engine · Warp Drive · Maneuvering Thrusters · Missile Bay · Drone Port · Hull Reinforcement · Shield Generator  |  Modules: Ammo Module  |  Weapons: Kinetic Weapon  |  Counter‑measures: Flare  |  Missiles: Explosive Missiles  |  Drones: Combat Kinetic Drones
+
+### Energy Damage
+
+* **Min** (T1) — Modules: Ammo Module  |  Weapons: Energy Weapon
+* **Mid** (T3) — Components: Heat Sink · Power Core · Missile Bay  |  Modules: Ammo Module  |  Weapons: Energy Weapon  |  Counter‑measures: Energy Capacitor  |  Missiles: Photon Missiles  |  Drones: Combat Energy Drones
+* **Max** (T5) — Components: Heat Sink · Power Core · Subwarp Engine · Warp Drive · Maneuvering Thrusters · Missile Bay · Drone Port · Hull Reinforcement · Shield Generator  |  Modules: Ammo Module  |  Weapons: Energy Weapon  |  Counter‑measures: Energy Capacitor  |  Missiles: Photon Missiles  |  Drones: Combat Energy Drones
+
+### EMP Damage
+
+* **Min** (T1) — Modules: Ammo Module  |  Weapons: EMP Weapon
+* **Mid** (T3) — Components: Heat Sink · Power Core · Missile Bay  |  Modules: Ammo Module  |  Weapons: EMP Weapon  |  Counter‑measures: Faraday Shielding  |  Missiles: EMP Missiles  |  Drones: Combat EMP Drones
+* **Max** (T5) — Components: Heat Sink · Power Core · Subwarp Engine · Warp Drive · Maneuvering Thrusters · Missile Bay · Drone Port · Hull Reinforcement · Shield Generator  |  Modules: Ammo Module  |  Weapons: EMP Weapon  |  Counter‑measures: Faraday Shielding  |  Missiles: EMP Missiles  |  Drones: Combat EMP Drones
+
+### Superchill Damage
+
+* **Min** (T1) — Modules: Ammo Module  |  Weapons: Superchill Weapon
+* **Mid** (T3) — Components: Heat Sink · Power Core · Missile Bay  |  Modules: Ammo Module  |  Weapons: Superchill Weapon  |  Counter‑measures: Warming Plates  |  Missiles: Superchill Missiles  |  Drones: Combat Superchill Drones
+* **Max** (T5) — Components: Heat Sink · Power Core · Subwarp Engine · Warp Drive · Maneuvering Thrusters · Missile Bay · Drone Port · Hull Reinforcement · Shield Generator  |  Modules: Ammo Module  |  Weapons: Superchill Weapon  |  Counter‑measures: Warming Plates  |  Missiles: Superchill Missiles  |  Drones: Combat Superchill Drones
+
+### Shockwave Damage
+
+* **Min** (T1) — Modules: Ammo Module  |  Weapons: Shockwave Weapon
+* **Mid** (T3) — Components: Heat Sink · Power Core · Missile Bay  |  Modules: Ammo Module  |  Weapons: Shockwave Weapon  |  Counter‑measures: Negative REM Plating  |  Missiles: Shockwave Missiles  |  Drones: Combat Shockwave Drones
+* **Max** (T5) — Components: Heat Sink · Power Core · Subwarp Engine · Warp Drive · Maneuvering Thrusters · Missile Bay · Drone Port · Hull Reinforcement · Shield Generator  |  Modules: Ammo Module  |  Weapons: Shockwave Weapon  |  Counter‑measures: Negative REM Plating  |  Missiles: Shockwave Missiles  |  Drones: Combat Shockwave Drones
+
+### Gray Goo Damage
+
+* **Min** (T1) — Modules: Ammo Module  |  Weapons: Gray Goo Weapon
+* **Mid** (T3) — Components: Heat Sink · Power Core · Missile Bay  |  Modules: Ammo Module  |  Weapons: Gray Goo Weapon  |  Counter‑measures: Healing Nanobots  |  Missiles: Gray Goo Missiles  |  Drones: Combat Gray Goo Drones
+* **Max** (T5) — Components: Heat Sink · Power Core · Subwarp Engine · Warp Drive · Maneuvering Thrusters · Missile Bay · Drone Port · Hull Reinforcement · Shield Generator  |  Modules: Ammo Module  |  Weapons: Gray Goo Weapon  |  Counter‑measures: Healing Nanobots  |  Missiles: Gray Goo Missiles  |  Drones: Combat Gray Goo Drones
+
+### Heat Damage
+
+* **Min** (T1) — Modules: Ammo Module  |  Weapons: Heat Weapon
+* **Mid** (T3) — Components: Heat Sink · Power Core · Missile Bay  |  Modules: Ammo Module  |  Weapons: Heat Weapon  |  Counter‑measures: Fire Suppressor  |  Missiles: Heat Missiles  |  Drones: Combat Heat Drones
+* **Max** (T5) — Components: Heat Sink · Power Core · Subwarp Engine · Warp Drive · Maneuvering Thrusters · Missile Bay · Drone Port · Hull Reinforcement · Shield Generator  |  Modules: Ammo Module  |  Weapons: Heat Weapon  |  Counter‑measures: Fire Suppressor  |  Missiles: Heat Missiles  |  Drones: Combat Heat Drones

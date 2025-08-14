@@ -1,0 +1,28 @@
+{
+	"folders": [
+		{
+			"name": "Ship Config Lite",
+			"path": "Ship Config Lite"
+		},
+		{
+			"name": "Loot Matrix",
+			"path": "Loot Matrix"
+		},
+		{
+			"name": "SAGE Map Editor",
+			"path": "SAGE Map Editor"
+		},
+		{
+			"name": "Claim Stakes Simulator",
+			"path": "Claim Stakes Simulator"
+		},
+		{
+			"name": "SAGE Editor Suite",
+			"path": "SAGE Editor Suite"
+		},
+		{
+			"path": "Research Nodes"
+		}
+	],
+	"settings": {}
+}

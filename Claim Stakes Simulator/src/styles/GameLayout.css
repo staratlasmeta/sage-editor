@@ -1,0 +1,297 @@
+.game-layout {
+    background-color: #121212;
+    /* Primary Background */
+    color: #FFFFFF;
+    /* Primary Text */
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.top-bar {
+    background-color: #1E1E1E;
+    /* Secondary Background */
+    color: #FFFFFF;
+    /* Primary Text */
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sidebar {
+    background-color: #2D2D2D;
+    /* Tertiary Background */
+    color: #FFFFFF;
+    /* Primary Text */
+    width: 250px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar .menu-item {
+    color: #AAAAAA;
+    /* Secondary Text */
+    padding: 10px 0;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.sidebar .menu-item:hover {
+    color: #3A86FF;
+    /* Accent Primary */
+}
+
+.content {
+    background-color: #1E1E1E;
+    /* Secondary Background */
+    color: #FFFFFF;
+    /* Primary Text */
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.game-nav {
+    grid-column: 1;
+    background: #1e1e1e;
+    color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-right: 1px solid #333;
+    position: fixed;
+    width: 250px;
+    height: 100vh;
+    overflow-y: auto;
+    padding-top: 60px;
+    z-index: 100;
+}
+
+.nav-primary {
+    padding: 12px 0;
+    border-bottom: 1px solid #333;
+    display: block;
+}
+
+.nav-item {
+    width: 100%;
+    padding: 12px 16px;
+    text-align: left;
+    background: none;
+    border: none;
+    color: #e0e0e0;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-icon {
+    font-size: 1.2em;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-item:hover {
+    background: #2d2d2d;
+}
+
+.nav-item.active {
+    background: #3a3a3a;
+    color: #4a90e2;
+}
+
+/* Purchase Claim Stake button styling */
+.purchase-item {
+    margin-top: 8px;
+    background: rgba(58, 134, 255, 0.1);
+    /* Accent Primary with opacity */
+    border: 1px dashed rgba(58, 134, 255, 0.4);
+    /* Accent Primary with opacity */
+    border-radius: 4px;
+    color: #FFFFFF;
+    /* Primary Text from GDD */
+    transition: all 0.3s ease;
+}
+
+.purchase-item:hover {
+    background: rgba(58, 134, 255, 0.2);
+    /* Brighter background on hover */
+    border-color: #3A86FF;
+    /* Accent Primary from GDD */
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.plus-icon {
+    color: #3A86FF;
+    /* Accent Primary from GDD */
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.nav-section {
+    border-top: none;
+}
+
+.section-header {
+    width: 100%;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.section-header:hover {
+    color: #ccc;
+}
+
+.expand-icon {
+    font-size: 0.8em;
+    transition: transform 0.2s;
+}
+
+.expand-icon.expanded {
+    transform: rotate(90deg);
+}
+
+.claim-count {
+    margin-left: auto;
+    font-size: 0.8em;
+    color: #666;
+}
+
+.nav-claim-stakes {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-left: 12px;
+}
+
+.no-claims-message {
+    padding: 12px;
+    color: #666;
+    font-size: 0.9em;
+    font-style: italic;
+}
+
+.game-content {
+    grid-column: 2;
+    padding-top: 60px;
+    /* Space for the resource bar */
+    overflow-y: auto;
+    background: #1a1a1a;
+    width: 100%;
+    height: calc(100vh - 60px);
+    /* Adjusted to viewport height minus top bar */
+}
+
+/* Add these new styles */
+.game-content.full-width {
+    padding: 60px 0 0 0;
+    width: 100%;
+}
+
+.game-simulator {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+}
+
+.simulator-content {
+    height: calc(100vh - 70px);
+    width: calc(100vw - 300px);
+    margin-left: 250px;
+    padding: 10px 50px 10px 10px;
+    background: #1e1e1e;
+    border-radius: 0;
+    box-shadow: none;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.tab-content {
+    height: calc(100% - 48px);
+    /* Subtract tab navigation height */
+    overflow-y: auto;
+    overflow-x: hidden;
+    /* Prevent horizontal scrolling */
+    padding: 16px 35px 16px 16px;
+    /* Increased right padding from 25px to 35px */
+    width: calc(100% - 50px);
+    /* Adjusted width to account for increased padding */
+}
+
+.resource-bar {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    background: #2a2a2a;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-top: 1px solid #333;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    z-index: 1000;
+}
+
+.resource-toggle {
+    display: flex;
+    gap: 8px;
+}
+
+.resource-toggle button {
+    padding: 6px 12px;
+    background: #333;
+    border: none;
+    color: #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.resource-toggle button.active {
+    background: #4a90e2;
+    color: white;
+}
+
+.resource-display {
+    flex: 1;
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 0 20px;
+}
+
+.resource-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80px;
+}
+
+.resource-name {
+    font-size: 0.8em;
+    color: #888;
+}
+
+.resource-value {
+    font-weight: bold;
+}

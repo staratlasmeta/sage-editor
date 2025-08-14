@@ -1,0 +1,73 @@
+,Model,Manufacturer,Spec,Class,Hull Tier,Power Core Model,Power Core Tier,Shield Generator Model,Shield Generator Tier,Hull Reinforcement Model,Hull Reinforcement Tier,Warp Drive Model,Warp Drive Tier,Subwarp Engine Model,Subwarp Engine Tier,Maneuvering Thrusters Model,Maneuvering Thrusters Tier,Heat Sink Model,Heat Sink Tier,Scanner Array Model,Scanner Array Tier,Tractor Beam Model,Tractor Beam Tier,Fixed Wep Class 1,Fixed Wep Qty 1,Fixed Wep Class 2,Fixed Wep Qty 2,Fixed Wep Class 3,Fixed Wep Qty 3,Fixed Wep Class 4,Fixed Wep Qty 4,Missile Bay Class 1,Missile Bay Qty 1,Missile Bay Class 2,Missile Bay Qty 2,Missile Bay Class 3,Missile Bay Qty 3,Missile Bay Class 4,Missile Bay Qty 4,CM System Class 1,CM System Qty 1,CM System Class 2,CM System Qty 2,CM System Class 3,CM System Qty 3,CM System Class 4,CM System Qty 4
+FBL_AIRBIKE,AIRBIKE,Fimbul,Racer,1,1,Balanced,2,Regen,2,Balanced,2,Eco,2,Speed,3,Racer,2,Eco,2,Eco,1,Balanced,1,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+OPL_JET,JET,Opal,Racer,1,1,Balanced,3,Regen,2,Balanced,3,Eco,5,Speed,3,Racer,3,Eco,3,Eco,1,Balanced,3,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+VZS_SOLOS,SOLOS,VZUS,Racer,1,1,Balanced,3,Regen,1,Balanced,5,Eco,3,Speed,2,Racer,4,Eco,4,Eco,2,Balanced,2,1,1,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+OGR_RUCH,RUCH,Ogrika,Racer,1,1,Balanced,2,Regen,3,Balanced,2,Eco,1,Speed,2,Racer,3,Eco,3,Eco,2,Balanced,1,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FBE_UNIBOMBA,UNIBOMBA,Fimbul ECOS,Bomber,1,1,Balanced,5,ShieldPoints,4,Armor,4,Eco,4,Eco,4,Balanced,3,Stealth,5,Balanced,4,Eco,3,1,2,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+PRC_X4,X4,Pearce,Fighter,1,1,Balanced,3,Balanced,2,Armor,2,Eco,5,Speed,3,Agility,2,Balanced,3,Eco,3,Eco,3,1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+BSN_PULSE,PULSE,Busan,Racer,1,1,Balanced,3,Regen,3,Balanced,2,Eco,1,Speed,3,Racer,2,Eco,4,Eco,3,Balanced,1,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+OPL_JETJET,JETJET,Opal,Racer,2,1,Balanced,4,Regen,3,Balanced,4,Eco,5,Speed,3,Racer,4,Eco,4,Eco,3,Balanced,4,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,0,0,0,0,0,0
+FBL_LOWBIE,LOWBIE,Fimbul,Transport,2,1,Balanced,1,ShieldPoints,1,Eco,1,Distance,1,Transport,1,Eco,1,Stealth,1,Eco,1,Eco,1,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,0,0,0,0,0,0
+PRC_X5,X5,Pearce,Fighter,2,1,Balanced,3,Balanced,2,Armor,1,Eco,4,Speed,2,Agility,1,Balanced,2,Eco,2,Eco,3,2,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,0,0,0,0,0,0
+OGR_NIRUCH,NIRUCH,Ogrika,Transport,2,1,Balanced,2,ShieldPoints,3,Eco,2,Distance,1,Transport,2,Eco,3,Stealth,3,Eco,2,Eco,1,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0,0,0,0
+CLC_SCUD,SCUD,Calico,Racer,2,1,Balanced,2,Regen,2,Balanced,2,Eco,2,Speed,3,Racer,1,Eco,4,Eco,2,Balanced,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,0,0,0,0,0,0
+CLC_MAXHOG,MAXHOG,Calico,Transport,2,1,Balanced,2,ShieldPoints,2,Eco,2,Distance,2,Transport,3,Eco,1,Stealth,4,Eco,2,Eco,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0,0,0,0
+FBL_CHICKUN,CHICKUN,Fimbul,Smuggler,2,1,Balanced,1,Eco,1,Balanced,1,Distance,1,Balanced,1,Balanced,1,Stealth,1,Balanced,1,Eco,1,3,1,2,1,0,0,0,0,0,0,0,0,0,0,0,0,2,1,0,0,0,0,0,0
+BSN_EYESFORAMOMENT,EYESFORAMOMENT,Busan,Racer,2,1,Balanced,3,Regen,3,Balanced,2,Eco,1,Speed,3,Racer,2,Eco,4,Eco,3,Balanced,1,1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,0,0,0,0,0,0
+VZS_AMBWE,AMBWE,VZUS,Bounty Hunter,3,1,Balanced,3,Eco,1,Balanced,5,Eco,3,Balanced,2,Agility,4,Stealth,5,Targeting,2,Eco,2,3,2,2,2,0,0,0,0,2,3,0,0,0,0,0,0,3,2,0,0,0,0,0,0
+RNB_CHI,CHI,Rainbow,Fighter,3,1,Balanced,6,Balanced,3,Armor,3,Eco,5,Speed,4,Agility,2,Balanced,4,Eco,2,Eco,3,3,4,0,0,0,0,0,0,3,2,0,0,0,0,0,0,3,1,2,2,0,0,0,0
+FBB_EARP,EARP,Fimbul BYOS,Fighter,3,1,Balanced,4,Balanced,2,Armor,3,Eco,2,Speed,4,Agility,2,Balanced,2,Eco,1,Eco,1,4,2,0,0,0,0,0,0,3,2,0,0,0,0,0,0,3,2,0,0,0,0,0,0
+TUF_FEIST,FEIST,Tufa,Fighter,3,1,Balanced,5,Balanced,1,Armor,4,Eco,2,Speed,5,Agility,3,Balanced,2,Eco,3,Eco,3,4,1,3,2,0,0,0,0,2,4,0,0,0,0,0,0,3,2,0,0,0,0,0,0
+CLC_MEDTECH,MEDTECH,Calico,Rescue,3,1,Balanced,2,Eco,2,Eco,2,Cooldown,2,Balanced,3,Agility,1,Eco,4,Balanced,2,Rate,2,2,2,1,2,0,0,0,0,2,2,0,0,0,0,0,0,2,4,0,0,0,0,0,0
+OGR_MIK,MIK,Ogrika,Fighter,3,1,Balanced,2,Balanced,3,Armor,2,Eco,1,Speed,2,Agility,3,Balanced,3,Eco,2,Eco,1,4,1,2,4,0,0,0,0,4,1,0,0,0,0,0,0,3,1,2,2,0,0,0,0
+PRC_R6,R6,Pearce,Repair,3,1,Balanced,3,Balanced,2,Balanced,2,Balanced,5,Balanced,3,Balanced,1,Eco,2,Sensitivity,3,Balanced,3,3,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,1,0,0,0,0,0,0
+BSN_THRILLOFLIFE,THRILLOFLIFE,Busan,Fighter,3,1,Balanced,3,Balanced,3,Armor,2,Eco,1,Speed,3,Agility,2,Balanced,4,Eco,3,Eco,1,4,2,0,0,0,0,0,0,1,8,0,0,0,0,0,0,3,2,0,0,0,0,0,0
+PRC_X6,X6,Pearce,Fighter,3,1,Balanced,3,Balanced,2,Armor,1,Eco,4,Speed,2,Agility,1,Balanced,2,Eco,2,Eco,3,3,2,2,4,0,0,0,0,3,1,2,2,0,0,0,0,3,2,0,0,0,0,0,0
+ARM_TIP,TIP,Armstrong Industries,Miner,3,1,Balanced,3,Balanced,2,Armor,2,Balanced,2,Eco,2,Eco,1,Balanced,2,Balanced,4,Rate,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,1,2,2,0,0,0,0
+OPL_RAYFAM,RAYFAM,Opal,Data Runner,3,1,Balanced,2,Eco,1,Eco,2,Cooldown,4,Balanced,1,Balanced,2,Stealth,2,DataRunner,1,Eco,3,3,2,0,0,0,0,0,0,2,2,0,0,0,0,0,0,3,1,2,2,0,0,0,0
+CLC_SHIPIT,SHIPIT,Calico,Freight,3,1,Balanced,2,Balanced,2,Balanced,2,Freighter,2,Eco,3,Eco,1,Balanced,4,Balanced,2,Rate,2,3,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,1,0,0,0,0,0,0
+VZS_ARMA,ARMA,VZUS,Fighter,3,1,Balanced,3,Balanced,1,Armor,4,Eco,2,Speed,1,Agility,3,Balanced,3,Eco,1,Eco,2,3,4,0,0,0,0,0,0,3,2,0,0,0,0,0,0,3,1,2,2,0,0,0,0
+CLC_ATSENFORCER,ATSENFORCER,Calico,Fighter,4,1,Balanced,2,Balanced,2,Armor,2,Eco,2,Speed,3,Agility,1,Balanced,4,Eco,2,Eco,2,6,1,0,0,0,0,0,0,1,8,0,16,0,0,0,0,4,3,0,0,0,0,0,0
+CLC_COMPAKTHERO,COMPAKTHERO,Calico,Multi-Role,4,1,Balanced,3,Balanced,3,Balanced,3,Balanced,3,Balanced,4,Balanced,3,Balanced,5,Balanced,3,Balanced,2,4,2,3,2,0,0,0,0,4,1,2,2,0,0,0,0,4,2,3,2,0,0,0,0
+CLC_EVAC,EVAC,Calico,Rescue,4,1,Balanced,2,Eco,2,Eco,2,Cooldown,2,Balanced,3,Agility,1,Eco,4,Balanced,2,Rate,2,3,2,2,2,0,0,0,0,3,2,0,0,0,0,0,0,4,1,3,1,2,2,0,0
+PRC_F4,F4,Pearce,Fighter,4,1,Balanced,3,Balanced,2,Armor,1,Eco,4,Speed,2,Agility,1,Balanced,2,Eco,2,Eco,3,4,4,0,0,0,0,0,0,4,2,0,0,0,0,0,0,5,1,4,1,0,0,0,0
+FBL_MAMBA,MAMBA,Fimbul,Bounty Hunter,4,1,Balanced,1,Eco,1,Balanced,1,Eco,1,Balanced,1,Agility,1,Stealth,1,Targeting,1,Eco,1,4,4,0,0,0,0,0,0,3,1,0,0,0,0,0,0,4,1,3,2,0,0,0,0
+FBL_MAMBAEX,MAMBAEX,Fimbul,Bounty Hunter,4,1,Balanced,1,Eco,1,Balanced,1,Eco,1,Balanced,1,Agility,1,Stealth,1,Targeting,1,Eco,1,5,2,0,0,0,0,0,0,4,1,0,0,0,0,0,0,4,1,3,2,0,0,0,0
+CLC_SKIPTRACE,SKIPTRACE,Calico,Bounty Hunter,4,1,Balanced,2,Eco,2,Balanced,2,Eco,2,Balanced,3,Agility,1,Stealth,3,Targeting,2,Eco,2,3,4,2,2,0,0,0,0,3,2,0,0,0,0,0,0,4,1,3,2,0,0,0,0
+RNB_OM,OM,Rainbow,Freight,4,1,Balanced,6,Balanced,3,Balanced,3,Freighter,5,Eco,4,Eco,2,Balanced,4,Balanced,2,Rate,3,3,4,0,0,0,0,0,0,3,1,0,0,0,0,0,0,4,1,3,2,0,0,0,0
+VZS_OPOD,OPOD,VZUS,Data Runner,4,1,Balanced,3,Eco,1,Eco,3,Cooldown,2,Balanced,1,Balanced,3,Stealth,3,DataRunner,2,Eco,2,3,2,2,2,0,0,0,0,3,2,0,0,0,0,0,0,4,1,3,2,0,0,0,0
+FBB_RANGER,RANGER,Fimbul BYOS,Data Runner,4,1,Balanced,4,Eco,2,Eco,3,Cooldown,2,Balanced,4,Balanced,2,Stealth,2,DataRunner,2,Eco,1,3,3,0,0,0,0,0,0,3,2,0,0,0,0,0,0,4,1,3,2,0,0,0,0
+FBB_PACKLITE,PACKLITE,Fimbul BYOS,Freight,4,1,Balanced,4,Balanced,2,Balanced,4,Freighter,3,Eco,5,Eco,2,Balanced,2,Balanced,1,Rate,1,4,2,0,0,0,0,0,0,3,1,0,0,0,0,0,0,4,1,3,2,0,0,0,0
+OGR_TURSIC,TURSIC,Ogrika,Fighter,4,1,Balanced,2,Balanced,3,Armor,2,Eco,2,Speed,2,Agility,3,Balanced,3,Eco,2,Eco,1,4,4,0,0,0,0,0,0,4,1,3,2,0,0,0,0,4,2,3,2,0,0,0,0
+ARM_TAP,TAP,Armstrong Industries,Miner,4,1,Balanced,3,Balanced,2,Armor,2,Balanced,2,Eco,2,Eco,1,Balanced,2,Balanced,4,Rate,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,1,3,2,0,0,0,0
+BSN_ASHOFWINDS,ASHOFWINDS,Busan,Salvage,4,1,Balanced,3,Balanced,3,Balanced,2,Fuel Efficiency,1,Eco,3,Eco,2,Eco,4,Sensitivity,3,Rate,1,4,1,2,2,0,0,0,0,3,1,0,0,0,0,0,0,4,1,0,0,0,0,0,0
+FLD_AEROSPACEONE,AEROSPACEONE,Floyd Line,Freight,4,1,Balanced,1,Balanced,1,Balanced,1,Freighter,2,Eco,1,Eco,3,Balanced,1,Balanced,2,Rate,3,3,4,0,0,0,0,0,0,3,2,0,0,0,0,0,0,4,1,3,2,0,0,0,0
+RNB_ARC,ARC,Rainbow,Freight,5,1,Balanced,6,Balanced,3,Balanced,3,Freighter,5,Eco,4,Eco,2,Balanced,4,Balanced,2,Rate,3,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+OPL_BITBOAT,BITBOAT,Opal,Transport,5,1,Balanced,2,ShieldPoints,2,Eco,3,Distance,5,Transport,2,Eco,2,Stealth,2,Eco,2,Eco,3,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FBE_GREENADER,GREENADER,Fimbul ECOS,Bomber,5,1,Balanced,4,ShieldPoints,2,Armor,3,Eco,2,Eco,2,Balanced,1,Stealth,4,Balanced,2,Eco,2,5,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+PRC_R8,R8,Pearce,Refuel/Repair,5,1,Balanced,3,Balanced,2,Balanced,1,FuelEfficiency,5,FuelEfficiency,3,Balanced,1,Eco,2,Eco,3,Balanced,3,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+OGR_SUNPAA,SUNPAA,Ogrika,Freight,5,1,Balanced,2,Balanced,3,Balanced,2,Freighter,2,Eco,3,Eco,4,Balanced,3,Balanced,3,Rate,1,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+OGR_THRIPID,THRIPID,Ogrika,Fighter,5,1,Balanced,2,Balanced,3,Armor,2,Eco,1,Speed,2,Agility,3,Balanced,3,Eco,2,Eco,1,5,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FBB_BUTCH,BUTCH,Fimbul BYOS,Fighter,5,1,Balanced,4,Balanced,2,Armor,3,Eco,2,Speed,3,Agility,2,Balanced,2,Eco,1,Eco,1,6,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+BSN_GOLDENFLAW,GOLDENFLAW,Busan,Repair,5,1,Balanced,3,Balanced,3,Balanced,2,Balanced,1,Balanced,3,Balanced,2,Eco,4,Sensitivity,3,Balanced,1,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FBL_BENZENE,BENZENE,Fimbul,Tow,5,1,Balanced,1,Balanced,1,Balanced,1,Balanced,1,Balanced,1,Balanced,1,Eco,1,Balanced,1,Rate,1,5,1,4,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+VZS_UNU,UNU,VZUS,Bounty Hunter,5,1,Balanced,3,Eco,1,Balanced,4,Eco,2,Balanced,1,Agility,3,Stealth,3,Targeting,1,Eco,2,5,2,4,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+VZS_BALLAD,BALLAD,VZUS,Fighter,6,1,Balanced,3,Balanced,1,Armor,4,Eco,2,Speed,1,Agility,3,Balanced,3,Eco,1,Eco,2,6,2,5,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FBE_BOMBARELLA,BOMBARELLA,Fimbul ECOS,Bomber,6,1,Balanced,4,ShieldPoints,2,Armor,3,Eco,2,Eco,2,Balanced,1,Stealth,4,Balanced,2,Eco,2,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+PRC_C9,C9,Pearce,Fighter,6,1,Balanced,3,Balanced,2,Armor,1,Eco,4,Speed,2,Agility,1,Balanced,2,Eco,2,Eco,3,7,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+PRC_D9,D9,Pearce,Salvage,6,1,Balanced,3,Balanced,2,Balanced,1,Fuel Efficiency,4,Eco,2,Eco,1,Eco,2,Sensitivity,2,Rate,3,5,2,4,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FBL_SLEDBARGE,SLEDBARGE,Fimbul,Freight,6,1,Balanced,1,Balanced,1,Balanced,1,Freighter,1,Eco,1,Eco,1,Balanced,1,Balanced,1,Rate,1,5,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CLC_GUARDIAN,GUARDIAN,Calico,Multi-Role,6,1,Balanced,2,Balanced,2,Balanced,2,Balanced,3,Balanced,4,Balanced,1,Balanced,5,Balanced,2,Balanced,2,5,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+OGR_JODASTERIS,JODASTERIS,Ogrika,Transport,6,1,Balanced,2,ShieldPoints,3,Eco,2,Distance,1,Transport,2,Eco,3,Stealth,3,Eco,2,Eco,1,4,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+BSN_MAIDENHEART,MAIDENHEART,Busan,Fighter,6,1,Balanced,3,Balanced,3,Armor,2,Eco,1,Speed,3,Agility,2,Balanced,4,Eco,3,Eco,1,6,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ARM_IMP,IMP,Armstrong Industries,Miner,6,1,Balanced,3,Balanced,2,Armor,2,Balanced,2,Eco,2,Eco,1,Balanced,2,Balanced,4,Rate,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+OGR_MARANN,MARANN,Ogrika,Fighter,6,1,Balanced,2,Balanced,3,Armor,2,Eco,1,Speed,2,Agility,3,Balanced,3,Eco,2,Eco,1,7,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+PRC_C11,C11,Pearce,Fighter,7,1,Balanced,3,Balanced,2,Armor,1,Eco,4,Speed,2,Agility,1,Balanced,2,Eco,2,Eco,3,7,2,5,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FBB_TANKSHIP,TANKSHIP,Fimbul BYOS,Fighter,7,1,Balanced,4,Balanced,2,Armor,3,Eco,2,Speed,4,Agility,2,Balanced,2,Eco,1,Eco,1,7,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FBE_TREEARROW,TREEARROW,Fimbul ECOS,Bomber,7,1,Balanced,4,ShieldPoints,2,Armor,3,Eco,2,Eco,2,Balanced,1,Stealth,4,Balanced,2,Eco,2,7,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+TUF_SPIRIT,SPIRIT,Tufa,Fighter,7,1,Balanced,5,Balanced,1,Armor,4,Eco,2,Speed,5,Agility,3,Balanced,2,Eco,3,Eco,3,7,2,6,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FBE_SUPERPHOENIX,SUPERPHOENIX,Fimbul ECOS,Bomber,9,1,Balanced,4,ShieldPoints,2,Armor,3,Eco,2,Eco,2,Balanced,1,Stealth,4,Balanced,2,Eco,2,7,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+PRC_T1,T1,Pearce,Fighter,9,1,Balanced,3,Balanced,2,Armor,1,Eco,4,Speed,2,Agility,1,Balanced,2,Eco,2,Eco,3,9,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+BSN_THELASTSTAND,THELASTSTAND,Busan,Fighter,9,1,Balanced,3,Balanced,3,Armor,2,Eco,1,Speed,3,Agility,2,Balanced,4,Eco,3,Eco,1,9,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+RNB_PHI,PHI,Rainbow,Fighter,9,1,Balanced,6,Balanced,3,Armor,2,Eco,5,Speed,4,Agility,2,Balanced,3,Eco,2,Eco,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+FBB_GALLOWSPINE,GALLOWSPINE,Fimbul BYOS,Fighter,9,1,Balanced,5,Balanced,3,Armor,1,Eco,4,Speed,4,Agility,2,Balanced,3,Eco,2,Eco,2,9,1,0,0,24,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0

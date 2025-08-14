@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<!-- Modularized Star Atlas Map Editor - This version uses split JavaScript modules instead of the monolithic script.js -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Atlas Map Editor</title>
+    <link rel="stylesheet" href="modern-style.css">
+    <link rel="stylesheet" href="layout-fix.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Chakra+Petch:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Include SVG Icons -->
+    <div id="svg-icons-container">
+        <!-- Use external SVG file instead of inline definitions -->
+        <object id="svg-icons" type="image/svg+xml" data="icons.svg" style="display: none;"></object>
+    </div>
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                Star Atlas Map Editor
+                <span class="file-info">
+                    <span id="currentFilename">Unsaved Map</span>
+                    <span id="saveStatusIndicator">(Saved)</span>
+                </span>
+            </div>
+            <div class="header-controls">
+                <div class="search-input-wrapper top-search">
+                    <input type="text" id="searchSystem" placeholder="Search systems...">
+                    <button type="button" id="clearSearchBtn" class="clear-search-btn" title="Clear search">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div id="mouseCoords" class="coords-display"></div>
+                <div id="systemCount" class="system-count"></div>
+                <a href="../SAGE Editor Suite/index.html" class="home-button" title="Return to SAGE Editor Suite">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Home
+                </a>
+            </div>
+        </header>
+        
+        <div class="main-content">
+            <div class="toolbar">
+                <div class="toolbar-section">
+                    <button id="newMapBtn" class="btn-action" data-tooltip="Create a new map">New</button>
+                    <button id="importBtn" class="btn-action" data-tooltip="Import map from file">Import</button>
+                    <button id="exportBtn" class="btn-action" data-tooltip="Export map to file">Export</button>
+                    <button id="fixDataBtn" class="btn-action" data-tooltip="Fix faction data in loaded systems">Fix Data</button>
+                </div>
+                <div class="toolbar-section">
+                    <button id="undoBtn" class="btn-action" data-tooltip="Undo last action" disabled>Undo</button>
+                    <button id="redoBtn" class="btn-action" data-tooltip="Redo last undone action" disabled>Redo</button>
+                    <button id="historyToggleBtn" class="btn-action" data-tooltip="Show/hide history panel">History</button>
+                </div>
+                <div class="toolbar-section">
+                    <button id="newSystemBtn" class="btn-action" data-tooltip="Create a new system at cursor">New System</button>
+                    <button id="deleteSystemBtn" class="btn-action" data-tooltip="Delete selected system(s)">Delete</button>
+                    <button id="copySystemBtn" class="btn-action" data-tooltip="Copy selected system">Copy</button>
+                    <button id="pasteSystemBtn" class="btn-action" data-tooltip="Paste system at cursor">Paste</button>
+                    <button id="linkSystemBtn" class="btn-action" data-tooltip="Link selected system to another">Link</button>
+                    <button id="deselectBtn" class="btn-action" data-tooltip="Deselect all systems" disabled>Deselect</button>
+                </div>
+                <div class="toolbar-section">
+                    <button id="resetViewBtn" class="btn-action" data-tooltip="Reset view and center map">Reset View</button>
+                    <button id="toggleGridBtn" class="btn-action toggle-btn active" data-tooltip="Show/hide grid">Grid</button>
+                    <button id="toggleSnapBtn" class="btn-action toggle-btn" data-tooltip="Snap to grid when moving">Snap</button>
+                    <button id="cycleSizeBtn" class="btn-action" data-tooltip="Cycle through system sizes">Size</button>
+                </div>
+                <div class="toolbar-section">
+                    <button id="createRegionBtn" class="btn-action" data-tooltip="Create a new region">Create Region</button>
+                    <button id="addToRegionBtn" class="btn-action" data-tooltip="Add selected system(s) to a region">Add to Region</button>
+                    <button id="removeFromRegionBtn" class="btn-action" data-tooltip="Remove selected system(s) from their region">Remove from Region</button>
+                    <button id="resourceRichnessBtn" class="btn-action" data-tooltip="Apply richness falloff to resources based on distance from origin">Resource Richness</button>
+                </div>
+                <div class="toolbar-section">
+                    <button id="manageFactionAreaBtn" class="btn-action toggle-btn" data-tooltip="Show/hide faction area">Faction Area</button>
+                </div>
+                <div class="toolbar-section">
+                    <button id="lockBtn" class="btn-action" data-tooltip="Lock selected system(s)" disabled>Lock</button>
+                    <button id="unlockBtn" class="btn-action" data-tooltip="Unlock selected system(s)" disabled>Unlock</button>
+                    <button id="lockAllBtn" class="btn-action toggle-btn" data-tooltip="Lock/Unlock all systems">Lock All</button>
+                </div>
+                <div class="toolbar-section">
+                    <button id="helpBtn" class="btn-action" data-tooltip="Show keyboard shortcuts">Help</button>
+                </div>
+            </div>
+            
+            <div class="workspace">
+                <div id="galaxyContainer" class="galaxy-container galaxy-view-container">
+                    <canvas id="galaxyView" class="galaxy-view" width="800" height="600"></canvas>
+                </div>
+                
+                <div id="detailsPanel" class="details-panel">
+                    <div class="details-tabs">
+                        <div class="details-tab active" data-tab="system-tab" data-tooltip="System Details">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1" fill="none"/>
+                                <circle cx="8" cy="8" r="3" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <div class="details-tab" data-tab="resources-tab" data-tooltip="Resources">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <!-- Planet with ring/orbit icon -->
+                                <circle cx="8" cy="8" r="4" fill="currentColor"/>
+                                <ellipse cx="8" cy="8" rx="7" ry="3" stroke="currentColor" stroke-width="1" fill="none"/>
+                            </svg>
+                        </div>
+                        <div class="details-tab" data-tab="filter-tab" data-tooltip="Filter">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2z"/>
+                            </svg>
+                        </div>
+                        <div class="details-tab" data-tab="history-tab" data-tooltip="History">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div id="system-tab" class="tab-content active">
+                        <div class="system-preview system-preview-container">
+                            <h3>System Preview</h3>
+                            <div class="system-preview-wrapper">
+                                <canvas id="systemPreview" width="300" height="300"></canvas>
+                            </div>
+                        </div>
+                        <div id="systemDetailContent" class="detail-content">
+                            <p>No system selected</p>
+                        </div>
+                    </div>
+                    
+                    <div id="resources-tab" class="tab-content">
+                        <div id="resourceDetailContent" class="detail-content">
+                            <p>Select a system to view resources</p>
+                        </div>
+                    </div>
+                    
+                    <div id="filter-tab" class="tab-content">
+                        <div id="resourceFilter" class="resource-filter"></div>
+                    </div>
+                    
+                    <div id="history-tab" class="tab-content">
+                        <div class="history-panel">
+                            <ul id="historyList" class="history-list"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load modularized scripts -->
+    <!-- Data Models and State (load first) -->
+    <script src="js/models.js"></script>
+    <script src="js/state.js"></script>
+    
+    <!-- Utility Functions -->
+    <script src="js/utils.js"></script>
+    <script src="js/helpers.js"></script>
+    
+    <!-- Core Functionality -->
+    <script src="js/canvas-drawing.js"></script>
+    <script src="js/system-operations.js"></script>
+    <script src="js/ui-handlers.js"></script>
+    <script src="js/file-operations.js"></script>
+    
+    <!-- Main Application (load last) -->
+    <script src="js/main.js"></script>
+    
+    <!-- Debug Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DEBUG: DOM Content Loaded');
+            console.log('DEBUG: Checking for canvas elements:');
+            console.log('galaxyView:', document.getElementById('galaxyView'));
+            console.log('systemPreview:', document.getElementById('systemPreview'));
+            
+            // Check if all required scripts are loaded
+            const requiredFunctions = [
+                'initCanvas', 'drawGalaxyMap', 'initUI', 'initCanvasHandlers',
+                'addStar', 'deleteStar', 'updateStarHeaders', 'saveState',
+                'undo', 'redo', 'displaySystemDetails', 'deepCopy'
+            ];
+            
+            console.log('DEBUG: Checking for required functions:');
+            requiredFunctions.forEach(funcName => {
+                console.log(`${funcName}: ${typeof window[funcName] === 'function' ? 'OK' : 'MISSING'}`);
+            });
+            
+            // Log global variables
+            console.log('DEBUG: Checking for global variables:');
+            const globalVars = ['mapData', 'systemLookup', 'selectedSystems', 'canvas', 'ctx'];
+            globalVars.forEach(varName => {
+                console.log(`${varName}: ${typeof window[varName] !== 'undefined' ? 'OK' : 'MISSING'}`);
+            });
+            
+            // Check SVG icons
+            console.log('DEBUG: Checking SVG icons');
+            const svgObject = document.getElementById('svg-icons');
+            if (svgObject) {
+                svgObject.addEventListener('load', function() {
+                    console.log('SVG icons loaded successfully');
+                });
+                
+                svgObject.addEventListener('error', function() {
+                    console.error('Failed to load SVG icons');
+                });
+            } else {
+                console.error('SVG icon container not found');
+            }
+            
+            // Directly define variables if still missing
+            if (typeof mapData === 'undefined') window.mapData = [];
+            if (typeof systemLookup === 'undefined') window.systemLookup = {};
+            if (typeof selectedSystems === 'undefined') window.selectedSystems = [];
+            if (typeof historyStack === 'undefined') window.historyStack = [];
+            if (typeof redoStack === 'undefined') window.redoStack = [];
+            
+            // Add a timeout check to verify everything loaded correctly
+            setTimeout(() => {
+                const missingFunctions = requiredFunctions.filter(funcName => 
+                    typeof window[funcName] !== 'function'
+                );
+                
+                if (missingFunctions.length > 0) {
+                    console.error('CRITICAL ERROR: Missing required functions:', missingFunctions);
+                    
+                    // Add a visible error message on the page
+                    const errorDiv = document.createElement('div');
+                    errorDiv.style.position = 'fixed';
+                    errorDiv.style.top = '0';
+                    errorDiv.style.left = '0';
+                    errorDiv.style.width = '100%';
+                    errorDiv.style.padding = '20px';
+                    errorDiv.style.backgroundColor = '#ff0000';
+                    errorDiv.style.color = 'white';
+                    errorDiv.style.zIndex = '9999';
+                    errorDiv.textContent = `Missing required functions: ${missingFunctions.join(', ')}. Check console for details.`;
+                    document.body.appendChild(errorDiv);
+                } else {
+                    console.log('All modules loaded successfully!');
+                    
+                    // Explicitly start the application
+                    if (typeof initApp === 'function') {
+                        console.log('Starting application...');
+                        initApp();
+                    } else {
+                        console.error('CRITICAL ERROR: initApp function not found');
+                        
+                        // Try to create a minimal fallback initialization
+                        console.log('Attempting fallback initialization...');
+                        
+                        // Create fallback init function
+                        function fallbackInit() {
+                            // Initialize critical components in the right order if possible
+                            if (typeof initCanvas === 'function') initCanvas();
+                            if (typeof initUI === 'function') initUI();
+                            if (typeof initCanvasHandlers === 'function') initCanvasHandlers();
+                            if (typeof drawGalaxyMap === 'function') drawGalaxyMap();
+                            
+                            // Show warning to user
+                            const warningDiv = document.createElement('div');
+                            warningDiv.style.position = 'fixed';
+                            warningDiv.style.top = '0';
+                            warningDiv.style.left = '0';
+                            warningDiv.style.width = '100%';
+                            warningDiv.style.padding = '10px';
+                            warningDiv.style.backgroundColor = '#ff9800';
+                            warningDiv.style.color = 'black';
+                            warningDiv.style.zIndex = '9999';
+                            warningDiv.style.textAlign = 'center';
+                            warningDiv.textContent = 'Warning: Application not properly initialized. Some features may not work.';
+                            document.body.appendChild(warningDiv);
+                        }
+                        
+                        fallbackInit();
+                    }
+                }
+            }, 500);
+        });
+    </script>
+</body>
+</html> 

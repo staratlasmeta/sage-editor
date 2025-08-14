@@ -1,0 +1,12 @@
+Asset,Type,Subtype,Config,Class,Tier,Qty,Ship Name
+Power Core,Component,Core,,XXS,T1,1,Fimbul Airbike
+Warp Drive,Component,Core,,XXS,T1,1,Fimbul Airbike
+Subwarp Engine,Component,Core,,XXS,T1,1,Fimbul Airbike
+Maneuvering Thrusters,Component,Core,,XXS,T1,1,Fimbul Airbike
+Shield Generator,Component,Core,,XXS,T1,1,Fimbul Airbike
+Scanner Array,Component,Core,,XXS,T1,1,Fimbul Airbike
+Tractor Beam,Component,Core,,XXS,T1,1,Fimbul Airbike
+Hull Reinforcement,Component,Core,,XXS,T1,1,Fimbul Airbike
+Heat Sink,Component,Core,,XXS,T1,1,Fimbul Airbike
+Fuel Module,Module,Swappable,Detail,XXS,T1,1,Fimbul Airbike
+Kinetic,Component,Weapon,,XXS,T1,2,Fimbul Airbike

@@ -1,0 +1,4860 @@
+{
+  "version": "1.0",
+  "timestamp": "2025-07-10T18:16:34.271Z",
+  "ship": {
+    "Ship Name": "Fimbul ECOS Treearrow",
+    "Manufacturer": "Fimbul ECOS",
+    "Spec": "Bomber",
+    "Class": 7,
+    "cargo_capacity": 828682,
+    "fuel_capacity": 696521,
+    "ammo_capacity": 934648,
+    "asteroid_mining_food_rate": 17.489,
+    "asteroid_mining_ammo_rate": 14.182,
+    "asteroid_mining_rate": 283.647,
+    "subwarp_speed": 0.0041,
+    "warp_speed": 0.1,
+    "max_warp_distance": 11.9,
+    "warp_cool_down": 540,
+    "warp_fuel_consumption": 13520.53,
+    "subwarp_fuel_consumption": 3714.43,
+    "planet_exit_fuel": 3714,
+    "scan_cool_down": 636,
+    "sduPerScan": 5592,
+    "scan_cost": 26332,
+    "required_crew": 118,
+    "passenger_capacity": 180,
+    "respawnTime": 494,
+    "ship_size": 240,
+    "warp_lane_speed": 0.9,
+    "warp_lane_fee": 250,
+    "warp_spool_time": 45,
+    "loading_rate": 9946.2,
+    "scan_power": 780,
+    "hit_points": 407940,
+    "shield_points": 163180,
+    "shield_recharge_rate": 3263.6,
+    "shield_break_delay": 6.5,
+    "damage": 187390,
+    "max_ap": 16,
+    "ap_recharge_time": 4.5,
+    "repair_cost": 815880,
+    "repair_rate": 5446,
+    "repair_ability": 30,
+    "repair_efficiency": 90,
+    "repair_cooldown": 135,
+    "loot_rate": 8286.8,
+    "ship_size_value": 13800000,
+    "lp_value\r": 347500,
+    "damage_kinetic": 0,
+    "damage_energy": 0,
+    "damage_emp": 0,
+    "damage_superchill": 0,
+    "damage_shockwave": 0,
+    "damage_graygoo": 0,
+    "damage_heat": 0,
+    "counter_decoy": 0,
+    "counter_energy_capacitor": 0,
+    "counter_fire_suppressor": 0,
+    "counter_flare": 0,
+    "counter_healing_nanobots": 0,
+    "counter_mine": 0,
+    "counter_negative_rem_plating": 0,
+    "counter_warming_plates": 0,
+    "counter_faraday_shielding": 0,
+    "damage_bomb": 0,
+    "crit_chance": 0,
+    "crit_multiplier": 0,
+    "damage_range": 0,
+    "stealth_power": 0,
+    "missile_power": 0,
+    "missile_capacity": 0,
+    "hit_chance": 0,
+    "hit_points_range": 0,
+    "shield_points_range": 0,
+    "stealth_power_range": 0,
+    "missile_power_range": 0,
+    "id": 38
+  },
+  "shipIdentifier": "fimbul-ecos-treearrow-fimbul-ecos",
+  "configurations": [
+    {
+      "name": "Default",
+      "components": {
+        "Ship Component": {},
+        "Ship Module": {},
+        "Ship Weapons": {},
+        "Countermeasures": {},
+        "Missiles": {},
+        "Bombs": {}
+      },
+      "locked": true
+    },
+    {
+      "name": "Tier One",
+      "components": {
+        "Ship Component": {
+          "Power Core": [
+            114439
+          ],
+          "Warp Drive": [
+            114549
+          ],
+          "Subwarp Engine": [
+            114494
+          ],
+          "Maneuvering Thrusters": [
+            114384
+          ],
+          "Shield Generator": [
+            114329
+          ],
+          "Heat Sink": [
+            40
+          ],
+          "Scanner Array": [
+            114604
+          ],
+          "Tractor Beam": [
+            114659
+          ],
+          "Hull Reinforcement": [
+            114769
+          ],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": [
+            115209
+          ]
+        },
+        "Ship Module": {
+          "Ammo Module": [
+            114103,
+            114103,
+            114103,
+            114103
+          ],
+          "Fuel Module": [
+            114219,
+            114219
+          ],
+          "Cargo Module": [
+            114164,
+            114164,
+            114164
+          ],
+          "Passenger Module": [
+            114274
+          ]
+        },
+        "Ship Weapons": {
+          "Kinetic": [
+            76881,
+            76876,
+            76876,
+            76876,
+            76876,
+            76876,
+            76876,
+            76871,
+            76871,
+            76871,
+            76871,
+            76871,
+            76871,
+            76871,
+            76871,
+            76866,
+            76866,
+            76866,
+            76866,
+            76866,
+            76866,
+            76866,
+            76866
+          ]
+        },
+        "Countermeasures": {
+          "Flare": [
+            115339,
+            115339,
+            115329,
+            115329,
+            115319,
+            115319,
+            115309,
+            115309,
+            115309,
+            115309
+          ]
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": [
+            116653
+          ]
+        }
+      },
+      "locked": true
+    },
+    {
+      "name": "Tier Two",
+      "components": {
+        "Ship Component": {
+          "Power Core": [
+            114440
+          ],
+          "Warp Drive": [
+            114550
+          ],
+          "Subwarp Engine": [
+            114495
+          ],
+          "Maneuvering Thrusters": [
+            114385
+          ],
+          "Shield Generator": [
+            114330
+          ],
+          "Heat Sink": [
+            41
+          ],
+          "Scanner Array": [
+            114605
+          ],
+          "Tractor Beam": [
+            114660
+          ],
+          "Hull Reinforcement": [
+            114770
+          ],
+          "Bomb Bay": [
+            115161,
+            115161
+          ],
+          "Drone Port": [
+            115210
+          ]
+        },
+        "Ship Module": {
+          "Ammo Module": [
+            114104,
+            114104,
+            114104,
+            114104
+          ],
+          "Fuel Module": [
+            114220,
+            114220
+          ],
+          "Cargo Module": [
+            114165,
+            114165,
+            114165
+          ],
+          "Passenger Module": [
+            114275
+          ]
+        },
+        "Ship Weapons": {
+          "Kinetic": [
+            76932,
+            76927,
+            76927,
+            76927,
+            76927,
+            76927,
+            76927,
+            76922,
+            76922,
+            76922,
+            76922,
+            76922,
+            76922,
+            76922,
+            76922,
+            76917,
+            76917,
+            76917,
+            76917,
+            76917,
+            76917,
+            76917,
+            76917
+          ]
+        },
+        "Countermeasures": {
+          "Flare": [
+            115541,
+            115541,
+            115531,
+            115531,
+            115521,
+            115521,
+            115511,
+            115511,
+            115511,
+            115511
+          ]
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": [
+            116653
+          ]
+        }
+      },
+      "locked": true
+    },
+    {
+      "name": "Tier Three",
+      "components": {
+        "Ship Component": {
+          "Power Core": [
+            114441
+          ],
+          "Warp Drive": [
+            114551
+          ],
+          "Subwarp Engine": [
+            114496
+          ],
+          "Maneuvering Thrusters": [
+            114386
+          ],
+          "Shield Generator": [
+            114331
+          ],
+          "Heat Sink": [
+            42
+          ],
+          "Scanner Array": [
+            114606
+          ],
+          "Tractor Beam": [
+            114661
+          ],
+          "Hull Reinforcement": [
+            114771
+          ],
+          "Bomb Bay": [
+            115162,
+            115162
+          ],
+          "Drone Port": [
+            115211
+          ]
+        },
+        "Ship Module": {
+          "Ammo Module": [
+            114105,
+            114105,
+            114105,
+            114105
+          ],
+          "Fuel Module": [
+            114221,
+            114221
+          ],
+          "Cargo Module": [
+            114166,
+            114166,
+            114166
+          ],
+          "Passenger Module": [
+            114276
+          ]
+        },
+        "Ship Weapons": {
+          "Kinetic": [
+            76983,
+            76978,
+            76978,
+            76978,
+            76978,
+            76978,
+            76978,
+            76973,
+            76973,
+            76973,
+            76973,
+            76973,
+            76973,
+            76973,
+            76973,
+            76968,
+            76968,
+            76968,
+            76968,
+            76968,
+            76968,
+            76968,
+            76968
+          ]
+        },
+        "Countermeasures": {
+          "Flare": [
+            115642,
+            115642,
+            115632,
+            115632,
+            115622,
+            115622,
+            115612,
+            115612,
+            115612,
+            115612
+          ]
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": [
+            116653
+          ]
+        }
+      },
+      "locked": true
+    },
+    {
+      "name": "Tier Four",
+      "components": {
+        "Ship Component": {
+          "Power Core": [
+            114442
+          ],
+          "Warp Drive": [
+            114552
+          ],
+          "Subwarp Engine": [
+            114497
+          ],
+          "Maneuvering Thrusters": [
+            114387
+          ],
+          "Shield Generator": [
+            114332
+          ],
+          "Heat Sink": [
+            43
+          ],
+          "Scanner Array": [
+            114607
+          ],
+          "Tractor Beam": [
+            114662
+          ],
+          "Hull Reinforcement": [
+            114772
+          ],
+          "Bomb Bay": [
+            115163,
+            115163
+          ],
+          "Drone Port": [
+            115212
+          ]
+        },
+        "Ship Module": {
+          "Ammo Module": [
+            114106,
+            114106,
+            114106,
+            114106
+          ],
+          "Fuel Module": [
+            114222,
+            114222
+          ],
+          "Cargo Module": [
+            114167,
+            114167,
+            114167
+          ],
+          "Passenger Module": [
+            114277
+          ]
+        },
+        "Ship Weapons": {
+          "Kinetic": [
+            77034,
+            77029,
+            77029,
+            77029,
+            77029,
+            77029,
+            77029,
+            77024,
+            77024,
+            77024,
+            77024,
+            77024,
+            77024,
+            77024,
+            77024,
+            77019,
+            77019,
+            77019,
+            77019,
+            77019,
+            77019,
+            77019,
+            77019
+          ]
+        },
+        "Countermeasures": {
+          "Flare": [
+            115743,
+            115743,
+            115733,
+            115733,
+            115723,
+            115723,
+            115713,
+            115713,
+            115713,
+            115713
+          ]
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": [
+            116653
+          ]
+        }
+      },
+      "locked": true
+    },
+    {
+      "name": "Tier Five",
+      "components": {
+        "Ship Component": {
+          "Power Core": [
+            114443
+          ],
+          "Warp Drive": [
+            114553
+          ],
+          "Subwarp Engine": [
+            114498
+          ],
+          "Maneuvering Thrusters": [
+            114388
+          ],
+          "Shield Generator": [
+            114333
+          ],
+          "Heat Sink": [
+            44
+          ],
+          "Scanner Array": [
+            114608
+          ],
+          "Tractor Beam": [
+            114663
+          ],
+          "Hull Reinforcement": [
+            114773
+          ],
+          "Bomb Bay": [
+            115164,
+            115164
+          ],
+          "Drone Port": [
+            115213
+          ]
+        },
+        "Ship Module": {
+          "Ammo Module": [
+            114107,
+            114107,
+            114107,
+            114107
+          ],
+          "Fuel Module": [
+            114223,
+            114223
+          ],
+          "Cargo Module": [
+            114168,
+            114168,
+            114168
+          ],
+          "Passenger Module": [
+            114278
+          ]
+        },
+        "Ship Weapons": {
+          "Kinetic": [
+            77085,
+            77080,
+            77080,
+            77080,
+            77080,
+            77080,
+            77080,
+            77075,
+            77075,
+            77075,
+            77075,
+            77075,
+            77075,
+            77075,
+            77075,
+            77070,
+            77070,
+            77070,
+            77070,
+            77070,
+            77070,
+            77070,
+            77070
+          ]
+        },
+        "Countermeasures": {
+          "Flare": [
+            115844,
+            115844,
+            115834,
+            115834,
+            115824,
+            115824,
+            115814,
+            115814,
+            115814,
+            115814
+          ]
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": [
+            116653
+          ]
+        }
+      },
+      "locked": true
+    },
+    {
+      "name": "Scanning Min",
+      "components": {
+        "Ship Component": {
+          "Power Core": [],
+          "Warp Drive": [],
+          "Subwarp Engine": [],
+          "Maneuvering Thrusters": [],
+          "Shield Generator": [],
+          "Heat Sink": [],
+          "Scanner Array": [
+            114604
+          ],
+          "Tractor Beam": [],
+          "Hull Reinforcement": [],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": []
+        },
+        "Ship Module": {
+          "Ammo Module": [],
+          "Fuel Module": [],
+          "Cargo Module": [],
+          "Passenger Module": []
+        },
+        "Ship Weapons": {
+          "Kinetic": []
+        },
+        "Countermeasures": {
+          "Flare": []
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": []
+        }
+      },
+      "locked": true
+    },
+    {
+      "name": "Scanning Mid",
+      "components": {
+        "Ship Component": {
+          "Power Core": [
+            114441
+          ],
+          "Warp Drive": [],
+          "Subwarp Engine": [],
+          "Maneuvering Thrusters": [],
+          "Shield Generator": [],
+          "Heat Sink": [
+            42
+          ],
+          "Scanner Array": [
+            114606
+          ],
+          "Tractor Beam": [],
+          "Hull Reinforcement": [],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": []
+        },
+        "Ship Module": {
+          "Ammo Module": [],
+          "Fuel Module": [],
+          "Cargo Module": [],
+          "Passenger Module": []
+        },
+        "Ship Weapons": {
+          "Kinetic": []
+        },
+        "Countermeasures": {
+          "Flare": []
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": [],
+          "Scan": [
+            116522
+          ]
+        }
+      },
+      "locked": true
+    },
+    {
+      "name": "Scanning Max",
+      "components": {
+        "Ship Component": {
+          "Power Core": [
+            114443
+          ],
+          "Warp Drive": [
+            114553
+          ],
+          "Subwarp Engine": [
+            114498
+          ],
+          "Maneuvering Thrusters": [
+            114388
+          ],
+          "Shield Generator": [
+            114333
+          ],
+          "Heat Sink": [
+            44
+          ],
+          "Scanner Array": [
+            114608
+          ],
+          "Tractor Beam": [],
+          "Hull Reinforcement": [
+            114773
+          ],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": [
+            115213
+          ]
+        },
+        "Ship Module": {
+          "Ammo Module": [],
+          "Fuel Module": [],
+          "Cargo Module": [],
+          "Passenger Module": []
+        },
+        "Ship Weapons": {
+          "Kinetic": []
+        },
+        "Countermeasures": {
+          "Flare": []
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": [],
+          "Scan": [
+            116556
+          ]
+        }
+      },
+      "locked": true
+    },
+    {
+      "name": "Salvage Min",
+      "components": {
+        "Ship Component": {
+          "Power Core": [],
+          "Warp Drive": [],
+          "Subwarp Engine": [],
+          "Maneuvering Thrusters": [],
+          "Shield Generator": [],
+          "Heat Sink": [],
+          "Scanner Array": [],
+          "Tractor Beam": [
+            114659
+          ],
+          "Hull Reinforcement": [],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": []
+        },
+        "Ship Module": {
+          "Ammo Module": [],
+          "Fuel Module": [],
+          "Cargo Module": [],
+          "Passenger Module": []
+        },
+        "Ship Weapons": {
+          "Kinetic": []
+        },
+        "Countermeasures": {
+          "Flare": []
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": []
+        }
+      },
+      "locked": true
+    },
+    {
+      "name": "Salvage Mid",
+      "components": {
+        "Ship Component": {
+          "Power Core": [
+            114441
+          ],
+          "Warp Drive": [],
+          "Subwarp Engine": [],
+          "Maneuvering Thrusters": [],
+          "Shield Generator": [],
+          "Heat Sink": [
+            42
+          ],
+          "Scanner Array": [],
+          "Tractor Beam": [
+            114661
+          ],
+          "Hull Reinforcement": [],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": []
+        },
+        "Ship Module": {
+          "Ammo Module": [],
+          "Fuel Module": [],
+          "Cargo Module": [
+            114166,
+            114166,
+            114166,
+            114166,
+            114166,
+            114166,
+            114166,
+            114166,
+            114166,
+            114166
+          ],
+          "Passenger Module": []
+        },
+        "Ship Weapons": {
+          "Kinetic": []
+        },
+        "Countermeasures": {
+          "Flare": []
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": [],
+          "Salvage": [
+            116578
+          ]
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Ship Module": {}
+      }
+    },
+    {
+      "name": "Salvage Max",
+      "components": {
+        "Ship Component": {
+          "Power Core": [
+            114443
+          ],
+          "Warp Drive": [
+            114553
+          ],
+          "Subwarp Engine": [
+            114498
+          ],
+          "Maneuvering Thrusters": [
+            114388
+          ],
+          "Shield Generator": [
+            114333
+          ],
+          "Heat Sink": [
+            44
+          ],
+          "Scanner Array": [],
+          "Tractor Beam": [
+            114663
+          ],
+          "Hull Reinforcement": [
+            114773
+          ],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": [
+            115213
+          ]
+        },
+        "Ship Module": {
+          "Ammo Module": [],
+          "Fuel Module": [],
+          "Cargo Module": [
+            114168,
+            114168,
+            114168,
+            114168,
+            114168,
+            114168,
+            114168,
+            114168,
+            114168,
+            114168
+          ],
+          "Passenger Module": []
+        },
+        "Ship Weapons": {
+          "Kinetic": []
+        },
+        "Countermeasures": {
+          "Flare": []
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": [],
+          "Salvage": [
+            116579
+          ]
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Ship Module": {}
+      }
+    },
+    {
+      "name": "Repair Min",
+      "components": {
+        "Ship Component": {
+          "Power Core": [],
+          "Warp Drive": [],
+          "Subwarp Engine": [],
+          "Maneuvering Thrusters": [],
+          "Shield Generator": [],
+          "Heat Sink": [],
+          "Scanner Array": [],
+          "Tractor Beam": [],
+          "Hull Reinforcement": [],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": []
+        },
+        "Ship Module": {
+          "Ammo Module": [],
+          "Fuel Module": [],
+          "Cargo Module": [],
+          "Passenger Module": []
+        },
+        "Ship Weapons": {
+          "Kinetic": []
+        },
+        "Countermeasures": {
+          "Flare": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "Healing Nanobots": [
+            115340,
+            115340,
+            115330,
+            115330,
+            115320,
+            115320,
+            115310,
+            115310,
+            115310,
+            115310
+          ]
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": []
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Countermeasures": {}
+      }
+    },
+    {
+      "name": "Repair Mid",
+      "components": {
+        "Ship Component": {
+          "Power Core": [
+            114441
+          ],
+          "Warp Drive": [],
+          "Subwarp Engine": [],
+          "Maneuvering Thrusters": [],
+          "Shield Generator": [],
+          "Heat Sink": [
+            42
+          ],
+          "Scanner Array": [],
+          "Tractor Beam": [],
+          "Hull Reinforcement": [],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": []
+        },
+        "Ship Module": {
+          "Ammo Module": [],
+          "Fuel Module": [],
+          "Cargo Module": [],
+          "Passenger Module": []
+        },
+        "Ship Weapons": {
+          "Kinetic": []
+        },
+        "Countermeasures": {
+          "Flare": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "Healing Nanobots": [
+            115643,
+            115643,
+            115633,
+            115633,
+            115623,
+            115623,
+            115613,
+            115613,
+            115613,
+            115613
+          ]
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": [],
+          "Repair": [
+            116601
+          ]
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Countermeasures": {}
+      }
+    },
+    {
+      "name": "Repair Max",
+      "components": {
+        "Ship Component": {
+          "Power Core": [
+            114443
+          ],
+          "Warp Drive": [
+            114553
+          ],
+          "Subwarp Engine": [
+            114498
+          ],
+          "Maneuvering Thrusters": [
+            114388
+          ],
+          "Shield Generator": [
+            114333
+          ],
+          "Heat Sink": [
+            44
+          ],
+          "Scanner Array": [],
+          "Tractor Beam": [],
+          "Hull Reinforcement": [
+            114773
+          ],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": [
+            115213
+          ]
+        },
+        "Ship Module": {
+          "Ammo Module": [],
+          "Fuel Module": [],
+          "Cargo Module": [],
+          "Passenger Module": []
+        },
+        "Ship Weapons": {
+          "Kinetic": []
+        },
+        "Countermeasures": {
+          "Flare": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "Healing Nanobots": [
+            115845,
+            115845,
+            115835,
+            115835,
+            115825,
+            115825,
+            115815,
+            115815,
+            115815,
+            115815
+          ]
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": [],
+          "Repair": [
+            116601
+          ]
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Countermeasures": {}
+      }
+    },
+    {
+      "name": "Rescue Min",
+      "components": {
+        "Ship Component": {
+          "Power Core": [],
+          "Warp Drive": [],
+          "Subwarp Engine": [],
+          "Maneuvering Thrusters": [],
+          "Shield Generator": [],
+          "Heat Sink": [],
+          "Scanner Array": [],
+          "Tractor Beam": [],
+          "Hull Reinforcement": [],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": []
+        },
+        "Ship Module": {
+          "Ammo Module": [],
+          "Fuel Module": [],
+          "Cargo Module": [],
+          "Passenger Module": [
+            114274
+          ]
+        },
+        "Ship Weapons": {
+          "Kinetic": []
+        },
+        "Countermeasures": {
+          "Flare": []
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": []
+        }
+      },
+      "locked": true
+    },
+    {
+      "name": "Rescue Mid",
+      "components": {
+        "Ship Component": {
+          "Power Core": [
+            114441
+          ],
+          "Warp Drive": [],
+          "Subwarp Engine": [],
+          "Maneuvering Thrusters": [],
+          "Shield Generator": [],
+          "Heat Sink": [
+            42
+          ],
+          "Scanner Array": [],
+          "Tractor Beam": [],
+          "Hull Reinforcement": [],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": []
+        },
+        "Ship Module": {
+          "Ammo Module": [],
+          "Fuel Module": [],
+          "Cargo Module": [],
+          "Passenger Module": [
+            114276,
+            114276,
+            114276,
+            114276,
+            114276,
+            114276,
+            114276,
+            114276,
+            114276,
+            114276
+          ]
+        },
+        "Ship Weapons": {
+          "Kinetic": []
+        },
+        "Countermeasures": {
+          "Flare": []
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": [],
+          "Rescue": [
+            116802
+          ]
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Ship Module": {}
+      }
+    },
+    {
+      "name": "Rescue Max",
+      "components": {
+        "Ship Component": {
+          "Power Core": [
+            114443
+          ],
+          "Warp Drive": [
+            114553
+          ],
+          "Subwarp Engine": [
+            114498
+          ],
+          "Maneuvering Thrusters": [
+            114388
+          ],
+          "Shield Generator": [
+            114333
+          ],
+          "Heat Sink": [
+            44
+          ],
+          "Scanner Array": [],
+          "Tractor Beam": [],
+          "Hull Reinforcement": [
+            114773
+          ],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": [
+            115213
+          ]
+        },
+        "Ship Module": {
+          "Ammo Module": [],
+          "Fuel Module": [],
+          "Cargo Module": [],
+          "Passenger Module": [
+            114278,
+            114278,
+            114278,
+            114278,
+            114278,
+            114278,
+            114278,
+            114278,
+            114278,
+            114278
+          ]
+        },
+        "Ship Weapons": {
+          "Kinetic": []
+        },
+        "Countermeasures": {
+          "Flare": []
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": [],
+          "Rescue": [
+            116802
+          ]
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Ship Module": {}
+      }
+    },
+    {
+      "name": "Fast Freight Min",
+      "components": {
+        "Ship Component": {
+          "Power Core": [],
+          "Warp Drive": [
+            114549
+          ],
+          "Subwarp Engine": [
+            114494
+          ],
+          "Maneuvering Thrusters": [],
+          "Shield Generator": [],
+          "Heat Sink": [],
+          "Scanner Array": [],
+          "Tractor Beam": [],
+          "Hull Reinforcement": [],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": []
+        },
+        "Ship Module": {
+          "Ammo Module": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "Fuel Module": [
+            114219,
+            114219,
+            114219,
+            114219,
+            114219,
+            114219,
+            114219,
+            114219,
+            114219,
+            114219
+          ],
+          "Cargo Module": [
+            "",
+            "",
+            ""
+          ],
+          "Passenger Module": [
+            ""
+          ]
+        },
+        "Ship Weapons": {
+          "Kinetic": []
+        },
+        "Countermeasures": {
+          "Flare": []
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": []
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Ship Module": {}
+      }
+    },
+    {
+      "name": "Fast Freight Mid",
+      "components": {
+        "Ship Component": {
+          "Power Core": [
+            114441
+          ],
+          "Warp Drive": [
+            114551
+          ],
+          "Subwarp Engine": [
+            114496
+          ],
+          "Maneuvering Thrusters": [
+            114386
+          ],
+          "Shield Generator": [],
+          "Heat Sink": [
+            42
+          ],
+          "Scanner Array": [],
+          "Tractor Beam": [
+            114661
+          ],
+          "Hull Reinforcement": [],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": []
+        },
+        "Ship Module": {
+          "Ammo Module": [],
+          "Fuel Module": [
+            114221,
+            114221,
+            114221,
+            114221,
+            114221,
+            114221,
+            114221,
+            114221,
+            114221,
+            114221
+          ],
+          "Cargo Module": [],
+          "Passenger Module": []
+        },
+        "Ship Weapons": {
+          "Kinetic": []
+        },
+        "Countermeasures": {
+          "Flare": []
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": [],
+          "Freight": [
+            116643
+          ]
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Ship Module": {}
+      }
+    },
+    {
+      "name": "Fast Freight Max",
+      "components": {
+        "Ship Component": {
+          "Power Core": [
+            114443
+          ],
+          "Warp Drive": [
+            114553
+          ],
+          "Subwarp Engine": [
+            114498
+          ],
+          "Maneuvering Thrusters": [
+            114388
+          ],
+          "Shield Generator": [
+            114333
+          ],
+          "Heat Sink": [
+            44
+          ],
+          "Scanner Array": [],
+          "Tractor Beam": [
+            114663
+          ],
+          "Hull Reinforcement": [
+            114773
+          ],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": [
+            115213
+          ]
+        },
+        "Ship Module": {
+          "Ammo Module": [],
+          "Fuel Module": [
+            114223,
+            114223,
+            114223,
+            114223,
+            114223,
+            114223,
+            114223,
+            114223,
+            114223,
+            114223
+          ],
+          "Cargo Module": [],
+          "Passenger Module": []
+        },
+        "Ship Weapons": {
+          "Kinetic": []
+        },
+        "Countermeasures": {
+          "Flare": []
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": [],
+          "Freight": [
+            116643
+          ]
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Ship Module": {}
+      }
+    },
+    {
+      "name": "Cargo Boost Min",
+      "components": {
+        "Ship Component": {
+          "Power Core": [],
+          "Warp Drive": [],
+          "Subwarp Engine": [],
+          "Maneuvering Thrusters": [],
+          "Shield Generator": [],
+          "Heat Sink": [],
+          "Scanner Array": [],
+          "Tractor Beam": [],
+          "Hull Reinforcement": [],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": []
+        },
+        "Ship Module": {
+          "Ammo Module": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "Fuel Module": [
+            "",
+            ""
+          ],
+          "Cargo Module": [
+            114164,
+            114164,
+            114164,
+            114164,
+            114164,
+            114164,
+            114164,
+            114164,
+            114164,
+            114164
+          ],
+          "Passenger Module": [
+            ""
+          ]
+        },
+        "Ship Weapons": {
+          "Kinetic": []
+        },
+        "Countermeasures": {
+          "Flare": []
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": []
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Ship Module": {}
+      }
+    },
+    {
+      "name": "Cargo Boost Mid",
+      "components": {
+        "Ship Component": {
+          "Power Core": [
+            114441
+          ],
+          "Warp Drive": [],
+          "Subwarp Engine": [
+            114496
+          ],
+          "Maneuvering Thrusters": [],
+          "Shield Generator": [
+            114331
+          ],
+          "Heat Sink": [
+            42
+          ],
+          "Scanner Array": [],
+          "Tractor Beam": [
+            114661
+          ],
+          "Hull Reinforcement": [
+            114771
+          ],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": [
+            115211
+          ]
+        },
+        "Ship Module": {
+          "Ammo Module": [],
+          "Fuel Module": [],
+          "Cargo Module": [
+            114166,
+            114166,
+            114166,
+            114166,
+            114166,
+            114166,
+            114166,
+            114166,
+            114166,
+            114166
+          ],
+          "Passenger Module": []
+        },
+        "Ship Weapons": {
+          "Kinetic": []
+        },
+        "Countermeasures": {
+          "Flare": []
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": [],
+          "Freight": [
+            116643
+          ]
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Ship Module": {}
+      }
+    },
+    {
+      "name": "Cargo Boost Max",
+      "components": {
+        "Ship Component": {
+          "Power Core": [
+            114443
+          ],
+          "Warp Drive": [],
+          "Subwarp Engine": [
+            114498
+          ],
+          "Maneuvering Thrusters": [],
+          "Shield Generator": [
+            114333
+          ],
+          "Heat Sink": [
+            44
+          ],
+          "Scanner Array": [],
+          "Tractor Beam": [
+            114663
+          ],
+          "Hull Reinforcement": [
+            114773
+          ],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": [
+            115213
+          ]
+        },
+        "Ship Module": {
+          "Ammo Module": [],
+          "Fuel Module": [],
+          "Cargo Module": [
+            114168,
+            114168,
+            114168,
+            114168,
+            114168,
+            114168,
+            114168,
+            114168,
+            114168,
+            114168
+          ],
+          "Passenger Module": []
+        },
+        "Ship Weapons": {
+          "Kinetic": []
+        },
+        "Countermeasures": {
+          "Flare": []
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": [],
+          "Freight": [
+            116643
+          ]
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Ship Module": {}
+      }
+    },
+    {
+      "name": "Mining Min",
+      "components": {
+        "Ship Component": {
+          "Power Core": [],
+          "Warp Drive": [],
+          "Subwarp Engine": [],
+          "Maneuvering Thrusters": [],
+          "Shield Generator": [],
+          "Heat Sink": [],
+          "Scanner Array": [],
+          "Tractor Beam": [
+            114659
+          ],
+          "Hull Reinforcement": [],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": []
+        },
+        "Ship Module": {
+          "Ammo Module": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "Fuel Module": [
+            "",
+            ""
+          ],
+          "Cargo Module": [
+            114164,
+            114164,
+            114164,
+            114164,
+            114164,
+            114164,
+            114164,
+            114164,
+            114164,
+            114164
+          ],
+          "Passenger Module": [
+            ""
+          ]
+        },
+        "Ship Weapons": {
+          "Kinetic": []
+        },
+        "Countermeasures": {
+          "Flare": []
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": []
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Ship Module": {}
+      }
+    },
+    {
+      "name": "Mining Mid",
+      "components": {
+        "Ship Component": {
+          "Power Core": [
+            114441
+          ],
+          "Warp Drive": [],
+          "Subwarp Engine": [],
+          "Maneuvering Thrusters": [],
+          "Shield Generator": [],
+          "Heat Sink": [
+            42
+          ],
+          "Scanner Array": [],
+          "Tractor Beam": [
+            114661
+          ],
+          "Hull Reinforcement": [],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": []
+        },
+        "Ship Module": {
+          "Ammo Module": [],
+          "Fuel Module": [],
+          "Cargo Module": [
+            114166,
+            114166,
+            114166,
+            114166,
+            114166,
+            114166,
+            114166,
+            114166,
+            114166,
+            114166
+          ],
+          "Passenger Module": []
+        },
+        "Ship Weapons": {
+          "Kinetic": []
+        },
+        "Countermeasures": {
+          "Flare": []
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": [],
+          "Mining": [
+            116615
+          ]
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Ship Module": {}
+      }
+    },
+    {
+      "name": "Mining Max",
+      "components": {
+        "Ship Component": {
+          "Power Core": [
+            114443
+          ],
+          "Warp Drive": [
+            114553
+          ],
+          "Subwarp Engine": [
+            114498
+          ],
+          "Maneuvering Thrusters": [
+            114388
+          ],
+          "Shield Generator": [
+            114333
+          ],
+          "Heat Sink": [
+            44
+          ],
+          "Scanner Array": [],
+          "Tractor Beam": [
+            114663
+          ],
+          "Hull Reinforcement": [
+            114773
+          ],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": [
+            115213
+          ]
+        },
+        "Ship Module": {
+          "Ammo Module": [],
+          "Fuel Module": [],
+          "Cargo Module": [
+            114168,
+            114168,
+            114168,
+            114168,
+            114168,
+            114168,
+            114168,
+            114168,
+            114168,
+            114168
+          ],
+          "Passenger Module": []
+        },
+        "Ship Weapons": {
+          "Kinetic": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "Heat": [
+            79249,
+            79247,
+            79247,
+            79247,
+            79247,
+            79247,
+            79247,
+            79245,
+            79245,
+            79245,
+            79245,
+            79245,
+            79245,
+            79245,
+            79245,
+            79243,
+            79243,
+            79243,
+            79243,
+            79243,
+            79243,
+            79243,
+            79243
+          ]
+        },
+        "Countermeasures": {
+          "Flare": []
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": [],
+          "Mining": [
+            116615
+          ]
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Ship Module": {},
+        "Ship Weapons": {}
+      }
+    },
+    {
+      "name": "Kinetic Damage Min",
+      "components": {
+        "Ship Component": {
+          "Power Core": [],
+          "Warp Drive": [],
+          "Subwarp Engine": [],
+          "Maneuvering Thrusters": [],
+          "Shield Generator": [],
+          "Heat Sink": [],
+          "Scanner Array": [],
+          "Tractor Beam": [],
+          "Hull Reinforcement": [],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": []
+        },
+        "Ship Module": {
+          "Ammo Module": [
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103
+          ],
+          "Fuel Module": [
+            "",
+            ""
+          ],
+          "Cargo Module": [
+            "",
+            "",
+            ""
+          ],
+          "Passenger Module": [
+            ""
+          ]
+        },
+        "Ship Weapons": {
+          "Kinetic": [
+            76881,
+            76876,
+            76876,
+            76876,
+            76876,
+            76876,
+            76876,
+            76871,
+            76871,
+            76871,
+            76871,
+            76871,
+            76871,
+            76871,
+            76871,
+            76866,
+            76866,
+            76866,
+            76866,
+            76866,
+            76866,
+            76866,
+            76866
+          ]
+        },
+        "Countermeasures": {
+          "Flare": []
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": []
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Ship Module": {}
+      }
+    },
+    {
+      "name": "Kinetic Damage Mid",
+      "components": {
+        "Ship Component": {
+          "Power Core": [
+            114441
+          ],
+          "Warp Drive": [],
+          "Subwarp Engine": [],
+          "Maneuvering Thrusters": [],
+          "Shield Generator": [],
+          "Heat Sink": [
+            42
+          ],
+          "Scanner Array": [],
+          "Tractor Beam": [],
+          "Hull Reinforcement": [],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": []
+        },
+        "Ship Module": {
+          "Ammo Module": [
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105
+          ],
+          "Fuel Module": [
+            "",
+            ""
+          ],
+          "Cargo Module": [
+            "",
+            "",
+            ""
+          ],
+          "Passenger Module": [
+            ""
+          ]
+        },
+        "Ship Weapons": {
+          "Kinetic": [
+            76982,
+            76977,
+            76977,
+            76977,
+            76977,
+            76977,
+            76977,
+            76972,
+            76972,
+            76972,
+            76972,
+            76972,
+            76972,
+            76972,
+            76972,
+            76967,
+            76967,
+            76967,
+            76967,
+            76967,
+            76967,
+            76967,
+            76967
+          ]
+        },
+        "Countermeasures": {
+          "Flare": [
+            115642,
+            115642,
+            115632,
+            115632,
+            115622,
+            115622,
+            115612,
+            115612,
+            115612,
+            115612
+          ]
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": [
+            116653
+          ]
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Ship Module": {}
+      }
+    },
+    {
+      "name": "Kinetic Damage Max",
+      "components": {
+        "Ship Component": {
+          "Power Core": [
+            114443
+          ],
+          "Warp Drive": [
+            114553
+          ],
+          "Subwarp Engine": [
+            114498
+          ],
+          "Maneuvering Thrusters": [
+            114388
+          ],
+          "Shield Generator": [
+            114333
+          ],
+          "Heat Sink": [
+            44
+          ],
+          "Scanner Array": [],
+          "Tractor Beam": [],
+          "Hull Reinforcement": [
+            114773
+          ],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": [
+            115213
+          ]
+        },
+        "Ship Module": {
+          "Ammo Module": [
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107
+          ],
+          "Fuel Module": [],
+          "Cargo Module": [],
+          "Passenger Module": []
+        },
+        "Ship Weapons": {
+          "Kinetic": [
+            77084,
+            77079,
+            77079,
+            77079,
+            77079,
+            77079,
+            77079,
+            77074,
+            77074,
+            77074,
+            77074,
+            77074,
+            77074,
+            77074,
+            77074,
+            77069,
+            77069,
+            77069,
+            77069,
+            77069,
+            77069,
+            77069,
+            77069
+          ]
+        },
+        "Countermeasures": {
+          "Flare": [
+            115844,
+            115844,
+            115834,
+            115834,
+            115824,
+            115824,
+            115814,
+            115814,
+            115814,
+            115814
+          ]
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": [
+            116653
+          ]
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Ship Module": {}
+      }
+    },
+    {
+      "name": "Energy Damage Min",
+      "components": {
+        "Ship Component": {
+          "Power Core": [],
+          "Warp Drive": [],
+          "Subwarp Engine": [],
+          "Maneuvering Thrusters": [],
+          "Shield Generator": [],
+          "Heat Sink": [],
+          "Scanner Array": [],
+          "Tractor Beam": [],
+          "Hull Reinforcement": [],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": []
+        },
+        "Ship Module": {
+          "Ammo Module": [
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103
+          ],
+          "Fuel Module": [
+            "",
+            ""
+          ],
+          "Cargo Module": [
+            "",
+            "",
+            ""
+          ],
+          "Passenger Module": [
+            ""
+          ]
+        },
+        "Ship Weapons": {
+          "Kinetic": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "Energy": [
+            77298,
+            77292,
+            77292,
+            77292,
+            77292,
+            77292,
+            77292,
+            77286,
+            77286,
+            77286,
+            77286,
+            77286,
+            77286,
+            77286,
+            77286,
+            77280,
+            77280,
+            77280,
+            77280,
+            77280,
+            77280,
+            77280,
+            77280
+          ]
+        },
+        "Countermeasures": {
+          "Flare": []
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": []
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Ship Module": {},
+        "Ship Weapons": {}
+      }
+    },
+    {
+      "name": "Energy Damage Mid",
+      "components": {
+        "Ship Component": {
+          "Power Core": [
+            114441
+          ],
+          "Warp Drive": [],
+          "Subwarp Engine": [],
+          "Maneuvering Thrusters": [],
+          "Shield Generator": [],
+          "Heat Sink": [
+            42
+          ],
+          "Scanner Array": [],
+          "Tractor Beam": [],
+          "Hull Reinforcement": [],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": []
+        },
+        "Ship Module": {
+          "Ammo Module": [
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105
+          ],
+          "Fuel Module": [],
+          "Cargo Module": [],
+          "Passenger Module": []
+        },
+        "Ship Weapons": {
+          "Kinetic": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "Energy": [
+            77420,
+            77414,
+            77414,
+            77414,
+            77414,
+            77414,
+            77414,
+            77408,
+            77408,
+            77408,
+            77408,
+            77408,
+            77408,
+            77408,
+            77408,
+            77402,
+            77402,
+            77402,
+            77402,
+            77402,
+            77402,
+            77402,
+            77402
+          ]
+        },
+        "Countermeasures": {
+          "Flare": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "Energy Capacitor": [
+            115640,
+            115640,
+            115630,
+            115630,
+            115620,
+            115620,
+            115610,
+            115610,
+            115610,
+            115610
+          ]
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": [],
+          "Combat Energy": [
+            116685
+          ]
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Ship Module": {},
+        "Ship Weapons": {},
+        "Countermeasures": {}
+      }
+    },
+    {
+      "name": "Energy Damage Max",
+      "components": {
+        "Ship Component": {
+          "Power Core": [
+            114443
+          ],
+          "Warp Drive": [
+            114553
+          ],
+          "Subwarp Engine": [
+            114498
+          ],
+          "Maneuvering Thrusters": [
+            114388
+          ],
+          "Shield Generator": [
+            114333
+          ],
+          "Heat Sink": [
+            44
+          ],
+          "Scanner Array": [],
+          "Tractor Beam": [],
+          "Hull Reinforcement": [
+            114773
+          ],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": [
+            115213
+          ]
+        },
+        "Ship Module": {
+          "Ammo Module": [
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107
+          ],
+          "Fuel Module": [],
+          "Cargo Module": [],
+          "Passenger Module": []
+        },
+        "Ship Weapons": {
+          "Kinetic": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "Energy": [
+            77542,
+            77536,
+            77536,
+            77536,
+            77536,
+            77536,
+            77536,
+            77530,
+            77530,
+            77530,
+            77530,
+            77530,
+            77530,
+            77530,
+            77530,
+            77524,
+            77524,
+            77524,
+            77524,
+            77524,
+            77524,
+            77524,
+            77524
+          ]
+        },
+        "Countermeasures": {
+          "Flare": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "Energy Capacitor": [
+            115842,
+            115842,
+            115832,
+            115832,
+            115822,
+            115822,
+            115812,
+            115812,
+            115812,
+            115812
+          ]
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": [],
+          "Combat Energy": [
+            116685
+          ]
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Ship Module": {},
+        "Ship Weapons": {},
+        "Countermeasures": {}
+      }
+    },
+    {
+      "name": "EMP Damage Min",
+      "components": {
+        "Ship Component": {
+          "Power Core": [],
+          "Warp Drive": [],
+          "Subwarp Engine": [],
+          "Maneuvering Thrusters": [],
+          "Shield Generator": [],
+          "Heat Sink": [],
+          "Scanner Array": [],
+          "Tractor Beam": [],
+          "Hull Reinforcement": [],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": []
+        },
+        "Ship Module": {
+          "Ammo Module": [
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103
+          ],
+          "Fuel Module": [
+            "",
+            ""
+          ],
+          "Cargo Module": [
+            "",
+            "",
+            ""
+          ],
+          "Passenger Module": [
+            ""
+          ]
+        },
+        "Ship Weapons": {
+          "Kinetic": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "EMP": [
+            77779,
+            77773,
+            77773,
+            77773,
+            77773,
+            77773,
+            77773,
+            77767,
+            77767,
+            77767,
+            77767,
+            77767,
+            77767,
+            77767,
+            77767,
+            77761,
+            77761,
+            77761,
+            77761,
+            77761,
+            77761,
+            77761,
+            77761
+          ]
+        },
+        "Countermeasures": {
+          "Flare": []
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": []
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Ship Module": {},
+        "Ship Weapons": {}
+      }
+    },
+    {
+      "name": "EMP Damage Mid",
+      "components": {
+        "Ship Component": {
+          "Power Core": [
+            114441
+          ],
+          "Warp Drive": [],
+          "Subwarp Engine": [],
+          "Maneuvering Thrusters": [],
+          "Shield Generator": [],
+          "Heat Sink": [
+            42
+          ],
+          "Scanner Array": [],
+          "Tractor Beam": [],
+          "Hull Reinforcement": [],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": []
+        },
+        "Ship Module": {
+          "Ammo Module": [
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105
+          ],
+          "Fuel Module": [
+            "",
+            ""
+          ],
+          "Cargo Module": [
+            "",
+            "",
+            ""
+          ],
+          "Passenger Module": [
+            ""
+          ]
+        },
+        "Ship Weapons": {
+          "Kinetic": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "EMP": [
+            77901,
+            77895,
+            77895,
+            77895,
+            77895,
+            77895,
+            77895,
+            77889,
+            77889,
+            77889,
+            77889,
+            77889,
+            77889,
+            77889,
+            77889,
+            77883,
+            77883,
+            77883,
+            77883,
+            77883,
+            77883,
+            77883,
+            77883
+          ]
+        },
+        "Countermeasures": {
+          "Flare": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "Faraday Shielding": [
+            115647,
+            115647,
+            115637,
+            115637,
+            115627,
+            115627,
+            115617,
+            115617,
+            115617,
+            115617
+          ]
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": [],
+          "Combat EMP": [
+            116706
+          ]
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Ship Module": {},
+        "Ship Weapons": {},
+        "Countermeasures": {}
+      }
+    },
+    {
+      "name": "EMP Damage Max",
+      "components": {
+        "Ship Component": {
+          "Power Core": [
+            114443
+          ],
+          "Warp Drive": [
+            114553
+          ],
+          "Subwarp Engine": [
+            114498
+          ],
+          "Maneuvering Thrusters": [
+            114388
+          ],
+          "Shield Generator": [
+            114333
+          ],
+          "Heat Sink": [
+            44
+          ],
+          "Scanner Array": [],
+          "Tractor Beam": [],
+          "Hull Reinforcement": [
+            114773
+          ],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": [
+            115213
+          ]
+        },
+        "Ship Module": {
+          "Ammo Module": [
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107
+          ],
+          "Fuel Module": [
+            "",
+            ""
+          ],
+          "Cargo Module": [
+            "",
+            "",
+            ""
+          ],
+          "Passenger Module": [
+            ""
+          ]
+        },
+        "Ship Weapons": {
+          "Kinetic": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "EMP": [
+            78023,
+            78017,
+            78017,
+            78017,
+            78017,
+            78017,
+            78017,
+            78011,
+            78011,
+            78011,
+            78011,
+            78011,
+            78011,
+            78011,
+            78011,
+            78005,
+            78005,
+            78005,
+            78005,
+            78005,
+            78005,
+            78005,
+            78005
+          ]
+        },
+        "Countermeasures": {
+          "Flare": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "Faraday Shielding": [
+            115849,
+            115849,
+            115839,
+            115839,
+            115829,
+            115829,
+            115819,
+            115819,
+            115819,
+            115819
+          ]
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": [],
+          "Combat EMP": [
+            116706
+          ]
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Ship Module": {},
+        "Ship Weapons": {},
+        "Countermeasures": {}
+      }
+    },
+    {
+      "name": "Superchill Damage Min",
+      "components": {
+        "Ship Component": {
+          "Power Core": [],
+          "Warp Drive": [],
+          "Subwarp Engine": [],
+          "Maneuvering Thrusters": [],
+          "Shield Generator": [],
+          "Heat Sink": [],
+          "Scanner Array": [],
+          "Tractor Beam": [],
+          "Hull Reinforcement": [],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": []
+        },
+        "Ship Module": {
+          "Ammo Module": [
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103
+          ],
+          "Fuel Module": [
+            "",
+            ""
+          ],
+          "Cargo Module": [
+            "",
+            "",
+            ""
+          ],
+          "Passenger Module": [
+            ""
+          ]
+        },
+        "Ship Weapons": {
+          "Kinetic": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "Superchill": [
+            78260,
+            78254,
+            78254,
+            78254,
+            78254,
+            78254,
+            78254,
+            78248,
+            78248,
+            78248,
+            78248,
+            78248,
+            78248,
+            78248,
+            78248,
+            78242,
+            78242,
+            78242,
+            78242,
+            78242,
+            78242,
+            78242,
+            78242
+          ]
+        },
+        "Countermeasures": {
+          "Flare": []
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": []
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Ship Module": {},
+        "Ship Weapons": {}
+      }
+    },
+    {
+      "name": "Superchill Damage Mid",
+      "components": {
+        "Ship Component": {
+          "Power Core": [
+            114441
+          ],
+          "Warp Drive": [],
+          "Subwarp Engine": [],
+          "Maneuvering Thrusters": [],
+          "Shield Generator": [],
+          "Heat Sink": [
+            42
+          ],
+          "Scanner Array": [],
+          "Tractor Beam": [],
+          "Hull Reinforcement": [],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": []
+        },
+        "Ship Module": {
+          "Ammo Module": [
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105
+          ],
+          "Fuel Module": [
+            "",
+            ""
+          ],
+          "Cargo Module": [
+            "",
+            "",
+            ""
+          ],
+          "Passenger Module": [
+            ""
+          ]
+        },
+        "Ship Weapons": {
+          "Kinetic": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "Superchill": [
+            78382,
+            78376,
+            78376,
+            78376,
+            78376,
+            78376,
+            78376,
+            78370,
+            78370,
+            78370,
+            78370,
+            78370,
+            78370,
+            78370,
+            78370,
+            78364,
+            78364,
+            78364,
+            78364,
+            78364,
+            78364,
+            78364,
+            78364
+          ]
+        },
+        "Countermeasures": {
+          "Flare": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "Warming Plates": [
+            115646,
+            115646,
+            115636,
+            115636,
+            115626,
+            115626,
+            115616,
+            115616,
+            115616,
+            115616
+          ]
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": [],
+          "Combat Superchill": [
+            116730
+          ]
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Ship Module": {},
+        "Ship Weapons": {},
+        "Countermeasures": {}
+      }
+    },
+    {
+      "name": "Superchill Damage Max",
+      "components": {
+        "Ship Component": {
+          "Power Core": [
+            114443
+          ],
+          "Warp Drive": [
+            114553
+          ],
+          "Subwarp Engine": [
+            114498
+          ],
+          "Maneuvering Thrusters": [
+            114388
+          ],
+          "Shield Generator": [
+            114333
+          ],
+          "Heat Sink": [
+            44
+          ],
+          "Scanner Array": [],
+          "Tractor Beam": [],
+          "Hull Reinforcement": [
+            114773
+          ],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": [
+            115213
+          ]
+        },
+        "Ship Module": {
+          "Ammo Module": [
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107
+          ],
+          "Fuel Module": [
+            "",
+            ""
+          ],
+          "Cargo Module": [
+            "",
+            "",
+            ""
+          ],
+          "Passenger Module": [
+            ""
+          ]
+        },
+        "Ship Weapons": {
+          "Kinetic": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "Superchill": [
+            78504,
+            78498,
+            78498,
+            78498,
+            78498,
+            78498,
+            78498,
+            78492,
+            78492,
+            78492,
+            78492,
+            78492,
+            78492,
+            78492,
+            78492,
+            78486,
+            78486,
+            78486,
+            78486,
+            78486,
+            78486,
+            78486,
+            78486
+          ]
+        },
+        "Countermeasures": {
+          "Flare": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "Warming Plates": [
+            115848,
+            115848,
+            115838,
+            115838,
+            115828,
+            115828,
+            115818,
+            115818,
+            115818,
+            115818
+          ]
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": [],
+          "Combat Superchill": [
+            116730
+          ]
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Ship Module": {},
+        "Ship Weapons": {},
+        "Countermeasures": {}
+      }
+    },
+    {
+      "name": "Shockwave Damage Min",
+      "components": {
+        "Ship Component": {
+          "Power Core": [],
+          "Warp Drive": [],
+          "Subwarp Engine": [],
+          "Maneuvering Thrusters": [],
+          "Shield Generator": [],
+          "Heat Sink": [],
+          "Scanner Array": [],
+          "Tractor Beam": [],
+          "Hull Reinforcement": [],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": []
+        },
+        "Ship Module": {
+          "Ammo Module": [
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103
+          ],
+          "Fuel Module": [
+            "",
+            ""
+          ],
+          "Cargo Module": [
+            "",
+            "",
+            ""
+          ],
+          "Passenger Module": [
+            ""
+          ]
+        },
+        "Ship Weapons": {
+          "Kinetic": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "Shockwave": [
+            78693,
+            78690,
+            78690,
+            78690,
+            78690,
+            78690,
+            78690,
+            78687,
+            78687,
+            78687,
+            78687,
+            78687,
+            78687,
+            78687,
+            78687,
+            78684,
+            78684,
+            78684,
+            78684,
+            78684,
+            78684,
+            78684,
+            78684
+          ]
+        },
+        "Countermeasures": {
+          "Flare": []
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": []
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Ship Module": {},
+        "Ship Weapons": {}
+      }
+    },
+    {
+      "name": "Shockwave Damage Mid",
+      "components": {
+        "Ship Component": {
+          "Power Core": [
+            114441
+          ],
+          "Warp Drive": [],
+          "Subwarp Engine": [],
+          "Maneuvering Thrusters": [],
+          "Shield Generator": [],
+          "Heat Sink": [
+            42
+          ],
+          "Scanner Array": [],
+          "Tractor Beam": [],
+          "Hull Reinforcement": [],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": []
+        },
+        "Ship Module": {
+          "Ammo Module": [
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105
+          ],
+          "Fuel Module": [
+            "",
+            ""
+          ],
+          "Cargo Module": [
+            "",
+            "",
+            ""
+          ],
+          "Passenger Module": [
+            ""
+          ]
+        },
+        "Ship Weapons": {
+          "Kinetic": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "Shockwave": [
+            78755,
+            78752,
+            78752,
+            78752,
+            78752,
+            78752,
+            78752,
+            78749,
+            78749,
+            78749,
+            78749,
+            78749,
+            78749,
+            78749,
+            78749,
+            78746,
+            78746,
+            78746,
+            78746,
+            78746,
+            78746,
+            78746,
+            78746
+          ]
+        },
+        "Countermeasures": {
+          "Flare": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "Negative REM Plating": [
+            115645,
+            115645,
+            115635,
+            115635,
+            115625,
+            115625,
+            115615,
+            115615,
+            115615,
+            115615
+          ]
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": [],
+          "Combat Shockwave": [
+            116745
+          ]
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Ship Module": {},
+        "Ship Weapons": {},
+        "Countermeasures": {}
+      }
+    },
+    {
+      "name": "Shockwave Damage Max",
+      "components": {
+        "Ship Component": {
+          "Power Core": [
+            114443
+          ],
+          "Warp Drive": [
+            114553
+          ],
+          "Subwarp Engine": [
+            114498
+          ],
+          "Maneuvering Thrusters": [
+            114388
+          ],
+          "Shield Generator": [
+            114333
+          ],
+          "Heat Sink": [
+            44
+          ],
+          "Scanner Array": [],
+          "Tractor Beam": [],
+          "Hull Reinforcement": [
+            114773
+          ],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": [
+            115213
+          ]
+        },
+        "Ship Module": {
+          "Ammo Module": [
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107
+          ],
+          "Fuel Module": [
+            "",
+            ""
+          ],
+          "Cargo Module": [
+            "",
+            "",
+            ""
+          ],
+          "Passenger Module": [
+            ""
+          ]
+        },
+        "Ship Weapons": {
+          "Kinetic": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "Shockwave": [
+            78817,
+            78814,
+            78814,
+            78814,
+            78814,
+            78814,
+            78814,
+            78811,
+            78811,
+            78811,
+            78811,
+            78811,
+            78811,
+            78811,
+            78811,
+            78808,
+            78808,
+            78808,
+            78808,
+            78808,
+            78808,
+            78808,
+            78808
+          ]
+        },
+        "Countermeasures": {
+          "Flare": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "Negative REM Plating": [
+            115847,
+            115847,
+            115837,
+            115837,
+            115827,
+            115827,
+            115817,
+            115817,
+            115817,
+            115817
+          ]
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": [],
+          "Combat Shockwave": [
+            116745
+          ]
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Ship Module": {},
+        "Ship Weapons": {},
+        "Countermeasures": {}
+      }
+    },
+    {
+      "name": "Gray Goo Damage Min",
+      "components": {
+        "Ship Component": {
+          "Power Core": [],
+          "Warp Drive": [],
+          "Subwarp Engine": [],
+          "Maneuvering Thrusters": [],
+          "Shield Generator": [],
+          "Heat Sink": [],
+          "Scanner Array": [],
+          "Tractor Beam": [],
+          "Hull Reinforcement": [],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": []
+        },
+        "Ship Module": {
+          "Ammo Module": [
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103
+          ],
+          "Fuel Module": [
+            "",
+            ""
+          ],
+          "Cargo Module": [
+            "",
+            "",
+            ""
+          ],
+          "Passenger Module": [
+            ""
+          ]
+        },
+        "Ship Weapons": {
+          "Kinetic": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "Gray Goo": [
+            78937,
+            78934,
+            78934,
+            78934,
+            78934,
+            78934,
+            78934,
+            78931,
+            78931,
+            78931,
+            78931,
+            78931,
+            78931,
+            78931,
+            78931,
+            78928,
+            78928,
+            78928,
+            78928,
+            78928,
+            78928,
+            78928,
+            78928
+          ]
+        },
+        "Countermeasures": {
+          "Flare": []
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": []
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Ship Module": {},
+        "Ship Weapons": {}
+      }
+    },
+    {
+      "name": "Gray Goo Damage Mid",
+      "components": {
+        "Ship Component": {
+          "Power Core": [
+            114441
+          ],
+          "Warp Drive": [],
+          "Subwarp Engine": [],
+          "Maneuvering Thrusters": [],
+          "Shield Generator": [],
+          "Heat Sink": [
+            42
+          ],
+          "Scanner Array": [],
+          "Tractor Beam": [],
+          "Hull Reinforcement": [],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": []
+        },
+        "Ship Module": {
+          "Ammo Module": [
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105
+          ],
+          "Fuel Module": [
+            "",
+            ""
+          ],
+          "Cargo Module": [
+            "",
+            "",
+            ""
+          ],
+          "Passenger Module": [
+            ""
+          ]
+        },
+        "Ship Weapons": {
+          "Kinetic": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "Gray Goo": [
+            78999,
+            78996,
+            78996,
+            78996,
+            78996,
+            78996,
+            78996,
+            78993,
+            78993,
+            78993,
+            78993,
+            78993,
+            78993,
+            78993,
+            78993,
+            78990,
+            78990,
+            78990,
+            78990,
+            78990,
+            78990,
+            78990,
+            78990
+          ]
+        },
+        "Countermeasures": {
+          "Flare": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "Healing Nanobots": [
+            115643,
+            115643,
+            115633,
+            115633,
+            115623,
+            115623,
+            115613,
+            115613,
+            115613,
+            115613
+          ]
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": [],
+          "Combat Gray Goo": [
+            116768
+          ]
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Ship Module": {},
+        "Ship Weapons": {},
+        "Countermeasures": {}
+      }
+    },
+    {
+      "name": "Gray Goo Damage Max",
+      "components": {
+        "Ship Component": {
+          "Power Core": [
+            114443
+          ],
+          "Warp Drive": [
+            114553
+          ],
+          "Subwarp Engine": [
+            114498
+          ],
+          "Maneuvering Thrusters": [
+            114388
+          ],
+          "Shield Generator": [
+            114333
+          ],
+          "Heat Sink": [
+            44
+          ],
+          "Scanner Array": [],
+          "Tractor Beam": [],
+          "Hull Reinforcement": [
+            114773
+          ],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": [
+            115213
+          ]
+        },
+        "Ship Module": {
+          "Ammo Module": [
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107
+          ],
+          "Fuel Module": [
+            "",
+            ""
+          ],
+          "Cargo Module": [
+            "",
+            "",
+            ""
+          ],
+          "Passenger Module": [
+            ""
+          ]
+        },
+        "Ship Weapons": {
+          "Kinetic": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "Gray Goo": [
+            79061,
+            79058,
+            79058,
+            79058,
+            79058,
+            79058,
+            79058,
+            79055,
+            79055,
+            79055,
+            79055,
+            79055,
+            79055,
+            79055,
+            79055,
+            79052,
+            79052,
+            79052,
+            79052,
+            79052,
+            79052,
+            79052,
+            79052
+          ]
+        },
+        "Countermeasures": {
+          "Flare": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "Healing Nanobots": [
+            115845,
+            115845,
+            115835,
+            115835,
+            115825,
+            115825,
+            115815,
+            115815,
+            115815,
+            115815
+          ]
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": [],
+          "Combat Gray Goo": [
+            116768
+          ]
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Ship Module": {},
+        "Ship Weapons": {},
+        "Countermeasures": {}
+      }
+    },
+    {
+      "name": "Heat Damage Min",
+      "components": {
+        "Ship Component": {
+          "Power Core": [],
+          "Warp Drive": [],
+          "Subwarp Engine": [],
+          "Maneuvering Thrusters": [],
+          "Shield Generator": [],
+          "Heat Sink": [],
+          "Scanner Array": [],
+          "Tractor Beam": [],
+          "Hull Reinforcement": [],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": []
+        },
+        "Ship Module": {
+          "Ammo Module": [
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103,
+            114103
+          ],
+          "Fuel Module": [
+            "",
+            ""
+          ],
+          "Cargo Module": [
+            "",
+            "",
+            ""
+          ],
+          "Passenger Module": [
+            ""
+          ]
+        },
+        "Ship Weapons": {
+          "Kinetic": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "Heat": [
+            79165,
+            79163,
+            79163,
+            79163,
+            79163,
+            79163,
+            79163,
+            79161,
+            79161,
+            79161,
+            79161,
+            79161,
+            79161,
+            79161,
+            79161,
+            79159,
+            79159,
+            79159,
+            79159,
+            79159,
+            79159,
+            79159,
+            79159
+          ]
+        },
+        "Countermeasures": {
+          "Flare": []
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": []
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Ship Module": {},
+        "Ship Weapons": {}
+      }
+    },
+    {
+      "name": "Heat Damage Mid",
+      "components": {
+        "Ship Component": {
+          "Power Core": [
+            114441
+          ],
+          "Warp Drive": [],
+          "Subwarp Engine": [],
+          "Maneuvering Thrusters": [],
+          "Shield Generator": [],
+          "Heat Sink": [
+            42
+          ],
+          "Scanner Array": [],
+          "Tractor Beam": [],
+          "Hull Reinforcement": [],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": []
+        },
+        "Ship Module": {
+          "Ammo Module": [
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105,
+            114105
+          ],
+          "Fuel Module": [
+            "",
+            ""
+          ],
+          "Cargo Module": [
+            "",
+            "",
+            ""
+          ],
+          "Passenger Module": [
+            ""
+          ]
+        },
+        "Ship Weapons": {
+          "Kinetic": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "Heat": [
+            79207,
+            79205,
+            79205,
+            79205,
+            79205,
+            79205,
+            79205,
+            79203,
+            79203,
+            79203,
+            79203,
+            79203,
+            79203,
+            79203,
+            79203,
+            79201,
+            79201,
+            79201,
+            79201,
+            79201,
+            79201,
+            79201,
+            79201
+          ]
+        },
+        "Countermeasures": {
+          "Flare": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "Fire Suppressor": [
+            115641,
+            115641,
+            115631,
+            115631,
+            115621,
+            115621,
+            115611,
+            115611,
+            115611,
+            115611
+          ]
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": [],
+          "Combat Heat": [
+            116789
+          ]
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Ship Module": {},
+        "Ship Weapons": {},
+        "Countermeasures": {}
+      }
+    },
+    {
+      "name": "Heat Damage Max",
+      "components": {
+        "Ship Component": {
+          "Power Core": [
+            114443
+          ],
+          "Warp Drive": [
+            114553
+          ],
+          "Subwarp Engine": [
+            114498
+          ],
+          "Maneuvering Thrusters": [
+            114388
+          ],
+          "Shield Generator": [
+            114333
+          ],
+          "Heat Sink": [
+            44
+          ],
+          "Scanner Array": [],
+          "Tractor Beam": [],
+          "Hull Reinforcement": [
+            114773
+          ],
+          "Bomb Bay": [
+            115160,
+            115160
+          ],
+          "Drone Port": [
+            115213
+          ]
+        },
+        "Ship Module": {
+          "Ammo Module": [
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107,
+            114107
+          ],
+          "Fuel Module": [
+            "",
+            ""
+          ],
+          "Cargo Module": [
+            "",
+            "",
+            ""
+          ],
+          "Passenger Module": [
+            ""
+          ]
+        },
+        "Ship Weapons": {
+          "Kinetic": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "Heat": [
+            79249,
+            79247,
+            79247,
+            79247,
+            79247,
+            79247,
+            79247,
+            79245,
+            79245,
+            79245,
+            79245,
+            79245,
+            79245,
+            79245,
+            79245,
+            79243,
+            79243,
+            79243,
+            79243,
+            79243,
+            79243,
+            79243,
+            79243
+          ]
+        },
+        "Countermeasures": {
+          "Flare": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "Fire Suppressor": [
+            115843,
+            115843,
+            115833,
+            115833,
+            115823,
+            115823,
+            115813,
+            115813,
+            115813,
+            115813
+          ]
+        },
+        "Missiles": {},
+        "Bombs": {
+          "Fimbul ECOS": []
+        },
+        "Drones": {
+          "Combat Kinetic": [],
+          "Combat Heat": [
+            116789
+          ]
+        }
+      },
+      "locked": true,
+      "_convertMetadata": {
+        "Ship Module": {},
+        "Ship Weapons": {},
+        "Countermeasures": {}
+      }
+    }
+  ],
+  "activeConfigIndex": 0
+}

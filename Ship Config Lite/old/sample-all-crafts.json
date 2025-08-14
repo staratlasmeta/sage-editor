@@ -1,0 +1,160 @@
+{
+  "ship_components": [
+    {
+      "id": "engine_boost_1",
+      "name": "Engine Booster Mk1",
+      "category": "Engines",
+      "description": "Improves subwarp speed by 10%",
+      "compatibleClasses": [1, 2, 3],
+      "type": "multiplier",
+      "effects": {
+        "subwarpSpeed": 0.1
+      }
+    },
+    {
+      "id": "engine_boost_2",
+      "name": "Engine Booster Mk2",
+      "category": "Engines",
+      "description": "Improves subwarp speed by 20%",
+      "compatibleClasses": [2, 3, 4],
+      "type": "multiplier",
+      "effects": {
+        "subwarpSpeed": 0.2
+      }
+    },
+    {
+      "id": "fuel_efficiency_1",
+      "name": "Fuel Optimizer Mk1",
+      "category": "Fuel Systems",
+      "description": "Reduces subwarp fuel consumption by 5%",
+      "compatibleClasses": [1, 2, 3, 4],
+      "type": "multiplier",
+      "effects": {
+        "subwarpFuelConsumptionRate": -0.05
+      }
+    },
+    {
+      "id": "fuel_efficiency_2",
+      "name": "Fuel Optimizer Mk2",
+      "category": "Fuel Systems",
+      "description": "Reduces subwarp fuel consumption by 10%",
+      "compatibleClasses": [3, 4, 5],
+      "type": "multiplier",
+      "effects": {
+        "subwarpFuelConsumptionRate": -0.1
+      }
+    },
+    {
+      "id": "cargo_expander_1",
+      "name": "Cargo Bay Extender Mk1",
+      "category": "Storage",
+      "description": "Increases cargo capacity by 50 units",
+      "compatibleClasses": [1, 2, 3, 4, 5],
+      "type": "additive",
+      "effects": {
+        "cargoCapacity": 50
+      }
+    },
+    {
+      "id": "cargo_expander_2",
+      "name": "Cargo Bay Extender Mk2",
+      "category": "Storage",
+      "description": "Increases cargo capacity by 100 units",
+      "compatibleClasses": [2, 3, 4, 5],
+      "type": "additive",
+      "effects": {
+        "cargoCapacity": 100
+      }
+    },
+    {
+      "id": "warp_enhancer_1",
+      "name": "Warp Drive Enhancer Mk1",
+      "category": "Warp Systems",
+      "description": "Increases warp distance by 0.2 units",
+      "compatibleClasses": [1, 2, 3],
+      "type": "additive",
+      "effects": {
+        "maxWarpDistance": 0.2
+      }
+    },
+    {
+      "id": "warp_enhancer_2",
+      "name": "Warp Drive Enhancer Mk2",
+      "category": "Warp Systems",
+      "description": "Increases warp distance by 0.5 units",
+      "compatibleClasses": [2, 3, 4, 5],
+      "type": "additive",
+      "effects": {
+        "maxWarpDistance": 0.5
+      }
+    },
+    {
+      "id": "warp_cooldown_1",
+      "name": "Warp Coolant System Mk1",
+      "category": "Warp Systems",
+      "description": "Reduces warp cooldown by 10%",
+      "compatibleClasses": [2, 3, 4],
+      "type": "multiplier",
+      "effects": {
+        "warpCoolDown": -0.1
+      }
+    },
+    {
+      "id": "mining_upgrade_1",
+      "name": "Mining Laser Upgrade Mk1",
+      "category": "Mining",
+      "description": "Improves mining rate by 15%",
+      "compatibleClasses": [3, 4, 5],
+      "type": "multiplier",
+      "effects": {
+        "miningRate": 0.15
+      }
+    }
+  ],
+  "ship_weapons": [
+    {
+      "id": "laser_cannon_1",
+      "name": "Basic Laser Cannon",
+      "category": "Weapons",
+      "description": "Standard laser weapon, increases ammo consumption by 5%",
+      "compatibleClasses": [1, 2, 3],
+      "type": "multiplier",
+      "effects": {
+        "ammoConsumptionRate": 0.05
+      }
+    },
+    {
+      "id": "missile_launcher_1",
+      "name": "Basic Missile Launcher",
+      "category": "Weapons",
+      "description": "Standard missile launcher, increases ammo consumption by 10%",
+      "compatibleClasses": [2, 3, 4],
+      "type": "multiplier",
+      "effects": {
+        "ammoConsumptionRate": 0.1
+      }
+    },
+    {
+      "id": "railgun_1",
+      "name": "Basic Railgun",
+      "category": "Weapons",
+      "description": "Standard railgun, increases ammo consumption by 15%",
+      "compatibleClasses": [3, 4, 5],
+      "type": "multiplier",
+      "effects": {
+        "ammoConsumptionRate": 0.15
+      }
+    },
+    {
+      "id": "ammo_extender_1",
+      "name": "Ammo Capacity Extender",
+      "category": "Ammo Systems",
+      "description": "Increases ammo capacity by 50 units",
+      "compatibleClasses": [1, 2, 3, 4, 5],
+      "type": "additive",
+      "effects": {
+        "ammoCapacity": 50
+      }
+    }
+  ]
+} 

@@ -1,0 +1,271 @@
+/* ResourcesList Styles */
+.resources-list {
+    background-color: #1E1E1E;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    padding: 20px;
+    width: 800px;
+    max-width: 90vw;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+/* Header */
+.resources-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #333333;
+}
+
+.resources-header h2 {
+    margin: 0;
+    color: #FFFFFF;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    color: #AAAAAA;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+}
+
+.close-button:hover {
+    color: #FFFFFF;
+}
+
+/* Controls */
+.resources-controls {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.search-filter input {
+    width: 100%;
+    padding: 8px 12px;
+    background-color: #2D2D2D;
+    border: 1px solid #444444;
+    color: #FFFFFF;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.search-filter input:focus {
+    border-color: #3A86FF;
+    outline: none;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.filter-buttons button {
+    background: #2D2D2D;
+    border: 1px solid transparent;
+    padding: 8px 16px;
+    color: #AAAAAA;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.filter-buttons button.active {
+    background-color: #3A86FF;
+    color: #FFFFFF;
+    border-color: #3A86FF;
+}
+
+.filter-buttons button:hover:not(.active) {
+    border-color: #3A86FF;
+    color: #FFFFFF;
+}
+
+/* Table */
+.resources-table {
+    border: 1px solid #333333;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.table-header {
+    display: grid;
+    grid-template-columns: 3fr 2fr 2fr 1fr;
+    background-color: #2D2D2D;
+    border-bottom: 1px solid #333333;
+}
+
+.header-cell {
+    padding: 10px 15px;
+    color: #FFFFFF;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+}
+
+.header-cell:hover {
+    background-color: rgba(58, 134, 255, 0.1);
+}
+
+.header-cell.sorted {
+    color: #3A86FF;
+}
+
+.sort-indicator {
+    margin-left: 5px;
+    font-size: 12px;
+}
+
+.table-body {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.resource-row {
+    display: grid;
+    grid-template-columns: 3fr 2fr 2fr 1fr;
+    border-bottom: 1px solid #333333;
+    transition: background-color 0.2s ease;
+}
+
+.resource-row:hover {
+    background-color: #2D2D2D;
+}
+
+.resource-row:last-child {
+    border-bottom: none;
+}
+
+.resource-cell {
+    padding: 10px 15px;
+    color: #AAAAAA;
+}
+
+.resource-name {
+    color: #FFFFFF;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+.resource-type-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.resource-type-indicator.raw {
+    background-color: #38B000;
+    /* Green for raw resources */
+}
+
+.resource-type-indicator.processed {
+    background-color: #3A86FF;
+    /* Blue for processed resources */
+}
+
+.resource-type-indicator.advanced {
+    background-color: #8338EC;
+    /* Purple for advanced resources */
+}
+
+.resource-type-indicator.unknown {
+    background-color: #AAAAAA;
+    /* Grey for unknown type */
+}
+
+.resource-amount {
+    font-weight: 500;
+    color: #FFFFFF;
+}
+
+.storage-bar {
+    height: 4px;
+    background-color: #2D2D2D;
+    border-radius: 2px;
+    margin-top: 5px;
+    overflow: hidden;
+}
+
+.storage-fill {
+    height: 100%;
+    background-color: #3A86FF;
+    border-radius: 2px;
+}
+
+.resource-rate {
+    font-weight: 500;
+}
+
+.resource-rate.positive {
+    color: #38B000;
+    /* Success color for positive rates */
+}
+
+.resource-rate.negative {
+    color: #FF5252;
+    /* Error color for negative rates */
+}
+
+.resource-rate.neutral {
+    color: #AAAAAA;
+    /* Secondary text color for zero rates */
+}
+
+.resource-tier {
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.no-resources {
+    padding: 20px;
+    text-align: center;
+    color: #AAAAAA;
+    grid-column: 1 / -1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .resources-list {
+        width: 100%;
+        max-width: 100%;
+        border-radius: 0;
+    }
+
+    .table-header,
+    .resource-row {
+        grid-template-columns: 3fr 2fr 2fr 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+
+    .table-header,
+    .resource-row {
+        grid-template-columns: 2fr 1fr 1fr;
+    }
+
+    .resource-cell.resource-tier {
+        display: none;
+    }
+
+    .header-cell:nth-child(4) {
+        display: none;
+    }
+}

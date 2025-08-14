@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loot Matrix</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">        <header>            <div class="tabs">                <button class="tab-button active" data-tab="rewardsList">Loot Matrix</button>                <button class="tab-button" data-tab="categories">Categories</button>            </div>            <a href="../SAGE Editor Suite/index.html" class="home-button" title="Return to SAGE Editor Suite">                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">                    <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>                </svg>                Home            </a>        </header>
+        
+        <div class="tab-content">
+            <div id="rewardsList" class="tab-pane active">
+                <div class="panel-header">
+                    <div class="panel-controls">
+                        <button id="newButton" title="New Document">New</button>
+                        <button id="saveButton" title="Save (Ctrl+S)">Save</button>
+                        <button id="loadButton" title="Load">Load</button>
+                        <input type="file" id="fileInput" style="display: none;">
+                        <button id="expandAllButton" title="Expand All">Expand All</button>
+                        <button id="collapseAllButton" title="Collapse All">Collapse All</button>
+                        <button id="selectAllButton" title="Select All">Select All</button>
+                        <button id="deselectAllButton" title="Deselect All">Deselect All</button>
+                        <button id="processCategoryPromotions" title="Process Category Promotions">Process Categories</button>
+                        <button id="bulkOperationsButton" title="Bulk Operations" style="display:none;">Bulk Operations</button>
+                        <button id="exportMarkdown" title="Export to Markdown" class="header-button">Export Markdown</button>
+                    </div>
+                    <div class="document-info">
+                        <button id="keyboardHintButton" title="Keyboard Shortcuts" class="icon-button">?</button>
+                        <div class="theme-toggle">
+                            <label for="themeSwitch">
+                                <input type="checkbox" id="themeSwitch">
+                                <span class="theme-slider"></span>
+                            </label>
+                        </div>
+                        <div class="width-toggle" title="Toggle Full Width">
+                            <label for="widthSwitch">
+                                <input type="checkbox" id="widthSwitch">
+                                <span class="width-slider"></span>
+                            </label>
+                        </div>
+                        <span id="autoSaveStatus">Unsaved changes</span>
+                        <span id="documentName">all-rewards</span>
+                    </div>
+                </div>
+                <div class="split-view">
+                    <div class="reward-tree panel">
+                        <div class="panel-header">
+                            <h2>Reward Structure <span id="itemCount" class="item-count">(0 items)</span></h2>
+                            <div class="panel-controls">
+                                <button id="addRootItem" title="Add Root Item">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8 3V13" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
+                                        <path d="M3 8H13" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="panel-content">
+                            <div id="rewardTreeContainer"></div>
+                        </div>
+                    </div>
+                    <div class="resize-handle" id="panelResizeHandle"></div>
+                    <div class="properties-panel panel">
+                        <div class="panel-header">
+                            <h2>Properties</h2>
+                            <div class="panel-controls">
+                                <button id="scrollTopButton" title="Scroll to Top">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8 3L3 8H13L8 3Z" fill="currentColor"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="panel-content">
+                            <div id="propertiesForm">
+                                <p>Select an item to edit its properties</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="categories" class="tab-pane">
+                <div class="panel-header">
+                    <div class="panel-controls">
+                        <button id="addColumn" title="Add Column">Add Column</button>
+                        <button id="addRow" title="Add Row">Add Row</button>
+                        <button id="importCSV" title="Import CSV">Import CSV</button>
+                        <button id="exportCategoriesCSV" title="Export CSV">Export CSV</button>
+                        <input type="file" id="csvFileInput" accept=".csv" style="display: none;">
+                    </div>
+                    <div class="document-info">
+                        <button id="keyboardHintButton2" title="Keyboard Shortcuts" class="icon-button">?</button>
+                        <div class="theme-toggle">
+                            <label for="themeSwitch">
+                                <input type="checkbox" id="themeSwitch">
+                                <span class="theme-slider"></span>
+                            </label>
+                        </div>
+                        <div class="width-toggle" title="Toggle Full Width">
+                            <label for="widthSwitch">
+                                <input type="checkbox" id="widthSwitch">
+                                <span class="width-slider"></span>
+                            </label>
+                        </div>
+                        <span id="autoSaveStatus2">Unsaved changes</span>
+                        <span id="documentName2">all-rewards</span>
+                    </div>
+                </div>
+                <div class="top-scroll-container">
+                    <div class="top-scroll-content"></div>
+                </div>
+                <div class="spreadsheet-container">
+                    <table id="categoriesTable">
+                        <thead>
+                            <tr id="headerRow">
+                                <th>Item Name</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Keyboard shortcuts modal -->
+    <div id="keyboardShortcutsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Keyboard Shortcuts</h2>
+                <span class="close" id="closeModal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <table class="shortcuts-table">
+                    <tr>
+                        <th>Action</th>
+                        <th>Shortcut</th>
+                    </tr>
+                    <tr>
+                        <td>Save</td>
+                        <td>Ctrl+S</td>
+                    </tr>
+                    <tr>
+                        <td>New Blank Document</td>
+                        <td>Ctrl+N</td>
+                    </tr>
+                    <tr>
+                        <td>New Blank Document (Alt)</td>
+                        <td>Ctrl+Shift+N</td>
+                    </tr>
+                    <tr>
+                        <td>Undo</td>
+                        <td>Ctrl+Z</td>
+                    </tr>
+                    <tr>
+                        <td>Add Item</td>
+                        <td>Alt+N</td>
+                    </tr>
+                    <tr>
+                        <td>Delete Selected Item</td>
+                        <td>Delete</td>
+                    </tr>
+                    <tr>
+                        <td>Expand Selected</td>
+                        <td>Right Arrow</td>
+                    </tr>
+                    <tr>
+                        <td>Collapse Selected</td>
+                        <td>Left Arrow</td>
+                    </tr>
+                    <tr>
+                        <td>Navigate Up</td>
+                        <td>Up Arrow</td>
+                    </tr>
+                    <tr>
+                        <td>Navigate Down</td>
+                        <td>Down Arrow</td>
+                    </tr>
+                    <tr>
+                        <td>Show Shortcuts</td>
+                        <td>?</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Context Menu Template -->
+    <div id="contextMenuTemplate" class="context-menu" style="display: none;">
+        <div class="context-menu-item" data-action="add">Add Child</div>
+        <div class="context-menu-item" data-action="edit">Edit Name</div>
+        <div class="context-menu-item" data-action="duplicate">Duplicate</div>
+        <div class="context-menu-item" data-action="delete">Delete</div>
+        <div class="context-menu-item" data-action="expand-all">Expand All Children</div>
+        <div class="context-menu-item" data-action="collapse-all">Collapse All Children</div>
+    </div>
+
+    <!-- Command Palette -->
+    <div class="command-palette" id="commandPalette">
+        <div class="command-palette-header">
+            <input type="text" id="commandInput" placeholder="Type a command...">
+        </div>
+        <div class="command-palette-results" id="commandResults">
+            <!-- Commands will be populated here -->
+        </div>
+    </div>
+    
+    <!-- Auto-backup Notification -->
+    <div class="auto-backup-notification" id="autoBackupNotification">
+        <div class="auto-backup-info">
+            <span id="backupStatus">Auto-backup saved</span>
+            <span id="backupTime"></span>
+        </div>
+        <button id="restoreBackup">Restore</button>
+        <button id="closeBackupNotification">×</button>
+    </div>
+    
+    <!-- Markdown Export Modal -->
+    <div id="markdownModal" class="modal">
+        <div class="modal-content markdown-modal-content">
+            <div class="modal-header markdown-modal-header">
+                <h2>Export to Markdown</h2>
+                <span class="close" id="closeMarkdownBtn">&times;</span>
+            </div>
+            <div class="modal-body">
+                <pre id="markdownText" class="markdown-text"></pre>
+                <div class="markdown-modal-footer">
+                    <button id="copyMarkdownBtn" class="copy-markdown">Copy to Clipboard</button>
+                    <button id="closeMarkdownModalBtn" class="close-markdown-modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="backupNotification" class="notification">
+        <p>Your document has been backed up to localStorage.</p>
+        <button id="closeBackupNotification">×</button>
+    </div>
+     
+    <script src="app.js"></script>
+</body>
+</html> 

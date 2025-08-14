@@ -1,0 +1,3758 @@
+# all-components
+
+## Ship Component
+  - **Heat Sink**
+    - XXS
+      - Heat Sink - XXS - T1
+      - Heat Sink - XXS - T2
+      - Heat Sink - XXS - T3
+      - Heat Sink - XXS - T4
+      - Heat Sink - XXS - T5
+    - XS
+      - Heat Sink - XS - T1
+      - Heat Sink - XS - T2
+      - Heat Sink - XS - T3
+      - Heat Sink - XS - T4
+      - Heat Sink - XS - T5
+    - S
+      - Heat Sink - S - T1
+      - Heat Sink - S - T2
+      - Heat Sink - S - T3
+      - Heat Sink - S - T4
+      - Heat Sink - S - T5
+    - M
+      - Heat Sink - M - T1
+      - Heat Sink - M - T2
+      - Heat Sink - M - T3
+      - Heat Sink - M - T4
+      - Heat Sink - M - T5
+    - L
+      - Heat Sink - L - T1
+      - Heat Sink - L - T2
+      - Heat Sink - L - T3
+      - Heat Sink - L - T4
+      - Heat Sink - L - T5
+    - CAP
+      - Heat Sink - CAP - T1
+      - Heat Sink - CAP - T2
+      - Heat Sink - CAP - T3
+      - Heat Sink - CAP - T4
+      - Heat Sink - CAP - T5
+    - CMD
+      - Heat Sink - CMD - T1
+      - Heat Sink - CMD - T2
+      - Heat Sink - CMD - T3
+      - Heat Sink - CMD - T4
+      - Heat Sink - CMD - T5
+    - Class 8
+      - Heat Sink - Class 8 - T1
+      - Heat Sink - Class 8 - T2
+      - Heat Sink - Class 8 - T3
+      - Heat Sink - Class 8 - T4
+      - Heat Sink - Class 8 - T5
+    - TTN
+      - Heat Sink - TTN - T1
+      - Heat Sink - TTN - T2
+      - Heat Sink - TTN - T3
+      - Heat Sink - TTN - T4
+      - Heat Sink - TTN - T5
+  - **Shield Generator**
+    - XXS
+      - Shield Generator - XXS - T1
+      - Shield Generator - XXS - T2
+      - Shield Generator - XXS - T3
+      - Shield Generator - XXS - T4
+      - Shield Generator - XXS - T5
+    - XS
+      - Shield Generator - XS - T1
+      - Shield Generator - XS - T2
+      - Shield Generator - XS - T3
+      - Shield Generator - XS - T4
+      - Shield Generator - XS - T5
+    - S
+      - Shield Generator - S - T1
+      - Shield Generator - S - T2
+      - Shield Generator - S - T3
+      - Shield Generator - S - T4
+      - Shield Generator - S - T5
+    - M
+      - Shield Generator - M - T1
+      - Shield Generator - M - T2
+      - Shield Generator - M - T3
+      - Shield Generator - M - T4
+      - Shield Generator - M - T5
+    - L
+      - Shield Generator - L - T1
+      - Shield Generator - L - T2
+      - Shield Generator - L - T3
+      - Shield Generator - L - T4
+      - Shield Generator - L - T5
+    - CAP
+      - Shield Generator - CAP - T1
+      - Shield Generator - CAP - T2
+      - Shield Generator - CAP - T3
+      - Shield Generator - CAP - T4
+      - Shield Generator - CAP - T5
+    - CMD
+      - Shield Generator - CMD - T1
+      - Shield Generator - CMD - T2
+      - Shield Generator - CMD - T3
+      - Shield Generator - CMD - T4
+      - Shield Generator - CMD - T5
+    - Class 8
+      - Shield Generator - Class 8 - T1
+      - Shield Generator - Class 8 - T2
+      - Shield Generator - Class 8 - T3
+      - Shield Generator - Class 8 - T4
+      - Shield Generator - Class 8 - T5
+    - TTN
+      - Shield Generator - TTN - T1
+      - Shield Generator - TTN - T2
+      - Shield Generator - TTN - T3
+      - Shield Generator - TTN - T4
+      - Shield Generator - TTN - T5
+  - **Maneuvering Thrusters**
+    - XXS
+      - Maneuvering Thrusters - XXS - T1
+      - Maneuvering Thrusters - XXS - T2
+      - Maneuvering Thrusters - XXS - T3
+      - Maneuvering Thrusters - XXS - T4
+      - Maneuvering Thrusters - XXS - T5
+    - XS
+      - Maneuvering Thrusters - XS - T1
+      - Maneuvering Thrusters - XS - T2
+      - Maneuvering Thrusters - XS - T3
+      - Maneuvering Thrusters - XS - T4
+      - Maneuvering Thrusters - XS - T5
+    - S
+      - Maneuvering Thrusters - S - T1
+      - Maneuvering Thrusters - S - T2
+      - Maneuvering Thrusters - S - T3
+      - Maneuvering Thrusters - S - T4
+      - Maneuvering Thrusters - S - T5
+    - M
+      - Maneuvering Thrusters - M - T1
+      - Maneuvering Thrusters - M - T2
+      - Maneuvering Thrusters - M - T3
+      - Maneuvering Thrusters - M - T4
+      - Maneuvering Thrusters - M - T5
+    - L
+      - Maneuvering Thrusters - L - T1
+      - Maneuvering Thrusters - L - T2
+      - Maneuvering Thrusters - L - T3
+      - Maneuvering Thrusters - L - T4
+      - Maneuvering Thrusters - L - T5
+    - CAP
+      - Maneuvering Thrusters - CAP - T1
+      - Maneuvering Thrusters - CAP - T2
+      - Maneuvering Thrusters - CAP - T3
+      - Maneuvering Thrusters - CAP - T4
+      - Maneuvering Thrusters - CAP - T5
+    - CMD
+      - Maneuvering Thrusters - CMD - T1
+      - Maneuvering Thrusters - CMD - T2
+      - Maneuvering Thrusters - CMD - T3
+      - Maneuvering Thrusters - CMD - T4
+      - Maneuvering Thrusters - CMD - T5
+    - Class 8
+      - Maneuvering Thrusters - Class 8 - T1
+      - Maneuvering Thrusters - Class 8 - T2
+      - Maneuvering Thrusters - Class 8 - T3
+      - Maneuvering Thrusters - Class 8 - T4
+      - Maneuvering Thrusters - Class 8 - T5
+    - TTN
+      - Maneuvering Thrusters - TTN - T1
+      - Maneuvering Thrusters - TTN - T2
+      - Maneuvering Thrusters - TTN - T3
+      - Maneuvering Thrusters - TTN - T4
+      - Maneuvering Thrusters - TTN - T5
+  - **Power Core**
+    - XXS
+      - Power Core - XXS - T1
+      - Power Core - XXS - T2
+      - Power Core - XXS - T3
+      - Power Core - XXS - T4
+      - Power Core - XXS - T5
+    - XS
+      - Power Core - XS - T1
+      - Power Core - XS - T2
+      - Power Core - XS - T3
+      - Power Core - XS - T4
+      - Power Core - XS - T5
+    - S
+      - Power Core - S - T1
+      - Power Core - S - T2
+      - Power Core - S - T3
+      - Power Core - S - T4
+      - Power Core - S - T5
+    - M
+      - Power Core - M - T1
+      - Power Core - M - T2
+      - Power Core - M - T3
+      - Power Core - M - T4
+      - Power Core - M - T5
+    - L
+      - Power Core - L - T1
+      - Power Core - L - T2
+      - Power Core - L - T3
+      - Power Core - L - T4
+      - Power Core - L - T5
+    - CAP
+      - Power Core - CAP - T1
+      - Power Core - CAP - T2
+      - Power Core - CAP - T3
+      - Power Core - CAP - T4
+      - Power Core - CAP - T5
+    - CMD
+      - Power Core - CMD - T1
+      - Power Core - CMD - T2
+      - Power Core - CMD - T3
+      - Power Core - CMD - T4
+      - Power Core - CMD - T5
+    - Class 8
+      - Power Core - Class 8 - T1
+      - Power Core - Class 8 - T2
+      - Power Core - Class 8 - T3
+      - Power Core - Class 8 - T4
+      - Power Core - Class 8 - T5
+    - TTN
+      - Power Core - TTN - T1
+      - Power Core - TTN - T2
+      - Power Core - TTN - T3
+      - Power Core - TTN - T4
+      - Power Core - TTN - T5
+  - **Subwarp Engine**
+    - XXS
+      - Subwarp Engine - XXS - T1
+      - Subwarp Engine - XXS - T2
+      - Subwarp Engine - XXS - T3
+      - Subwarp Engine - XXS - T4
+      - Subwarp Engine - XXS - T5
+    - XS
+      - Subwarp Engine - XS - T1
+      - Subwarp Engine - XS - T2
+      - Subwarp Engine - XS - T3
+      - Subwarp Engine - XS - T4
+      - Subwarp Engine - XS - T5
+    - S
+      - Subwarp Engine - S - T1
+      - Subwarp Engine - S - T2
+      - Subwarp Engine - S - T3
+      - Subwarp Engine - S - T4
+      - Subwarp Engine - S - T5
+    - M
+      - Subwarp Engine - M - T1
+      - Subwarp Engine - M - T2
+      - Subwarp Engine - M - T3
+      - Subwarp Engine - M - T4
+      - Subwarp Engine - M - T5
+    - L
+      - Subwarp Engine - L - T1
+      - Subwarp Engine - L - T2
+      - Subwarp Engine - L - T3
+      - Subwarp Engine - L - T4
+      - Subwarp Engine - L - T5
+    - CAP
+      - Subwarp Engine - CAP - T1
+      - Subwarp Engine - CAP - T2
+      - Subwarp Engine - CAP - T3
+      - Subwarp Engine - CAP - T4
+      - Subwarp Engine - CAP - T5
+    - CMD
+      - Subwarp Engine - CMD - T1
+      - Subwarp Engine - CMD - T2
+      - Subwarp Engine - CMD - T3
+      - Subwarp Engine - CMD - T4
+      - Subwarp Engine - CMD - T5
+    - Class 8
+      - Subwarp Engine - Class 8 - T1
+      - Subwarp Engine - Class 8 - T2
+      - Subwarp Engine - Class 8 - T3
+      - Subwarp Engine - Class 8 - T4
+      - Subwarp Engine - Class 8 - T5
+    - TTN
+      - Subwarp Engine - TTN - T1
+      - Subwarp Engine - TTN - T2
+      - Subwarp Engine - TTN - T3
+      - Subwarp Engine - TTN - T4
+      - Subwarp Engine - TTN - T5
+  - **Warp Drive**
+    - XXS
+      - Warp Drive - XXS - T1
+      - Warp Drive - XXS - T2
+      - Warp Drive - XXS - T3
+      - Warp Drive - XXS - T4
+      - Warp Drive - XXS - T5
+    - XS
+      - Warp Drive - XS - T1
+      - Warp Drive - XS - T2
+      - Warp Drive - XS - T3
+      - Warp Drive - XS - T4
+      - Warp Drive - XS - T5
+    - S
+      - Warp Drive - S - T1
+      - Warp Drive - S - T2
+      - Warp Drive - S - T3
+      - Warp Drive - S - T4
+      - Warp Drive - S - T5
+    - M
+      - Warp Drive - M - T1
+      - Warp Drive - M - T2
+      - Warp Drive - M - T3
+      - Warp Drive - M - T4
+      - Warp Drive - M - T5
+    - L
+      - Warp Drive - L - T1
+      - Warp Drive - L - T2
+      - Warp Drive - L - T3
+      - Warp Drive - L - T4
+      - Warp Drive - L - T5
+    - CAP
+      - Warp Drive - CAP - T1
+      - Warp Drive - CAP - T2
+      - Warp Drive - CAP - T3
+      - Warp Drive - CAP - T4
+      - Warp Drive - CAP - T5
+    - CMD
+      - Warp Drive - CMD - T1
+      - Warp Drive - CMD - T2
+      - Warp Drive - CMD - T3
+      - Warp Drive - CMD - T4
+      - Warp Drive - CMD - T5
+    - Class 8
+      - Warp Drive - Class 8 - T1
+      - Warp Drive - Class 8 - T2
+      - Warp Drive - Class 8 - T3
+      - Warp Drive - Class 8 - T4
+      - Warp Drive - Class 8 - T5
+    - TTN
+      - Warp Drive - TTN - T1
+      - Warp Drive - TTN - T2
+      - Warp Drive - TTN - T3
+      - Warp Drive - TTN - T4
+      - Warp Drive - TTN - T5
+  - **Scanner Array**
+    - XXS
+      - Scanner Array - XXS - T1
+      - Scanner Array - XXS - T2
+      - Scanner Array - XXS - T3
+      - Scanner Array - XXS - T4
+      - Scanner Array - XXS - T5
+    - XS
+      - Scanner Array - XS - T1
+      - Scanner Array - XS - T2
+      - Scanner Array - XS - T3
+      - Scanner Array - XS - T4
+      - Scanner Array - XS - T5
+    - S
+      - Scanner Array - S - T1
+      - Scanner Array - S - T2
+      - Scanner Array - S - T3
+      - Scanner Array - S - T4
+      - Scanner Array - S - T5
+    - M
+      - Scanner Array - M - T1
+      - Scanner Array - M - T2
+      - Scanner Array - M - T3
+      - Scanner Array - M - T4
+      - Scanner Array - M - T5
+    - L
+      - Scanner Array - L - T1
+      - Scanner Array - L - T2
+      - Scanner Array - L - T3
+      - Scanner Array - L - T4
+      - Scanner Array - L - T5
+    - CAP
+      - Scanner Array - CAP - T1
+      - Scanner Array - CAP - T2
+      - Scanner Array - CAP - T3
+      - Scanner Array - CAP - T4
+      - Scanner Array - CAP - T5
+    - CMD
+      - Scanner Array - CMD - T1
+      - Scanner Array - CMD - T2
+      - Scanner Array - CMD - T3
+      - Scanner Array - CMD - T4
+      - Scanner Array - CMD - T5
+    - Class 8
+      - Scanner Array - Class 8 - T1
+      - Scanner Array - Class 8 - T2
+      - Scanner Array - Class 8 - T3
+      - Scanner Array - Class 8 - T4
+      - Scanner Array - Class 8 - T5
+    - TTN
+      - Scanner Array - TTN - T1
+      - Scanner Array - TTN - T2
+      - Scanner Array - TTN - T3
+      - Scanner Array - TTN - T4
+      - Scanner Array - TTN - T5
+  - **Tractor Beam**
+    - XXS
+      - Tractor Beam - XXS - T1
+      - Tractor Beam - XXS - T2
+      - Tractor Beam - XXS - T3
+      - Tractor Beam - XXS - T4
+      - Tractor Beam - XXS - T5
+    - XS
+      - Tractor Beam - XS - T1
+      - Tractor Beam - XS - T2
+      - Tractor Beam - XS - T3
+      - Tractor Beam - XS - T4
+      - Tractor Beam - XS - T5
+    - S
+      - Tractor Beam - S - T1
+      - Tractor Beam - S - T2
+      - Tractor Beam - S - T3
+      - Tractor Beam - S - T4
+      - Tractor Beam - S - T5
+    - M
+      - Tractor Beam - M - T1
+      - Tractor Beam - M - T2
+      - Tractor Beam - M - T3
+      - Tractor Beam - M - T4
+      - Tractor Beam - M - T5
+    - L
+      - Tractor Beam - L - T1
+      - Tractor Beam - L - T2
+      - Tractor Beam - L - T3
+      - Tractor Beam - L - T4
+      - Tractor Beam - L - T5
+    - CAP
+      - Tractor Beam - CAP - T1
+      - Tractor Beam - CAP - T2
+      - Tractor Beam - CAP - T3
+      - Tractor Beam - CAP - T4
+      - Tractor Beam - CAP - T5
+    - CMD
+      - Tractor Beam - CMD - T1
+      - Tractor Beam - CMD - T2
+      - Tractor Beam - CMD - T3
+      - Tractor Beam - CMD - T4
+      - Tractor Beam - CMD - T5
+    - Class 8
+      - Tractor Beam - Class 8 - T1
+      - Tractor Beam - Class 8 - T2
+      - Tractor Beam - Class 8 - T3
+      - Tractor Beam - Class 8 - T4
+      - Tractor Beam - Class 8 - T5
+    - TTN
+      - Tractor Beam - TTN - T1
+      - Tractor Beam - TTN - T2
+      - Tractor Beam - TTN - T3
+      - Tractor Beam - TTN - T4
+      - Tractor Beam - TTN - T5
+  - **Hull Reinforcement**
+    - XXS
+      - Hull Reinforcement - XXS - T1
+      - Hull Reinforcement - XXS - T2
+      - Hull Reinforcement - XXS - T3
+      - Hull Reinforcement - XXS - T4
+      - Hull Reinforcement - XXS - T5
+    - XS
+      - Hull Reinforcement - XS - T1
+      - Hull Reinforcement - XS - T2
+      - Hull Reinforcement - XS - T3
+      - Hull Reinforcement - XS - T4
+      - Hull Reinforcement - XS - T5
+    - S
+      - Hull Reinforcement - S - T1
+      - Hull Reinforcement - S - T2
+      - Hull Reinforcement - S - T3
+      - Hull Reinforcement - S - T4
+      - Hull Reinforcement - S - T5
+    - M
+      - Hull Reinforcement - M - T1
+      - Hull Reinforcement - M - T2
+      - Hull Reinforcement - M - T3
+      - Hull Reinforcement - M - T4
+      - Hull Reinforcement - M - T5
+    - L
+      - Hull Reinforcement - L - T1
+      - Hull Reinforcement - L - T2
+      - Hull Reinforcement - L - T3
+      - Hull Reinforcement - L - T4
+      - Hull Reinforcement - L - T5
+    - CAP
+      - Hull Reinforcement - CAP - T1
+      - Hull Reinforcement - CAP - T2
+      - Hull Reinforcement - CAP - T3
+      - Hull Reinforcement - CAP - T4
+      - Hull Reinforcement - CAP - T5
+    - CMD
+      - Hull Reinforcement - CMD - T1
+      - Hull Reinforcement - CMD - T2
+      - Hull Reinforcement - CMD - T3
+      - Hull Reinforcement - CMD - T4
+      - Hull Reinforcement - CMD - T5
+    - Class 8
+      - Hull Reinforcement - Class 8 - T1
+      - Hull Reinforcement - Class 8 - T2
+      - Hull Reinforcement - Class 8 - T3
+      - Hull Reinforcement - Class 8 - T4
+      - Hull Reinforcement - Class 8 - T5
+    - TTN
+      - Hull Reinforcement - TTN - T1
+      - Hull Reinforcement - TTN - T2
+      - Hull Reinforcement - TTN - T3
+      - Hull Reinforcement - TTN - T4
+      - Hull Reinforcement - TTN - T5
+  - **Repair Rig**
+    - XXS
+      - Repair Rig - XXS - T1
+      - Repair Rig - XXS - T2
+      - Repair Rig - XXS - T3
+      - Repair Rig - XXS - T4
+      - Repair Rig - XXS - T5
+    - XS
+      - Repair Rig - XS - T1
+      - Repair Rig - XS - T2
+      - Repair Rig - XS - T3
+      - Repair Rig - XS - T4
+      - Repair Rig - XS - T5
+    - S
+      - Repair Rig - S - T1
+      - Repair Rig - S - T2
+      - Repair Rig - S - T3
+      - Repair Rig - S - T4
+      - Repair Rig - S - T5
+    - M
+      - Repair Rig - M - T1
+      - Repair Rig - M - T2
+      - Repair Rig - M - T3
+      - Repair Rig - M - T4
+      - Repair Rig - M - T5
+    - L
+      - Repair Rig - L - T1
+      - Repair Rig - L - T2
+      - Repair Rig - L - T3
+      - Repair Rig - L - T4
+      - Repair Rig - L - T5
+    - CAP
+      - Repair Rig - CAP - T1
+      - Repair Rig - CAP - T2
+      - Repair Rig - CAP - T3
+      - Repair Rig - CAP - T4
+      - Repair Rig - CAP - T5
+    - CMD
+      - Repair Rig - CMD - T1
+      - Repair Rig - CMD - T2
+      - Repair Rig - CMD - T3
+      - Repair Rig - CMD - T4
+      - Repair Rig - CMD - T5
+    - Class 8
+      - Repair Rig - Class 8 - T1
+      - Repair Rig - Class 8 - T2
+      - Repair Rig - Class 8 - T3
+      - Repair Rig - Class 8 - T4
+      - Repair Rig - Class 8 - T5
+    - TTN
+      - Repair Rig - TTN - T1
+      - Repair Rig - TTN - T2
+      - Repair Rig - TTN - T3
+      - Repair Rig - TTN - T4
+      - Repair Rig - TTN - T5
+  - **Rescue Rig**
+    - XXS
+      - Rescue Rig - XXS - T1
+      - Rescue Rig - XXS - T2
+      - Rescue Rig - XXS - T3
+      - Rescue Rig - XXS - T4
+      - Rescue Rig - XXS - T5
+    - XS
+      - Rescue Rig - XS - T1
+      - Rescue Rig - XS - T2
+      - Rescue Rig - XS - T3
+      - Rescue Rig - XS - T4
+      - Rescue Rig - XS - T5
+    - S
+      - Rescue Rig - S - T1
+      - Rescue Rig - S - T2
+      - Rescue Rig - S - T3
+      - Rescue Rig - S - T4
+      - Rescue Rig - S - T5
+    - M
+      - Rescue Rig - M - T1
+      - Rescue Rig - M - T2
+      - Rescue Rig - M - T3
+      - Rescue Rig - M - T4
+      - Rescue Rig - M - T5
+    - L
+      - Rescue Rig - L - T1
+      - Rescue Rig - L - T2
+      - Rescue Rig - L - T3
+      - Rescue Rig - L - T4
+      - Rescue Rig - L - T5
+    - CAP
+      - Rescue Rig - CAP - T1
+      - Rescue Rig - CAP - T2
+      - Rescue Rig - CAP - T3
+      - Rescue Rig - CAP - T4
+      - Rescue Rig - CAP - T5
+    - CMD
+      - Rescue Rig - CMD - T1
+      - Rescue Rig - CMD - T2
+      - Rescue Rig - CMD - T3
+      - Rescue Rig - CMD - T4
+      - Rescue Rig - CMD - T5
+    - Class 8
+      - Rescue Rig - Class 8 - T1
+      - Rescue Rig - Class 8 - T2
+      - Rescue Rig - Class 8 - T3
+      - Rescue Rig - Class 8 - T4
+      - Rescue Rig - Class 8 - T5
+    - TTN
+      - Rescue Rig - TTN - T1
+      - Rescue Rig - TTN - T2
+      - Rescue Rig - TTN - T3
+      - Rescue Rig - TTN - T4
+      - Rescue Rig - TTN - T5
+  - **Refuel Rig**
+    - XXS
+      - Refuel Rig - XXS - T1
+      - Refuel Rig - XXS - T2
+      - Refuel Rig - XXS - T3
+      - Refuel Rig - XXS - T4
+      - Refuel Rig - XXS - T5
+    - XS
+      - Refuel Rig - XS - T1
+      - Refuel Rig - XS - T2
+      - Refuel Rig - XS - T3
+      - Refuel Rig - XS - T4
+      - Refuel Rig - XS - T5
+    - S
+      - Refuel Rig - S - T1
+      - Refuel Rig - S - T2
+      - Refuel Rig - S - T3
+      - Refuel Rig - S - T4
+      - Refuel Rig - S - T5
+    - M
+      - Refuel Rig - M - T1
+      - Refuel Rig - M - T2
+      - Refuel Rig - M - T3
+      - Refuel Rig - M - T4
+      - Refuel Rig - M - T5
+    - L
+      - Refuel Rig - L - T1
+      - Refuel Rig - L - T2
+      - Refuel Rig - L - T3
+      - Refuel Rig - L - T4
+      - Refuel Rig - L - T5
+    - CAP
+      - Refuel Rig - CAP - T1
+      - Refuel Rig - CAP - T2
+      - Refuel Rig - CAP - T3
+      - Refuel Rig - CAP - T4
+      - Refuel Rig - CAP - T5
+    - CMD
+      - Refuel Rig - CMD - T1
+      - Refuel Rig - CMD - T2
+      - Refuel Rig - CMD - T3
+      - Refuel Rig - CMD - T4
+      - Refuel Rig - CMD - T5
+    - Class 8
+      - Refuel Rig - Class 8 - T1
+      - Refuel Rig - Class 8 - T2
+      - Refuel Rig - Class 8 - T3
+      - Refuel Rig - Class 8 - T4
+      - Refuel Rig - Class 8 - T5
+    - TTN
+      - Refuel Rig - TTN - T1
+      - Refuel Rig - TTN - T2
+      - Refuel Rig - TTN - T3
+      - Refuel Rig - TTN - T4
+      - Refuel Rig - TTN - T5
+  - **Salvage Rig**
+    - XXS
+      - Salvage Rig - XXS - T1
+      - Salvage Rig - XXS - T2
+      - Salvage Rig - XXS - T3
+      - Salvage Rig - XXS - T4
+      - Salvage Rig - XXS - T5
+    - XS
+      - Salvage Rig - XS - T1
+      - Salvage Rig - XS - T2
+      - Salvage Rig - XS - T3
+      - Salvage Rig - XS - T4
+      - Salvage Rig - XS - T5
+    - S
+      - Salvage Rig - S - T1
+      - Salvage Rig - S - T2
+      - Salvage Rig - S - T3
+      - Salvage Rig - S - T4
+      - Salvage Rig - S - T5
+    - M
+      - Salvage Rig - M - T1
+      - Salvage Rig - M - T2
+      - Salvage Rig - M - T3
+      - Salvage Rig - M - T4
+      - Salvage Rig - M - T5
+    - L
+      - Salvage Rig - L - T1
+      - Salvage Rig - L - T2
+      - Salvage Rig - L - T3
+      - Salvage Rig - L - T4
+      - Salvage Rig - L - T5
+    - CAP
+      - Salvage Rig - CAP - T1
+      - Salvage Rig - CAP - T2
+      - Salvage Rig - CAP - T3
+      - Salvage Rig - CAP - T4
+      - Salvage Rig - CAP - T5
+    - CMD
+      - Salvage Rig - CMD - T1
+      - Salvage Rig - CMD - T2
+      - Salvage Rig - CMD - T3
+      - Salvage Rig - CMD - T4
+      - Salvage Rig - CMD - T5
+    - Class 8
+      - Salvage Rig - Class 8 - T1
+      - Salvage Rig - Class 8 - T2
+      - Salvage Rig - Class 8 - T3
+      - Salvage Rig - Class 8 - T4
+      - Salvage Rig - Class 8 - T5
+    - TTN
+      - Salvage Rig - TTN - T1
+      - Salvage Rig - TTN - T2
+      - Salvage Rig - TTN - T3
+      - Salvage Rig - TTN - T4
+      - Salvage Rig - TTN - T5
+  - **Mining Rig**
+    - XXS
+      - Mining Rig - XXS - T1
+      - Mining Rig - XXS - T2
+      - Mining Rig - XXS - T3
+      - Mining Rig - XXS - T4
+      - Mining Rig - XXS - T5
+    - XS
+      - Mining Rig - XS - T1
+      - Mining Rig - XS - T2
+      - Mining Rig - XS - T3
+      - Mining Rig - XS - T4
+      - Mining Rig - XS - T5
+    - S
+      - Mining Rig - S - T1
+      - Mining Rig - S - T2
+      - Mining Rig - S - T3
+      - Mining Rig - S - T4
+      - Mining Rig - S - T5
+    - M
+      - Mining Rig - M - T1
+      - Mining Rig - M - T2
+      - Mining Rig - M - T3
+      - Mining Rig - M - T4
+      - Mining Rig - M - T5
+    - L
+      - Mining Rig - L - T1
+      - Mining Rig - L - T2
+      - Mining Rig - L - T3
+      - Mining Rig - L - T4
+      - Mining Rig - L - T5
+    - CAP
+      - Mining Rig - CAP - T1
+      - Mining Rig - CAP - T2
+      - Mining Rig - CAP - T3
+      - Mining Rig - CAP - T4
+      - Mining Rig - CAP - T5
+    - CMD
+      - Mining Rig - CMD - T1
+      - Mining Rig - CMD - T2
+      - Mining Rig - CMD - T3
+      - Mining Rig - CMD - T4
+      - Mining Rig - CMD - T5
+    - Class 8
+      - Mining Rig - Class 8 - T1
+      - Mining Rig - Class 8 - T2
+      - Mining Rig - Class 8 - T3
+      - Mining Rig - Class 8 - T4
+      - Mining Rig - Class 8 - T5
+    - TTN
+      - Mining Rig - TTN - T1
+      - Mining Rig - TTN - T2
+      - Mining Rig - TTN - T3
+      - Mining Rig - TTN - T4
+      - Mining Rig - TTN - T5
+  - **Tow Rig**
+    - XXS
+      - Tow Rig - XXS - T1
+      - Tow Rig - XXS - T2
+      - Tow Rig - XXS - T3
+      - Tow Rig - XXS - T4
+      - Tow Rig - XXS - T5
+    - XS
+      - Tow Rig - XS - T1
+      - Tow Rig - XS - T2
+      - Tow Rig - XS - T3
+      - Tow Rig - XS - T4
+      - Tow Rig - XS - T5
+    - S
+      - Tow Rig - S - T1
+      - Tow Rig - S - T2
+      - Tow Rig - S - T3
+      - Tow Rig - S - T4
+      - Tow Rig - S - T5
+    - M
+      - Tow Rig - M - T1
+      - Tow Rig - M - T2
+      - Tow Rig - M - T3
+      - Tow Rig - M - T4
+      - Tow Rig - M - T5
+    - L
+      - Tow Rig - L - T1
+      - Tow Rig - L - T2
+      - Tow Rig - L - T3
+      - Tow Rig - L - T4
+      - Tow Rig - L - T5
+    - CAP
+      - Tow Rig - CAP - T1
+      - Tow Rig - CAP - T2
+      - Tow Rig - CAP - T3
+      - Tow Rig - CAP - T4
+      - Tow Rig - CAP - T5
+    - CMD
+      - Tow Rig - CMD - T1
+      - Tow Rig - CMD - T2
+      - Tow Rig - CMD - T3
+      - Tow Rig - CMD - T4
+      - Tow Rig - CMD - T5
+    - Class 8
+      - Tow Rig - Class 8 - T1
+      - Tow Rig - Class 8 - T2
+      - Tow Rig - Class 8 - T3
+      - Tow Rig - Class 8 - T4
+      - Tow Rig - Class 8 - T5
+    - TTN
+      - Tow Rig - TTN - T1
+      - Tow Rig - TTN - T2
+      - Tow Rig - TTN - T3
+      - Tow Rig - TTN - T4
+      - Tow Rig - TTN - T5
+  - **Missile Bay**
+    - XXXS
+      - Missile Bay - XXXS - T1
+      - Missile Bay - XXXS - T2
+      - Missile Bay - XXXS - T3
+      - Missile Bay - XXXS - T4
+      - Missile Bay - XXXS - T5
+    - XXS
+      - Missile Bay - XXS - T1
+      - Missile Bay - XXS - T2
+      - Missile Bay - XXS - T3
+      - Missile Bay - XXS - T4
+      - Missile Bay - XXS - T5
+    - XS
+      - Missile Bay - XS - T1
+      - Missile Bay - XS - T2
+      - Missile Bay - XS - T3
+      - Missile Bay - XS - T4
+      - Missile Bay - XS - T5
+    - S
+      - Missile Bay - S - T1
+      - Missile Bay - S - T2
+      - Missile Bay - S - T3
+      - Missile Bay - S - T4
+      - Missile Bay - S - T5
+    - M
+      - Missile Bay - M - T1
+      - Missile Bay - M - T2
+      - Missile Bay - M - T3
+      - Missile Bay - M - T4
+      - Missile Bay - M - T5
+    - L
+      - Missile Bay - L - T1
+      - Missile Bay - L - T2
+      - Missile Bay - L - T3
+      - Missile Bay - L - T4
+      - Missile Bay - L - T5
+    - CAP
+      - Missile Bay - CAP - T1
+      - Missile Bay - CAP - T2
+      - Missile Bay - CAP - T3
+      - Missile Bay - CAP - T4
+      - Missile Bay - CAP - T5
+    - CMD
+      - Missile Bay - CMD - T1
+      - Missile Bay - CMD - T2
+      - Missile Bay - CMD - T3
+      - Missile Bay - CMD - T4
+      - Missile Bay - CMD - T5
+    - Class 8
+      - Missile Bay - Class 8 - T1
+      - Missile Bay - Class 8 - T2
+      - Missile Bay - Class 8 - T3
+      - Missile Bay - Class 8 - T4
+      - Missile Bay - Class 8 - T5
+    - TTN
+      - Missile Bay - TTN - T1
+      - Missile Bay - TTN - T2
+      - Missile Bay - TTN - T3
+      - Missile Bay - TTN - T4
+      - Missile Bay - TTN - T5
+  - **Bomb Bay**
+    - XXS
+      - Bomb Bay - XXS - T1
+      - Bomb Bay - XXS - T2
+      - Bomb Bay - XXS - T3
+      - Bomb Bay - XXS - T4
+      - Bomb Bay - XXS - T5
+    - XS
+      - Bomb Bay - XS - T1
+      - Bomb Bay - XS - T2
+      - Bomb Bay - XS - T3
+      - Bomb Bay - XS - T4
+      - Bomb Bay - XS - T5
+    - S
+      - Bomb Bay - S - T1
+      - Bomb Bay - S - T2
+      - Bomb Bay - S - T3
+      - Bomb Bay - S - T4
+      - Bomb Bay - S - T5
+    - M
+      - Bomb Bay - M - T1
+      - Bomb Bay - M - T2
+      - Bomb Bay - M - T3
+      - Bomb Bay - M - T4
+      - Bomb Bay - M - T5
+    - L
+      - Bomb Bay - L - T1
+      - Bomb Bay - L - T2
+      - Bomb Bay - L - T3
+      - Bomb Bay - L - T4
+      - Bomb Bay - L - T5
+    - CAP
+      - Bomb Bay - CAP - T1
+      - Bomb Bay - CAP - T2
+      - Bomb Bay - CAP - T3
+      - Bomb Bay - CAP - T4
+      - Bomb Bay - CAP - T5
+    - CMD
+      - Bomb Bay - CMD - T1
+      - Bomb Bay - CMD - T2
+      - Bomb Bay - CMD - T3
+      - Bomb Bay - CMD - T4
+      - Bomb Bay - CMD - T5
+    - Class 8
+      - Bomb Bay - Class 8 - T1
+      - Bomb Bay - Class 8 - T2
+      - Bomb Bay - Class 8 - T3
+      - Bomb Bay - Class 8 - T4
+      - Bomb Bay - Class 8 - T5
+    - TTN
+      - Bomb Bay - TTN - T1
+      - Bomb Bay - TTN - T2
+      - Bomb Bay - TTN - T3
+      - Bomb Bay - TTN - T4
+      - Bomb Bay - TTN - T5
+  - **Drone Port**
+    - XXS
+      - Drone Port - XXS - T1
+      - Drone Port - XXS - T2
+      - Drone Port - XXS - T3
+      - Drone Port - XXS - T4
+      - Drone Port - XXS - T5
+    - XS
+      - Drone Port - XS - T1
+      - Drone Port - XS - T2
+      - Drone Port - XS - T3
+      - Drone Port - XS - T4
+      - Drone Port - XS - T5
+    - S
+      - Drone Port - S - T1
+      - Drone Port - S - T2
+      - Drone Port - S - T3
+      - Drone Port - S - T4
+      - Drone Port - S - T5
+    - M
+      - Drone Port - M - T1
+      - Drone Port - M - T2
+      - Drone Port - M - T3
+      - Drone Port - M - T4
+      - Drone Port - M - T5
+    - L
+      - Drone Port - L - T1
+      - Drone Port - L - T2
+      - Drone Port - L - T3
+      - Drone Port - L - T4
+      - Drone Port - L - T5
+    - CAP
+      - Drone Port - CAP - T1
+      - Drone Port - CAP - T2
+      - Drone Port - CAP - T3
+      - Drone Port - CAP - T4
+      - Drone Port - CAP - T5
+    - CMD
+      - Drone Port - CMD - T1
+      - Drone Port - CMD - T2
+      - Drone Port - CMD - T3
+      - Drone Port - CMD - T4
+      - Drone Port - CMD - T5
+    - Class 8
+      - Drone Port - Class 8 - T1
+      - Drone Port - Class 8 - T2
+      - Drone Port - Class 8 - T3
+      - Drone Port - Class 8 - T4
+      - Drone Port - Class 8 - T5
+    - TTN
+      - Drone Port - TTN - T1
+      - Drone Port - TTN - T2
+      - Drone Port - TTN - T3
+      - Drone Port - TTN - T4
+      - Drone Port - TTN - T5
+## Ship Module
+  - **Ammo Module**
+    - XXS
+      - Ammo Module - XXS - T1
+      - Ammo Module - XXS - T2
+      - Ammo Module - XXS - T3
+      - Ammo Module - XXS - T4
+      - Ammo Module - XXS - T5
+    - XS
+      - Ammo Module - XS - T1
+      - Ammo Module - XS - T2
+      - Ammo Module - XS - T3
+      - Ammo Module - XS - T4
+      - Ammo Module - XS - T5
+    - S
+      - Ammo Module - S - T1
+      - Ammo Module - S - T2
+      - Ammo Module - S - T3
+      - Ammo Module - S - T4
+      - Ammo Module - S - T5
+    - M
+      - Ammo Module - M - T1
+      - Ammo Module - M - T2
+      - Ammo Module - M - T3
+      - Ammo Module - M - T4
+      - Ammo Module - M - T5
+    - L
+      - Ammo Module - L - T1
+      - Ammo Module - L - T2
+      - Ammo Module - L - T3
+      - Ammo Module - L - T4
+      - Ammo Module - L - T5
+    - CAP
+      - Ammo Module - CAP - T1
+      - Ammo Module - CAP - T2
+      - Ammo Module - CAP - T3
+      - Ammo Module - CAP - T4
+      - Ammo Module - CAP - T5
+    - CMD
+      - Ammo Module - CMD - T1
+      - Ammo Module - CMD - T2
+      - Ammo Module - CMD - T3
+      - Ammo Module - CMD - T4
+      - Ammo Module - CMD - T5
+    - Class 8
+      - Ammo Module - Class 8 - T1
+      - Ammo Module - Class 8 - T2
+      - Ammo Module - Class 8 - T3
+      - Ammo Module - Class 8 - T4
+      - Ammo Module - Class 8 - T5
+    - TTN
+      - Ammo Module - TTN - T1
+      - Ammo Module - TTN - T2
+      - Ammo Module - TTN - T3
+      - Ammo Module - TTN - T4
+      - Ammo Module - TTN - T5
+  - **Cargo Module**
+    - XXS
+      - Cargo Module - XXS - T1
+      - Cargo Module - XXS - T2
+      - Cargo Module - XXS - T3
+      - Cargo Module - XXS - T4
+      - Cargo Module - XXS - T5
+    - XS
+      - Cargo Module - XS - T1
+      - Cargo Module - XS - T2
+      - Cargo Module - XS - T3
+      - Cargo Module - XS - T4
+      - Cargo Module - XS - T5
+    - S
+      - Cargo Module - S - T1
+      - Cargo Module - S - T2
+      - Cargo Module - S - T3
+      - Cargo Module - S - T4
+      - Cargo Module - S - T5
+    - M
+      - Cargo Module - M - T1
+      - Cargo Module - M - T2
+      - Cargo Module - M - T3
+      - Cargo Module - M - T4
+      - Cargo Module - M - T5
+    - L
+      - Cargo Module - L - T1
+      - Cargo Module - L - T2
+      - Cargo Module - L - T3
+      - Cargo Module - L - T4
+      - Cargo Module - L - T5
+    - CAP
+      - Cargo Module - CAP - T1
+      - Cargo Module - CAP - T2
+      - Cargo Module - CAP - T3
+      - Cargo Module - CAP - T4
+      - Cargo Module - CAP - T5
+    - CMD
+      - Cargo Module - CMD - T1
+      - Cargo Module - CMD - T2
+      - Cargo Module - CMD - T3
+      - Cargo Module - CMD - T4
+      - Cargo Module - CMD - T5
+    - Class 8
+      - Cargo Module - Class 8 - T1
+      - Cargo Module - Class 8 - T2
+      - Cargo Module - Class 8 - T3
+      - Cargo Module - Class 8 - T4
+      - Cargo Module - Class 8 - T5
+    - TTN
+      - Cargo Module - TTN - T1
+      - Cargo Module - TTN - T2
+      - Cargo Module - TTN - T3
+      - Cargo Module - TTN - T4
+      - Cargo Module - TTN - T5
+  - **Fuel Module**
+    - XXS
+      - Fuel Module - XXS - T1
+      - Fuel Module - XXS - T2
+      - Fuel Module - XXS - T3
+      - Fuel Module - XXS - T4
+      - Fuel Module - XXS - T5
+    - XS
+      - Fuel Module - XS - T1
+      - Fuel Module - XS - T2
+      - Fuel Module - XS - T3
+      - Fuel Module - XS - T4
+      - Fuel Module - XS - T5
+    - S
+      - Fuel Module - S - T1
+      - Fuel Module - S - T2
+      - Fuel Module - S - T3
+      - Fuel Module - S - T4
+      - Fuel Module - S - T5
+    - M
+      - Fuel Module - M - T1
+      - Fuel Module - M - T2
+      - Fuel Module - M - T3
+      - Fuel Module - M - T4
+      - Fuel Module - M - T5
+    - L
+      - Fuel Module - L - T1
+      - Fuel Module - L - T2
+      - Fuel Module - L - T3
+      - Fuel Module - L - T4
+      - Fuel Module - L - T5
+    - CAP
+      - Fuel Module - CAP - T1
+      - Fuel Module - CAP - T2
+      - Fuel Module - CAP - T3
+      - Fuel Module - CAP - T4
+      - Fuel Module - CAP - T5
+    - CMD
+      - Fuel Module - CMD - T1
+      - Fuel Module - CMD - T2
+      - Fuel Module - CMD - T3
+      - Fuel Module - CMD - T4
+      - Fuel Module - CMD - T5
+    - Class 8
+      - Fuel Module - Class 8 - T1
+      - Fuel Module - Class 8 - T2
+      - Fuel Module - Class 8 - T3
+      - Fuel Module - Class 8 - T4
+      - Fuel Module - Class 8 - T5
+    - TTN
+      - Fuel Module - TTN - T1
+      - Fuel Module - TTN - T2
+      - Fuel Module - TTN - T3
+      - Fuel Module - TTN - T4
+      - Fuel Module - TTN - T5
+  - **Passenger Module**
+    - XXS
+      - Passenger Module - XXS - T1
+      - Passenger Module - XXS - T2
+      - Passenger Module - XXS - T3
+      - Passenger Module - XXS - T4
+      - Passenger Module - XXS - T5
+    - XS
+      - Passenger Module - XS - T1
+      - Passenger Module - XS - T2
+      - Passenger Module - XS - T3
+      - Passenger Module - XS - T4
+      - Passenger Module - XS - T5
+    - S
+      - Passenger Module - S - T1
+      - Passenger Module - S - T2
+      - Passenger Module - S - T3
+      - Passenger Module - S - T4
+      - Passenger Module - S - T5
+    - M
+      - Passenger Module - M - T1
+      - Passenger Module - M - T2
+      - Passenger Module - M - T3
+      - Passenger Module - M - T4
+      - Passenger Module - M - T5
+    - L
+      - Passenger Module - L - T1
+      - Passenger Module - L - T2
+      - Passenger Module - L - T3
+      - Passenger Module - L - T4
+      - Passenger Module - L - T5
+    - CAP
+      - Passenger Module - CAP - T1
+      - Passenger Module - CAP - T2
+      - Passenger Module - CAP - T3
+      - Passenger Module - CAP - T4
+      - Passenger Module - CAP - T5
+    - CMD
+      - Passenger Module - CMD - T1
+      - Passenger Module - CMD - T2
+      - Passenger Module - CMD - T3
+      - Passenger Module - CMD - T4
+      - Passenger Module - CMD - T5
+    - Class 8
+      - Passenger Module - Class 8 - T1
+      - Passenger Module - Class 8 - T2
+      - Passenger Module - Class 8 - T3
+      - Passenger Module - Class 8 - T4
+      - Passenger Module - Class 8 - T5
+    - TTN
+      - Passenger Module - TTN - T1
+      - Passenger Module - TTN - T2
+      - Passenger Module - TTN - T3
+      - Passenger Module - TTN - T4
+      - Passenger Module - TTN - T5
+## Ship Weapons
+  - **Kinetic**
+    - T1
+      - XXXS
+        - Kinetic - Rapidfire - XXXS - T1
+        - Kinetic - Cannon - XXXS - T1
+        - Kinetic - Scatterfire - XXXS - T1
+        - Kinetic - Burst - XXXS - T1
+      - XXS
+        - Kinetic - Rapidfire - XXS - T1
+        - Kinetic - Cannon - XXS - T1
+        - Kinetic - Scatterfire - XXS - T1
+        - Kinetic - Burst - XXS - T1
+      - XS
+        - Kinetic - Rapidfire - XS - T1
+        - Kinetic - Cannon - XS - T1
+        - Kinetic - Scatterfire - XS - T1
+        - Kinetic - Burst - XS - T1
+      - S
+        - Kinetic - Rapidfire - S - T1
+        - Kinetic - Cannon - S - T1
+        - Kinetic - Scatterfire - S - T1
+        - Kinetic - Burst - S - T1
+      - M
+        - Kinetic - Rapidfire - M - T1
+        - Kinetic - Cannon - M - T1
+        - Kinetic - Scatterfire - M - T1
+        - Kinetic - Burst - M - T1
+      - L
+        - Kinetic - Rapidfire - L - T1
+        - Kinetic - Cannon - L - T1
+        - Kinetic - Scatterfire - L - T1
+        - Kinetic - Burst - L - T1
+      - CAP
+        - Kinetic - Rapidfire - CAP - T1
+        - Kinetic - Cannon - CAP - T1
+        - Kinetic - Scatterfire - CAP - T1
+        - Kinetic - Burst - CAP - T1
+      - CMD
+        - Kinetic - Rapidfire - CMD - T1
+        - Kinetic - Cannon - CMD - T1
+        - Kinetic - Scatterfire - CMD - T1
+        - Kinetic - Burst - CMD - T1
+      - Class 8
+        - Kinetic - Rapidfire - Class 8 - T1
+        - Kinetic - Cannon - Class 8 - T1
+        - Kinetic - Scatterfire - Class 8 - T1
+        - Kinetic - Burst - Class 8 - T1
+      - TTN
+        - Kinetic - Rapidfire - TTN - T1
+        - Kinetic - Cannon - TTN - T1
+        - Kinetic - Scatterfire - TTN - T1
+        - Kinetic - Burst - TTN - T1
+    - T2
+      - XXXS
+        - Kinetic - Rapidfire - XXXS - T2
+        - Kinetic - Cannon - XXXS - T2
+        - Kinetic - Scatterfire - XXXS - T2
+        - Kinetic - Burst - XXXS - T2
+      - XXS
+        - Kinetic - Rapidfire - XXS - T2
+        - Kinetic - Cannon - XXS - T2
+        - Kinetic - Scatterfire - XXS - T2
+        - Kinetic - Burst - XXS - T2
+      - XS
+        - Kinetic - Rapidfire - XS - T2
+        - Kinetic - Cannon - XS - T2
+        - Kinetic - Scatterfire - XS - T2
+        - Kinetic - Burst - XS - T2
+      - S
+        - Kinetic - Rapidfire - S - T2
+        - Kinetic - Cannon - S - T2
+        - Kinetic - Scatterfire - S - T2
+        - Kinetic - Burst - S - T2
+      - M
+        - Kinetic - Rapidfire - M - T2
+        - Kinetic - Cannon - M - T2
+        - Kinetic - Scatterfire - M - T2
+        - Kinetic - Burst - M - T2
+      - L
+        - Kinetic - Rapidfire - L - T2
+        - Kinetic - Cannon - L - T2
+        - Kinetic - Scatterfire - L - T2
+        - Kinetic - Burst - L - T2
+      - CAP
+        - Kinetic - Rapidfire - CAP - T2
+        - Kinetic - Cannon - CAP - T2
+        - Kinetic - Scatterfire - CAP - T2
+        - Kinetic - Burst - CAP - T2
+      - CMD
+        - Kinetic - Rapidfire - CMD - T2
+        - Kinetic - Cannon - CMD - T2
+        - Kinetic - Scatterfire - CMD - T2
+        - Kinetic - Burst - CMD - T2
+      - Class 8
+        - Kinetic - Rapidfire - Class 8 - T2
+        - Kinetic - Cannon - Class 8 - T2
+        - Kinetic - Scatterfire - Class 8 - T2
+        - Kinetic - Burst - Class 8 - T2
+      - TTN
+        - Kinetic - Rapidfire - TTN - T2
+        - Kinetic - Cannon - TTN - T2
+        - Kinetic - Scatterfire - TTN - T2
+        - Kinetic - Burst - TTN - T2
+    - T3
+      - XXXS
+        - Kinetic - Rapidfire - XXXS - T3
+        - Kinetic - Cannon - XXXS - T3
+        - Kinetic - Scatterfire - XXXS - T3
+        - Kinetic - Burst - XXXS - T3
+      - XXS
+        - Kinetic - Rapidfire - XXS - T3
+        - Kinetic - Cannon - XXS - T3
+        - Kinetic - Scatterfire - XXS - T3
+        - Kinetic - Burst - XXS - T3
+      - XS
+        - Kinetic - Rapidfire - XS - T3
+        - Kinetic - Cannon - XS - T3
+        - Kinetic - Scatterfire - XS - T3
+        - Kinetic - Burst - XS - T3
+      - S
+        - Kinetic - Rapidfire - S - T3
+        - Kinetic - Cannon - S - T3
+        - Kinetic - Scatterfire - S - T3
+        - Kinetic - Burst - S - T3
+      - M
+        - Kinetic - Rapidfire - M - T3
+        - Kinetic - Cannon - M - T3
+        - Kinetic - Scatterfire - M - T3
+        - Kinetic - Burst - M - T3
+      - L
+        - Kinetic - Rapidfire - L - T3
+        - Kinetic - Cannon - L - T3
+        - Kinetic - Scatterfire - L - T3
+        - Kinetic - Burst - L - T3
+      - CAP
+        - Kinetic - Rapidfire - CAP - T3
+        - Kinetic - Cannon - CAP - T3
+        - Kinetic - Scatterfire - CAP - T3
+        - Kinetic - Burst - CAP - T3
+      - CMD
+        - Kinetic - Rapidfire - CMD - T3
+        - Kinetic - Cannon - CMD - T3
+        - Kinetic - Scatterfire - CMD - T3
+        - Kinetic - Burst - CMD - T3
+      - Class 8
+        - Kinetic - Rapidfire - Class 8 - T3
+        - Kinetic - Cannon - Class 8 - T3
+        - Kinetic - Scatterfire - Class 8 - T3
+        - Kinetic - Burst - Class 8 - T3
+      - TTN
+        - Kinetic - Rapidfire - TTN - T3
+        - Kinetic - Cannon - TTN - T3
+        - Kinetic - Scatterfire - TTN - T3
+        - Kinetic - Burst - TTN - T3
+    - T4
+      - XXXS
+        - Kinetic - Rapidfire - XXXS - T4
+        - Kinetic - Cannon - XXXS - T4
+        - Kinetic - Scatterfire - XXXS - T4
+        - Kinetic - Burst - XXXS - T4
+      - XXS
+        - Kinetic - Rapidfire - XXS - T4
+        - Kinetic - Cannon - XXS - T4
+        - Kinetic - Scatterfire - XXS - T4
+        - Kinetic - Burst - XXS - T4
+      - XS
+        - Kinetic - Rapidfire - XS - T4
+        - Kinetic - Cannon - XS - T4
+        - Kinetic - Scatterfire - XS - T4
+        - Kinetic - Burst - XS - T4
+      - S
+        - Kinetic - Rapidfire - S - T4
+        - Kinetic - Cannon - S - T4
+        - Kinetic - Scatterfire - S - T4
+        - Kinetic - Burst - S - T4
+      - M
+        - Kinetic - Rapidfire - M - T4
+        - Kinetic - Cannon - M - T4
+        - Kinetic - Scatterfire - M - T4
+        - Kinetic - Burst - M - T4
+      - L
+        - Kinetic - Rapidfire - L - T4
+        - Kinetic - Cannon - L - T4
+        - Kinetic - Scatterfire - L - T4
+        - Kinetic - Burst - L - T4
+      - CAP
+        - Kinetic - Rapidfire - CAP - T4
+        - Kinetic - Cannon - CAP - T4
+        - Kinetic - Scatterfire - CAP - T4
+        - Kinetic - Burst - CAP - T4
+      - CMD
+        - Kinetic - Rapidfire - CMD - T4
+        - Kinetic - Cannon - CMD - T4
+        - Kinetic - Scatterfire - CMD - T4
+        - Kinetic - Burst - CMD - T4
+      - Class 8
+        - Kinetic - Rapidfire - Class 8 - T4
+        - Kinetic - Cannon - Class 8 - T4
+        - Kinetic - Scatterfire - Class 8 - T4
+        - Kinetic - Burst - Class 8 - T4
+      - TTN
+        - Kinetic - Rapidfire - TTN - T4
+        - Kinetic - Cannon - TTN - T4
+        - Kinetic - Scatterfire - TTN - T4
+        - Kinetic - Burst - TTN - T4
+    - T5
+      - XXXS
+        - Kinetic - Rapidfire - XXXS - T5
+        - Kinetic - Cannon - XXXS - T5
+        - Kinetic - Scatterfire - XXXS - T5
+        - Kinetic - Burst - XXXS - T5
+      - XXS
+        - Kinetic - Rapidfire - XXS - T5
+        - Kinetic - Cannon - XXS - T5
+        - Kinetic - Scatterfire - XXS - T5
+        - Kinetic - Burst - XXS - T5
+      - XS
+        - Kinetic - Rapidfire - XS - T5
+        - Kinetic - Cannon - XS - T5
+        - Kinetic - Scatterfire - XS - T5
+        - Kinetic - Burst - XS - T5
+      - S
+        - Kinetic - Rapidfire - S - T5
+        - Kinetic - Cannon - S - T5
+        - Kinetic - Scatterfire - S - T5
+        - Kinetic - Burst - S - T5
+      - M
+        - Kinetic - Rapidfire - M - T5
+        - Kinetic - Cannon - M - T5
+        - Kinetic - Scatterfire - M - T5
+        - Kinetic - Burst - M - T5
+      - L
+        - Kinetic - Rapidfire - L - T5
+        - Kinetic - Cannon - L - T5
+        - Kinetic - Scatterfire - L - T5
+        - Kinetic - Burst - L - T5
+      - CAP
+        - Kinetic - Rapidfire - CAP - T5
+        - Kinetic - Cannon - CAP - T5
+        - Kinetic - Scatterfire - CAP - T5
+        - Kinetic - Burst - CAP - T5
+      - CMD
+        - Kinetic - Rapidfire - CMD - T5
+        - Kinetic - Cannon - CMD - T5
+        - Kinetic - Scatterfire - CMD - T5
+        - Kinetic - Burst - CMD - T5
+      - Class 8
+        - Kinetic - Rapidfire - Class 8 - T5
+        - Kinetic - Cannon - Class 8 - T5
+        - Kinetic - Scatterfire - Class 8 - T5
+        - Kinetic - Burst - Class 8 - T5
+      - TTN
+        - Kinetic - Rapidfire - TTN - T5
+        - Kinetic - Cannon - TTN - T5
+        - Kinetic - Scatterfire - TTN - T5
+        - Kinetic - Burst - TTN - T5
+  - **Energy**
+    - T1
+      - XXXS
+        - Energy - Rapidfire - XXXS - T1
+        - Energy - Cannon - XXXS - T1
+        - Energy - Scatterfire - XXXS - T1
+        - Energy - Burst - XXXS - T1
+        - Energy - Beam - XXXS - T1
+      - XXS
+        - Energy - Rapidfire - XXS - T1
+        - Energy - Cannon - XXS - T1
+        - Energy - Scatterfire - XXS - T1
+        - Energy - Burst - XXS - T1
+        - Energy - Beam - XXS - T1
+      - XS
+        - Energy - Rapidfire - XS - T1
+        - Energy - Cannon - XS - T1
+        - Energy - Scatterfire - XS - T1
+        - Energy - Burst - XS - T1
+        - Energy - Beam - XS - T1
+      - S
+        - Energy - Rapidfire - S - T1
+        - Energy - Cannon - S - T1
+        - Energy - Scatterfire - S - T1
+        - Energy - Burst - S - T1
+        - Energy - Beam - S - T1
+      - M
+        - Energy - Rapidfire - M - T1
+        - Energy - Cannon - M - T1
+        - Energy - Scatterfire - M - T1
+        - Energy - Burst - M - T1
+        - Energy - Beam - M - T1
+      - L
+        - Energy - Rapidfire - L - T1
+        - Energy - Cannon - L - T1
+        - Energy - Scatterfire - L - T1
+        - Energy - Burst - L - T1
+        - Energy - Beam - L - T1
+      - CAP
+        - Energy - Rapidfire - CAP - T1
+        - Energy - Cannon - CAP - T1
+        - Energy - Scatterfire - CAP - T1
+        - Energy - Burst - CAP - T1
+        - Energy - Beam - CAP - T1
+      - CMD
+        - Energy - Rapidfire - CMD - T1
+        - Energy - Cannon - CMD - T1
+        - Energy - Scatterfire - CMD - T1
+        - Energy - Burst - CMD - T1
+        - Energy - Beam - CMD - T1
+      - Class 8
+        - Energy - Rapidfire - Class 8 - T1
+        - Energy - Cannon - Class 8 - T1
+        - Energy - Scatterfire - Class 8 - T1
+        - Energy - Burst - Class 8 - T1
+        - Energy - Beam - Class 8 - T1
+      - TTN
+        - Energy - Rapidfire - TTN - T1
+        - Energy - Cannon - TTN - T1
+        - Energy - Scatterfire - TTN - T1
+        - Energy - Burst - TTN - T1
+        - Energy - Beam - TTN - T1
+    - T2
+      - XXXS
+        - Energy - Rapidfire - XXXS - T2
+        - Energy - Cannon - XXXS - T2
+        - Energy - Scatterfire - XXXS - T2
+        - Energy - Burst - XXXS - T2
+        - Energy - Beam - XXXS - T2
+      - XXS
+        - Energy - Rapidfire - XXS - T2
+        - Energy - Cannon - XXS - T2
+        - Energy - Scatterfire - XXS - T2
+        - Energy - Burst - XXS - T2
+        - Energy - Beam - XXS - T2
+      - XS
+        - Energy - Rapidfire - XS - T2
+        - Energy - Cannon - XS - T2
+        - Energy - Scatterfire - XS - T2
+        - Energy - Burst - XS - T2
+        - Energy - Beam - XS - T2
+      - S
+        - Energy - Rapidfire - S - T2
+        - Energy - Cannon - S - T2
+        - Energy - Scatterfire - S - T2
+        - Energy - Burst - S - T2
+        - Energy - Beam - S - T2
+      - M
+        - Energy - Rapidfire - M - T2
+        - Energy - Cannon - M - T2
+        - Energy - Scatterfire - M - T2
+        - Energy - Burst - M - T2
+        - Energy - Beam - M - T2
+      - L
+        - Energy - Rapidfire - L - T2
+        - Energy - Cannon - L - T2
+        - Energy - Scatterfire - L - T2
+        - Energy - Burst - L - T2
+        - Energy - Beam - L - T2
+      - CAP
+        - Energy - Rapidfire - CAP - T2
+        - Energy - Cannon - CAP - T2
+        - Energy - Scatterfire - CAP - T2
+        - Energy - Burst - CAP - T2
+        - Energy - Beam - CAP - T2
+      - CMD
+        - Energy - Rapidfire - CMD - T2
+        - Energy - Cannon - CMD - T2
+        - Energy - Scatterfire - CMD - T2
+        - Energy - Burst - CMD - T2
+        - Energy - Beam - CMD - T2
+      - Class 8
+        - Energy - Rapidfire - Class 8 - T2
+        - Energy - Cannon - Class 8 - T2
+        - Energy - Scatterfire - Class 8 - T2
+        - Energy - Burst - Class 8 - T2
+        - Energy - Beam - Class 8 - T2
+      - TTN
+        - Energy - Rapidfire - TTN - T2
+        - Energy - Cannon - TTN - T2
+        - Energy - Scatterfire - TTN - T2
+        - Energy - Burst - TTN - T2
+        - Energy - Beam - TTN - T2
+    - T3
+      - XXXS
+        - Energy - Rapidfire - XXXS - T3
+        - Energy - Cannon - XXXS - T3
+        - Energy - Scatterfire - XXXS - T3
+        - Energy - Burst - XXXS - T3
+        - Energy - Beam - XXXS - T3
+      - XXS
+        - Energy - Rapidfire - XXS - T3
+        - Energy - Cannon - XXS - T3
+        - Energy - Scatterfire - XXS - T3
+        - Energy - Burst - XXS - T3
+        - Energy - Beam - XXS - T3
+      - XS
+        - Energy - Rapidfire - XS - T3
+        - Energy - Cannon - XS - T3
+        - Energy - Scatterfire - XS - T3
+        - Energy - Burst - XS - T3
+        - Energy - Beam - XS - T3
+      - S
+        - Energy - Rapidfire - S - T3
+        - Energy - Cannon - S - T3
+        - Energy - Scatterfire - S - T3
+        - Energy - Burst - S - T3
+        - Energy - Beam - S - T3
+      - M
+        - Energy - Rapidfire - M - T3
+        - Energy - Cannon - M - T3
+        - Energy - Scatterfire - M - T3
+        - Energy - Burst - M - T3
+        - Energy - Beam - M - T3
+      - L
+        - Energy - Rapidfire - L - T3
+        - Energy - Cannon - L - T3
+        - Energy - Scatterfire - L - T3
+        - Energy - Burst - L - T3
+        - Energy - Beam - L - T3
+      - CAP
+        - Energy - Rapidfire - CAP - T3
+        - Energy - Cannon - CAP - T3
+        - Energy - Scatterfire - CAP - T3
+        - Energy - Burst - CAP - T3
+        - Energy - Beam - CAP - T3
+      - CMD
+        - Energy - Rapidfire - CMD - T3
+        - Energy - Cannon - CMD - T3
+        - Energy - Scatterfire - CMD - T3
+        - Energy - Burst - CMD - T3
+        - Energy - Beam - CMD - T3
+      - Class 8
+        - Energy - Rapidfire - Class 8 - T3
+        - Energy - Cannon - Class 8 - T3
+        - Energy - Scatterfire - Class 8 - T3
+        - Energy - Burst - Class 8 - T3
+        - Energy - Beam - Class 8 - T3
+      - TTN
+        - Energy - Rapidfire - TTN - T3
+        - Energy - Cannon - TTN - T3
+        - Energy - Scatterfire - TTN - T3
+        - Energy - Burst - TTN - T3
+        - Energy - Beam - TTN - T3
+    - T4
+      - XXXS
+        - Energy - Rapidfire - XXXS - T4
+        - Energy - Cannon - XXXS - T4
+        - Energy - Scatterfire - XXXS - T4
+        - Energy - Burst - XXXS - T4
+        - Energy - Beam - XXXS - T4
+      - XXS
+        - Energy - Rapidfire - XXS - T4
+        - Energy - Cannon - XXS - T4
+        - Energy - Scatterfire - XXS - T4
+        - Energy - Burst - XXS - T4
+        - Energy - Beam - XXS - T4
+      - XS
+        - Energy - Rapidfire - XS - T4
+        - Energy - Cannon - XS - T4
+        - Energy - Scatterfire - XS - T4
+        - Energy - Burst - XS - T4
+        - Energy - Beam - XS - T4
+      - S
+        - Energy - Rapidfire - S - T4
+        - Energy - Cannon - S - T4
+        - Energy - Scatterfire - S - T4
+        - Energy - Burst - S - T4
+        - Energy - Beam - S - T4
+      - M
+        - Energy - Rapidfire - M - T4
+        - Energy - Cannon - M - T4
+        - Energy - Scatterfire - M - T4
+        - Energy - Burst - M - T4
+        - Energy - Beam - M - T4
+      - L
+        - Energy - Rapidfire - L - T4
+        - Energy - Cannon - L - T4
+        - Energy - Scatterfire - L - T4
+        - Energy - Burst - L - T4
+        - Energy - Beam - L - T4
+      - CAP
+        - Energy - Rapidfire - CAP - T4
+        - Energy - Cannon - CAP - T4
+        - Energy - Scatterfire - CAP - T4
+        - Energy - Burst - CAP - T4
+        - Energy - Beam - CAP - T4
+      - CMD
+        - Energy - Rapidfire - CMD - T4
+        - Energy - Cannon - CMD - T4
+        - Energy - Scatterfire - CMD - T4
+        - Energy - Burst - CMD - T4
+        - Energy - Beam - CMD - T4
+      - Class 8
+        - Energy - Rapidfire - Class 8 - T4
+        - Energy - Cannon - Class 8 - T4
+        - Energy - Scatterfire - Class 8 - T4
+        - Energy - Burst - Class 8 - T4
+        - Energy - Beam - Class 8 - T4
+      - TTN
+        - Energy - Rapidfire - TTN - T4
+        - Energy - Cannon - TTN - T4
+        - Energy - Scatterfire - TTN - T4
+        - Energy - Burst - TTN - T4
+        - Energy - Beam - TTN - T4
+    - T5
+      - XXXS
+        - Energy - Rapidfire - XXXS - T5
+        - Energy - Cannon - XXXS - T5
+        - Energy - Scatterfire - XXXS - T5
+        - Energy - Burst - XXXS - T5
+        - Energy - Beam - XXXS - T5
+      - XXS
+        - Energy - Rapidfire - XXS - T5
+        - Energy - Cannon - XXS - T5
+        - Energy - Scatterfire - XXS - T5
+        - Energy - Burst - XXS - T5
+        - Energy - Beam - XXS - T5
+      - XS
+        - Energy - Rapidfire - XS - T5
+        - Energy - Cannon - XS - T5
+        - Energy - Scatterfire - XS - T5
+        - Energy - Burst - XS - T5
+        - Energy - Beam - XS - T5
+      - S
+        - Energy - Rapidfire - S - T5
+        - Energy - Cannon - S - T5
+        - Energy - Scatterfire - S - T5
+        - Energy - Burst - S - T5
+        - Energy - Beam - S - T5
+      - M
+        - Energy - Rapidfire - M - T5
+        - Energy - Cannon - M - T5
+        - Energy - Scatterfire - M - T5
+        - Energy - Burst - M - T5
+        - Energy - Beam - M - T5
+      - L
+        - Energy - Rapidfire - L - T5
+        - Energy - Cannon - L - T5
+        - Energy - Scatterfire - L - T5
+        - Energy - Burst - L - T5
+        - Energy - Beam - L - T5
+      - CAP
+        - Energy - Rapidfire - CAP - T5
+        - Energy - Cannon - CAP - T5
+        - Energy - Scatterfire - CAP - T5
+        - Energy - Burst - CAP - T5
+        - Energy - Beam - CAP - T5
+      - CMD
+        - Energy - Rapidfire - CMD - T5
+        - Energy - Cannon - CMD - T5
+        - Energy - Scatterfire - CMD - T5
+        - Energy - Burst - CMD - T5
+        - Energy - Beam - CMD - T5
+      - Class 8
+        - Energy - Rapidfire - Class 8 - T5
+        - Energy - Cannon - Class 8 - T5
+        - Energy - Scatterfire - Class 8 - T5
+        - Energy - Burst - Class 8 - T5
+        - Energy - Beam - Class 8 - T5
+      - TTN
+        - Energy - Rapidfire - TTN - T5
+        - Energy - Cannon - TTN - T5
+        - Energy - Scatterfire - TTN - T5
+        - Energy - Burst - TTN - T5
+        - Energy - Beam - TTN - T5
+  - **EMP**
+    - T1
+      - XXXS
+        - EMP - Rapidfire - XXXS - T1
+        - EMP - Cannon - XXXS - T1
+        - EMP - Scatterfire - XXXS - T1
+        - EMP - Burst - XXXS - T1
+        - EMP - Beam - XXXS - T1
+      - XXS
+        - EMP - Rapidfire - XXS - T1
+        - EMP - Cannon - XXS - T1
+        - EMP - Scatterfire - XXS - T1
+        - EMP - Burst - XXS - T1
+        - EMP - Beam - XXS - T1
+      - XS
+        - EMP - Rapidfire - XS - T1
+        - EMP - Cannon - XS - T1
+        - EMP - Scatterfire - XS - T1
+        - EMP - Burst - XS - T1
+        - EMP - Beam - XS - T1
+      - S
+        - EMP - Rapidfire - S - T1
+        - EMP - Cannon - S - T1
+        - EMP - Scatterfire - S - T1
+        - EMP - Burst - S - T1
+        - EMP - Beam - S - T1
+      - M
+        - EMP - Rapidfire - M - T1
+        - EMP - Cannon - M - T1
+        - EMP - Scatterfire - M - T1
+        - EMP - Burst - M - T1
+        - EMP - Beam - M - T1
+      - L
+        - EMP - Rapidfire - L - T1
+        - EMP - Cannon - L - T1
+        - EMP - Scatterfire - L - T1
+        - EMP - Burst - L - T1
+        - EMP - Beam - L - T1
+      - CAP
+        - EMP - Rapidfire - CAP - T1
+        - EMP - Cannon - CAP - T1
+        - EMP - Scatterfire - CAP - T1
+        - EMP - Burst - CAP - T1
+        - EMP - Beam - CAP - T1
+      - CMD
+        - EMP - Rapidfire - CMD - T1
+        - EMP - Cannon - CMD - T1
+        - EMP - Scatterfire - CMD - T1
+        - EMP - Burst - CMD - T1
+        - EMP - Beam - CMD - T1
+      - Class 8
+        - EMP - Rapidfire - Class 8 - T1
+        - EMP - Cannon - Class 8 - T1
+        - EMP - Scatterfire - Class 8 - T1
+        - EMP - Burst - Class 8 - T1
+        - EMP - Beam - Class 8 - T1
+      - TTN
+        - EMP - Rapidfire - TTN - T1
+        - EMP - Cannon - TTN - T1
+        - EMP - Scatterfire - TTN - T1
+        - EMP - Burst - TTN - T1
+        - EMP - Beam - TTN - T1
+    - T2
+      - XXXS
+        - EMP - Rapidfire - XXXS - T2
+        - EMP - Cannon - XXXS - T2
+        - EMP - Scatterfire - XXXS - T2
+        - EMP - Burst - XXXS - T2
+        - EMP - Beam - XXXS - T2
+      - XXS
+        - EMP - Rapidfire - XXS - T2
+        - EMP - Cannon - XXS - T2
+        - EMP - Scatterfire - XXS - T2
+        - EMP - Burst - XXS - T2
+        - EMP - Beam - XXS - T2
+      - XS
+        - EMP - Rapidfire - XS - T2
+        - EMP - Cannon - XS - T2
+        - EMP - Scatterfire - XS - T2
+        - EMP - Burst - XS - T2
+        - EMP - Beam - XS - T2
+      - S
+        - EMP - Rapidfire - S - T2
+        - EMP - Cannon - S - T2
+        - EMP - Scatterfire - S - T2
+        - EMP - Burst - S - T2
+        - EMP - Beam - S - T2
+      - M
+        - EMP - Rapidfire - M - T2
+        - EMP - Cannon - M - T2
+        - EMP - Scatterfire - M - T2
+        - EMP - Burst - M - T2
+        - EMP - Beam - M - T2
+      - L
+        - EMP - Rapidfire - L - T2
+        - EMP - Cannon - L - T2
+        - EMP - Scatterfire - L - T2
+        - EMP - Burst - L - T2
+        - EMP - Beam - L - T2
+      - CAP
+        - EMP - Rapidfire - CAP - T2
+        - EMP - Cannon - CAP - T2
+        - EMP - Scatterfire - CAP - T2
+        - EMP - Burst - CAP - T2
+        - EMP - Beam - CAP - T2
+      - CMD
+        - EMP - Rapidfire - CMD - T2
+        - EMP - Cannon - CMD - T2
+        - EMP - Scatterfire - CMD - T2
+        - EMP - Burst - CMD - T2
+        - EMP - Beam - CMD - T2
+      - Class 8
+        - EMP - Rapidfire - Class 8 - T2
+        - EMP - Cannon - Class 8 - T2
+        - EMP - Scatterfire - Class 8 - T2
+        - EMP - Burst - Class 8 - T2
+        - EMP - Beam - Class 8 - T2
+      - TTN
+        - EMP - Rapidfire - TTN - T2
+        - EMP - Cannon - TTN - T2
+        - EMP - Scatterfire - TTN - T2
+        - EMP - Burst - TTN - T2
+        - EMP - Beam - TTN - T2
+    - T3
+      - XXXS
+        - EMP - Rapidfire - XXXS - T3
+        - EMP - Cannon - XXXS - T3
+        - EMP - Scatterfire - XXXS - T3
+        - EMP - Burst - XXXS - T3
+        - EMP - Beam - XXXS - T3
+      - XXS
+        - EMP - Rapidfire - XXS - T3
+        - EMP - Cannon - XXS - T3
+        - EMP - Scatterfire - XXS - T3
+        - EMP - Burst - XXS - T3
+        - EMP - Beam - XXS - T3
+      - XS
+        - EMP - Rapidfire - XS - T3
+        - EMP - Cannon - XS - T3
+        - EMP - Scatterfire - XS - T3
+        - EMP - Burst - XS - T3
+        - EMP - Beam - XS - T3
+      - S
+        - EMP - Rapidfire - S - T3
+        - EMP - Cannon - S - T3
+        - EMP - Scatterfire - S - T3
+        - EMP - Burst - S - T3
+        - EMP - Beam - S - T3
+      - M
+        - EMP - Rapidfire - M - T3
+        - EMP - Cannon - M - T3
+        - EMP - Scatterfire - M - T3
+        - EMP - Burst - M - T3
+        - EMP - Beam - M - T3
+      - L
+        - EMP - Rapidfire - L - T3
+        - EMP - Cannon - L - T3
+        - EMP - Scatterfire - L - T3
+        - EMP - Burst - L - T3
+        - EMP - Beam - L - T3
+      - CAP
+        - EMP - Rapidfire - CAP - T3
+        - EMP - Cannon - CAP - T3
+        - EMP - Scatterfire - CAP - T3
+        - EMP - Burst - CAP - T3
+        - EMP - Beam - CAP - T3
+      - CMD
+        - EMP - Rapidfire - CMD - T3
+        - EMP - Cannon - CMD - T3
+        - EMP - Scatterfire - CMD - T3
+        - EMP - Burst - CMD - T3
+        - EMP - Beam - CMD - T3
+      - Class 8
+        - EMP - Rapidfire - Class 8 - T3
+        - EMP - Cannon - Class 8 - T3
+        - EMP - Scatterfire - Class 8 - T3
+        - EMP - Burst - Class 8 - T3
+        - EMP - Beam - Class 8 - T3
+      - TTN
+        - EMP - Rapidfire - TTN - T3
+        - EMP - Cannon - TTN - T3
+        - EMP - Scatterfire - TTN - T3
+        - EMP - Burst - TTN - T3
+        - EMP - Beam - TTN - T3
+    - T4
+      - XXXS
+        - EMP - Rapidfire - XXXS - T4
+        - EMP - Cannon - XXXS - T4
+        - EMP - Scatterfire - XXXS - T4
+        - EMP - Burst - XXXS - T4
+        - EMP - Beam - XXXS - T4
+      - XXS
+        - EMP - Rapidfire - XXS - T4
+        - EMP - Cannon - XXS - T4
+        - EMP - Scatterfire - XXS - T4
+        - EMP - Burst - XXS - T4
+        - EMP - Beam - XXS - T4
+      - XS
+        - EMP - Rapidfire - XS - T4
+        - EMP - Cannon - XS - T4
+        - EMP - Scatterfire - XS - T4
+        - EMP - Burst - XS - T4
+        - EMP - Beam - XS - T4
+      - S
+        - EMP - Rapidfire - S - T4
+        - EMP - Cannon - S - T4
+        - EMP - Scatterfire - S - T4
+        - EMP - Burst - S - T4
+        - EMP - Beam - S - T4
+      - M
+        - EMP - Rapidfire - M - T4
+        - EMP - Cannon - M - T4
+        - EMP - Scatterfire - M - T4
+        - EMP - Burst - M - T4
+        - EMP - Beam - M - T4
+      - L
+        - EMP - Rapidfire - L - T4
+        - EMP - Cannon - L - T4
+        - EMP - Scatterfire - L - T4
+        - EMP - Burst - L - T4
+        - EMP - Beam - L - T4
+      - CAP
+        - EMP - Rapidfire - CAP - T4
+        - EMP - Cannon - CAP - T4
+        - EMP - Scatterfire - CAP - T4
+        - EMP - Burst - CAP - T4
+        - EMP - Beam - CAP - T4
+      - CMD
+        - EMP - Rapidfire - CMD - T4
+        - EMP - Cannon - CMD - T4
+        - EMP - Scatterfire - CMD - T4
+        - EMP - Burst - CMD - T4
+        - EMP - Beam - CMD - T4
+      - Class 8
+        - EMP - Rapidfire - Class 8 - T4
+        - EMP - Cannon - Class 8 - T4
+        - EMP - Scatterfire - Class 8 - T4
+        - EMP - Burst - Class 8 - T4
+        - EMP - Beam - Class 8 - T4
+      - TTN
+        - EMP - Rapidfire - TTN - T4
+        - EMP - Cannon - TTN - T4
+        - EMP - Scatterfire - TTN - T4
+        - EMP - Burst - TTN - T4
+        - EMP - Beam - TTN - T4
+    - T5
+      - XXXS
+        - EMP - Rapidfire - XXXS - T5
+        - EMP - Cannon - XXXS - T5
+        - EMP - Scatterfire - XXXS - T5
+        - EMP - Burst - XXXS - T5
+        - EMP - Beam - XXXS - T5
+      - XXS
+        - EMP - Rapidfire - XXS - T5
+        - EMP - Cannon - XXS - T5
+        - EMP - Scatterfire - XXS - T5
+        - EMP - Burst - XXS - T5
+        - EMP - Beam - XXS - T5
+      - XS
+        - EMP - Rapidfire - XS - T5
+        - EMP - Cannon - XS - T5
+        - EMP - Scatterfire - XS - T5
+        - EMP - Burst - XS - T5
+        - EMP - Beam - XS - T5
+      - S
+        - EMP - Rapidfire - S - T5
+        - EMP - Cannon - S - T5
+        - EMP - Scatterfire - S - T5
+        - EMP - Burst - S - T5
+        - EMP - Beam - S - T5
+      - M
+        - EMP - Rapidfire - M - T5
+        - EMP - Cannon - M - T5
+        - EMP - Scatterfire - M - T5
+        - EMP - Burst - M - T5
+        - EMP - Beam - M - T5
+      - L
+        - EMP - Rapidfire - L - T5
+        - EMP - Cannon - L - T5
+        - EMP - Scatterfire - L - T5
+        - EMP - Burst - L - T5
+        - EMP - Beam - L - T5
+      - CAP
+        - EMP - Rapidfire - CAP - T5
+        - EMP - Cannon - CAP - T5
+        - EMP - Scatterfire - CAP - T5
+        - EMP - Burst - CAP - T5
+        - EMP - Beam - CAP - T5
+      - CMD
+        - EMP - Rapidfire - CMD - T5
+        - EMP - Cannon - CMD - T5
+        - EMP - Scatterfire - CMD - T5
+        - EMP - Burst - CMD - T5
+        - EMP - Beam - CMD - T5
+      - Class 8
+        - EMP - Rapidfire - Class 8 - T5
+        - EMP - Cannon - Class 8 - T5
+        - EMP - Scatterfire - Class 8 - T5
+        - EMP - Burst - Class 8 - T5
+        - EMP - Beam - Class 8 - T5
+      - TTN
+        - EMP - Rapidfire - TTN - T5
+        - EMP - Cannon - TTN - T5
+        - EMP - Scatterfire - TTN - T5
+        - EMP - Burst - TTN - T5
+        - EMP - Beam - TTN - T5
+  - **Superchill**
+    - T1
+      - XXXS
+        - Superchill - Rapidfire - XXXS - T1
+        - Superchill - Cannon - XXXS - T1
+        - Superchill - Scatterfire - XXXS - T1
+        - Superchill - Burst - XXXS - T1
+        - Superchill - Beam - XXXS - T1
+      - XXS
+        - Superchill - Rapidfire - XXS - T1
+        - Superchill - Cannon - XXS - T1
+        - Superchill - Scatterfire - XXS - T1
+        - Superchill - Burst - XXS - T1
+        - Superchill - Beam - XXS - T1
+      - XS
+        - Superchill - Rapidfire - XS - T1
+        - Superchill - Cannon - XS - T1
+        - Superchill - Scatterfire - XS - T1
+        - Superchill - Burst - XS - T1
+        - Superchill - Beam - XS - T1
+      - S
+        - Superchill - Rapidfire - S - T1
+        - Superchill - Cannon - S - T1
+        - Superchill - Scatterfire - S - T1
+        - Superchill - Burst - S - T1
+        - Superchill - Beam - S - T1
+      - M
+        - Superchill - Rapidfire - M - T1
+        - Superchill - Cannon - M - T1
+        - Superchill - Scatterfire - M - T1
+        - Superchill - Burst - M - T1
+        - Superchill - Beam - M - T1
+      - L
+        - Superchill - Rapidfire - L - T1
+        - Superchill - Cannon - L - T1
+        - Superchill - Scatterfire - L - T1
+        - Superchill - Burst - L - T1
+        - Superchill - Beam - L - T1
+      - CAP
+        - Superchill - Rapidfire - CAP - T1
+        - Superchill - Cannon - CAP - T1
+        - Superchill - Scatterfire - CAP - T1
+        - Superchill - Burst - CAP - T1
+        - Superchill - Beam - CAP - T1
+      - CMD
+        - Superchill - Rapidfire - CMD - T1
+        - Superchill - Cannon - CMD - T1
+        - Superchill - Scatterfire - CMD - T1
+        - Superchill - Burst - CMD - T1
+        - Superchill - Beam - CMD - T1
+      - Class 8
+        - Superchill - Rapidfire - Class 8 - T1
+        - Superchill - Cannon - Class 8 - T1
+        - Superchill - Scatterfire - Class 8 - T1
+        - Superchill - Burst - Class 8 - T1
+        - Superchill - Beam - Class 8 - T1
+      - TTN
+        - Superchill - Rapidfire - TTN - T1
+        - Superchill - Cannon - TTN - T1
+        - Superchill - Scatterfire - TTN - T1
+        - Superchill - Burst - TTN - T1
+        - Superchill - Beam - TTN - T1
+    - T2
+      - XXXS
+        - Superchill - Rapidfire - XXXS - T2
+        - Superchill - Cannon - XXXS - T2
+        - Superchill - Scatterfire - XXXS - T2
+        - Superchill - Burst - XXXS - T2
+        - Superchill - Beam - XXXS - T2
+      - XXS
+        - Superchill - Rapidfire - XXS - T2
+        - Superchill - Cannon - XXS - T2
+        - Superchill - Scatterfire - XXS - T2
+        - Superchill - Burst - XXS - T2
+        - Superchill - Beam - XXS - T2
+      - XS
+        - Superchill - Rapidfire - XS - T2
+        - Superchill - Cannon - XS - T2
+        - Superchill - Scatterfire - XS - T2
+        - Superchill - Burst - XS - T2
+        - Superchill - Beam - XS - T2
+      - S
+        - Superchill - Rapidfire - S - T2
+        - Superchill - Cannon - S - T2
+        - Superchill - Scatterfire - S - T2
+        - Superchill - Burst - S - T2
+        - Superchill - Beam - S - T2
+      - M
+        - Superchill - Rapidfire - M - T2
+        - Superchill - Cannon - M - T2
+        - Superchill - Scatterfire - M - T2
+        - Superchill - Burst - M - T2
+        - Superchill - Beam - M - T2
+      - L
+        - Superchill - Rapidfire - L - T2
+        - Superchill - Cannon - L - T2
+        - Superchill - Scatterfire - L - T2
+        - Superchill - Burst - L - T2
+        - Superchill - Beam - L - T2
+      - CAP
+        - Superchill - Rapidfire - CAP - T2
+        - Superchill - Cannon - CAP - T2
+        - Superchill - Scatterfire - CAP - T2
+        - Superchill - Burst - CAP - T2
+        - Superchill - Beam - CAP - T2
+      - CMD
+        - Superchill - Rapidfire - CMD - T2
+        - Superchill - Cannon - CMD - T2
+        - Superchill - Scatterfire - CMD - T2
+        - Superchill - Burst - CMD - T2
+        - Superchill - Beam - CMD - T2
+      - Class 8
+        - Superchill - Rapidfire - Class 8 - T2
+        - Superchill - Cannon - Class 8 - T2
+        - Superchill - Scatterfire - Class 8 - T2
+        - Superchill - Burst - Class 8 - T2
+        - Superchill - Beam - Class 8 - T2
+      - TTN
+        - Superchill - Rapidfire - TTN - T2
+        - Superchill - Cannon - TTN - T2
+        - Superchill - Scatterfire - TTN - T2
+        - Superchill - Burst - TTN - T2
+        - Superchill - Beam - TTN - T2
+    - T3
+      - XXXS
+        - Superchill - Rapidfire - XXXS - T3
+        - Superchill - Cannon - XXXS - T3
+        - Superchill - Scatterfire - XXXS - T3
+        - Superchill - Burst - XXXS - T3
+        - Superchill - Beam - XXXS - T3
+      - XXS
+        - Superchill - Rapidfire - XXS - T3
+        - Superchill - Cannon - XXS - T3
+        - Superchill - Scatterfire - XXS - T3
+        - Superchill - Burst - XXS - T3
+        - Superchill - Beam - XXS - T3
+      - XS
+        - Superchill - Rapidfire - XS - T3
+        - Superchill - Cannon - XS - T3
+        - Superchill - Scatterfire - XS - T3
+        - Superchill - Burst - XS - T3
+        - Superchill - Beam - XS - T3
+      - S
+        - Superchill - Rapidfire - S - T3
+        - Superchill - Cannon - S - T3
+        - Superchill - Scatterfire - S - T3
+        - Superchill - Burst - S - T3
+        - Superchill - Beam - S - T3
+      - M
+        - Superchill - Rapidfire - M - T3
+        - Superchill - Cannon - M - T3
+        - Superchill - Scatterfire - M - T3
+        - Superchill - Burst - M - T3
+        - Superchill - Beam - M - T3
+      - L
+        - Superchill - Rapidfire - L - T3
+        - Superchill - Cannon - L - T3
+        - Superchill - Scatterfire - L - T3
+        - Superchill - Burst - L - T3
+        - Superchill - Beam - L - T3
+      - CAP
+        - Superchill - Rapidfire - CAP - T3
+        - Superchill - Cannon - CAP - T3
+        - Superchill - Scatterfire - CAP - T3
+        - Superchill - Burst - CAP - T3
+        - Superchill - Beam - CAP - T3
+      - CMD
+        - Superchill - Rapidfire - CMD - T3
+        - Superchill - Cannon - CMD - T3
+        - Superchill - Scatterfire - CMD - T3
+        - Superchill - Burst - CMD - T3
+        - Superchill - Beam - CMD - T3
+      - Class 8
+        - Superchill - Rapidfire - Class 8 - T3
+        - Superchill - Cannon - Class 8 - T3
+        - Superchill - Scatterfire - Class 8 - T3
+        - Superchill - Burst - Class 8 - T3
+        - Superchill - Beam - Class 8 - T3
+      - TTN
+        - Superchill - Rapidfire - TTN - T3
+        - Superchill - Cannon - TTN - T3
+        - Superchill - Scatterfire - TTN - T3
+        - Superchill - Burst - TTN - T3
+        - Superchill - Beam - TTN - T3
+    - T4
+      - XXXS
+        - Superchill - Rapidfire - XXXS - T4
+        - Superchill - Cannon - XXXS - T4
+        - Superchill - Scatterfire - XXXS - T4
+        - Superchill - Burst - XXXS - T4
+        - Superchill - Beam - XXXS - T4
+      - XXS
+        - Superchill - Rapidfire - XXS - T4
+        - Superchill - Cannon - XXS - T4
+        - Superchill - Scatterfire - XXS - T4
+        - Superchill - Burst - XXS - T4
+        - Superchill - Beam - XXS - T4
+      - XS
+        - Superchill - Rapidfire - XS - T4
+        - Superchill - Cannon - XS - T4
+        - Superchill - Scatterfire - XS - T4
+        - Superchill - Burst - XS - T4
+        - Superchill - Beam - XS - T4
+      - S
+        - Superchill - Rapidfire - S - T4
+        - Superchill - Cannon - S - T4
+        - Superchill - Scatterfire - S - T4
+        - Superchill - Burst - S - T4
+        - Superchill - Beam - S - T4
+      - M
+        - Superchill - Rapidfire - M - T4
+        - Superchill - Cannon - M - T4
+        - Superchill - Scatterfire - M - T4
+        - Superchill - Burst - M - T4
+        - Superchill - Beam - M - T4
+      - L
+        - Superchill - Rapidfire - L - T4
+        - Superchill - Cannon - L - T4
+        - Superchill - Scatterfire - L - T4
+        - Superchill - Burst - L - T4
+        - Superchill - Beam - L - T4
+      - CAP
+        - Superchill - Rapidfire - CAP - T4
+        - Superchill - Cannon - CAP - T4
+        - Superchill - Scatterfire - CAP - T4
+        - Superchill - Burst - CAP - T4
+        - Superchill - Beam - CAP - T4
+      - CMD
+        - Superchill - Rapidfire - CMD - T4
+        - Superchill - Cannon - CMD - T4
+        - Superchill - Scatterfire - CMD - T4
+        - Superchill - Burst - CMD - T4
+        - Superchill - Beam - CMD - T4
+      - Class 8
+        - Superchill - Rapidfire - Class 8 - T4
+        - Superchill - Cannon - Class 8 - T4
+        - Superchill - Scatterfire - Class 8 - T4
+        - Superchill - Burst - Class 8 - T4
+        - Superchill - Beam - Class 8 - T4
+      - TTN
+        - Superchill - Rapidfire - TTN - T4
+        - Superchill - Cannon - TTN - T4
+        - Superchill - Scatterfire - TTN - T4
+        - Superchill - Burst - TTN - T4
+        - Superchill - Beam - TTN - T4
+    - T5
+      - XXXS
+        - Superchill - Rapidfire - XXXS - T5
+        - Superchill - Cannon - XXXS - T5
+        - Superchill - Scatterfire - XXXS - T5
+        - Superchill - Burst - XXXS - T5
+        - Superchill - Beam - XXXS - T5
+      - XXS
+        - Superchill - Rapidfire - XXS - T5
+        - Superchill - Cannon - XXS - T5
+        - Superchill - Scatterfire - XXS - T5
+        - Superchill - Burst - XXS - T5
+        - Superchill - Beam - XXS - T5
+      - XS
+        - Superchill - Rapidfire - XS - T5
+        - Superchill - Cannon - XS - T5
+        - Superchill - Scatterfire - XS - T5
+        - Superchill - Burst - XS - T5
+        - Superchill - Beam - XS - T5
+      - S
+        - Superchill - Rapidfire - S - T5
+        - Superchill - Cannon - S - T5
+        - Superchill - Scatterfire - S - T5
+        - Superchill - Burst - S - T5
+        - Superchill - Beam - S - T5
+      - M
+        - Superchill - Rapidfire - M - T5
+        - Superchill - Cannon - M - T5
+        - Superchill - Scatterfire - M - T5
+        - Superchill - Burst - M - T5
+        - Superchill - Beam - M - T5
+      - L
+        - Superchill - Rapidfire - L - T5
+        - Superchill - Cannon - L - T5
+        - Superchill - Scatterfire - L - T5
+        - Superchill - Burst - L - T5
+        - Superchill - Beam - L - T5
+      - CAP
+        - Superchill - Rapidfire - CAP - T5
+        - Superchill - Cannon - CAP - T5
+        - Superchill - Scatterfire - CAP - T5
+        - Superchill - Burst - CAP - T5
+        - Superchill - Beam - CAP - T5
+      - CMD
+        - Superchill - Rapidfire - CMD - T5
+        - Superchill - Cannon - CMD - T5
+        - Superchill - Scatterfire - CMD - T5
+        - Superchill - Burst - CMD - T5
+        - Superchill - Beam - CMD - T5
+      - Class 8
+        - Superchill - Rapidfire - Class 8 - T5
+        - Superchill - Cannon - Class 8 - T5
+        - Superchill - Scatterfire - Class 8 - T5
+        - Superchill - Burst - Class 8 - T5
+        - Superchill - Beam - Class 8 - T5
+      - TTN
+        - Superchill - Rapidfire - TTN - T5
+        - Superchill - Cannon - TTN - T5
+        - Superchill - Scatterfire - TTN - T5
+        - Superchill - Burst - TTN - T5
+        - Superchill - Beam - TTN - T5
+  - **Shockwave**
+    - T1
+      - XXXS
+        - Shockwave - Cannon - XXXS - T1
+        - Shockwave - Burst - XXXS - T1
+      - XXS
+        - Shockwave - Cannon - XXS - T1
+        - Shockwave - Burst - XXS - T1
+      - XS
+        - Shockwave - Cannon - XS - T1
+        - Shockwave - Burst - XS - T1
+      - S
+        - Shockwave - Cannon - S - T1
+        - Shockwave - Burst - S - T1
+      - M
+        - Shockwave - Cannon - M - T1
+        - Shockwave - Burst - M - T1
+      - L
+        - Shockwave - Cannon - L - T1
+        - Shockwave - Burst - L - T1
+      - CAP
+        - Shockwave - Cannon - CAP - T1
+        - Shockwave - Burst - CAP - T1
+      - CMD
+        - Shockwave - Cannon - CMD - T1
+        - Shockwave - Burst - CMD - T1
+      - Class 8
+        - Shockwave - Cannon - Class 8 - T1
+        - Shockwave - Burst - Class 8 - T1
+      - TTN
+        - Shockwave - Cannon - TTN - T1
+        - Shockwave - Burst - TTN - T1
+    - T2
+      - XXXS
+        - Shockwave - Cannon - XXXS - T2
+        - Shockwave - Burst - XXXS - T2
+      - XXS
+        - Shockwave - Cannon - XXS - T2
+        - Shockwave - Burst - XXS - T2
+      - XS
+        - Shockwave - Cannon - XS - T2
+        - Shockwave - Burst - XS - T2
+      - S
+        - Shockwave - Cannon - S - T2
+        - Shockwave - Burst - S - T2
+      - M
+        - Shockwave - Cannon - M - T2
+        - Shockwave - Burst - M - T2
+      - L
+        - Shockwave - Cannon - L - T2
+        - Shockwave - Burst - L - T2
+      - CAP
+        - Shockwave - Cannon - CAP - T2
+        - Shockwave - Burst - CAP - T2
+      - CMD
+        - Shockwave - Cannon - CMD - T2
+        - Shockwave - Burst - CMD - T2
+      - Class 8
+        - Shockwave - Cannon - Class 8 - T2
+        - Shockwave - Burst - Class 8 - T2
+      - TTN
+        - Shockwave - Cannon - TTN - T2
+        - Shockwave - Burst - TTN - T2
+    - T3
+      - XXXS
+        - Shockwave - Cannon - XXXS - T3
+        - Shockwave - Burst - XXXS - T3
+      - XXS
+        - Shockwave - Cannon - XXS - T3
+        - Shockwave - Burst - XXS - T3
+      - XS
+        - Shockwave - Cannon - XS - T3
+        - Shockwave - Burst - XS - T3
+      - S
+        - Shockwave - Cannon - S - T3
+        - Shockwave - Burst - S - T3
+      - M
+        - Shockwave - Cannon - M - T3
+        - Shockwave - Burst - M - T3
+      - L
+        - Shockwave - Cannon - L - T3
+        - Shockwave - Burst - L - T3
+      - CAP
+        - Shockwave - Cannon - CAP - T3
+        - Shockwave - Burst - CAP - T3
+      - CMD
+        - Shockwave - Cannon - CMD - T3
+        - Shockwave - Burst - CMD - T3
+      - Class 8
+        - Shockwave - Cannon - Class 8 - T3
+        - Shockwave - Burst - Class 8 - T3
+      - TTN
+        - Shockwave - Cannon - TTN - T3
+        - Shockwave - Burst - TTN - T3
+    - T4
+      - XXXS
+        - Shockwave - Cannon - XXXS - T4
+        - Shockwave - Burst - XXXS - T4
+      - XXS
+        - Shockwave - Cannon - XXS - T4
+        - Shockwave - Burst - XXS - T4
+      - XS
+        - Shockwave - Cannon - XS - T4
+        - Shockwave - Burst - XS - T4
+      - S
+        - Shockwave - Cannon - S - T4
+        - Shockwave - Burst - S - T4
+      - M
+        - Shockwave - Cannon - M - T4
+        - Shockwave - Burst - M - T4
+      - L
+        - Shockwave - Cannon - L - T4
+        - Shockwave - Burst - L - T4
+      - CAP
+        - Shockwave - Cannon - CAP - T4
+        - Shockwave - Burst - CAP - T4
+      - CMD
+        - Shockwave - Cannon - CMD - T4
+        - Shockwave - Burst - CMD - T4
+      - Class 8
+        - Shockwave - Cannon - Class 8 - T4
+        - Shockwave - Burst - Class 8 - T4
+      - TTN
+        - Shockwave - Cannon - TTN - T4
+        - Shockwave - Burst - TTN - T4
+    - T5
+      - XXXS
+        - Shockwave - Cannon - XXXS - T5
+        - Shockwave - Burst - XXXS - T5
+      - XXS
+        - Shockwave - Cannon - XXS - T5
+        - Shockwave - Burst - XXS - T5
+      - XS
+        - Shockwave - Cannon - XS - T5
+        - Shockwave - Burst - XS - T5
+      - S
+        - Shockwave - Cannon - S - T5
+        - Shockwave - Burst - S - T5
+      - M
+        - Shockwave - Cannon - M - T5
+        - Shockwave - Burst - M - T5
+      - L
+        - Shockwave - Cannon - L - T5
+        - Shockwave - Burst - L - T5
+      - CAP
+        - Shockwave - Cannon - CAP - T5
+        - Shockwave - Burst - CAP - T5
+      - CMD
+        - Shockwave - Cannon - CMD - T5
+        - Shockwave - Burst - CMD - T5
+      - Class 8
+        - Shockwave - Cannon - Class 8 - T5
+        - Shockwave - Burst - Class 8 - T5
+      - TTN
+        - Shockwave - Cannon - TTN - T5
+        - Shockwave - Burst - TTN - T5
+  - **Gray Goo**
+    - T1
+      - XXXS
+        - Gray Goo - Cannon - XXXS - T1
+        - Gray Goo - Burst - XXXS - T1
+      - XXS
+        - Gray Goo - Cannon - XXS - T1
+        - Gray Goo - Burst - XXS - T1
+      - XS
+        - Gray Goo - Cannon - XS - T1
+        - Gray Goo - Burst - XS - T1
+      - S
+        - Gray Goo - Cannon - S - T1
+        - Gray Goo - Burst - S - T1
+      - M
+        - Gray Goo - Cannon - M - T1
+        - Gray Goo - Burst - M - T1
+      - L
+        - Gray Goo - Cannon - L - T1
+        - Gray Goo - Burst - L - T1
+      - CAP
+        - Gray Goo - Cannon - CAP - T1
+        - Gray Goo - Burst - CAP - T1
+      - CMD
+        - Gray Goo - Cannon - CMD - T1
+        - Gray Goo - Burst - CMD - T1
+      - Class 8
+        - Gray Goo - Cannon - Class 8 - T1
+        - Gray Goo - Burst - Class 8 - T1
+      - TTN
+        - Gray Goo - Cannon - TTN - T1
+        - Gray Goo - Burst - TTN - T1
+    - T2
+      - XXXS
+        - Gray Goo - Cannon - XXXS - T2
+        - Gray Goo - Burst - XXXS - T2
+      - XXS
+        - Gray Goo - Cannon - XXS - T2
+        - Gray Goo - Burst - XXS - T2
+      - XS
+        - Gray Goo - Cannon - XS - T2
+        - Gray Goo - Burst - XS - T2
+      - S
+        - Gray Goo - Cannon - S - T2
+        - Gray Goo - Burst - S - T2
+      - M
+        - Gray Goo - Cannon - M - T2
+        - Gray Goo - Burst - M - T2
+      - L
+        - Gray Goo - Cannon - L - T2
+        - Gray Goo - Burst - L - T2
+      - CAP
+        - Gray Goo - Cannon - CAP - T2
+        - Gray Goo - Burst - CAP - T2
+      - CMD
+        - Gray Goo - Cannon - CMD - T2
+        - Gray Goo - Burst - CMD - T2
+      - Class 8
+        - Gray Goo - Cannon - Class 8 - T2
+        - Gray Goo - Burst - Class 8 - T2
+      - TTN
+        - Gray Goo - Cannon - TTN - T2
+        - Gray Goo - Burst - TTN - T2
+    - T3
+      - XXXS
+        - Gray Goo - Cannon - XXXS - T3
+        - Gray Goo - Burst - XXXS - T3
+      - XXS
+        - Gray Goo - Cannon - XXS - T3
+        - Gray Goo - Burst - XXS - T3
+      - XS
+        - Gray Goo - Cannon - XS - T3
+        - Gray Goo - Burst - XS - T3
+      - S
+        - Gray Goo - Cannon - S - T3
+        - Gray Goo - Burst - S - T3
+      - M
+        - Gray Goo - Cannon - M - T3
+        - Gray Goo - Burst - M - T3
+      - L
+        - Gray Goo - Cannon - L - T3
+        - Gray Goo - Burst - L - T3
+      - CAP
+        - Gray Goo - Cannon - CAP - T3
+        - Gray Goo - Burst - CAP - T3
+      - CMD
+        - Gray Goo - Cannon - CMD - T3
+        - Gray Goo - Burst - CMD - T3
+      - Class 8
+        - Gray Goo - Cannon - Class 8 - T3
+        - Gray Goo - Burst - Class 8 - T3
+      - TTN
+        - Gray Goo - Cannon - TTN - T3
+        - Gray Goo - Burst - TTN - T3
+    - T4
+      - XXXS
+        - Gray Goo - Cannon - XXXS - T4
+        - Gray Goo - Burst - XXXS - T4
+      - XXS
+        - Gray Goo - Cannon - XXS - T4
+        - Gray Goo - Burst - XXS - T4
+      - XS
+        - Gray Goo - Cannon - XS - T4
+        - Gray Goo - Burst - XS - T4
+      - S
+        - Gray Goo - Cannon - S - T4
+        - Gray Goo - Burst - S - T4
+      - M
+        - Gray Goo - Cannon - M - T4
+        - Gray Goo - Burst - M - T4
+      - L
+        - Gray Goo - Cannon - L - T4
+        - Gray Goo - Burst - L - T4
+      - CAP
+        - Gray Goo - Cannon - CAP - T4
+        - Gray Goo - Burst - CAP - T4
+      - CMD
+        - Gray Goo - Cannon - CMD - T4
+        - Gray Goo - Burst - CMD - T4
+      - Class 8
+        - Gray Goo - Cannon - Class 8 - T4
+        - Gray Goo - Burst - Class 8 - T4
+      - TTN
+        - Gray Goo - Cannon - TTN - T4
+        - Gray Goo - Burst - TTN - T4
+    - T5
+      - XXXS
+        - Gray Goo - Cannon - XXXS - T5
+        - Gray Goo - Burst - XXXS - T5
+      - XXS
+        - Gray Goo - Cannon - XXS - T5
+        - Gray Goo - Burst - XXS - T5
+      - XS
+        - Gray Goo - Cannon - XS - T5
+        - Gray Goo - Burst - XS - T5
+      - S
+        - Gray Goo - Cannon - S - T5
+        - Gray Goo - Burst - S - T5
+      - M
+        - Gray Goo - Cannon - M - T5
+        - Gray Goo - Burst - M - T5
+      - L
+        - Gray Goo - Cannon - L - T5
+        - Gray Goo - Burst - L - T5
+      - CAP
+        - Gray Goo - Cannon - CAP - T5
+        - Gray Goo - Burst - CAP - T5
+      - CMD
+        - Gray Goo - Cannon - CMD - T5
+        - Gray Goo - Burst - CMD - T5
+      - Class 8
+        - Gray Goo - Cannon - Class 8 - T5
+        - Gray Goo - Burst - Class 8 - T5
+      - TTN
+        - Gray Goo - Cannon - TTN - T5
+        - Gray Goo - Burst - TTN - T5
+  - **Heat**
+    - T1
+      - XXXS
+        - Heat - Beam - XXXS - T1
+      - XXS
+        - Heat - Beam - XXS - T1
+      - XS
+        - Heat - Beam - XS - T1
+      - S
+        - Heat - Beam - S - T1
+      - M
+        - Heat - Beam - M - T1
+      - L
+        - Heat - Beam - L - T1
+      - CAP
+        - Heat - Beam - CAP - T1
+      - CMD
+        - Heat - Beam - CMD - T1
+      - Class 8
+        - Heat - Beam - Class 8 - T1
+      - TTN
+        - Heat - Beam - TTN - T1
+    - T2
+      - XXXS
+        - Heat - Beam - XXXS - T2
+      - XXS
+        - Heat - Beam - XXS - T2
+      - XS
+        - Heat - Beam - XS - T2
+      - S
+        - Heat - Beam - S - T2
+      - M
+        - Heat - Beam - M - T2
+      - L
+        - Heat - Beam - L - T2
+      - CAP
+        - Heat - Beam - CAP - T2
+      - CMD
+        - Heat - Beam - CMD - T2
+      - Class 8
+        - Heat - Beam - Class 8 - T2
+      - TTN
+        - Heat - Beam - TTN - T2
+    - T3
+      - XXXS
+        - Heat - Beam - XXXS - T3
+      - XXS
+        - Heat - Beam - XXS - T3
+      - XS
+        - Heat - Beam - XS - T3
+      - S
+        - Heat - Beam - S - T3
+      - M
+        - Heat - Beam - M - T3
+      - L
+        - Heat - Beam - L - T3
+      - CAP
+        - Heat - Beam - CAP - T3
+      - CMD
+        - Heat - Beam - CMD - T3
+      - Class 8
+        - Heat - Beam - Class 8 - T3
+      - TTN
+        - Heat - Beam - TTN - T3
+    - T4
+      - XXXS
+        - Heat - Beam - XXXS - T4
+      - XXS
+        - Heat - Beam - XXS - T4
+      - XS
+        - Heat - Beam - XS - T4
+      - S
+        - Heat - Beam - S - T4
+      - M
+        - Heat - Beam - M - T4
+      - L
+        - Heat - Beam - L - T4
+      - CAP
+        - Heat - Beam - CAP - T4
+      - CMD
+        - Heat - Beam - CMD - T4
+      - Class 8
+        - Heat - Beam - Class 8 - T4
+      - TTN
+        - Heat - Beam - TTN - T4
+    - T5
+      - XXXS
+        - Heat - Beam - XXXS - T5
+      - XXS
+        - Heat - Beam - XXS - T5
+      - XS
+        - Heat - Beam - XS - T5
+      - S
+        - Heat - Beam - S - T5
+      - M
+        - Heat - Beam - M - T5
+      - L
+        - Heat - Beam - L - T5
+      - CAP
+        - Heat - Beam - CAP - T5
+      - CMD
+        - Heat - Beam - CMD - T5
+      - Class 8
+        - Heat - Beam - Class 8 - T5
+      - TTN
+        - Heat - Beam - TTN - T5
+## Countermeasures
+  - **T1**
+    - XXXS
+      - Decoy - XXXS - T1
+      - Energy Capacitor - XXXS - T1
+      - Fire Suppressor - XXXS - T1
+      - Flare - XXXS - T1
+      - Healing Nanobots - XXXS - T1
+      - Mine - XXXS - T1
+      - Negative REM Plating - XXXS - T1
+      - Warming Plates - XXXS - T1
+      - Faraday Shielding - XXXS - T1
+    - XXS
+      - Decoy - XXS - T1
+      - Energy Capacitor - XXS - T1
+      - Fire Suppressor - XXS - T1
+      - Flare - XXS - T1
+      - Healing Nanobots - XXS - T1
+      - Mine - XXS - T1
+      - Negative REM Plating - XXS - T1
+      - Warming Plates - XXS - T1
+      - Faraday Shielding - XXS - T1
+    - XS
+      - Decoy - XS - T1
+      - Energy Capacitor - XS - T1
+      - Fire Suppressor - XS - T1
+      - Flare - XS - T1
+      - Healing Nanobots - XS - T1
+      - Mine - XS - T1
+      - Negative REM Plating - XS - T1
+      - Warming Plates - XS - T1
+      - Faraday Shielding - XS - T1
+    - S
+      - Decoy - S - T1
+      - Energy Capacitor - S - T1
+      - Fire Suppressor - S - T1
+      - Flare - S - T1
+      - Healing Nanobots - S - T1
+      - Mine - S - T1
+      - Negative REM Plating - S - T1
+      - Warming Plates - S - T1
+      - Faraday Shielding - S - T1
+    - M
+      - Decoy - M - T1
+      - Energy Capacitor - M - T1
+      - Fire Suppressor - M - T1
+      - Flare - M - T1
+      - Healing Nanobots - M - T1
+      - Mine - M - T1
+      - Negative REM Plating - M - T1
+      - Warming Plates - M - T1
+      - Faraday Shielding - M - T1
+    - L
+      - Decoy - L - T1
+      - Energy Capacitor - L - T1
+      - Fire Suppressor - L - T1
+      - Flare - L - T1
+      - Healing Nanobots - L - T1
+      - Mine - L - T1
+      - Negative REM Plating - L - T1
+      - Warming Plates - L - T1
+      - Faraday Shielding - L - T1
+    - CAP
+      - Decoy - CAP - T1
+      - Energy Capacitor - CAP - T1
+      - Fire Suppressor - CAP - T1
+      - Flare - CAP - T1
+      - Healing Nanobots - CAP - T1
+      - Mine - CAP - T1
+      - Negative REM Plating - CAP - T1
+      - Warming Plates - CAP - T1
+      - Faraday Shielding - CAP - T1
+    - CMD
+      - Decoy - CMD - T1
+      - Energy Capacitor - CMD - T1
+      - Fire Suppressor - CMD - T1
+      - Flare - CMD - T1
+      - Healing Nanobots - CMD - T1
+      - Mine - CMD - T1
+      - Negative REM Plating - CMD - T1
+      - Warming Plates - CMD - T1
+      - Faraday Shielding - CMD - T1
+    - Class 8
+      - Decoy - Class 8 - T1
+      - Energy Capacitor - Class 8 - T1
+      - Fire Suppressor - Class 8 - T1
+      - Flare - Class 8 - T1
+      - Healing Nanobots - Class 8 - T1
+      - Mine - Class 8 - T1
+      - Negative REM Plating - Class 8 - T1
+      - Warming Plates - Class 8 - T1
+      - Faraday Shielding - Class 8 - T1
+    - TTN
+      - Decoy - TTN - T1
+      - Energy Capacitor - TTN - T1
+      - Fire Suppressor - TTN - T1
+      - Flare - TTN - T1
+      - Healing Nanobots - TTN - T1
+      - Mine - TTN - T1
+      - Negative REM Plating - TTN - T1
+      - Warming Plates - TTN - T1
+      - Faraday Shielding - TTN - T1
+  - **T2**
+    - XXXS
+      - Decoy - XXXS - T2
+      - Energy Capacitor - XXXS - T2
+      - Fire Suppressor - XXXS - T2
+      - Flare - XXXS - T2
+      - Healing Nanobots - XXXS - T2
+      - Mine - XXXS - T2
+      - Negative REM Plating - XXXS - T2
+      - Warming Plates - XXXS - T2
+      - Faraday Shielding - XXXS - T2
+    - XXS
+      - Decoy - XXS - T2
+      - Energy Capacitor - XXS - T2
+      - Fire Suppressor - XXS - T2
+      - Flare - XXS - T2
+      - Healing Nanobots - XXS - T2
+      - Mine - XXS - T2
+      - Negative REM Plating - XXS - T2
+      - Warming Plates - XXS - T2
+      - Faraday Shielding - XXS - T2
+    - XS
+      - Decoy - XS - T2
+      - Energy Capacitor - XS - T2
+      - Fire Suppressor - XS - T2
+      - Flare - XS - T2
+      - Healing Nanobots - XS - T2
+      - Mine - XS - T2
+      - Negative REM Plating - XS - T2
+      - Warming Plates - XS - T2
+      - Faraday Shielding - XS - T2
+    - S
+      - Decoy - S - T2
+      - Energy Capacitor - S - T2
+      - Fire Suppressor - S - T2
+      - Flare - S - T2
+      - Healing Nanobots - S - T2
+      - Mine - S - T2
+      - Negative REM Plating - S - T2
+      - Warming Plates - S - T2
+      - Faraday Shielding - S - T2
+    - M
+      - Decoy - M - T2
+      - Energy Capacitor - M - T2
+      - Fire Suppressor - M - T2
+      - Flare - M - T2
+      - Healing Nanobots - M - T2
+      - Mine - M - T2
+      - Negative REM Plating - M - T2
+      - Warming Plates - M - T2
+      - Faraday Shielding - M - T2
+    - L
+      - Decoy - L - T2
+      - Energy Capacitor - L - T2
+      - Fire Suppressor - L - T2
+      - Flare - L - T2
+      - Healing Nanobots - L - T2
+      - Mine - L - T2
+      - Negative REM Plating - L - T2
+      - Warming Plates - L - T2
+      - Faraday Shielding - L - T2
+    - CAP
+      - Decoy - CAP - T2
+      - Energy Capacitor - CAP - T2
+      - Fire Suppressor - CAP - T2
+      - Flare - CAP - T2
+      - Healing Nanobots - CAP - T2
+      - Mine - CAP - T2
+      - Negative REM Plating - CAP - T2
+      - Warming Plates - CAP - T2
+      - Faraday Shielding - CAP - T2
+    - CMD
+      - Decoy - CMD - T2
+      - Energy Capacitor - CMD - T2
+      - Fire Suppressor - CMD - T2
+      - Flare - CMD - T2
+      - Healing Nanobots - CMD - T2
+      - Mine - CMD - T2
+      - Negative REM Plating - CMD - T2
+      - Warming Plates - CMD - T2
+      - Faraday Shielding - CMD - T2
+    - Class 8
+      - Decoy - Class 8 - T2
+      - Energy Capacitor - Class 8 - T2
+      - Fire Suppressor - Class 8 - T2
+      - Flare - Class 8 - T2
+      - Healing Nanobots - Class 8 - T2
+      - Mine - Class 8 - T2
+      - Negative REM Plating - Class 8 - T2
+      - Warming Plates - Class 8 - T2
+      - Faraday Shielding - Class 8 - T2
+    - TTN
+      - Decoy - TTN - T2
+      - Energy Capacitor - TTN - T2
+      - Fire Suppressor - TTN - T2
+      - Flare - TTN - T2
+      - Healing Nanobots - TTN - T2
+      - Mine - TTN - T2
+      - Negative REM Plating - TTN - T2
+      - Warming Plates - TTN - T2
+      - Faraday Shielding - TTN - T2
+  - **T3**
+    - XXXS
+      - Decoy - XXXS - T3
+      - Energy Capacitor - XXXS - T3
+      - Fire Suppressor - XXXS - T3
+      - Flare - XXXS - T3
+      - Healing Nanobots - XXXS - T3
+      - Mine - XXXS - T3
+      - Negative REM Plating - XXXS - T3
+      - Warming Plates - XXXS - T3
+      - Faraday Shielding - XXXS - T3
+    - XXS
+      - Decoy - XXS - T3
+      - Energy Capacitor - XXS - T3
+      - Fire Suppressor - XXS - T3
+      - Flare - XXS - T3
+      - Healing Nanobots - XXS - T3
+      - Mine - XXS - T3
+      - Negative REM Plating - XXS - T3
+      - Warming Plates - XXS - T3
+      - Faraday Shielding - XXS - T3
+    - XS
+      - Decoy - XS - T3
+      - Energy Capacitor - XS - T3
+      - Fire Suppressor - XS - T3
+      - Flare - XS - T3
+      - Healing Nanobots - XS - T3
+      - Mine - XS - T3
+      - Negative REM Plating - XS - T3
+      - Warming Plates - XS - T3
+      - Faraday Shielding - XS - T3
+    - S
+      - Decoy - S - T3
+      - Energy Capacitor - S - T3
+      - Fire Suppressor - S - T3
+      - Flare - S - T3
+      - Healing Nanobots - S - T3
+      - Mine - S - T3
+      - Negative REM Plating - S - T3
+      - Warming Plates - S - T3
+      - Faraday Shielding - S - T3
+    - M
+      - Decoy - M - T3
+      - Energy Capacitor - M - T3
+      - Fire Suppressor - M - T3
+      - Flare - M - T3
+      - Healing Nanobots - M - T3
+      - Mine - M - T3
+      - Negative REM Plating - M - T3
+      - Warming Plates - M - T3
+      - Faraday Shielding - M - T3
+    - L
+      - Decoy - L - T3
+      - Energy Capacitor - L - T3
+      - Fire Suppressor - L - T3
+      - Flare - L - T3
+      - Healing Nanobots - L - T3
+      - Mine - L - T3
+      - Negative REM Plating - L - T3
+      - Warming Plates - L - T3
+      - Faraday Shielding - L - T3
+    - CAP
+      - Decoy - CAP - T3
+      - Energy Capacitor - CAP - T3
+      - Fire Suppressor - CAP - T3
+      - Flare - CAP - T3
+      - Healing Nanobots - CAP - T3
+      - Mine - CAP - T3
+      - Negative REM Plating - CAP - T3
+      - Warming Plates - CAP - T3
+      - Faraday Shielding - CAP - T3
+    - CMD
+      - Decoy - CMD - T3
+      - Energy Capacitor - CMD - T3
+      - Fire Suppressor - CMD - T3
+      - Flare - CMD - T3
+      - Healing Nanobots - CMD - T3
+      - Mine - CMD - T3
+      - Negative REM Plating - CMD - T3
+      - Warming Plates - CMD - T3
+      - Faraday Shielding - CMD - T3
+    - Class 8
+      - Decoy - Class 8 - T3
+      - Energy Capacitor - Class 8 - T3
+      - Fire Suppressor - Class 8 - T3
+      - Flare - Class 8 - T3
+      - Healing Nanobots - Class 8 - T3
+      - Mine - Class 8 - T3
+      - Negative REM Plating - Class 8 - T3
+      - Warming Plates - Class 8 - T3
+      - Faraday Shielding - Class 8 - T3
+    - TTN
+      - Decoy - TTN - T3
+      - Energy Capacitor - TTN - T3
+      - Fire Suppressor - TTN - T3
+      - Flare - TTN - T3
+      - Healing Nanobots - TTN - T3
+      - Mine - TTN - T3
+      - Negative REM Plating - TTN - T3
+      - Warming Plates - TTN - T3
+      - Faraday Shielding - TTN - T3
+  - **T4**
+    - XXXS
+      - Decoy - XXXS - T4
+      - Energy Capacitor - XXXS - T4
+      - Fire Suppressor - XXXS - T4
+      - Flare - XXXS - T4
+      - Healing Nanobots - XXXS - T4
+      - Mine - XXXS - T4
+      - Negative REM Plating - XXXS - T4
+      - Warming Plates - XXXS - T4
+      - Faraday Shielding - XXXS - T4
+    - XXS
+      - Decoy - XXS - T4
+      - Energy Capacitor - XXS - T4
+      - Fire Suppressor - XXS - T4
+      - Flare - XXS - T4
+      - Healing Nanobots - XXS - T4
+      - Mine - XXS - T4
+      - Negative REM Plating - XXS - T4
+      - Warming Plates - XXS - T4
+      - Faraday Shielding - XXS - T4
+    - XS
+      - Decoy - XS - T4
+      - Energy Capacitor - XS - T4
+      - Fire Suppressor - XS - T4
+      - Flare - XS - T4
+      - Healing Nanobots - XS - T4
+      - Mine - XS - T4
+      - Negative REM Plating - XS - T4
+      - Warming Plates - XS - T4
+      - Faraday Shielding - XS - T4
+    - S
+      - Decoy - S - T4
+      - Energy Capacitor - S - T4
+      - Fire Suppressor - S - T4
+      - Flare - S - T4
+      - Healing Nanobots - S - T4
+      - Mine - S - T4
+      - Negative REM Plating - S - T4
+      - Warming Plates - S - T4
+      - Faraday Shielding - S - T4
+    - M
+      - Decoy - M - T4
+      - Energy Capacitor - M - T4
+      - Fire Suppressor - M - T4
+      - Flare - M - T4
+      - Healing Nanobots - M - T4
+      - Mine - M - T4
+      - Negative REM Plating - M - T4
+      - Warming Plates - M - T4
+      - Faraday Shielding - M - T4
+    - L
+      - Decoy - L - T4
+      - Energy Capacitor - L - T4
+      - Fire Suppressor - L - T4
+      - Flare - L - T4
+      - Healing Nanobots - L - T4
+      - Mine - L - T4
+      - Negative REM Plating - L - T4
+      - Warming Plates - L - T4
+      - Faraday Shielding - L - T4
+    - CAP
+      - Decoy - CAP - T4
+      - Energy Capacitor - CAP - T4
+      - Fire Suppressor - CAP - T4
+      - Flare - CAP - T4
+      - Healing Nanobots - CAP - T4
+      - Mine - CAP - T4
+      - Negative REM Plating - CAP - T4
+      - Warming Plates - CAP - T4
+      - Faraday Shielding - CAP - T4
+    - CMD
+      - Decoy - CMD - T4
+      - Energy Capacitor - CMD - T4
+      - Fire Suppressor - CMD - T4
+      - Flare - CMD - T4
+      - Healing Nanobots - CMD - T4
+      - Mine - CMD - T4
+      - Negative REM Plating - CMD - T4
+      - Warming Plates - CMD - T4
+      - Faraday Shielding - CMD - T4
+    - Class 8
+      - Decoy - Class 8 - T4
+      - Energy Capacitor - Class 8 - T4
+      - Fire Suppressor - Class 8 - T4
+      - Flare - Class 8 - T4
+      - Healing Nanobots - Class 8 - T4
+      - Mine - Class 8 - T4
+      - Negative REM Plating - Class 8 - T4
+      - Warming Plates - Class 8 - T4
+      - Faraday Shielding - Class 8 - T4
+    - TTN
+      - Decoy - TTN - T4
+      - Energy Capacitor - TTN - T4
+      - Fire Suppressor - TTN - T4
+      - Flare - TTN - T4
+      - Healing Nanobots - TTN - T4
+      - Mine - TTN - T4
+      - Negative REM Plating - TTN - T4
+      - Warming Plates - TTN - T4
+      - Faraday Shielding - TTN - T4
+  - **T5**
+    - XXXS
+      - Decoy - XXXS - T5
+      - Energy Capacitor - XXXS - T5
+      - Fire Suppressor - XXXS - T5
+      - Flare - XXXS - T5
+      - Healing Nanobots - XXXS - T5
+      - Mine - XXXS - T5
+      - Negative REM Plating - XXXS - T5
+      - Warming Plates - XXXS - T5
+      - Faraday Shielding - XXXS - T5
+    - XXS
+      - Decoy - XXS - T5
+      - Energy Capacitor - XXS - T5
+      - Fire Suppressor - XXS - T5
+      - Flare - XXS - T5
+      - Healing Nanobots - XXS - T5
+      - Mine - XXS - T5
+      - Negative REM Plating - XXS - T5
+      - Warming Plates - XXS - T5
+      - Faraday Shielding - XXS - T5
+    - XS
+      - Decoy - XS - T5
+      - Energy Capacitor - XS - T5
+      - Fire Suppressor - XS - T5
+      - Flare - XS - T5
+      - Healing Nanobots - XS - T5
+      - Mine - XS - T5
+      - Negative REM Plating - XS - T5
+      - Warming Plates - XS - T5
+      - Faraday Shielding - XS - T5
+    - S
+      - Decoy - S - T5
+      - Energy Capacitor - S - T5
+      - Fire Suppressor - S - T5
+      - Flare - S - T5
+      - Healing Nanobots - S - T5
+      - Mine - S - T5
+      - Negative REM Plating - S - T5
+      - Warming Plates - S - T5
+      - Faraday Shielding - S - T5
+    - M
+      - Decoy - M - T5
+      - Energy Capacitor - M - T5
+      - Fire Suppressor - M - T5
+      - Flare - M - T5
+      - Healing Nanobots - M - T5
+      - Mine - M - T5
+      - Negative REM Plating - M - T5
+      - Warming Plates - M - T5
+      - Faraday Shielding - M - T5
+    - L
+      - Decoy - L - T5
+      - Energy Capacitor - L - T5
+      - Fire Suppressor - L - T5
+      - Flare - L - T5
+      - Healing Nanobots - L - T5
+      - Mine - L - T5
+      - Negative REM Plating - L - T5
+      - Warming Plates - L - T5
+      - Faraday Shielding - L - T5
+    - CAP
+      - Decoy - CAP - T5
+      - Energy Capacitor - CAP - T5
+      - Fire Suppressor - CAP - T5
+      - Flare - CAP - T5
+      - Healing Nanobots - CAP - T5
+      - Mine - CAP - T5
+      - Negative REM Plating - CAP - T5
+      - Warming Plates - CAP - T5
+      - Faraday Shielding - CAP - T5
+    - CMD
+      - Decoy - CMD - T5
+      - Energy Capacitor - CMD - T5
+      - Fire Suppressor - CMD - T5
+      - Flare - CMD - T5
+      - Healing Nanobots - CMD - T5
+      - Mine - CMD - T5
+      - Negative REM Plating - CMD - T5
+      - Warming Plates - CMD - T5
+      - Faraday Shielding - CMD - T5
+    - Class 8
+      - Decoy - Class 8 - T5
+      - Energy Capacitor - Class 8 - T5
+      - Fire Suppressor - Class 8 - T5
+      - Flare - Class 8 - T5
+      - Healing Nanobots - Class 8 - T5
+      - Mine - Class 8 - T5
+      - Negative REM Plating - Class 8 - T5
+      - Warming Plates - Class 8 - T5
+      - Faraday Shielding - Class 8 - T5
+    - TTN
+      - Decoy - TTN - T5
+      - Energy Capacitor - TTN - T5
+      - Fire Suppressor - TTN - T5
+      - Flare - TTN - T5
+      - Healing Nanobots - TTN - T5
+      - Mine - TTN - T5
+      - Negative REM Plating - TTN - T5
+      - Warming Plates - TTN - T5
+      - Faraday Shielding - TTN - T5
+## Missiles
+  - **T1**
+    - XXXS
+      - Explosive - Missiles - XXXS - T1
+      - Heat - Missiles - XXXS - T1
+      - Superchill - Missiles - XXXS - T1
+      - Gray Goo - Missiles - XXXS - T1
+      - EMP - Missiles - XXXS - T1
+      - Shockwave - Missiles - XXXS - T1
+      - Photon - Missiles - XXXS - T1
+    - XXS
+      - Explosive - Missiles - XXS - T1
+      - Heat - Missiles - XXS - T1
+      - Superchill - Missiles - XXS - T1
+      - Gray Goo - Missiles - XXS - T1
+      - EMP - Missiles - XXS - T1
+      - Shockwave - Missiles - XXS - T1
+      - Photon - Missiles - XXS - T1
+    - XS
+      - Explosive - Missiles - XS - T1
+      - Heat - Missiles - XS - T1
+      - Superchill - Missiles - XS - T1
+      - Gray Goo - Missiles - XS - T1
+      - EMP - Missiles - XS - T1
+      - Shockwave - Missiles - XS - T1
+      - Photon - Missiles - XS - T1
+    - S
+      - Explosive - Missiles - S - T1
+      - Heat - Missiles - S - T1
+      - Superchill - Missiles - S - T1
+      - Gray Goo - Missiles - S - T1
+      - EMP - Missiles - S - T1
+      - Shockwave - Missiles - S - T1
+      - Photon - Missiles - S - T1
+    - M
+      - Explosive - Missiles - M - T1
+      - Heat - Missiles - M - T1
+      - Superchill - Missiles - M - T1
+      - Gray Goo - Missiles - M - T1
+      - EMP - Missiles - M - T1
+      - Shockwave - Missiles - M - T1
+      - Photon - Missiles - M - T1
+    - L
+      - Explosive - Missiles - L - T1
+      - Heat - Missiles - L - T1
+      - Superchill - Missiles - L - T1
+      - Gray Goo - Missiles - L - T1
+      - EMP - Missiles - L - T1
+      - Shockwave - Missiles - L - T1
+      - Photon - Missiles - L - T1
+    - CAP
+      - Explosive - Missiles - CAP - T1
+      - Heat - Missiles - CAP - T1
+      - Superchill - Missiles - CAP - T1
+      - Gray Goo - Missiles - CAP - T1
+      - EMP - Missiles - CAP - T1
+      - Shockwave - Missiles - CAP - T1
+      - Photon - Missiles - CAP - T1
+    - CMD
+      - Explosive - Missiles - CMD - T1
+      - Heat - Missiles - CMD - T1
+      - Superchill - Missiles - CMD - T1
+      - Gray Goo - Missiles - CMD - T1
+      - EMP - Missiles - CMD - T1
+      - Shockwave - Missiles - CMD - T1
+      - Photon - Missiles - CMD - T1
+    - Class 8
+      - Explosive - Missiles - Class 8 - T1
+      - Heat - Missiles - Class 8 - T1
+      - Superchill - Missiles - Class 8 - T1
+      - Gray Goo - Missiles - Class 8 - T1
+      - EMP - Missiles - Class 8 - T1
+      - Shockwave - Missiles - Class 8 - T1
+      - Photon - Missiles - Class 8 - T1
+    - TTN
+      - Explosive - Missiles - TTN - T1
+      - Heat - Missiles - TTN - T1
+      - Superchill - Missiles - TTN - T1
+      - Gray Goo - Missiles - TTN - T1
+      - EMP - Missiles - TTN - T1
+      - Shockwave - Missiles - TTN - T1
+      - Photon - Missiles - TTN - T1
+  - **T2**
+    - XXXS
+      - Explosive - Missiles - XXXS - T2
+      - Heat - Missiles - XXXS - T2
+      - Superchill - Missiles - XXXS - T2
+      - Gray Goo - Missiles - XXXS - T2
+      - EMP - Missiles - XXXS - T2
+      - Shockwave - Missiles - XXXS - T2
+      - Photon - Missiles - XXXS - T2
+    - XXS
+      - Explosive - Missiles - XXS - T2
+      - Heat - Missiles - XXS - T2
+      - Superchill - Missiles - XXS - T2
+      - Gray Goo - Missiles - XXS - T2
+      - EMP - Missiles - XXS - T2
+      - Shockwave - Missiles - XXS - T2
+      - Photon - Missiles - XXS - T2
+    - XS
+      - Explosive - Missiles - XS - T2
+      - Heat - Missiles - XS - T2
+      - Superchill - Missiles - XS - T2
+      - Gray Goo - Missiles - XS - T2
+      - EMP - Missiles - XS - T2
+      - Shockwave - Missiles - XS - T2
+      - Photon - Missiles - XS - T2
+    - S
+      - Explosive - Missiles - S - T2
+      - Heat - Missiles - S - T2
+      - Superchill - Missiles - S - T2
+      - Gray Goo - Missiles - S - T2
+      - EMP - Missiles - S - T2
+      - Shockwave - Missiles - S - T2
+      - Photon - Missiles - S - T2
+    - M
+      - Explosive - Missiles - M - T2
+      - Heat - Missiles - M - T2
+      - Superchill - Missiles - M - T2
+      - Gray Goo - Missiles - M - T2
+      - EMP - Missiles - M - T2
+      - Shockwave - Missiles - M - T2
+      - Photon - Missiles - M - T2
+    - L
+      - Explosive - Missiles - L - T2
+      - Heat - Missiles - L - T2
+      - Superchill - Missiles - L - T2
+      - Gray Goo - Missiles - L - T2
+      - EMP - Missiles - L - T2
+      - Shockwave - Missiles - L - T2
+      - Photon - Missiles - L - T2
+    - CAP
+      - Explosive - Missiles - CAP - T2
+      - Heat - Missiles - CAP - T2
+      - Superchill - Missiles - CAP - T2
+      - Gray Goo - Missiles - CAP - T2
+      - EMP - Missiles - CAP - T2
+      - Shockwave - Missiles - CAP - T2
+      - Photon - Missiles - CAP - T2
+    - CMD
+      - Explosive - Missiles - CMD - T2
+      - Heat - Missiles - CMD - T2
+      - Superchill - Missiles - CMD - T2
+      - Gray Goo - Missiles - CMD - T2
+      - EMP - Missiles - CMD - T2
+      - Shockwave - Missiles - CMD - T2
+      - Photon - Missiles - CMD - T2
+    - Class 8
+      - Explosive - Missiles - Class 8 - T2
+      - Heat - Missiles - Class 8 - T2
+      - Superchill - Missiles - Class 8 - T2
+      - Gray Goo - Missiles - Class 8 - T2
+      - EMP - Missiles - Class 8 - T2
+      - Shockwave - Missiles - Class 8 - T2
+      - Photon - Missiles - Class 8 - T2
+    - TTN
+      - Explosive - Missiles - TTN - T2
+      - Heat - Missiles - TTN - T2
+      - Superchill - Missiles - TTN - T2
+      - Gray Goo - Missiles - TTN - T2
+      - EMP - Missiles - TTN - T2
+      - Shockwave - Missiles - TTN - T2
+      - Photon - Missiles - TTN - T2
+  - **T3**
+    - XXXS
+      - Explosive - Missiles - XXXS - T3
+      - Heat - Missiles - XXXS - T3
+      - Superchill - Missiles - XXXS - T3
+      - Gray Goo - Missiles - XXXS - T3
+      - EMP - Missiles - XXXS - T3
+      - Shockwave - Missiles - XXXS - T3
+      - Photon - Missiles - XXXS - T3
+    - XXS
+      - Explosive - Missiles - XXS - T3
+      - Heat - Missiles - XXS - T3
+      - Superchill - Missiles - XXS - T3
+      - Gray Goo - Missiles - XXS - T3
+      - EMP - Missiles - XXS - T3
+      - Shockwave - Missiles - XXS - T3
+      - Photon - Missiles - XXS - T3
+    - XS
+      - Explosive - Missiles - XS - T3
+      - Heat - Missiles - XS - T3
+      - Superchill - Missiles - XS - T3
+      - Gray Goo - Missiles - XS - T3
+      - EMP - Missiles - XS - T3
+      - Shockwave - Missiles - XS - T3
+      - Photon - Missiles - XS - T3
+    - S
+      - Explosive - Missiles - S - T3
+      - Heat - Missiles - S - T3
+      - Superchill - Missiles - S - T3
+      - Gray Goo - Missiles - S - T3
+      - EMP - Missiles - S - T3
+      - Shockwave - Missiles - S - T3
+      - Photon - Missiles - S - T3
+    - M
+      - Explosive - Missiles - M - T3
+      - Heat - Missiles - M - T3
+      - Superchill - Missiles - M - T3
+      - Gray Goo - Missiles - M - T3
+      - EMP - Missiles - M - T3
+      - Shockwave - Missiles - M - T3
+      - Photon - Missiles - M - T3
+    - L
+      - Explosive - Missiles - L - T3
+      - Heat - Missiles - L - T3
+      - Superchill - Missiles - L - T3
+      - Gray Goo - Missiles - L - T3
+      - EMP - Missiles - L - T3
+      - Shockwave - Missiles - L - T3
+      - Photon - Missiles - L - T3
+    - CAP
+      - Explosive - Missiles - CAP - T3
+      - Heat - Missiles - CAP - T3
+      - Superchill - Missiles - CAP - T3
+      - Gray Goo - Missiles - CAP - T3
+      - EMP - Missiles - CAP - T3
+      - Shockwave - Missiles - CAP - T3
+      - Photon - Missiles - CAP - T3
+    - CMD
+      - Explosive - Missiles - CMD - T3
+      - Heat - Missiles - CMD - T3
+      - Superchill - Missiles - CMD - T3
+      - Gray Goo - Missiles - CMD - T3
+      - EMP - Missiles - CMD - T3
+      - Shockwave - Missiles - CMD - T3
+      - Photon - Missiles - CMD - T3
+    - Class 8
+      - Explosive - Missiles - Class 8 - T3
+      - Heat - Missiles - Class 8 - T3
+      - Superchill - Missiles - Class 8 - T3
+      - Gray Goo - Missiles - Class 8 - T3
+      - EMP - Missiles - Class 8 - T3
+      - Shockwave - Missiles - Class 8 - T3
+      - Photon - Missiles - Class 8 - T3
+    - TTN
+      - Explosive - Missiles - TTN - T3
+      - Heat - Missiles - TTN - T3
+      - Superchill - Missiles - TTN - T3
+      - Gray Goo - Missiles - TTN - T3
+      - EMP - Missiles - TTN - T3
+      - Shockwave - Missiles - TTN - T3
+      - Photon - Missiles - TTN - T3
+  - **T4**
+    - XXXS
+      - Explosive - Missiles - XXXS - T4
+      - Heat - Missiles - XXXS - T4
+      - Superchill - Missiles - XXXS - T4
+      - Gray Goo - Missiles - XXXS - T4
+      - EMP - Missiles - XXXS - T4
+      - Shockwave - Missiles - XXXS - T4
+      - Photon - Missiles - XXXS - T4
+    - XXS
+      - Explosive - Missiles - XXS - T4
+      - Heat - Missiles - XXS - T4
+      - Superchill - Missiles - XXS - T4
+      - Gray Goo - Missiles - XXS - T4
+      - EMP - Missiles - XXS - T4
+      - Shockwave - Missiles - XXS - T4
+      - Photon - Missiles - XXS - T4
+    - XS
+      - Explosive - Missiles - XS - T4
+      - Heat - Missiles - XS - T4
+      - Superchill - Missiles - XS - T4
+      - Gray Goo - Missiles - XS - T4
+      - EMP - Missiles - XS - T4
+      - Shockwave - Missiles - XS - T4
+      - Photon - Missiles - XS - T4
+    - S
+      - Explosive - Missiles - S - T4
+      - Heat - Missiles - S - T4
+      - Superchill - Missiles - S - T4
+      - Gray Goo - Missiles - S - T4
+      - EMP - Missiles - S - T4
+      - Shockwave - Missiles - S - T4
+      - Photon - Missiles - S - T4
+    - M
+      - Explosive - Missiles - M - T4
+      - Heat - Missiles - M - T4
+      - Superchill - Missiles - M - T4
+      - Gray Goo - Missiles - M - T4
+      - EMP - Missiles - M - T4
+      - Shockwave - Missiles - M - T4
+      - Photon - Missiles - M - T4
+    - L
+      - Explosive - Missiles - L - T4
+      - Heat - Missiles - L - T4
+      - Superchill - Missiles - L - T4
+      - Gray Goo - Missiles - L - T4
+      - EMP - Missiles - L - T4
+      - Shockwave - Missiles - L - T4
+      - Photon - Missiles - L - T4
+    - CAP
+      - Explosive - Missiles - CAP - T4
+      - Heat - Missiles - CAP - T4
+      - Superchill - Missiles - CAP - T4
+      - Gray Goo - Missiles - CAP - T4
+      - EMP - Missiles - CAP - T4
+      - Shockwave - Missiles - CAP - T4
+      - Photon - Missiles - CAP - T4
+    - CMD
+      - Explosive - Missiles - CMD - T4
+      - Heat - Missiles - CMD - T4
+      - Superchill - Missiles - CMD - T4
+      - Gray Goo - Missiles - CMD - T4
+      - EMP - Missiles - CMD - T4
+      - Shockwave - Missiles - CMD - T4
+      - Photon - Missiles - CMD - T4
+    - Class 8
+      - Explosive - Missiles - Class 8 - T4
+      - Heat - Missiles - Class 8 - T4
+      - Superchill - Missiles - Class 8 - T4
+      - Gray Goo - Missiles - Class 8 - T4
+      - EMP - Missiles - Class 8 - T4
+      - Shockwave - Missiles - Class 8 - T4
+      - Photon - Missiles - Class 8 - T4
+    - TTN
+      - Explosive - Missiles - TTN - T4
+      - Heat - Missiles - TTN - T4
+      - Superchill - Missiles - TTN - T4
+      - Gray Goo - Missiles - TTN - T4
+      - EMP - Missiles - TTN - T4
+      - Shockwave - Missiles - TTN - T4
+      - Photon - Missiles - TTN - T4
+  - **T5**
+    - XXXS
+      - Explosive - Missiles - XXXS - T5
+      - Heat - Missiles - XXXS - T5
+      - Superchill - Missiles - XXXS - T5
+      - Gray Goo - Missiles - XXXS - T5
+      - EMP - Missiles - XXXS - T5
+      - Shockwave - Missiles - XXXS - T5
+      - Photon - Missiles - XXXS - T5
+    - XXS
+      - Explosive - Missiles - XXS - T5
+      - Heat - Missiles - XXS - T5
+      - Superchill - Missiles - XXS - T5
+      - Gray Goo - Missiles - XXS - T5
+      - EMP - Missiles - XXS - T5
+      - Shockwave - Missiles - XXS - T5
+      - Photon - Missiles - XXS - T5
+    - XS
+      - Explosive - Missiles - XS - T5
+      - Heat - Missiles - XS - T5
+      - Superchill - Missiles - XS - T5
+      - Gray Goo - Missiles - XS - T5
+      - EMP - Missiles - XS - T5
+      - Shockwave - Missiles - XS - T5
+      - Photon - Missiles - XS - T5
+    - S
+      - Explosive - Missiles - S - T5
+      - Heat - Missiles - S - T5
+      - Superchill - Missiles - S - T5
+      - Gray Goo - Missiles - S - T5
+      - EMP - Missiles - S - T5
+      - Shockwave - Missiles - S - T5
+      - Photon - Missiles - S - T5
+    - M
+      - Explosive - Missiles - M - T5
+      - Heat - Missiles - M - T5
+      - Superchill - Missiles - M - T5
+      - Gray Goo - Missiles - M - T5
+      - EMP - Missiles - M - T5
+      - Shockwave - Missiles - M - T5
+      - Photon - Missiles - M - T5
+    - L
+      - Explosive - Missiles - L - T5
+      - Heat - Missiles - L - T5
+      - Superchill - Missiles - L - T5
+      - Gray Goo - Missiles - L - T5
+      - EMP - Missiles - L - T5
+      - Shockwave - Missiles - L - T5
+      - Photon - Missiles - L - T5
+    - CAP
+      - Explosive - Missiles - CAP - T5
+      - Heat - Missiles - CAP - T5
+      - Superchill - Missiles - CAP - T5
+      - Gray Goo - Missiles - CAP - T5
+      - EMP - Missiles - CAP - T5
+      - Shockwave - Missiles - CAP - T5
+      - Photon - Missiles - CAP - T5
+    - CMD
+      - Explosive - Missiles - CMD - T5
+      - Heat - Missiles - CMD - T5
+      - Superchill - Missiles - CMD - T5
+      - Gray Goo - Missiles - CMD - T5
+      - EMP - Missiles - CMD - T5
+      - Shockwave - Missiles - CMD - T5
+      - Photon - Missiles - CMD - T5
+    - Class 8
+      - Explosive - Missiles - Class 8 - T5
+      - Heat - Missiles - Class 8 - T5
+      - Superchill - Missiles - Class 8 - T5
+      - Gray Goo - Missiles - Class 8 - T5
+      - EMP - Missiles - Class 8 - T5
+      - Shockwave - Missiles - Class 8 - T5
+      - Photon - Missiles - Class 8 - T5
+    - TTN
+      - Explosive - Missiles - TTN - T5
+      - Heat - Missiles - TTN - T5
+      - Superchill - Missiles - TTN - T5
+      - Gray Goo - Missiles - TTN - T5
+      - EMP - Missiles - TTN - T5
+      - Shockwave - Missiles - TTN - T5
+      - Photon - Missiles - TTN - T5
+## Drones
+  - **Scan** - Drones
+    - Calico Parrot - Drones - Scan
+    - Calico XPL - Drones - Scan
+    - Fimbul ECOS Spybot - Drones - Scan
+  - **Salvage** - Drones
+    - Fimbul BYOS Scrapup - Drones - Salvage
+    - Busan Dust Draw - Drones - Salvage
+    - Pearce D1 - Drones - Salvage
+  - **Rescue** - Drones
+    - Calico Medrone - Drones - Rescue
+  - **Repair** - Drones
+    - VZUS fixif - Drones - Repair
+  - **Mining** - Drones
+    - Armstrong IMP Tink - Drones - Mining
+  - **Freight** - Drones
+    - Armstrong IMP Tote - Drones - Freight
+  - **Combat Kinetic** - Drones
+    - Fimbul Naga - Drones - Combat Kinetic
+    - Pearce Hulltank - Drones - Combat Kinetic
+  - **Combat Energy** - Drones
+    - Pearce Shocktank - Drones - Combat Energy
+    - Fimbul Naga Pew - Drones - Combat Energy
+  - **Combat EMP** - Drones
+    - Fimbul Zap - Drones - Combat EMP
+  - **Combat Superchill** - Drones
+    - Fimbul ECOS Crybot - Drones - Combat Superchill
+  - **Combat Shockwave** - Drones
+    - Opal Womp - Drones - Combat Shockwave
+  - **Combat Gray Goo** - Drones
+    - Rainbow Gu - Drones - Combat Gray Goo
+  - **Combat Heat** - Drones
+    - Tufa Pyra - Drones - Combat Heat

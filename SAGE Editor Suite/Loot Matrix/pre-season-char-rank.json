@@ -1,0 +1,1504 @@
+{
+  "rewardTree": [
+    {
+      "id": 1,
+      "name": "Pre-Season Character Rank",
+      "quantity": 1,
+      "properties": {},
+      "propertyOrder": [],
+      "children": [
+        {
+          "id": 2,
+          "name": "PSCR Level 1",
+          "quantity": 1,
+          "properties": {},
+          "propertyOrder": [],
+          "children": [
+            {
+              "id": 3,
+              "name": "Sole Jettie",
+              "quantity": 1,
+              "properties": {
+                "Category": "Sole Jettie",
+                "Unlocks": "Slot Unlock"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            },
+            {
+              "id": 16,
+              "name": "Sole Jettie",
+              "quantity": 1,
+              "properties": {
+                "Category": "Sole Jettie",
+                "Unlocks": "Ability Unlock",
+                "Tier": "T1"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks",
+                "Tier"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            },
+            {
+              "id": 70,
+              "name": "Ship",
+              "quantity": 1,
+              "properties": {
+                "Unlocks": "Performance Boost",
+                "Tier": "T1",
+                "Class": "XXS",
+                "Category": "Ship"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks",
+                "Class",
+                "Tier"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            }
+          ],
+          "expanded": true,
+          "status": "not started",
+          "nameSource": "Name"
+        },
+        {
+          "id": 7,
+          "name": "PSCR Level 2",
+          "quantity": 1,
+          "properties": {},
+          "propertyOrder": [],
+          "children": [
+            {
+              "id": 8,
+              "name": "Bubbie",
+              "quantity": 1,
+              "properties": {
+                "Category": "Bubbie",
+                "Unlocks": "Slot Unlock"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            },
+            {
+              "id": 18,
+              "name": "Bubbie",
+              "quantity": 1,
+              "properties": {
+                "Category": "Bubbie",
+                "Unlocks": "Ability Unlock",
+                "Tier": "T1"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks",
+                "Tier"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            },
+            {
+              "id": 30,
+              "name": "Weapon",
+              "quantity": 1,
+              "properties": {
+                "Category": "Weapon",
+                "Damage Type": "Kinetic",
+                "Firing Cadences": "Semi-Auto",
+                "Weapon Type": "Rifle",
+                "Unlocks": "Ability Unlock"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks",
+                "Damage Type",
+                "Firing Cadences",
+                "Weapon Type"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            }
+          ],
+          "expanded": true,
+          "status": "not started",
+          "nameSource": "Name"
+        },
+        {
+          "id": 20,
+          "name": "PSCR Level 3",
+          "quantity": 1,
+          "properties": {},
+          "propertyOrder": [],
+          "children": [
+            {
+              "id": 22,
+              "name": "Sole Jettie",
+              "quantity": 1,
+              "properties": {
+                "Category": "Sole Jettie",
+                "Unlocks": "Ability Unlock",
+                "Tier": "T2"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks",
+                "Tier"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            },
+            {
+              "id": 38,
+              "name": "Weapon",
+              "quantity": 1,
+              "properties": {
+                "Category": "Weapon",
+                "Damage Type": "Energy",
+                "Firing Cadences": "Semi-Auto",
+                "Weapon Type": "Pistol",
+                "Unlocks": "Ability Unlock"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks",
+                "Damage Type",
+                "Firing Cadences",
+                "Weapon Type"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            },
+            {
+              "id": 71,
+              "name": "Ship",
+              "quantity": 1,
+              "properties": {
+                "Unlocks": "Performance Boost",
+                "Tier": "T1",
+                "Class": "XS",
+                "Category": "Ship"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks",
+                "Class",
+                "Tier"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            }
+          ],
+          "expanded": true,
+          "status": "not started",
+          "nameSource": "Name"
+        },
+        {
+          "id": 31,
+          "name": "PSCR Level 4",
+          "quantity": 1,
+          "properties": {},
+          "propertyOrder": [],
+          "children": [
+            {
+              "id": 39,
+              "name": "Weapon",
+              "quantity": 1,
+              "properties": {
+                "Category": "Weapon",
+                "Damage Type": "Kinetic",
+                "Firing Cadences": "Semi-Auto",
+                "Weapon Type": "Rifle",
+                "Unlocks": "Ability Unlock"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks",
+                "Damage Type",
+                "Firing Cadences",
+                "Weapon Type"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            },
+            {
+              "id": 33,
+              "name": "Bubbie",
+              "quantity": 1,
+              "properties": {
+                "Category": "Bubbie",
+                "Unlocks": "Ability Unlock",
+                "Tier": "T2"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks",
+                "Tier"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            }
+          ],
+          "expanded": true,
+          "status": "not started",
+          "nameSource": "Name"
+        },
+        {
+          "id": 13,
+          "name": "PSCR Level 5",
+          "quantity": 1,
+          "properties": {},
+          "propertyOrder": [],
+          "children": [
+            {
+              "id": 14,
+              "name": "Palm Jettie",
+              "quantity": 1,
+              "properties": {
+                "Category": "Palm Jettie",
+                "Unlocks": "Slot Unlock"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            },
+            {
+              "id": 17,
+              "name": "Palm Jettie",
+              "quantity": 1,
+              "properties": {
+                "Category": "Palm Jettie",
+                "Unlocks": "Ability Unlock",
+                "Tier": "T1"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks",
+                "Tier"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            },
+            {
+              "id": 43,
+              "name": "Weapon",
+              "quantity": 1,
+              "properties": {
+                "Category": "Weapon",
+                "Damage Type": "Kinetic",
+                "Firing Cadences": "Auto",
+                "Weapon Type": "Rifle",
+                "Unlocks": "Ability Unlock"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks",
+                "Damage Type",
+                "Firing Cadences",
+                "Weapon Type"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            }
+          ],
+          "expanded": true,
+          "status": "not started",
+          "nameSource": "Name"
+        },
+        {
+          "id": 35,
+          "name": "PSCR Level 6",
+          "quantity": 1,
+          "properties": {},
+          "propertyOrder": [],
+          "children": [
+            {
+              "id": 44,
+              "name": "Weapon",
+              "quantity": 1,
+              "properties": {
+                "Category": "Weapon",
+                "Damage Type": "Energy",
+                "Firing Cadences": "Auto",
+                "Weapon Type": "Rifle",
+                "Unlocks": "Ability Unlock"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks",
+                "Damage Type",
+                "Firing Cadences",
+                "Weapon Type"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            },
+            {
+              "id": 72,
+              "name": "Ship",
+              "quantity": 1,
+              "properties": {
+                "Unlocks": "Performance Boost",
+                "Tier": "T2",
+                "Class": "XXS",
+                "Category": "Ship"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks",
+                "Class",
+                "Tier"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            }
+          ],
+          "expanded": true,
+          "status": "not started",
+          "nameSource": "Name"
+        },
+        {
+          "id": 53,
+          "name": "PSCR Level 7",
+          "quantity": 1,
+          "properties": {},
+          "propertyOrder": [],
+          "children": [
+            {
+              "id": 45,
+              "name": "Weapon",
+              "quantity": 1,
+              "properties": {
+                "Category": "Weapon",
+                "Damage Type": "Kinetic",
+                "Firing Cadences": "Semi-Auto",
+                "Weapon Type": "Shotgun",
+                "Unlocks": "Ability Unlock"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks",
+                "Damage Type",
+                "Firing Cadences",
+                "Weapon Type"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            }
+          ],
+          "expanded": true,
+          "status": "not started",
+          "nameSource": "Name"
+        },
+        {
+          "id": 55,
+          "name": "PSCR Level 8",
+          "quantity": 1,
+          "properties": {},
+          "propertyOrder": [],
+          "children": [
+            {
+              "id": 73,
+              "name": "Ship",
+              "quantity": 1,
+              "properties": {
+                "Unlocks": "Performance Boost",
+                "Tier": "T2",
+                "Class": "XS",
+                "Category": "Ship"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks",
+                "Class",
+                "Tier"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            }
+          ],
+          "expanded": true,
+          "status": "not started",
+          "nameSource": "Name"
+        },
+        {
+          "id": 56,
+          "name": "PSCR Level 9",
+          "quantity": 1,
+          "properties": {},
+          "propertyOrder": [],
+          "children": [
+            {
+              "id": 52,
+              "name": "Weapon",
+              "quantity": 1,
+              "properties": {
+                "Category": "Weapon",
+                "Damage Type": "Kinetic",
+                "Firing Cadences": "Semi-Auto",
+                "Weapon Type": "Sniper",
+                "Unlocks": "Ability Unlock"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks",
+                "Damage Type",
+                "Firing Cadences",
+                "Weapon Type"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            }
+          ],
+          "expanded": true,
+          "status": "not started",
+          "nameSource": "Name"
+        },
+        {
+          "id": 41,
+          "name": "PSCR Level 10",
+          "quantity": 1,
+          "properties": {},
+          "propertyOrder": [],
+          "children": [
+            {
+              "id": 40,
+              "name": "Sole Jettie",
+              "quantity": 1,
+              "properties": {
+                "Category": "Sole Jettie",
+                "Unlocks": "Ability Unlock",
+                "Tier": "T3"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks",
+                "Tier"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            },
+            {
+              "id": 74,
+              "name": "Ship",
+              "quantity": 1,
+              "properties": {
+                "Unlocks": "Performance Boost",
+                "Tier": "T3",
+                "Class": "XXS",
+                "Category": "Ship"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks",
+                "Class",
+                "Tier"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            }
+          ],
+          "expanded": true,
+          "status": "not started",
+          "nameSource": "Name"
+        },
+        {
+          "id": 57,
+          "name": "PSCR Level 11",
+          "quantity": 1,
+          "properties": {},
+          "propertyOrder": [],
+          "children": [
+            {
+              "id": 51,
+              "name": "Weapon",
+              "quantity": 1,
+              "properties": {
+                "Category": "Weapon",
+                "Damage Type": "Shockwave",
+                "Firing Cadences": "Charge",
+                "Unlocks": "Ability Unlock",
+                "Weapon Type": "Pistol"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks",
+                "Damage Type",
+                "Firing Cadences",
+                "Weapon Type"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            }
+          ],
+          "expanded": true,
+          "status": "not started",
+          "nameSource": "Name"
+        },
+        {
+          "id": 58,
+          "name": "PSCR Level 12",
+          "quantity": 1,
+          "properties": {},
+          "propertyOrder": [],
+          "children": [
+            {
+              "id": 67,
+              "name": "Palm Jettie",
+              "quantity": 1,
+              "properties": {
+                "Category": "Palm Jettie",
+                "Unlocks": "Ability Unlock",
+                "Tier": "T2"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks",
+                "Tier"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            },
+            {
+              "id": 75,
+              "name": "Ship",
+              "quantity": 1,
+              "properties": {
+                "Unlocks": "Performance Boost",
+                "Tier": "T3",
+                "Class": "XS",
+                "Category": "Ship"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks",
+                "Class",
+                "Tier"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            }
+          ],
+          "expanded": true,
+          "status": "not started",
+          "nameSource": "Name"
+        },
+        {
+          "id": 59,
+          "name": "PSCR Level 13",
+          "quantity": 1,
+          "properties": {},
+          "propertyOrder": [],
+          "children": [
+            {
+              "id": 48,
+              "name": "Weapon",
+              "quantity": 1,
+              "properties": {
+                "Category": "Weapon",
+                "Damage Type": "Kinetic",
+                "Firing Cadences": "Charge",
+                "Unlocks": "Ability Unlock",
+                "Weapon Type": "Melee"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks",
+                "Damage Type",
+                "Firing Cadences",
+                "Weapon Type"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            }
+          ],
+          "expanded": true,
+          "status": "not started",
+          "nameSource": "Name"
+        },
+        {
+          "id": 60,
+          "name": "PSCR Level 14",
+          "quantity": 1,
+          "properties": {},
+          "propertyOrder": [],
+          "children": [
+            {
+              "id": 76,
+              "name": "Ship",
+              "quantity": 1,
+              "properties": {
+                "Unlocks": "Performance Boost",
+                "Tier": "T4",
+                "Class": "XXS",
+                "Category": "Ship"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks",
+                "Class",
+                "Tier"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            }
+          ],
+          "expanded": true,
+          "status": "not started",
+          "nameSource": "Name"
+        },
+        {
+          "id": 61,
+          "name": "PSCR Level 15",
+          "quantity": 1,
+          "properties": {},
+          "propertyOrder": [],
+          "children": [
+            {
+              "id": 69,
+              "name": "Bubbie",
+              "quantity": 1,
+              "properties": {
+                "Category": "Bubbie",
+                "Unlocks": "Ability Unlock",
+                "Tier": "T3"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks",
+                "Tier"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            }
+          ],
+          "expanded": true,
+          "status": "not started",
+          "nameSource": "Name"
+        },
+        {
+          "id": 62,
+          "name": "PSCR Level 16",
+          "quantity": 1,
+          "properties": {},
+          "propertyOrder": [],
+          "children": [
+            {
+              "id": 77,
+              "name": "Ship",
+              "quantity": 1,
+              "properties": {
+                "Unlocks": "Performance Boost",
+                "Tier": "T4",
+                "Class": "XS",
+                "Category": "Ship"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks",
+                "Class",
+                "Tier"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            }
+          ],
+          "expanded": true,
+          "status": "not started",
+          "nameSource": "Name"
+        },
+        {
+          "id": 63,
+          "name": "PSCR Level 17",
+          "quantity": 1,
+          "properties": {},
+          "propertyOrder": [],
+          "children": [
+            {
+              "id": 49,
+              "name": "Weapon",
+              "quantity": 1,
+              "properties": {
+                "Category": "Weapon",
+                "Damage Type": "Kinetic",
+                "Firing Cadences": "Charge",
+                "Unlocks": "Ability Unlock",
+                "Weapon Type": "Railgun"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks",
+                "Damage Type",
+                "Firing Cadences",
+                "Weapon Type"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            }
+          ],
+          "expanded": true,
+          "status": "not started",
+          "nameSource": "Name"
+        },
+        {
+          "id": 64,
+          "name": "PSCR Level 18",
+          "quantity": 1,
+          "properties": {},
+          "propertyOrder": [],
+          "children": [
+            {
+              "id": 46,
+              "name": "Weapon",
+              "quantity": 1,
+              "properties": {
+                "Category": "Weapon",
+                "Damage Type": "Explosive",
+                "Firing Cadences": "Semi-Auto",
+                "Unlocks": "Ability Unlock",
+                "Weapon Parts": "Rocket Launcher"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks",
+                "Damage Type",
+                "Firing Cadences",
+                "Weapon Parts"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            },
+            {
+              "id": 78,
+              "name": "Ship",
+              "quantity": 1,
+              "properties": {
+                "Unlocks": "Performance Boost",
+                "Tier": "T5",
+                "Class": "XXS",
+                "Category": "Ship"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks",
+                "Class",
+                "Tier"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            }
+          ],
+          "expanded": true,
+          "status": "not started",
+          "nameSource": "Name"
+        },
+        {
+          "id": 65,
+          "name": "PSCR Level 19",
+          "quantity": 1,
+          "properties": {},
+          "propertyOrder": [],
+          "children": [
+            {
+              "id": 50,
+              "name": "Weapon",
+              "quantity": 1,
+              "properties": {
+                "Category": "Weapon",
+                "Damage Type": "Shockwave",
+                "Firing Cadences": "Charge",
+                "Unlocks": "Ability Unlock",
+                "Weapon Type": "Rifle"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks",
+                "Damage Type",
+                "Firing Cadences",
+                "Weapon Type"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            }
+          ],
+          "expanded": true,
+          "status": "not started",
+          "nameSource": "Name"
+        },
+        {
+          "id": 66,
+          "name": "PSCR Level 20",
+          "quantity": 1,
+          "properties": {},
+          "propertyOrder": [],
+          "children": [
+            {
+              "id": 68,
+              "name": "Palm Jettie",
+              "quantity": 1,
+              "properties": {
+                "Category": "Palm Jettie",
+                "Unlocks": "Ability Unlock",
+                "Tier": "T3"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks",
+                "Tier"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            },
+            {
+              "id": 47,
+              "name": "Weapon",
+              "quantity": 1,
+              "properties": {
+                "Category": "Weapon",
+                "Damage Type": "Kinetic",
+                "Firing Cadences": "Auto",
+                "Unlocks": "Ability Unlock",
+                "Weapon Type": "Gatling"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks",
+                "Damage Type",
+                "Firing Cadences",
+                "Weapon Type"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            },
+            {
+              "id": 79,
+              "name": "Ship",
+              "quantity": 1,
+              "properties": {
+                "Unlocks": "Performance Boost",
+                "Tier": "T5",
+                "Class": "XS",
+                "Category": "Ship"
+              },
+              "propertyOrder": [
+                "Category",
+                "Unlocks",
+                "Class",
+                "Tier"
+              ],
+              "children": [],
+              "expanded": true,
+              "status": "not started",
+              "nameSource": "Category"
+            }
+          ],
+          "expanded": true,
+          "status": "not started",
+          "nameSource": "Name"
+        }
+      ],
+      "expanded": true,
+      "status": "not started",
+      "nameSource": "Name"
+    }
+  ],
+  "categories": {
+    "Category": [
+      "Drones",
+      "Crew Packs",
+      "Resources",
+      "Trinket",
+      "Charm",
+      "Crew Gear",
+      "Mounts",
+      "Weapon",
+      "Emote",
+      "Crew Skins",
+      "Ship Skins",
+      "Gun Skin",
+      "Poster",
+      "Pet",
+      "Access",
+      "Structure",
+      "Hab Assets",
+      "GAO Land",
+      "Ship Weapons",
+      "Story GN",
+      "Ship Component",
+      "Ship Module",
+      "Crew",
+      "XP",
+      "XP Boost",
+      "Marketplace Fee Reduction",
+      "Career",
+      "Ship",
+      "Weapon Parts",
+      "Pet Emote",
+      "Sole Jettie",
+      "Palm Jettie",
+      "Bubbie"
+    ],
+    "Drones": [
+      "Fimbul Naga",
+      "Pearce Hulltank",
+      "Calico XPL Drone",
+      "",
+      ""
+    ],
+    "Crew Packs": [
+      "Silver",
+      "Gold",
+      "Platinum"
+    ],
+    "Resources": [
+      "Gold",
+      "Platinum",
+      "Diamond",
+      "Black Goo",
+      "Drywater",
+      "R4",
+      "ASTRA",
+      "Toolkits",
+      "Fuel",
+      "Ammunition"
+    ],
+    "Trinket": [
+      "Paizul 1:6 Scale Statue",
+      "Bekalu 1:6 Scale Statue",
+      "Uru Priest 1:6 Scale Statue",
+      "Joni - Heart of Iris 1:6 Scale Statue",
+      "Tigu Bobblehead Trinket",
+      "Mini Flower Pot",
+      "Purple Punaab Bonsai Tree",
+      "Fimbul Airbike Statue",
+      "VZUS solos Statue",
+      "Fimbul Lowbie Statue",
+      "ATLAS Statue",
+      "POLIS Statue"
+    ],
+    "Charm": [
+      "Puri Gun Charm",
+      "Purmuten Gun Charm",
+      "Purmuten II Gun Charm",
+      "Mini Flower Gun Charm",
+      "Ship Charm",
+      "Tigu Gun Charm"
+    ],
+    "Crew Gear": [
+      "Bubbie - Tier 1",
+      "Bubbie - Tier 2",
+      "Bubbie - Tier 3",
+      "Soles Jettie - Tier 1",
+      "Soles Jettie - Tier 2",
+      "Soles Jettie - Tier 3",
+      "Palm Jettie - Tier 1",
+      "Palm Jettie - Tier 2",
+      "Palm Jettie - Tier 3",
+      "Blink Soles",
+      "Slide Soles",
+      "Dash Soles",
+      "Gravity Soles",
+      "Burst Soles",
+      "Dive Palms",
+      "Shock Palms",
+      "Buffer Palms",
+      "Explosive Palms",
+      "Ricochet Palms",
+      "Rampage Palms"
+    ],
+    "Mounts": [
+      "Minky Steer",
+      "Juprian Ox",
+      "Punaab Tigu"
+    ],
+    "Weapon": [
+      "Shotgun Upper",
+      "Gatling Upper",
+      "Kinetic Auto Upper",
+      "Energy Auto Upper",
+      "Longgun Lower",
+      "Handgun Lower",
+      "GAN Universal Grip"
+    ],
+    "Emote": [
+      "Astra EP1"
+    ],
+    "Crew Skins": [
+      "Generic Skin - Astra EP1 - Common",
+      "Generic Skin - Astra EP1 - Uncommon",
+      "Generic Skin - Astra EP1 - Rare",
+      "Generic Skin - Astra EP1 - Epic",
+      "Generic Skin - Astra EP1 - Legendary",
+      "Generic Skin - Astra EP1 - Anomaly"
+    ],
+    "Gun Skin": [
+      "Generic Gun Skin - Astra EP1 - Common",
+      "Generic Gun Skin - Astra EP1 - Uncommon",
+      "Generic Gun Skin - Astra EP1 - Rare",
+      "Generic Gun Skin - Astra EP1 - Epic",
+      "Generic Gun Skin - Astra EP1 - Legendary",
+      "Generic Gun Skin - Astra EP1 - Anomaly"
+    ],
+    "Poster": [
+      "Astra EP1 Poster - Tier 1",
+      "Astra EP1 Poster - Tier 2",
+      "Astra EP1 Poster - Tier 3"
+    ],
+    "Pet": [
+      "Tigu",
+      "Puri",
+      "Purmuten",
+      "Mok"
+    ],
+    "Access": [
+      "Astra EP1 Badge",
+      "Airbike Racer",
+      "solos Racer",
+      "Lowbie Racer",
+      "PS EP0 Badge"
+    ],
+    "Structure": [
+      "Claim Stakes - Tier 1",
+      "Claim Stakes - Tier 2",
+      "Claim Stakes - Tier 3",
+      "Claim Stakes - Tier 4",
+      "Claim Stakes - Tier 5",
+      "Extraction HUB",
+      "Processing HUB",
+      "Storage HUB",
+      "Farm HUB"
+    ],
+    "Hab Assets": [
+      "Cargo Storage - Tier 1",
+      "Cargo Storage - Tier 2",
+      "Cargo Storage - Tier 3",
+      "Hab - Tier 1",
+      "Hab - Tier 2",
+      "Hab - Tier 3",
+      "Crafting Station - XS",
+      "Crafting Station - Small",
+      "Crafting Station - Medium",
+      "Landing Pad - XXS",
+      "Landing Pad - XS",
+      "Hab Interior Paint",
+      "Hab Exterior Paint",
+      "Pet House"
+    ],
+    "GAO Land": [
+      "Plot - Tier 1",
+      "Plot - Tier 2",
+      "Plot - Tier 3"
+    ],
+    "Ship Weapons": [
+      "Fimbul Energy Rapidfire - XXXS",
+      "ECOS Energy Rapidfire - XXXS",
+      "Pearce Energy Beam - XXXS",
+      "Pearce Energy Rapidfire - XXXS",
+      "Opal Energy Rapidfire - XXS",
+      "Pearce Energy Rapidfire - XXS",
+      "Fimbul Energy Rapidfire - XXS",
+      "Tufa Energy Rapidfire - XXS",
+      "Ogrika Energy Beam - XXS",
+      "BYOS Energy Rapidfire - XXS",
+      "Busan Energy Rapidfire - XXS",
+      "Calico Energy Rapidfire - XXS",
+      "VZUS Energy Rapidfire - XXS",
+      "ECOS Energy Rapidfire - XXS",
+      "Ogrika Energy Kinetic Rapidfire - XXS",
+      "Calico Energy Rapidfire - XS",
+      "ECOS Energy Rapidfire - XS",
+      "Calico Kinetic Rapidfire - XS",
+      "Fimbul Energy Rapidfire - XS",
+      "Tufa Energy Rapidfire - XS",
+      "Opal Energy Rapidfire - XS",
+      "Pearce Energy Rapidfire - XS",
+      "Pearce Energy Beam - XS",
+      "Ogrika Energy Beam - XS",
+      "Ogrika Energy Rapidfire - XS",
+      "Busan Energy Rapidfire - S",
+      "Ogrika Energy Rapidfire - S",
+      "BYOS Energy Rapidfire - S",
+      "Opal Energy Rapidfire - S",
+      "Fimbul Kinetic Rapidfire - S",
+      "Fimbul Energy Rapidfire - S",
+      "Ogrika Energy Beam - S",
+      "Tufa Energy Rapidfire - S",
+      "Pearce Kinetic Rapidfire - S",
+      "Pearce Energy Rapidfire - S",
+      "Ogrika Energy Kinetic Rapidfire - S",
+      "Rainbow Energy Rapidfire - M",
+      "VZUS Energy Beam - M",
+      "VZUS Energy Beam - L",
+      "Ogrika Energy Rapidfire - L",
+      "Pearce Energy Beam - L",
+      "Calico Energy Rapidfire - L",
+      "Vzus Energy Beam - CPT",
+      "Pearce Energy Beam - CMD"
+    ],
+    "Story GN": [
+      "Exclusive CORE Book One - Final Episode",
+      "Exclusive Book Two - Episode 1 Cover",
+      "Exclusive Book Three - Episode 1 Cover"
+    ],
+    "Ship Component": [
+      "Shield Generator",
+      "Maneuvering Thrusters",
+      "Power Core",
+      "Subwarp Engine",
+      "Warp Drive",
+      "Scanner Array",
+      "Tractor Beam",
+      "Kinetic Rapidfire",
+      "Heat Sink",
+      "Hull Reinforcement"
+    ],
+    "Tier": [
+      "T0",
+      "T1",
+      "T2",
+      "T3",
+      "T4",
+      "T5",
+      "T6",
+      "Exotic"
+    ],
+    "Rarity": [
+      "Common",
+      "Uncommon",
+      "Rare",
+      "Epic",
+      "Legendary",
+      "Anomaly"
+    ],
+    "Class": [
+      "XXS",
+      "XS",
+      "S",
+      "M",
+      "L",
+      "CAP",
+      "CMD",
+      "Class 8",
+      "TTN"
+    ],
+    "Item Type": [
+      "Skin",
+      "Equipment",
+      "Resource",
+      "Crew",
+      "Ship",
+      "Misc",
+      "Charm"
+    ],
+    "Ships": [
+      "Fimbul Airbike",
+      "Pearce X4",
+      "Opal Jet",
+      "VZUS solos",
+      "Ogrika Ruch",
+      "Busan Pulse",
+      "Fimbul ECOS Unibomba",
+      "Tufa Spark",
+      "Opal Jetjet",
+      "Fimbul Airbike EX",
+      "Fimbul Lowbie",
+      "Ogrika Niruch",
+      "Pearce X5",
+      "Calico Scud",
+      "Calico Maxhog",
+      "Fimbul Chickun",
+      "Busan EFAM",
+      "XXS Only",
+      "XS Only",
+      "ANY"
+    ],
+    "Mastery (Career in SAGE)": [
+      "Combat",
+      "Pilot",
+      "Trader",
+      "Jettie",
+      "Bubbie",
+      "Pistol",
+      "Rifles",
+      "Shotguns",
+      "Heavy Weapon",
+      "Explosives",
+      "Sniper",
+      "Melee",
+      "ANY"
+    ],
+    "Weapon (Mastery)": [
+      "Kinetic Auto Rifle",
+      "Energy Auto Rifle",
+      "Shockwave Auto Rifle",
+      "Gray Goo Semi-Auto Pistol",
+      "Kinetic Scout Rifle",
+      "Kinetic Shotgun",
+      "Kinetic Gatling Gun",
+      "Kinetic Sniper Rifle",
+      "Explosive Rocket Launcher",
+      "Kinetic Semi-Auto Pistol",
+      "Energy Semi-Auto Pistol",
+      "Shockwave Charge Pistol",
+      "Gray Goo Semi-Auto Pistol",
+      "Kinetic/Energy Railgun",
+      "Heat Beam Rifle/Pistol",
+      "Super Chill Rifle/Pistol",
+      "EMP Rifle/Pistol",
+      "Photon Special Heavy Weapon",
+      "ANY"
+    ],
+    "Challenge (Various XP Per)": [
+      "[PS] Episode 0",
+      "[PS] Episode 1",
+      "[PS] Episode 2",
+      "[PS] Episode 3",
+      "[S0] Episode 0",
+      "[S0] Episode 1",
+      "[S0] Episode 2",
+      "[S0] Episode 3",
+      "[S0] Episode 4",
+      "[S0] Episode 5",
+      "ANY"
+    ],
+    "Loot Drop (Goo+Sand)": [
+      "Goo Loot",
+      "Other Routes"
+    ],
+    "Species": [
+      "Human",
+      "Sogmian",
+      "Mierese",
+      "Profound Punaab",
+      "High Punaab",
+      "Photoli",
+      "Tufa",
+      "Ustur"
+    ],
+    "Gender": [
+      "Male",
+      "Female",
+      "Body 1",
+      "Body 2",
+      "N/A"
+    ],
+    "Mastery Min Level": [
+      "Common",
+      "Uncommon",
+      "Rare",
+      "Epic",
+      "Legendary",
+      "Anomaly"
+    ],
+    "Equipment": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20"
+    ],
+    "Ship Module": [
+      "Fuel Module"
+    ],
+    "Crew": [
+      "Crew"
+    ],
+    "XP": [
+      "XP"
+    ],
+    "XP Boost": [
+      "1% per day",
+      "5% per day",
+      "10% per day",
+      "15% per day",
+      "20% per day",
+      "25% per day",
+      "50% per day",
+      "100% per day"
+    ],
+    "Skin Episode": [
+      "Astra EP1",
+      "PS EP0"
+    ],
+    "Fee Reduction": [
+      "0.25%",
+      "0.5%",
+      "0.75%",
+      "1%",
+      "1.25%",
+      "1.5%",
+      "1.75%",
+      "2%",
+      "2.25%",
+      "2.5%"
+    ],
+    "Career": [
+      "Racer",
+      "Combat",
+      "Miner",
+      "Pirate"
+    ],
+    "Weapon Parts": [
+      "Scope",
+      "Stock",
+      "Grip",
+      "Cheek Riser",
+      "Suppressor",
+      "Barrel Ext",
+      "Tactical Light",
+      "Kinetic Upper",
+      "Energy Upper",
+      "Shockwave Upper",
+      "Gray Goo Upper",
+      "EMP Upper",
+      "Heat Beam Upper",
+      "Superchill Upper",
+      "Explosive Upper",
+      "Photon Upper",
+      "Frame",
+      "Rifle Upper",
+      "Shotgun Upper",
+      "Sniper Upper",
+      "Gatling Upper",
+      "Railgun",
+      "Rocket Launcher",
+      "Charm",
+      "Kinetic Scout Upper"
+    ],
+    "Damage Type": [
+      "Kinetic",
+      "Energy",
+      "Shockwave",
+      "Gray Goo",
+      "EMP",
+      "Heat Beam",
+      "Superchill",
+      "Explosive",
+      "Photon"
+    ],
+    "Weapon Type": [
+      "Pistol",
+      "Rifle",
+      "Shotgun",
+      "Sniper",
+      "Railgun",
+      "Launcher",
+      "Gatling",
+      "Melee"
+    ],
+    "Firing Cadences": [
+      "Semi-Auto",
+      "Auto",
+      "Charge",
+      "Burst"
+    ],
+    "Cosmetics": [
+      "Skins",
+      "Charms",
+      "Badge Pins"
+    ],
+    "Unlocks": [
+      "Slot Unlock",
+      "Ability Unlock",
+      "Performance Boost"
+    ]
+  },
+  "nextId": 80
+}

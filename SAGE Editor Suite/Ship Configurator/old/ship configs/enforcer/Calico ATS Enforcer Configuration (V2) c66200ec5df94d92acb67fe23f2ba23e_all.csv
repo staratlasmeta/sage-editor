@@ -1,0 +1,25 @@
+﻿Asset,Type,Subtype,Config,Class,Qty,Ship Name
+Navigator (https://www.notion.so/Navigator-12b110423c754524a11c3e0bdef50f5c?pvs=21),Crew,,,,1,Calico ATS Enforcer
+Pilot (https://www.notion.so/Pilot-27d1096841ce418dbb935215ddf2e60b?pvs=21),Crew,,,,1,Calico ATS Enforcer
+Flight Station (https://www.notion.so/Flight-Station-10ca52fc4d6c4f0a9718139127036fcf?pvs=21),Station,,,,2,Calico ATS Enforcer
+Power Core (https://www.notion.so/Power-Core-fec1491dcb4b4c849f07de274513a992?pvs=21),Component,Core,,Medium,1,Calico ATS Enforcer
+Warp Drive (https://www.notion.so/Warp-Drive-dd8657c0b3d047da98782551469b61a2?pvs=21),Component,Core,,Medium,1,Calico ATS Enforcer
+Subwarp Engine (https://www.notion.so/Subwarp-Engine-c3fbf18af39048afb1dcec4a3b8ec14d?pvs=21),Component,Core,,Medium,1,Calico ATS Enforcer
+Maneuvering Thrusters (https://www.notion.so/Maneuvering-Thrusters-26f4163fe70a480fbbfb28bf2346e2ac?pvs=21),Component,Core,,Medium,1,Calico ATS Enforcer
+Heat Sink (https://www.notion.so/Heat-Sink-9a2ef32ff8014683b7c02b4856ba14ce?pvs=21),Component,Core,,Medium,1,Calico ATS Enforcer
+Shield Generator (https://www.notion.so/Shield-Generator-22ff6250d678461da38ad5adee5234e9?pvs=21),Component,Core,,Medium,1,Calico ATS Enforcer
+Scanner Array (https://www.notion.so/Scanner-Array-7ff97074be804fbbbe57c465e952d9f2?pvs=21),Component,Core,,Medium,1,Calico ATS Enforcer
+Tractor Beam (https://www.notion.so/Tractor-Beam-a53cadac3f5543b09057327e01ec30c6?pvs=21),Component,Core,,Medium,1,Calico ATS Enforcer
+Hull Reinforcement (https://www.notion.so/Hull-Reinforcement-187f8583d7374ce3a191be8165a87ed9?pvs=21),Component,Core,,Medium,1,Calico ATS Enforcer
+Fixed Hardpoint (https://www.notion.so/Fixed-Hardpoint-c8ac7684ffe14d53a34fbae51e2f4aa5?pvs=21),Component,Combat,,Capital,1,Calico ATS Enforcer
+Missile Bay (https://www.notion.so/Missile-Bay-0b53fb061c8143b5b6c1d9ce6c98c4c0?pvs=21),Component,Combat,,XX-Small,8,Calico ATS Enforcer
+Missile Bay (https://www.notion.so/Missile-Bay-0b53fb061c8143b5b6c1d9ce6c98c4c0?pvs=21),Component,Combat,,XXX-Small,16,Calico ATS Enforcer
+Countermeasure System (https://www.notion.so/Countermeasure-System-abc89ea959094c7ca59956d4fede2b6b?pvs=21),Component,Combat,,Medium,3,Calico ATS Enforcer
+Ammo Module (https://www.notion.so/Ammo-Module-ca0afaffdcf046f3b7ffeb9936fbdf9a?pvs=21),Module,Swappable,Detail,Medium,2,Calico ATS Enforcer
+Fuel Module (https://www.notion.so/Fuel-Module-120259914f1a4377bad3b7ffd3f42c9e?pvs=21),Module,Swappable,Detail,Medium,1,Calico ATS Enforcer
+Cargo Module (https://www.notion.so/Cargo-Module-790ddec5d1e4449494a5274787f043fa?pvs=21),Module,Swappable,Detail,Medium,1,Calico ATS Enforcer
+Bridge/Cockpit (https://www.notion.so/Bridge-Cockpit-58c0cce9dacd4c7db88eb19b790d9e07?pvs=21),Interior,Standard,Room,X-Small,1,Calico ATS Enforcer
+Lift (https://www.notion.so/Lift-bb50cf0ec7584344bbbad5728bc2cf74?pvs=21),Interior,Standard,Detail,Medium,1,Calico ATS Enforcer
+Escape Pods (https://www.notion.so/Escape-Pods-d4474c589707419dbbf5cbaf68209923?pvs=21),Interior,Standard,Detail,Medium,2,Calico ATS Enforcer
+Cargo Hold (https://www.notion.so/Cargo-Hold-dbb8e39c2c1f460c80fee2bd7921fb49?pvs=21),Interior,Standard,Detail,Small,1,Calico ATS Enforcer
+Armory (https://www.notion.so/Armory-12653f39dd4043f2bc1c4bfc9f9b7bf6?pvs=21),Interior,Functional,Detail,X-Small,1,Calico ATS Enforcer

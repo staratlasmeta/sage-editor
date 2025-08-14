@@ -1,0 +1,46 @@
+Category,Drones,Crew Packs,Resources,Trinket,Charm,Crew Gear,Mounts,Weapon,Emote,Crew Skins,Gun Skin,Poster,Pet,Access,Structure,Hab Assets,GAO Land,Ship Weapons,Story GN,Ship Component,Tier,Rarity,Class,Item Type,Ships,Mastery (Career in SAGE),Weapon (Mastery),Challenge (Various XP Per),Loot Drop (Goo+Sand),Species,Gender,Mastery Min Level,Equipment,Crew,XP,XP Boost,Skin Episode,Fee Reduction,Career,Weapon Parts,Damage Type,Weapon Type,Firing Cadences,Cosmetics,Manufacturer,Countermeasure,Ingredients,Ship Modules,Platform,Bubbies,Sole Jetties,Palm Jetties
+Drones,Fimbul Naga,Silver,Gold,Paizul 1:6 Scale Statue,Puri Gun Charm,Bubbie - Tier 1,Minky Steer,Shotgun Upper,Astra EP1,Generic Skin - Astra EP1 - Common,Generic Gun Skin - Astra EP1 - Common,Astra EP1 Poster - Tier 1,Tigu,Astra EP1 Badge,Claim Stakes - Tier 1,Cargo Storage,Plot - Tier 1,Fimbul Energy Rapidfire - XXXS,Exclusive CORE Book One - Final Episode,Shield Generator,T0,Common,XXS,Skin,Fimbul Airbike,Combat,Kinetic Auto Rifle,[PS] Episode 0,Goo Loot,Human,Male,Common,1,Crew,XP,1% per day,Astra EP1,0.25%,Racer,Scope,Kinetic,Pistol,Semi-Auto,Skins,Calico,Flare,Kinetic Payload Kit,Cargo Module,SAGE Browser,Bubbie,Sole Jettie,Palm Jettie
+Crew Packs,Pearce Hulltank,Gold,Platinum,Bekalu 1:6 Scale Statue,Purmuten Gun Charm,Bubbie - Tier 2,Juprian Ox,Gatling Upper,,Generic Skin - Astra EP1 - Uncommon,Generic Gun Skin - Astra EP1 - Uncommon,Astra EP1 Poster - Tier 2,Puri,Airbike Racer,Claim Stakes - Tier 2,Hab,Plot - Tier 2,ECOS Energy Rapidfire - XXXS,Exclusive Book Two - Episode 1 Cover,Maneuvering Thrusters,T1,Uncommon,XS,Equipment,Pearce X4,Pilot,Energy Auto Rifle,[PS] Episode 1,Other Routes,Sogmian,Female,Uncommon,2,,,5% per day,PS EP0,0.5%,Combat,Stock,Energy,Rifle,Auto,Charms,Ogrika,Fire Suppressor,Energy Payload Kit,Fuel Module,Unreal,,Blink Soles,Dive Palms
+Resources,Calico XPL Drone,Platinum,Diamond,Uru Priest 1:6 Scale Statue,Purmuten II Gun Charm,Bubbie - Tier 3,Punaab Tigu,Kinetic Auto Upper,,Generic Skin - Astra EP1 - Rare,Generic Gun Skin - Astra EP1 - Rare,Astra EP1 Poster - Tier 3,Purmuten,solos Racer,Claim Stakes - Tier 3,Crafting Station,Plot - Tier 3,Pearce Energy Beam - XXXS,Exclusive Book Three - Episode 1 Cover,Power Core,T2,Rare,S,Resource,Opal Jet,Trader,Shockwave Auto Rifle,[PS] Episode 2,,Mierese,Body 1,Rare,3,,,10% per day,,0.75%,Miner,Grip,Shockwave,Shotgun,Charge,Badge Pins,Opal,Warming Plates,EMP Payload Kit,Ammo Module,Fleet Command,,Slide Soles,Shock Palms
+Trinket,,,Black Goo,Joni - Heart of Iris 1:6 Scale Statue,Mini Flower Gun Charm,Soles Jettie - Tier 1,,Energy Auto Upper,,Generic Skin - Astra EP1 - Epic,Generic Gun Skin - Astra EP1 - Epic,,Mok,Lowbie Racer,Claim Stakes - Tier 4,Landing Pad,,Pearce Energy Rapidfire - XXXS,,Subwarp Engine,T3,Epic,M,Crew,VZUS solos,Jettie,Gray Goo Semi-Auto Pistol,[PS] Episode 3,,Profound Punaab,Body 2,Epic,4,,,15% per day,,1%,Pirate,Cheek Riser,Gray Goo,Sniper,Burst,,VZUS,Healing Nanobots,Superchill Payload Kit,Passenger Module,Mobile Tablet,,Dash Soles,Buffer Palms
+Charm,,,Drywater,Tigu Bobblehead Trinket,Ship Charm,Soles Jettie - Tier 2,,Longgun Lower,,Generic Skin - Astra EP1 - Legendary,Generic Gun Skin - Astra EP1 - Legendary,,,PS EP0 Badge,Claim Stakes - Tier 5,Hab Interior Paint,,Opal Energy Rapidfire - XXS,,Warp Drive,T4,Legendary,L,Ship,Ogrika Ruch,Bubbie,Kinetic Scout Rifle,[S0] Episode 0,,High Punaab,N/A,Legendary,5,,,20% per day,,1.25%,,Suppressor,EMP,Railgun,Rapidfire,,Pearce,Energy Capacitor,Shockwave Payload Kit,,Mobile Phone,,Gravity Soles,Explosive Palms
+Crew Gear,,,R4,Mini Flower Pot,Tigu Gun Charm,Soles Jettie - Tier 3,,Handgun Lower,,Generic Skin - Astra EP1 - Anomaly,Generic Gun Skin - Astra EP1 - Anomaly,,,,Extraction HUB,Hab Exterior Paint,,Pearce Energy Rapidfire - XXS,,Scanner Array,T5,Anomaly,CAP,Misc,Busan Pulse,Pistol,Kinetic Shotgun,[S0] Episode 1,,Photoli,,Anomaly,6,,,25% per day,,1.5%,,Barrel Ext,Heat,Launcher,Beam,,Fimbul,Decoy,Gray Goo Payload Kit,,Console,,Burst Soles,Ricochet Palms
+Mounts,,,ASTRA,Purple Punaab Bonsai Tree,,Palm Jettie - Tier 1,,GAN Universal Grip,,,,,,,Processing HUB,Pet House,,Fimbul Energy Rapidfire - XXS,,Tractor Beam,T6,,CMD,Charm,Fimbul ECOS Unibomba,Rifles,Kinetic Gatling Gun,[S0] Episode 2,,Tufa,,,7,,,50% per day,,1.75%,,Tactical Light,Superchill,Gatling,Cannon,,Rainbow,Mine,Heat Payload Kit,,,,,Rampage Palms
+Weapon,,,Toolkits,Fimbul Airbike Statue,,Palm Jettie - Tier 2,,,,,,,,,Storage HUB,,,Tufa Energy Rapidfire - XXS,,Kinetic Rapidfire,Exotic,,Class 8,,Tufa Spark,Shotguns,Kinetic Sniper Rifle,[S0] Episode 3,,Ustur,,,8,,,100% per day,,2%,,Kinetic Upper,Explosive,,Bomb,,Tufa,Negative REM Plating,Explosive Payload Kit,,,,,Takedown Palms
+Emote,,,Fuel,VZUS solos Statue,,Palm Jettie - Tier 3,,,,,,,,,Farm HUB,,,Ogrika Energy Beam - XXS,,Heat Sink,,,TTN,,Opal Jetjet,Heavy Weapon,Explosive Rocket Launcher,[S0] Episode 4,,,,,9,,,,,2.25%,,Energy Upper,Photon,,Explosive,,Fimbul BYOS,,Photon Payload Kit,,,,,
+Crew Skins,,,Ammunition,Fimbul Lowbie Statue,,Blink Soles,,,,,,,,,,,,BYOS Energy Rapidfire - XXS,,Hull Reinforcement,,,XXXS,,Fimbul Airbike EX,Explosives,Kinetic Semi-Auto Pistol,[S0] Episode 5,,,,,10,,,,,2.5%,,Shockwave Upper,Terrabomb,,Mine,,Fimbul ECOS,,Rapidfire Controller,,,,,
+Ship Skins,,,,ATLAS Statue,,Slide Soles,,,,,,,,,,,,Busan Energy Rapidfire - XXS,,Repair Rig,,,,,Fimbul Lowbie,Sniper,Energy Semi-Auto Pistol,ANY,,,,,11,,,,,,,Gray Goo Upper,,,Missile,,Floydline,,Cannon Breech,,,,,
+Gun Skin,,,,POLIS Statue,,Dash Soles,,,,,,,,,,,,Calico Energy Rapidfire - XXS,,Refuel Rig,,,,,Ogrika Niruch,Melee,Shockwave Charge Pistol,,,,,,12,,,,,,,EMP Upper,,,Countermeasure,,,,Scatterfire Controller,,,,,
+Poster,,,,,,Gravity Soles,,,,,,,,,,,,VZUS Energy Rapidfire - XXS,,Salvage Rig,,,,,Pearce X5,ANY,Gray Goo Semi-Auto Pistol,,,,,,13,,,,,,,Heat Beam Upper,,,Scatterfire,,,,Burst Actuator,,,,,
+Pet,,,,,,Burst Soles,,,,,,,,,,,,ECOS Energy Rapidfire - XXS,,Mining Rig,,,,,Calico Scud,,Kinetic/Energy Railgun,,,,,,14,,,,,,,Superchill Upper,,,,,,,Beam Focusing Array,,,,,
+Access,,,,,,Dive Palms,,,,,,,,,,,,Ogrika Energy Kinetic Rapidfire - XXS,,Tow Rig,,,,,Calico Maxhog,,Heat Beam Rifle/Pistol,,,,,,15,,,,,,,Explosive Upper,,,,,,,Missile Guidance Core,,,,,
+Structure,,,,,,Shock Palms,,,,,,,,,,,,Calico Energy Rapidfire - XS,,Missile Bay,,,,,Fimbul Chickun,,Super Chill Rifle/Pistol,,,,,,16,,,,,,,Photon Upper,,,,,,,Charge Capacitor,,,,,
+Hab Assets,,,,,,Buffer Palms,,,,,,,,,,,,ECOS Energy Rapidfire - XS,,Bomb Bay,,,,,Busan EFAM,,EMP Rifle/Pistol,,,,,,17,,,,,,,Frame,,,,,,,,,,,,
+GAO Land,,,,,,Explosive Palms,,,,,,,,,,,,Calico Kinetic Rapidfire - XS,,Drone Port,,,,,XXS Only,,Photon Special Heavy Weapon,,,,,,18,,,,,,,Rifle Upper,,,,,,,,,,,,
+Ship Weapons,,,,,,Ricochet Palms,,,,,,,,,,,,Fimbul Energy Rapidfire - XS,,,,,,,XS Only,,ANY,,,,,,19,,,,,,,Shotgun Upper,,,,,,,,,,,,
+Story GN,,,,,,Rampage Palms,,,,,,,,,,,,Tufa Energy Rapidfire - XS,,,,,,,ANY,,,,,,,,20,,,,,,,Sniper Upper,,,,,,,,,,,,
+Ship Component,,,,,,,,,,,,,,,,,,Opal Energy Rapidfire - XS,,,,,,,,,,,,,,,,,,,,,,Gatling Upper,,,,,,,,,,,,
+Ship Module,,,,,,,,,,,,,,,,,,Pearce Energy Rapidfire - XS,,,,,,,,,,,,,,,,,,,,,,Railgun,,,,,,,,,,,,
+Crew,,,,,,,,,,,,,,,,,,Pearce Energy Beam - XS,,,,,,,,,,,,,,,,,,,,,,Rocket Launcher,,,,,,,,,,,,
+XP,,,,,,,,,,,,,,,,,,Ogrika Energy Beam - XS,,,,,,,,,,,,,,,,,,,,,,Charm,,,,,,,,,,,,
+XP Boost,,,,,,,,,,,,,,,,,,Ogrika Energy Rapidfire - XS,,,,,,,,,,,,,,,,,,,,,,Kinetic Scout Upper,,,,,,,,,,,,
+Marketplace Fee Reduction,,,,,,,,,,,,,,,,,,Busan Energy Rapidfire - S,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Career,,,,,,,,,,,,,,,,,,Ogrika Energy Rapidfire - S,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Ship,,,,,,,,,,,,,,,,,,BYOS Energy Rapidfire - S,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Weapon Parts,,,,,,,,,,,,,,,,,,Opal Energy Rapidfire - S,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Pet Emote,,,,,,,,,,,,,,,,,,Fimbul Kinetic Rapidfire - S,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Missiles,,,,,,,,,,,,,,,,,,Fimbul Energy Rapidfire - S,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Bombs,,,,,,,,,,,,,,,,,,Ogrika Energy Beam - S,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Countermeasures,,,,,,,,,,,,,,,,,,Tufa Energy Rapidfire - S,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Ingredients,,,,,,,,,,,,,,,,,,Pearce Kinetic Rapidfire - S,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Bubbie,,,,,,,,,,,,,,,,,,Pearce Energy Rapidfire - S,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Sole Jettie,,,,,,,,,,,,,,,,,,Ogrika Energy Kinetic Rapidfire - S,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Palm Jettie,,,,,,,,,,,,,,,,,,Rainbow Energy Rapidfire - M,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,VZUS Energy Beam - M,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,VZUS Energy Beam - L,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,Ogrika Energy Rapidfire - L,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,Pearce Energy Beam - L,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,Calico Energy Rapidfire - L,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,Vzus Energy Beam - CPT,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,Pearce Energy Beam - CMD,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

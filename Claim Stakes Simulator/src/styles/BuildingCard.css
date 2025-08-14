@@ -1,0 +1,1493 @@
+.building-card {
+    position: relative;
+    background-color: #3A3A3A;
+    color: #FFFFFF;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    border-left: 4px solid #3A86FF;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    transition: all 0.2s ease;
+    width: 100%;
+    box-sizing: border-box;
+    height: 450px;
+    /* Fixed height exactly 450px */
+    max-height: 450px;
+    min-width: 280px;
+    /* Ensure consistent minimum width */
+    max-width: 320px;
+    /* Keep cards same width as preview cards */
+}
+
+.building-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border-color: #3A86FF;
+}
+
+.building-card.already-constructed {
+    border-left: 4px solid #4CAF50;
+    /* Green border for already constructed buildings */
+}
+
+.building-card.already-constructed:hover {
+    border-color: #4CAF50;
+}
+
+.tier-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    /* Prevent content from spilling out */
+}
+
+.building-tab-content {
+    flex: 1;
+    overflow-y: auto;
+    /* Main scrollbar */
+    background-color: #333333;
+    /* Slightly lighter to match new card background */
+    padding: 12px;
+    max-height: 280px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(58, 134, 255, 0.3) rgba(0, 0, 0, 0.1);
+}
+
+
+.resource-subtabs-container {
+    display: flex;
+    flex-direction: column;
+    background: #2E2E2E;
+    /* Slightly darker than card background */
+    border-radius: 4px;
+    margin-bottom: 10px;
+    padding: 10px;
+    position: relative;
+}
+
+.construction-section {
+    padding: 8px 0;
+}
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 8px;
+    margin-bottom: 4px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    position: relative;
+}
+
+.stat-row.unavailable {
+    position: relative;
+    padding-right: 30px;
+    /* Make space for the question mark */
+}
+
+.stat-row.unavailable::after {
+    content: "?";
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.stat-row.unavailable:hover::after {
+    background-color: rgba(58, 134, 255, 0.5);
+}
+
+.building-actions {
+    display: none;
+}
+
+.building-tab-content::-webkit-scrollbar {
+    width: 4px;
+}
+
+.building-tab-content::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.building-tab-content::-webkit-scrollbar-thumb {
+    background: rgba(58, 134, 255, 0.3);
+    border-radius: 4px;
+}
+
+.building-tab-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(58, 134, 255, 0.5);
+}
+
+.content-tabs-row {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: #333333;
+    /* Match the new card background */
+}
+
+.content-tabs {
+    display: flex;
+}
+
+.content-tab {
+    background-color: transparent;
+    color: #AAAAAA;
+    border: none;
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    position: relative;
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.content-tab.active {
+    color: white;
+    border-bottom: 2px solid #3A86FF;
+}
+
+.content-tab:hover:not(.active) {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.building-preview-header {
+    padding: 16px 16px 8px 16px;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.building-name {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.2;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+    padding-right: 8px;
+}
+
+.hub-label {
+    background-color: #3A86FF;
+    color: white;
+    font-size: 0.7em;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 8px;
+    font-weight: bold;
+}
+
+.building-name:has(.hub-label) {
+    color: #3A86FF;
+    font-weight: 600;
+}
+
+.tier-tabs-row {
+    padding: 0 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.tier-tabs {
+    display: flex;
+    gap: 4px;
+}
+
+.tier-tab {
+    background-color: #2E2E2E;
+    /* Match the darker background */
+    color: #AAAAAA;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 12px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.tier-tab.active {
+    background-color: #3A86FF;
+    color: white;
+}
+
+.tier-tab.has-instances {
+    background-color: rgba(76, 175, 80, 0.2);
+    border-color: #4CAF50;
+}
+
+.tier-tab.has-instances.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.building-prerequisites {
+    margin-bottom: 16px;
+    background-color: rgba(58, 134, 255, 0.1);
+    border-radius: 6px;
+    padding: 12px;
+    border: 1px solid rgba(58, 134, 255, 0.2);
+}
+
+.building-prerequisites h4 {
+    margin: 0 0 8px 0;
+    font-size: 0.9em;
+    color: #FFFFFF;
+    font-weight: 500;
+}
+
+.prerequisite-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.prerequisite-item {
+    padding: 2px 6px;
+    margin-bottom: 2px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    font-size: 0.8em;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+}
+
+.prerequisite-item:before {
+    content: "🔧";
+    margin-right: 8px;
+}
+
+.building-card .stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    padding: 8px 12px;
+    margin: 4px 0;
+    font-size: 0.9em;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.building-card .stat-item .stat-name {
+    font-weight: 600;
+    color: #c5c5c5;
+    margin-right: 8px;
+    display: inline-block;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.building-card .stat-item .stat-value {
+    font-weight: 600;
+    color: #ffffff;
+    display: inline-block;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.building-card .stat-item .stat-value.positive {
+    color: #2ecc71;
+    text-shadow: 0 0 8px rgba(46, 204, 113, 0.4);
+}
+
+.building-card .stat-item .stat-value.negative {
+    color: #e74c3c;
+    text-shadow: 0 0 8px rgba(231, 76, 60, 0.4);
+}
+
+.building-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 8px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    margin: 8px 0;
+    padding-bottom: 16px;
+    /* Additional padding at bottom for storage */
+}
+
+.building-stats-grid h4 {
+    margin: 0 0 8px 0;
+    font-size: 0.9em;
+    color: #AAAAAA;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 4px;
+}
+
+.building-stats-grid .stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 8px;
+    margin-bottom: 4px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    position: relative;
+}
+
+.building-stats-grid .stat-name {
+    font-size: 0.85em;
+    color: #CCCCCC;
+    font-weight: 500;
+    flex: 1;
+    text-transform: capitalize;
+    letter-spacing: 0.5px;
+}
+
+.building-stats-grid .stat-value {
+    font-size: 0.85em;
+    font-weight: 600;
+    color: #FFFFFF;
+}
+
+.stat-name {
+    font-weight: 600;
+    color: #c5c5c5;
+    margin-right: 8px;
+    display: inline-block;
+}
+
+.stat-value {
+    font-weight: 600;
+    color: #ffffff;
+    display: inline-block;
+}
+
+.stat-value.positive {
+    color: #2ecc71;
+    text-shadow: 0 0 8px rgba(46, 204, 113, 0.4);
+}
+
+.stat-value.negative {
+    color: #e74c3c;
+    text-shadow: 0 0 8px rgba(231, 76, 60, 0.4);
+}
+
+.resource-notice {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    border: 1px dashed #444;
+    min-height: 50px;
+    margin: 5px 0;
+    width: 100%;
+    font-size: 0.85em;
+    color: #AAAAAA;
+}
+
+.resource-notice-icon {
+    font-size: 1.2em;
+    margin-right: 12px;
+    color: #AAAAAA;
+}
+
+.construction-status {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    z-index: 1;
+}
+
+.progress-bar {
+    width: 80%;
+    height: 8px;
+    background: #444;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.progress {
+    height: 100%;
+    background: #38B000;
+    transition: width 1s linear;
+}
+
+.building-card.under-construction {
+    opacity: 0.8;
+    position: relative;
+    border-left: 4px solid #FFAA00;
+}
+
+.building-card.forced-under-construction {
+    opacity: 0.8;
+    position: relative;
+    border-left: 4px solid #FFAA00;
+}
+
+button {
+    background-color: #3A86FF;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #2776F0;
+}
+
+button:disabled {
+    background-color: #2D2D2D;
+    color: #666666;
+    cursor: not-allowed;
+}
+
+.tier-limit-warning {
+    margin-top: 5px;
+    font-size: 12px;
+    color: #FFAA00;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    background-color: rgba(255, 170, 0, 0.1);
+    border-radius: 4px;
+}
+
+.warning-icon {
+    margin-right: 8px;
+}
+
+/* BuildingCard specific styles */
+.building-actions .construct-button {
+    display: none;
+}
+
+.building-actions .show-production-chain,
+.building-actions .receive-resources-button {
+    display: block;
+}
+
+.construction-indicator {
+    animation: construction-pulse 2s infinite;
+}
+
+@keyframes construction-pulse {
+    0% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 0.9;
+    }
+
+    100% {
+        opacity: 0.5;
+    }
+}
+
+.cost-item.available {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.current-amount.has-resources {
+    color: #4CAF50;
+    font-weight: bold;
+    transition: color 0.3s ease, font-weight 0.3s ease;
+}
+
+@keyframes resource-received {
+    0% {
+        background-color: rgba(76, 175, 80, 0.3);
+    }
+
+    50% {
+        background-color: rgba(76, 175, 80, 0.5);
+    }
+
+    100% {
+        background-color: transparent;
+    }
+}
+
+.has-resources {
+    animation: resource-received 1s ease-out;
+}
+
+.special-resource {
+    position: relative;
+}
+
+.special-resource.available {
+    color: #64ffda !important;
+    font-weight: bold;
+}
+
+.special-resource.has-resources {
+    animation: special-resource-received 1.5s ease-out;
+    color: #64ffda !important;
+    font-weight: bold;
+}
+
+@keyframes special-resource-received {
+    0% {
+        background-color: rgba(100, 255, 218, 0.3);
+    }
+
+    50% {
+        background-color: rgba(100, 255, 218, 0.5);
+    }
+
+    100% {
+        background-color: transparent;
+    }
+}
+
+.cost-item {
+    margin-bottom: 4px;
+    padding: 2px 5px;
+    border-radius: 3px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.cost-item.unavailable {
+    color: #ff5252;
+}
+
+.current-amount {
+    margin-left: 5px;
+    font-size: 0.8em;
+    transition: all 0.3s ease;
+}
+
+@keyframes resource-highlight-pulse {
+    0% {
+        opacity: 0.7;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.7;
+    }
+}
+
+.has-resources:not(.special-resource) {
+    animation: resource-highlight-pulse 2s infinite;
+}
+
+.cost-item.from-global {
+    position: relative;
+}
+
+.cost-item.from-global.available {
+    border-left: 2px solid #64ffda;
+    padding-left: 8px;
+}
+
+.current-amount.from-global {
+    position: relative;
+}
+
+.global-source {
+    color: #64ffda;
+    font-weight: bold;
+    margin-left: 2px;
+}
+
+.current-amount.from-global.has-resources {
+    animation: global-resource-received 1.5s ease-out;
+}
+
+@keyframes global-resource-received {
+    0% {
+        background-color: rgba(100, 255, 218, 0.2);
+    }
+
+    50% {
+        background-color: rgba(100, 255, 218, 0.4);
+    }
+
+    100% {
+        background-color: transparent;
+    }
+}
+
+.tier-status {
+    margin-top: 10px;
+    padding: 8px;
+    text-align: center;
+    font-size: 14px;
+    border-radius: 4px;
+    background-color: rgba(200, 200, 200, 0.1);
+}
+
+.tier-status small {
+    display: block;
+    font-size: 11px;
+    opacity: 0.7;
+    margin-top: 3px;
+}
+
+.tier-status[title*="cannot be upgraded"] {
+    background-color: rgba(70, 130, 180, 0.2);
+    border: 1px solid rgba(70, 130, 180, 0.5);
+    padding: 10px;
+    color: #e0e0e0;
+    font-weight: bold;
+}
+
+.module-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.total-modules-count {
+    background-color: rgba(70, 130, 180, 0.2);
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.module-tier-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.instance-summary {
+    color: #e0e0e0;
+    font-size: 14px;
+    text-align: center;
+}
+
+.upgrade-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.upgrade-btn:hover {
+    background-color: #45a049;
+}
+
+.upgrade-btn:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+}
+
+.add-module-btn {
+    background-color: #3A86FF;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.add-module-btn:hover {
+    background-color: #2776F0;
+}
+
+.add-module-btn:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+}
+
+.instance-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #FF5722;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: bold;
+    min-width: 20px;
+    padding: 2px;
+    box-sizing: border-box;
+    overflow: visible;
+    z-index: 10;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    line-height: 1;
+}
+
+.module-label {
+    background-color: #FF5722;
+    color: white;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 10px;
+    margin-left: 8px;
+    vertical-align: middle;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.tier-tab .instance-count {
+    margin-left: 4px;
+    background: #3A86FF;
+    color: white;
+    font-size: 0.8em;
+    padding: 1px 4px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.tier-tab.has-instances {
+    position: relative;
+}
+
+.tier-tab.active.has-instances {
+    background-color: #2a5fbb;
+}
+
+.upgrade-section {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #444;
+}
+
+.upgrade-module-btn {
+    background-color: #FF9800;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.upgrade-module-btn:hover {
+    background-color: #F57C00;
+}
+
+.upgrade-module-btn:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+}
+
+.no-upgrade-data {
+    color: #888;
+    font-style: italic;
+    margin: 10px 0;
+}
+
+.cost-mode-tabs {
+    display: flex;
+    margin-bottom: 10px;
+    background-color: #333;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.cost-mode-tab {
+    flex: 1;
+    padding: 8px 12px;
+    background-color: transparent;
+    border: none;
+    color: #ccc;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.cost-mode-tab:hover {
+    background-color: #444;
+}
+
+.cost-mode-tab.active {
+    background-color: #555;
+    color: white;
+    font-weight: bold;
+}
+
+.cost-mode-tab.active:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 25%;
+    width: 50%;
+    height: 3px;
+    background-color: #3A86FF;
+    border-radius: 3px 3px 0 0;
+}
+
+.construct-button,
+.add-module-btn {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.construct-button:hover,
+.add-module-btn:hover {
+    background-color: #388E3C;
+}
+
+.construct-button:disabled,
+.add-module-btn:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+}
+
+.tier-limit-warning {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    padding: 5px;
+    background-color: rgba(255, 200, 0, 0.1);
+    border-radius: 4px;
+    font-size: 12px;
+    color: #ffcc00;
+}
+
+.warning-icon {
+    margin-right: 5px;
+}
+
+button.disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.tier-tab.available-upgrade {
+    background-color: rgba(80, 200, 120, 0.15);
+    border: 1px solid rgba(80, 200, 120, 0.5);
+}
+
+.upgrade-indicator {
+    margin-left: 4px;
+    font-size: 10px;
+    color: #5ea;
+    vertical-align: super;
+}
+
+.building-card .building-name .hub-label {
+    background-color: #4a8;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.8em;
+    margin-left: 5px;
+}
+
+.building-card .action-button.upgrade-button:not([disabled]) {
+    background: linear-gradient(to bottom, #4a8, #387);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transform: translateY(0);
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.building-card .action-button.upgrade-button:not([disabled]):hover {
+    background: linear-gradient(to bottom, #5b9, #4a8);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+    transform: translateY(-1px);
+}
+
+.building-card .action-button.upgrade-button:not([disabled]):active {
+    background: linear-gradient(to bottom, #4a8, #387);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    transform: translateY(1px);
+}
+
+.resource-notice {
+    background-color: #252525;
+    border-radius: 6px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85em;
+    color: #aaa;
+    border: 1px dashed #444;
+    margin: 5px 0;
+    width: 100%;
+}
+
+.resource-notice-icon {
+    font-size: 1.2em;
+}
+
+.prerequisite-warning {
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 189, 89, 0.2);
+    border: 1px dashed #ffbd59;
+    border-radius: 4px;
+    padding: 8px 12px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    color: #ffbd59;
+}
+
+.prerequisite-icon {
+    font-size: 1.1rem;
+    margin-right: 8px;
+}
+
+.potential-resources {
+    margin-top: 8px;
+    padding: 8px;
+    border: 1px dashed #444;
+    border-radius: 4px;
+    background-color: rgba(30, 30, 30, 0.5);
+}
+
+.flow-item {
+    padding: 6px 10px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    margin-bottom: 4px;
+    font-size: 0.9em;
+}
+
+.flow-label {
+    display: block;
+    font-size: 0.9em;
+    margin-bottom: 6px;
+    color: #AAAAAA;
+    font-weight: 500;
+}
+
+.cost-section {
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 10px;
+}
+
+/* Building details container */
+.building-details {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: visible;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Required buildings section */
+.required-buildings {
+    margin-bottom: 16px;
+    width: 100%;
+}
+
+.required-building-list {
+    background-color: rgba(58, 134, 255, 0.1);
+    border-radius: 6px;
+    padding: 12px;
+    margin-top: 8px;
+    width: 100%;
+    border: 1px solid rgba(58, 134, 255, 0.2);
+    box-sizing: border-box;
+    overflow: visible;
+}
+
+.prerequisite-item {
+    padding: 8px 12px;
+    margin: 4px 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* NEW: Styling for the transport notice (can reuse/adapt resource-notice) */
+.transport-notice {
+    display: flex;
+    flex-direction: column;
+    /* Stack text and button */
+    gap: 10px;
+    /* Space between text and button */
+    align-items: flex-start;
+    /* Align items to the start */
+    padding: 12px;
+    background-color: rgba(80, 150, 255, 0.1);
+    /* Info background */
+    border-radius: 6px;
+    border: 1px dashed #5096FF;
+    /* Info border */
+    margin: 10px 0;
+    width: 100%;
+    font-size: 0.85em;
+    color: #a9cfff;
+    /* Info text */
+    box-sizing: border-box;
+}
+
+/* Reuse icon style but change color if needed */
+.transport-notice .resource-notice-icon {
+    color: #5096FF;
+    /* Info color */
+    float: left;
+    line-height: 1.4;
+    /* Adjust as needed */
+    margin-right: 8px;
+}
+
+.transport-notice span:not(.resource-notice-icon) {
+    display: block;
+    /* Ensure text is block level */
+    margin-left: 2.2em;
+    /* Indent text past the icon */
+}
+
+
+/* NEW: Style for the receive button within the transport notice */
+.transport-receive-btn {
+    padding: 6px 12px;
+    font-size: 0.9em;
+    background-color: #3A86FF;
+    /* Use primary accent color */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 5px;
+    /* Add some space above the button */
+    align-self: flex-start;
+    /* Align button left */
+    margin-left: 2.2em;
+    /* Align button with indented text */
+}
+
+.transport-receive-btn:hover {
+    background-color: #2776F0;
+}
+
+
+/* NEW: Styling for the input item needing transport */
+.flow-item.non-native-input {
+    border-left: 3px solid #FFAA00;
+    /* Warning color border */
+    padding-left: 9px;
+    /* Adjust padding slightly */
+}
+
+.transport-tag {
+    font-style: italic;
+    font-size: 0.9em;
+    color: #FFAA00;
+    /* Warning color */
+    margin-left: 5px;
+}
+
+.prerequisite-warning {
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 189, 89, 0.2);
+    border: 1px dashed #ffbd59;
+    border-radius: 4px;
+    padding: 8px 12px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    color: #ffbd59;
+}
+
+.prerequisite-icon {
+    font-size: 1.1rem;
+    margin-right: 8px;
+}
+
+/* Improve the count indicator positioning */
+.count-indicator {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 10px;
+    padding: 1px 5px;
+    font-size: 10px;
+    min-width: 15px;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    /* Ensure it's above the button text */
+}
+
+/* Make sure tier tabs have proper positioning for the indicator */
+.tier-tab {
+    position: relative;
+}
+
+.resource-section {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.resource-flow-section {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Production and Consumption sections */
+.production-section,
+.consumption-section {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.resource-list {
+    max-height: 150px;
+    overflow-y: auto;
+    padding-right: 6px;
+}
+
+.resource-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    padding: 8px 12px;
+    margin: 4px 0;
+    width: 100%;
+    box-sizing: border-box;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+/* Custom scrollbar for resource list */
+.resource-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.resource-list::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+}
+
+.resource-list::-webkit-scrollbar-thumb {
+    background: rgba(58, 134, 255, 0.3);
+    border-radius: 3px;
+}
+
+.resource-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(58, 134, 255, 0.5);
+}
+
+/* Tab Navigation Styles */
+.tab-navigation {
+    display: flex;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 16px;
+    background-color: #252525;
+}
+
+.tab-button {
+    background-color: #1e1e1e;
+    color: #AAAAAA;
+    border: none;
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex: 1;
+    text-align: center;
+    position: relative;
+    font-size: 0.9em;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tab-button.active {
+    color: white;
+    background-color: #1e1e1e;
+    border-bottom: 2px solid #3A86FF;
+}
+
+.tab-button:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Tab Content Styles - Made taller than building-stats-grid */
+.building-tab-content {
+    flex: 1;
+    overflow-y: auto;
+    max-height: 300px;
+    /* Adjust this value as needed */
+}
+
+/* Ensure the building card maintains its fixed height */
+.building-card {
+    position: relative;
+    background-color: #3A3A3A;
+    color: #FFFFFF;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    border-left: 4px solid #3A86FF;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    transition: all 0.2s ease;
+    width: 100%;
+    box-sizing: border-box;
+    height: 450px;
+    /* Fixed height exactly 450px */
+    max-height: 450px;
+}
+
+/* Ensure the tier content stays within the bounds */
+.tier-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    /* Prevent content from spilling outside */
+}
+
+/* Make the construction section scrollable */
+.construction-section {
+    overflow-y: auto;
+    max-height: 235px;
+}
+
+/* Add Building Card */
+.add-building-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(45, 45, 45, 0.7);
+    cursor: pointer;
+    min-height: 200px;
+    border: 2px dashed #555;
+    border-left: 4px solid #3A86FF;
+}
+
+.add-building-card:hover {
+    background-color: #3D3D3D;
+    border-color: #4A96FF;
+}
+
+.add-building-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-building-icon {
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: #3A86FF;
+    margin-bottom: 10px;
+}
+
+.add-building-text {
+    font-size: 1.1rem;
+    color: #AAA;
+}
+
+.add-building-card:hover .add-building-text {
+    color: #FFF;
+}
+
+/* Add styling for the count indicator as a small green pill */
+.count-indicator {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 10px;
+    padding: 1px 5px;
+    font-size: 10px;
+    min-width: 15px;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Make sure tier tabs have proper positioning for the indicator */
+.tier-tab {
+    position: relative;
+}
+
+/* Richness value styling */
+.richness-value {
+    color: #4CAF50;
+    font-style: italic;
+    margin-left: 4px;
+    font-size: 0.9em;
+}
+
+.richness-missing {
+    color: #FF9800;
+    font-style: italic;
+    margin-left: 4px;
+    font-size: 0.9em;
+}
+
+.potential-resources {
+    margin-top: 8px;
+    font-size: 0.9em;
+    color: #AAA;
+}
+
+.flow-item.potential {
+    opacity: 0.7;
+    margin-left: 10px;
+    margin-bottom: 2px;
+}
+
+/* Resource subtabs styling */
+.resource-subtabs-container {
+    display: flex;
+    flex-direction: column;
+    background: #222222;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    padding: 10px;
+    position: relative;
+}
+
+.resource-subtabs-heading {
+    margin-bottom: 12px;
+}
+
+.resource-subtabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.resource-subtabs.centered {
+    justify-content: center;
+    /* Center the tabs */
+}
+
+.resource-subtab {
+    background-color: #2D2D2D;
+    color: #AAAAAA;
+    border: 1px solid #444444;
+    border-radius: 6px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.resource-subtab:hover {
+    background-color: #3A3A3A;
+    color: #FFFFFF;
+    border-color: #3A86FF;
+}
+
+.resource-subtab.active {
+    background-color: #3A86FF;
+    color: #FFFFFF;
+    border-color: #3A86FF;
+    box-shadow: 0 0 8px rgba(58, 134, 255, 0.3);
+}
+
+.resource-flow-content {
+    max-height: 155px;
+    overflow-y: auto;
+    /* Add scrollbar styling */
+    scrollbar-width: thin;
+    scrollbar-color: #3A86FF #222222;
+}
+
+.resource-flow-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.resource-flow-content::-webkit-scrollbar-track {
+    background: #222222;
+    border-radius: 4px;
+}
+
+.resource-flow-content::-webkit-scrollbar-thumb {
+    background-color: #3A86FF;
+    border-radius: 4px;
+}
+
+.empty-state {
+    color: #888888;
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 15px 0;
+}

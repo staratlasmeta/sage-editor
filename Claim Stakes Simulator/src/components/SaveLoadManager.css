@@ -1,0 +1,308 @@
+/* Save Load Manager */
+.save-load-manager {
+    background-color: #1E1E1E;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    padding: 20px;
+    width: 600px;
+    max-width: 90vw;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2000;
+}
+
+.save-load-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #333333;
+}
+
+.save-load-header h2 {
+    margin: 0;
+    color: #FFFFFF;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    color: #AAAAAA;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+}
+
+.close-button:hover {
+    color: #FFFFFF;
+}
+
+.view-selector {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.view-selector button {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 8px 16px;
+    color: #AAAAAA;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.view-selector button.active {
+    color: #FFFFFF;
+    border-bottom: 2px solid #3A86FF;
+}
+
+.view-selector button:hover {
+    color: #FFFFFF;
+}
+
+/* Confirmation Message */
+.confirmation-message {
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.confirmation-message.success {
+    background-color: rgba(56, 176, 0, 0.1);
+    border: 1px solid #38B000;
+    color: #38B000;
+}
+
+.confirmation-message.error {
+    background-color: rgba(255, 82, 82, 0.1);
+    border: 1px solid #FF5252;
+    color: #FF5252;
+}
+
+/* Saves List */
+.saves-list {
+    border: 1px solid #333333;
+    border-radius: 4px;
+}
+
+.saves-list-header {
+    display: grid;
+    grid-template-columns: 3fr 2fr 2fr;
+    padding: 10px 15px;
+    background-color: #2D2D2D;
+    border-bottom: 1px solid #333333;
+    font-weight: 600;
+}
+
+.save-item {
+    display: grid;
+    grid-template-columns: 3fr 2fr 2fr;
+    padding: 10px 15px;
+    border-bottom: 1px solid #333333;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.save-item:last-child {
+    border-bottom: none;
+}
+
+.save-item:hover {
+    background-color: #2D2D2D;
+}
+
+.save-item.selected {
+    background-color: rgba(58, 134, 255, 0.1);
+}
+
+.save-name,
+.save-name-header {
+    font-weight: 500;
+    color: #FFFFFF;
+}
+
+.save-date,
+.save-date-header {
+    color: #AAAAAA;
+}
+
+.save-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.load-button,
+.delete-button {
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: none;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.load-button {
+    background-color: #3A86FF;
+    color: #FFFFFF;
+}
+
+.delete-button {
+    background-color: #2D2D2D;
+    color: #FF5252;
+    border: 1px solid #FF5252;
+}
+
+.load-button:hover {
+    background-color: #2871db;
+}
+
+.delete-button:hover {
+    background-color: rgba(255, 82, 82, 0.1);
+}
+
+.no-saves {
+    padding: 20px;
+    text-align: center;
+    color: #AAAAAA;
+}
+
+/* Save Form */
+.save-form {
+    padding: 10px;
+}
+
+.save-form h3 {
+    margin-top: 0;
+    color: #FFFFFF;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #FFFFFF;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px 12px;
+    background-color: #2D2D2D;
+    border: 1px solid #444444;
+    color: #FFFFFF;
+    border-radius: 4px;
+}
+
+.form-group input:focus {
+    border-color: #3A86FF;
+    outline: none;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.form-actions button {
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.primary-button {
+    background-color: #3A86FF;
+    color: #FFFFFF;
+}
+
+.danger-button {
+    background-color: #FF5252;
+    color: #FFFFFF;
+}
+
+button {
+    background-color: #2D2D2D;
+    color: #FFFFFF;
+}
+
+/* Save Preview */
+.save-preview {
+    background-color: #2D2D2D;
+    border-radius: 4px;
+    padding: 15px;
+    margin: 15px 0;
+}
+
+.save-preview h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #FFFFFF;
+}
+
+.preview-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid #444444;
+}
+
+.preview-item:last-child {
+    border-bottom: none;
+}
+
+.preview-item span:first-child {
+    color: #AAAAAA;
+}
+
+.preview-item span:last-child {
+    color: #FFFFFF;
+    font-weight: 500;
+}
+
+/* Confirmation views */
+.load-confirmation,
+.delete-confirmation {
+    padding: 10px;
+}
+
+.load-confirmation h3,
+.delete-confirmation h3 {
+    margin-top: 0;
+    color: #FFFFFF;
+}
+
+.warning {
+    color: #FFAA00;
+    font-weight: 500;
+}
+
+/* Modal backdrop */
+.save-load-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

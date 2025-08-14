@@ -1,0 +1,12 @@
+Asset,Type,Subtype,Config,Class,Tier,Qty,Ship Name
+Power Core,Component,Core,,XXS,T1,1,VZUS solos
+Warp Drive,Component,Core,,XXS,T1,1,VZUS solos
+Subwarp Engine,Component,Core,,XXS,T1,1,VZUS solos
+Maneuvering Thrusters,Component,Core,,XXS,T1,1,VZUS solos
+Shield Generator,Component,Core,,XXS,T1,1,VZUS solos
+Scanner Array,Component,Core,,XXS,T1,1,VZUS solos
+Tractor Beam,Component,Core,,XXS,T1,1,VZUS solos
+Heat Sink,Component,Core,,XXS,T1,1,VZUS solos
+Hull Reinforcement,Component,Core,,XXS,T1,1,VZUS solos
+Fuel Module,Module,Swappable,Detail,XXS,T1,1,VZUS solos
+Energy,Component,Weapon,,XXS,T1,2,VZUS solos

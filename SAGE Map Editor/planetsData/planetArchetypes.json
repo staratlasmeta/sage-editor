@@ -1,0 +1,4195 @@
+{
+    "planetArchetypes": {
+    "planetArchetype-terrestrial-planet-oni": {
+        "name": "ONI Terrestrial Planet",
+        "description": "ONI controlled Terrestrial Planet",
+        "richness": {
+            "cargo-hydrogen": 1,
+            "cargo-volcanic-ash": 1,
+            "cargo-iron-ore": 1,
+            "cargo-lanthanum": 1,
+            "cargo-limestone": 1,
+            "cargo-neodymium": 1,
+            "cargo-nitrogen": 1,
+            "cargo-ochre-ore": 1,
+            "cargo-oxygen": 1,
+            "cargo-sandstone": 1,
+            "cargo-shale": 1,
+            "cargo-silica": 1,
+            "cargo-aluminum-ore": 1,
+            "cargo-amber-resin": 1,
+            "cargo-argon": 1,
+            "cargo-basalt": 1,
+            "cargo-biomass": 1,
+            "cargo-carbon": 1,
+            "cargo-clay": 1,
+            "cargo-dysprosium": 1,
+            "cargo-gold-ore": 1,
+            "cargo-graphite": 1
+        },
+        "tags": [
+            "tag-terrestrial-planet",
+            "tag-oni",
+            "tag-hydrogen",
+            "tag-volcanic-ash",
+            "tag-iron-ore",
+            "tag-lanthanum",
+            "tag-limestone",
+            "tag-neodymium",
+            "tag-nitrogen",
+            "tag-ochre-ore",
+            "tag-oxygen",
+            "tag-sandstone",
+            "tag-shale",
+            "tag-silica",
+            "tag-aluminum-ore",
+            "tag-amber-resin",
+            "tag-argon",
+            "tag-basalt",
+            "tag-biomass",
+            "tag-carbon",
+            "tag-clay",
+            "tag-dysprosium",
+            "tag-gold-ore",
+            "tag-graphite"
+        ],
+        "plots": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 100,
+                "2": 10,
+                "3": 1,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 1000,
+                "2": 100,
+                "3": 10,
+                "4": 1,
+                "5": 0
+            },
+            "3": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 10,
+                "5": 0
+            },
+            "4": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "5": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "6": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            }
+        },
+        "rent": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 10,
+                "2": 100,
+                "3": 1000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 20,
+                "2": 200,
+                "3": 2000,
+                "4": 20000,
+                "5": 0
+            },
+            "3": {
+                "1": 30,
+                "2": 300,
+                "3": 3000,
+                "4": 30000,
+                "5": 0
+            },
+            "4": {
+                "1": 40,
+                "2": 400,
+                "3": 4000,
+                "4": 40000,
+                "5": 400000
+            },
+            "5": {
+                "1": 50,
+                "2": 500,
+                "3": 5000,
+                "4": 50000,
+                "5": 500000
+            },
+            "6": {
+                "1": 60,
+                "2": 6000,
+                "3": 60000,
+                "4": 60000,
+                "5": 600000
+            }
+        },
+        "placementFee": {
+            "0": {
+                "1": 100,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 200,
+                "2": 2000,
+                "3": 2000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 300,
+                "2": 3000,
+                "3": 30000,
+                "4": 300000,
+                "5": 0
+            },
+            "3": {
+                "1": 400,
+                "2": 4000,
+                "3": 40000,
+                "4": 400000,
+                "5": 4000000
+            },
+            "4": {
+                "1": 500,
+                "2": 5000,
+                "3": 50000,
+                "4": 500000,
+                "5": 5000000
+            },
+            "5": {
+                "1": 600,
+                "2": 6000,
+                "3": 60000,
+                "4": 600000,
+                "5": 6000000
+            },
+            "6": {
+                "1": 700,
+                "2": 7000,
+                "3": 70000,
+                "4": 700000,
+                "5": 7000000
+            }
+        }
+    },
+    "planetArchetype-terrestrial-planet-mud": {
+        "name": "MUD Terrestrial Planet",
+        "description": "MUD controlled Terrestrial Planet",
+        "richness": {
+            "cargo-hydrogen": 1,
+            "cargo-volcanic-ash": 1,
+            "cargo-iron-ore": 1,
+            "cargo-lanthanum": 1,
+            "cargo-limestone": 1,
+            "cargo-neodymium": 1,
+            "cargo-nitrogen": 1,
+            "cargo-ochre-ore": 1,
+            "cargo-oxygen": 1,
+            "cargo-sandstone": 1,
+            "cargo-shale": 1,
+            "cargo-silica": 1,
+            "cargo-aluminum-ore": 1,
+            "cargo-amber-resin": 1,
+            "cargo-argon": 1,
+            "cargo-basalt": 1,
+            "cargo-biomass": 1,
+            "cargo-carbon": 1,
+            "cargo-clay": 1,
+            "cargo-dysprosium": 1,
+            "cargo-gold-ore": 1,
+            "cargo-graphite": 1
+        },
+        "tags": [
+            "tag-terrestrial-planet",
+            "tag-mud",
+            "tag-hydrogen",
+            "tag-volcanic-ash",
+            "tag-iron-ore",
+            "tag-lanthanum",
+            "tag-limestone",
+            "tag-neodymium",
+            "tag-nitrogen",
+            "tag-ochre-ore",
+            "tag-oxygen",
+            "tag-sandstone",
+            "tag-shale",
+            "tag-silica",
+            "tag-aluminum-ore",
+            "tag-amber-resin",
+            "tag-argon",
+            "tag-basalt",
+            "tag-biomass",
+            "tag-carbon",
+            "tag-clay",
+            "tag-dysprosium",
+            "tag-gold-ore",
+            "tag-graphite"
+        ],
+        "plots": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 100,
+                "2": 10,
+                "3": 1,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 1000,
+                "2": 100,
+                "3": 10,
+                "4": 1,
+                "5": 0
+            },
+            "3": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 10,
+                "5": 0
+            },
+            "4": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "5": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "6": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            }
+        },
+        "rent": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 10,
+                "2": 100,
+                "3": 1000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 20,
+                "2": 200,
+                "3": 2000,
+                "4": 20000,
+                "5": 0
+            },
+            "3": {
+                "1": 30,
+                "2": 300,
+                "3": 3000,
+                "4": 30000,
+                "5": 0
+            },
+            "4": {
+                "1": 40,
+                "2": 400,
+                "3": 4000,
+                "4": 40000,
+                "5": 400000
+            },
+            "5": {
+                "1": 50,
+                "2": 500,
+                "3": 5000,
+                "4": 50000,
+                "5": 500000
+            },
+            "6": {
+                "1": 60,
+                "2": 6000,
+                "3": 60000,
+                "4": 60000,
+                "5": 600000
+            }
+        },
+        "placementFee": {
+            "0": {
+                "1": 100,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 200,
+                "2": 2000,
+                "3": 2000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 300,
+                "2": 3000,
+                "3": 30000,
+                "4": 300000,
+                "5": 0
+            },
+            "3": {
+                "1": 400,
+                "2": 4000,
+                "3": 40000,
+                "4": 400000,
+                "5": 4000000
+            },
+            "4": {
+                "1": 500,
+                "2": 5000,
+                "3": 50000,
+                "4": 500000,
+                "5": 5000000
+            },
+            "5": {
+                "1": 600,
+                "2": 6000,
+                "3": 60000,
+                "4": 600000,
+                "5": 6000000
+            },
+            "6": {
+                "1": 700,
+                "2": 7000,
+                "3": 70000,
+                "4": 700000,
+                "5": 7000000
+            }
+        }
+    },
+    "planetArchetype-terrestrial-planet-ustur": {
+        "name": "USTUR Terrestrial Planet",
+        "description": "USTUR controlled Terrestrial Planet",
+        "richness": {
+            "cargo-hydrogen": 1,
+            "cargo-volcanic-ash": 1,
+            "cargo-iron-ore": 1,
+            "cargo-lanthanum": 1,
+            "cargo-limestone": 1,
+            "cargo-neodymium": 1,
+            "cargo-nitrogen": 1,
+            "cargo-ochre-ore": 1,
+            "cargo-oxygen": 1,
+            "cargo-sandstone": 1,
+            "cargo-shale": 1,
+            "cargo-silica": 1,
+            "cargo-aluminum-ore": 1,
+            "cargo-amber-resin": 1,
+            "cargo-argon": 1,
+            "cargo-basalt": 1,
+            "cargo-biomass": 1,
+            "cargo-carbon": 1,
+            "cargo-clay": 1,
+            "cargo-dysprosium": 1,
+            "cargo-gold-ore": 1,
+            "cargo-graphite": 1
+        },
+        "tags": [
+            "tag-terrestrial-planet",
+            "tag-ustur",
+            "tag-hydrogen",
+            "tag-volcanic-ash",
+            "tag-iron-ore",
+            "tag-lanthanum",
+            "tag-limestone",
+            "tag-neodymium",
+            "tag-nitrogen",
+            "tag-ochre-ore",
+            "tag-oxygen",
+            "tag-sandstone",
+            "tag-shale",
+            "tag-silica",
+            "tag-aluminum-ore",
+            "tag-amber-resin",
+            "tag-argon",
+            "tag-basalt",
+            "tag-biomass",
+            "tag-carbon",
+            "tag-clay",
+            "tag-dysprosium",
+            "tag-gold-ore",
+            "tag-graphite"
+        ],
+        "plots": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 100,
+                "2": 10,
+                "3": 1,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 1000,
+                "2": 100,
+                "3": 10,
+                "4": 1,
+                "5": 0
+            },
+            "3": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 10,
+                "5": 0
+            },
+            "4": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "5": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "6": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            }
+        },
+        "rent": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 10,
+                "2": 100,
+                "3": 1000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 20,
+                "2": 200,
+                "3": 2000,
+                "4": 20000,
+                "5": 0
+            },
+            "3": {
+                "1": 30,
+                "2": 300,
+                "3": 3000,
+                "4": 30000,
+                "5": 0
+            },
+            "4": {
+                "1": 40,
+                "2": 400,
+                "3": 4000,
+                "4": 40000,
+                "5": 400000
+            },
+            "5": {
+                "1": 50,
+                "2": 500,
+                "3": 5000,
+                "4": 50000,
+                "5": 500000
+            },
+            "6": {
+                "1": 60,
+                "2": 6000,
+                "3": 60000,
+                "4": 60000,
+                "5": 600000
+            }
+        },
+        "placementFee": {
+            "0": {
+                "1": 100,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 200,
+                "2": 2000,
+                "3": 2000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 300,
+                "2": 3000,
+                "3": 30000,
+                "4": 300000,
+                "5": 0
+            },
+            "3": {
+                "1": 400,
+                "2": 4000,
+                "3": 40000,
+                "4": 400000,
+                "5": 4000000
+            },
+            "4": {
+                "1": 500,
+                "2": 5000,
+                "3": 50000,
+                "4": 500000,
+                "5": 5000000
+            },
+            "5": {
+                "1": 600,
+                "2": 6000,
+                "3": 60000,
+                "4": 600000,
+                "5": 6000000
+            },
+            "6": {
+                "1": 700,
+                "2": 7000,
+                "3": 70000,
+                "4": 700000,
+                "5": 7000000
+            }
+        }
+    },
+    "planetArchetype-ice-giant-oni": {
+        "name": "ONI Ice Giant",
+        "description": "ONI controlled Ice Giant",
+        "richness": {
+            "cargo-topaz-crystals": 1,
+            "cargo-tourmaline-crystals": 1,
+            "cargo-xenon": 1,
+            "cargo-zirconium-ore": 1,
+            "cargo-rochinol": 1,
+            "cargo-crystal-lattice": 1,
+            "cargo-diamond": 1,
+            "cargo-krypton": 1,
+            "cargo-magnesium-crystals": 1,
+            "cargo-peridot-crystals": 1,
+            "cargo-ruby-crystals": 1,
+            "cargo-sapphire-crystals": 1,
+            "cargo-spinel-crystals": 1,
+            "cargo-tellurium-crystals": 1,
+            "cargo-arco": 1,
+            "cargo-beryllium-crystals": 1,
+            "cargo-biolumite": 1,
+            "cargo-cobalt-ore": 1,
+            "cargo-garnet-crystals": 1,
+            "cargo-genesium-crystals": 1,
+            "cargo-hicenium-crystals": 1
+        },
+        "tags": [
+            "tag-ice-giant",
+            "tag-oni",
+            "tag-topaz-crystals",
+            "tag-tourmaline-crystals",
+            "tag-xenon",
+            "tag-zirconium-ore",
+            "tag-rochinol",
+            "tag-crystal-lattice",
+            "tag-diamond",
+            "tag-krypton",
+            "tag-magnesium-crystals",
+            "tag-peridot-crystals",
+            "tag-ruby-crystals",
+            "tag-sapphire-crystals",
+            "tag-spinel-crystals",
+            "tag-tellurium-crystals",
+            "tag-arco",
+            "tag-beryllium-crystals",
+            "tag-biolumite",
+            "tag-cobalt-ore",
+            "tag-garnet-crystals",
+            "tag-genesium-crystals",
+            "tag-hicenium-crystals"
+        ],
+        "plots": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 100,
+                "2": 10,
+                "3": 1,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 1000,
+                "2": 100,
+                "3": 10,
+                "4": 1,
+                "5": 0
+            },
+            "3": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 10,
+                "5": 0
+            },
+            "4": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "5": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "6": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            }
+        },
+        "rent": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 10,
+                "2": 100,
+                "3": 1000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 20,
+                "2": 200,
+                "3": 2000,
+                "4": 20000,
+                "5": 0
+            },
+            "3": {
+                "1": 30,
+                "2": 300,
+                "3": 3000,
+                "4": 30000,
+                "5": 0
+            },
+            "4": {
+                "1": 40,
+                "2": 400,
+                "3": 4000,
+                "4": 40000,
+                "5": 400000
+            },
+            "5": {
+                "1": 50,
+                "2": 500,
+                "3": 5000,
+                "4": 50000,
+                "5": 500000
+            },
+            "6": {
+                "1": 60,
+                "2": 6000,
+                "3": 60000,
+                "4": 60000,
+                "5": 600000
+            }
+        },
+        "placementFee": {
+            "0": {
+                "1": 100,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 200,
+                "2": 2000,
+                "3": 2000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 300,
+                "2": 3000,
+                "3": 30000,
+                "4": 300000,
+                "5": 0
+            },
+            "3": {
+                "1": 400,
+                "2": 4000,
+                "3": 40000,
+                "4": 400000,
+                "5": 4000000
+            },
+            "4": {
+                "1": 500,
+                "2": 5000,
+                "3": 50000,
+                "4": 500000,
+                "5": 5000000
+            },
+            "5": {
+                "1": 600,
+                "2": 6000,
+                "3": 60000,
+                "4": 600000,
+                "5": 6000000
+            },
+            "6": {
+                "1": 700,
+                "2": 7000,
+                "3": 70000,
+                "4": 700000,
+                "5": 7000000
+            }
+        }
+    },
+    "planetArchetype-ice-giant-mud": {
+        "name": "MUD Ice Giant",
+        "description": "MUD controlled Ice Giant",
+        "richness": {
+            "cargo-topaz-crystals": 1,
+            "cargo-tourmaline-crystals": 1,
+            "cargo-xenon": 1,
+            "cargo-zirconium-ore": 1,
+            "cargo-rochinol": 1,
+            "cargo-crystal-lattice": 1,
+            "cargo-diamond": 1,
+            "cargo-krypton": 1,
+            "cargo-magnesium-crystals": 1,
+            "cargo-peridot-crystals": 1,
+            "cargo-ruby-crystals": 1,
+            "cargo-sapphire-crystals": 1,
+            "cargo-spinel-crystals": 1,
+            "cargo-tellurium-crystals": 1,
+            "cargo-arco": 1,
+            "cargo-beryllium-crystals": 1,
+            "cargo-biolumite": 1,
+            "cargo-cobalt-ore": 1,
+            "cargo-garnet-crystals": 1,
+            "cargo-genesium-crystals": 1,
+            "cargo-hicenium-crystals": 1
+        },
+        "tags": [
+            "tag-ice-giant",
+            "tag-mud",
+            "tag-topaz-crystals",
+            "tag-tourmaline-crystals",
+            "tag-xenon",
+            "tag-zirconium-ore",
+            "tag-rochinol",
+            "tag-crystal-lattice",
+            "tag-diamond",
+            "tag-krypton",
+            "tag-magnesium-crystals",
+            "tag-peridot-crystals",
+            "tag-ruby-crystals",
+            "tag-sapphire-crystals",
+            "tag-spinel-crystals",
+            "tag-tellurium-crystals",
+            "tag-arco",
+            "tag-beryllium-crystals",
+            "tag-biolumite",
+            "tag-cobalt-ore",
+            "tag-garnet-crystals",
+            "tag-genesium-crystals",
+            "tag-hicenium-crystals"
+        ],
+        "plots": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 100,
+                "2": 10,
+                "3": 1,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 1000,
+                "2": 100,
+                "3": 10,
+                "4": 1,
+                "5": 0
+            },
+            "3": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 10,
+                "5": 0
+            },
+            "4": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "5": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "6": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            }
+        },
+        "rent": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 10,
+                "2": 100,
+                "3": 1000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 20,
+                "2": 200,
+                "3": 2000,
+                "4": 20000,
+                "5": 0
+            },
+            "3": {
+                "1": 30,
+                "2": 300,
+                "3": 3000,
+                "4": 30000,
+                "5": 0
+            },
+            "4": {
+                "1": 40,
+                "2": 400,
+                "3": 4000,
+                "4": 40000,
+                "5": 400000
+            },
+            "5": {
+                "1": 50,
+                "2": 500,
+                "3": 5000,
+                "4": 50000,
+                "5": 500000
+            },
+            "6": {
+                "1": 60,
+                "2": 6000,
+                "3": 60000,
+                "4": 60000,
+                "5": 600000
+            }
+        },
+        "placementFee": {
+            "0": {
+                "1": 100,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 200,
+                "2": 2000,
+                "3": 2000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 300,
+                "2": 3000,
+                "3": 30000,
+                "4": 300000,
+                "5": 0
+            },
+            "3": {
+                "1": 400,
+                "2": 4000,
+                "3": 40000,
+                "4": 400000,
+                "5": 4000000
+            },
+            "4": {
+                "1": 500,
+                "2": 5000,
+                "3": 50000,
+                "4": 500000,
+                "5": 5000000
+            },
+            "5": {
+                "1": 600,
+                "2": 6000,
+                "3": 60000,
+                "4": 600000,
+                "5": 6000000
+            },
+            "6": {
+                "1": 700,
+                "2": 7000,
+                "3": 70000,
+                "4": 700000,
+                "5": 7000000
+            }
+        }
+    },
+    "planetArchetype-ice-giant-ustur": {
+        "name": "USTUR Ice Giant",
+        "description": "USTUR controlled Ice Giant",
+        "richness": {
+            "cargo-topaz-crystals": 1,
+            "cargo-tourmaline-crystals": 1,
+            "cargo-xenon": 1,
+            "cargo-zirconium-ore": 1,
+            "cargo-rochinol": 1,
+            "cargo-crystal-lattice": 1,
+            "cargo-diamond": 1,
+            "cargo-krypton": 1,
+            "cargo-magnesium-crystals": 1,
+            "cargo-peridot-crystals": 1,
+            "cargo-ruby-crystals": 1,
+            "cargo-sapphire-crystals": 1,
+            "cargo-spinel-crystals": 1,
+            "cargo-tellurium-crystals": 1,
+            "cargo-arco": 1,
+            "cargo-beryllium-crystals": 1,
+            "cargo-biolumite": 1,
+            "cargo-cobalt-ore": 1,
+            "cargo-garnet-crystals": 1,
+            "cargo-genesium-crystals": 1,
+            "cargo-hicenium-crystals": 1
+        },
+        "tags": [
+            "tag-ice-giant",
+            "tag-ustur",
+            "tag-topaz-crystals",
+            "tag-tourmaline-crystals",
+            "tag-xenon",
+            "tag-zirconium-ore",
+            "tag-rochinol",
+            "tag-crystal-lattice",
+            "tag-diamond",
+            "tag-krypton",
+            "tag-magnesium-crystals",
+            "tag-peridot-crystals",
+            "tag-ruby-crystals",
+            "tag-sapphire-crystals",
+            "tag-spinel-crystals",
+            "tag-tellurium-crystals",
+            "tag-arco",
+            "tag-beryllium-crystals",
+            "tag-biolumite",
+            "tag-cobalt-ore",
+            "tag-garnet-crystals",
+            "tag-genesium-crystals",
+            "tag-hicenium-crystals"
+        ],
+        "plots": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 100,
+                "2": 10,
+                "3": 1,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 1000,
+                "2": 100,
+                "3": 10,
+                "4": 1,
+                "5": 0
+            },
+            "3": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 10,
+                "5": 0
+            },
+            "4": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "5": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "6": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            }
+        },
+        "rent": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 10,
+                "2": 100,
+                "3": 1000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 20,
+                "2": 200,
+                "3": 2000,
+                "4": 20000,
+                "5": 0
+            },
+            "3": {
+                "1": 30,
+                "2": 300,
+                "3": 3000,
+                "4": 30000,
+                "5": 0
+            },
+            "4": {
+                "1": 40,
+                "2": 400,
+                "3": 4000,
+                "4": 40000,
+                "5": 400000
+            },
+            "5": {
+                "1": 50,
+                "2": 500,
+                "3": 5000,
+                "4": 50000,
+                "5": 500000
+            },
+            "6": {
+                "1": 60,
+                "2": 6000,
+                "3": 60000,
+                "4": 60000,
+                "5": 600000
+            }
+        },
+        "placementFee": {
+            "0": {
+                "1": 100,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 200,
+                "2": 2000,
+                "3": 2000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 300,
+                "2": 3000,
+                "3": 30000,
+                "4": 300000,
+                "5": 0
+            },
+            "3": {
+                "1": 400,
+                "2": 4000,
+                "3": 40000,
+                "4": 400000,
+                "5": 4000000
+            },
+            "4": {
+                "1": 500,
+                "2": 5000,
+                "3": 50000,
+                "4": 500000,
+                "5": 5000000
+            },
+            "5": {
+                "1": 600,
+                "2": 6000,
+                "3": 60000,
+                "4": 600000,
+                "5": 6000000
+            },
+            "6": {
+                "1": 700,
+                "2": 7000,
+                "3": 70000,
+                "4": 700000,
+                "5": 7000000
+            }
+        }
+    },
+    "planetArchetype-gas-giant-oni": {
+        "name": "ONI Gas Giant",
+        "description": "ONI controlled Gas Giant",
+        "richness": {
+            "cargo-hydrogen": 1,
+            "cargo-xenon": 1,
+            "cargo-krypton": 1,
+            "cargo-neon": 1,
+            "cargo-nitrogen": 1,
+            "cargo-sulfur-hexafluoride": 1,
+            "cargo-tenon-gas": 1,
+            "cargo-argon": 1,
+            "cargo-carbon": 1,
+            "cargo-fluorine-gas": 1,
+            "cargo-helium": 1
+        },
+        "tags": [
+            "tag-gas-giant",
+            "tag-oni",
+            "tag-hydrogen",
+            "tag-xenon",
+            "tag-krypton",
+            "tag-neon",
+            "tag-nitrogen",
+            "tag-sulfur-hexafluoride",
+            "tag-tenon-gas",
+            "tag-argon",
+            "tag-carbon",
+            "tag-fluorine-gas",
+            "tag-helium"
+        ],
+        "plots": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 100,
+                "2": 10,
+                "3": 1,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 1000,
+                "2": 100,
+                "3": 10,
+                "4": 1,
+                "5": 0
+            },
+            "3": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 10,
+                "5": 0
+            },
+            "4": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "5": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "6": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            }
+        },
+        "rent": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 10,
+                "2": 100,
+                "3": 1000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 20,
+                "2": 200,
+                "3": 2000,
+                "4": 20000,
+                "5": 0
+            },
+            "3": {
+                "1": 30,
+                "2": 300,
+                "3": 3000,
+                "4": 30000,
+                "5": 0
+            },
+            "4": {
+                "1": 40,
+                "2": 400,
+                "3": 4000,
+                "4": 40000,
+                "5": 400000
+            },
+            "5": {
+                "1": 50,
+                "2": 500,
+                "3": 5000,
+                "4": 50000,
+                "5": 500000
+            },
+            "6": {
+                "1": 60,
+                "2": 6000,
+                "3": 60000,
+                "4": 60000,
+                "5": 600000
+            }
+        },
+        "placementFee": {
+            "0": {
+                "1": 100,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 200,
+                "2": 2000,
+                "3": 2000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 300,
+                "2": 3000,
+                "3": 30000,
+                "4": 300000,
+                "5": 0
+            },
+            "3": {
+                "1": 400,
+                "2": 4000,
+                "3": 40000,
+                "4": 400000,
+                "5": 4000000
+            },
+            "4": {
+                "1": 500,
+                "2": 5000,
+                "3": 50000,
+                "4": 500000,
+                "5": 5000000
+            },
+            "5": {
+                "1": 600,
+                "2": 6000,
+                "3": 60000,
+                "4": 600000,
+                "5": 6000000
+            },
+            "6": {
+                "1": 700,
+                "2": 7000,
+                "3": 70000,
+                "4": 700000,
+                "5": 7000000
+            }
+        }
+    },
+    "planetArchetype-gas-giant-mud": {
+        "name": "MUD Gas Giant",
+        "description": "MUD controlled Gas Giant",
+        "richness": {
+            "cargo-hydrogen": 1,
+            "cargo-xenon": 1,
+            "cargo-krypton": 1,
+            "cargo-neon": 1,
+            "cargo-nitrogen": 1,
+            "cargo-sulfur-hexafluoride": 1,
+            "cargo-tenon-gas": 1,
+            "cargo-argon": 1,
+            "cargo-carbon": 1,
+            "cargo-fluorine-gas": 1,
+            "cargo-helium": 1
+        },
+        "tags": [
+            "tag-gas-giant",
+            "tag-mud",
+            "tag-hydrogen",
+            "tag-xenon",
+            "tag-krypton",
+            "tag-neon",
+            "tag-nitrogen",
+            "tag-sulfur-hexafluoride",
+            "tag-tenon-gas",
+            "tag-argon",
+            "tag-carbon",
+            "tag-fluorine-gas",
+            "tag-helium"
+        ],
+        "plots": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 100,
+                "2": 10,
+                "3": 1,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 1000,
+                "2": 100,
+                "3": 10,
+                "4": 1,
+                "5": 0
+            },
+            "3": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 10,
+                "5": 0
+            },
+            "4": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "5": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "6": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            }
+        },
+        "rent": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 10,
+                "2": 100,
+                "3": 1000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 20,
+                "2": 200,
+                "3": 2000,
+                "4": 20000,
+                "5": 0
+            },
+            "3": {
+                "1": 30,
+                "2": 300,
+                "3": 3000,
+                "4": 30000,
+                "5": 0
+            },
+            "4": {
+                "1": 40,
+                "2": 400,
+                "3": 4000,
+                "4": 40000,
+                "5": 400000
+            },
+            "5": {
+                "1": 50,
+                "2": 500,
+                "3": 5000,
+                "4": 50000,
+                "5": 500000
+            },
+            "6": {
+                "1": 60,
+                "2": 6000,
+                "3": 60000,
+                "4": 60000,
+                "5": 600000
+            }
+        },
+        "placementFee": {
+            "0": {
+                "1": 100,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 200,
+                "2": 2000,
+                "3": 2000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 300,
+                "2": 3000,
+                "3": 30000,
+                "4": 300000,
+                "5": 0
+            },
+            "3": {
+                "1": 400,
+                "2": 4000,
+                "3": 40000,
+                "4": 400000,
+                "5": 4000000
+            },
+            "4": {
+                "1": 500,
+                "2": 5000,
+                "3": 50000,
+                "4": 500000,
+                "5": 5000000
+            },
+            "5": {
+                "1": 600,
+                "2": 6000,
+                "3": 60000,
+                "4": 600000,
+                "5": 6000000
+            },
+            "6": {
+                "1": 700,
+                "2": 7000,
+                "3": 70000,
+                "4": 700000,
+                "5": 7000000
+            }
+        }
+    },
+    "planetArchetype-gas-giant-ustur": {
+        "name": "USTUR Gas Giant",
+        "description": "USTUR controlled Gas Giant",
+        "richness": {
+            "cargo-hydrogen": 1,
+            "cargo-xenon": 1,
+            "cargo-krypton": 1,
+            "cargo-neon": 1,
+            "cargo-nitrogen": 1,
+            "cargo-sulfur-hexafluoride": 1,
+            "cargo-tenon-gas": 1,
+            "cargo-argon": 1,
+            "cargo-carbon": 1,
+            "cargo-fluorine-gas": 1,
+            "cargo-helium": 1
+        },
+        "tags": [
+            "tag-gas-giant",
+            "tag-ustur",
+            "tag-hydrogen",
+            "tag-xenon",
+            "tag-krypton",
+            "tag-neon",
+            "tag-nitrogen",
+            "tag-sulfur-hexafluoride",
+            "tag-tenon-gas",
+            "tag-argon",
+            "tag-carbon",
+            "tag-fluorine-gas",
+            "tag-helium"
+        ],
+        "plots": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 100,
+                "2": 10,
+                "3": 1,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 1000,
+                "2": 100,
+                "3": 10,
+                "4": 1,
+                "5": 0
+            },
+            "3": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 10,
+                "5": 0
+            },
+            "4": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "5": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "6": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            }
+        },
+        "rent": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 10,
+                "2": 100,
+                "3": 1000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 20,
+                "2": 200,
+                "3": 2000,
+                "4": 20000,
+                "5": 0
+            },
+            "3": {
+                "1": 30,
+                "2": 300,
+                "3": 3000,
+                "4": 30000,
+                "5": 0
+            },
+            "4": {
+                "1": 40,
+                "2": 400,
+                "3": 4000,
+                "4": 40000,
+                "5": 400000
+            },
+            "5": {
+                "1": 50,
+                "2": 500,
+                "3": 5000,
+                "4": 50000,
+                "5": 500000
+            },
+            "6": {
+                "1": 60,
+                "2": 6000,
+                "3": 60000,
+                "4": 60000,
+                "5": 600000
+            }
+        },
+        "placementFee": {
+            "0": {
+                "1": 100,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 200,
+                "2": 2000,
+                "3": 2000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 300,
+                "2": 3000,
+                "3": 30000,
+                "4": 300000,
+                "5": 0
+            },
+            "3": {
+                "1": 400,
+                "2": 4000,
+                "3": 40000,
+                "4": 400000,
+                "5": 4000000
+            },
+            "4": {
+                "1": 500,
+                "2": 5000,
+                "3": 50000,
+                "4": 500000,
+                "5": 5000000
+            },
+            "5": {
+                "1": 600,
+                "2": 6000,
+                "3": 60000,
+                "4": 600000,
+                "5": 6000000
+            },
+            "6": {
+                "1": 700,
+                "2": 7000,
+                "3": 70000,
+                "4": 700000,
+                "5": 7000000
+            }
+        }
+    },
+    "planetArchetype-barren-planet-oni": {
+        "name": "ONI Barren Planet",
+        "description": "ONI controlled Barren Planet",
+        "richness": {
+            "cargo-tungsten-ore": 1,
+            "cargo-vanadium-ore": 1,
+            "cargo-zinc-ore": 1,
+            "cargo-rochinol": 1,
+            "cargo-jasphorus-crystals": 1,
+            "cargo-krypton": 1,
+            "cargo-lithium-ore": 1,
+            "cargo-magnesium-crystals": 1,
+            "cargo-manganese-ore": 1,
+            "cargo-pumice-granules": 1,
+            "cargo-tin-ore": 1,
+            "cargo-arco": 1,
+            "cargo-black-opal": 1,
+            "cargo-copper-ore": 1,
+            "cargo-genesium-crystals": 1
+        },
+        "tags": [
+            "tag-barren-planet",
+            "tag-oni",
+            "tag-tungsten-ore",
+            "tag-vanadium-ore",
+            "tag-zinc-ore",
+            "tag-rochinol",
+            "tag-jasphorus-crystals",
+            "tag-krypton",
+            "tag-lithium-ore",
+            "tag-magnesium-crystals",
+            "tag-manganese-ore",
+            "tag-pumice-granules",
+            "tag-tin-ore",
+            "tag-arco",
+            "tag-black-opal",
+            "tag-copper-ore",
+            "tag-genesium-crystals"
+        ],
+        "plots": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 100,
+                "2": 10,
+                "3": 1,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 1000,
+                "2": 100,
+                "3": 10,
+                "4": 1,
+                "5": 0
+            },
+            "3": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 10,
+                "5": 0
+            },
+            "4": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "5": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "6": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            }
+        },
+        "rent": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 10,
+                "2": 100,
+                "3": 1000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 20,
+                "2": 200,
+                "3": 2000,
+                "4": 20000,
+                "5": 0
+            },
+            "3": {
+                "1": 30,
+                "2": 300,
+                "3": 3000,
+                "4": 30000,
+                "5": 0
+            },
+            "4": {
+                "1": 40,
+                "2": 400,
+                "3": 4000,
+                "4": 40000,
+                "5": 400000
+            },
+            "5": {
+                "1": 50,
+                "2": 500,
+                "3": 5000,
+                "4": 50000,
+                "5": 500000
+            },
+            "6": {
+                "1": 60,
+                "2": 6000,
+                "3": 60000,
+                "4": 60000,
+                "5": 600000
+            }
+        },
+        "placementFee": {
+            "0": {
+                "1": 100,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 200,
+                "2": 2000,
+                "3": 2000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 300,
+                "2": 3000,
+                "3": 30000,
+                "4": 300000,
+                "5": 0
+            },
+            "3": {
+                "1": 400,
+                "2": 4000,
+                "3": 40000,
+                "4": 400000,
+                "5": 4000000
+            },
+            "4": {
+                "1": 500,
+                "2": 5000,
+                "3": 50000,
+                "4": 500000,
+                "5": 5000000
+            },
+            "5": {
+                "1": 600,
+                "2": 6000,
+                "3": 60000,
+                "4": 600000,
+                "5": 6000000
+            },
+            "6": {
+                "1": 700,
+                "2": 7000,
+                "3": 70000,
+                "4": 700000,
+                "5": 7000000
+            }
+        }
+    },
+    "planetArchetype-barren-planet-mud": {
+        "name": "MUD Barren Planet",
+        "description": "MUD controlled Barren Planet",
+        "richness": {
+            "cargo-tungsten-ore": 1,
+            "cargo-vanadium-ore": 1,
+            "cargo-zinc-ore": 1,
+            "cargo-rochinol": 1,
+            "cargo-jasphorus-crystals": 1,
+            "cargo-krypton": 1,
+            "cargo-lithium-ore": 1,
+            "cargo-magnesium-crystals": 1,
+            "cargo-manganese-ore": 1,
+            "cargo-pumice-granules": 1,
+            "cargo-tin-ore": 1,
+            "cargo-arco": 1,
+            "cargo-black-opal": 1,
+            "cargo-copper-ore": 1,
+            "cargo-genesium-crystals": 1
+        },
+        "tags": [
+            "tag-barren-planet",
+            "tag-mud",
+            "tag-tungsten-ore",
+            "tag-vanadium-ore",
+            "tag-zinc-ore",
+            "tag-rochinol",
+            "tag-jasphorus-crystals",
+            "tag-krypton",
+            "tag-lithium-ore",
+            "tag-magnesium-crystals",
+            "tag-manganese-ore",
+            "tag-pumice-granules",
+            "tag-tin-ore",
+            "tag-arco",
+            "tag-black-opal",
+            "tag-copper-ore",
+            "tag-genesium-crystals"
+        ],
+        "plots": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 100,
+                "2": 10,
+                "3": 1,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 1000,
+                "2": 100,
+                "3": 10,
+                "4": 1,
+                "5": 0
+            },
+            "3": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 10,
+                "5": 0
+            },
+            "4": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "5": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "6": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            }
+        },
+        "rent": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 10,
+                "2": 100,
+                "3": 1000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 20,
+                "2": 200,
+                "3": 2000,
+                "4": 20000,
+                "5": 0
+            },
+            "3": {
+                "1": 30,
+                "2": 300,
+                "3": 3000,
+                "4": 30000,
+                "5": 0
+            },
+            "4": {
+                "1": 40,
+                "2": 400,
+                "3": 4000,
+                "4": 40000,
+                "5": 400000
+            },
+            "5": {
+                "1": 50,
+                "2": 500,
+                "3": 5000,
+                "4": 50000,
+                "5": 500000
+            },
+            "6": {
+                "1": 60,
+                "2": 6000,
+                "3": 60000,
+                "4": 60000,
+                "5": 600000
+            }
+        },
+        "placementFee": {
+            "0": {
+                "1": 100,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 200,
+                "2": 2000,
+                "3": 2000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 300,
+                "2": 3000,
+                "3": 30000,
+                "4": 300000,
+                "5": 0
+            },
+            "3": {
+                "1": 400,
+                "2": 4000,
+                "3": 40000,
+                "4": 400000,
+                "5": 4000000
+            },
+            "4": {
+                "1": 500,
+                "2": 5000,
+                "3": 50000,
+                "4": 500000,
+                "5": 5000000
+            },
+            "5": {
+                "1": 600,
+                "2": 6000,
+                "3": 60000,
+                "4": 600000,
+                "5": 6000000
+            },
+            "6": {
+                "1": 700,
+                "2": 7000,
+                "3": 70000,
+                "4": 700000,
+                "5": 7000000
+            }
+        }
+    },
+    "planetArchetype-barren-planet-ustur": {
+        "name": "USTUR Barren Planet",
+        "description": "USTUR controlled Barren Planet",
+        "richness": {
+            "cargo-tungsten-ore": 1,
+            "cargo-vanadium-ore": 1,
+            "cargo-zinc-ore": 1,
+            "cargo-rochinol": 1,
+            "cargo-jasphorus-crystals": 1,
+            "cargo-krypton": 1,
+            "cargo-lithium-ore": 1,
+            "cargo-magnesium-crystals": 1,
+            "cargo-manganese-ore": 1,
+            "cargo-pumice-granules": 1,
+            "cargo-tin-ore": 1,
+            "cargo-arco": 1,
+            "cargo-black-opal": 1,
+            "cargo-copper-ore": 1,
+            "cargo-genesium-crystals": 1
+        },
+        "tags": [
+            "tag-barren-planet",
+            "tag-ustur",
+            "tag-tungsten-ore",
+            "tag-vanadium-ore",
+            "tag-zinc-ore",
+            "tag-rochinol",
+            "tag-jasphorus-crystals",
+            "tag-krypton",
+            "tag-lithium-ore",
+            "tag-magnesium-crystals",
+            "tag-manganese-ore",
+            "tag-pumice-granules",
+            "tag-tin-ore",
+            "tag-arco",
+            "tag-black-opal",
+            "tag-copper-ore",
+            "tag-genesium-crystals"
+        ],
+        "plots": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 100,
+                "2": 10,
+                "3": 1,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 1000,
+                "2": 100,
+                "3": 10,
+                "4": 1,
+                "5": 0
+            },
+            "3": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 10,
+                "5": 0
+            },
+            "4": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "5": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "6": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            }
+        },
+        "rent": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 10,
+                "2": 100,
+                "3": 1000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 20,
+                "2": 200,
+                "3": 2000,
+                "4": 20000,
+                "5": 0
+            },
+            "3": {
+                "1": 30,
+                "2": 300,
+                "3": 3000,
+                "4": 30000,
+                "5": 0
+            },
+            "4": {
+                "1": 40,
+                "2": 400,
+                "3": 4000,
+                "4": 40000,
+                "5": 400000
+            },
+            "5": {
+                "1": 50,
+                "2": 500,
+                "3": 5000,
+                "4": 50000,
+                "5": 500000
+            },
+            "6": {
+                "1": 60,
+                "2": 6000,
+                "3": 60000,
+                "4": 60000,
+                "5": 600000
+            }
+        },
+        "placementFee": {
+            "0": {
+                "1": 100,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 200,
+                "2": 2000,
+                "3": 2000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 300,
+                "2": 3000,
+                "3": 30000,
+                "4": 300000,
+                "5": 0
+            },
+            "3": {
+                "1": 400,
+                "2": 4000,
+                "3": 40000,
+                "4": 400000,
+                "5": 4000000
+            },
+            "4": {
+                "1": 500,
+                "2": 5000,
+                "3": 50000,
+                "4": 500000,
+                "5": 5000000
+            },
+            "5": {
+                "1": 600,
+                "2": 6000,
+                "3": 60000,
+                "4": 600000,
+                "5": 6000000
+            },
+            "6": {
+                "1": 700,
+                "2": 7000,
+                "3": 70000,
+                "4": 700000,
+                "5": 7000000
+            }
+        }
+    },
+    "planetArchetype-volcanic-planet-oni": {
+        "name": "ONI Volcanic Planet",
+        "description": "ONI controlled Volcanic Planet",
+        "richness": {
+            "cargo-tourmaline-crystals": 1,
+            "cargo-rochinol": 1,
+            "cargo-crystal-lattice": 1,
+            "cargo-rhenium-ore": 1,
+            "cargo-diamond": 1,
+            "cargo-iridium-ore": 1,
+            "cargo-lumanite": 1,
+            "cargo-mica": 1,
+            "cargo-osmium-ore": 1,
+            "cargo-palladium": 1,
+            "cargo-platinum-ore": 1,
+            "cargo-rhodium-ore": 1,
+            "cargo-spinel-crystals": 1,
+            "cargo-tantalum-ore": 1,
+            "cargo-arco": 1,
+            "cargo-cinnabar-crystals": 1,
+            "cargo-dodiline-crystals": 1,
+            "cargo-fluorine-gas": 1,
+            "cargo-garnet-crystals": 1,
+            "cargo-glowstone-crystals": 1,
+            "cargo-hafnium-ore": 1,
+            "cargo-helium": 1
+        },
+        "tags": [
+            "tag-volcanic-planet",
+            "tag-oni",
+            "tag-tourmaline-crystals",
+            "tag-rochinol",
+            "tag-crystal-lattice",
+            "tag-rhenium-ore",
+            "tag-diamond",
+            "tag-iridium-ore",
+            "tag-lumanite",
+            "tag-mica",
+            "tag-osmium-ore",
+            "tag-palladium",
+            "tag-platinum-ore",
+            "tag-rhodium-ore",
+            "tag-spinel-crystals",
+            "tag-tantalum-ore",
+            "tag-arco",
+            "tag-cinnabar-crystals",
+            "tag-dodiline-crystals",
+            "tag-fluorine-gas",
+            "tag-garnet-crystals",
+            "tag-glowstone-crystals",
+            "tag-hafnium-ore",
+            "tag-helium"
+        ],
+        "plots": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 100,
+                "2": 10,
+                "3": 1,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 1000,
+                "2": 100,
+                "3": 10,
+                "4": 1,
+                "5": 0
+            },
+            "3": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 10,
+                "5": 0
+            },
+            "4": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "5": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "6": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            }
+        },
+        "rent": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 10,
+                "2": 100,
+                "3": 1000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 20,
+                "2": 200,
+                "3": 2000,
+                "4": 20000,
+                "5": 0
+            },
+            "3": {
+                "1": 30,
+                "2": 300,
+                "3": 3000,
+                "4": 30000,
+                "5": 0
+            },
+            "4": {
+                "1": 40,
+                "2": 400,
+                "3": 4000,
+                "4": 40000,
+                "5": 400000
+            },
+            "5": {
+                "1": 50,
+                "2": 500,
+                "3": 5000,
+                "4": 50000,
+                "5": 500000
+            },
+            "6": {
+                "1": 60,
+                "2": 6000,
+                "3": 60000,
+                "4": 60000,
+                "5": 600000
+            }
+        },
+        "placementFee": {
+            "0": {
+                "1": 100,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 200,
+                "2": 2000,
+                "3": 2000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 300,
+                "2": 3000,
+                "3": 30000,
+                "4": 300000,
+                "5": 0
+            },
+            "3": {
+                "1": 400,
+                "2": 4000,
+                "3": 40000,
+                "4": 400000,
+                "5": 4000000
+            },
+            "4": {
+                "1": 500,
+                "2": 5000,
+                "3": 50000,
+                "4": 500000,
+                "5": 5000000
+            },
+            "5": {
+                "1": 600,
+                "2": 6000,
+                "3": 60000,
+                "4": 600000,
+                "5": 6000000
+            },
+            "6": {
+                "1": 700,
+                "2": 7000,
+                "3": 70000,
+                "4": 700000,
+                "5": 7000000
+            }
+        }
+    },
+    "planetArchetype-volcanic-planet-mud": {
+        "name": "MUD Volcanic Planet",
+        "description": "MUD controlled Volcanic Planet",
+        "richness": {
+            "cargo-tourmaline-crystals": 1,
+            "cargo-rochinol": 1,
+            "cargo-crystal-lattice": 1,
+            "cargo-rhenium-ore": 1,
+            "cargo-diamond": 1,
+            "cargo-iridium-ore": 1,
+            "cargo-lumanite": 1,
+            "cargo-mica": 1,
+            "cargo-osmium-ore": 1,
+            "cargo-palladium": 1,
+            "cargo-platinum-ore": 1,
+            "cargo-rhodium-ore": 1,
+            "cargo-spinel-crystals": 1,
+            "cargo-tantalum-ore": 1,
+            "cargo-arco": 1,
+            "cargo-cinnabar-crystals": 1,
+            "cargo-dodiline-crystals": 1,
+            "cargo-fluorine-gas": 1,
+            "cargo-garnet-crystals": 1,
+            "cargo-glowstone-crystals": 1,
+            "cargo-hafnium-ore": 1,
+            "cargo-helium": 1
+        },
+        "tags": [
+            "tag-volcanic-planet",
+            "tag-mud",
+            "tag-tourmaline-crystals",
+            "tag-rochinol",
+            "tag-crystal-lattice",
+            "tag-rhenium-ore",
+            "tag-diamond",
+            "tag-iridium-ore",
+            "tag-lumanite",
+            "tag-mica",
+            "tag-osmium-ore",
+            "tag-palladium",
+            "tag-platinum-ore",
+            "tag-rhodium-ore",
+            "tag-spinel-crystals",
+            "tag-tantalum-ore",
+            "tag-arco",
+            "tag-cinnabar-crystals",
+            "tag-dodiline-crystals",
+            "tag-fluorine-gas",
+            "tag-garnet-crystals",
+            "tag-glowstone-crystals",
+            "tag-hafnium-ore",
+            "tag-helium"
+        ],
+        "plots": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 100,
+                "2": 10,
+                "3": 1,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 1000,
+                "2": 100,
+                "3": 10,
+                "4": 1,
+                "5": 0
+            },
+            "3": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 10,
+                "5": 0
+            },
+            "4": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "5": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "6": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            }
+        },
+        "rent": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 10,
+                "2": 100,
+                "3": 1000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 20,
+                "2": 200,
+                "3": 2000,
+                "4": 20000,
+                "5": 0
+            },
+            "3": {
+                "1": 30,
+                "2": 300,
+                "3": 3000,
+                "4": 30000,
+                "5": 0
+            },
+            "4": {
+                "1": 40,
+                "2": 400,
+                "3": 4000,
+                "4": 40000,
+                "5": 400000
+            },
+            "5": {
+                "1": 50,
+                "2": 500,
+                "3": 5000,
+                "4": 50000,
+                "5": 500000
+            },
+            "6": {
+                "1": 60,
+                "2": 6000,
+                "3": 60000,
+                "4": 60000,
+                "5": 600000
+            }
+        },
+        "placementFee": {
+            "0": {
+                "1": 100,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 200,
+                "2": 2000,
+                "3": 2000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 300,
+                "2": 3000,
+                "3": 30000,
+                "4": 300000,
+                "5": 0
+            },
+            "3": {
+                "1": 400,
+                "2": 4000,
+                "3": 40000,
+                "4": 400000,
+                "5": 4000000
+            },
+            "4": {
+                "1": 500,
+                "2": 5000,
+                "3": 50000,
+                "4": 500000,
+                "5": 5000000
+            },
+            "5": {
+                "1": 600,
+                "2": 6000,
+                "3": 60000,
+                "4": 600000,
+                "5": 6000000
+            },
+            "6": {
+                "1": 700,
+                "2": 7000,
+                "3": 70000,
+                "4": 700000,
+                "5": 7000000
+            }
+        }
+    },
+    "planetArchetype-volcanic-planet-ustur": {
+        "name": "USTUR Volcanic Planet",
+        "description": "USTUR controlled Volcanic Planet",
+        "richness": {
+            "cargo-tourmaline-crystals": 1,
+            "cargo-rochinol": 1,
+            "cargo-crystal-lattice": 1,
+            "cargo-rhenium-ore": 1,
+            "cargo-diamond": 1,
+            "cargo-iridium-ore": 1,
+            "cargo-lumanite": 1,
+            "cargo-mica": 1,
+            "cargo-osmium-ore": 1,
+            "cargo-palladium": 1,
+            "cargo-platinum-ore": 1,
+            "cargo-rhodium-ore": 1,
+            "cargo-spinel-crystals": 1,
+            "cargo-tantalum-ore": 1,
+            "cargo-arco": 1,
+            "cargo-cinnabar-crystals": 1,
+            "cargo-dodiline-crystals": 1,
+            "cargo-fluorine-gas": 1,
+            "cargo-garnet-crystals": 1,
+            "cargo-glowstone-crystals": 1,
+            "cargo-hafnium-ore": 1,
+            "cargo-helium": 1
+        },
+        "tags": [
+            "tag-volcanic-planet",
+            "tag-ustur",
+            "tag-tourmaline-crystals",
+            "tag-rochinol",
+            "tag-crystal-lattice",
+            "tag-rhenium-ore",
+            "tag-diamond",
+            "tag-iridium-ore",
+            "tag-lumanite",
+            "tag-mica",
+            "tag-osmium-ore",
+            "tag-palladium",
+            "tag-platinum-ore",
+            "tag-rhodium-ore",
+            "tag-spinel-crystals",
+            "tag-tantalum-ore",
+            "tag-arco",
+            "tag-cinnabar-crystals",
+            "tag-dodiline-crystals",
+            "tag-fluorine-gas",
+            "tag-garnet-crystals",
+            "tag-glowstone-crystals",
+            "tag-hafnium-ore",
+            "tag-helium"
+        ],
+        "plots": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 100,
+                "2": 10,
+                "3": 1,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 1000,
+                "2": 100,
+                "3": 10,
+                "4": 1,
+                "5": 0
+            },
+            "3": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 10,
+                "5": 0
+            },
+            "4": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "5": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "6": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            }
+        },
+        "rent": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 10,
+                "2": 100,
+                "3": 1000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 20,
+                "2": 200,
+                "3": 2000,
+                "4": 20000,
+                "5": 0
+            },
+            "3": {
+                "1": 30,
+                "2": 300,
+                "3": 3000,
+                "4": 30000,
+                "5": 0
+            },
+            "4": {
+                "1": 40,
+                "2": 400,
+                "3": 4000,
+                "4": 40000,
+                "5": 400000
+            },
+            "5": {
+                "1": 50,
+                "2": 500,
+                "3": 5000,
+                "4": 50000,
+                "5": 500000
+            },
+            "6": {
+                "1": 60,
+                "2": 6000,
+                "3": 60000,
+                "4": 60000,
+                "5": 600000
+            }
+        },
+        "placementFee": {
+            "0": {
+                "1": 100,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 200,
+                "2": 2000,
+                "3": 2000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 300,
+                "2": 3000,
+                "3": 30000,
+                "4": 300000,
+                "5": 0
+            },
+            "3": {
+                "1": 400,
+                "2": 4000,
+                "3": 40000,
+                "4": 400000,
+                "5": 4000000
+            },
+            "4": {
+                "1": 500,
+                "2": 5000,
+                "3": 50000,
+                "4": 500000,
+                "5": 5000000
+            },
+            "5": {
+                "1": 600,
+                "2": 6000,
+                "3": 60000,
+                "4": 600000,
+                "5": 6000000
+            },
+            "6": {
+                "1": 700,
+                "2": 7000,
+                "3": 70000,
+                "4": 700000,
+                "5": 7000000
+            }
+        }
+    },
+    "planetArchetype-system-asteroid belt-oni": {
+        "name": "ONI System Asteroid Belt",
+        "description": "ONI controlled System Asteroid Belt",
+        "richness": {
+            "cargo-titanium-ore": 1,
+            "cargo-tritium-ore": 1,
+            "cargo-crystal-lattice": 1,
+            "cargo-rhenium-ore": 1,
+            "cargo-lithium-ore": 1,
+            "cargo-methane": 1,
+            "cargo-quartz-crystals": 1,
+            "cargo-scandium-ore": 1,
+            "cargo-silica": 1,
+            "cargo-sodium-crystals": 1,
+            "cargo-strontium-crystals": 1,
+            "cargo-aluminum-ore": 1,
+            "cargo-boron-ore": 1,
+            "cargo-cesium": 1,
+            "cargo-copper-ore": 1,
+            "cargo-heliodor-crystals": 1
+        },
+        "tags": [
+            "tag-system-asteroid-belt",
+            "tag-oni",
+            "tag-titanium-ore",
+            "tag-tritium-ore",
+            "tag-crystal-lattice",
+            "tag-rhenium-ore",
+            "tag-lithium-ore",
+            "tag-methane",
+            "tag-quartz-crystals",
+            "tag-scandium-ore",
+            "tag-silica",
+            "tag-sodium-crystals",
+            "tag-strontium-crystals",
+            "tag-aluminum-ore",
+            "tag-boron-ore",
+            "tag-cesium",
+            "tag-copper-ore",
+            "tag-heliodor-crystals"
+        ],
+        "plots": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 100,
+                "2": 10,
+                "3": 1,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 1000,
+                "2": 100,
+                "3": 10,
+                "4": 1,
+                "5": 0
+            },
+            "3": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 10,
+                "5": 0
+            },
+            "4": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "5": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "6": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            }
+        },
+        "rent": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 10,
+                "2": 100,
+                "3": 1000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 20,
+                "2": 200,
+                "3": 2000,
+                "4": 20000,
+                "5": 0
+            },
+            "3": {
+                "1": 30,
+                "2": 300,
+                "3": 3000,
+                "4": 30000,
+                "5": 0
+            },
+            "4": {
+                "1": 40,
+                "2": 400,
+                "3": 4000,
+                "4": 40000,
+                "5": 400000
+            },
+            "5": {
+                "1": 50,
+                "2": 500,
+                "3": 5000,
+                "4": 50000,
+                "5": 500000
+            },
+            "6": {
+                "1": 60,
+                "2": 6000,
+                "3": 60000,
+                "4": 60000,
+                "5": 600000
+            }
+        },
+        "placementFee": {
+            "0": {
+                "1": 100,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 200,
+                "2": 2000,
+                "3": 2000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 300,
+                "2": 3000,
+                "3": 30000,
+                "4": 300000,
+                "5": 0
+            },
+            "3": {
+                "1": 400,
+                "2": 4000,
+                "3": 40000,
+                "4": 400000,
+                "5": 4000000
+            },
+            "4": {
+                "1": 500,
+                "2": 5000,
+                "3": 50000,
+                "4": 500000,
+                "5": 5000000
+            },
+            "5": {
+                "1": 600,
+                "2": 6000,
+                "3": 60000,
+                "4": 600000,
+                "5": 6000000
+            },
+            "6": {
+                "1": 700,
+                "2": 7000,
+                "3": 70000,
+                "4": 700000,
+                "5": 7000000
+            }
+        }
+    },
+    "planetArchetype-system-asteroid belt-mud": {
+        "name": "MUD System Asteroid Belt",
+        "description": "MUD controlled System Asteroid Belt",
+        "richness": {
+            "cargo-titanium-ore": 1,
+            "cargo-tritium-ore": 1,
+            "cargo-crystal-lattice": 1,
+            "cargo-rhenium-ore": 1,
+            "cargo-lithium-ore": 1,
+            "cargo-methane": 1,
+            "cargo-quartz-crystals": 1,
+            "cargo-scandium-ore": 1,
+            "cargo-silica": 1,
+            "cargo-sodium-crystals": 1,
+            "cargo-strontium-crystals": 1,
+            "cargo-aluminum-ore": 1,
+            "cargo-boron-ore": 1,
+            "cargo-cesium": 1,
+            "cargo-copper-ore": 1,
+            "cargo-heliodor-crystals": 1
+        },
+        "tags": [
+            "tag-system-asteroid-belt",
+            "tag-mud",
+            "tag-titanium-ore",
+            "tag-tritium-ore",
+            "tag-crystal-lattice",
+            "tag-rhenium-ore",
+            "tag-lithium-ore",
+            "tag-methane",
+            "tag-quartz-crystals",
+            "tag-scandium-ore",
+            "tag-silica",
+            "tag-sodium-crystals",
+            "tag-strontium-crystals",
+            "tag-aluminum-ore",
+            "tag-boron-ore",
+            "tag-cesium",
+            "tag-copper-ore",
+            "tag-heliodor-crystals"
+        ],
+        "plots": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 100,
+                "2": 10,
+                "3": 1,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 1000,
+                "2": 100,
+                "3": 10,
+                "4": 1,
+                "5": 0
+            },
+            "3": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 10,
+                "5": 0
+            },
+            "4": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "5": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "6": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            }
+        },
+        "rent": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 10,
+                "2": 100,
+                "3": 1000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 20,
+                "2": 200,
+                "3": 2000,
+                "4": 20000,
+                "5": 0
+            },
+            "3": {
+                "1": 30,
+                "2": 300,
+                "3": 3000,
+                "4": 30000,
+                "5": 0
+            },
+            "4": {
+                "1": 40,
+                "2": 400,
+                "3": 4000,
+                "4": 40000,
+                "5": 400000
+            },
+            "5": {
+                "1": 50,
+                "2": 500,
+                "3": 5000,
+                "4": 50000,
+                "5": 500000
+            },
+            "6": {
+                "1": 60,
+                "2": 6000,
+                "3": 60000,
+                "4": 60000,
+                "5": 600000
+            }
+        },
+        "placementFee": {
+            "0": {
+                "1": 100,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 200,
+                "2": 2000,
+                "3": 2000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 300,
+                "2": 3000,
+                "3": 30000,
+                "4": 300000,
+                "5": 0
+            },
+            "3": {
+                "1": 400,
+                "2": 4000,
+                "3": 40000,
+                "4": 400000,
+                "5": 4000000
+            },
+            "4": {
+                "1": 500,
+                "2": 5000,
+                "3": 50000,
+                "4": 500000,
+                "5": 5000000
+            },
+            "5": {
+                "1": 600,
+                "2": 6000,
+                "3": 60000,
+                "4": 600000,
+                "5": 6000000
+            },
+            "6": {
+                "1": 700,
+                "2": 7000,
+                "3": 70000,
+                "4": 700000,
+                "5": 7000000
+            }
+        }
+    },
+    "planetArchetype-system-asteroid belt-ustur": {
+        "name": "USTUR System Asteroid Belt",
+        "description": "USTUR controlled System Asteroid Belt",
+        "richness": {
+            "cargo-titanium-ore": 1,
+            "cargo-tritium-ore": 1,
+            "cargo-crystal-lattice": 1,
+            "cargo-rhenium-ore": 1,
+            "cargo-lithium-ore": 1,
+            "cargo-methane": 1,
+            "cargo-quartz-crystals": 1,
+            "cargo-scandium-ore": 1,
+            "cargo-silica": 1,
+            "cargo-sodium-crystals": 1,
+            "cargo-strontium-crystals": 1,
+            "cargo-aluminum-ore": 1,
+            "cargo-boron-ore": 1,
+            "cargo-cesium": 1,
+            "cargo-copper-ore": 1,
+            "cargo-heliodor-crystals": 1
+        },
+        "tags": [
+            "tag-system-asteroid-belt",
+            "tag-ustur",
+            "tag-titanium-ore",
+            "tag-tritium-ore",
+            "tag-crystal-lattice",
+            "tag-rhenium-ore",
+            "tag-lithium-ore",
+            "tag-methane",
+            "tag-quartz-crystals",
+            "tag-scandium-ore",
+            "tag-silica",
+            "tag-sodium-crystals",
+            "tag-strontium-crystals",
+            "tag-aluminum-ore",
+            "tag-boron-ore",
+            "tag-cesium",
+            "tag-copper-ore",
+            "tag-heliodor-crystals"
+        ],
+        "plots": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 100,
+                "2": 10,
+                "3": 1,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 1000,
+                "2": 100,
+                "3": 10,
+                "4": 1,
+                "5": 0
+            },
+            "3": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 10,
+                "5": 0
+            },
+            "4": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "5": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "6": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            }
+        },
+        "rent": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 10,
+                "2": 100,
+                "3": 1000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 20,
+                "2": 200,
+                "3": 2000,
+                "4": 20000,
+                "5": 0
+            },
+            "3": {
+                "1": 30,
+                "2": 300,
+                "3": 3000,
+                "4": 30000,
+                "5": 0
+            },
+            "4": {
+                "1": 40,
+                "2": 400,
+                "3": 4000,
+                "4": 40000,
+                "5": 400000
+            },
+            "5": {
+                "1": 50,
+                "2": 500,
+                "3": 5000,
+                "4": 50000,
+                "5": 500000
+            },
+            "6": {
+                "1": 60,
+                "2": 6000,
+                "3": 60000,
+                "4": 60000,
+                "5": 600000
+            }
+        },
+        "placementFee": {
+            "0": {
+                "1": 100,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 200,
+                "2": 2000,
+                "3": 2000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 300,
+                "2": 3000,
+                "3": 30000,
+                "4": 300000,
+                "5": 0
+            },
+            "3": {
+                "1": 400,
+                "2": 4000,
+                "3": 40000,
+                "4": 400000,
+                "5": 4000000
+            },
+            "4": {
+                "1": 500,
+                "2": 5000,
+                "3": 50000,
+                "4": 500000,
+                "5": 5000000
+            },
+            "5": {
+                "1": 600,
+                "2": 6000,
+                "3": 60000,
+                "4": 600000,
+                "5": 6000000
+            },
+            "6": {
+                "1": 700,
+                "2": 7000,
+                "3": 70000,
+                "4": 700000,
+                "5": 7000000
+            }
+        }
+    },
+    "planetArchetype-dark-planet-oni": {
+        "name": "ONI Dark Planet",
+        "description": "ONI controlled Dark Planet",
+        "richness": {
+            "cargo-topaz-crystals": 1,
+            "cargo-viscovite-crystals": 1,
+            "cargo-xenon": 1,
+            "cargo-raw-chisenic": 1,
+            "cargo-rochinol": 1,
+            "cargo-crystal-lattice": 1,
+            "cargo-diamond": 1,
+            "cargo-methane": 1,
+            "cargo-nanite-crystals": 1,
+            "cargo-nanosil": 1,
+            "cargo-neodymium": 1,
+            "cargo-neon": 1,
+            "cargo-opal-fragments": 1,
+            "cargo-prismarite": 1,
+            "cargo-radiant-dust": 1,
+            "cargo-silver-ore": 1,
+            "cargo-sulfur-hexafluoride": 1,
+            "cargo-arco": 1,
+            "cargo-beryllium-crystals": 1,
+            "cargo-emerald-crystals": 1,
+            "cargo-heliodor-crystals": 1
+        },
+        "tags": [
+            "tag-dark-planet",
+            "tag-oni",
+            "tag-topaz-crystals",
+            "tag-viscovite-crystals",
+            "tag-xenon",
+            "tag-raw-chisenic",
+            "tag-rochinol",
+            "tag-crystal-lattice",
+            "tag-diamond",
+            "tag-methane",
+            "tag-nanite-crystals",
+            "tag-nanosil",
+            "tag-neodymium",
+            "tag-neon",
+            "tag-opal-fragments",
+            "tag-prismarite",
+            "tag-radiant-dust",
+            "tag-silver-ore",
+            "tag-sulfur-hexafluoride",
+            "tag-arco",
+            "tag-beryllium-crystals",
+            "tag-emerald-crystals",
+            "tag-heliodor-crystals"
+        ],
+        "plots": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 100,
+                "2": 10,
+                "3": 1,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 1000,
+                "2": 100,
+                "3": 10,
+                "4": 1,
+                "5": 0
+            },
+            "3": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 10,
+                "5": 0
+            },
+            "4": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "5": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "6": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            }
+        },
+        "rent": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 10,
+                "2": 100,
+                "3": 1000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 20,
+                "2": 200,
+                "3": 2000,
+                "4": 20000,
+                "5": 0
+            },
+            "3": {
+                "1": 30,
+                "2": 300,
+                "3": 3000,
+                "4": 30000,
+                "5": 0
+            },
+            "4": {
+                "1": 40,
+                "2": 400,
+                "3": 4000,
+                "4": 40000,
+                "5": 400000
+            },
+            "5": {
+                "1": 50,
+                "2": 500,
+                "3": 5000,
+                "4": 50000,
+                "5": 500000
+            },
+            "6": {
+                "1": 60,
+                "2": 6000,
+                "3": 60000,
+                "4": 60000,
+                "5": 600000
+            }
+        },
+        "placementFee": {
+            "0": {
+                "1": 100,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 200,
+                "2": 2000,
+                "3": 2000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 300,
+                "2": 3000,
+                "3": 30000,
+                "4": 300000,
+                "5": 0
+            },
+            "3": {
+                "1": 400,
+                "2": 4000,
+                "3": 40000,
+                "4": 400000,
+                "5": 4000000
+            },
+            "4": {
+                "1": 500,
+                "2": 5000,
+                "3": 50000,
+                "4": 500000,
+                "5": 5000000
+            },
+            "5": {
+                "1": 600,
+                "2": 6000,
+                "3": 60000,
+                "4": 600000,
+                "5": 6000000
+            },
+            "6": {
+                "1": 700,
+                "2": 7000,
+                "3": 70000,
+                "4": 700000,
+                "5": 7000000
+            }
+        }
+    },
+    "planetArchetype-dark-planet-mud": {
+        "name": "MUD Dark Planet",
+        "description": "MUD controlled Dark Planet",
+        "richness": {
+            "cargo-topaz-crystals": 1,
+            "cargo-viscovite-crystals": 1,
+            "cargo-xenon": 1,
+            "cargo-raw-chisenic": 1,
+            "cargo-rochinol": 1,
+            "cargo-crystal-lattice": 1,
+            "cargo-diamond": 1,
+            "cargo-methane": 1,
+            "cargo-nanite-crystals": 1,
+            "cargo-nanosil": 1,
+            "cargo-neodymium": 1,
+            "cargo-neon": 1,
+            "cargo-opal-fragments": 1,
+            "cargo-prismarite": 1,
+            "cargo-radiant-dust": 1,
+            "cargo-silver-ore": 1,
+            "cargo-sulfur-hexafluoride": 1,
+            "cargo-arco": 1,
+            "cargo-beryllium-crystals": 1,
+            "cargo-emerald-crystals": 1,
+            "cargo-heliodor-crystals": 1
+        },
+        "tags": [
+            "tag-dark-planet",
+            "tag-mud",
+            "tag-topaz-crystals",
+            "tag-viscovite-crystals",
+            "tag-xenon",
+            "tag-raw-chisenic",
+            "tag-rochinol",
+            "tag-crystal-lattice",
+            "tag-diamond",
+            "tag-methane",
+            "tag-nanite-crystals",
+            "tag-nanosil",
+            "tag-neodymium",
+            "tag-neon",
+            "tag-opal-fragments",
+            "tag-prismarite",
+            "tag-radiant-dust",
+            "tag-silver-ore",
+            "tag-sulfur-hexafluoride",
+            "tag-arco",
+            "tag-beryllium-crystals",
+            "tag-emerald-crystals",
+            "tag-heliodor-crystals"
+        ],
+        "plots": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 100,
+                "2": 10,
+                "3": 1,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 1000,
+                "2": 100,
+                "3": 10,
+                "4": 1,
+                "5": 0
+            },
+            "3": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 10,
+                "5": 0
+            },
+            "4": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "5": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "6": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            }
+        },
+        "rent": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 10,
+                "2": 100,
+                "3": 1000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 20,
+                "2": 200,
+                "3": 2000,
+                "4": 20000,
+                "5": 0
+            },
+            "3": {
+                "1": 30,
+                "2": 300,
+                "3": 3000,
+                "4": 30000,
+                "5": 0
+            },
+            "4": {
+                "1": 40,
+                "2": 400,
+                "3": 4000,
+                "4": 40000,
+                "5": 400000
+            },
+            "5": {
+                "1": 50,
+                "2": 500,
+                "3": 5000,
+                "4": 50000,
+                "5": 500000
+            },
+            "6": {
+                "1": 60,
+                "2": 6000,
+                "3": 60000,
+                "4": 60000,
+                "5": 600000
+            }
+        },
+        "placementFee": {
+            "0": {
+                "1": 100,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 200,
+                "2": 2000,
+                "3": 2000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 300,
+                "2": 3000,
+                "3": 30000,
+                "4": 300000,
+                "5": 0
+            },
+            "3": {
+                "1": 400,
+                "2": 4000,
+                "3": 40000,
+                "4": 400000,
+                "5": 4000000
+            },
+            "4": {
+                "1": 500,
+                "2": 5000,
+                "3": 50000,
+                "4": 500000,
+                "5": 5000000
+            },
+            "5": {
+                "1": 600,
+                "2": 6000,
+                "3": 60000,
+                "4": 600000,
+                "5": 6000000
+            },
+            "6": {
+                "1": 700,
+                "2": 7000,
+                "3": 70000,
+                "4": 700000,
+                "5": 7000000
+            }
+        }
+    },
+    "planetArchetype-dark-planet-ustur": {
+        "name": "USTUR Dark Planet",
+        "description": "USTUR controlled Dark Planet",
+        "richness": {
+            "cargo-topaz-crystals": 1,
+            "cargo-viscovite-crystals": 1,
+            "cargo-xenon": 1,
+            "cargo-raw-chisenic": 1,
+            "cargo-rochinol": 1,
+            "cargo-crystal-lattice": 1,
+            "cargo-diamond": 1,
+            "cargo-methane": 1,
+            "cargo-nanite-crystals": 1,
+            "cargo-nanosil": 1,
+            "cargo-neodymium": 1,
+            "cargo-neon": 1,
+            "cargo-opal-fragments": 1,
+            "cargo-prismarite": 1,
+            "cargo-radiant-dust": 1,
+            "cargo-silver-ore": 1,
+            "cargo-sulfur-hexafluoride": 1,
+            "cargo-arco": 1,
+            "cargo-beryllium-crystals": 1,
+            "cargo-emerald-crystals": 1,
+            "cargo-heliodor-crystals": 1
+        },
+        "tags": [
+            "tag-dark-planet",
+            "tag-ustur",
+            "tag-topaz-crystals",
+            "tag-viscovite-crystals",
+            "tag-xenon",
+            "tag-raw-chisenic",
+            "tag-rochinol",
+            "tag-crystal-lattice",
+            "tag-diamond",
+            "tag-methane",
+            "tag-nanite-crystals",
+            "tag-nanosil",
+            "tag-neodymium",
+            "tag-neon",
+            "tag-opal-fragments",
+            "tag-prismarite",
+            "tag-radiant-dust",
+            "tag-silver-ore",
+            "tag-sulfur-hexafluoride",
+            "tag-arco",
+            "tag-beryllium-crystals",
+            "tag-emerald-crystals",
+            "tag-heliodor-crystals"
+        ],
+        "plots": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 100,
+                "2": 10,
+                "3": 1,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 1000,
+                "2": 100,
+                "3": 10,
+                "4": 1,
+                "5": 0
+            },
+            "3": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 10,
+                "5": 0
+            },
+            "4": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "5": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            },
+            "6": {
+                "1": 10000,
+                "2": 1000,
+                "3": 100,
+                "4": 100,
+                "5": 100
+            }
+        },
+        "rent": {
+            "0": {
+                "1": 10,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 10,
+                "2": 100,
+                "3": 1000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 20,
+                "2": 200,
+                "3": 2000,
+                "4": 20000,
+                "5": 0
+            },
+            "3": {
+                "1": 30,
+                "2": 300,
+                "3": 3000,
+                "4": 30000,
+                "5": 0
+            },
+            "4": {
+                "1": 40,
+                "2": 400,
+                "3": 4000,
+                "4": 40000,
+                "5": 400000
+            },
+            "5": {
+                "1": 50,
+                "2": 500,
+                "3": 5000,
+                "4": 50000,
+                "5": 500000
+            },
+            "6": {
+                "1": 60,
+                "2": 6000,
+                "3": 60000,
+                "4": 60000,
+                "5": 600000
+            }
+        },
+        "placementFee": {
+            "0": {
+                "1": 100,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0
+            },
+            "1": {
+                "1": 200,
+                "2": 2000,
+                "3": 2000,
+                "4": 0,
+                "5": 0
+            },
+            "2": {
+                "1": 300,
+                "2": 3000,
+                "3": 30000,
+                "4": 300000,
+                "5": 0
+            },
+            "3": {
+                "1": 400,
+                "2": 4000,
+                "3": 40000,
+                "4": 400000,
+                "5": 4000000
+            },
+            "4": {
+                "1": 500,
+                "2": 5000,
+                "3": 50000,
+                "4": 500000,
+                "5": 5000000
+            },
+            "5": {
+                "1": 600,
+                "2": 6000,
+                "3": 60000,
+                "4": 600000,
+                "5": 6000000
+            },
+            "6": {
+                "1": 700,
+                "2": 7000,
+                "3": 70000,
+                "4": 700000,
+                "5": 7000000
+            }
+        }
+    }
+}
+}

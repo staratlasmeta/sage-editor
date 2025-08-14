@@ -1,0 +1,4 @@
+Ship Name,Manufacturer,Spec,Class,cargo_capacity,fuel_capacity,hit_points,damage,max_ap
+Test Ship A,TestCorp,Fighter,3,100,500,1000,50,10
+Test Ship B,TestCorp,Bomber,4,200,600,1200,75,15
+Test Ship C,AnotherCorp,Scout,2,50,400,800,25,8 

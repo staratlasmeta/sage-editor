@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Nodes - SAGE Editor Suite</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    
+    <!-- Floating Menu Bar -->
+    <div class="floating-menu">
+        <div class="menu-item dropdown">
+            <button class="menu-button" title="File">📁</button>
+            <div class="dropdown-content">
+                <label class="dropdown-item">
+                    Load JSON
+                    <input type="file" id="jsonFile" accept=".json" style="display: none;">
+                </label>
+                <button id="exportJson" class="dropdown-item">Export JSON</button>
+                <button id="exportMarkdown" class="dropdown-item">Export Markdown</button>
+            </div>
+        </div>
+        <div class="menu-item dropdown">
+            <button class="menu-button" title="View">🔍</button>
+            <div class="dropdown-content">
+                <button id="resetView" class="dropdown-item">Reset View</button>
+                <button id="fitToScreen" class="dropdown-item">Fit to Screen</button>
+                <button id="toggleGrid" class="dropdown-item">Toggle Grid</button>
+                <button id="toggleLabels" class="dropdown-item">Toggle Labels</button>
+                <button id="toggleSnapToGrid" class="dropdown-item">Toggle Snap to Grid</button>
+                <button id="toggleFPS" class="dropdown-item">Toggle FPS</button>
+            </div>
+        </div>
+        <div class="menu-separator"></div>
+        <button id="modeToggle" class="menu-button" title="Toggle Edit Mode">��</button>
+        <button id="simulationToggle" class="menu-button" title="Simulation Mode">🎮</button>
+        <div class="menu-separator"></div>
+        <a href="../SAGE Editor Suite/index.html" class="menu-item home-link">HOME</a>
+    </div>
+    
+    <!-- Simulation Controls Toolbar -->
+    <div class="simulation-toolbar" id="simulationToolbar" style="display: none;">
+        <div class="toolbar-section">
+            <button id="simPlayPause" class="toolbar-button" title="Play/Pause">▶️</button>
+            <button id="simStop" class="toolbar-button" title="Stop">⏹️</button>
+            <button id="simReset" class="toolbar-button" title="Reset">🔄</button>
+        </div>
+        <div class="toolbar-separator"></div>
+        <div class="toolbar-section">
+            <span class="toolbar-label">Speed:</span>
+            <button id="simSpeed1x" class="toolbar-button speed-button active" data-speed="1">1x</button>
+            <button id="simSpeed2x" class="toolbar-button speed-button" data-speed="2">2x</button>
+            <button id="simSpeed4x" class="toolbar-button speed-button" data-speed="4">4x</button>
+            <button id="simSpeed8x" class="toolbar-button speed-button" data-speed="8">8x</button>
+        </div>
+        <div class="toolbar-separator"></div>
+        <button id="simStats" class="toolbar-button" title="Show Stats">📊 Stats</button>
+        <div class="toolbar-separator"></div>
+        <span id="renownDisplay" class="renown-display">Renown: 0 / 0</span>
+    </div>
+    
+    <!-- Career XP Display -->
+    <div class="career-xp-panel" id="careerXPPanel" style="display: none;">
+        <div class="panel-header">Career Progress</div>
+        <div id="careerXPContainer" class="career-xp-container"></div>
+    </div>
+    
+    <!-- Simulation Stats Panel -->
+    <div class="simulation-stats-panel" id="simulationStatsPanel" style="display: none;">
+        <div class="stats-header">
+            <h3>Simulation Statistics</h3>
+            <button id="closeStatsPanel" class="close-button">✕</button>
+        </div>
+        <div class="stats-content">
+            <div class="stat-section">
+                <h4>Progress Overview</h4>
+                <div id="progressStats"></div>
+            </div>
+            <div class="stat-section">
+                <h4>Career Breakdown</h4>
+                <div id="careerStats"></div>
+            </div>
+            <div class="stat-section">
+                <h4>Unlocked Skills</h4>
+                <div id="skillsList"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bulk Edit Toolbar -->
+    <div class="bulk-edit-toolbar" id="bulkEditToolbar" style="display: none;">
+        <div class="toolbar-section">
+            <span class="toolbar-label">Align</span>
+            <button id="alignLeft" class="toolbar-button" title="Align Left">⬅️</button>
+            <button id="alignCenter" class="toolbar-button" title="Align Center">↔️</button>
+            <button id="alignRight" class="toolbar-button" title="Align Right">➡️</button>
+            <button id="alignTop" class="toolbar-button" title="Align Top">⬆️</button>
+            <button id="alignMiddle" class="toolbar-button" title="Align Middle">↕️</button>
+            <button id="alignBottom" class="toolbar-button" title="Align Bottom">⬇️</button>
+        </div>
+        <div class="toolbar-separator"></div>
+        <div class="toolbar-section">
+            <span class="toolbar-label">Distribute</span>
+            <button id="distributeHorizontal" class="toolbar-button" title="Distribute Horizontally">⬌</button>
+            <button id="distributeVertical" class="toolbar-button" title="Distribute Vertically">⬍</button>
+        </div>
+        <div class="toolbar-separator"></div>
+        <button id="snapToGridBulk" class="toolbar-button" title="Snap to Grid">⊞ Snap to Grid</button>
+        <div class="toolbar-separator"></div>
+        <button id="multiEdit" class="toolbar-button" title="Edit Selected Nodes">✏️ Edit All</button>
+    </div>
+    
+    <!-- Floating Node Editor -->
+    <div class="floating-node-editor" id="nodeEditor" style="display: none;">
+        <div class="node-editor-header">
+            <h3>Edit Node</h3>
+            <!-- Color Swatches -->
+            <div class="color-swatches">
+                <button class="color-swatch" data-color="#666666" style="background: #666666"></button>
+                <button class="color-swatch" data-color="#FF4444" style="background: #FF4444"></button>
+                <button class="color-swatch" data-color="#4A90E2" style="background: #4A90E2"></button>
+                <button class="color-swatch" data-color="#FFD700" style="background: #FFD700"></button>
+                <button class="color-swatch" data-color="#00FF88" style="background: #00FF88"></button>
+                <button class="color-swatch" data-color="#FF6B00" style="background: #FF6B00"></button>
+                <button class="color-swatch" data-color="#9B59B6" style="background: #9B59B6"></button>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" id="nodeName">
+        </div>
+        <div class="form-group">
+            <label>Scalability</label>
+            <select id="nodeScalability">
+                <option value="">None</option>
+                <option value="Unlimited">Unlimited</option>
+                <option value="Successive Range">Successive Range</option>
+                <option value="Single Activation">Single Activation</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>
+                Milestone
+                <button id="manageMilestones" class="manage-button" title="Manage Milestones">⚙</button>
+            </label>
+            <select id="nodeMilestone">
+                <option value="">None</option>
+                <option value="C4">C4</option>
+                <option value="add-new">+ Add New Milestone</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>
+                Tag
+                <button id="manageTags" class="manage-button" title="Manage Tags">⚙</button>
+            </label>
+            <select id="nodeTag">
+                <option value="">None</option>
+                <option value="Career">Career</option>
+                <option value="add-new">+ Add New Tag</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <textarea id="nodeDescription" rows="3"></textarea>
+        </div>
+        <div class="form-group simulation-config" style="display: none;">
+            <label>Progression Type (for Successive Range)</label>
+            <select id="nodeProgressionType">
+                <option value="free-form">Free-form (Any Order)</option>
+                <option value="sequential">Sequential (Ordered)</option>
+            </select>
+        </div>
+        <div class="form-group child-order-config" style="display: none;">
+            <label>Child Order</label>
+            <div id="childOrderList" class="child-order-list"></div>
+            <button id="updateChildOrder" class="secondary">Update Order</button>
+        </div>
+        <div class="button-group">
+            <button id="saveNode" class="primary">Save</button>
+            <button id="deleteNode" class="danger">Delete</button>
+            <button id="cancelEdit">Cancel</button>
+        </div>
+    </div>
+    
+    <!-- Floating Details Bar -->
+    <div class="floating-details" id="nodeDetails">
+        <span id="detailName">None</span>
+        <span>•</span>
+        <span id="detailScalability">-</span>
+        <span>•</span>
+        <span id="detailMilestone">-</span>
+        <span>•</span>
+        <span id="detailTag">-</span>
+        <span>•</span>
+        <span id="detailDescription">-</span>
+    </div>
+    
+    <!-- Floating Status Bar -->
+    <div class="floating-status">
+        <span id="tagsContainer">Tags: <span id="tagsList"></span></span>
+    </div>
+    
+    <!-- FPS Counter -->
+    <div class="fps-counter" id="fpsCounter">
+        FPS: <span id="fps">0</span>
+    </div>
+    
+    <!-- Keyboard Help -->
+    <div class="keyboard-help" id="keyboardHelp" style="display: none;">
+        <span>Connection Types: 1-Curved 2-Linear 3-Step 4-Smooth 5-Arc 6-Zigzag</span>
+    </div>
+    
+    <!-- Add New Item Modal -->
+    <div class="modal-overlay" id="addItemModal" style="display: none;">
+        <div class="modal-content">
+            <h3 id="modalTitle">Add New Item</h3>
+            <input type="text" id="modalInput" placeholder="Enter name..." />
+            <div class="button-group">
+                <button id="modalSave" class="primary">Save</button>
+                <button id="modalCancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Manage Items Modal -->
+    <div class="modal-overlay" id="manageItemsModal" style="display: none;">
+        <div class="modal-content manage-modal">
+            <h3 id="manageModalTitle">Manage Items</h3>
+            <div id="itemsList" class="items-list"></div>
+            <div class="button-group">
+                <button id="closeManageModal">Close</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Multi-Edit Modal -->
+    <div class="modal-overlay" id="multiEditModal" style="display: none;">
+        <div class="modal-content multi-edit-modal">
+            <h3>Edit Multiple Nodes (<span id="multiEditCount">0</span> selected)</h3>
+            
+            <div class="form-group">
+                <label>
+                    Name
+                    <span class="field-warning" id="nameWarning" style="display: none;">⚠️ Multiple values</span>
+                </label>
+                <input type="text" id="multiNodeName" placeholder="Keep existing">
+            </div>
+            
+            <div class="form-group">
+                <label>
+                    Scalability
+                    <span class="field-warning" id="scalabilityWarning" style="display: none;">⚠️ Multiple values</span>
+                </label>
+                <select id="multiNodeScalability">
+                    <option value="">Keep existing</option>
+                    <option value="none">None</option>
+                    <option value="Unlimited">Unlimited</option>
+                    <option value="Successive Range">Successive Range</option>
+                    <option value="Single Activation">Single Activation</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>
+                    Milestone
+                    <span class="field-warning" id="milestoneWarning" style="display: none;">⚠️ Multiple values</span>
+                </label>
+                <select id="multiNodeMilestone">
+                    <option value="">Keep existing</option>
+                    <option value="none">None</option>
+                    <option value="C4">C4</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>
+                    Tag
+                    <span class="field-warning" id="tagWarning" style="display: none;">⚠️ Multiple values</span>
+                </label>
+                <select id="multiNodeTag">
+                    <option value="">Keep existing</option>
+                    <option value="none">None</option>
+                    <option value="Career">Career</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>
+                    Description
+                    <span class="field-warning" id="descriptionWarning" style="display: none;">⚠️ Multiple values</span>
+                </label>
+                <textarea id="multiNodeDescription" rows="3" placeholder="Keep existing"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>Color</label>
+                <div class="color-swatches">
+                    <button class="color-swatch multi-color-swatch" data-color="" style="background: linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc), linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc); background-size: 10px 10px; background-position: 0 0, 5px 5px;" title="Keep existing"></button>
+                    <button class="color-swatch multi-color-swatch" data-color="#666666" style="background: #666666"></button>
+                    <button class="color-swatch multi-color-swatch" data-color="#FF4444" style="background: #FF4444"></button>
+                    <button class="color-swatch multi-color-swatch" data-color="#4A90E2" style="background: #4A90E2"></button>
+                    <button class="color-swatch multi-color-swatch" data-color="#FFD700" style="background: #FFD700"></button>
+                    <button class="color-swatch multi-color-swatch" data-color="#00FF88" style="background: #00FF88"></button>
+                    <button class="color-swatch multi-color-swatch" data-color="#FF6B00" style="background: #FF6B00"></button>
+                    <button class="color-swatch multi-color-swatch" data-color="#9B59B6" style="background: #9B59B6"></button>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button id="applyMultiEdit" class="primary">Apply Changes</button>
+                <button id="cancelMultiEdit">Cancel</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Markdown Export Modal -->
+    <div class="modal-overlay" id="markdownModal" style="display: none;">
+        <div class="modal-content markdown-modal">
+            <div class="modal-header">
+                <h3>Export to Markdown</h3>
+                <button class="close-button" id="closeMarkdownModal">✕</button>
+            </div>
+            <div class="modal-body">
+                <div id="markdownPreview" class="markdown-preview"></div>
+                <textarea id="markdownText" class="markdown-text" readonly style="display: none;"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button id="copyMarkdownBtn" class="primary">Copy to Clipboard</button>
+                <button id="closeMarkdownBtn">Close</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Load all JavaScript modules in order -->
+    <script src="js/canvas-manager.js"></script>
+    <script src="js/node-manager.js"></script>
+    <script src="js/connection-manager.js"></script>
+    <script src="js/rendering.js"></script>
+    <script src="js/event-handlers.js"></script>
+    <script src="js/ui-controls.js"></script>
+    <script src="js/file-io.js"></script>
+    <script src="js/bulk-edit.js"></script>
+    <script src="js/simulation.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html> 

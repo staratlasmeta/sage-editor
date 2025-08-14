@@ -1,0 +1,74 @@
+/* Claim Stake Information Section */
+.claim-stake-info-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 16px;
+    width: 100%;
+}
+
+.info-card {
+    background-color: #1c1c1c;
+    border-radius: 4px;
+    padding: 16px;
+    transition: transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.info-card-header {
+    color: #AAAAAA;
+    font-size: 0.85em;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.info-card-content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+/* More specific selector to avoid affecting building stats */
+.claim-stake-information .info-card-value {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #FFFFFF;
+    border-radius: 4px;
+    padding: 6px 12px;
+    min-width: 60px;
+    text-align: center;
+    margin-left: auto;
+}
+
+/* Specific colors for different card types with background colors matching the screenshot */
+.claim-stake-information .info-card.slots .info-card-value {
+    background-color: #4F378B;
+    color: #FFFFFF;
+}
+
+.claim-stake-information .info-card.rent .info-card-value {
+    background-color: #386641;
+    color: #FFFFFF;
+}
+
+.claim-stake-information .info-card.tier .info-card-value {
+    background-color: #6E572D;
+    color: #FFFFFF;
+}
+
+/* General Section Header */
+.claim-stake-information .section-header {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #FFFFFF;
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+}
+
+/* For the claim-stake overview section */
+.claim-stake-information {
+    background-color: #191919;
+    padding: 24px;
+    margin-bottom: 20px;
+}

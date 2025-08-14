@@ -1,0 +1,500 @@
+.building-type-selector {
+    background-color: #1E1E1E;
+    /* Secondary Background */
+    border: 1px solid #333333;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.building-type-selector:hover {
+    background-color: #2D2D2D;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border-color: #3A86FF;
+}
+
+.building-type-selector h3 {
+    margin: 0 0 0.5rem 0;
+    color: #FFFFFF;
+    /* Primary Text */
+    font-weight: 500;
+}
+
+.building-type-info {
+    color: #AAAAAA;
+    /* Secondary Text */
+    font-size: 0.9em;
+}
+
+.building-type-info p {
+    margin: 0.25rem 0;
+}
+
+.selected-building {
+    width: 100%;
+}
+
+.back-button {
+    background: none;
+    border: none;
+    color: #AAAAAA;
+    padding: 0.5rem 0;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+}
+
+.back-button:hover {
+    color: #FFFFFF;
+}
+
+.back-button:before {
+    content: "←";
+    margin-right: 5px;
+}
+
+.building-selector {
+    background-color: #1a1a1a;
+    color: #FFFFFF;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #333333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.building-item {
+    background-color: #2D2D2D;
+    /* Tertiary Background */
+    color: #FFFFFF;
+    /* Primary Text */
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border-left: 4px solid #3A86FF;
+    /* Accent Primary */
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.building-item:hover {
+    background-color: #3D3D3D;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+    border-left-color: #2776F0;
+}
+
+.building-item .details {
+    color: #AAAAAA;
+    /* Secondary Text */
+    margin-top: 8px;
+}
+
+/* Tab navigation styling */
+.tab-navigation {
+    display: flex;
+    background-color: #1E1E1E;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 1px solid #333333;
+}
+
+.tab-button {
+    flex: 1;
+    background-color: transparent;
+    color: #AAAAAA;
+    border: none;
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    letter-spacing: 0.5px;
+}
+
+.tab-button:hover {
+    background-color: #2D2D2D;
+    color: #FFFFFF;
+}
+
+.tab-button.active {
+    background-color: #3A86FF;
+    color: #FFFFFF;
+}
+
+button {
+    background-color: #3A86FF;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: 500;
+}
+
+button:hover {
+    background-color: #2776F0;
+}
+
+button:disabled {
+    background-color: #2D2D2D;
+    color: #666666;
+    cursor: not-allowed;
+}
+
+/* Add styling for prerequisite toggle */
+.prerequisite-toggle {
+    margin: 10px 0;
+    padding: 8px 12px;
+    background-color: rgba(30, 30, 30, 0.8);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.toggle-label {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #ccc;
+    cursor: pointer;
+}
+
+.toggle-label input[type="checkbox"] {
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+/* Building Detail Popup Styles */
+.building-detail-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.building-detail-content {
+    background: #1E1E1E;
+    border: 1px solid #333;
+    border-radius: 8px;
+    max-width: 500px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 0;
+}
+
+.building-detail-header {
+    padding: 20px;
+    border-bottom: 1px solid #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.building-detail-header h3 {
+    margin: 0;
+    color: #FFFFFF;
+    font-size: 18px;
+}
+
+.close-popup-btn {
+    background: none;
+    border: none;
+    color: #AAAAAA;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+}
+
+.close-popup-btn:hover {
+    color: #FFFFFF;
+    background: #FF5252;
+    border-radius: 50%;
+}
+
+/* Add sidebar overlay styling */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+/* New Sidebar Styles */
+.construction-validator-sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 100vh;
+    background: #1E1E1E;
+    border-left: 2px solid #3A86FF;
+    box-shadow: -4px 0 8px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+.sidebar-header {
+    padding: 20px;
+    border-bottom: 2px solid #333;
+    background: #2D2D2D;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.sidebar-header h3 {
+    margin: 0;
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.close-sidebar-btn {
+    background: none;
+    border: none;
+    color: #AAAAAA;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px;
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.close-sidebar-btn:hover {
+    color: #FFFFFF;
+    background: #FF5252;
+}
+
+.sidebar-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.sidebar-footer {
+    padding: 20px;
+    border-top: 2px solid #333;
+    background: #2D2D2D;
+    display: flex;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+/* Update existing validator styles for sidebar */
+.construction-validator {
+    padding: 20px;
+    background: #1E1E1E;
+    color: #FFFFFF;
+}
+
+.building-info h4 {
+    color: #3A86FF;
+    margin: 0 0 8px 0;
+    font-size: 16px;
+}
+
+.building-description {
+    color: #AAAAAA;
+    font-size: 14px;
+    margin: 0 0 20px 0;
+    line-height: 1.4;
+}
+
+.prerequisites-section h5 {
+    color: #FFFFFF;
+    margin: 0 0 12px 0;
+    font-size: 14px;
+    font-weight: 600;
+    border-bottom: 1px solid #333;
+    padding-bottom: 8px;
+}
+
+.prerequisite-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0;
+    font-size: 13px;
+}
+
+.prerequisite-item:last-child {
+    border-bottom: none;
+}
+
+.prerequisite-item.valid {
+    color: #38B000;
+}
+
+.prerequisite-item.invalid {
+    color: #FF5252;
+}
+
+.prerequisite-icon {
+    font-size: 12px;
+    min-width: 16px;
+}
+
+.prerequisite-text {
+    flex: 1;
+}
+
+.resource-costs-section {
+    margin-top: 16px;
+}
+
+.resource-costs-section h6 {
+    color: #FFFFFF;
+    margin: 0 0 8px 0;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.validation-issues {
+    background: #2D1B1B;
+    border: 1px solid #FF5252;
+    border-radius: 4px;
+    padding: 12px;
+    margin-top: 16px;
+}
+
+.validation-issues h5 {
+    color: #FF5252;
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    border: none;
+    padding: 0;
+}
+
+.validation-issues ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.issue-item {
+    color: #FF5252;
+    font-size: 13px;
+    margin: 4px 0;
+}
+
+.validation-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid #333;
+}
+
+.construct-btn,
+.cancel-btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex: 1;
+}
+
+.construct-btn.enabled {
+    background: #38B000;
+    color: #FFFFFF;
+}
+
+.construct-btn.enabled:hover {
+    background: #2d8600;
+}
+
+.construct-btn.disabled {
+    background: #555;
+    color: #999;
+    cursor: not-allowed;
+}
+
+.cancel-btn {
+    background: #2D2D2D;
+    color: #FFFFFF;
+}
+
+.cancel-btn:hover {
+    background: #3D3D3D;
+}
+
+.validation-error {
+    text-align: center;
+    padding: 20px;
+}
+
+.validation-error h4 {
+    color: #FF5252;
+    margin: 0 0 8px 0;
+}
+
+.validation-error p {
+    color: #AAAAAA;
+    margin: 0;
+}
+
+/* Debug info styling */
+.debug-info {
+    background: #2D2D2D;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 8px;
+    margin-top: 16px;
+}
+
+.debug-info p {
+    margin: 2px 0;
+    font-family: 'Courier New', monospace;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .construction-validator-sidebar {
+        width: 350px;
+    }
+}
+
+@media (max-width: 768px) {
+    .construction-validator-sidebar {
+        width: 100%;
+        height: 100vh;
+    }
+}

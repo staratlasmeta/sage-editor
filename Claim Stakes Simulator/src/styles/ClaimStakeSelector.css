@@ -1,0 +1,1055 @@
+.claim-stake-selector {
+    background-color: #1E1E1E;
+    /* Secondary Background */
+    color: #FFFFFF;
+    /* Primary Text */
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.view-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 15px;
+}
+
+.view-button {
+    padding: 8px 16px;
+    border: none;
+    background: #2d2d2d;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #999;
+}
+
+.view-button.active {
+    background: #3a3a3a;
+    color: #4a90e2;
+}
+
+.showing-count {
+    margin-left: 20px;
+    color: #999;
+    font-size: 0.9em;
+}
+
+.filters {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.filter {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 200px;
+}
+
+.filter label {
+    font-weight: bold;
+    color: #e0e0e0;
+}
+
+.filter select {
+    padding: 8px;
+    background: #2d2d2d;
+    border: 1px solid #333;
+    border-radius: 4px;
+    width: 100%;
+    color: #e0e0e0;
+}
+
+.filter select option {
+    background: #2d2d2d;
+    color: #e0e0e0;
+}
+
+.claim-stakes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.claim-stake-card {
+    padding: 20px;
+    background: #2d2d2d;
+    border: 1px solid #333;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.claim-stake-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    background: #333;
+}
+
+.claim-stake-card h3 {
+    margin: 0 0 16px 0;
+    font-size: 1.1em;
+    color: #e0e0e0;
+}
+
+.claim-stake-stats {
+    margin-bottom: 16px;
+    color: #999;
+}
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.stat {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.purchase-button {
+    padding: 10px 20px;
+    background: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.purchase-button:hover {
+    background: #357abd;
+}
+
+.marketplace-layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    height: calc(100vh - 80px);
+    background: #1a1a1a;
+    position: fixed;
+    left: 250px;
+    right: 0;
+    top: 60px;
+    padding-top: 20px;
+}
+
+/* Left side - Available Stakes Section */
+.available-stakes-section {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #333;
+    height: 100%;
+    background: #1e1e1e;
+    overflow: hidden;
+    margin-top: 0;
+}
+
+.filters-section {
+    padding: 0;
+    border-bottom: 1px solid #333;
+    background: #1e1e1e;
+    margin-top: 0;
+}
+
+.filter {
+    padding: 8px 16px;
+    margin: 0;
+}
+
+.filter:last-child {
+    margin-bottom: 0;
+}
+
+.filter label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: 500;
+    color: #333;
+    font-size: 0.9em;
+}
+
+.filter select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: white;
+}
+
+/* Scrollable Stakes List */
+.stakes-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px;
+    background: #1e1e1e;
+    height: calc(100vh - 80px - 160px);
+}
+
+.stake-list-item {
+    padding: 8px 12px;
+    border: 1px solid #333;
+    background: #2d2d2d;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.stake-list-item:hover {
+    border-color: #4a90e2;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.stake-list-item.selected {
+    border-color: #3A86FF;
+    /* Accent Primary from GDD */
+    background: #2D2D2D;
+    /* Tertiary Background from GDD */
+    box-shadow: 0 0 8px rgba(58, 134, 255, 0.6);
+    /* Blue glow effect */
+    border-left: 4px solid #3A86FF;
+    /* Left accent border */
+}
+
+.stake-list-item.selected h3 {
+    color: #FFFFFF;
+    /* Primary Text from GDD */
+}
+
+.stake-list-item.selected .stake-brief-info {
+    color: #AAAAAA;
+    /* Secondary Text from GDD */
+}
+
+.stake-list-item.selected .stake-brief-info span {
+    background: #1E1E1E;
+    /* Secondary Background from GDD */
+    color: #FFFFFF;
+    /* Primary Text from GDD */
+    border: 1px solid #3A86FF;
+    /* Accent Primary border */
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.stake-list-item h3 {
+    margin: 0 0 6px 0;
+    font-size: 1em;
+    color: #e0e0e0;
+}
+
+.stake-brief-info {
+    display: flex;
+    gap: 6px;
+    font-size: 0.85em;
+    color: #999;
+    flex-wrap: wrap;
+}
+
+.stake-brief-info span {
+    padding: 2px 6px;
+    background: #2d2d2d;
+    border-radius: 3px;
+    color: #e0e0e0;
+}
+
+/* Right side - Details Section */
+.stake-details-section {
+    padding: 20px;
+    overflow-y: auto;
+    height: 100%;
+    margin-top: 0;
+}
+
+.details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.details-header h2 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #e0e0e0;
+}
+
+.purchase-button {
+    padding: 10px 20px;
+    background: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.2s;
+}
+
+.purchase-button:hover {
+    background: #357abd;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #e1e8ed;
+}
+
+.tab-button {
+    padding: 12px 24px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: #666;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.tab-button:hover {
+    color: #4a90e2;
+}
+
+.tab-button.active {
+    color: #4a90e2;
+    border-bottom-color: #4a90e2;
+}
+
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.stat-item {
+    background-color: #1E1E1E;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.stat-item label {
+    color: #AAAAAA;
+    font-size: 0.85em;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.stat-item span {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #FFFFFF;
+}
+
+/* Stat item content and icons */
+.stat-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stat-value {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #FFFFFF;
+}
+
+.stat-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(58, 134, 255, 0.1);
+    color: #3A86FF;
+    font-size: 1.2rem;
+}
+
+/* Specific styling for different stat items */
+.stat-item:nth-child(1) .stat-icon {
+    background-color: rgba(131, 56, 236, 0.1);
+    color: #8338EC;
+}
+
+.stat-item:nth-child(2) .stat-icon {
+    background-color: rgba(56, 176, 0, 0.1);
+    color: #38B000;
+}
+
+.stat-item:nth-child(3) .stat-icon {
+    background-color: rgba(255, 170, 0, 0.1);
+    color: #FFAA00;
+}
+
+.stat-item:nth-child(4) .stat-icon {
+    background-color: rgba(255, 82, 82, 0.1);
+    color: #FF5252;
+}
+
+.no-selection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #666;
+    font-style: italic;
+}
+
+/* Resources and Buildings sections */
+.resources-info,
+.buildings-info {
+    padding: 20px;
+    background: #2d2d2d;
+    border-radius: 8px;
+    border: 1px solid #333;
+}
+
+.resources-info h3,
+.buildings-info h3 {
+    margin: 0 0 16px 0;
+    color: #e0e0e0;
+}
+
+.loading-message {
+    padding: 20px;
+    text-align: center;
+    color: #666;
+    font-style: italic;
+}
+
+/* Remove any margin/padding from the claim-stake-manager */
+.claim-stake-manager {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background: #1a1a1a;
+}
+
+.resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+    background: #1E1E1E;
+    /* Secondary Background from GDD */
+    padding: 16px;
+    border-radius: 8px;
+}
+
+.resource-card {
+    background: #2D2D2D;
+    /* Tertiary Background from GDD */
+    border: 1px solid #3A86FF;
+    /* Accent Primary from GDD */
+    border-radius: 8px;
+    padding: 16px;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.resource-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border-color: #3A86FF;
+    /* Accent Primary from GDD */
+    background: #333;
+}
+
+.resource-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    border-bottom: 1px solid rgba(58, 134, 255, 0.3);
+    /* Accent Primary with opacity */
+    padding-bottom: 8px;
+}
+
+.resource-name {
+    font-size: 1.1em;
+    font-weight: 500;
+    color: #FFFFFF;
+    /* Primary Text from GDD */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.resource-richness {
+    font-size: 0.9em;
+    color: #FFFFFF;
+    /* Primary Text from GDD */
+    padding: 4px 8px;
+    background: #3A86FF;
+    /* Accent Primary from GDD */
+    border-radius: 4px;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.resource-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.resource-tier {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(58, 134, 255, 0.05);
+    /* Very subtle background */
+    padding: 6px 8px;
+    border-radius: 4px;
+}
+
+.detail-label {
+    font-size: 0.9em;
+    color: #AAAAAA;
+    /* Secondary Text from GDD */
+}
+
+.detail-value {
+    font-size: 0.9em;
+    color: #FFFFFF;
+    /* Primary Text from GDD */
+    background: rgba(58, 134, 255, 0.2);
+    /* Accent Primary with opacity */
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.resource-summary {
+    background: #2D2D2D;
+    /* Tertiary Background from GDD */
+    border: 1px solid #3A86FF;
+    /* Accent Primary from GDD */
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.total-resources {
+    font-size: 1.2em;
+    color: #FFFFFF;
+    /* Primary Text from GDD */
+    margin-bottom: 12px;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(58, 134, 255, 0.3);
+    /* Accent Primary with opacity */
+    padding-bottom: 8px;
+}
+
+.total-resources span {
+    color: #3A86FF;
+    /* Accent Primary from GDD */
+    font-weight: 600;
+    padding: 2px 8px;
+    background: rgba(58, 134, 255, 0.2);
+    /* Accent Primary with opacity */
+    border-radius: 4px;
+    margin-left: 8px;
+}
+
+.richness-breakdown {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.richness-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    background: #1E1E1E;
+    /* Secondary Background from GDD */
+    border: 1px solid #3A86FF;
+    /* Accent Primary from GDD */
+    border-radius: 4px;
+    color: #FFFFFF;
+    /* Primary Text from GDD */
+}
+
+.richness-value {
+    font-weight: 500;
+    color: #FFFFFF;
+    /* Primary Text from GDD */
+}
+
+.resource-count {
+    background: #3A86FF;
+    /* Accent Primary from GDD */
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.resource-select {
+    width: 100%;
+    min-width: 200px;
+}
+
+/* Override react-select styles to match your theme */
+.resource-select .select__control {
+    background-color: #2d2d2d;
+    border-color: #333;
+    color: #e0e0e0;
+}
+
+.resource-select .select__menu {
+    background-color: #2d2d2d;
+    border: 1px solid #333;
+}
+
+.resource-select .select__option {
+    background-color: #2d2d2d;
+    color: #e0e0e0;
+}
+
+.resource-select .select__option--is-focused {
+    background-color: #3a3a3a;
+}
+
+.resource-select .select__multi-value {
+    background-color: #3a3a3a;
+}
+
+.resource-select .select__multi-value__label {
+    color: #e0e0e0;
+}
+
+/* React-Select component styling - updated for better readability with dark theme */
+/* This targets any React-Select component in the application */
+div[class*="react-select"],
+.resource-select,
+[id*="react-select"] {
+    color: #FFFFFF;
+    /* Primary Text from GDD */
+}
+
+/* Input control styling */
+div[class*="-control"],
+.select__control,
+.resource-select .select__control {
+    background-color: #2D2D2D !important;
+    /* Tertiary Background from GDD */
+    border-color: #333 !important;
+    border-radius: 4px;
+    box-shadow: none !important;
+}
+
+/* Dropdown menu styling */
+div[class*="-menu"],
+.select__menu,
+.resource-select .select__menu {
+    background-color: #1E1E1E !important;
+    /* Secondary Background from GDD */
+    border: 1px solid #333 !important;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important;
+    z-index: 100;
+}
+
+/* Option items styling */
+div[class*="-option"],
+.select__option,
+.resource-select .select__option {
+    background-color: #1E1E1E !important;
+    /* Secondary Background from GDD */
+    color: #FFFFFF !important;
+    /* Primary Text from GDD */
+}
+
+/* Hovered option styling */
+div[class*="-option"]:hover,
+div[class*="-option--is-focused"],
+.select__option--is-focused,
+.resource-select .select__option--is-focused {
+    background-color: #3A86FF !important;
+    /* Accent Primary from GDD */
+    color: #FFFFFF !important;
+}
+
+/* Selected option styling */
+div[class*="-option--is-selected"],
+.select__option--is-selected,
+.resource-select .select__option--is-selected {
+    background-color: rgba(58, 134, 255, 0.7) !important;
+    /* Accent Primary with opacity */
+    color: #FFFFFF !important;
+}
+
+/* Multi-value styling (for multi-select) */
+div[class*="-multiValue"],
+.select__multi-value,
+.resource-select .select__multi-value {
+    background-color: #3A86FF !important;
+    /* Accent Primary from GDD */
+    border-radius: 4px;
+}
+
+div[class*="-multiValueLabel"],
+.select__multi-value__label,
+.resource-select .select__multi-value__label {
+    color: #FFFFFF !important;
+    /* Primary Text from GDD */
+}
+
+/* Placeholder text */
+div[class*="-placeholder"],
+.select__placeholder,
+.resource-select .select__placeholder {
+    color: #AAAAAA !important;
+    /* Secondary Text from GDD */
+}
+
+/* Input text */
+div[class*="-input"],
+.select__input,
+.resource-select .select__input {
+    color: #FFFFFF !important;
+    /* Primary Text from GDD */
+}
+
+/* The clear indicator */
+div[class*="-clearIndicator"],
+.select__clear-indicator,
+.resource-select .select__clear-indicator {
+    color: #AAAAAA !important;
+    /* Secondary Text from GDD */
+}
+
+div[class*="-clearIndicator"]:hover,
+.select__clear-indicator:hover,
+.resource-select .select__clear-indicator:hover {
+    color: #FFFFFF !important;
+    /* Primary Text from GDD */
+}
+
+/* Dropdown indicator */
+div[class*="-indicatorSeparator"],
+.select__indicator-separator,
+.resource-select .select__indicator-separator {
+    background-color: #333 !important;
+}
+
+div[class*="-dropdownIndicator"],
+.select__dropdown-indicator,
+.resource-select .select__dropdown-indicator {
+    color: #AAAAAA !important;
+    /* Secondary Text from GDD */
+}
+
+div[class*="-dropdownIndicator"]:hover,
+.select__dropdown-indicator:hover,
+.resource-select .select__dropdown-indicator:hover {
+    color: #FFFFFF !important;
+    /* Primary Text from GDD */
+}
+
+.no-resources {
+    color: #999;
+    font-style: italic;
+    background: #2d2d2d;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* Update the tabs */
+.tab-navigation {
+    background: #1e1e1e;
+    border-bottom: 1px solid #333;
+    margin-bottom: 20px;
+}
+
+.tab-button {
+    background: transparent;
+    border: none;
+    color: #999;
+    padding: 12px 20px;
+    cursor: pointer;
+}
+
+.tab-button.active {
+    color: #4a90e2;
+    border-bottom: 2px solid #4a90e2;
+}
+
+/* Update filter dropdowns */
+.filter-by-resources {
+    padding: 16px;
+    background: #2d2d2d;
+    border: 1px solid #333;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+/* Update the general info section */
+.general-info {
+    padding: 16px;
+}
+
+.general-info .section-header {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #FFFFFF;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Update filter inputs and dropdowns */
+.filter input[type="text"],
+.filter input[type="search"] {
+    background: #2d2d2d;
+    border: 1px solid #333;
+    color: #e0e0e0;
+    padding: 8px;
+    border-radius: 4px;
+    width: 100%;
+}
+
+.filter input[type="text"]::placeholder,
+.filter input[type="search"]::placeholder {
+    color: #666;
+}
+
+/* Style for any dropdown menus in filters */
+.filter select,
+.filter-dropdown {
+    background: #2d2d2d;
+    border: 1px solid #333;
+    color: #e0e0e0;
+    padding: 8px;
+    border-radius: 4px;
+    width: 100%;
+    max-height: 300px;
+    appearance: menulist;
+    /* Force native dropdown appearance */
+}
+
+.filter select option,
+.filter-dropdown option {
+    background: #2d2d2d;
+    color: #e0e0e0;
+    padding: 8px 12px;
+}
+
+/* Ensure dropdown options have enough height */
+.filter select option {
+    min-height: 24px;
+}
+
+/* Update any filter labels */
+.filter label,
+.filter-label {
+    color: #e0e0e0;
+    font-size: 0.9em;
+    margin-bottom: 4px;
+}
+
+/* Update text colors for better contrast */
+.claim-stake-card h3,
+.section-title,
+.stat-item span,
+.resource-name,
+.total-resources,
+.richness-value {
+    color: #e0e0e0;
+    /* Changed from #2c3e50 - much lighter for better contrast */
+}
+
+/* Secondary text elements */
+.stat-item label,
+.resource-richness,
+.stat,
+.description-text {
+    color: #999;
+    /* Changed from #666 - lighter secondary text */
+}
+
+/* Tertiary/helper text */
+.helper-text,
+.placeholder-text,
+input::placeholder {
+    color: #666;
+    /* For less important text but still readable */
+}
+
+/* Update any remaining text colors */
+.stake-list-item h3,
+.details-header h2,
+.resource-name,
+.building-name,
+.status-label {
+    color: #e0e0e0;
+    /* Changed from #2c3e50 */
+}
+
+/* Update secondary text */
+.stake-brief-info,
+.resource-info,
+.building-info {
+    color: #999;
+    /* Changed from #666 */
+}
+
+/* Update any remaining light backgrounds */
+.stake-brief-info span {
+    background: #2d2d2d;
+    /* Changed from #f1f4f7 */
+    color: #e0e0e0;
+}
+
+/* Update borders and backgrounds */
+.status-item {
+    border-bottom-color: #333;
+    /* Changed from #f1f1f1 */
+}
+
+.claim-stake-item {
+    background-color: #2D2D2D;
+    /* Tertiary Background */
+    color: #FFFFFF;
+    /* Primary Text */
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border-left: 4px solid #3A86FF;
+    /* Accent Primary */
+}
+
+.claim-stake-item:hover {
+    background-color: #3A86FF;
+    /* Accent Primary */
+    color: #FFFFFF;
+    /* Primary Text */
+}
+
+.claim-stake-item .details {
+    color: #AAAAAA;
+    /* Secondary Text */
+}
+
+button {
+    background-color: #3A86FF;
+    /* Primary Button Background */
+    color: #FFFFFF;
+    /* Primary Button Text */
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #2776F0;
+    /* Primary Button Hover */
+}
+
+button:disabled {
+    background-color: #2D2D2D;
+    /* Disabled Button Background */
+    color: #666666;
+    /* Disabled Button Text */
+    cursor: not-allowed;
+}
+
+/* Add specific selectors for the React Select classes seen in the screenshot */
+.css-1jqq780-placeholder {
+    color: #AAAAAA !important;
+    /* Secondary Text from GDD */
+    font-size: 14px;
+}
+
+.css-hlgwow {
+    background-color: #2D2D2D !important;
+    /* Tertiary Background from GDD */
+    border: 1px solid #333 !important;
+    border-radius: 4px;
+    color: #FFFFFF !important;
+    /* Primary Text from GDD */
+}
+
+.css-19bb58m {
+    /* The input field */
+    color: #FFFFFF !important;
+    /* Primary Text from GDD */
+}
+
+/* Style for the dropdown items */
+[class*="-menu"] [class*="-option"] {
+    background-color: #1E1E1E !important;
+    /* Secondary Background from GDD */
+    color: #FFFFFF !important;
+    /* Primary Text from GDD */
+    padding: 8px 12px;
+}
+
+/* Highlighted dropdown items */
+[class*="-menu"] [class*="-option"]:hover,
+[class*="-menu"] [class*="-option--is-focused"] {
+    background-color: rgba(58, 134, 255, 0.5) !important;
+    /* Accent Primary from GDD with opacity */
+}
+
+/* Selected item in the dropdown */
+[class*="-menu"] [class*="-option--is-selected"] {
+    background-color: #3A86FF !important;
+    /* Accent Primary from GDD */
+}
+
+/* Control container */
+.css-13cymwt-control {
+    background-color: #2D2D2D !important;
+    /* Tertiary Background from GDD */
+    border-color: #333 !important;
+    box-shadow: none !important;
+    min-height: 38px;
+}
+
+.css-13cymwt-control:hover {
+    border-color: #3A86FF !important;
+    /* Accent Primary from GDD */
+}
+
+/* Ensure contrast for amber resin and other items */
+div[class*="-menu"] div[class*="-option"] {
+    padding: 8px 12px;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+/* Better visibility for amber resin and other selected items */
+.select__value-container div {
+    background-color: rgba(58, 134, 255, 0.2) !important;
+    border-radius: 4px;
+    color: #FFFFFF !important;
+}

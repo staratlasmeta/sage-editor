@@ -1,0 +1,13 @@
+{
+  "filename": "claim-stakes-simulator-standalone.html",
+  "size": 2017189,
+  "sizeMB": "1.92",
+  "buildDate": "2025-06-03T14:18:58.301Z",
+  "version": "0.1.0",
+  "reactVersion": "^18.2.0",
+  "components": {
+    "css": 1,
+    "js": 2,
+    "gameDataSize": 762896
+  }
+}

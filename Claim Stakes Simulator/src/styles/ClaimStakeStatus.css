@@ -1,0 +1,426 @@
+/* Add styles for global resources */
+.resource-stat.has-global .resource-info label {
+    position: relative;
+}
+
+.resource-stat.has-global .resource-info label::after {
+    content: '*';
+    color: #64ffda;
+    font-weight: bold;
+    margin-left: 2px;
+}
+
+.resource-sources {
+    margin-left: 5px;
+    font-size: 0.8em;
+    color: #888;
+}
+
+.resource-source.global-source {
+    font-size: 0.8em;
+    color: #64ffda;
+    margin-left: 4px;
+    font-style: italic;
+}
+
+/* Highlight resources that come from global pool */
+.resource-stat.has-global:not(.has-local) {
+    background-color: rgba(100, 255, 218, 0.1);
+    border-left: 2px solid #64ffda;
+}
+
+/* Style for resources with both local and global components */
+.resource-stat.has-global.has-local {
+    background-color: rgba(100, 255, 218, 0.05);
+    border-left: 2px solid #4CAF50;
+}
+
+/* Dashboard-style ClaimStakeStatus */
+.claim-stake-status.dashboard-style {
+    padding: 20px;
+    background-color: #121212;
+    color: #FFFFFF;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    min-width: 0;
+}
+
+.dashboard-header {
+    margin-bottom: 20px;
+}
+
+.dashboard-header h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: #FFFFFF;
+}
+
+/* Status Overview Grid */
+.status-overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 0 12px;
+    max-width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.status-card {
+    background-color: #1E1E1E;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.status-card:hover {
+    background-color: #2D2D2D;
+    border-color: #3A86FF;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.status-card-icon {
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.status-card-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.status-card-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: #FFFFFF;
+    line-height: 1.2;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    word-break: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.status-card-label {
+    font-size: 11px;
+    color: #AAAAAA;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.status-card-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.status-card-indicator.good {
+    background-color: #4CAF50;
+}
+
+.status-card-indicator.warning {
+    background-color: #FF9800;
+}
+
+.status-card-indicator.error {
+    background-color: #F44336;
+}
+
+/* Dashboard Sections */
+.dashboard-section {
+    background-color: #1E1E1E;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    overflow: hidden;
+}
+
+.section-header {
+    background-color: #2D2D2D;
+    padding: 12px 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background-color 0.2s ease;
+}
+
+.section-header:hover {
+    background-color: #333333;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.section-icon {
+    font-size: 16px;
+}
+
+.expand-arrow {
+    font-size: 12px;
+    color: #AAAAAA;
+    user-select: none;
+}
+
+.expand-arrow.expanded {
+    transform: rotate(180deg);
+}
+
+.section-content {
+    padding: 16px;
+}
+
+/* Resources Grid */
+.resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+.resource-card {
+    background-color: #2D2D2D;
+    border: 1px solid #444444;
+    border-radius: 6px;
+    padding: 12px;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.resource-card:hover {
+    border-color: #3A86FF;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.resource-name {
+    font-weight: 500;
+    color: #FFFFFF;
+    font-size: 13px;
+    margin-bottom: 4px;
+    text-transform: capitalize;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.resource-amount {
+    font-size: 16px;
+    font-weight: 600;
+    color: #FFFFFF;
+    margin-bottom: 2px;
+}
+
+.resource-rate {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 6px;
+    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.3);
+    display: inline-block;
+    min-width: auto;
+    width: auto;
+    text-align: center;
+}
+
+.resource-rate.positive {
+    color: #4CAF50;
+    background: rgba(76, 175, 80, 0.2);
+}
+
+.resource-rate.negative {
+    color: #F44336;
+    background: rgba(244, 67, 54, 0.2);
+}
+
+.no-resources {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #AAAAAA;
+    font-style: italic;
+    padding: 20px;
+}
+
+/* Detail Section Grids */
+.power-stats-grid,
+.crew-stats-grid,
+.fuel-stats-grid,
+.planet-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.power-stat,
+.crew-stat,
+.fuel-stat,
+.planet-info-item {
+    background-color: #2D2D2D;
+    padding: 12px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stat-label,
+.planet-info-label {
+    font-size: 12px;
+    color: #AAAAAA;
+    font-weight: 500;
+}
+
+.stat-value,
+.planet-info-value {
+    font-weight: 600;
+    color: #FFFFFF;
+}
+
+.stat-value.positive {
+    color: #4CAF50;
+}
+
+.stat-value.negative {
+    color: #F44336;
+}
+
+/* Status Badge */
+.status-badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-badge.operational {
+    background-color: rgba(76, 175, 80, 0.2);
+    color: #4CAF50;
+    border: 1px solid #4CAF50;
+}
+
+.status-badge.inactive {
+    background-color: rgba(244, 67, 54, 0.2);
+    color: #F44336;
+    border: 1px solid #F44336;
+}
+
+/* Crew and Progress Bars */
+.crew-bar {
+    background-color: #333333;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+.crew-used {
+    background-color: #4CAF50;
+    height: 100%;
+    transition: width 0.3s ease;
+}
+
+.crew-used.crew-exceeded {
+    background-color: #F44336;
+}
+
+/* Resupply Button */
+.resupply-fuel-button {
+    background-color: #3A86FF;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+    margin-top: 8px;
+}
+
+.resupply-fuel-button:hover {
+    background-color: #2563EB;
+    transform: translateY(-1px);
+}
+
+.resupply-fuel-button:disabled {
+    background-color: #555555;
+    color: #888888;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Resources Section Specific */
+.resources-section .section-header {
+    background-color: #3A86FF;
+    color: #FFFFFF;
+}
+
+.resources-section .section-header:hover {
+    background-color: #2563EB;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .status-overview-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .resources-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 8px;
+    }
+
+    .power-stats-grid,
+    .crew-stats-grid,
+    .fuel-stats-grid,
+    .planet-info-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.slots-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+}
+
+.slots-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+.power-stats-grid {}

@@ -1,0 +1,1469 @@
+/* Modern Styling for Map Editor */
+:root {
+  /* Base Colors */
+  --bg-dark: #121212;
+  --bg-surface: #1e1e1e;
+  --bg-elevated: #252525;
+  --bg-input: #2a2a2a;
+  
+  /* Accent Colors */
+  --accent-primary: #4a88ff;
+  --accent-primary-hover: #5a94ff;
+  --accent-success: #4caf50;
+  --accent-warning: #ff9800;
+  --accent-danger: #f44336;
+  
+  /* Text Colors */
+  --text-primary: #e0e0e0;
+  --text-secondary: #b0b0b0;
+  --text-muted: #888888;
+  
+  /* Borders */
+  --border-color: #333333;
+  --border-radius: 0px;
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.4);
+  
+  /* Animation */
+  --transition-speed: 0.2s;
+  
+  /* Fonts */
+  --font-main: 'Inter', 'Segoe UI', sans-serif;
+  --font-headings: 'Chakra Petch', sans-serif;
+}
+
+/* Global Styles */
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Apply Chakra Petch to all headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-headings);
+  font-weight: 500;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Top Toolbar */
+.top-toolbar {
+  background-color: var(--bg-surface);
+  border-bottom: 1px solid var(--border-color);
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Home button styling */
+.home-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background-color: var(--bg-elevated);
+  color: var(--accent-primary);
+  text-decoration: none;
+  border-radius: var(--border-radius);
+  font-family: var(--font-headings);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all var(--transition-speed) ease;
+  border: 1px solid var(--border-color);
+  margin-left: 15px;
+}
+
+.home-button:hover {
+  background-color: #383838;
+  border-color: var(--accent-primary);
+  transform: scale(1.05);
+}
+
+.home-button svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Button Styling */
+button {
+  background-color: var(--bg-elevated);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+button:hover:not(:disabled) {
+  background-color: #383838;
+  border-color: #555;
+}
+
+button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+button svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Primary Button */
+.btn-primary {
+  background-color: var(--accent-primary);
+  border-color: var(--accent-primary);
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--accent-primary-hover);
+  border-color: var(--accent-primary-hover);
+}
+
+/* Danger Button */
+.btn-danger {
+  background-color: var(--accent-danger);
+  border-color: #c53030;
+  color: white;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background-color: #f55a4e;
+  border-color: #d84444;
+}
+
+/* Input Styling */
+input, select {
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 8px 12px;
+  border-radius: var(--border-radius);
+  font-size: 0.9rem;
+  transition: all var(--transition-speed) ease;
+  outline: none;
+}
+
+input:focus, select:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 2px rgba(74, 136, 255, 0.2);
+}
+
+/* Container Styling */
+.galaxy-view-container, .details-panel {
+  background-color: var(--bg-surface);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+/* Galaxy View Container specific styling */
+.galaxy-view-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0; /* Prevents flex items from overflowing */
+  position: sticky;
+  top: 15px; /* Match editor-container padding */
+  height: calc(100vh - 100px); /* Subtract top toolbar and padding */
+}
+
+/* Canvas Styling */
+#galaxyCanvas, #systemPreviewCanvas {
+  border-radius: var(--border-radius);
+  background-color: #000;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Galaxy map container needs to take remaining space */
+#galaxy-map-container {
+  flex: 1;
+  position: relative;
+  min-height: 0; /* Allows container to shrink below content size */
+}
+
+/* System Preview Container - add consistent margins */
+.system-preview-container {
+  padding: 0;
+  background-color: var(--bg-elevated);
+  border-radius: var(--border-radius);
+  margin: 0 0 15px 0; /* Consistent margin on all sides */
+  min-height: 325px; /* Add minimum height to ensure details don't overlap */
+}
+
+/* Accordion styles for detail sections */
+.accordion-header {
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.2s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: var(--bg-elevated);
+  border-radius: var(--border-radius);
+}
+
+.accordion-header:hover {
+  background-color: var(--bg-input);
+}
+
+.accordion-icon {
+  font-size: 12px;
+  color: var(--text-secondary);
+  transition: transform 0.2s ease;
+}
+
+.accordion-content {
+  transition: max-height 0.3s ease, opacity 0.2s ease;
+  overflow: hidden;
+  opacity: 1;
+}
+
+.accordion-content[style*="display: none"] {
+  opacity: 0;
+}
+
+.detail-section {
+  margin-bottom: 15px;
+}
+
+/* Make system preview header consistent with galaxy view header */
+.system-preview-container h3 {
+  margin: 0;
+  padding: 10px;
+  font-weight: 500;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-elevated);
+  font-family: var(--font-headings);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* System preview canvas container - ensure consistent padding */
+#systemPreview {
+  padding: 0;
+  margin: 0;
+  display: block;
+  width: 100%;  
+  height: 300px; /* Set fixed height */
+}
+
+/* Add a wrapper for the system preview canvas with padding */
+.system-preview-wrapper {
+  background-color: #000;
+  height: 300px; /* Match canvas height */
+  overflow: hidden; /* Ensure content doesn't overflow */
+}
+
+/* Tabs Styling */
+.tabs-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.tabs-header {
+  display: flex;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-elevated);
+}
+
+/* Tab button styling for icon-only tabs */
+.tab-button {
+  padding: 10px;
+  width: 44px;
+  height: 44px;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all var(--transition-speed) ease;
+  display: flex;
+  align-items: center;
+}
+
+.tab-button .icon {
+  margin: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.tab-button:hover {
+  color: var(--text-primary);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.tab-button.active {
+  color: var(--accent-primary);
+  background-color: rgba(61, 139, 248, 0.08);
+  border-bottom: 2px solid var(--accent-primary);
+}
+
+.tab-content {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 15px;
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Icons Styling */
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  fill: none;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+}
+
+/* Fix for SVG icons - ensure symbols are properly inherited */
+svg.icon use {
+  color: inherit;
+  stroke: inherit;
+  fill: inherit;
+}
+
+/* Fix for Safari and Firefox */
+svg.icon {
+  overflow: visible;
+}
+
+/* Improved Icon Button Styles */
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  color: var(--text-primary);
+  position: relative;
+}
+
+.icon-button:hover {
+  background-color: var(--bg-hover);
+}
+
+.icon-button svg {
+  width: 16px;
+  height: 16px;
+}
+
+.icon-button .icon {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+/* Improve form layout to prevent overlapping */
+.form-row {
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-row label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  min-width: unset;
+  line-height: 1.2;
+}
+
+/* Two-column layout for forms */
+@media (min-width: 500px) {
+  .form-row {
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .form-row label {
+    min-width: 90px;
+    max-width: 90px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+}
+
+/* Ensure form inputs don't overflow */
+.form-row input,
+.form-row select {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Make the details panel content area scrollable if needed */
+#system-details {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* Coordinate inputs styling */
+.coord-inputs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  max-width: 100%;
+}
+
+.coord-inputs input {
+  flex: 1;
+  min-width: 0; /* Allow inputs to shrink below min-content */
+  max-width: 80px;
+  padding: 6px 8px;
+}
+
+.coord-inputs span {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+/* System key styling with truncation */
+.system-key {
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  cursor: pointer;
+  padding: 4px 8px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: var(--border-radius);
+}
+
+.system-key.copied {
+  background-color: rgba(61, 139, 248, 0.2);
+  color: var(--accent-primary);
+}
+
+/* History Panel Styling */
+.history-panel {
+   border-top: 1px solid var(--border-color);
+   margin-top: 15px;
+}
+
+#historyList {
+   list-style: none;
+   padding: 0;
+   margin: 0;
+   max-height: 500px;
+   overflow-y: auto;
+}
+
+.history-item {
+    padding: 8px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.2s ease;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    border-radius: 4px;
+    margin-bottom: 2px;
+}
+
+.history-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.history-item.current-state {
+    background-color: rgba(65, 105, 225, 0.2);
+    border-left: 3px solid royalblue;
+    color: var(--accent-primary);
+    font-weight: 500;
+}
+
+.history-time {
+    color: #aaa;
+    font-size: 0.85em;
+    margin-right: 10px;
+    white-space: nowrap;
+}
+
+.history-desc {
+    flex-grow: 1;
+}
+
+.history-group-header {
+    font-weight: bold;
+    background-color: rgba(50, 50, 50, 0.3);
+}
+
+.history-group-item {
+    padding: 6px 10px 6px 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+    font-size: 0.95em;
+    color: #ccc;
+}
+
+.history-group-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.group-toggle {
+    margin-right: 8px;
+    font-size: 10px;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.history-group-header.collapsed {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.empty-history {
+    padding: 15px;
+    text-align: center;
+    color: #999;
+    font-style: italic;
+}
+
+/* SVG Icon Generator - Will be used for consistent icons */
+.icons-svg {
+  display: none;
+}
+
+/* Helper classes for grid layouts */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* Tooltip styling */
+[data-tooltip] {
+  position: relative;
+}
+
+[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  z-index: 1000;
+  
+  /* Check position in viewport */
+  bottom: auto;
+  top: calc(100% + 5px);
+}
+
+/* Reposition tooltip for elements near the bottom of the viewport */
+[data-tooltip]:hover::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent rgba(0, 0, 0, 0.8) transparent;
+  z-index: 1000;
+}
+
+/* Mobile-friendly tooltip adjustments */
+@media (max-width: 768px) {
+  [data-tooltip]:hover::after {
+    min-width: 100px;
+    max-width: 200px;
+    white-space: normal;
+  }
+}
+
+/* Card-like panels for containing related information */
+.card-panel {
+  background-color: var(--bg-elevated);
+  border-radius: var(--border-radius);
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: var(--shadow-sm);
+}
+
+.card-panel h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+  font-weight: 500;
+  font-family: var(--font-headings);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 5px;
+}
+
+.galaxy-info-panel {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: rgba(30, 30, 30, 0.8);
+  border-radius: var(--border-radius);
+  padding: 10px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  backdrop-filter: blur(4px);
+  max-width: 250px;
+  z-index: 5;
+}
+
+/* Planet Cards */
+.planet-card {
+  background-color: var(--bg-elevated);
+  border-radius: var(--border-radius);
+  margin-bottom: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.planet-card:hover {
+  border-color: #555;
+  box-shadow: var(--shadow-sm);
+}
+
+.planet-card-header {
+  padding: 8px 15px;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.planet-card-header h4 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  border: none;
+}
+
+.planet-card-content {
+  padding: 12px;
+}
+
+.resource-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  margin: 2px;
+  border-radius: var(--border-radius);
+  font-size: 0.8rem;
+  white-space: nowrap;
+  user-select: none;
+  transition: all 0.2s ease;
+}
+
+.resource-badge.clickable {
+  cursor: pointer;
+}
+
+/* Resource Badge Styles */
+.resource-biomass { background-color: rgba(34, 139, 34, 0.3); color: #8fca8f; }
+.resource-carbon { background-color: rgba(105, 105, 105, 0.3); color: #bbbbbb; }
+.resource-iron { background-color: rgba(160, 82, 45, 0.3); color: #d9a689; }
+.resource-copper { background-color: rgba(184, 115, 51, 0.3); color: #e6be98; }
+.resource-hydrogen { background-color: rgba(240, 248, 255, 0.15); color: #f0f8ff; }
+.resource-nitrogen { background-color: rgba(230, 230, 250, 0.15); color: #e6e6fa; }
+.resource-lumanite { background-color: rgba(218, 165, 32, 0.3); color: #ffd966; }
+.resource-arco { background-color: rgba(255, 99, 71, 0.3); color: #ff9e8a; }
+.resource-titanium { background-color: rgba(119, 136, 153, 0.3); color: #a6b3c1; }
+
+/* Search & Filter Components */
+.search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-input);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  transition: border-color var(--transition-speed) ease;
+}
+
+.search-input-wrapper:focus-within {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 2px rgba(74, 136, 255, 0.2);
+}
+
+.search-icon {
+  margin-left: 8px;
+  color: var(--text-secondary);
+}
+
+.search-input-wrapper input {
+  background: transparent;
+  border: none;
+  padding: 8px 32px 8px 8px;
+  width: 100%;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}
+
+.search-input-wrapper input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.clear-search-btn {
+  position: absolute;
+  right: 8px;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: none;
+}
+
+.search-input-wrapper.has-text .clear-search-btn {
+  display: block;
+}
+
+.search-label {
+  color: var(--text-secondary);
+  margin-right: 8px;
+  font-size: 0.9rem;
+}
+
+/* Placeholder Messages */
+.placeholder-message, .empty-state-message {
+  padding: 20px;
+  text-align: center;
+  color: var(--text-muted);
+  font-style: italic;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: var(--border-radius);
+  margin: 10px 0;
+}
+
+/* Toolbar Button Styling */
+.btn-action {
+  background-color: var(--bg-elevated);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.btn-action:hover:not(:disabled) {
+  background-color: #383838;
+}
+
+.btn-action:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.btn-action svg {
+  width: 16px;
+  height: 16px;
+}
+
+.btn-action:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Small Button Variant */
+.btn-sm {
+  padding: 4px 8px;
+  font-size: 0.8rem;
+}
+
+/* Header Actions Container */
+.header-actions {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  position: relative;
+}
+
+/* View Header Styling - Fix for aligning buttons with title */
+.view-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0;
+  padding: 10px;
+  background-color: var(--bg-elevated);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.view-header h2 {
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 500;
+  font-family: var(--font-headings);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Action Panel Styling */
+.action-panel {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px;
+  background-color: var(--bg-elevated);
+  border-radius: var(--border-radius);
+  margin-bottom: 15px;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-group {
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+  padding-right: 10px;
+  margin-right: 10px;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  align-items: center;
+}
+
+.action-group:last-child {
+  border-right: none;
+  padding-right: 0;
+  margin-right: 0;
+}
+
+.action-label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 2px;
+}
+
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* Filter-related Components */
+/* Imported from filter-styles.css */
+.filter-popup {
+  position: fixed; /* Change to fixed positioning */
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+  width: 250px;
+  max-height: 800px;
+  overflow-y: auto;
+  display: none;
+  z-index: 1000;
+  flex-direction: column;
+}
+
+.filter-popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid var(--border-color);
+  font-weight: 500;
+  background-color: var(--bg-surface);
+  flex-shrink: 0;
+}
+
+.filter-popup-content {
+  padding: 10px;
+  overflow-y: auto;
+  flex-grow: 1;
+  min-height: 0; /* This is crucial for Firefox */
+}
+
+.filter-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  background-color: var(--bg-surface);
+  padding-bottom: 10px;
+}
+
+.filter-checkboxes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filter-checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-checkbox-row input[type="checkbox"] {
+  margin: 0;
+}
+
+.color-indicator {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.filter-popup.visible {
+  display: flex;
+}
+
+/* Toolbar Groups */
+.toolbar-group-left,
+.toolbar-group-center,
+.toolbar-group-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toolbar-group-center {
+  justify-content: center;
+  flex-grow: 1;
+  text-align: center;
+  font-size: 0.9em;
+  color: var(--text-secondary);
+  margin: 0 15px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+#currentFilename {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
+  display: inline-block;
+}
+
+#saveStatusIndicator {
+  color: var(--accent-warning);
+  font-weight: bold;
+  margin-left: 5px;
+  display: none;
+}
+
+#systemCountSpan {
+  margin-left: 15px;
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+/* File Input Styling */
+#mapFile {
+  display: none;
+}
+
+/* Details panel specifics */
+.details-panel {
+  width: 350px;
+  min-width: 350px; /* Prevents shrinking */
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto; /* Don't grow or shrink */
+}
+
+/* Dark-specific selection colors */
+::selection {
+  background-color: rgba(74, 136, 255, 0.3);
+  color: #ffffff;
+}
+
+/* Make all UI components consistent with border-radius */
+.placeholder-message, 
+.empty-state-message,
+.filter-popup,
+.resource-badge {
+  border-radius: var(--border-radius);
+}
+
+/* Make action panel consistent */
+.action-panel {
+  border-radius: var(--border-radius);
+}
+
+/* Stats Panel Styling */
+.faction-stats-panel {
+  padding: 10px;
+  width: 400px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.faction-stats-panel h2 {
+  margin: 0 0 10px 0;
+}
+
+.stats-container {
+  background-color: var(--bg-surface);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.stats-row-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stats-row-container:not(:last-child) {
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.stats-title {
+  color: var(--text-secondary);
+  font-size: 1em;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(80px, 1fr));
+  align-items: baseline;
+}
+
+/* Column headers (Total, MUD, ONI, UST) */
+div.stats-grid.label-row {
+  color: var(--text-muted);
+  font-family: var(--font-main);
+  font-size: 0.9em;
+}
+
+/* Numerical values */
+div.stats-grid.value-row > span {
+  font-family: var(--font-headings) !important;
+  font-size: 1.2em;
+  font-weight: 700;
+  text-align: left;
+  white-space: nowrap;
+}
+
+/* Category titles (Systems:, Territory:, etc) */
+.stats-title {
+  color: var(--text-secondary);
+  font-size: 1em;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.faction-breakdown {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.faction-pill {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.faction-pill.mud {
+  background-color: rgba(255, 87, 34, 0.2);
+  color: #FF5722;
+}
+
+.faction-pill.oni {
+  background-color: rgba(33, 150, 243, 0.2);
+  color: #2196F3;
+}
+
+.faction-pill.ust {
+  background-color: rgba(255, 193, 7, 0.2);
+  color: #FFC107;
+}
+
+.faction-pill.none {
+  background-color: rgba(128, 128, 128, 0.2);
+  color: #808080;
+}
+
+/* Make editor container fill the screen better */
+.editor-container {
+  flex: 1;
+  display: flex;
+  padding: 15px;
+  gap: 15px;
+  align-items: flex-start; /* Align items to top */
+  min-height: calc(100vh - 60px); /* Subtract top toolbar height */
+}
+
+/* Add style for empty base state */
+.empty-base-state {
+    color: #888;
+    font-style: italic;
+    background-color: rgba(50, 50, 50, 0.2);
+    border-left: 3px dashed #666;
+}
+
+/* Filter controls */
+.filter-controls {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.filter-controls button {
+  flex: 1;
+  padding: 4px 8px;
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  transition: all 0.2s ease;
+}
+
+.filter-controls button:hover {
+  background-color: var(--bg-hover);
+}
+
+/* Group toggle styling */
+.filter-item.group-toggle {
+  background-color: rgba(40, 40, 40, 0.5);
+  padding: 4px 8px;
+  margin-bottom: 8px;
+  border-left: 3px solid var(--accent-primary);
+}
+
+.filter-item.group-toggle label {
+  font-weight: 500;
+  color: var(--accent-primary);
+}
+
+/* Group toggles container */
+.group-toggles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 8px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 15px;
+}
+
+/* Updated group toggle style for the top section */
+.group-toggles .filter-item.group-toggle {
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.group-toggles .filter-item.group-toggle label {
+  font-size: 0.8rem;
+}
+
+/* Improved toggle button styling */
+.btn-action.toggle-btn {
+  position: relative;
+  overflow: hidden;
+  background-color: #2a2a2a; /* Dark grey for OFF state */
+  color: #999; /* Muted text for OFF state */
+  border-color: #333;
+}
+
+.btn-action.toggle-btn:hover {
+  background-color: #323232;
+  color: #bbb;
+}
+
+.btn-action.toggle-btn.active {
+  background-color: var(--bg-elevated); /* Default button background for ON state */
+  border-color: #555; /* Subtle border */
+  color: var(--text-primary); /* Normal text color */
+  font-weight: normal;
+}
+
+.btn-action.toggle-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent-primary); /* Keep the indicator line */
+}
+
+/* Improved system count display */
+.system-count {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  background: rgba(0, 0, 0, 0.2);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.system-count span {
+  display: inline-block;
+  padding: 0 5px;
+  white-space: nowrap;
+}
+
+/* Header search bar styling */
+.header-controls .search-input-wrapper.top-search {
+  width: 200px;
+  min-width: 150px;
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+
+.header-controls .search-input-wrapper.top-search input {
+  height: 28px;
+  font-size: 0.85rem;
+  padding: 4px 26px 4px 8px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-color: rgba(80, 80, 80, 0.4);
+}
+
+.header-controls .search-input-wrapper.top-search .clear-search-btn {
+  right: 4px;
+  width: 20px;
+  height: 20px;
+}
+
+/* Region dropdown styling */
+#systemRegion option {
+  padding: 4px;
+  white-space: nowrap;
+}
+
+#systemRegion option:not(:first-child) {
+  border-left: 5px solid;
+}
+
+/* Display the current region color next to the dropdown */
+#systemRegion {
+  padding-left: 26px;
+  position: relative;
+  background-position: 8px center;
+  background-repeat: no-repeat;
+  background-size: 12px 12px;
+}
+
+/* Lock Mode Styling for Details Panel */
+.locked-mode .form-group input,
+.locked-mode .form-group select,
+.locked-mode .form-group textarea,
+.locked-mode button:not(#centerSystemBtn):not(#centerSystemGroupBtn):not(.center-individual-btn):not(.remove-link-btn):not(.select-link-btn):not(#select-all-resources):not(#select-none-resources) { /* Allow centering/link/filter buttons */
+  pointer-events: none; /* Prevent clicks */
+  opacity: 0.6; /* Visually indicate disabled state */
+  background-color: #333; /* Darken background */
+}
+
+.locked-mode .locked-indicator,
+.locked-mode .locked-indicator-inline {
+    color: #ffcc00; /* Yellow/gold color for lock indicator */
+    font-weight: bold;
+    font-size: 0.9em;
+    margin-left: 8px;
+}
+
+.locked-mode .locked-indicator-inline {
+    font-size: 0.8em;
+    font-style: italic;
+}
+
+/* Ensure specific buttons that SHOULD work in locked mode are not disabled */
+.locked-mode #centerSystemBtn,
+.locked-mode .center-individual-btn,
+.locked-mode #centerSystemGroupBtn,
+.locked-mode .remove-link-btn,
+.locked-mode .select-link-btn {
+    pointer-events: auto;
+    opacity: 1;
+    cursor: pointer;
+}
+
+/* Style disabled buttons explicitly */
+button:disabled,
+.locked-mode button:disabled { /* Ensure disabled buttons in locked mode look consistent */
+    opacity: 0.4 !important; /* Lower opacity for disabled */
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+    background-color: #444 !important; /* Explicit disabled background */
+}
+
+/* Responsive adjustments if needed */
+@media (max-width: 768px) {
+  [data-tooltip]:hover::after {
+    min-width: 100px;
+    max-width: 200px;
+    white-space: normal;
+  }
+}
+
+/* Keyboard Shortcuts Modal */
+.shortcut-section {
+  margin-bottom: 20px;
+}
+
+.shortcut-section h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+  font-weight: 500;
+  font-family: var(--font-headings);
+  letter-spacing: 0.5px;
+  font-size: 0.95rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 5px;
+}
+
+.shortcut-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.shortcut-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 10px;
+  background-color: var(--bg-elevated);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+}
+
+.shortcut-keys {
+  font-family: monospace;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 3px 6px;
+  border-radius: 3px;
+  color: var(--accent-primary);
+  font-weight: bold;
+}
+
+.shortcut-description {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/* Responsive for mobile */
+@media (max-width: 600px) {
+  .shortcut-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .modal-dialog {
+    width: 95%;
+    max-width: 450px;
+  }
+}
+
+/* Input note styling for additional information */
+.input-note {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+  font-style: italic;
+}
+
+/* Resource visualization styling */
+.resource-vis-item {
+  background-color: rgba(0, 100, 100, 0.1);
+  padding: 8px 10px;
+  border-radius: var(--border-radius);
+  margin-bottom: 10px;
+  border-left: 3px solid #00b3b3;
+}
+
+.resource-vis-item label {
+  font-weight: 500;
+  color: #00cccc;
+} 

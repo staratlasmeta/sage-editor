@@ -1,0 +1,21 @@
+﻿Asset,Type,Subtype,Config,Class,Qty,Ship Name
+Pilot (https://www.notion.so/Pilot-27d1096841ce418dbb935215ddf2e60b?pvs=21),Crew,,,,1,Ogrika Niruch
+Navigator (https://www.notion.so/Navigator-12b110423c754524a11c3e0bdef50f5c?pvs=21),Crew,,,,1,Ogrika Niruch
+Flight Station (https://www.notion.so/Flight-Station-10ca52fc4d6c4f0a9718139127036fcf?pvs=21),Station,,,,2,Ogrika Niruch
+Power Core (https://www.notion.so/Power-Core-fec1491dcb4b4c849f07de274513a992?pvs=21),Component,Core,,X-Small,1,Ogrika Niruch
+Warp Drive (https://www.notion.so/Warp-Drive-dd8657c0b3d047da98782551469b61a2?pvs=21),Component,Core,,X-Small,1,Ogrika Niruch
+Subwarp Engine (https://www.notion.so/Subwarp-Engine-c3fbf18af39048afb1dcec4a3b8ec14d?pvs=21),Component,Core,,X-Small,1,Ogrika Niruch
+Maneuvering Thrusters (https://www.notion.so/Maneuvering-Thrusters-26f4163fe70a480fbbfb28bf2346e2ac?pvs=21),Component,Core,,X-Small,1,Ogrika Niruch
+Shield Generator (https://www.notion.so/Shield-Generator-22ff6250d678461da38ad5adee5234e9?pvs=21),Component,Core,,X-Small,1,Ogrika Niruch
+Heat Sink (https://www.notion.so/Heat-Sink-9a2ef32ff8014683b7c02b4856ba14ce?pvs=21),Component,Core,,X-Small,1,Ogrika Niruch
+Scanner Array (https://www.notion.so/Scanner-Array-7ff97074be804fbbbe57c465e952d9f2?pvs=21),Component,Core,,X-Small,1,Ogrika Niruch
+Tractor Beam (https://www.notion.so/Tractor-Beam-a53cadac3f5543b09057327e01ec30c6?pvs=21),Component,Core,,X-Small,1,Ogrika Niruch
+Hull Reinforcement (https://www.notion.so/Hull-Reinforcement-187f8583d7374ce3a191be8165a87ed9?pvs=21),Component,Core,,X-Small,1,Ogrika Niruch
+Fixed Hardpoint (https://www.notion.so/Fixed-Hardpoint-c8ac7684ffe14d53a34fbae51e2f4aa5?pvs=21),Component,Combat,,X-Small,2,Ogrika Niruch
+Countermeasure System (https://www.notion.so/Countermeasure-System-abc89ea959094c7ca59956d4fede2b6b?pvs=21),Component,Combat,,X-Small,2,Ogrika Niruch
+Cargo Module (https://www.notion.so/Cargo-Module-790ddec5d1e4449494a5274787f043fa?pvs=21),Module,Swappable,Detail,X-Small,1,Ogrika Niruch
+Fuel Module (https://www.notion.so/Fuel-Module-120259914f1a4377bad3b7ffd3f42c9e?pvs=21),Module,Swappable,Detail,X-Small,1,Ogrika Niruch
+Bridge/Cockpit (https://www.notion.so/Bridge-Cockpit-58c0cce9dacd4c7db88eb19b790d9e07?pvs=21),Interior,Standard,Room,X-Small,1,Ogrika Niruch
+Escape Pods (https://www.notion.so/Escape-Pods-d4474c589707419dbbf5cbaf68209923?pvs=21),Interior,Standard,Detail,X-Small,2,Ogrika Niruch
+Cargo Hold (https://www.notion.so/Cargo-Hold-dbb8e39c2c1f460c80fee2bd7921fb49?pvs=21),Interior,Standard,Detail,X-Small,1,Ogrika Niruch
+Theater (https://www.notion.so/Theater-19e7883269fd4571b77bf13e35f3bae8?pvs=21),Interior,Activity,Detail,X-Small,1,Ogrika Niruch

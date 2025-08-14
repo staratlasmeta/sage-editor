@@ -1,0 +1,1040 @@
+/* Layout fixes for Star Atlas Map Editor */
+
+/* Main container structure */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+
+/* Header styling */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  background-color: var(--bg-surface);
+  border-bottom: 1px solid var(--border-color);
+  height: 40px;
+  min-height: 40px;
+  z-index: 10;
+  position: relative;
+}
+
+/* Logo always stays on the left */
+.logo {
+  flex: 0 0 auto;
+  font-weight: bold;
+  font-family: var(--font-headings);
+}
+
+/* Fixed position file info */
+.file-info {
+  position: static;
+  left: unset;
+  top: unset;
+  transform: none;
+  text-align: left;
+  white-space: nowrap;
+  pointer-events: auto;
+  z-index: 1;
+  margin-left: 18px;
+  font-weight: normal;
+  font-size: 1rem;
+  color: var(--text-secondary);
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Header controls stay on the right */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+  flex: 0 0 auto;
+  z-index: 2;
+  max-width: 60%; /* Prevent from taking too much space */
+}
+
+/* Main content - fills available space */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Toolbar - horizontal layout */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 5px;
+  background-color: var(--bg-surface);
+  border-bottom: 1px solid var(--border-color);
+  overflow-x: auto;
+  min-height: 40px;
+  z-index: 5;
+}
+
+/* Make toolbar sections horizontal */
+.toolbar-section {
+  display: flex;
+  gap: 5px;
+  margin-right: 10px;
+  padding-right: 10px;
+  border-right: 1px solid var(--border-color);
+}
+
+.toolbar-section:last-child {
+  border-right: none;
+}
+
+/* Workspace - where canvas and details panel live */
+.workspace {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Galaxy container - fill available space */
+#galaxyContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+/* Canvas should fill container */
+.galaxy-view {
+  width: 100%;
+  height: 100%;
+  display: block;
+  background-color: #000;
+}
+
+/* Details panel - fixed width */
+#detailsPanel {
+  width: 300px;
+  min-width: 340px;
+  height: 100%;
+  overflow-y: auto;
+  padding: 0;
+  border-left: 1px solid var(--border-color);
+  background-color: var(--bg-surface);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 3;
+}
+
+/* Tabbed interface for details panel */
+.details-tabs {
+  padding: 0;
+  overflow-x: auto;
+  white-space: nowrap;
+  background-color: var(--bg-elevated);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 0; /* No more search panel above */
+}
+
+.details-tab {
+  padding: 8px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-width: auto;
+  max-width: none;
+  transition: all 0.2s;
+}
+
+.details-tab i {
+  font-size: 18px;
+}
+
+.details-tab.active {
+  border-bottom-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+/* Make sure tab content fills the available space */
+.tab-content {
+  height: calc(100% - 40px);
+  overflow-y: auto;
+  padding: 0;
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* System preview - maintain proper proportions */
+.system-preview-container {
+  margin-bottom: 15px;
+  height: auto;
+}
+
+.system-preview-wrapper {
+  width: 100%;
+  height: 250px;
+}
+
+/* Search panel positioning */
+.search-panel {
+  padding: 10px 15px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: var(--bg-elevated);
+  border-bottom: 1px solid var(--border-color);
+  z-index: 4;
+}
+
+.search-panel .search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.search-panel input {
+  width: 100%;
+  padding: 8px 28px 8px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  box-sizing: border-box;
+  margin: 0;
+  font-size: 14px;
+}
+
+.search-panel input:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 2px rgba(74, 136, 255, 0.2);
+}
+
+.search-panel .clear-search-btn {
+  position: absolute;
+  right: 8px;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  display: none;
+}
+
+.search-panel .clear-search-btn:hover {
+  color: var(--text-primary);
+}
+
+.search-panel .search-input-wrapper.has-text .clear-search-btn {
+  display: block;
+}
+
+/* Fix tooltip positioning */
+[data-tooltip] {
+  position: relative !important;
+  cursor: pointer !important;
+}
+
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: fixed !important;
+  bottom: auto !important;
+  top: calc(100% + 10px) !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  padding: 5px 10px !important;
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  color: white !important;
+  border-radius: 4px !important;
+  white-space: nowrap !important;
+  font-size: 0.8rem !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transition: opacity 0.2s, visibility 0.2s !important;
+  pointer-events: none !important;
+  z-index: 10000 !important;
+  text-transform: none !important;
+  font-weight: normal !important;
+  letter-spacing: normal !important;
+  max-width: 250px !important;
+}
+
+/* Add a small arrow/triangle to the tooltip */
+[data-tooltip]::before {
+  content: "";
+  position: fixed !important;
+  bottom: auto !important;
+  top: calc(100% + 5px) !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  border-width: 5px !important;
+  border-style: solid !important;
+  border-color: transparent transparent rgba(0, 0, 0, 0.8) transparent !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transition: opacity 0.2s, visibility 0.2s !important;
+  pointer-events: none !important;
+  z-index: 10000 !important;
+}
+
+[data-tooltip]:hover::after,
+[data-tooltip]:hover::before {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Remove any inline tooltip styles that might have been added */
+div.tooltip {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Fix tooltip positioning for buttons at the edges of the screen */
+[data-tooltip].edge-left::after,
+[data-tooltip].edge-left::before {
+  left: 0;
+  transform: none;
+}
+
+[data-tooltip].edge-right::after,
+[data-tooltip].edge-right::before {
+  left: auto;
+  right: 0;
+  transform: none;
+}
+
+/* History panel styling in tab */
+#history-tab .history-panel {
+  height: 100%;
+  overflow-y: auto;
+  padding: 0;
+  margin: 0;
+}
+
+.history-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.history-list li {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border-color);
+  cursor: default;
+}
+
+.history-item {
+  cursor: pointer !important;
+  transition: background-color 0.2s;
+  position: relative;
+}
+
+.history-item:hover {
+  background-color: rgba(74, 136, 255, 0.1) !important;
+}
+
+.history-item:active {
+  background-color: rgba(74, 136, 255, 0.2) !important;
+}
+
+.history-item:before {
+  content: "↺";
+  margin-right: 5px;
+  color: #888;
+}
+
+.empty-history {
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* Prevent overlap of faction area stats */
+#factionAreaStats {
+  position: fixed !important;
+  top: 100px !important;
+  right: 20px !important;
+  max-width: 250px !important;
+  max-height: 50vh !important;
+  overflow-y: auto !important;
+  z-index: 1000 !important;
+  background-color: var(--bg-surface) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--border-radius) !important;
+  padding: 10px !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+/* Make faction panel closable */
+#factionAreaStats .close-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  line-height: 18px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: var(--bg-elevated);
+  color: var(--text-primary);
+}
+
+#factionAreaStats .close-button:hover {
+  background-color: var(--text-secondary);
+  color: var(--bg-surface);
+}
+
+/* Button sizing/spacing */
+.btn-action {
+  padding: 5px 10px;
+  white-space: nowrap;
+}
+
+/* Resource filter container */
+.resource-filter {
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.resource-category {
+  margin-bottom: 15px;
+}
+
+.resource-category h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 5px;
+}
+
+.filter-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.filter-item label {
+  margin-left: 5px;
+  font-size: 0.9rem;
+}
+
+/* Modal styling for planet resources */
+.modal-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-lg);
+  padding: 0;
+  max-width: 90%;
+  width: 600px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  max-height: 85vh;
+}
+
+.modal-content {
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.button-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 15px;
+}
+
+/* Adjust for smaller screens */
+@media (max-width: 1200px) {
+  .workspace {
+    flex-direction: column;
+  }
+  
+  #detailsPanel {
+    width: 100%;
+    height: 300px;
+    min-height: 300px;
+    border-left: none;
+    border-top: 1px solid var(--border-color);
+  }
+  
+  .system-preview-wrapper {
+    height: 150px;
+  }
+}
+
+/* Make it clear that panels can be closed */
+#historyPanel h3, #factionAreaStats h3 {
+  cursor: pointer;
+  position: relative;
+  padding-right: 25px;
+}
+
+#historyPanel h3:after, #factionAreaStats h3:after {
+  content: "×";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+}
+
+/* Style the detail content to support tabbed interface */
+.detail-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Resource detail styling */
+.resource-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.resource-table th,
+.resource-table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.resource-table th {
+  font-weight: 500;
+  background-color: var(--bg-elevated);
+}
+
+.resource-item {
+  display: inline-block;
+  margin: 5px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+}
+
+.resource-item:hover {
+  background-color: rgba(74, 136, 255, 0.1);
+}
+
+.resource-item.existing {
+  opacity: 0.5;
+}
+
+.resource-color {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 5px;
+  vertical-align: middle;
+  border-radius: 2px;
+}
+
+/* Add scrollbar styling for better appearance */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+.coords-display, .system-count {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.coords-display {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  min-width: 120px;
+  text-align: left;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-family: var(--font-headings);
+  letter-spacing: -0.5px;
+}
+
+/* Reset UI button in header */
+.reset-button {
+  background: #444;
+  color: #fff;
+  border: 1px solid #666;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s;
+}
+
+.reset-button:hover {
+  background: #555;
+  border-color: #777;
+}
+
+/* Style the system details panel for better layout */
+.detail-section {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: rgba(30, 30, 30, 0.5);
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+}
+
+.detail-section h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 8px;
+}
+
+/* Form group styling */
+.form-group {
+  margin-bottom: 12px;
+  /* display: flex; */
+  align-items: center;
+}
+
+.form-group label {
+  width: 130px;
+  text-align: right;
+  padding-right: 10px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group select {
+  flex: 1;
+  background-color: rgba(40, 40, 40, 0.7);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 8px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-group input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: rgba(40, 40, 40, 0.7);
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+  position: relative;
+}
+
+.form-group input[type="checkbox"]:checked {
+  background-color: var(--accent-primary);
+  border-color: var(--accent-primary);
+}
+
+.form-group input[type="checkbox"]:checked:after {
+  content: '✓';
+  position: absolute;
+  left: 3px;
+  top: -1px;
+  color: white;
+  font-size: 14px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 2px rgba(74, 136, 255, 0.2);
+}
+
+/* Style the star/planet items */
+.star-item, .planet-item {
+  background-color: rgba(25, 25, 25, 0.6);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 12px;
+  margin-bottom: 15px;
+}
+
+.star-item h4, .planet-item h4 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(180, 180, 180, 0.2);
+  font-size: 0.95rem;
+}
+
+/* Style buttons consistently */
+.small-btn, .remove-star-btn, .remove-planet-btn, .edit-resources-btn {
+  background-color: #333;
+  color: white;
+  border: 1px solid #444;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  margin-right: 5px;
+  transition: all 0.2s;
+}
+
+.small-btn:hover, .remove-star-btn:hover, .remove-planet-btn:hover, .edit-resources-btn:hover {
+  background-color: #444;
+  border-color: #555;
+}
+
+.remove-star-btn, .remove-planet-btn {
+  background-color: rgba(180, 40, 40, 0.3);
+  border-color: rgba(180, 40, 40, 0.5);
+}
+
+.remove-star-btn:hover, .remove-planet-btn:hover {
+  background-color: rgba(180, 40, 40, 0.5);
+  border-color: rgba(180, 40, 40, 0.7);
+}
+
+.edit-resources-btn {
+  background-color: rgba(40, 80, 160, 0.3);
+  border-color: rgba(40, 80, 160, 0.5);
+}
+
+.edit-resources-btn:hover {
+  background-color: rgba(40, 80, 160, 0.5);
+  border-color: rgba(40, 80, 160, 0.7);
+}
+
+/* Links list styling */
+.links-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.links-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  background-color: rgba(40, 40, 40, 0.3);
+  border-radius: 4px;
+  margin-bottom: 6px;
+}
+
+.links-list li:hover {
+  background-color: rgba(40, 40, 40, 0.5);
+}
+
+.link-distance {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin: 0 10px;
+}
+
+/* Button layout in sections */
+.detail-section .button-row {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 10px;
+  gap: 8px;
+}
+
+/* Make detail content scrollable */
+#system-tab {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+#systemDetailContent {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+#systemDetailContent::-webkit-scrollbar {
+  width: 6px;
+}
+
+#systemDetailContent::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 100, 100, 0.5);
+  border-radius: 3px;
+}
+
+/* Empty state styling */
+.detail-content p {
+  color: var(--text-secondary);
+  font-style: italic;
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* Add specific styling for each tab */
+#resources-tab {
+  padding: 15px;
+}
+
+#filter-tab {
+  padding: 0; /* Resource filter has its own padding */
+}
+
+#history-tab {
+  padding: 0; /* History list has its own padding */
+}
+
+/* Statistics styles for multi-select panel */
+.stats-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.stats-group {
+  flex: 1;
+  min-width: 140px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 10px;
+  background-color: var(--bg-elevated);
+}
+
+.stats-group h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent-primary);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 5px;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-size: 12px;
+}
+
+.stat-label {
+  color: var(--text-secondary);
+}
+
+.stat-value {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* Region badges */
+.region-badge {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  color: white;
+  margin-left: 5px;
+  font-weight: 500;
+}
+
+/* Core badge */
+.core-badge {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  background-color: #FFD700;
+  color: #000;
+  margin-left: 5px;
+  font-weight: 500;
+}
+
+/* Selected systems list */
+.selected-systems-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+}
+
+.selected-systems-list li {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 12px;
+}
+
+.selected-systems-list li:last-child {
+  border-bottom: none;
+}
+
+/* Generate Distribution button */
+.distribution-btn {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  background-color: var(--accent-secondary, #4a6bff);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  text-align: center;
+}
+
+.distribution-btn:hover {
+  background-color: var(--accent-secondary-dark, #3955cc);
+}
+
+/* Distribution panel container */
+.distribution-buttons {
+  margin: 10px 0;
+}
+
+/* Star type badges */
+.star-type-badge {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  margin: 2px;
+  font-weight: 500;
+  background-color: rgba(255, 255, 0, 0.2);
+  border: 1px solid rgba(255, 255, 0, 0.5);
+  color: #FFD700;
+}
+
+/* Star color classes */
+.star-white-dwarf {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #F0F8FF;
+}
+
+.star-red-dwarf {
+  background-color: rgba(255, 0, 0, 0.2);
+  border: 1px solid rgba(255, 0, 0, 0.5);
+  color: #FF4500;
+}
+
+.star-solar {
+  background-color: rgba(255, 215, 0, 0.2);
+  border: 1px solid rgba(255, 215, 0, 0.5);
+  color: #FFD700;
+}
+
+.star-hot-blue {
+  background-color: rgba(0, 0, 255, 0.2);
+  border: 1px solid rgba(0, 0, 255, 0.5);
+  color: #ADD8E6;
+}
+
+.star-red-giant {
+  background-color: rgba(139, 0, 0, 0.2);
+  border: 1px solid rgba(139, 0, 0, 0.5);
+  color: #DC143C;
+}
+
+.star-blue-giant {
+  background-color: rgba(0, 0, 139, 0.2);
+  border: 1px solid rgba(0, 0, 139, 0.5);
+  color: #1E90FF;
+}
+
+.star-neutron {
+  background-color: rgba(0, 255, 255, 0.2);
+  border: 1px solid rgba(0, 255, 255, 0.5);
+  color: #00FFFF;
+}
+
+.star-black-hole {
+  background-color: rgba(25, 25, 25, 0.9);
+  border: 1px solid rgba(75, 0, 130, 0.7);
+  color: #BA55D3;
+}
+
+/* Filename and save status styling */
+#currentFilename {
+  font-weight: 500;
+  color: var(--text-primary);
+  display: inline-block;
+  padding: 2px 5px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+
+#saveStatusIndicator {
+  color: var(--accent-warning);
+  margin-left: 5px;
+  font-size: 0.85rem;
+  vertical-align: middle;
+}
+
+#saveStatusIndicator.saved {
+  color: var(--accent-success);
+} 

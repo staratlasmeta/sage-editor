@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ship Config Lite</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Override styles with high specificity */
+        .ship-column-header select,
+        .ship-selector,
+        .config-dropdown {
+            width: 100% !important;
+            font-size: 14px !important;
+            height: 36px !important;
+            padding: 0 8px !important;
+            margin: 0 !important;
+            font-family: 'Chakra Petch', sans-serif !important;
+            background-color: var(--button-bg-color) !important;
+            color: var(--text-color) !important;
+            border: 1px solid var(--border-color) !important;
+            box-sizing: border-box !important;
+            min-height: 36px !important;
+            max-height: 36px !important;
+            line-height: 36px !important;
+        }
+        
+        /* Extra specific selector for the ship selector */
+        .selectors-buttons-container > .ship-selector,
+        .ship-selector.ship-selector {
+            height: 36px !important;
+            min-height: 36px !important;
+            max-height: 36px !important;
+            line-height: 36px !important;
+            box-sizing: border-box !important;
+        }
+        
+        .selectors-buttons-container {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: stretch !important;
+            gap: 2px !important;
+            width: 100% !important;
+        }
+        
+        .config-container {
+            display: flex !important;
+            align-items: center !important;
+            gap: 6px !important;
+            margin-top: 2px !important;
+        }
+        
+        .ship-control-btn {
+            background-color: var(--button-bg-color) !important;
+            color: var(--button-text) !important;
+            border: 1px solid var(--border-color) !important;
+            border-radius: 3px !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            font-family: 'Chakra Petch', sans-serif !important;
+            font-size: 16px !important;
+            cursor: pointer !important;
+            transition: background-color 0.2s !important;
+            height: 36px !important;
+            width: 36px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+        
+        .ship-selector {
+            margin-bottom: 0 !important;
+        }
+        
+        /* Style the drag handle */
+        .drag-handle {
+            position: relative;
+            font-size: 16px;
+            color: var(--secondary-text-color);
+            cursor: grab;
+            width: 40px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
+            user-select: none;
+            transition: color 0.2s;
+        }
+        
+        .drag-handle:hover {
+            color: var(--text-color);
+        }
+        
+        /* Style the header when dragging */
+        .ship-header.dragging {
+            opacity: 0.9;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Header spacing */
+        .ship-column-header {
+            padding-top: 0 !important;
+            position: relative !important;
+        }
+    </style>
+</head>
+<body class="dark-theme">
+    <div class="container">
+        <header>
+            <div class="panel-header">
+                <div class="panel-controls">
+                    <input type="file" id="csv-file" accept=".csv" hidden />
+                    <input type="file" id="components-file" accept=".json" hidden />
+                    <input type="file" id="config-file" accept=".json" hidden />
+                    <button id="file-menu-button" class="header-button" title="File Operations">File ▾</button>
+                    <button id="save-config" class="header-button" title="Save Configs">Save Configs</button>
+                    <div id="category-buttons" class="category-buttons-container"></div>
+                </div>
+                <div class="header-right-controls">
+                    <div class="theme-toggle">
+                        <label for="themeSwitch">
+                            <input type="checkbox" id="themeSwitch">
+                            <span class="theme-slider"></span>
+                        </label>
+                    </div>
+                    <a href="../SAGE Editor Suite/index.html" class="home-button" title="Return to SAGE Editor Suite">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Home
+                    </a>
+                </div>
+            </div>
+        </header>
+        
+        <div id="app-container">
+            <div class="main-content">
+                <div class="ship-stats-container">
+                    <div class="ship-stats-header" style="display: flex !important; justify-content: space-between !important; align-items: center !important; width: 100%;">
+                        <h2 style="flex-grow: 0; flex-shrink: 0;">Ship Comparison <span id="ship-count" style="font-weight: normal; font-size: 0.9em; color: #888;"></span></h2>
+                        <div class="panel-controls" style="display: flex !important; gap: 8px !important; margin-left: auto !important; flex-shrink: 0;">
+                            <button id="refresh-table-button" class="header-button" title="Refresh all ship stats">↻</button>
+                            <button id="add-ship-button" class="header-button">Add Ship</button>
+                            <button id="ship-actions-button" class="header-button">Actions ▾</button>
+                            <button id="analysis-tools-button" class="header-button">Analysis ▾</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Top scrollbar wrapper -->
+                    <div class="top-scroll-container">
+                        <div class="top-scroll-content"></div>
+                    </div>
+                    
+                    <div class="ship-stats-table-container">
+                        <table id="ship-comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Stat</th>
+                                    <!-- Ship columns will be added dynamically -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Stats rows will be added dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right-side sliding components panel -->
+            <div id="components-panel" class="components-panel">
+                <div class="components-panel-header">
+                    <div class="components-panel-title-area">
+                        <h2 id="components-panel-title">Edit Configuration</h2>
+                        <div class="config-name"></div>
+                    </div>
+                    <div class="components-panel-controls">
+                        <input type="file" id="csv-config-file" accept=".csv" hidden />
+                        <button id="import-csv-config" class="header-button" title="Import Configuration from CSV">Import CSV</button>
+                        <button id="close-components-panel" class="close-button">&times;</button>
+                    </div>
+                </div>
+                <div class="components-panel-content">
+                    <div id="components-container" data-ship-id="" data-config-index="">
+                        <!-- Components will be added here dynamically -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Component attributes editing panel -->
+            <div id="attributes-panel" class="attributes-panel">
+                <div class="attributes-panel-header">
+                    <div class="attributes-panel-title-area">
+                        <h2 id="attributes-panel-title">Edit Component Attributes</h2>
+                        <div class="category-name"></div>
+                    </div>
+                    <div class="attributes-panel-controls">
+                        <button id="lock-attributes-panel" class="header-button lock-button">🔓 Unlocked</button>
+                        <button id="close-attributes-panel" class="close-button">&times;</button>
+                    </div>
+                </div>
+                <div class="attributes-panel-content">
+                    <!-- Left sidebar for group selection -->
+                    <div class="groups-column">
+                        <div id="component-groups-list" class="component-groups-list"></div>
+                    </div>
+                    
+                    <!-- Main stats area that fills remaining space -->
+                    <div class="stats-column" style="flex: 1;">
+                        <div class="attributes-section">
+                            <h3>Base Stats</h3>
+                            <div id="base-stats-container" class="stats-editor-container"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Overlay for when components panel is open -->
+            <div id="overlay" class="overlay"></div>
+        </div>
+    </div>
+
+    <!-- Ship Analysis Suite Modal -->
+    <div id="analysisModal" class="modal">
+        <div class="modal-content analysis-modal-content">
+            <div class="modal-header analysis-modal-header">
+                <h2>Ship Configuration Analysis Suite</h2>
+                <button class="close-button" id="closeAnalysisBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Tab Navigation -->
+                <div class="analysis-tabs">
+                    <button class="analysis-tab active" data-tab="config-markdown">Full Configs</button>
+                    <button class="analysis-tab" data-tab="config-names">Config Names</button>
+                    <button class="analysis-tab" data-tab="config-uniqueness">Uniqueness</button>
+                    <button class="analysis-tab" data-tab="component-usage">Component Usage</button>
+                    <button class="analysis-tab" data-tab="config-similarity">Similarity</button>
+                    <button class="analysis-tab" data-tab="performance-matrix">Performance</button>
+                    <button class="analysis-tab" data-tab="slot-utilization">Slot Usage</button>
+                    <button class="analysis-tab" data-tab="validation-report">Validation</button>
+                    <button class="analysis-tab" data-tab="drone-port-ships">Drone Ports</button>
+                    <button class="analysis-tab" data-tab="stat-impact">Stat Impact</button>
+                    <button class="analysis-tab" data-tab="component-stats-table">Component Stats</button>
+                </div>
+                <!-- Tab Content -->
+                <div class="analysis-content">
+                    <pre id="analysisText" class="analysis-text"></pre>
+                </div>
+                <div class="analysis-modal-footer">
+                    <button id="copyAnalysisBtn" class="copy-analysis">Copy to Clipboard</button>
+                    <button id="closeAnalysisModalBtn" class="close-analysis-modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JSZip library for creating ZIP files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    
+    <script src="js/custom-ship-management.js"></script>
+    <script src="js/file-io.js"></script>
+    <script src="js/file-separation.js"></script>
+    <script src="js/drag-drop-files.js"></script>
+    <script src="js/score-breakdown.js"></script>
+    <script src="js/analysis-tools.js"></script>
+    <script src="js/ship-scoring.js"></script>
+    <script src="js/comparison-table.js"></script>
+    <script src="js/table-updates.js"></script>
+    <script src="js/pending-changes.js"></script>
+    <script src="js/drone-scaling.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/config-management.js"></script>
+    <script src="js/config-upgrade.js"></script>
+    <script src="js/component-management.js"></script>
+    <script src="js/components-panel.js"></script>
+    <script src="js/config-pattern-builder.js"></script>
+    <script src="js/batch-pattern-processor.js"></script>
+    <script src="js/attribute-management.js"></script>
+    <script src="js/stat-type-system.js"></script>
+    <script src="js/attributes-panel.js"></script>
+    <script src="js/drag-drop.js"></script>
+    <script src="js/combat-simulator-v2.js"></script>
+</body>
+</html> 

@@ -1,0 +1,90 @@
+/* Claim Stake Info Styles */
+.claim-stake-overview {
+    background-color: #1E1E1E;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+    border: 1px solid #333333;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.claim-stake-header {
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.claim-stake-header h2 {
+    margin: 0;
+    color: #FFFFFF;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.claim-stake-stats-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.claim-stake-stat {
+    flex: 1;
+    min-width: 180px;
+    background-color: #2D2D2D;
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.claim-stake-stat:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.stat-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.stat-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.slots-icon {
+    background-color: rgba(131, 56, 236, 0.1);
+    color: #8338EC;
+}
+
+.rent-icon {
+    background-color: rgba(56, 176, 0, 0.1);
+    color: #38B000;
+}
+
+.stat-name {
+    font-weight: 600;
+    color: #c5c5c5;
+    margin-right: 8px;
+}
+
+.stat-label {
+    color: #AAAAAA;
+    font-size: 0.85em;
+    font-weight: 500;
+}
+
+.stat-value {
+    color: #FFFFFF;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
