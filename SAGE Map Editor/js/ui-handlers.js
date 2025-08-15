@@ -1500,15 +1500,15 @@ function setupResourceFilter() {
     // Define resourceCategories
     const resourceCategories = {
         'Gases': RESOURCE_TYPES.filter(r => r.name.toLowerCase().includes('gas') ||
-            ['hydrogen', 'helium', 'nitrogen', 'methane', 'neon',
-                'argon', 'xenon', 'krypton'].includes(r.name.toLowerCase())),
+            ['hydrogen', 'nitrogen', 'methane', 'neon',
+                'argon', 'xenon', 'krypton', 'oxygen'].includes(r.name.toLowerCase())),
         'Ores': RESOURCE_TYPES.filter(r => r.name.toLowerCase().includes('ore')),
         'Crystals': RESOURCE_TYPES.filter(r => r.name.toLowerCase().includes('crystal')),
         'Other': RESOURCE_TYPES.filter(r => !r.name.toLowerCase().includes('gas') &&
             !r.name.toLowerCase().includes('ore') &&
             !r.name.toLowerCase().includes('crystal') &&
-            !['hydrogen', 'helium', 'nitrogen', 'methane', 'neon',
-                'argon', 'xenon', 'krypton'].includes(r.name.toLowerCase()))
+            !['hydrogen', 'nitrogen', 'methane', 'neon',
+                'argon', 'xenon', 'krypton', 'oxygen'].includes(r.name.toLowerCase()))
     };
 
     for (const category in resourceCategories) {
@@ -1660,7 +1660,7 @@ function setupResourceFilter() {
                 // Resource category - use data from RESOURCE_TYPES to reliably identify resources
                 if (category === 'gases') {
                     // Find all checkboxes for gas resources
-                    const gasResources = ['hydrogen', 'helium', 'nitrogen', 'methane', 'neon', 'argon', 'xenon', 'krypton', 'fluorine gas', 'tenon gas', 'sulfur', 'oxygen'];
+                    const gasResources = ['hydrogen', 'nitrogen', 'methane', 'neon', 'argon', 'xenon', 'krypton', 'fluorine gas', 'tenon gas', 'oxygen'];
                     itemsToUpdate = Array.from(resourceFilter.querySelectorAll('input[type="checkbox"]')).filter(checkbox => {
                         const resourceName = checkbox.id.replace('filter-', '').toLowerCase();
                         return gasResources.includes(resourceName) || resourceName.includes('gas');
@@ -1679,7 +1679,7 @@ function setupResourceFilter() {
                     });
                 } else if (category === 'other') {
                     // Find all other resources that aren't gases, ores, or crystals
-                    const gasResources = ['hydrogen', 'helium', 'nitrogen', 'methane', 'neon', 'argon', 'xenon', 'krypton', 'fluorine gas', 'tenon gas', 'sulfur', 'oxygen'];
+                    const gasResources = ['hydrogen', 'nitrogen', 'methane', 'neon', 'argon', 'xenon', 'krypton', 'fluorine gas', 'tenon gas', 'oxygen'];
                     itemsToUpdate = Array.from(resourceFilter.querySelectorAll('input[type="checkbox"]')).filter(checkbox => {
                         const resourceName = checkbox.id.replace('filter-', '').toLowerCase();
                         const name = resourceName.toLowerCase();
