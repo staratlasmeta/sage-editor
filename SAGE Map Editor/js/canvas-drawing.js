@@ -1630,9 +1630,9 @@ function drawSystemPreview(system, autoCenter = false) {
         drawOrbitPathsInPreview(planets, centerX, centerY, effectiveScale);
     }
     
-    // Draw planets
+    // Draw planets with resource labels if in expanded view
     if (planets.length > 0) {
-        drawPlanetsInPreview(planets, centerX, centerY, effectiveScale);
+        drawPlanetsInPreview(planets, centerX, centerY, effectiveScale, isSystemPreviewExpanded);
     }
     
     // Draw system name at the top left
@@ -1743,7 +1743,7 @@ function drawOrbitPathsInPreview(planets, centerX, centerY, scale) {
 }
 
 // Draw planets in the system preview
-function drawPlanetsInPreview(planets, centerX, centerY, scale) {
+function drawPlanetsInPreview(planets, centerX, centerY, scale, showResourceLabels = false) {
     if (!previewCtx) return;
     
     planets.forEach(planet => {
@@ -1786,6 +1786,61 @@ function drawPlanetsInPreview(planets, centerX, centerY, scale) {
             previewCtx.font = '10px Arial';
             previewCtx.fillText(planetTypeName, planetX, planetY + planetSize + 10);
         }
+        
+        // Draw resource labels if in expanded view
+        if (showResourceLabels && planet.resources && planet.resources.length > 0) {
+            drawPlanetResourceLabels(planet, planetX, planetY, planetSize, scale);
+        }
+    });
+}
+
+// Draw resource labels for a planet in the system preview
+function drawPlanetResourceLabels(planet, planetX, planetY, planetSize, scale) {
+    if (!previewCtx || !planet.resources || planet.resources.length === 0) return;
+    
+    // Filter resources based on resourceFilterState
+    const filteredResources = planet.resources.filter(resource => 
+        resourceFilterState[resource.name] !== false
+    );
+    
+    if (filteredResources.length === 0) return;
+    
+    // Text properties - scale font size appropriately
+    const fontSize = Math.min(12, Math.max(8, 10 * Math.sqrt(scale)));
+    previewCtx.font = `${fontSize}px Arial`;
+    previewCtx.textAlign = 'center';
+    
+    // Start position below the planet type
+    let labelY = planetY + planetSize + 25;
+    
+    // Draw each resource label
+    filteredResources.forEach((resource, index) => {
+        // Add richness value to the resource name
+        const resourceName = resource.name || 'Unknown Resource';
+        const richness = resource.richness || 1;
+        const displayText = `${resourceName} (R${richness.toFixed(1)})`;
+        const textWidth = previewCtx.measureText(displayText).width;
+        
+        // Get resource color
+        const resourceColor = RESOURCE_COLORS[resourceName.toLowerCase()] || RESOURCE_COLORS.default;
+        
+        // Background for text
+        const bgPadding = 3;
+        const bgHeight = fontSize + 2;
+        previewCtx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+        previewCtx.fillRect(
+            planetX - textWidth / 2 - bgPadding, 
+            labelY - bgHeight / 2 - 1, 
+            textWidth + bgPadding * 2, 
+            bgHeight
+        );
+        
+        // Draw the resource text
+        previewCtx.fillStyle = resourceColor;
+        previewCtx.fillText(displayText, planetX, labelY);
+        
+        // Move down for next resource
+        labelY += fontSize + 4;
     });
 }
 
