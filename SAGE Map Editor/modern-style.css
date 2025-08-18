@@ -1180,6 +1180,31 @@ div.stats-grid.value-row > span {
   min-height: calc(100vh - 60px); /* Subtract top toolbar height */
 }
 
+/* Expanded system preview styles */
+#expandedSystemPreview {
+  background: radial-gradient(ellipse at center, #0a0a0a 0%, #000000 100%);
+}
+
+#expandedSystemPreview button {
+  transition: all 0.2s ease;
+}
+
+#expandedSystemPreview button:hover {
+  background: rgba(255,255,255,0.25) !important;
+  transform: scale(1.05);
+}
+
+/* System action buttons */
+.system-actions button {
+  transition: all 0.2s ease;
+}
+
+.system-actions button:hover {
+  background: rgba(255,255,255,0.25) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
 /* Add style for empty base state */
 .empty-base-state {
     color: #888;

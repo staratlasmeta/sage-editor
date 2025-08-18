@@ -301,7 +301,13 @@ function displaySystemDetails(systems) {
     // Generate HTML for system details tab
     let html = `
         <div class="detail-section">
-            <div class="system-actions" style="display: flex; justify-content: flex-end; margin-bottom: 10px;">
+            <div class="system-actions" style="display: flex; justify-content: flex-end; margin-bottom: 10px; gap: 8px;">
+                <button id="expandPreviewBtn" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 6px 12px; border-radius: 4px; background: rgba(255,255,255,0.15); border: none; cursor: pointer; font-size: 0.9em;" title="Expand System Preview">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                    </svg>
+                    Expand
+                </button>
                 <button id="centerSystemBtn" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 6px 12px; border-radius: 4px; background: rgba(255,255,255,0.15); border: none; cursor: pointer; font-size: 0.9em;" title="Center View on System">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="7"></circle>
@@ -1526,6 +1532,36 @@ function setupSystemDetailsEventListeners(system) {
             centerViewOnSystem(system);
         });
     }
+    
+    // Expand preview button
+    const expandPreviewBtn = document.getElementById('expandPreviewBtn');
+    if (expandPreviewBtn) {
+        // Update button text based on current state
+        if (window.isSystemPreviewExpanded) {
+            expandPreviewBtn.innerHTML = `
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 14h6v6M20 10h-6V4M14 10l7-7M3 21l7-7"/>
+                </svg>
+                Minimize
+            `;
+        } else {
+            expandPreviewBtn.innerHTML = `
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                </svg>
+                Expand
+            `;
+        }
+        
+        expandPreviewBtn.addEventListener('click', function() {
+            toggleExpandedSystemPreview(system);
+        });
+    }
+    
+    // Draw system preview
+    // Use auto-center if we're not in expanded view
+    const autoCenter = !window.isSystemPreviewExpanded;
+    drawSystemPreview(system, autoCenter);
 }
 
 // Add a new star to a system
