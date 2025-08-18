@@ -96,23 +96,49 @@ function importMap() {
         const reader = new FileReader();
         reader.onload = function(e) {
             try {
-                const importData = JSON.parse(e.target.result);
-                loadMapData(importData);
-                drawGalaxyMap();
-                unsavedChanges = false;
+                // Show import loader
+                createImportLoader();
+                updateImportProgress(5, 'READING FILE...');
                 
-                // Set title if the element exists
-                if (importData.title) {
-                    const mapTitleElement = document.getElementById('mapTitle');
-                    if (mapTitleElement) {
-                        mapTitleElement.value = importData.title;
+                // Parse JSON with a small delay to show the loader
+                setTimeout(() => {
+                    try {
+                        const importData = JSON.parse(e.target.result);
+                        updateImportProgress(10, 'PARSING MAP DATA...');
+                        
+                        // Load the map data with progress tracking
+                        loadMapData(importData, () => {
+                            // After data is loaded, draw the galaxy
+                            updateImportProgress(80, 'RENDERING GALAXY MAP...');
+                            
+                            setTimeout(() => {
+                                drawGalaxyMap();
+                                unsavedChanges = false;
+                                
+                                // Set title if the element exists
+                                if (importData.title) {
+                                    const mapTitleElement = document.getElementById('mapTitle');
+                                    if (mapTitleElement) {
+                                        mapTitleElement.value = importData.title;
+                                    }
+                                }
+                                
+                                // Update the filename display in the UI
+                                updateTopBarInfo();
+                                
+                                // Show completion
+                                showImportComplete();
+                            }, 100);
+                        });
+                    } catch (error) {
+                        console.error('Error parsing map:', error);
+                        closeImportLoader();
+                        alert('Error importing map: ' + error.message);
                     }
-                }
-                
-                // Update the filename display in the UI
-                updateTopBarInfo();
+                }, 100);
             } catch (error) {
                 console.error('Error importing map:', error);
+                if (window.closeImportLoader) closeImportLoader();
                 alert('Error importing map: ' + error.message);
             }
         };
@@ -124,7 +150,7 @@ function importMap() {
 }
 
 // Load map data from imported object
-function loadMapData(importData) {
+function loadMapData(importData, onComplete) {
     // Support both old (array) and new (object) formats
     let loadedMapData;
     if (Array.isArray(importData)) {
@@ -133,6 +159,11 @@ function loadMapData(importData) {
     } else {
         loadedMapData = importData.mapData || [];
         regionDefinitions = importData.regionDefinitions || [];
+    }
+    
+    // Update progress for region counting
+    if (window.updateImportProgress) {
+        updateImportProgress(15, `LOADING ${regionDefinitions.length} REGIONS...`);
     }
     
     // --- Transform data for compatibility with new structure ---
@@ -198,7 +229,27 @@ function loadMapData(importData) {
         }
     });
 
+    // Process systems with progress tracking if available
+    if (window.processSystemsWithProgress && window.updateImportProgress) {
+        updateImportProgress(20, 'PROCESSING SYSTEMS...');
+        processSystemsWithProgress(loadedMapData, () => {
+            // Continue with normal processing after stats are collected
+            finishLoadingMapData(loadedMapData, onComplete);
+        });
+    } else {
+        // Fallback to normal processing without progress
+        finishLoadingMapData(loadedMapData, onComplete);
+    }
+}
+
+// Finish loading map data after progress tracking
+function finishLoadingMapData(loadedMapData, onComplete) {
     mapData = loadedMapData;
+    
+    // Update progress
+    if (window.updateImportProgress) {
+        updateImportProgress(65, 'BUILDING SYSTEM LOOKUP...');
+    }
     
     // Generate system lookup
     systemLookup = {};
@@ -231,6 +282,11 @@ function loadMapData(importData) {
     // Set system counter to max found + 1
     systemCounter = maxCounter + 1;
     
+    // Update progress
+    if (window.updateImportProgress) {
+        updateImportProgress(70, 'UPDATING INTERFACE...');
+    }
+    
     // Update UI
     clearSelection();
     isModified = false;
@@ -238,7 +294,13 @@ function loadMapData(importData) {
     updateSystemCount();
     updateLockButtonsState(); // Update lock button state
     centerMapView();
-    drawGalaxyMap();
+    
+    // Call completion callback if provided
+    if (onComplete) {
+        onComplete();
+    } else {
+        drawGalaxyMap();
+    }
 }
 
 // Export map to file
