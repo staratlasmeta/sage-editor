@@ -2535,6 +2535,7 @@ function displayGalaxyStatistics(detailsContent) {
     let totalPlanets = 0;
     let totalStars = 0;
     let totalSystems = mapData.length;
+    let totalLinks = 0;
     
     // Resource count across the entire galaxy
     const resourceCount = {};
@@ -2672,7 +2673,7 @@ function displayGalaxyStatistics(detailsContent) {
                 </div>
                 <div class="stat-row">
                     <span class="stat-label">Regular Systems:</span>
-                    <span class="stat-value">${systems.length - coreCount - kingCount}</span>
+                    <span class="stat-value">${totalSystems - coreCount - kingCount}</span>
                 </div>
             </div>
             
