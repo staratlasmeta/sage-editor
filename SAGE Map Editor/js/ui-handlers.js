@@ -2171,6 +2171,13 @@ function initKeyboardShortcuts() {
                     toggleHeatmapDebugMode();
                 }
                 break;
+            case 'e':
+                // Toggle expanded system preview
+                if (selectedSystems.length === 1) {
+                    event.preventDefault();
+                    toggleExpandedSystemPreview(selectedSystems[0]);
+                }
+                break;
             case '+':
             case '=':
                 // Zoom in
@@ -2510,6 +2517,10 @@ function showHelpModal() {
             <div class="shortcut-section">
                 <h4>Visualization</h4>
                 <div class="shortcut-grid">
+                    <div class="shortcut-item">
+                        <span class="shortcut-keys">E</span>
+                        <span class="shortcut-description">Toggle expanded system preview</span>
+                    </div>
                     <div class="shortcut-item">
                         <span class="shortcut-keys">D</span>
                         <span class="shortcut-description">Toggle heatmap debug mode</span>

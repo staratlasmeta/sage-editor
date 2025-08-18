@@ -1506,12 +1506,13 @@ function drawLinkingLine() {
 }
 
 // Draw system preview
-function drawSystemPreview(system) {
+function drawSystemPreview(system, autoCenter = false) {
     if (!previewCanvas || !previewCtx) return;
     
-    // Get display dimensions (CSS pixels)
-    const displayWidth = previewCanvas.clientWidth || previewCanvas.width;
-    const displayHeight = previewCanvas.clientHeight || previewCanvas.height;
+    // Get display dimensions (CSS pixels) accounting for DPI
+    const dpr = window.devicePixelRatio || 1;
+    const displayWidth = previewCanvas.clientWidth || (previewCanvas.width / dpr);
+    const displayHeight = previewCanvas.clientHeight || (previewCanvas.height / dpr);
     
     // Clear the entire canvas including scaled areas
     previewCtx.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
@@ -1528,7 +1529,6 @@ function drawSystemPreview(system) {
         previewCtx.setTransform(1, 0, 0, 1, 0, 0);
         
         // Apply DPI scaling manually
-        const dpr = window.devicePixelRatio || 1;
         previewCtx.scale(dpr, dpr);
         
         // Set text properties
@@ -1564,9 +1564,53 @@ function drawSystemPreview(system) {
     previewCtx.fillStyle = '#000000';
     previewCtx.fillRect(0, 0, previewCanvas.width, previewCanvas.height);
     
+    // Calculate optimal scale if auto-centering
+    if (autoCenter) {
+        // Reset offsets for auto-centering
+        previewOffsetX = 0;
+        previewOffsetY = 0;
+        
+        // Calculate the bounds of the system
+        const planets = system.planets || [];
+        let maxOrbitRadius = 0;
+        
+        if (planets.length > 0) {
+            // Find the outermost planet
+            planets.forEach(planet => {
+                if (planet.orbit !== undefined) {
+                    const orbitRadius = 50 + planet.orbit * 40;
+                    maxOrbitRadius = Math.max(maxOrbitRadius, orbitRadius);
+                }
+            });
+        }
+        
+        // If no planets, use a default radius
+        if (maxOrbitRadius === 0) {
+            maxOrbitRadius = 100;
+        }
+        
+        // Add padding for planet size and labels
+        const systemRadius = maxOrbitRadius + 40;
+        
+        // Calculate scale to fit the system in the canvas with padding
+        const padding = 60; // Leave space for labels
+        const availableWidth = displayWidth - padding * 2;
+        const availableHeight = displayHeight - padding * 2;
+        
+        const scaleX = availableWidth / (systemRadius * 2);
+        const scaleY = availableHeight / (systemRadius * 2);
+        
+        // Use the smaller scale to ensure it fits
+        previewScale = Math.min(scaleX, scaleY, 2.0); // Cap at 2.0 for reasonable size
+        
+        // Ensure minimum scale
+        previewScale = Math.max(previewScale, 0.5);
+    }
+    
     // Calculate system center
-    const centerX = previewCanvas.width / 2 + previewOffsetX;
-    const centerY = previewCanvas.height / 2 + previewOffsetY;
+    // Note: setupHighDPICanvas already handles DPI scaling, so we work in CSS pixels
+    const centerX = displayWidth / 2 + previewOffsetX;
+    const centerY = displayHeight / 2 + previewOffsetY;
     
     // Prepare scale for drawing
     let effectiveScale = previewScale;
@@ -1586,9 +1630,9 @@ function drawSystemPreview(system) {
         drawOrbitPathsInPreview(planets, centerX, centerY, effectiveScale);
     }
     
-    // Draw planets
+    // Draw planets with resource labels if in expanded view
     if (planets.length > 0) {
-        drawPlanetsInPreview(planets, centerX, centerY, effectiveScale);
+        drawPlanetsInPreview(planets, centerX, centerY, effectiveScale, isSystemPreviewExpanded);
     }
     
     // Draw system name at the top left
@@ -1615,10 +1659,11 @@ function drawSystemPreview(system) {
     if (system.coordinates && system.coordinates.length === 2) {
         previewCtx.fillStyle = '#AAAAAA';
         previewCtx.font = '12px Arial';
+        previewCtx.textAlign = 'center';
         previewCtx.fillText(
             `Coordinates: (${system.coordinates[0].toFixed(2)}, ${system.coordinates[1].toFixed(2)})`,
-            previewCanvas.width / 2,
-            previewCanvas.height - 15
+            displayWidth / 2,
+            displayHeight - 15
         );
     }
 }
@@ -1698,7 +1743,7 @@ function drawOrbitPathsInPreview(planets, centerX, centerY, scale) {
 }
 
 // Draw planets in the system preview
-function drawPlanetsInPreview(planets, centerX, centerY, scale) {
+function drawPlanetsInPreview(planets, centerX, centerY, scale, showResourceLabels = false) {
     if (!previewCtx) return;
     
     planets.forEach(planet => {
@@ -1741,6 +1786,61 @@ function drawPlanetsInPreview(planets, centerX, centerY, scale) {
             previewCtx.font = '10px Arial';
             previewCtx.fillText(planetTypeName, planetX, planetY + planetSize + 10);
         }
+        
+        // Draw resource labels if in expanded view
+        if (showResourceLabels && planet.resources && planet.resources.length > 0) {
+            drawPlanetResourceLabels(planet, planetX, planetY, planetSize, scale);
+        }
+    });
+}
+
+// Draw resource labels for a planet in the system preview
+function drawPlanetResourceLabels(planet, planetX, planetY, planetSize, scale) {
+    if (!previewCtx || !planet.resources || planet.resources.length === 0) return;
+    
+    // Filter resources based on resourceFilterState
+    const filteredResources = planet.resources.filter(resource => 
+        resourceFilterState[resource.name] !== false
+    );
+    
+    if (filteredResources.length === 0) return;
+    
+    // Text properties - scale font size appropriately
+    const fontSize = Math.min(12, Math.max(8, 10 * Math.sqrt(scale)));
+    previewCtx.font = `${fontSize}px Arial`;
+    previewCtx.textAlign = 'center';
+    
+    // Start position below the planet type
+    let labelY = planetY + planetSize + 25;
+    
+    // Draw each resource label
+    filteredResources.forEach((resource, index) => {
+        // Add richness value to the resource name
+        const resourceName = resource.name || 'Unknown Resource';
+        const richness = resource.richness || 1;
+        const displayText = `${resourceName} (R${richness.toFixed(1)})`;
+        const textWidth = previewCtx.measureText(displayText).width;
+        
+        // Get resource color
+        const resourceColor = RESOURCE_COLORS[resourceName.toLowerCase()] || RESOURCE_COLORS.default;
+        
+        // Background for text
+        const bgPadding = 3;
+        const bgHeight = fontSize + 2;
+        previewCtx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+        previewCtx.fillRect(
+            planetX - textWidth / 2 - bgPadding, 
+            labelY - bgHeight / 2 - 1, 
+            textWidth + bgPadding * 2, 
+            bgHeight
+        );
+        
+        // Draw the resource text
+        previewCtx.fillStyle = resourceColor;
+        previewCtx.fillText(displayText, planetX, labelY);
+        
+        // Move down for next resource
+        labelY += fontSize + 4;
     });
 }
 
@@ -1762,6 +1862,198 @@ function getGalaxyCanvasCoords(event) {
     };
 }
 
+// Toggle expanded system preview
+let isSystemPreviewExpanded = false;
+let expandedPreviewSystem = null;
+let originalGalaxyCanvasParent = null;
+let originalPreviewCanvasParent = null;
+
+function toggleExpandedSystemPreview(system) {
+    // If no system provided, use the currently expanded system or selected system
+    if (!system && isSystemPreviewExpanded) {
+        system = expandedPreviewSystem;
+    } else if (!system && selectedSystems.length === 1) {
+        system = selectedSystems[0];
+    } else if (!system) {
+        return;
+    }
+    
+    const galaxyContainer = document.getElementById('galaxyContainer');
+    const detailsPanel = document.getElementById('detailsPanel');
+    const systemPreviewContainer = document.querySelector('.system-preview-container');
+    const systemTab = document.getElementById('system-tab');
+    const expandBtn = document.getElementById('expandPreviewBtn');
+    
+    if (!isSystemPreviewExpanded) {
+        // Expand the preview
+        isSystemPreviewExpanded = true;
+        expandedPreviewSystem = system;
+        
+        // Store original parents
+        originalGalaxyCanvasParent = canvas.parentElement;
+        originalPreviewCanvasParent = previewCanvas.parentElement;
+        
+        // Hide the galaxy canvas
+        canvas.style.display = 'none';
+        
+        // Create expanded preview container
+        const expandedContainer = document.createElement('div');
+        expandedContainer.id = 'expandedSystemPreview';
+        expandedContainer.style.cssText = `
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            display: flex;
+            flex-direction: column;
+        `;
+        
+        // Create header with minimize button
+        const header = document.createElement('div');
+        header.style.cssText = `
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 10;
+            display: flex;
+            gap: 8px;
+        `;
+        
+        // Add system name display
+        const systemNameDisplay = document.createElement('div');
+        systemNameDisplay.style.cssText = `
+            background: rgba(30, 30, 30, 0.9);
+            padding: 8px 16px;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        `;
+        systemNameDisplay.innerHTML = `
+            <span>${system.name}</span>
+            ${system.faction ? `<span style="color: ${getFactionColor(system.faction)}; font-weight: bold;">${system.faction}</span>` : ''}
+        `;
+        
+        // Create minimize button
+        const minimizeBtn = document.createElement('button');
+        minimizeBtn.style.cssText = `
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.15);
+            border: none;
+            cursor: pointer;
+            font-size: 0.9em;
+            color: #fff;
+        `;
+        minimizeBtn.innerHTML = `
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 14h6v6M20 10h-6V4M14 10l7-7M3 21l7-7"/>
+            </svg>
+            Minimize
+        `;
+        minimizeBtn.onclick = () => toggleExpandedSystemPreview();
+        
+        header.appendChild(systemNameDisplay);
+        header.appendChild(minimizeBtn);
+        
+        // Create canvas container
+        const canvasContainer = document.createElement('div');
+        canvasContainer.style.cssText = `
+            width: 100%;
+            height: 100%;
+            position: relative;
+        `;
+        
+        // Move preview canvas to expanded container
+        canvasContainer.appendChild(previewCanvas);
+        expandedContainer.appendChild(header);
+        expandedContainer.appendChild(canvasContainer);
+        
+        // Replace galaxy container content
+        galaxyContainer.innerHTML = '';
+        galaxyContainer.appendChild(expandedContainer);
+        
+        // Update canvas size
+        setTimeout(() => {
+            const rect = canvasContainer.getBoundingClientRect();
+            previewCanvas.style.width = rect.width + 'px';
+            previewCanvas.style.height = rect.height + 'px';
+            setupHighDPICanvas(previewCanvas, previewCtx);
+            
+            // Redraw with larger size and auto-center
+            drawSystemPreview(system, true);
+        }, 10);
+        
+        // Update button text
+        if (expandBtn) {
+            expandBtn.innerHTML = `
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 14h6v6M20 10h-6V4M14 10l7-7M3 21l7-7"/>
+                </svg>
+                Minimize
+            `;
+        }
+    } else {
+        // Minimize back to normal
+        isSystemPreviewExpanded = false;
+        const systemToRedraw = expandedPreviewSystem || system;
+        
+        // Restore canvas to original container
+        const expandedContainer = document.getElementById('expandedSystemPreview');
+        if (expandedContainer) {
+            expandedContainer.remove();
+        }
+        
+        // Restore galaxy canvas
+        galaxyContainer.innerHTML = '';
+        galaxyContainer.appendChild(canvas);
+        canvas.style.display = 'block';
+        
+        // Restore preview canvas to its original location
+        const previewWrapper = document.querySelector('.system-preview-wrapper');
+        if (previewWrapper && previewCanvas) {
+            previewWrapper.appendChild(previewCanvas);
+            
+            // Reset preview canvas size
+            previewCanvas.style.width = '100%';
+            previewCanvas.style.height = '300px';
+            
+            // Use setTimeout to ensure DOM updates are complete
+            setTimeout(() => {
+                setupHighDPICanvas(previewCanvas, previewCtx);
+                
+                // Redraw the system preview with auto-center
+                if (systemToRedraw) {
+                    drawSystemPreview(systemToRedraw, true);
+                }
+            }, 10);
+        }
+        
+        // Update button text
+        if (expandBtn) {
+            expandBtn.innerHTML = `
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                </svg>
+                Expand
+            `;
+        }
+        
+        // Redraw galaxy canvas
+        updateCanvasSize();
+        drawGalaxyMap();
+        
+        expandedPreviewSystem = null;
+    }
+}
+
 // Make canvas drawing functions globally available
 window.initCanvas = initCanvas;
 window.updateCanvasSize = updateCanvasSize;
@@ -1777,6 +2069,7 @@ window.setupHighDPICanvas = setupHighDPICanvas;
 window.drawRegionPolygons = drawRegionPolygons;
 window.drawRegionLabels = drawRegionLabels;
 window.drawRegions = drawRegions;
+window.toggleExpandedSystemPreview = toggleExpandedSystemPreview;
 window.drawResourceHeatmap = drawResourceHeatmap;
 window.getHeatmapColor = getHeatmapColor;
 window.drawHeatmapLegend = drawHeatmapLegend;

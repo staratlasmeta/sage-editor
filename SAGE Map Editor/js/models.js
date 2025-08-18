@@ -293,4 +293,7 @@ const REGION_COLORS = [
 ];
 
 // Grid spacing
-const GALAXY_GRID_SPACING = 1; // Changed from 10 to 1 
+const GALAXY_GRID_SPACING = 1; // Changed from 10 to 1
+
+// Export RESOURCE_COLORS globally for canvas drawing
+window.RESOURCE_COLORS = RESOURCE_COLORS; 
