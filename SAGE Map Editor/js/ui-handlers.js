@@ -1141,6 +1141,7 @@ function updateSystemCount() {
         MUD: 0,
         ONI: 0,
         UST: 0,
+        Neutral: 0,
         none: 0
     };
 
@@ -1165,6 +1166,10 @@ function updateSystemCount() {
 
     if (counts.UST > 0) {
         html += `<span style="color: ${getFactionColor('UST')}">UST: ${counts.UST}</span>`;
+    }
+
+    if (counts.Neutral > 0) {
+        html += `<span style="color: ${getFactionColor('Neutral')}">Neutral: ${counts.Neutral}</span>`;
     }
 
     if (counts.none > 0) {
@@ -1474,7 +1479,7 @@ function setupResourceFilter() {
 
     // System Labels Group
     const systemLabelItems = [
-        { id: "SystemName" }, { id: "FactionLabel" }, { id: "PlanetCount" }, { id: "StarCount" }, { id: "StarbaseTier" }, { id: "LockStatus" }
+        { id: "SystemName" }, { id: "FactionLabel" }, { id: "ControllingFaction" }, { id: "PlanetCount" }, { id: "StarCount" }, { id: "StarbaseTier" }, { id: "LockStatus" }
     ];
     const allSystemLabelsChecked = areAllChecked(systemLabelItems);
     itemsHtml += `
@@ -1530,7 +1535,8 @@ function setupResourceFilter() {
     // Add system label filters
     const systemLabelOptions = [
         { id: "SystemName", label: "System Name" },
-        { id: "FactionLabel", label: "Faction Label (e.g., UST)" },
+        { id: "FactionLabel", label: "Faction Type (e.g., UST)" },
+        { id: "ControllingFaction", label: "Controlling Faction (e.g., CF:MUD)" },
         { id: "PlanetCount", label: "Planet Count (e.g., P:4)" },
         { id: "StarCount", label: "Star Count (e.g., S:1)" },
         { id: "StarbaseTier", label: "Starbase Tier (e.g., SB:T1)" },

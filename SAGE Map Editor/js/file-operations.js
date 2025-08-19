@@ -272,6 +272,11 @@ function finishLoadingMapData(loadedMapData, onComplete) {
             system.starbase = { tier: 0 };
         }
         
+        // Ensure controllingFaction property exists
+        if (system.controllingFaction === undefined) {
+            system.controllingFaction = 'Neutral';
+        }
+        
         // Extract system counter from name if possible
         if (system.name) {
             const match = system.name.match(/System-(\d+)/);

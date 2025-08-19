@@ -21,6 +21,7 @@ function createNewSystem() {
         name: systemName,
         coordinates: [x, y],
         faction: null,
+        controllingFaction: 'Neutral', // Current controlling faction (ownership)
         stars: [
             {
                 name: 'Solar',
@@ -62,6 +63,7 @@ function createNewSystemAtCoords(x, y) {
         name: systemName,
         coordinates: [x, y],
         faction: null,
+        controllingFaction: 'Neutral', // Current controlling faction (ownership)
         stars: [
             {
                 name: 'Solar',
@@ -339,13 +341,25 @@ function displaySystemDetails(systems) {
             </div>
             
             <div class="form-group">
-                <label for="systemFaction">Faction:</label>
+                <label for="systemFaction">Faction Type:</label>
                 <select id="systemFaction">
                     <option value="">-- None --</option>
                     <option value="MUD" ${system.faction === 'MUD' ? 'selected' : ''}>MUD</option>
                     <option value="ONI" ${system.faction === 'ONI' ? 'selected' : ''}>ONI</option>
                     <option value="UST" ${system.faction === 'UST' ? 'selected' : ''}>UST</option>
                 </select>
+                <span class="form-note">(Determines planet types)</span>
+            </div>
+            
+            <div class="form-group">
+                <label for="systemControllingFaction">Controlling Faction:</label>
+                <select id="systemControllingFaction">
+                    <option value="MUD" ${system.controllingFaction === 'MUD' ? 'selected' : ''}>MUD</option>
+                    <option value="ONI" ${system.controllingFaction === 'ONI' ? 'selected' : ''}>ONI</option>
+                    <option value="UST" ${system.controllingFaction === 'UST' ? 'selected' : ''}>UST</option>
+                    <option value="Neutral" ${system.controllingFaction === 'Neutral' || !system.controllingFaction ? 'selected' : ''}>Neutral</option>
+                </select>
+                <span class="form-note">(Current ownership)</span>
             </div>
             
             <div class="form-group">
@@ -520,13 +534,24 @@ function displayMultipleSystemDetails(systems, detailsContent) {
             <h3>Multiple Systems Selected (${systems.length})</h3>
             
             <div class="form-group">
-                <label for="bulkFaction">Set Faction for All:</label>
+                <label for="bulkFaction">Set Faction Type for All:</label>
                 <select id="bulkFaction">
                     <option value="">-- No Change --</option>
                     <option value="none">-- None --</option>
                     <option value="MUD">MUD</option>
                     <option value="ONI">ONI</option>
                     <option value="UST">UST</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="bulkControllingFaction">Set Controlling Faction for All:</label>
+                <select id="bulkControllingFaction">
+                    <option value="">-- No Change --</option>
+                    <option value="MUD">MUD</option>
+                    <option value="ONI">ONI</option>
+                    <option value="UST">UST</option>
+                    <option value="Neutral">Neutral</option>
                 </select>
             </div>
             
@@ -599,7 +624,7 @@ function displayMultipleSystemDetails(systems, detailsContent) {
         const factionValue = this.value;
         if (!factionValue) return;
         
-        saveState(`Changed Faction for ${systems.length} Systems`);
+        saveState(`Changed Faction Type for ${systems.length} Systems`);
         
         systems.forEach(system => {
             if (factionValue === 'none') {
@@ -611,6 +636,22 @@ function displayMultipleSystemDetails(systems, detailsContent) {
         
         displaySystemDetails(systems);
         drawGalaxyMap();
+    });
+    
+    document.getElementById('bulkControllingFaction').addEventListener('change', function() {
+        if (anyLocked) { console.log("Bulk edit prevented: Locked system selected."); return; } // Prevent action if locked
+        const factionValue = this.value;
+        if (!factionValue) return;
+        
+        saveState(`Changed Controlling Faction for ${systems.length} Systems`);
+        
+        systems.forEach(system => {
+            system.controllingFaction = factionValue;
+        });
+        
+        displaySystemDetails(systems);
+        drawGalaxyMap();
+        systems.forEach(system => drawSystemPreview(system)); // Update starbase colors
     });
     
     // Add event listeners for the center buttons
@@ -693,6 +734,7 @@ function generateSystemStatistics(systems) {
         'MUD': 0,
         'ONI': 0,
         'UST': 0,
+        'Neutral': 0,
         'None': 0
     };
     
@@ -1161,6 +1203,16 @@ function setupSystemDetailsEventListeners(system) {
             system.faction = newValue || null;
             saveState(`Changed System Faction to ${newValue || 'None'}`);
             drawGalaxyMap();
+        }
+    });
+    
+    document.getElementById('systemControllingFaction').addEventListener('change', function() {
+        const newValue = this.value;
+        if ((system.controllingFaction || 'Neutral') !== newValue) {
+            system.controllingFaction = newValue || 'Neutral';
+            saveState(`Changed Controlling Faction to ${newValue || 'Neutral'}`);
+            drawGalaxyMap();
+            drawSystemPreview(system); // Update starbase color
         }
     });
     
@@ -1766,8 +1818,9 @@ function addNewPlanet(system) {
     
     // Default to terrestrial planet type based on faction
     let typeValue = 0; // Default to ONI Terrestrial
-    if (system.faction === 'MUD') typeValue = 7; // MUD Terrestrial
-    else if (system.faction === 'UST') typeValue = 14; // USTUR Terrestrial
+    if (system.faction === 'MUD') typeValue = 8; // MUD Terrestrial
+    else if (system.faction === 'UST') typeValue = 16; // USTUR Terrestrial
+    else if (system.faction === 'Neutral') typeValue = 24; // Neutral Terrestrial
     
     // Generate a default name
     const planetCounter = system.planets.length + 1;
@@ -2204,7 +2257,7 @@ function generateRegionalPlanetDistribution(systems) {
 
     // Group planet types by tier and faction
     const planetsByTierAndFaction = {
-        MUD: {}, ONI: {}, USTUR: {}, NONE: {}
+        MUD: {}, ONI: {}, USTUR: {}, Neutral: {}, NONE: {}
     };
     
     Object.entries(PLANET_TIERS).forEach(([planetType, tier]) => {
@@ -2213,6 +2266,7 @@ function generateRegionalPlanetDistribution(systems) {
         if (planetType.startsWith('MUD')) faction = 'MUD';
         else if (planetType.startsWith('ONI')) faction = 'ONI';
         else if (planetType.startsWith('USTUR')) faction = 'USTUR';
+        else if (planetType.startsWith('Neutral')) faction = 'Neutral';
         
         // Initialize tier array if needed
         if (!planetsByTierAndFaction[faction][tier]) {
@@ -2561,6 +2615,7 @@ function displayGalaxyStatistics(detailsContent) {
         'MUD': 0,
         'ONI': 0,
         'UST': 0,
+        'Neutral': 0,
         'None': 0
     };
     
@@ -2569,6 +2624,7 @@ function displayGalaxyStatistics(detailsContent) {
         'MUD': { systems: 0, core: 0, planets: 0, stars: 0, resources: 0, minX: Infinity, maxX: -Infinity, minY: Infinity, maxY: -Infinity },
         'ONI': { systems: 0, core: 0, planets: 0, stars: 0, resources: 0, minX: Infinity, maxX: -Infinity, minY: Infinity, maxY: -Infinity },
         'UST': { systems: 0, core: 0, planets: 0, stars: 0, resources: 0, minX: Infinity, maxX: -Infinity, minY: Infinity, maxY: -Infinity },
+        'Neutral': { systems: 0, core: 0, planets: 0, stars: 0, resources: 0, minX: Infinity, maxX: -Infinity, minY: Infinity, maxY: -Infinity },
         'None': { systems: 0, core: 0, planets: 0, stars: 0, resources: 0, minX: Infinity, maxX: -Infinity, minY: Infinity, maxY: -Infinity }
     };
     
