@@ -54,7 +54,17 @@ const PLANET_TYPES = [
     { type: 20, name: "USTUR Gas Giant", defaultScale: 0.4, faction: "USTUR" },
     { type: 21, name: "USTUR Ice Giant", defaultScale: 0.4, faction: "USTUR" },
     { type: 22, name: "USTUR Dark Planet", defaultScale: 0.3, faction: "USTUR" },
-    { type: 23, name: "USTUR Oceanic Planet", defaultScale: 0.3, faction: "USTUR" }
+    { type: 23, name: "USTUR Oceanic Planet", defaultScale: 0.3, faction: "USTUR" },
+
+    // Neutral Planet Types
+    { type: 24, name: "Neutral Terrestrial Planet", defaultScale: 0.3, faction: "Neutral" },
+    { type: 25, name: "Neutral Volcanic Planet", defaultScale: 0.2, faction: "Neutral" },
+    { type: 26, name: "Neutral Barren Planet", defaultScale: 0.1, faction: "Neutral" },
+    { type: 27, name: "Neutral System Asteroid Belt", defaultScale: 0.5, faction: "Neutral" },
+    { type: 28, name: "Neutral Gas Giant", defaultScale: 0.4, faction: "Neutral" },
+    { type: 29, name: "Neutral Ice Giant", defaultScale: 0.4, faction: "Neutral" },
+    { type: 30, name: "Neutral Dark Planet", defaultScale: 0.3, faction: "Neutral" },
+    { type: 31, name: "Neutral Oceanic Planet", defaultScale: 0.3, faction: "Neutral" }
 ];
 
 // Planet tier definitions
@@ -87,7 +97,17 @@ const PLANET_TIERS = {
     "ONI Gas Giant": 3,
     "ONI Ice Giant": 4,
     "ONI Dark Planet": 5,
-    "ONI Oceanic Planet": 3
+    "ONI Oceanic Planet": 3,
+
+    // Neutral variants
+    "Neutral Terrestrial Planet": 1,
+    "Neutral Volcanic Planet": 2,
+    "Neutral Barren Planet": 1,
+    "Neutral System Asteroid Belt": 2,
+    "Neutral Gas Giant": 3,
+    "Neutral Ice Giant": 4,
+    "Neutral Dark Planet": 5,
+    "Neutral Oceanic Planet": 3
 };
 
 // Resource types - updated to match exact data specification (excluding Ink)

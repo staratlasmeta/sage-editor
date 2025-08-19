@@ -466,10 +466,19 @@ function drawSystemNode(system) {
     // Skip if outside viewport
     if (x < -20 || x > canvas.width + 20 || y < -20 || y > canvas.height + 20) return;
     
-    // Determine color based on faction
+    // Determine color based on controlling faction or faction type
     let fillColor = '#FFFFFF'; // Default white
-    if (system.faction) {
+    
+    // Use faction type colors when showing faction areas, otherwise use controlling faction
+    if (showFactionArea && system.faction) {
+        // Show faction type colors when faction area is toggled
         fillColor = getFactionColor(system.faction);
+    } else if (system.controllingFaction) {
+        // Show controlling faction colors by default
+        fillColor = getFactionColor(system.controllingFaction);
+    } else {
+        // Fallback to Neutral gray if no controlling faction set
+        fillColor = getFactionColor('Neutral');
     }
     
     // Draw region indicator if system belongs to a region and indicators are enabled
@@ -658,6 +667,11 @@ function drawSystemLabel(system, x, y, isSelected, isHovered) {
         statsText += `${system.faction} `;
     }
     
+    // Add controlling faction if enabled in filter or selected/hovered
+    if (system.controllingFaction && (resourceFilterState["ControllingFaction"] || isSelected || isHovered)) {
+        statsText += `CF:${system.controllingFaction} `;
+    }
+    
     // Add planet count if enabled in filter or selected/hovered
     if (system.planets && system.planets.length > 0 && (resourceFilterState["PlanetCount"] || isSelected || isHovered)) {
         statsText += `P:${system.planets.length} `;
@@ -810,26 +824,33 @@ function drawFactionArea() {
     factionAreaStats = {
         MUD: { area: 0, systems: 0 },
         ONI: { area: 0, systems: 0 },
-        UST: { area: 0, systems: 0 }
+        UST: { area: 0, systems: 0 },
+        Neutral: { area: 0, systems: 0 }
     };
     
     // Group systems by faction
     const factionSystems = {
         MUD: [],
         ONI: [],
-        UST: []
+        UST: [],
+        Neutral: []
     };
     
     mapData.forEach(system => {
         if (!system.coordinates) return;
         
         const faction = system.faction;
-        if (faction && factionSystems[faction]) {
-            factionSystems[faction].push({
-                x: system.coordinates[0],
-                y: system.coordinates[1]
-            });
+        if (faction && factionSystems[faction] !== undefined) {
+            // Count the system for statistics
             factionAreaStats[faction].systems++;
+            
+            // Only add to polygon drawing if not Neutral
+            if (faction !== 'Neutral') {
+                factionSystems[faction].push({
+                    x: system.coordinates[0],
+                    y: system.coordinates[1]
+                });
+            }
         }
     });
     
@@ -880,7 +901,8 @@ function drawFactionAreaStats() {
     const expandedFactionStats = {
         MUD: { systems: 0, core: 0, planets: 0, stars: 0, resources: 0, territory: 0 },
         ONI: { systems: 0, core: 0, planets: 0, stars: 0, resources: 0, territory: 0 },
-        UST: { systems: 0, core: 0, planets: 0, stars: 0, resources: 0, territory: 0 }
+        UST: { systems: 0, core: 0, planets: 0, stars: 0, resources: 0, territory: 0 },
+        Neutral: { systems: 0, core: 0, planets: 0, stars: 0, resources: 0, territory: 0 }
     };
     
     // Populate faction stats
@@ -973,10 +995,7 @@ function drawFactionAreaStats() {
     // Draw faction column headers
     displayedFactions.forEach((faction, index) => {
         const x = boxX + labelWidth + (columnWidth * index) + (columnWidth / 2);
-        const color = faction === 'MUD' ? '#FF5722' : 
-                     faction === 'ONI' ? '#2196F3' : 
-                     faction === 'UST' ? '#FFC107' : 
-                     '#7f8c8d';
+        const color = getFactionColor(faction);
         ctx.fillStyle = color;
         ctx.textAlign = 'center';
         ctx.fillText(faction, x, y);
@@ -1645,7 +1664,7 @@ function drawSystemPreview(system, autoCenter = false) {
     // Draw starbase orbit if tier > 0
     if (system.starbase && system.starbase.tier > 0) {
         try {
-            drawStarbaseOrbitInPreview(stars, centerX, centerY, effectiveScale);
+            drawStarbaseOrbitInPreview(stars, centerX, centerY, effectiveScale, system);
         } catch (error) {
             console.error('Error drawing starbase orbit:', error);
         }
@@ -1659,7 +1678,7 @@ function drawSystemPreview(system, autoCenter = false) {
     // Draw starbase if tier > 0
     if (system.starbase && system.starbase.tier > 0) {
         try {
-            drawStarbaseInPreview(system.starbase, stars, centerX, centerY, effectiveScale);
+            drawStarbaseInPreview(system.starbase, stars, centerX, centerY, effectiveScale, system);
         } catch (error) {
             console.error('Error drawing starbase:', error);
         }
@@ -1671,18 +1690,27 @@ function drawSystemPreview(system, autoCenter = false) {
     previewCtx.textAlign = 'left';
     previewCtx.fillText(system.name || 'Unnamed System', 15, 25);
     
-    // Draw faction if available
+    // Draw faction and controlling faction if available
+    let yPos = 45;
     if (system.faction) {
         previewCtx.fillStyle = getFactionColor(system.faction);
         previewCtx.font = '14px Arial';
-        previewCtx.fillText(system.faction, 15, 45);
+        previewCtx.fillText(`Type: ${system.faction}`, 15, yPos);
+        yPos += 20;
+    }
+    
+    if (system.controllingFaction) {
+        previewCtx.fillStyle = getFactionColor(system.controllingFaction);
+        previewCtx.font = '14px Arial';
+        previewCtx.fillText(`Control: ${system.controllingFaction}`, 15, yPos);
+        yPos += 20;
     }
     
     // Draw Core system indicator if applicable
     if (system.isCore) {
         previewCtx.fillStyle = '#FFD700'; // Gold
         previewCtx.font = 'bold 14px Arial';
-        previewCtx.fillText('CORE', 15, 65);
+        previewCtx.fillText('CORE', 15, yPos);
     }
     
     // Draw coordinates at the bottom
@@ -1904,12 +1932,16 @@ function calculateStarbaseOrbitRadius(stars, scale) {
 }
 
 // Draw starbase orbit in the system preview
-function drawStarbaseOrbitInPreview(stars, centerX, centerY, scale) {
+function drawStarbaseOrbitInPreview(stars, centerX, centerY, scale, system) {
     if (!previewCtx) return;
     
     const orbitRadius = calculateStarbaseOrbitRadius(stars, scale);
     
-    previewCtx.strokeStyle = 'rgba(0, 191, 255, 0.3)'; // Deep Sky Blue with transparency
+    // Get controlling faction color
+    const factionColor = system && system.controllingFaction ? getFactionColor(system.controllingFaction) : '#00BFFF';
+    const rgbColor = hexToRgb(factionColor);
+    
+    previewCtx.strokeStyle = `rgba(${rgbColor.r}, ${rgbColor.g}, ${rgbColor.b}, 0.3)`; // Faction color with transparency
     previewCtx.lineWidth = 2;
     previewCtx.setLineDash([5, 5]); // Dashed line to differentiate from planet orbits
     
@@ -1921,7 +1953,7 @@ function drawStarbaseOrbitInPreview(stars, centerX, centerY, scale) {
 }
 
 // Draw starbase in the system preview
-function drawStarbaseInPreview(starbase, stars, centerX, centerY, scale) {
+function drawStarbaseInPreview(starbase, stars, centerX, centerY, scale, system) {
     if (!previewCtx) return;
     
     // Position starbase at a fixed angle on its orbit
@@ -1932,6 +1964,10 @@ function drawStarbaseInPreview(starbase, stars, centerX, centerY, scale) {
     const starbaseY = centerY + Math.sin(angle) * orbitRadius;
     
     const size = 8 * scale;
+    
+    // Get controlling faction color
+    const factionColor = system && system.controllingFaction ? getFactionColor(system.controllingFaction) : '#00BFFF';
+    const rgbColor = hexToRgb(factionColor);
     
     // Draw starbase as a hexagon to differentiate from circular planets
     previewCtx.save();
@@ -1951,19 +1987,18 @@ function drawStarbaseInPreview(starbase, stars, centerX, centerY, scale) {
     }
     previewCtx.closePath();
     
-    // Fill with tier-based color gradient
+    // Fill with tier-based color gradient using controlling faction color
     const gradient = previewCtx.createRadialGradient(0, 0, 0, 0, 0, size);
-    const baseColor = '#00BFFF'; // Deep Sky Blue
     const tierIntensity = starbase.tier / 5; // Normalize tier to 0-1
     
-    gradient.addColorStop(0, `rgba(0, 191, 255, ${0.8 + tierIntensity * 0.2})`);
-    gradient.addColorStop(1, `rgba(0, 191, 255, ${0.3 + tierIntensity * 0.3})`);
+    gradient.addColorStop(0, `rgba(${rgbColor.r}, ${rgbColor.g}, ${rgbColor.b}, ${0.8 + tierIntensity * 0.2})`);
+    gradient.addColorStop(1, `rgba(${rgbColor.r}, ${rgbColor.g}, ${rgbColor.b}, ${0.3 + tierIntensity * 0.3})`);
     
     previewCtx.fillStyle = gradient;
     previewCtx.fill();
     
     // Draw outline
-    previewCtx.strokeStyle = '#00BFFF';
+    previewCtx.strokeStyle = factionColor;
     previewCtx.lineWidth = 2;
     previewCtx.stroke();
     
@@ -1977,7 +2012,7 @@ function drawStarbaseInPreview(starbase, stars, centerX, centerY, scale) {
     previewCtx.restore();
     
     // Draw label
-    previewCtx.fillStyle = '#00BFFF';
+    previewCtx.fillStyle = factionColor;
     previewCtx.font = '12px Arial';
     previewCtx.textAlign = 'center';
     previewCtx.fillText(`Starbase T${starbase.tier}`, starbaseX, starbaseY - size - 10);
@@ -2225,7 +2260,7 @@ function drawResourceHeatmap() {
     // Get visible resources from filter state
     const visibleResources = Object.keys(resourceFilterState).filter(key => {
         // Only include if it's not a system/region label filter and is visible (not false)
-        return !['SystemName', 'FactionLabel', 'PlanetCount', 'StarCount', 'LockStatus', 
+        return !['SystemName', 'FactionLabel', 'ControllingFaction', 'PlanetCount', 'StarCount', 'LockStatus', 
                                      'RegionalPolygon', 'RegionalBlob', 'RegionalName', 'RegionalSystems', 'RegionalCore', 
                  'RegionalArea', 'RegionalDistance', 'RegionalIndicator', 'Planets'].includes(key) && 
                resourceFilterState[key] !== false;

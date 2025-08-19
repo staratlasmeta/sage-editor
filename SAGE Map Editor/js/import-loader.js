@@ -14,7 +14,7 @@ let importStats = {
     resources: 0,
     regions: 0,
     links: 0,
-    factions: { MUD: 0, ONI: 0, UST: 0 }
+    factions: { MUD: 0, ONI: 0, UST: 0, Neutral: 0 }
 };
 
 // Fun facts to display during loading

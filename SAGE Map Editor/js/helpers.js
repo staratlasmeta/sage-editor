@@ -51,6 +51,9 @@ function getFactionColor(faction) {
         case 'UST':
         case 'USTUR':
             return '#FFC107'; // USTUR color
+        case 'Neutral':
+        case 'NEUTRAL':
+            return '#999999'; // Neutral gray color
         default:
             return '#CCCCCC'; // Gray default
     }
