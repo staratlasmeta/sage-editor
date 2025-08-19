@@ -267,6 +267,11 @@ function finishLoadingMapData(loadedMapData, onComplete) {
             system.isLocked = false;
         }
         
+        // Ensure starbase property exists with default tier 0
+        if (!system.starbase) {
+            system.starbase = { tier: 0 };
+        }
+        
         // Extract system counter from name if possible
         if (system.name) {
             const match = system.name.match(/System-(\d+)/);

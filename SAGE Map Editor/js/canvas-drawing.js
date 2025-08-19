@@ -665,7 +665,12 @@ function drawSystemLabel(system, x, y, isSelected, isHovered) {
     
     // Add star count if enabled in filter or selected/hovered
     if (system.stars && system.stars.length > 0 && (resourceFilterState["StarCount"] || isSelected || isHovered)) {
-        statsText += `S:${system.stars.length}`;
+        statsText += `S:${system.stars.length} `;
+    }
+    
+    // Add starbase tier if enabled in filter or selected/hovered
+    if (system.starbase && system.starbase.tier > 0 && (resourceFilterState["StarbaseTier"] || isSelected || isHovered)) {
+        statsText += `SB:T${system.starbase.tier}`;
     }
     
     // Draw stats if there's text to show
@@ -1572,7 +1577,14 @@ function drawSystemPreview(system, autoCenter = false) {
         
         // Calculate the bounds of the system
         const planets = system.planets || [];
+        const stars = system.stars || []; // Define stars here for auto-centering calculation
         let maxOrbitRadius = 0;
+        
+        // Check if starbase exists and include its orbit
+        if (system.starbase && system.starbase.tier > 0) {
+            const starbaseRadius = calculateStarbaseOrbitRadius(stars, 1); // Use scale 1 for base calculation
+            maxOrbitRadius = Math.max(maxOrbitRadius, starbaseRadius);
+        }
         
         if (planets.length > 0) {
             // Find the outermost planet
@@ -1584,7 +1596,7 @@ function drawSystemPreview(system, autoCenter = false) {
             });
         }
         
-        // If no planets, use a default radius
+        // If no planets and no starbase, use a default radius
         if (maxOrbitRadius === 0) {
             maxOrbitRadius = 100;
         }
@@ -1630,9 +1642,27 @@ function drawSystemPreview(system, autoCenter = false) {
         drawOrbitPathsInPreview(planets, centerX, centerY, effectiveScale);
     }
     
+    // Draw starbase orbit if tier > 0
+    if (system.starbase && system.starbase.tier > 0) {
+        try {
+            drawStarbaseOrbitInPreview(stars, centerX, centerY, effectiveScale);
+        } catch (error) {
+            console.error('Error drawing starbase orbit:', error);
+        }
+    }
+    
     // Draw planets with resource labels if in expanded view
     if (planets.length > 0) {
         drawPlanetsInPreview(planets, centerX, centerY, effectiveScale, isSystemPreviewExpanded);
+    }
+    
+    // Draw starbase if tier > 0
+    if (system.starbase && system.starbase.tier > 0) {
+        try {
+            drawStarbaseInPreview(system.starbase, stars, centerX, centerY, effectiveScale);
+        } catch (error) {
+            console.error('Error drawing starbase:', error);
+        }
     }
     
     // Draw system name at the top left
@@ -1844,6 +1874,115 @@ function drawPlanetResourceLabels(planet, planetX, planetY, planetSize, scale) {
     });
 }
 
+// Calculate starbase orbit radius based on star configuration
+function calculateStarbaseOrbitRadius(stars, scale) {
+    let baseRadius = 30 * scale; // Default radius
+    
+    if (!stars || stars.length === 0) {
+        return baseRadius;
+    }
+    
+    // Calculate the maximum extent of the star system
+    if (stars.length === 1) {
+        // Single star - orbit should be outside the star size + glow
+        const starSize = ((stars[0].scale || 1) * 25) * scale;
+        baseRadius = (starSize * 2) + (15 * scale); // Star size + glow + padding
+    } else {
+        // Multiple stars - orbit should be outside the star ring + largest star
+        const starRingRadius = 30 * scale;
+        let maxStarSize = 0;
+        
+        stars.forEach(star => {
+            const starSize = ((star.scale || 1) * 25) * scale;
+            maxStarSize = Math.max(maxStarSize, starSize);
+        });
+        
+        baseRadius = starRingRadius + maxStarSize + (15 * scale); // Ring + star size + padding
+    }
+    
+    return baseRadius;
+}
+
+// Draw starbase orbit in the system preview
+function drawStarbaseOrbitInPreview(stars, centerX, centerY, scale) {
+    if (!previewCtx) return;
+    
+    const orbitRadius = calculateStarbaseOrbitRadius(stars, scale);
+    
+    previewCtx.strokeStyle = 'rgba(0, 191, 255, 0.3)'; // Deep Sky Blue with transparency
+    previewCtx.lineWidth = 2;
+    previewCtx.setLineDash([5, 5]); // Dashed line to differentiate from planet orbits
+    
+    previewCtx.beginPath();
+    previewCtx.arc(centerX, centerY, orbitRadius, 0, Math.PI * 2);
+    previewCtx.stroke();
+    
+    previewCtx.setLineDash([]); // Reset line dash
+}
+
+// Draw starbase in the system preview
+function drawStarbaseInPreview(starbase, stars, centerX, centerY, scale) {
+    if (!previewCtx) return;
+    
+    // Position starbase at a fixed angle on its orbit
+    const orbitRadius = calculateStarbaseOrbitRadius(stars, scale);
+    const angle = -Math.PI / 2; // Top of the orbit (12 o'clock position)
+    
+    const starbaseX = centerX + Math.cos(angle) * orbitRadius;
+    const starbaseY = centerY + Math.sin(angle) * orbitRadius;
+    
+    const size = 8 * scale;
+    
+    // Draw starbase as a hexagon to differentiate from circular planets
+    previewCtx.save();
+    previewCtx.translate(starbaseX, starbaseY);
+    
+    // Draw hexagon shape
+    previewCtx.beginPath();
+    for (let i = 0; i < 6; i++) {
+        const hexAngle = (i * Math.PI * 2) / 6 - Math.PI / 2;
+        const x = Math.cos(hexAngle) * size;
+        const y = Math.sin(hexAngle) * size;
+        if (i === 0) {
+            previewCtx.moveTo(x, y);
+        } else {
+            previewCtx.lineTo(x, y);
+        }
+    }
+    previewCtx.closePath();
+    
+    // Fill with tier-based color gradient
+    const gradient = previewCtx.createRadialGradient(0, 0, 0, 0, 0, size);
+    const baseColor = '#00BFFF'; // Deep Sky Blue
+    const tierIntensity = starbase.tier / 5; // Normalize tier to 0-1
+    
+    gradient.addColorStop(0, `rgba(0, 191, 255, ${0.8 + tierIntensity * 0.2})`);
+    gradient.addColorStop(1, `rgba(0, 191, 255, ${0.3 + tierIntensity * 0.3})`);
+    
+    previewCtx.fillStyle = gradient;
+    previewCtx.fill();
+    
+    // Draw outline
+    previewCtx.strokeStyle = '#00BFFF';
+    previewCtx.lineWidth = 2;
+    previewCtx.stroke();
+    
+    // Draw tier number in center
+    previewCtx.fillStyle = '#FFFFFF';
+    previewCtx.font = `bold ${10 * scale}px Arial`;
+    previewCtx.textAlign = 'center';
+    previewCtx.textBaseline = 'middle';
+    previewCtx.fillText(starbase.tier.toString(), 0, 0);
+    
+    previewCtx.restore();
+    
+    // Draw label
+    previewCtx.fillStyle = '#00BFFF';
+    previewCtx.font = '12px Arial';
+    previewCtx.textAlign = 'center';
+    previewCtx.fillText(`Starbase T${starbase.tier}`, starbaseX, starbaseY - size - 10);
+}
+
 // Get planet type name from type ID
 function getPlanetTypeName(typeId) {
     if (typeof typeId === 'string') return typeId;
@@ -1888,6 +2027,7 @@ function toggleExpandedSystemPreview(system) {
         // Expand the preview
         isSystemPreviewExpanded = true;
         expandedPreviewSystem = system;
+        window.isSystemPreviewExpanded = true; // Ensure global state is updated
         
         // Store original parents
         originalGalaxyCanvasParent = canvas.parentElement;
@@ -1987,8 +2127,10 @@ function toggleExpandedSystemPreview(system) {
             previewCanvas.style.height = rect.height + 'px';
             setupHighDPICanvas(previewCanvas, previewCtx);
             
-            // Redraw with larger size and auto-center
-            drawSystemPreview(system, true);
+            // Force immediate redraw with auto-center
+            requestAnimationFrame(() => {
+                drawSystemPreview(system, true);
+            });
         }, 10);
         
         // Update button text
@@ -2003,6 +2145,7 @@ function toggleExpandedSystemPreview(system) {
     } else {
         // Minimize back to normal
         isSystemPreviewExpanded = false;
+        window.isSystemPreviewExpanded = false; // Ensure global state is updated
         const systemToRedraw = expandedPreviewSystem || system;
         
         // Restore canvas to original container
