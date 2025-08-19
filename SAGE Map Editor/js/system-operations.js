@@ -30,7 +30,8 @@ function createNewSystem() {
         ],
         planets: [],
         links: [],
-        isLocked: false // Add locked status
+        isLocked: false, // Add locked status
+        starbase: { tier: 0 } // Default starbase tier 0
     };
     
     // Add system to map data
@@ -70,7 +71,8 @@ function createNewSystemAtCoords(x, y) {
         ],
         planets: [],
         links: [],
-        isLocked: false // Add locked status
+        isLocked: false, // Add locked status
+        starbase: { tier: 0 } // Default starbase tier 0
     };
     
     // Add system to map data
@@ -363,6 +365,21 @@ function displaySystemDetails(systems) {
                     <option value="">-- None --</option>
                     ${regionDefinitions.map(region => 
                         `<option value="${region.id}" ${system.regionId === region.id ? 'selected' : ''}>${region.name}</option>`
+                    ).join('')}
+                </select>
+            </div>
+        </div>
+    `;
+    
+    // Starbase Section
+    html += `
+        <div class="detail-section">
+            <h3>Starbase</h3>
+            <div class="form-group">
+                <label for="starbaseTier">Tier:</label>
+                <select id="starbaseTier" ${isLocked ? 'disabled' : ''}>
+                    ${[0, 1, 2, 3, 4, 5].map(tier => 
+                        `<option value="${tier}" ${(system.starbase && system.starbase.tier === tier) ? 'selected' : ''}>Tier ${tier}</option>`
                     ).join('')}
                 </select>
             </div>
@@ -1190,6 +1207,24 @@ function setupSystemDetailsEventListeners(system) {
             drawGalaxyMap();
         }
     });
+    
+    // Starbase tier listener
+    const starbaseTierSelect = document.getElementById('starbaseTier');
+    if (starbaseTierSelect) {
+        starbaseTierSelect.addEventListener('change', function() {
+            const newTier = parseInt(this.value);
+            if (!system.starbase) {
+                system.starbase = { tier: 0 };
+            }
+            const oldTier = system.starbase.tier;
+            
+            if (newTier !== oldTier) {
+                system.starbase.tier = newTier;
+                saveState(`Changed Starbase Tier to ${newTier}`);
+                drawSystemPreview(system); // Update preview if starbase is shown there
+            }
+        });
+    }
     
     // Add star button
     const addStarBtn = document.getElementById('addStarBtn');
@@ -2302,6 +2337,13 @@ function generateRegionalPlanetDistribution(systems) {
     systems.forEach((system, systemIndex) => {
         // Skip if system is locked
         if (system.isLocked) return;
+
+        // Set starbase tier to 0 (default)
+        if (!system.starbase) {
+            system.starbase = { tier: 0 };
+        } else {
+            system.starbase.tier = 0;
+        }
 
         // Generate stars for the system
         system.stars = []; // Clear existing stars

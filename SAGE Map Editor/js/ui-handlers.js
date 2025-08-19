@@ -1474,7 +1474,7 @@ function setupResourceFilter() {
 
     // System Labels Group
     const systemLabelItems = [
-        { id: "SystemName" }, { id: "FactionLabel" }, { id: "PlanetCount" }, { id: "StarCount" }, { id: "LockStatus" }
+        { id: "SystemName" }, { id: "FactionLabel" }, { id: "PlanetCount" }, { id: "StarCount" }, { id: "StarbaseTier" }, { id: "LockStatus" }
     ];
     const allSystemLabelsChecked = areAllChecked(systemLabelItems);
     itemsHtml += `
@@ -1533,6 +1533,7 @@ function setupResourceFilter() {
         { id: "FactionLabel", label: "Faction Label (e.g., UST)" },
         { id: "PlanetCount", label: "Planet Count (e.g., P:4)" },
         { id: "StarCount", label: "Star Count (e.g., S:1)" },
+        { id: "StarbaseTier", label: "Starbase Tier (e.g., SB:T1)" },
         { id: "LockStatus", label: "Lock Status 🔒" },
         { id: "KingStatus", label: "KING Status ⭐" }
         // Removed Planets as it should always be on
@@ -2684,7 +2685,7 @@ function applyResourceRichnessFalloff(systems, minRichness, maxRichness, falloff
         // Get all resource names that are visible in the filter
         Object.keys(resourceFilterState).forEach(key => {
             // Only include if it's not a system label filter and is visible (not false)
-            if (!['SystemName', 'FactionLabel', 'PlanetCount', 'StarCount', 'LockStatus',
+            if (!['SystemName', 'FactionLabel', 'PlanetCount', 'StarCount', 'StarbaseTier', 'LockStatus',
                 'RegionalPolygon', 'RegionalBlob', 'RegionalName', 'RegionalSystems', 'RegionalCore',
                 'RegionalKing', 'RegionalArea', 'RegionalDistance', 'RegionalIndicator', 'Planets'].includes(key) &&
                 resourceFilterState[key] !== false) {
