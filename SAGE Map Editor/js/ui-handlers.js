@@ -269,34 +269,24 @@ function handleGalaxyMouseDown(event) {
                 // If clicking an unselected system, select it (if unlocked)
                 if (system.isLocked) {
                     console.log(`System ${system.name} is locked. Selecting for view only.`);
-                    // Store the previous selection for undo/redo
-                    const prevSelection = [...selectedSystems];
-
-                    selectedSystems = [system]; // Select only the locked system
+                    selectedSystems.length = 0;
+                    selectedSystems.push(system); // Select only the locked system
                     displaySystemDetails(selectedSystems);
                     updateLockButtonsState();
                     drawGalaxyMap();
 
                     // Save the selection state change
-                    saveState(`Selected System ${system.name}`, false, false, {
-                        selectedKeys: selectedSystems.map(sys => sys.key),
-                        prevSelectedKeys: prevSelection.map(sys => sys.key)
-                    });
+                    saveState(`Selected ${system.name}`);
                 } else {
-                    // Store the previous selection for undo/redo
-                    const prevSelection = [...selectedSystems];
-
-                    selectedSystems = [system]; // Select the unlocked system
+                    selectedSystems.length = 0;
+                    selectedSystems.push(system); // Select the unlocked system
                     displaySystemDetails(selectedSystems);
                     drawSystemPreview(system);
                     updateLockButtonsState();
                     drawGalaxyMap();
 
                     // Save the selection state change
-                    saveState(`Selected System ${system.name}`, false, false, {
-                        selectedKeys: selectedSystems.map(sys => sys.key),
-                        prevSelectedKeys: prevSelection.map(sys => sys.key)
-                    });
+                    saveState(`Selected ${system.name}`);
                 }
             }
         } else {
@@ -328,9 +318,6 @@ function handleGalaxyMouseDown(event) {
                 console.log(`System ${system.name} is locked. Interaction limited.`);
                 // Allow selecting/deselecting locked system for viewing only
                 if (event.shiftKey) { // Use shift for toggling locked selection
-                    // Store the previous selection for undo/redo
-                    const prevSelection = [...selectedSystems];
-
                     const index = selectedSystems.findIndex(s => s.key === system.key);
                     if (index > -1) {
                         selectedSystems.splice(index, 1); // Allow deselection
@@ -339,23 +326,15 @@ function handleGalaxyMouseDown(event) {
                     }
 
                     // Save the selection state change
-                    saveState(`${index > -1 ? 'Deselected' : 'Selected'} System ${system.name}`, false, false, {
-                        selectedKeys: selectedSystems.map(sys => sys.key),
-                        prevSelectedKeys: prevSelection.map(sys => sys.key)
-                    });
+                    saveState(`${index > -1 ? 'Deselected' : 'Selected'} ${system.name}`);
                 } else {
                     // Simple click on locked: Select only this locked system
                     if (!(selectedSystems.length === 1 && selectedSystems[0].key === system.key)) {
-                        // Store the previous selection for undo/redo
-                        const prevSelection = [...selectedSystems];
-
-                        selectedSystems = [system];
+                        selectedSystems.length = 0;
+                        selectedSystems.push(system);
 
                         // Save the selection state change
-                        saveState(`Selected System ${system.name}`, false, false, {
-                            selectedKeys: selectedSystems.map(sys => sys.key),
-                            prevSelectedKeys: prevSelection.map(sys => sys.key)
-                        });
+                        saveState(`Selected ${system.name}`);
                     }
                 }
                 displaySystemDetails(selectedSystems);
@@ -381,9 +360,6 @@ function handleGalaxyMouseDown(event) {
                 updateActiveToolButton();
                 drawGalaxyMap();
             } else if (event.shiftKey) {
-                // Store the previous selection for undo/redo
-                const prevSelection = [...selectedSystems];
-
                 // Toggle selection for unlocked system
                 const index = selectedSystems.findIndex(s => s.key === system.key);
                 if (index !== -1) {
@@ -393,10 +369,7 @@ function handleGalaxyMouseDown(event) {
                 }
 
                 // Save the selection state change
-                saveState(`${index !== -1 ? 'Deselected' : 'Selected'} System ${system.name}`, false, false, {
-                    selectedKeys: selectedSystems.map(sys => sys.key),
-                    prevSelectedKeys: prevSelection.map(sys => sys.key)
-                });
+                saveState(`${index !== -1 ? 'Deselected' : 'Selected'} ${system.name}`);
 
                 displaySystemDetails(selectedSystems);
                 updateSystemPreview(); // Use helper for preview update
@@ -407,18 +380,13 @@ function handleGalaxyMouseDown(event) {
 
                 if (!systemWasAlreadySelected) {
                     console.log("Selecting system:", system.name);
-                    // Store the previous selection for undo/redo
-                    const prevSelection = [...selectedSystems];
-
-                    selectedSystems = [system]; // Select only this system
+                    selectedSystems.length = 0;
+                    selectedSystems.push(system); // Select only this system
                     displaySystemDetails(selectedSystems);
                     updateSystemPreview();
 
                     // Save the selection state change
-                    saveState(`Selected System ${system.name}`, false, false, {
-                        selectedKeys: selectedSystems.map(sys => sys.key),
-                        prevSelectedKeys: prevSelection.map(sys => sys.key)
-                    });
+                    saveState(`Selected ${system.name}`);
                 } else {
                     // If clicking an already selected system within a multi-selection,
                     // don't deselect others, just prepare for drag.
@@ -456,12 +424,9 @@ function handleGalaxyMouseDown(event) {
                 selectionEnd = { x: coords.x, y: coords.y };
                 // Clear previous selection if not holding shift (standard box select behavior)
                 if (!event.shiftKey) {
-                    // Store the previous selection for undo/redo
-                    const prevSelection = [...selectedSystems];
-
                     // Unconditionally clear selection
                     if (selectedSystems.length > 0) {
-                        selectedSystems = [];
+                        selectedSystems.length = 0;
                         console.log(`Box select: Deselected all systems.`);
 
                         // Save the selection state change
@@ -486,18 +451,12 @@ function handleGalaxyMouseDown(event) {
                 // Deselect all systems if not holding shift (and no locked systems selected)
                 if (!event.shiftKey) {
                     if (selectedSystems.length > 0) {
-                        // Store the previous selection for undo/redo
-                        const prevSelection = [...selectedSystems];
-
                         // Unconditionally clear selection
                         console.log(`Click empty: Deselected all systems.`);
-                        selectedSystems = [];
+                        selectedSystems.length = 0;
 
                         // Save the selection state change
-                        saveState("Deselected All Systems", false, false, {
-                            selectedKeys: [],
-                            prevSelectedKeys: prevSelection.map(sys => sys.key)
-                        });
+                        saveState("Deselected All Systems");
 
                         displaySystemDetails(selectedSystems);
                         updateSystemPreview();
@@ -645,8 +604,6 @@ function handleGalaxyMouseUp(event) {
         });
 
         if (selectedInBox.length > 0) {
-            // Store the previous selection for undo/redo
-            const prevSelection = [...selectedSystems];
             let selectionDescription = "";
 
             // If shift is held, add to selection, otherwise replace
@@ -667,10 +624,7 @@ function handleGalaxyMouseUp(event) {
             }
 
             // Save the selection state change
-            saveState(selectionDescription, false, false, {
-                selectedKeys: selectedSystems.map(sys => sys.key),
-                prevSelectedKeys: prevSelection.map(sys => sys.key)
-            });
+            saveState(selectionDescription);
 
             displaySystemDetails(selectedSystems);
             if (selectedSystems.length === 1) {
@@ -688,15 +642,8 @@ function handleGalaxyMouseUp(event) {
         if (didDrag) {
             console.log("Saving state after dragging system:", draggedSystem.name);
 
-            // Create a metadata object to store selection state with the history
-            const metadata = {
-                selectedKeys: selectedSystems.map(sys => sys.key),
-                isDragOperation: true // Mark this as a drag operation
-            };
-
-            // Pass the metadata to saveState, grouping it with previous selection operation
-            // Use true for groupWithPrevious to avoid creating a separate history entry
-            saveState("Moved System", true, false, metadata);
+            // Save the move as a new state (not grouped)
+            saveState("Moved System");
         } else {
             console.log("System was clicked but not dragged:", draggedSystem.name);
         }
@@ -1181,12 +1128,25 @@ function updateSystemCount() {
 
 // Update undo/redo buttons state
 function updateUndoRedoButtons() {
-    if (undoBtn) {
-        undoBtn.disabled = historyStack.length === 0;
-    }
+    if (typeof getHistoryInfo === 'function') {
+        const historyInfo = getHistoryInfo();
+        
+        if (undoBtn) {
+            undoBtn.disabled = !historyInfo.canUndo;
+        }
 
-    if (redoBtn) {
-        redoBtn.disabled = redoStack.length === 0;
+        if (redoBtn) {
+            redoBtn.disabled = !historyInfo.canRedo;
+        }
+    } else {
+        // Fallback to old system
+        if (undoBtn) {
+            undoBtn.disabled = historyStack.length === 0;
+        }
+
+        if (redoBtn) {
+            redoBtn.disabled = redoStack.length === 0;
+        }
     }
 }
 
@@ -1194,151 +1154,127 @@ function updateUndoRedoButtons() {
 function updateHistoryPanel() {
     const historyList = document.getElementById('historyList');
     if (!historyList) return;
-
-    // Clear history list
+    
+    // Clear existing items
     historyList.innerHTML = '';
-
-    if (historyStack.length === 0) {
+    
+    // Check if new history system is available
+    if (typeof getHistoryInfo !== 'function') {
+        // Fallback to old system
+        updateHistoryPanelOld();
+        return;
+    }
+    
+    // Get history info from new system
+    const historyInfo = getHistoryInfo();
+    const states = historyInfo.states;
+    const currentIndex = historyInfo.currentIndex;
+    
+    if (states.length === 0) {
         const li = document.createElement('li');
         li.textContent = 'No history yet';
         li.className = 'empty-history';
         historyList.appendChild(li);
         return;
     }
-
-    // Track action groups to handle collapsing
-    let currentActionGroup = null;
-    let groupItems = [];
-    let groupContainer = null;
-
-    console.log("Updating history panel with", historyStack.length, "items");
-
-    // Add history items (most recent on top)
-    historyStack.slice().reverse().forEach((item, index) => {
-        const actualIndex = historyStack.length - 1 - index; // Convert displayed index to actual index
-        const isCurrent = (actualIndex === historyStack.length - 1);
-
-        console.log(`Rendering history item ${index}: ${item.description} (actual index ${actualIndex})`);
-
-        // Format the timestamp
-        let timeStr = '';
-        if (item.timestamp) {
-            const time = new Date(item.timestamp);
-            timeStr = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    
+    // Add history items from newest to oldest
+    states.slice().reverse().forEach((snapshot, reverseIndex) => {
+        const actualIndex = states.length - 1 - reverseIndex;
+        const isCurrentState = actualIndex === currentIndex;
+        
+        // Create list item
+        const li = document.createElement('li');
+        li.className = 'history-item';
+        
+        if (isCurrentState) {
+            li.classList.add('current-state');
         }
-
-        // Check if this item belongs to a group
-        if (item.actionGroup && item.actionGroup === currentActionGroup) {
-            // This item belongs to the current group
-            const groupItem = document.createElement('li');
-            groupItem.textContent = `${item.description}`;
-            groupItem.className = 'history-group-item';
-            groupItem.setAttribute('data-history-index', actualIndex);
-
-            // Add click event to restore this state
-            groupItem.addEventListener('click', function (e) {
-                e.stopPropagation(); // Don't trigger the group click
-                const clickedIndex = parseInt(this.getAttribute('data-history-index'));
-                restoreHistoryState(clickedIndex);
+        
+        // Special styling for initial state
+        if (actualIndex === 0) {
+            li.classList.add('empty-base-state');
+        }
+        
+        // Get timestamp
+        let timeStr = 'Unknown';
+        if (snapshot.timestamp) {
+            timeStr = snapshot.timestamp.toLocaleTimeString([], { 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit' 
             });
-
-            groupItems.push(groupItem);
+        }
+        
+        // Create timestamp element
+        const timeElement = document.createElement('span');
+        timeElement.className = 'history-time';
+        timeElement.textContent = timeStr;
+        
+        // Create description element
+        const descElement = document.createElement('span');
+        descElement.className = 'history-desc';
+        
+        // Get system count and selected count
+        const systemCount = snapshot.data.mapData ? snapshot.data.mapData.length : 0;
+        const selectedCount = snapshot.data.selectedSystemKeys ? snapshot.data.selectedSystemKeys.length : 0;
+        
+        // Build description with counts
+        let description = snapshot.description;
+        if (selectedCount > 0) {
+            description += ` [${systemCount} sys, ${selectedCount} sel]`;
         } else {
-            // This is a new item or group
-
-            // If we were tracking a group, add all its items now
-            if (groupItems.length > 0 && groupContainer) {
-                // Add items in reverse order (most recent at top)
-                groupItems.reverse().forEach(groupItem => {
-                    groupContainer.appendChild(groupItem);
-                });
-                groupItems = [];
-            }
-
-            // Start a new list item or group
-            const li = document.createElement('li');
-
-            // Create the timestamp element
-            const timeElement = document.createElement('span');
-            timeElement.className = 'history-time';
-            timeElement.textContent = timeStr;
-
-            // Create the description element
-            const descElement = document.createElement('span');
-            descElement.className = 'history-desc';
-
-            // Display index for debugging
-            descElement.textContent = `${item.description || `History ${historyStack.length - index}`} [${actualIndex}]`;
-
-            // Set appropriate class based on whether this is the current state
-            li.className = 'history-item';
-            if (isCurrent) {
-                li.classList.add('current-state');
-            }
-
-            // Special styling for the base empty state
-            if ((actualIndex === 0 && item.description && item.description.includes('Empty')) ||
-                item.description === 'Empty Base State') {
-                li.classList.add('empty-base-state');
-            }
-
-            li.setAttribute('data-history-index', actualIndex);
-
-            // Add elements to the list item
-            li.appendChild(timeElement);
-            li.appendChild(descElement);
-
-            // Add click event to restore this state
-            li.addEventListener('click', function () {
-                const clickedIndex = parseInt(this.getAttribute('data-history-index'));
-                restoreHistoryState(clickedIndex);
-            });
-
-            historyList.appendChild(li);
-
-            // If this is a group header, prepare for group items
-            if (item.actionGroup) {
-                currentActionGroup = item.actionGroup;
-                groupContainer = li;
-                li.classList.add('history-group-header');
-
-                // Add expand/collapse functionality
-                const toggleElement = document.createElement('span');
-                toggleElement.className = 'group-toggle';
-                toggleElement.textContent = '▼';
-                li.insertBefore(toggleElement, li.firstChild);
-
-                // Add toggle event
-                li.addEventListener('click', function (e) {
-                    this.classList.toggle('collapsed');
-                    const isCollapsed = this.classList.contains('collapsed');
-                    toggleElement.textContent = isCollapsed ? '►' : '▼';
-
-                    // Show/hide child items
-                    const groupItems = this.querySelectorAll('.history-group-item');
-                    groupItems.forEach(item => {
-                        item.style.display = isCollapsed ? 'none' : 'block';
-                    });
-
-                    e.stopPropagation(); // Don't trigger the restore state
-                });
-            } else {
-                // Reset group tracking
-                currentActionGroup = null;
-                groupContainer = null;
-            }
+            description += ` [${systemCount}]`;
         }
-    });
-
-    // If we were tracking a group at the end, add all its items now
-    if (groupItems.length > 0 && groupContainer) {
-        // Add items in reverse order (most recent at top)
-        groupItems.reverse().forEach(groupItem => {
-            groupContainer.appendChild(groupItem);
+        
+        descElement.textContent = description;
+        
+        // Add elements to list item
+        li.appendChild(timeElement);
+        li.appendChild(descElement);
+        
+        // Add click event
+        li.addEventListener('click', function() {
+            historyJumpTo(actualIndex);
         });
-    }
+        
+        // Add to list
+        historyList.appendChild(li);
+    });
+    
+    console.log(`History panel updated with ${states.length} items, current index: ${currentIndex}`);
+}
 
-    console.log("History panel updated with", historyList.children.length, "visible items");
+// Old history panel update function (fallback)
+function updateHistoryPanelOld() {
+    const historyList = document.getElementById('historyList');
+    if (!historyList) return;
+    
+    if (!historyStack || historyStack.length === 0) {
+        const li = document.createElement('li');
+        li.textContent = 'No history yet';
+        li.className = 'empty-history';
+        historyList.appendChild(li);
+        return;
+    }
+    
+    // Simple list of history items
+    historyStack.slice().reverse().forEach((item, index) => {
+        const actualIndex = historyStack.length - 1 - index;
+        const li = document.createElement('li');
+        li.className = 'history-item';
+        
+        if (actualIndex === historyStack.length - 1) {
+            li.classList.add('current-state');
+        }
+        
+        li.textContent = item.description || `State ${actualIndex}`;
+        li.addEventListener('click', function() {
+            restoreHistoryState(actualIndex);
+        });
+        
+        historyList.appendChild(li);
+    });
 }
 
 // Restore state from history at a specific index
@@ -1368,44 +1304,66 @@ function restoreHistoryState(index) {
     // Restore the state at the clicked index
     const restoredState = historyStack[index];
 
-    // Apply the state
-    mapData = deepCopy(restoredState.mapData);
-    regionDefinitions = deepCopy(restoredState.regionDefinitions);
+    // Apply the state - use the new state structure
+    if (restoredState.state) {
+        mapData.length = 0;
+        restoredState.state.forEach(item => mapData.push(item));
+    } else if (restoredState.mapData) {
+        // Handle old format for backward compatibility
+        mapData = deepCopy(restoredState.mapData);
+    }
+    
+    // Restore region definitions
+    if (restoredState.regionDefinitions) {
+        regionDefinitions = deepCopy(restoredState.regionDefinitions);
+    }
 
     // Rebuild lookup
-    rebuildSystemLookup();
+    systemLookup = {};
+    mapData.forEach(system => {
+        if (system.key) systemLookup[system.key] = system;
+    });
+
+    // Clear all state variables
+    hoveredSystem = null;
+    draggedSystem = null;
+    linkSourceSystem = null;
+    isPanning = false;
+    isLinking = false;
+
+    // Restore selection state from the saved state
+    selectedSystems.length = 0; // Clear array without breaking window reference
+    
+    // Use selectedSystemKeys from the restored state
+    if (restoredState.selectedSystemKeys) {
+        restoredState.selectedSystemKeys.forEach(key => {
+            if (systemLookup[key]) {
+                selectedSystems.push(systemLookup[key]);
+            }
+        });
+        console.log(`Restored selection with ${selectedSystems.length} systems`);
+    } else {
+        console.log("No selection data in restored state");
+    }
+
+    // Update UI based on selections
+    updateLockButtonsState();
+    setupResourceFilter();
+    displaySystemDetails(selectedSystems);
+    
+    if (selectedSystems.length === 1) {
+        drawSystemPreview(selectedSystems[0]);
+    } else {
+        drawSystemPreview(null);
+    }
 
     // Update UI
     updateUndoRedoButtons();
+    updateSystemCount();
 
-    // If there's a selected system, update the details
-    if (selectedSystems.length > 0) {
-        // Check if selected systems still exist and update
-        selectedSystems = selectedSystems.filter(system => {
-            return mapData.some(s => s.key === system.key);
-        });
-
-        if (selectedSystems.length > 0) {
-            // Update system details with updated system references
-            const updatedSelectedSystems = selectedSystems.map(system => {
-                return mapData.find(s => s.key === system.key);
-            }).filter(Boolean);
-
-            selectedSystems = updatedSelectedSystems;
-            displaySystemDetails(selectedSystems);
-
-            if (selectedSystems.length === 1) {
-                drawSystemPreview(selectedSystems[0]);
-            }
-        } else {
-            // No selected systems remaining
-            displaySystemDetails(null);
-            drawSystemPreview(null);
-        }
-    }
-
-    // Redraw the map
+    // Force redraw the map
     drawGalaxyMap();
+    console.log("Redrew galaxy map after restoring state");
 
     // Update the history panel
     updateHistoryPanel();
@@ -2118,6 +2076,26 @@ function initKeyboardShortcuts() {
 
         // Determine if Ctrl key is pressed
         const ctrlPressed = event.ctrlKey || event.metaKey;
+        
+        // Debug logging for Ctrl+Shift+Z issue
+        if (ctrlPressed && (event.key === 'z' || event.key === 'Z')) {
+            console.log('Key event:', {
+                key: event.key,
+                code: event.code,
+                shiftKey: event.shiftKey,
+                ctrlKey: event.ctrlKey,
+                metaKey: event.metaKey
+            });
+        }
+        
+        // Handle Ctrl+Shift+Z using event.code for better reliability
+        if (ctrlPressed && event.shiftKey && event.code === 'KeyZ') {
+            event.preventDefault();
+            event.stopPropagation();
+            console.log('Ctrl+Shift+Z detected via event.code - calling redo()');
+            redo();
+            return; // Exit early to prevent other handlers
+        }
 
         switch (event.key) {
             case 'Escape':
@@ -2132,13 +2110,16 @@ function initKeyboardShortcuts() {
                 }
                 break;
             case 'z':
+            case 'Z':
                 // Undo/Redo with Ctrl+Z and Ctrl+Shift+Z
                 if (ctrlPressed) {
+                    event.preventDefault();
+                    event.stopPropagation(); // Ensure this event doesn't bubble
                     if (event.shiftKey) {
-                        event.preventDefault();
+                        console.log('Ctrl+Shift+Z detected - calling redo()');
                         redo();
                     } else {
-                        event.preventDefault();
+                        console.log('Ctrl+Z detected - calling undo()');
                         undo();
                     }
                 }
