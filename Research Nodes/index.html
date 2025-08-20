@@ -37,6 +37,7 @@
         <button id="modeToggle" class="menu-button" title="Toggle Edit Mode">��</button>
         <button id="simulationToggle" class="menu-button" title="Simulation Mode">🎮</button>
         <div class="menu-separator"></div>
+        <button id="helpButton" class="menu-button" title="Help">❓</button>
         <a href="../SAGE Editor Suite/index.html" class="menu-item home-link">HOME</a>
     </div>
     
@@ -331,6 +332,119 @@
             <div class="modal-footer">
                 <button id="copyMarkdownBtn" class="primary">Copy to Clipboard</button>
                 <button id="closeMarkdownBtn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Modal -->
+    <div class="modal-overlay" id="helpModal" style="display: none;">
+        <div class="modal-content help-modal">
+            <div class="modal-header">
+                <h3>Research Nodes Help</h3>
+                <button class="close-button" id="closeHelpModal">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="help-tabs">
+                    <button class="help-tab active" data-tab="quickstart">Quick Start</button>
+                    <button class="help-tab" data-tab="shortcuts">Keyboard Shortcuts</button>
+                    <button class="help-tab" data-tab="mouse">Mouse Controls</button>
+                    <button class="help-tab" data-tab="simulation">Simulation Mode</button>
+                </div>
+                <div class="help-content">
+                    <div id="quickstart-content" class="tab-content active">
+                        <h4>Getting Started</h4>
+                        <div class="help-section">
+                            <ol>
+                                <li><strong>Create Nodes</strong>: Right‑click empty space to create a node.</li>
+                                <li><strong>Connect</strong>: Right‑click a node, then click another to link them.</li>
+                                <li><strong>Edit</strong>: Double‑click a node to open its editor.</li>
+                                <li><strong>Arrange</strong>: Drag nodes; hold Ctrl to box‑select and move many.</li>
+                                <li><strong>View</strong>: Use the top-left menu for grid, labels, FPS and zoom controls.</li>
+                            </ol>
+                        </div>
+                        <div class="help-section">
+                            <h5>Tips</h5>
+                            <ul>
+                                <li>Shift+Click a node to quickly collapse/expand its subtree.</li>
+                                <li>Alt+Drag duplicates node(s); use multi‑select to duplicate many at once.</li>
+                                <li>Use numbers 1‑6 to change a selected connection’s style.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="shortcuts-content" class="tab-content">
+                        <div class="shortcut-section">
+                            <h4>Editing</h4>
+                            <div class="shortcut-grid">
+                                <div class="shortcut-item"><span class="shortcut-keys">Delete</span><span class="shortcut-description">Delete selection</span></div>
+                                <div class="shortcut-item"><span class="shortcut-keys">Ctrl + C</span><span class="shortcut-description">Copy selection</span></div>
+                                <div class="shortcut-item"><span class="shortcut-keys">Ctrl + V</span><span class="shortcut-description">Paste</span></div>
+                                <div class="shortcut-item"><span class="shortcut-keys">Ctrl + D</span><span class="shortcut-description">Duplicate selection</span></div>
+                                <div class="shortcut-item"><span class="shortcut-keys">Ctrl + Z</span><span class="shortcut-description">Undo</span></div>
+                                <div class="shortcut-item"><span class="shortcut-keys">Ctrl + Y / Ctrl + Shift + Z</span><span class="shortcut-description">Redo</span></div>
+                            </div>
+                        </div>
+                        <div class="shortcut-section">
+                            <h4>Selection & View</h4>
+                            <div class="shortcut-grid">
+                                <div class="shortcut-item"><span class="shortcut-keys">Ctrl + Drag</span><span class="shortcut-description">Box select</span></div>
+                                <div class="shortcut-item"><span class="shortcut-keys">Shift + Click</span><span class="shortcut-description">Collapse/Expand node</span></div>
+                                <div class="shortcut-item"><span class="shortcut-keys">Wheel</span><span class="shortcut-description">Zoom</span></div>
+                                <div class="shortcut-item"><span class="shortcut-keys">Middle Drag</span><span class="shortcut-description">Pan</span></div>
+                            </div>
+                        </div>
+                        <div class="shortcut-section">
+                            <h4>Connections</h4>
+                            <div class="shortcut-grid">
+                                <div class="shortcut-item"><span class="shortcut-keys">1–6</span><span class="shortcut-description">Change connection type (Curved, Linear, Step, Smooth, Arc, Zigzag)</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="mouse-content" class="tab-content">
+                        <div class="shortcut-section">
+                            <h4>Mouse Controls</h4>
+                            <div class="shortcut-grid">
+                                <div class="shortcut-item"><span class="shortcut-keys">Left Click</span><span class="shortcut-description">Select node</span></div>
+                                <div class="shortcut-item"><span class="shortcut-keys">Double Click</span><span class="shortcut-description">Open node editor</span></div>
+                                <div class="shortcut-item"><span class="shortcut-keys">Right Click (node)</span><span class="shortcut-description">Start linking</span></div>
+                                <div class="shortcut-item"><span class="shortcut-keys">Right Click (empty)</span><span class="shortcut-description">Create new node</span></div>
+                                <div class="shortcut-item"><span class="shortcut-keys">Middle Drag</span><span class="shortcut-description">Pan canvas</span></div>
+                                <div class="shortcut-item"><span class="shortcut-keys">Wheel</span><span class="shortcut-description">Zoom in/out</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="simulation-content" class="tab-content">
+                        <div class="help-section">
+                            <h4>Simulation Mode</h4>
+                            <p>Test your skill tree progression as a player would experience it. Click the 🎮 button to enter Simulation Mode.</p>
+                            
+                            <h5>How It Works</h5>
+                            <ul>
+                                <li><strong>Career Nodes</strong>: Start points that gain XP over time when active</li>
+                                <li><strong>Renown Points</strong>: Earned when careers level up, used to unlock skills</li>
+                                <li><strong>Skill Unlocking</strong>: Click nodes to spend renown and unlock them</li>
+                                <li><strong>Prerequisites</strong>: Must unlock parent nodes first</li>
+                            </ul>
+                            
+                            <h5>Controls</h5>
+                            <ul>
+                                <li><strong>Play/Pause Career</strong>: Click ▶️ button next to each career</li>
+                                <li><strong>Speed Controls</strong>: 1x, 2x, 4x, 8x simulation speed</li>
+                                <li><strong>Spend Points</strong>: Left-click unlocked nodes to invest renown</li>
+                                <li><strong>Remove Points</strong>: Right-click to remove points (if allowed)</li>
+                            </ul>
+                            
+                            <h5>Node Types</h5>
+                            <ul>
+                                <li><strong>Unlimited</strong>: Can invest points infinitely</li>
+                                <li><strong>Single Activation</strong>: One-time unlock only</li>
+                                <li><strong>Successive Range</strong>: Guidance nodes (no cost)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="closeHelpBtn">Close</button>
             </div>
         </div>
     </div>

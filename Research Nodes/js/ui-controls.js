@@ -231,17 +231,66 @@ function showKeyboardHelp() {
  */
 function initializeUI(editor) {
     // Set initial values
-    document.getElementById('zoomLevel').textContent = '100%';
+    const zoomLevel = document.getElementById('zoomLevel');
+    if (zoomLevel) zoomLevel.textContent = '100%';
     // Mode display removed from UI
     
     // Set initial button states
-    document.getElementById('toggleGrid').classList.add('active');
-    document.getElementById('toggleLabels').classList.add('active');
-    document.getElementById('toggleSnapToGrid').classList.add('active');
-    document.getElementById('toggleFPS').classList.add('active');
+    const toggleGrid = document.getElementById('toggleGrid');
+    const toggleLabels = document.getElementById('toggleLabels');
+    const toggleSnapToGrid = document.getElementById('toggleSnapToGrid');
+    const toggleFPS = document.getElementById('toggleFPS');
+    
+    if (toggleGrid) toggleGrid.classList.add('active');
+    if (toggleLabels) toggleLabels.classList.add('active');
+    if (toggleSnapToGrid) toggleSnapToGrid.classList.add('active');
+    if (toggleFPS) toggleFPS.classList.add('active');
     
     // Hide loading overlay after delay
-    setTimeout(() => hideLoadingOverlay(), 500);
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    if (loadingOverlay) {
+        setTimeout(() => hideLoadingOverlay(), 500);
+    }
+
+    // Help modal wiring
+    const helpBtn = document.getElementById('helpButton');
+    const helpModal = document.getElementById('helpModal');
+    const closeHelpModalBtn = document.getElementById('closeHelpModal');
+    const closeHelpBtn = document.getElementById('closeHelpBtn');
+    
+    console.log('Help button found:', helpBtn);
+    console.log('Help modal found:', helpModal);
+    
+    if (helpBtn && helpModal) {
+        helpBtn.addEventListener('click', () => {
+            console.log('Help button clicked!');
+            // Initialize tabs
+            const tabs = helpModal.querySelectorAll('.help-tab');
+            const contents = helpModal.querySelectorAll('.tab-content');
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+            helpModal.querySelector('.help-tab')?.classList.add('active');
+            helpModal.querySelector('#quickstart-content')?.classList.add('active');
+            helpModal.style.display = 'flex';
+        });
+    } else {
+        console.error('Help button or modal not found!', { helpBtn, helpModal });
+    }
+    const hideHelp = () => { if (helpModal) helpModal.style.display = 'none'; };
+    closeHelpModalBtn?.addEventListener('click', hideHelp);
+    closeHelpBtn?.addEventListener('click', hideHelp);
+    helpModal?.addEventListener('click', (e) => { if (e.target === helpModal) hideHelp(); });
+    helpModal?.addEventListener('click', (e) => {
+        const tab = e.target.closest?.('.help-tab');
+        if (!tab) return;
+        const tabs = helpModal.querySelectorAll('.help-tab');
+        const contents = helpModal.querySelectorAll('.tab-content');
+        tabs.forEach(t => t.classList.remove('active'));
+        contents.forEach(c => c.classList.remove('active'));
+        tab.classList.add('active');
+        const contentId = tab.dataset.tab + '-content';
+        helpModal.querySelector('#' + contentId)?.classList.add('active');
+    });
 }
 
 // === MODULE EXPORT ===

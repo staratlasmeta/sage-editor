@@ -74,6 +74,11 @@ function initializeEditor() {
     // Set initial mode
     window.UIControls.setMode(editor, 'edit');
     
+    // Initialize UI controls and wire help modal
+    if (window.UIControls && typeof window.UIControls.initializeUI === 'function') {
+        window.UIControls.initializeUI(editor);
+    }
+    
     console.log('Research Nodes Editor initialized successfully');
 }
 

@@ -558,7 +558,7 @@ body {
     min-width: 36px;
     height: 36px;
     border-radius: 4px;
-    filter: grayscale(100%);
+    /* filter: grayscale(100%); */
     opacity: 0.8;
 }
 
@@ -2370,6 +2370,66 @@ canvas.simulation-mode.spending {
     background: #5ba0f2;
     border-color: #5ba0f2;
 }
+
+/* Help Modal */
+.help-modal {
+    width: 700px;
+    max-width: 90vw;
+}
+
+.help-tabs {
+    display: flex;
+    gap: 8px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 12px;
+}
+
+.help-tab {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-bottom: none;
+    padding: 8px 12px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+}
+
+.help-tab.active {
+    background: var(--bg-secondary);
+    font-weight: 600;
+}
+
+.help-content .tab-content { display: none; }
+.help-content .tab-content.active { display: block; }
+
+.help-section { margin-bottom: 16px; }
+.help-section h5 { margin: 8px 0; }
+
+.shortcut-section { margin-bottom: 16px; }
+
+.shortcut-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 10px 16px;
+}
+
+.shortcut-item {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 10px;
+    border: 1px dashed var(--border-color);
+    border-radius: 6px;
+    background: var(--bg-secondary);
+}
+
+.shortcut-keys {
+    font-weight: 700;
+}
+
+.shortcut-description { opacity: 0.85; }
 
 /* Update the secondary button style for consistency */
 .button-group button.secondary {
