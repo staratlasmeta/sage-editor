@@ -1426,47 +1426,197 @@ button:disabled,
   font-size: 0.95rem;
   border-bottom: 1px solid var(--border-color);
   padding-bottom: 5px;
+  padding-right: 0;
+  margin-right: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .shortcut-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  gap: 12px;
+  padding-right: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .shortcut-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 6px 10px;
+  padding: 8px 12px;
   background-color: var(--bg-elevated);
   border-radius: var(--border-radius);
   border: 1px solid var(--border-color);
+  gap: 20px;
+  min-width: 0;
+  flex-wrap: nowrap;
 }
 
 .shortcut-keys {
   font-family: monospace;
   background-color: rgba(0, 0, 0, 0.2);
-  padding: 3px 6px;
+  padding: 3px 8px;
   border-radius: 3px;
   color: var(--accent-primary);
   font-weight: bold;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .shortcut-description {
   color: var(--text-secondary);
   font-size: 0.9rem;
+  text-align: right;
+  word-wrap: break-word;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Help Modal Tabs */
+.help-modal .modal-content {
+  width: 100%;
+  min-width: 600px;
+  max-width: min(900px, 90vw);
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+.help-modal h3 {
+  margin: 0 0 15px 0;
+  padding: 0;
+}
+
+.help-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0;
+}
+
+.help-tab {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  padding: 10px 20px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+}
+
+.help-tab:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.help-tab.active {
+  color: var(--accent-primary);
+  border-bottom-color: var(--accent-primary);
+  background: rgba(74, 136, 255, 0.1);
+}
+
+.help-content {
+  max-height: 70vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 10px 20px 10px 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Ensure all help content children don't exceed width */
+.help-content * {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.tab-content {
+  display: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.help-section {
+  margin-bottom: 25px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.help-section h4,
+.help-section h5 {
+  color: var(--accent-primary);
+  margin-bottom: 10px;
+  font-size: 1rem;
+  margin-top: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.help-section ul,
+.help-section ol {
+  margin-left: 20px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  padding-right: 10px;
+  box-sizing: border-box;
+}
+
+.help-section li {
+  margin-bottom: 8px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.help-section strong {
+  color: var(--text-primary);
+}
+
+.help-section p {
+  margin: 0 0 10px 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Responsive for mobile */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .shortcut-grid {
     grid-template-columns: 1fr;
+    padding-right: 5px;
   }
   
   .modal-dialog {
     width: 95%;
     max-width: 450px;
+  }
+  
+  .help-modal .modal-content {
+    min-width: auto;
+    width: 95%;
+    max-width: none;
+  }
+  
+  .help-tabs {
+    flex-wrap: wrap;
+  }
+  
+  .help-tab {
+    flex: 1;
+    min-width: 100px;
+    padding: 8px 10px;
+    font-size: 0.9rem;
+  }
+  
+  .help-content {
+    max-height: 400px;
   }
 }
 
@@ -1513,6 +1663,7 @@ button:disabled,
     border-radius: 0;
     padding: 30px;
     width: 550px;
+    max-width: 550px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
