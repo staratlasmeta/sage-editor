@@ -106,18 +106,22 @@ function initAppState() {
     initResourceFilterState();
     
     // Reset selection and interaction states
-    selectedSystems = [];
+    selectedSystems.length = 0;
     hoveredSystem = null;
     draggedSystem = null;
     isPanning = false;
     isLinking = false;
     
-    // Initialize history
-    historyStack = [];
-    redoStack = [];
-
-    // Save the initial empty state
-    saveState('Initial Empty State', false, true);
+    // Initialize the new history system
+    if (typeof initializeHistory === 'function') {
+        initializeHistory();
+    } else {
+        // Fallback to old system
+        historyStack = [];
+        redoStack = [];
+        // Save the initial empty state
+        saveState('Initial Empty State', false, true);
+    }
 }
 
 // Create test data for development

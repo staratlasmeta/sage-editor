@@ -87,6 +87,9 @@ window.systemSizeMultiplier = systemSizeMultiplier;
 window.showResourceHeatmap = showResourceHeatmap;
 window.heatmapDebugMode = heatmapDebugMode;
 
+// Also ensure we're working with the same reference everywhere
+selectedSystems = window.selectedSystems;
+
 // Save state function
 function saveState(description = "Unknown Action", groupWithPrevious = false, forceEmpty = false, metadata = null) {
     console.log(`[saveState] Called for "${description}" with ${mapData ? mapData.length : 0} systems. forceEmpty=${forceEmpty}`);
@@ -126,6 +129,8 @@ function saveState(description = "Unknown Action", groupWithPrevious = false, fo
                 timestamp: timestamp,
                 actionGroup: actionGroupId,
                 state: currentState || [],
+                regionDefinitions: deepCopy(regionDefinitions) || [],
+                selectedSystemKeys: selectedSystems.map(sys => sys.key), // Always save current selection
                 metadata: metadata || {} // Store metadata if provided
             };
             copySucceeded = true;
@@ -187,59 +192,13 @@ function undo() {
             timestamp: lastStateObject.timestamp,
             actionGroup: lastStateObject.actionGroup,
             state: currentStateForRedo,
-            metadata: {
-                selectedKeys: currentSelectedKeys, // Store current selection with the redo state
-                // Also store the previous selection state if available
-                prevSelectedKeys: lastStateObject.metadata && lastStateObject.metadata.prevSelectedKeys ?
-                    lastStateObject.metadata.prevSelectedKeys : []
-            }
+            regionDefinitions: deepCopy(regionDefinitions) || [],
+            selectedSystemKeys: currentSelectedKeys,
+            metadata: lastStateObject.metadata || {}
         });
         console.log("Pushed to redo stack:", lastStateObject.description);
     }
 
-    // Handle special case for selection-only operations
-    const isSelectionOnly = lastStateObject.description.includes("Selected") ||
-        lastStateObject.description.includes("Deselected");
-
-    if (isSelectionOnly && lastStateObject.metadata && lastStateObject.metadata.prevSelectedKeys) {
-        console.log("Undoing selection operation, restoring previous selection state");
-
-        // For selection operations, don't change map data, just restore previous selection
-        const keysToRestore = lastStateObject.metadata.prevSelectedKeys;
-        selectedSystems = [];
-
-        keysToRestore.forEach(key => {
-            const system = systemLookup[key];
-            if (system) {
-                selectedSystems.push(system);
-            }
-        });
-
-        console.log(`Restored previous selection with ${selectedSystems.length} systems`);
-
-        // Update UI based on selections
-        updateLockButtonsState();
-        setupResourceFilter();
-        displaySystemDetails(selectedSystems);
-        if (selectedSystems.length === 1) {
-            drawSystemPreview(selectedSystems[0]);
-        } else {
-            drawSystemPreview(null);
-        }
-
-        // Force redraw of the map
-        requestAnimationFrame(() => {
-            drawGalaxyMap();
-            console.log("Redrew galaxy map after undoing selection");
-        });
-
-        updateUndoRedoButtons();
-        updateHistoryPanel();
-        console.log(`Undo processed for selection: "${lastStateObject.description}"`);
-        return;
-    }
-
-    // For non-selection operations or operations that change the map data:
     // Restore map data from the state object
     const previousState = lastStateObject.state;
     console.log("Previous state has systems:", previousState.length);
@@ -251,9 +210,15 @@ function undo() {
     } else {
         console.error("Undo error: previousState is not an array!", previousState);
         // Attempt to restore redo state? 
-        historyStack.push(previousState); // Put it back
+        historyStack.push(lastStateObject); // Put it back (the full object, not just state)
         redoStack.pop(); // Remove the state we wrongly pushed
         return; // Abort undo
+    }
+    
+    // Restore region definitions if available
+    if (lastStateObject.regionDefinitions) {
+        regionDefinitions = deepCopy(lastStateObject.regionDefinitions) || [];
+        console.log("Restored region definitions:", regionDefinitions.length);
     }
 
     // Rebuild lookup (essential!)
@@ -269,55 +234,26 @@ function undo() {
     isPanning = false;
     isLinking = false;
 
-    // Store the keys of the systems we want to keep selected
-    let keysToKeepSelected = [];
-
-    // If the undone state had selection metadata, use it
-    if (lastStateObject.metadata && lastStateObject.metadata.selectedKeys) {
-        // If this was a drag operation, and we're undoing, we should restore the previous selection
-        if (lastStateObject.metadata.isDragOperation && lastStateObject.metadata.prevSelectedKeys) {
-            keysToKeepSelected = lastStateObject.metadata.prevSelectedKeys;
-            console.log("Drag operation detected, restoring selection before drag:", keysToKeepSelected);
-        } else {
-            keysToKeepSelected = lastStateObject.metadata.selectedKeys;
-            console.log("Using selection metadata from history:", keysToKeepSelected);
-        }
+    // Restore selection state from the saved state
+    selectedSystems.length = 0; // Clear array without breaking window reference
+    
+    // Use the selectedSystemKeys from the restored state
+    if (lastStateObject.selectedSystemKeys) {
+        lastStateObject.selectedSystemKeys.forEach(key => {
+            if (systemLookup[key]) {
+                selectedSystems.push(systemLookup[key]);
+            }
+        });
+        console.log(`Restored selection with ${selectedSystems.length} systems`);
     } else {
-        // Otherwise, try to preserve current selection if possible
-        keysToKeepSelected = currentSelectedKeys;
-        console.log("No selection metadata, trying to preserve current selection:", keysToKeepSelected);
+        console.log("No selection data in restored state");
     }
-
-    // Reset selection and restore based on keys
-    selectedSystems = [];
-
-    // Restore selections based on the appropriate keys
-    keysToKeepSelected.forEach(key => {
-        if (systemLookup[key]) {
-            selectedSystems.push(systemLookup[key]);
-        }
-    });
 
     // Update UI based on selections
     updateLockButtonsState(); // Update lock button state
     setupResourceFilter(); // Update filter state
 
-    if (historyStack.length === 0) {
-        console.log("Restoring to initial empty base state");
-        mapData = [];
-        systemLookup = {};
-        selectedSystems = [];
-        regionDefinitions = []; // Clear regions too
-        linkSourceSystem = null;
-        isLinking = false;
-        // DO NOT clear historyStack or redoStack here.
-        // The state we popped is already on the redoStack.
 
-        // Rebuild lookups etc based on the now empty data
-        rebuildSystemLookup();
-        updateLockButtonsState(); // Update lock button state
-        setupResourceFilter(); // Update filter state
-    }
 
     // Update UI
     displaySystemDetails(selectedSystems);
@@ -328,10 +264,8 @@ function undo() {
     }
 
     // Force redraw of the map
-    requestAnimationFrame(() => {
-        drawGalaxyMap();
-        console.log("Redrew galaxy map after undo operation");
-    });
+    drawGalaxyMap();
+    console.log("Redrew galaxy map after undo operation");
 
     updateUndoRedoButtons();
     updateHistoryPanel(); // Update history UI
@@ -363,58 +297,12 @@ function redo() {
             timestamp: nextStateObject.timestamp,
             actionGroup: nextStateObject.actionGroup,
             state: currentStateForHistory,
-            metadata: {
-                selectedKeys: currentSelectedKeys, // Store current selection with the history state
-                // Also store the next selection state if available
-                prevSelectedKeys: nextStateObject.metadata && nextStateObject.metadata.prevSelectedKeys ?
-                    nextStateObject.metadata.prevSelectedKeys : []
-            }
+            regionDefinitions: deepCopy(regionDefinitions) || [],
+            selectedSystemKeys: currentSelectedKeys,
+            metadata: nextStateObject.metadata || {}
         });
     }
 
-    // Handle special case for selection-only operations
-    const isSelectionOnly = nextStateObject.description.includes("Selected") ||
-        nextStateObject.description.includes("Deselected");
-
-    if (isSelectionOnly && nextStateObject.metadata && nextStateObject.metadata.selectedKeys) {
-        console.log("Redoing selection operation, applying next selection state");
-
-        // For selection operations, don't change map data, just apply next selection
-        const keysToApply = nextStateObject.metadata.selectedKeys;
-        selectedSystems = [];
-
-        keysToApply.forEach(key => {
-            const system = systemLookup[key];
-            if (system) {
-                selectedSystems.push(system);
-            }
-        });
-
-        console.log(`Applied next selection with ${selectedSystems.length} systems`);
-
-        // Update UI based on selections
-        updateLockButtonsState();
-        setupResourceFilter();
-        displaySystemDetails(selectedSystems);
-        if (selectedSystems.length === 1) {
-            drawSystemPreview(selectedSystems[0]);
-        } else {
-            drawSystemPreview(null);
-        }
-
-        // Force redraw of the map
-        requestAnimationFrame(() => {
-            drawGalaxyMap();
-            console.log("Redrew galaxy map after redoing selection");
-        });
-
-        updateUndoRedoButtons();
-        updateHistoryPanel();
-        console.log(`Redo processed for selection: "${nextStateObject.description}"`);
-        return;
-    }
-
-    // For non-selection operations or operations that change the map data:
     // Restore map data from the state object
     const nextState = nextStateObject.state;
     mapData.length = 0;
@@ -423,9 +311,15 @@ function redo() {
     } else {
         console.error("Redo error: nextState is not an array!", nextState);
         // Attempt to restore history state?
-        redoStack.push(nextState); // Put it back
+        redoStack.push(nextStateObject); // Put it back (the full object)
         historyStack.pop(); // Remove the state we wrongly pushed
         return; // Abort redo
+    }
+    
+    // Restore region definitions if available
+    if (nextStateObject.regionDefinitions) {
+        regionDefinitions = deepCopy(nextStateObject.regionDefinitions) || [];
+        console.log("Restored region definitions:", regionDefinitions.length);
     }
 
     // Rebuild lookup
@@ -441,28 +335,20 @@ function redo() {
     isPanning = false;
     isLinking = false;
 
-    // Store the keys of the systems we want to keep selected
-    let keysToKeepSelected = [];
-
-    // If the redone state had selection metadata, use it
-    if (nextStateObject.metadata && nextStateObject.metadata.selectedKeys) {
-        keysToKeepSelected = nextStateObject.metadata.selectedKeys;
-        console.log("Using selection metadata from redo:", keysToKeepSelected);
+    // Restore selection state from the saved state
+    selectedSystems.length = 0; // Clear array without breaking window reference
+    
+    // Use the selectedSystemKeys from the restored state
+    if (nextStateObject.selectedSystemKeys) {
+        nextStateObject.selectedSystemKeys.forEach(key => {
+            if (systemLookup[key]) {
+                selectedSystems.push(systemLookup[key]);
+            }
+        });
+        console.log(`Restored selection with ${selectedSystems.length} systems`);
     } else {
-        // Otherwise, try to preserve current selection if possible
-        keysToKeepSelected = currentSelectedKeys;
-        console.log("No selection metadata in redo, trying to preserve current selection:", keysToKeepSelected);
+        console.log("No selection data in restored state");
     }
-
-    // Reset selection and restore based on keys
-    selectedSystems = [];
-
-    // Restore selections based on the appropriate keys
-    keysToKeepSelected.forEach(key => {
-        if (systemLookup[key]) {
-            selectedSystems.push(systemLookup[key]);
-        }
-    });
 
     // Update UI based on selections
     updateLockButtonsState(); // Update lock button state
@@ -477,10 +363,8 @@ function redo() {
     }
 
     // Force redraw of the map
-    requestAnimationFrame(() => {
-        drawGalaxyMap();
-        console.log("Redrew galaxy map after redo operation");
-    });
+    drawGalaxyMap();
+    console.log("Redrew galaxy map after redo operation");
 
     updateUndoRedoButtons();
     updateHistoryPanel(); // Update history UI
@@ -493,9 +377,12 @@ function clearMapData() {
     console.log("*** clearMapData called ***");
     console.log("Before clear - mapData:", mapData.length, "historyStack:", historyStack.length);
 
-    mapData = [];
-    systemLookup = {};
-    selectedSystems = []; // Update to use the array
+    mapData.length = 0; // Clear array without breaking window reference
+    // Clear systemLookup object
+    for (let key in systemLookup) {
+        delete systemLookup[key];
+    }
+    selectedSystems.length = 0; // Clear array without breaking window reference
     linkSourceSystem = null;
     isLinking = false;
     systemCounter = 0; // Reset counter

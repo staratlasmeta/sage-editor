@@ -181,10 +181,13 @@ function updateTopBarInfo() {
 
 // Clear all map data
 function clearMapData() {
-    mapData = [];
-    systemLookup = {};
-    regionDefinitions = [];
-    selectedSystems = [];
+    mapData.length = 0;
+    // Clear systemLookup object
+    for (let key in systemLookup) {
+        delete systemLookup[key];
+    }
+    regionDefinitions.length = 0;
+    selectedSystems.length = 0;
     systemCounter = 1;
     historyStack = [];
     redoStack = [];
@@ -199,38 +202,47 @@ function clearMapData() {
     drawGalaxyMap();
 }
 
-// Save current state for undo/redo
+// Legacy saveState function - redirects to the new implementation in state.js
 function saveState(description) {
-    // Create a copy of the current state
+    // Forward to the new implementation in state.js
+    if (window.saveState && window.saveState !== saveState) {
+        return window.saveState(description);
+    }
+    
+    console.error("New saveState implementation not found, using legacy version");
+    
+    // Legacy implementation as fallback
     const state = {
         mapData: deepCopy(mapData),
         regionDefinitions: deepCopy(regionDefinitions),
         description: description || 'Change'
     };
 
-    // Add to history stack
     historyStack.push(state);
-
-    // Clear redo stack when a new change is made
     redoStack = [];
 
-    // Limit history size
     if (historyStack.length > window.MAX_HISTORY_SIZE) {
         historyStack.shift();
     }
 
-    // Mark as modified
     isModified = true;
     updateTopBarInfo();
     updateUndoRedoButtons();
     updateHistoryPanel();
 }
 
-// Undo last change
+// Legacy undo function - redirects to the new implementation in state.js
 function undo() {
+    // Forward to the new implementation in state.js
+    if (window.undo && window.undo !== undo) {
+        return window.undo();
+    }
+    
+    console.error("New undo implementation not found, using legacy version");
+    
+    // Legacy implementation as fallback
     if (historyStack.length === 0) return;
 
-    // Save current state to redo stack
     const currentState = {
         mapData: deepCopy(mapData),
         regionDefinitions: deepCopy(regionDefinitions),
@@ -238,23 +250,17 @@ function undo() {
     };
 
     redoStack.push(currentState);
-
-    // Pop last state from history
     const lastState = historyStack.pop();
 
-    // Restore state
     mapData = lastState.mapData;
     regionDefinitions = lastState.regionDefinitions;
 
-    // Rebuild system lookup
     rebuildSystemLookup();
 
-    // Clear selection
-    selectedSystems = [];
+    selectedSystems.length = 0;
     displaySystemDetails(null);
     drawSystemPreview(null);
 
-    // Update UI
     updateUndoRedoButtons();
     updateHistoryPanel();
     drawGalaxyMap();
@@ -262,11 +268,18 @@ function undo() {
     console.log(`Undo: ${lastState.description}`);
 }
 
-// Redo last undone change
+// Legacy redo function - redirects to the new implementation in state.js
 function redo() {
+    // Forward to the new implementation in state.js
+    if (window.redo && window.redo !== redo) {
+        return window.redo();
+    }
+    
+    console.error("New redo implementation not found, using legacy version");
+    
+    // Legacy implementation as fallback
     if (redoStack.length === 0) return;
 
-    // Save current state to history stack
     const currentState = {
         mapData: deepCopy(mapData),
         regionDefinitions: deepCopy(regionDefinitions),
@@ -274,23 +287,17 @@ function redo() {
     };
 
     historyStack.push(currentState);
-
-    // Pop last state from redo stack
     const redoState = redoStack.pop();
 
-    // Restore state
     mapData = redoState.mapData;
     regionDefinitions = redoState.regionDefinitions;
 
-    // Rebuild system lookup
     rebuildSystemLookup();
 
-    // Clear selection
-    selectedSystems = [];
+    selectedSystems.length = 0;
     displaySystemDetails(null);
     drawSystemPreview(null);
 
-    // Update UI
     updateUndoRedoButtons();
     updateHistoryPanel();
     drawGalaxyMap();

@@ -5,9 +5,12 @@ function newMap() {
     console.log("==== Creating New Map ====");
     
     // Clear relevant map data manually (avoid clearMapData() which clears history)
-    mapData = [];
-    systemLookup = {};
-    selectedSystems = [];
+    mapData.length = 0;
+    // Clear systemLookup object
+    for (let key in systemLookup) {
+        delete systemLookup[key];
+    }
+    selectedSystems.length = 0;
     regionDefinitions = [];
     linkSourceSystem = null;
     isLinking = false;
@@ -39,13 +42,16 @@ function newMap() {
     }
     
     // Initialize history for the new map
-    historyStack = [];
-    redoStack = [];
-    lastActionGroup = null;
-    
-    // 1. Save the initial EMPTY state first
-    console.log("Saving empty base state...");
-    saveState('Base Empty State', false, true); // forceEmpty = true is key
+    if (typeof historyClear === 'function') {
+        historyClear(); // This will save the initial empty state
+    } else {
+        // Fallback to old system
+        historyStack = [];
+        redoStack = [];
+        lastActionGroup = null;
+        console.log("Saving empty base state...");
+        saveState('Initial Empty State', false, true); // forceEmpty = true is key
+    }
 
     // 2. Create default region if applicable
     try {
@@ -53,18 +59,18 @@ function newMap() {
             console.log("Calling createDefaultRegion...");
             createDefaultRegion(); // This might add systems/regions
             console.log("createDefaultRegion called.");
-            // 3. Save the state *after* creating the default region, if it changed anything
-            // We might compare against the base state or just save unconditionally for simplicity
-            saveState('Initial Map Setup', false); // Description reflects potential default content
+            // Don't save another state if nothing was added
+            if (mapData.length > 0 || regionDefinitions.length > 0) {
+                saveState('Initial Map Setup', false);
+            }
         } else {
             console.warn("createDefaultRegion function not found. Starting with empty map.");
-            // If no default region, the 'Base Empty State' is the only initial state.
         }
     } catch (error) {
         console.error("Error during createDefaultRegion or subsequent saveState:", error);
         // Fallback: Ensure at least the empty state is saved if errors occurred.
         if (historyStack.length === 0) {
-             saveState('Base Empty State (Fallback)', false, true);
+             saveState('Initial Empty State (Fallback)', false, true);
         }
     }
     
@@ -80,7 +86,7 @@ function newMap() {
 
 // Import map from file
 function importMap() {
-    saveState('Import Map');
+    // Don't save state here - we'll reset history after successful import
     
     const fileInput = document.createElement('input');
     fileInput.type = 'file';
@@ -305,6 +311,26 @@ function finishLoadingMapData(loadedMapData, onComplete) {
     updateLockButtonsState(); // Update lock button state
     centerMapView();
     
+    // Reset history after successful import
+    if (typeof historyClear === 'function') {
+        historyClear(); // This will save the initial empty state
+        // Save the imported map as the next state
+        saveHistoryState('Imported Map');
+    } else {
+        // Fallback to old system
+        historyStack = [];
+        redoStack = [];
+        lastActionGroup = null;
+        
+        // Save initial state of the imported map
+        saveState('Imported Map', false);
+    }
+    
+    // Mark as not modified since this is the initial state
+    isModified = false;
+    updateTopBarInfo();
+    updateHistoryPanel();
+    
     // Call completion callback if provided
     if (onComplete) {
         onComplete();
@@ -360,7 +386,7 @@ function exportMap() {
 
 // Clear selection - helper for file operations
 function clearSelection() {
-    selectedSystems = [];
+    selectedSystems.length = 0;
     displaySystemDetails(null);
     drawSystemPreview(null);
     if(deselectBtn) deselectBtn.disabled = true;
@@ -394,9 +420,12 @@ function forceReset() {
     console.log("==== FORCE RESET INITIATED ====");
     
     // Clear all data
-    mapData = [];
-    systemLookup = {};
-    selectedSystems = [];
+    mapData.length = 0;
+    // Clear systemLookup object
+    for (let key in systemLookup) {
+        delete systemLookup[key];
+    }
+    selectedSystems.length = 0;
     linkSourceSystem = null;
     isLinking = false;
     systemCounter = 0;
@@ -440,7 +469,10 @@ function forceReset() {
         description: 'Empty Base State',
         timestamp: new Date(Date.now() - 1000), // 1 second earlier
         actionGroup: null,
-        state: [] // Truly empty
+        state: [], // Truly empty
+        regionDefinitions: [],
+        selectedSystemKeys: [],
+        metadata: {}
     });
     
     // Initial state that users will see

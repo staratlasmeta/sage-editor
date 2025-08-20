@@ -39,14 +39,20 @@ function createNewSystem() {
     mapData.push(newSystem);
     systemLookup[newSystem.key] = newSystem;
     
-    // Select the new system
-    selectedSystems = [newSystem];
+    // Save state after creating the system (but before selection)
+    saveState(`Created ${systemName}`);
+    
+    // Select the new system (this is a separate action)
+    selectedSystems.length = 0;
+    selectedSystems.push(newSystem);
     updateLockButtonsState(); // Update lock button state
     setupResourceFilter(); // Update filter state
     displaySystemDetails(selectedSystems);
     drawSystemPreview(newSystem);
     
-    saveState(`Created System ${systemName}`);
+    // Save state after selecting the system
+    saveState(`Selected ${systemName}`);
+    
     drawGalaxyMap();
     console.log(`Created new system at (${x}, ${y})`);
 }
@@ -81,15 +87,21 @@ function createNewSystemAtCoords(x, y) {
     mapData.push(newSystem);
     systemLookup[newSystem.key] = newSystem;
     
-    // Select the new system
-    selectedSystems = [newSystem];
+    // Save state after creating the system (but before selection)
+    console.log(`Saving state for new system ${systemName}`);
+    saveState(`Created ${systemName}`);
+    
+    // Select the new system (this is a separate action)
+    selectedSystems.length = 0;
+    selectedSystems.push(newSystem);
     updateLockButtonsState(); // Update lock button state
     setupResourceFilter(); // Update filter state
     displaySystemDetails(selectedSystems);
     drawSystemPreview(newSystem);
     
-    console.log(`Saving state for new system ${systemName}`);
-    saveState(`Created System ${systemName}`);
+    // Save state after selecting the system
+    saveState(`Selected ${systemName}`);
+    
     drawGalaxyMap();
     console.log(`Created new system at (${x}, ${y})`);
     
@@ -124,7 +136,7 @@ function deleteSelectedSystems() {
     });
     
     // Clear selection
-    selectedSystems = [];
+    selectedSystems.length = 0;
     updateLockButtonsState(); // Update lock button state
     setupResourceFilter(); // Update filter state
     clearSelectionUI();
@@ -135,11 +147,20 @@ function deleteSelectedSystems() {
 
 // Deselect all systems
 function deselectAll() {
-    selectedSystems = [];
-    updateLockButtonsState(); // Update lock button state
-    setupResourceFilter(); // Update filter state
-    clearSelectionUI();
-    drawGalaxyMap();
+    if (selectedSystems.length > 0) {
+        // Save the previous selection state
+        const prevSelection = [...selectedSystems];
+        
+        selectedSystems.length = 0;
+        updateLockButtonsState(); // Update lock button state
+        setupResourceFilter(); // Update filter state
+        clearSelectionUI();
+        
+        // Save state for undo/redo
+        saveState("Deselected All Systems");
+        
+        drawGalaxyMap();
+    }
 }
 
 // Toggle linking mode
@@ -251,7 +272,8 @@ function pasteSystem() {
     systemLookup[newSystem.key] = newSystem;
     
     // Select the new system
-    selectedSystems = [newSystem];
+    selectedSystems.length = 0;
+    selectedSystems.push(newSystem);
     updateLockButtonsState(); // Update lock button state
     setupResourceFilter(); // Update filter state
     displaySystemDetails(selectedSystems);
@@ -1527,7 +1549,8 @@ function setupSystemDetailsEventListeners(system) {
             const linkedSystem = systemLookup[linkKey];
             
             if (linkedSystem) {
-                selectedSystems = [linkedSystem];
+                selectedSystems.length = 0;
+                selectedSystems.push(linkedSystem);
                 displaySystemDetails(selectedSystems);
                 centerViewOnSystem(linkedSystem);
             }
@@ -2934,7 +2957,8 @@ function selectAllSystems() {
     if (mapData.length === 0) return;
     
     // Select all systems
-    selectedSystems = [...mapData];
+    selectedSystems.length = 0;
+    selectedSystems.push(...mapData);
     
     // Update UI
     displaySystemDetails(selectedSystems);
@@ -2944,6 +2968,9 @@ function selectAllSystems() {
     if (deselectBtn) {
         deselectBtn.disabled = false;
     }
+    
+    // Save state for undo/redo
+    saveState("Selected All Systems");
     
     // Redraw map to show selection
     drawGalaxyMap();
