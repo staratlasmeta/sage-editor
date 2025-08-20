@@ -126,64 +126,109 @@
         </div>
     </div>
     
-    <!-- Keyboard shortcuts modal -->
+    <!-- Help / Shortcuts modal (enhanced) -->
     <div id="keyboardShortcutsModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Keyboard Shortcuts</h2>
+                <h2>Loot Matrix Help</h2>
                 <span class="close" id="closeModal">&times;</span>
             </div>
             <div class="modal-body">
-                <table class="shortcuts-table">
-                    <tr>
-                        <th>Action</th>
-                        <th>Shortcut</th>
-                    </tr>
-                    <tr>
-                        <td>Save</td>
-                        <td>Ctrl+S</td>
-                    </tr>
-                    <tr>
-                        <td>New Blank Document</td>
-                        <td>Ctrl+N</td>
-                    </tr>
-                    <tr>
-                        <td>New Blank Document (Alt)</td>
-                        <td>Ctrl+Shift+N</td>
-                    </tr>
-                    <tr>
-                        <td>Undo</td>
-                        <td>Ctrl+Z</td>
-                    </tr>
-                    <tr>
-                        <td>Add Item</td>
-                        <td>Alt+N</td>
-                    </tr>
-                    <tr>
-                        <td>Delete Selected Item</td>
-                        <td>Delete</td>
-                    </tr>
-                    <tr>
-                        <td>Expand Selected</td>
-                        <td>Right Arrow</td>
-                    </tr>
-                    <tr>
-                        <td>Collapse Selected</td>
-                        <td>Left Arrow</td>
-                    </tr>
-                    <tr>
-                        <td>Navigate Up</td>
-                        <td>Up Arrow</td>
-                    </tr>
-                    <tr>
-                        <td>Navigate Down</td>
-                        <td>Down Arrow</td>
-                    </tr>
-                    <tr>
-                        <td>Show Shortcuts</td>
-                        <td>?</td>
-                    </tr>
-                </table>
+                <div class="help-tabs">
+                    <button class="help-tab active" data-tab="quickstart">Quick Start</button>
+                    <button class="help-tab" data-tab="shortcuts">Keyboard Shortcuts</button>
+                    <button class="help-tab" data-tab="mouse">Mouse & UI</button>
+                </div>
+
+                <div class="help-content">
+                    <div id="quickstart-content" class="tab-content active">
+                        <h4>Getting Started</h4>
+                        <div class="help-section">
+                            <h5>Basic Workflow</h5>
+                            <ol>
+                                <li><strong>Create Items</strong>: Use New/Add Root Item to start your reward tree</li>
+                                <li><strong>Structure</strong>: Add children, duplicate, and drag to reorder</li>
+                                <li><strong>Edit Properties</strong>: Select an item to edit details in the Properties panel</li>
+                                <li><strong>Categories</strong>: Switch to Categories tab for spreadsheet-style editing</li>
+                                <li><strong>Save/Load</strong>: Use Save to download JSON, Load to import</li>
+                            </ol>
+                        </div>
+
+                        <div class="help-section">
+                            <h5>Key Features</h5>
+                            <ul>
+                                <li><strong>Bulk Operations</strong>: Expand/Collapse All, Select/Deselect All</li>
+                                <li><strong>Command Palette</strong>: Press Ctrl+P to search and run commands</li>
+                                <li><strong>Markdown Export</strong>: Export the reward tree to Markdown</li>
+                                <li><strong>Auto Backup</strong>: Periodic local backups with quick restore</li>
+                            </ul>
+                        </div>
+
+                        <div class="help-section">
+                            <h5>Tips</h5>
+                            <ul>
+                                <li>Use Alt+N to quickly add items at the current level</li>
+                                <li>Right-click an item for context actions (add child, duplicate, delete)</li>
+                                <li>Use arrow keys to navigate and expand/collapse the tree</li>
+                                <li>Categories tab supports CSV import/export for bulk edits</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div id="shortcuts-content" class="tab-content">
+                        <div class="shortcut-section">
+                            <h4>Document</h4>
+                            <div class="shortcut-grid">
+                                <div class="shortcut-item"><span class="shortcut-keys">Ctrl + S</span><span class="shortcut-description">Save</span></div>
+                                <div class="shortcut-item"><span class="shortcut-keys">Ctrl + N</span><span class="shortcut-description">New blank document</span></div>
+                                <div class="shortcut-item"><span class="shortcut-keys">Ctrl + Shift + N</span><span class="shortcut-description">New blank document (alt)</span></div>
+                                <div class="shortcut-item"><span class="shortcut-keys">Ctrl + P</span><span class="shortcut-description">Open command palette</span></div>
+                                <div class="shortcut-item"><span class="shortcut-keys">?</span><span class="shortcut-description">Toggle help</span></div>
+                            </div>
+                        </div>
+
+                        <div class="shortcut-section">
+                            <h4>Editing</h4>
+                            <div class="shortcut-grid">
+                                <div class="shortcut-item"><span class="shortcut-keys">Alt + N</span><span class="shortcut-description">Add item</span></div>
+                                <div class="shortcut-item"><span class="shortcut-keys">Delete</span><span class="shortcut-description">Delete selected</span></div>
+                                <div class="shortcut-item"><span class="shortcut-keys">Ctrl + Z</span><span class="shortcut-description">Undo</span></div>
+                                <div class="shortcut-item"><span class="shortcut-keys">Ctrl + Y / Ctrl + Shift + Z</span><span class="shortcut-description">Redo</span></div>
+                                <div class="shortcut-item"><span class="shortcut-keys">Ctrl + A</span><span class="shortcut-description">Select all</span></div>
+                                <div class="shortcut-item"><span class="shortcut-keys">Esc</span><span class="shortcut-description">Deselect all</span></div>
+                            </div>
+                        </div>
+
+                        <div class="shortcut-section">
+                            <h4>Navigation</h4>
+                            <div class="shortcut-grid">
+                                <div class="shortcut-item"><span class="shortcut-keys">↑ / ↓</span><span class="shortcut-description">Move selection</span></div>
+                                <div class="shortcut-item"><span class="shortcut-keys">→</span><span class="shortcut-description">Expand selected</span></div>
+                                <div class="shortcut-item"><span class="shortcut-keys">←</span><span class="shortcut-description">Collapse selected</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="mouse-content" class="tab-content">
+                        <div class="shortcut-section">
+                            <h4>Tree & Properties</h4>
+                            <div class="shortcut-grid">
+                                <div class="shortcut-item"><span class="shortcut-keys">Left Click</span><span class="shortcut-description">Select item</span></div>
+                                <div class="shortcut-item"><span class="shortcut-keys">Double Click</span><span class="shortcut-description">Edit name</span></div>
+                                <div class="shortcut-item"><span class="shortcut-keys">Right Click</span><span class="shortcut-description">Open context menu</span></div>
+                                <div class="shortcut-item"><span class="shortcut-keys">Drag</span><span class="shortcut-description">Reorder/move items</span></div>
+                            </div>
+                        </div>
+
+                        <div class="shortcut-section">
+                            <h4>Categories Spreadsheet</h4>
+                            <div class="shortcut-grid">
+                                <div class="shortcut-item"><span class="shortcut-keys">Click Header</span><span class="shortcut-description">Select column</span></div>
+                                <div class="shortcut-item"><span class="shortcut-keys">CSV Import/Export</span><span class="shortcut-description">Bulk edit via CSV</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

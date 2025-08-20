@@ -83,6 +83,7 @@ const elements = {
     closeBackupNotification: document.getElementById('closeBackupNotification'),
     scrollTopButton: document.getElementById('scrollTopButton'),
     keyboardHintButton: document.getElementById('keyboardHintButton'),
+    keyboardHintButton2: document.getElementById('keyboardHintButton2'),
     // Static backup notification
     backupNotification: document.getElementById('backupNotification'),
     closeBackupNotificationBtn: document.querySelector('#backupNotification button')
@@ -241,6 +242,9 @@ function setupEventListeners() {
     
     // Keyboard shortcut info - update to use the new button
     elements.keyboardHintButton.addEventListener('click', showShortcutsModal);
+    if (elements.keyboardHintButton2) {
+        elements.keyboardHintButton2.addEventListener('click', showShortcutsModal);
+    }
     elements.closeModal.addEventListener('click', hideShortcutsModal);
     
     // Custom context menu for the table headers
@@ -750,12 +754,61 @@ function navigateItems(direction) {
 
 // Show keyboard shortcuts modal
 function showShortcutsModal() {
+    // Default to first tab active
+    const tabs = elements.keyboardShortcutsModal.querySelectorAll('.help-tab');
+    const contents = elements.keyboardShortcutsModal.querySelectorAll('.tab-content');
+    tabs.forEach(t => t.classList.remove('active'));
+    contents.forEach(c => c.classList.remove('active'));
+    const firstTab = elements.keyboardShortcutsModal.querySelector('.help-tab');
+    const firstContent = elements.keyboardShortcutsModal.querySelector('#quickstart-content');
+    if (firstTab) firstTab.classList.add('active');
+    if (firstContent) firstContent.classList.add('active');
+
+    // Wire tab switching once
+    if (!elements.keyboardShortcutsModal.dataset.tabsWired) {
+        elements.keyboardShortcutsModal.addEventListener('click', (e) => {
+            const tab = e.target.closest('.help-tab');
+            if (!tab) return;
+            const tabsLocal = elements.keyboardShortcutsModal.querySelectorAll('.help-tab');
+            const contentsLocal = elements.keyboardShortcutsModal.querySelectorAll('.tab-content');
+            tabsLocal.forEach(t => t.classList.remove('active'));
+            contentsLocal.forEach(c => c.classList.remove('active'));
+            tab.classList.add('active');
+            const contentId = tab.dataset.tab + '-content';
+            const contentEl = elements.keyboardShortcutsModal.querySelector('#' + contentId);
+            if (contentEl) contentEl.classList.add('active');
+        });
+        elements.keyboardShortcutsModal.dataset.tabsWired = 'true';
+    }
+
+    // Wire backdrop close once
+    if (!elements.keyboardShortcutsModal.dataset.backdropWired) {
+        elements.keyboardShortcutsModal.addEventListener('click', (e) => {
+            if (e.target === elements.keyboardShortcutsModal) {
+                hideShortcutsModal();
+            }
+        });
+        elements.keyboardShortcutsModal.dataset.backdropWired = 'true';
+    }
+
+    // Close on Escape (attach per-open, remove on hide)
+    appState.helpModalEscHandler = (e) => {
+        if (e.key === 'Escape') {
+            hideShortcutsModal();
+        }
+    };
+    document.addEventListener('keydown', appState.helpModalEscHandler);
+
     elements.keyboardShortcutsModal.style.display = 'block';
 }
 
 // Hide keyboard shortcuts modal
 function hideShortcutsModal() {
     elements.keyboardShortcutsModal.style.display = 'none';
+    if (appState.helpModalEscHandler) {
+        document.removeEventListener('keydown', appState.helpModalEscHandler);
+        appState.helpModalEscHandler = null;
+    }
 }
 
 // Expand all items in the tree
