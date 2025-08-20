@@ -704,8 +704,8 @@ function drawSystemLabel(system, x, y, isSelected, isHovered) {
 function drawSystemResourceLabels(system, x, y, isSelected, isHovered) {
     if (!ctx) return;
     
-    // Get all resources in the system
-    const systemResources = window.getAllSystemResources ? window.getAllSystemResources(system) : [];
+    // Get all resources in the system, excluding asteroid belts for galaxy map
+    const systemResources = window.getAllSystemResources ? window.getAllSystemResources(system, true) : [];
     
     if (!systemResources || systemResources.length === 0) return;
     
@@ -1786,18 +1786,32 @@ function drawStarsInPreview(stars, centerX, centerY, scale) {
 function drawOrbitPathsInPreview(planets, centerX, centerY, scale) {
     if (!previewCtx) return;
     
-    previewCtx.strokeStyle = 'rgba(100, 100, 100, 0.5)';
-    previewCtx.lineWidth = 1;
-    
     planets.forEach(planet => {
         if (planet.orbit === undefined) return;
         
+        // Check if this is an asteroid belt
+        const planetTypeName = getPlanetTypeName(planet.type);
+        const isAsteroidBelt = planetTypeName && planetTypeName.includes('System Asteroid Belt');
+        
         const orbitRadius = (50 + planet.orbit * 40) * scale;
+        
+        previewCtx.strokeStyle = 'rgba(100, 100, 100, 0.5)';
+        previewCtx.lineWidth = 1;
+        
+        // Use dashed line for asteroid belts
+        if (isAsteroidBelt) {
+            previewCtx.setLineDash([5, 5]); // 5 pixel dash, 5 pixel gap
+        } else {
+            previewCtx.setLineDash([]); // Solid line for planets
+        }
         
         previewCtx.beginPath();
         previewCtx.arc(centerX, centerY, orbitRadius, 0, Math.PI * 2);
         previewCtx.stroke();
     });
+    
+    // Reset line dash
+    previewCtx.setLineDash([]);
 }
 
 // Draw planets in the system preview
@@ -1807,6 +1821,10 @@ function drawPlanetsInPreview(planets, centerX, centerY, scale, showResourceLabe
     planets.forEach(planet => {
         if (planet.orbit === undefined) return;
         
+        // Check if this is an asteroid belt
+        const planetTypeName = getPlanetTypeName(planet.type);
+        const isAsteroidBelt = planetTypeName && planetTypeName.includes('System Asteroid Belt');
+        
         // Calculate planet position based on orbit
         const orbitRadius = (50 + planet.orbit * 40) * scale;
         const orbitAngle = ((planet.angle !== undefined ? planet.angle : Math.random() * 360) * Math.PI) / 180;
@@ -1814,42 +1832,136 @@ function drawPlanetsInPreview(planets, centerX, centerY, scale, showResourceLabe
         const planetX = centerX + Math.cos(orbitAngle) * orbitRadius;
         const planetY = centerY + Math.sin(orbitAngle) * orbitRadius;
         
-        // Determine planet size and color
-        const planetSize = ((planet.scale || 1) * 10) * scale;
-        let planetColor = getPlanetColor(planet.type);
-        
-        // Draw planet
-        previewCtx.beginPath();
-        previewCtx.fillStyle = planetColor;
-        previewCtx.arc(planetX, planetY, planetSize, 0, Math.PI * 2);
-        previewCtx.fill();
-        
-        // Draw planet outline
-        previewCtx.strokeStyle = '#444444';
-        previewCtx.lineWidth = 1;
-        previewCtx.stroke();
-        
-        // Draw planet name if available
-        if (planet.name) {
-            previewCtx.fillStyle = '#DDDDDD';
-            previewCtx.font = '12px Arial';
-            previewCtx.textAlign = 'center';
-            previewCtx.fillText(planet.name, planetX, planetY - planetSize - 5);
-        }
-        
-        // Draw planet type if available and different from name
-        const planetTypeName = getPlanetTypeName(planet.type);
-        if (planetTypeName && planetTypeName !== planet.name) {
-            previewCtx.fillStyle = '#AAAAAA';
-            previewCtx.font = '10px Arial';
-            previewCtx.fillText(planetTypeName, planetX, planetY + planetSize + 10);
-        }
-        
-        // Draw resource labels if in expanded view
-        if (showResourceLabels && planet.resources && planet.resources.length > 0) {
-            drawPlanetResourceLabels(planet, planetX, planetY, planetSize, scale);
+        if (isAsteroidBelt) {
+            // Draw asteroid belt as scattered asteroids along the orbit
+            drawAsteroidBelt(centerX, centerY, orbitRadius, scale, planet);
+            
+            // Draw asteroid belt name at the calculated position
+            if (planet.name) {
+                previewCtx.fillStyle = '#DDDDDD';
+                previewCtx.font = '12px Arial';
+                previewCtx.textAlign = 'center';
+                previewCtx.fillText(planet.name, planetX, planetY - 15);
+            }
+            
+            // Draw planet type below
+            if (planetTypeName) {
+                previewCtx.fillStyle = '#AAAAAA';
+                previewCtx.font = '10px Arial';
+                previewCtx.textAlign = 'center';
+                previewCtx.fillText(planetTypeName, planetX, planetY + 15);
+            }
+            
+            // Draw resource labels if in expanded view
+            if (showResourceLabels && planet.resources && planet.resources.length > 0) {
+                drawPlanetResourceLabels(planet, planetX, planetY, 10 * scale, scale);
+            }
+        } else {
+            // Draw regular planet
+            const planetSize = ((planet.scale || 1) * 10) * scale;
+            let planetColor = getPlanetColor(planet.type);
+            
+            // Draw planet
+            previewCtx.beginPath();
+            previewCtx.fillStyle = planetColor;
+            previewCtx.arc(planetX, planetY, planetSize, 0, Math.PI * 2);
+            previewCtx.fill();
+            
+            // Draw planet outline
+            previewCtx.strokeStyle = '#444444';
+            previewCtx.lineWidth = 1;
+            previewCtx.stroke();
+            
+            // Draw planet name if available
+            if (planet.name) {
+                previewCtx.fillStyle = '#DDDDDD';
+                previewCtx.font = '12px Arial';
+                previewCtx.textAlign = 'center';
+                previewCtx.fillText(planet.name, planetX, planetY - planetSize - 5);
+            }
+            
+            // Draw planet type if available and different from name
+            if (planetTypeName && planetTypeName !== planet.name) {
+                previewCtx.fillStyle = '#AAAAAA';
+                previewCtx.font = '10px Arial';
+                previewCtx.fillText(planetTypeName, planetX, planetY + planetSize + 10);
+            }
+            
+            // Draw resource labels if in expanded view
+            if (showResourceLabels && planet.resources && planet.resources.length > 0) {
+                drawPlanetResourceLabels(planet, planetX, planetY, planetSize, scale);
+            }
         }
     });
+}
+
+// Draw asteroid belt as scattered asteroids along the orbit
+function drawAsteroidBelt(centerX, centerY, orbitRadius, scale, planet) {
+    if (!previewCtx) return;
+    
+    // Get planet color for asteroids
+    const asteroidColor = getPlanetColor(planet.type);
+    
+    // Number of asteroids to draw - more for larger orbits
+    const asteroidCount = Math.floor(20 + orbitRadius / 10);
+    
+    // Use deterministic random based on planet name and orbit for consistent positions
+    const nameSeed = planet.name ? planet.name.split('').reduce((a, b) => a + b.charCodeAt(0), 0) : 0;
+    const seed = nameSeed + planet.orbit * 1000 + (planet.angle || 0) * 10;
+    
+    // Simple deterministic random number generator
+    const seededRandom = (index) => {
+        const x = Math.sin(seed + index) * 10000;
+        return x - Math.floor(x);
+    };
+    
+    // Draw scattered asteroids along the orbit
+    for (let i = 0; i < asteroidCount; i++) {
+        // Distribute asteroids evenly with some deterministic randomness
+        const baseAngle = (i / asteroidCount) * Math.PI * 2;
+        const angleVariation = (seededRandom(i * 3) - 0.5) * 0.3; // ±0.15 radians variation
+        const angle = baseAngle + angleVariation;
+        
+        // Add some variation to the orbit radius for each asteroid
+        const radiusVariation = (seededRandom(i * 3 + 1) - 0.5) * 10 * scale;
+        const asteroidOrbitRadius = orbitRadius + radiusVariation;
+        
+        // Calculate asteroid position
+        const asteroidX = centerX + Math.cos(angle) * asteroidOrbitRadius;
+        const asteroidY = centerY + Math.sin(angle) * asteroidOrbitRadius;
+        
+        // Vary asteroid sizes
+        const asteroidSize = (1 + seededRandom(i * 3 + 2) * 3) * scale;
+        
+        // Draw asteroid
+        previewCtx.beginPath();
+        previewCtx.fillStyle = asteroidColor;
+        
+        // Make some asteroids irregular shaped
+        if (seededRandom(i * 7) > 0.5) {
+            // Draw as circle
+            previewCtx.arc(asteroidX, asteroidY, asteroidSize, 0, Math.PI * 2);
+        } else {
+            // Draw as irregular polygon
+            previewCtx.moveTo(asteroidX + asteroidSize, asteroidY);
+            for (let j = 1; j < 5; j++) {
+                const polygonAngle = (j / 5) * Math.PI * 2;
+                const polygonRadius = asteroidSize * (0.7 + seededRandom(i * 11 + j) * 0.6);
+                previewCtx.lineTo(
+                    asteroidX + Math.cos(polygonAngle) * polygonRadius,
+                    asteroidY + Math.sin(polygonAngle) * polygonRadius
+                );
+            }
+            previewCtx.closePath();
+        }
+        
+        previewCtx.fill();
+        
+        // Add subtle outline
+        previewCtx.strokeStyle = 'rgba(68, 68, 68, 0.5)';
+        previewCtx.lineWidth = 0.5;
+        previewCtx.stroke();
+    }
 }
 
 // Draw resource labels for a planet in the system preview
@@ -2293,6 +2405,12 @@ function drawResourceHeatmap() {
         // Process all planets in the system
         system.planets.forEach(planet => {
             if (!planet.resources) return;
+            
+            // Skip asteroid belts for heatmap calculation
+            const planetName = window.getPlanetTypeName ? window.getPlanetTypeName(planet.type) : '';
+            if (planetName && planetName.includes('System Asteroid Belt')) {
+                return; // Skip asteroid belts
+            }
             
             // Calculate abundance score for filtered resources
             planet.resources.forEach(resource => {
