@@ -2185,6 +2185,11 @@ function initKeyboardShortcuts() {
                     toggleExpandedSystemPreview(selectedSystems[0]);
                 }
                 break;
+            case 'h':
+                // Toggle help modal
+                event.preventDefault();
+                showHelpModal();
+                break;
             case '+':
             case '=':
                 // Zoom in
@@ -2452,111 +2457,216 @@ function clearSelectionUI() {
     updateLockButtonsState();
 }
 
+// Global variable to track help modal
+let helpModalDialog = null;
+
 // Function to show help/keyboard shortcuts modal
 function showHelpModal() {
-    // Create dialog for keyboard shortcuts
-    const dialog = document.createElement('div');
-    dialog.className = 'modal-dialog';
-    dialog.innerHTML = `
-        <div class="modal-content">
-            <h3>Keyboard Shortcuts</h3>
+    // Toggle if already exists
+    if (helpModalDialog) {
+        document.body.removeChild(helpModalDialog);
+        helpModalDialog = null;
+        return;
+    }
+
+    // Create dialog for help
+    helpModalDialog = document.createElement('div');
+    helpModalDialog.className = 'modal-overlay';
+    helpModalDialog.innerHTML = `
+        <div class="modal-dialog help-modal">
+            <div class="modal-content">
+            <h3>SAGE Map Editor Help</h3>
             
-            <div class="shortcut-section">
-                <h4>Navigation</h4>
-                <div class="shortcut-grid">
-                    <div class="shortcut-item">
-                        <span class="shortcut-keys">+/=</span>
-                        <span class="shortcut-description">Zoom in</span>
-                    </div>
-                    <div class="shortcut-item">
-                        <span class="shortcut-keys">-/_</span>
-                        <span class="shortcut-description">Zoom out</span>
-                    </div>
-                    <div class="shortcut-item">
-                        <span class="shortcut-keys">Ctrl + +/=</span>
-                        <span class="shortcut-description">Zoom in (faster)</span>
-                    </div>
-                    <div class="shortcut-item">
-                        <span class="shortcut-keys">Ctrl + -/_</span>
-                        <span class="shortcut-description">Zoom out (faster)</span>
-                    </div>
-                    <div class="shortcut-item">
-                        <span class="shortcut-keys">Ctrl + 0</span>
-                        <span class="shortcut-description">Reset view/center map</span>
-                    </div>
-                    <div class="shortcut-item">
-                        <span class="shortcut-keys">Middle Mouse</span>
-                        <span class="shortcut-description">Pan the map</span>
-                    </div>
-                </div>
+            <div class="help-tabs">
+                <button class="help-tab active" data-tab="quickstart">Quick Start</button>
+                <button class="help-tab" data-tab="shortcuts">Keyboard Shortcuts</button>
+                <button class="help-tab" data-tab="mouse">Mouse Controls</button>
             </div>
             
-            <div class="shortcut-section">
-                <h4>System Operations</h4>
-                <div class="shortcut-grid">
-                    <div class="shortcut-item">
-                        <span class="shortcut-keys">Ctrl + A</span>
-                        <span class="shortcut-description">Select all systems</span>
+            <div class="help-content">
+                <div id="quickstart-content" class="tab-content active">
+                    <h4>Getting Started</h4>
+                    <div class="help-section">
+                        <h5>Basic Workflow</h5>
+                        <ol>
+                            <li><strong>Create Systems</strong>: Right-click on empty space to add a new star system</li>
+                            <li><strong>Select Systems</strong>: Left-click to select, Shift+click for multiple</li>
+                            <li><strong>Edit Properties</strong>: Use the right panel to modify stars, planets, and resources</li>
+                            <li><strong>Link Systems</strong>: Right-click and drag between systems to create connections</li>
+                            <li><strong>Organize Regions</strong>: Group systems into regions for bulk operations</li>
+                        </ol>
                     </div>
-                    <div class="shortcut-item">
-                        <span class="shortcut-keys">Ctrl + C</span>
-                        <span class="shortcut-description">Copy selected system</span>
+                    
+                    <div class="help-section">
+                        <h5>Key Features</h5>
+                        <ul>
+                            <li><strong>Regional Distribution</strong>: Auto-generate planets and resources for selected systems</li>
+                            <li><strong>Resource Management</strong>: Add/edit resources on planets with richness values</li>
+                            <li><strong>Faction System</strong>: Assign faction types (determines planets) and controlling factions (visual ownership)</li>
+                            <li><strong>Starbases</strong>: Add defensive structures (Tier 0-5) to systems</li>
+                            <li><strong>Import/Export</strong>: Save and load your maps as JSON files</li>
+                        </ul>
                     </div>
-                    <div class="shortcut-item">
-                        <span class="shortcut-keys">Ctrl + V</span>
-                        <span class="shortcut-description">Paste system</span>
-                    </div>
-                    <div class="shortcut-item">
-                        <span class="shortcut-keys">Delete/Backspace</span>
-                        <span class="shortcut-description">Delete selected system(s)</span>
-                    </div>
-                    <div class="shortcut-item">
-                        <span class="shortcut-keys">Shift + Click</span>
-                        <span class="shortcut-description">Add/remove from selection</span>
-                    </div>
-                    <div class="shortcut-item">
-                        <span class="shortcut-keys">Ctrl + Click & Drag</span>
-                        <span class="shortcut-description">Box select systems</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="shortcut-section">
-                <h4>Visualization</h4>
-                <div class="shortcut-grid">
-                    <div class="shortcut-item">
-                        <span class="shortcut-keys">E</span>
-                        <span class="shortcut-description">Toggle expanded system preview</span>
-                    </div>
-                    <div class="shortcut-item">
-                        <span class="shortcut-keys">D</span>
-                        <span class="shortcut-description">Toggle heatmap debug mode</span>
+                    
+                    <div class="help-section">
+                        <h5>Tips</h5>
+                        <ul>
+                            <li>Use <strong>Snap to Grid</strong> for organized layouts</li>
+                            <li>Toggle <strong>System Labels</strong> to see system names</li>
+                            <li>Enable <strong>Faction Area</strong> to visualize territory control</li>
+                            <li>Lock systems to prevent accidental changes</li>
+                            <li>Use the search box to quickly find systems</li>
+                        </ul>
                     </div>
                 </div>
-            </div>
-            
-            <div class="shortcut-section">
-                <h4>History & Misc</h4>
-                <div class="shortcut-grid">
-                    <div class="shortcut-item">
-                        <span class="shortcut-keys">Ctrl + Z</span>
-                        <span class="shortcut-description">Undo</span>
+                
+                <div id="shortcuts-content" class="tab-content">
+                    <div class="shortcut-section">
+                        <h4>Navigation</h4>
+                        <div class="shortcut-grid">
+                            <div class="shortcut-item">
+                                <span class="shortcut-keys">+/=</span>
+                                <span class="shortcut-description">Zoom in</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-keys">-/_</span>
+                                <span class="shortcut-description">Zoom out</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-keys">Ctrl + +/=</span>
+                                <span class="shortcut-description">Zoom in (faster)</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-keys">Ctrl + -/_</span>
+                                <span class="shortcut-description">Zoom out (faster)</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-keys">Ctrl + 0</span>
+                                <span class="shortcut-description">Reset view/center map</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="shortcut-item">
-                        <span class="shortcut-keys">Ctrl + Y</span>
-                        <span class="shortcut-description">Redo</span>
+                    
+                    <div class="shortcut-section">
+                        <h4>System Operations</h4>
+                        <div class="shortcut-grid">
+                            <div class="shortcut-item">
+                                <span class="shortcut-keys">Ctrl + A</span>
+                                <span class="shortcut-description">Select all systems</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-keys">Ctrl + C</span>
+                                <span class="shortcut-description">Copy selected system</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-keys">Ctrl + V</span>
+                                <span class="shortcut-description">Paste system</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-keys">Delete/Backspace</span>
+                                <span class="shortcut-description">Delete selected system(s)</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="shortcut-item">
-                        <span class="shortcut-keys">Ctrl + Shift + Z</span>
-                        <span class="shortcut-description">Redo (alternative)</span>
+                    
+                    <div class="shortcut-section">
+                        <h4>Visualization</h4>
+                        <div class="shortcut-grid">
+                            <div class="shortcut-item">
+                                <span class="shortcut-keys">E</span>
+                                <span class="shortcut-description">Toggle expanded system preview</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-keys">D</span>
+                                <span class="shortcut-description">Toggle heatmap debug mode</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-keys">H</span>
+                                <span class="shortcut-description">Toggle help modal</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="shortcut-item">
-                        <span class="shortcut-keys">Escape</span>
-                        <span class="shortcut-description">Cancel current operation</span>
+                    
+                    <div class="shortcut-section">
+                        <h4>History</h4>
+                        <div class="shortcut-grid">
+                            <div class="shortcut-item">
+                                <span class="shortcut-keys">Ctrl + Z</span>
+                                <span class="shortcut-description">Undo</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-keys">Ctrl + Y</span>
+                                <span class="shortcut-description">Redo</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-keys">Ctrl + Shift + Z</span>
+                                <span class="shortcut-description">Redo (alternative)</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-keys">Escape</span>
+                                <span class="shortcut-description">Cancel current operation</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="shortcut-item">
-                        <span class="shortcut-keys">Double Click</span>
-                        <span class="shortcut-description">Select all systems in region</span>
+                </div>
+                
+                <div id="mouse-content" class="tab-content">
+                    <div class="shortcut-section">
+                        <h4>Basic Mouse Controls</h4>
+                        <div class="shortcut-grid">
+                            <div class="shortcut-item">
+                                <span class="shortcut-keys">Left Click</span>
+                                <span class="shortcut-description">Select system</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-keys">Right Click (empty)</span>
+                                <span class="shortcut-description">Create new system</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-keys">Middle Mouse</span>
+                                <span class="shortcut-description">Pan the map</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-keys">Mouse Wheel</span>
+                                <span class="shortcut-description">Zoom in/out</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="shortcut-section">
+                        <h4>Selection & Linking</h4>
+                        <div class="shortcut-grid">
+                            <div class="shortcut-item">
+                                <span class="shortcut-keys">Shift + Click</span>
+                                <span class="shortcut-description">Add/remove from selection</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-keys">Ctrl + Click & Drag</span>
+                                <span class="shortcut-description">Box select systems</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-keys">Right Click & Drag</span>
+                                <span class="shortcut-description">Create link between systems</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-keys">Double Click</span>
+                                <span class="shortcut-description">Select all systems in region</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="shortcut-section">
+                        <h4>System Preview</h4>
+                        <div class="shortcut-grid">
+                            <div class="shortcut-item">
+                                <span class="shortcut-keys">Left Drag</span>
+                                <span class="shortcut-description">Pan system view</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <span class="shortcut-keys">Mouse Wheel</span>
+                                <span class="shortcut-description">Zoom system view</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2565,14 +2675,51 @@ function showHelpModal() {
                 <button id="closeHelpBtn">Close</button>
             </div>
         </div>
+        </div>
     `;
 
-    document.body.appendChild(dialog);
+    document.body.appendChild(helpModalDialog);
+
+    // Set up tab switching
+    const tabs = helpModalDialog.querySelectorAll('.help-tab');
+    const contents = helpModalDialog.querySelectorAll('.tab-content');
+    
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Remove active class from all tabs and contents
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+            
+            // Add active class to clicked tab and corresponding content
+            tab.classList.add('active');
+            const contentId = tab.dataset.tab + '-content';
+            helpModalDialog.querySelector('#' + contentId).classList.add('active');
+        });
+    });
 
     // Set up event handler for close button
     document.getElementById('closeHelpBtn').addEventListener('click', () => {
-        document.body.removeChild(dialog);
+        document.body.removeChild(helpModalDialog);
+        helpModalDialog = null;
     });
+    
+    // Close on click outside
+    helpModalDialog.addEventListener('click', (e) => {
+        if (e.target === helpModalDialog) {
+            document.body.removeChild(helpModalDialog);
+            helpModalDialog = null;
+        }
+    });
+    
+    // Also close on Escape key
+    const escapeHandler = (e) => {
+        if (e.key === 'Escape' && helpModalDialog) {
+            document.body.removeChild(helpModalDialog);
+            helpModalDialog = null;
+            document.removeEventListener('keydown', escapeHandler);
+        }
+    };
+    document.addEventListener('keydown', escapeHandler);
 }
 
 // Function to show resource richness falloff modal
