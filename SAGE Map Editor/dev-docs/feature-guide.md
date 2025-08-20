@@ -176,6 +176,57 @@ Apply distance-based richness reduction:
 - **Exponential**: Rapid falloff
 - **Logarithmic**: Gradual reduction
 - **Fibonacci**: Natural curve
+- **Asteroid Multiplier**: Special factor for asteroid belt resources (0.01-5.0)
+
+### Asteroid Belts
+
+#### Automatic Generation
+Every system receives one asteroid belt during regional distribution:
+- Always created as first planet in system
+- Faction-specific type (ONI/MUD/USTUR/Neutral)
+- Positioned at orbit 1
+
+#### Resource Inheritance
+Asteroid belts automatically inherit all resources from their system:
+- Collects unique resources from all planets
+- Preserves original richness values
+- Updated after planet generation
+
+#### Visual Representation
+- **Orbit Path**: Dashed line (vs solid for planets)
+- **Asteroids**: 20-30 scattered objects along orbit
+- **Shapes**: Mix of circles and irregular polygons
+- **Positioning**: Deterministic based on name/orbit for consistency
+
+#### Resource Display
+- **Galaxy Map**: Excludes asteroid resources from labels
+- **System Preview**: Shows all resources including asteroids
+- **Richness Multiplier**: Can reduce below minimum via falloff tool
+
+### Starbases
+
+#### Overview
+Each system can have one starbase with tiers 0-5:
+- **Tier 0**: No starbase (default)
+- **Tiers 1-5**: Progressively larger/stronger bases
+
+#### Visual Representation
+- **Shape**: Hexagon to distinguish from planets
+- **Color**: Matches controlling faction
+- **Position**: Fixed orbit outside all planets
+- **Display**: Shows tier number in center
+
+#### Properties
+- **Manual Editing**: Change tier via system details panel
+- **Regional Distribution**: All systems start at Tier 0
+- **Orbit**: Dynamically calculated to avoid star collision
+- **Labels**: Shows as "SB:T[tier]" in system stats
+
+#### Integration
+- Included in system statistics
+- Part of regional distribution
+- Searchable/filterable via "StarbaseTier" filter
+- Color updates with controlling faction changes
 
 ---
 
@@ -263,34 +314,56 @@ Three main factions plus neutral:
 - **MUD**: Orange-red (#FF5722)
 - **ONI**: Blue (#2196F3)
 - **UST/USTUR**: Amber (#FFC107)
-- **Neutral**: Gray (#CCCCCC)
+- **Neutral**: Gray (#999999)
+
+### Faction Types vs Controlling Faction
+
+#### Faction Type
+Determines planet types during regional distribution:
+- Only MUD, ONI, or UST (no Neutral)
+- Affects planet archetype selection
+- Permanent system characteristic
+
+#### Controlling Faction
+Indicates current ownership/control:
+- Can be MUD, ONI, UST, or Neutral
+- Default is Neutral for new systems
+- Changes visual appearance:
+  - System blip color (when Faction Area off)
+  - Starbase color
+  - System label color
 
 ### Faction Assignment
 
 #### Manual
 1. Select system
-2. Choose faction from dropdown
-3. Or cycle with keyboard shortcut
+2. Set "Faction Type" (MUD/ONI/UST)
+3. Set "Controlling Faction" (MUD/ONI/UST/Neutral)
 
 #### Automatic
-Regional Distribution assigns factions based on:
-- Existing nearby systems
-- Random distribution
-- Weighted probabilities
+Regional Distribution:
+- Assigns faction types based on proximity
+- Sets controlling faction to Neutral by default
+- Preserves faction type for planet generation
 
 ### Faction Visualization
 
-#### Faction Areas
-Toggle "Faction Area" to see:
-- Territory boundaries
-- System counts
-- Area calculations
-- Faction statistics panel
+#### Default View
+- System colors show controlling faction
+- Neutral systems appear gray
+
+#### Faction Area Toggle
+When enabled:
+- System colors switch to faction type
+- Shows territory boundaries (MUD/ONI/UST only)
+- Neutral faction never draws polygons
+- Displays faction statistics panel
 
 #### Visual Indicators
-- System color coding
-- Faction labels
+- System color coding (based on mode)
+- Faction labels (CF: for controlling)
 - Statistics in details panel
+- Starbase colors match controlling faction
 
 ---
 

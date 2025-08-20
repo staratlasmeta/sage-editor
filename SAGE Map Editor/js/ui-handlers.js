@@ -2599,7 +2599,7 @@ function showResourceRichnessModal() {
             
             <div class="form-group">
                 <label for="minRichness">Minimum Richness:</label>
-                <input type="number" id="minRichness" value="0.1" min="0.1" max="10" step="0.1" />
+                <input type="number" id="minRichness" value="0.1" min="0.01" max="10" step="0.01" />
                 <span class="input-note">Farthest systems/planets</span>
             </div>
             
@@ -2621,6 +2621,12 @@ function showResourceRichnessModal() {
                 </select>
             </div>
             
+            <div class="form-group">
+                <label for="asteroidMultiplier">Asteroid Belt Richness Multiplier:</label>
+                <input type="number" id="asteroidMultiplier" value="1.0" min="0.01" max="5.0" step="0.01" />
+                <span class="input-note">Multiplies calculated richness for asteroid belt resources</span>
+            </div>
+            
             <div class="button-row">
                 <button id="cancelRichnessBtn">Cancel</button>
                 <button id="applyRichnessBtn">Apply Richness Falloff</button>
@@ -2640,6 +2646,7 @@ function showResourceRichnessModal() {
         const minRichness = parseFloat(document.getElementById('minRichness').value);
         const falloffCurve = document.getElementById('falloffCurve').value;
         const useFilters = document.getElementById('useFilters').value === 'visible';
+        const asteroidMultiplier = parseFloat(document.getElementById('asteroidMultiplier').value);
 
         // Validate inputs
         if (isNaN(maxRichness) || isNaN(minRichness)) {
@@ -2651,9 +2658,14 @@ function showResourceRichnessModal() {
             alert('Minimum richness cannot be greater than maximum richness');
             return;
         }
+        
+        if (isNaN(asteroidMultiplier) || asteroidMultiplier <= 0) {
+            alert('Please enter a valid asteroid belt multiplier');
+            return;
+        }
 
         // Apply richness falloff
-        applyResourceRichnessFalloff(selectedSystems, minRichness, maxRichness, falloffCurve, useFilters);
+        applyResourceRichnessFalloff(selectedSystems, minRichness, maxRichness, falloffCurve, useFilters, asteroidMultiplier);
 
         // Close dialog
         document.body.removeChild(dialog);
@@ -2661,7 +2673,7 @@ function showResourceRichnessModal() {
 }
 
 // Function to apply resource richness falloff
-function applyResourceRichnessFalloff(systems, minRichness, maxRichness, falloffCurve, useFilters) {
+function applyResourceRichnessFalloff(systems, minRichness, maxRichness, falloffCurve, useFilters, asteroidMultiplier = 1.0) {
     if (systems.length === 0) return;
 
     // Find the system farthest from origin to normalize distances
@@ -2739,6 +2751,10 @@ function applyResourceRichnessFalloff(systems, minRichness, maxRichness, falloff
         // Update resources on planets
         system.planets.forEach(planet => {
             if (!planet.resources) return;
+            
+            // Check if this planet is an asteroid belt
+            const planetName = window.getPlanetTypeName ? window.getPlanetTypeName(planet.type) : '';
+            const isAsteroidBelt = planetName && planetName.includes('System Asteroid Belt');
 
             planet.resources.forEach(resource => {
                 // Skip if using filters and this resource is not visible
@@ -2746,8 +2762,21 @@ function applyResourceRichnessFalloff(systems, minRichness, maxRichness, falloff
                     return;
                 }
 
-                // Set the richness value, rounded to one decimal place
-                resource.richness = Math.round(richnessValue * 10) / 10;
+                // Calculate final richness value
+                let finalRichness = richnessValue;
+                
+                // Apply asteroid multiplier if this is an asteroid belt
+                if (isAsteroidBelt && asteroidMultiplier !== 1.0) {
+                    finalRichness = richnessValue * asteroidMultiplier;
+                }
+
+                // Set the richness value, rounded appropriately
+                // Use more decimal places for very small values
+                if (finalRichness < 0.1) {
+                    resource.richness = Math.round(finalRichness * 100) / 100; // Two decimal places for small values
+                } else {
+                    resource.richness = Math.round(finalRichness * 10) / 10; // One decimal place for normal values
+                }
                 changedResourcesCount++;
             });
         });

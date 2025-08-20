@@ -2442,16 +2442,43 @@ function generateRegionalPlanetDistribution(systems) {
             planetCount = Math.floor(Math.random() * 3) + 2; // 2-4 planets for regular systems
         }
         
+        // First, ensure system has an asteroid belt
+        let hasAsteroidBelt = false;
+        
         // Create planets
         for (let i = 0; i < planetCount; i++) {
-            // Get planet tier and type based on system's faction
-            const tier = getPlanetTier(system.isKing, system.isCore);
-            console.log(`System ${system.name} (${system.isKing ? 'KING' : system.isCore ? 'CORE' : 'Regular'}, Faction: ${system.faction || 'None'}): Generating planet ${i+1} with tier ${tier}`);
+            let planetType;
             
-            const planetType = getRandomPlanetType(tier, system.faction || system.closestFaction);
-            if (!planetType) {
-                console.warn(`Could not find appropriate planet type for tier ${tier} and faction ${system.faction || 'None'}`);
-                continue;
+            // Force first planet to be asteroid belt if none exists yet
+            if (i === 0 && !hasAsteroidBelt) {
+                // Get the appropriate asteroid belt for this faction
+                const asteroidBeltFaction = system.faction || system.closestFaction || 'ONI';
+                if (asteroidBeltFaction === 'Neutral') {
+                    planetType = 'Neutral System Asteroid Belt';
+                } else if (asteroidBeltFaction === 'MUD') {
+                    planetType = 'MUD System Asteroid Belt';
+                } else if (asteroidBeltFaction === 'UST' || asteroidBeltFaction === 'USTUR') {
+                    planetType = 'USTUR System Asteroid Belt';
+                } else {
+                    planetType = 'ONI System Asteroid Belt';
+                }
+                hasAsteroidBelt = true;
+                console.log(`System ${system.name}: Ensuring asteroid belt - ${planetType}`);
+            } else {
+                // Get planet tier and type based on system's faction
+                const tier = getPlanetTier(system.isKing, system.isCore);
+                console.log(`System ${system.name} (${system.isKing ? 'KING' : system.isCore ? 'CORE' : 'Regular'}, Faction: ${system.faction || 'None'}): Generating planet ${i+1} with tier ${tier}`);
+                
+                planetType = getRandomPlanetType(tier, system.faction || system.closestFaction);
+                if (!planetType) {
+                    console.warn(`Could not find appropriate planet type for tier ${tier} and faction ${system.faction || 'None'}`);
+                    continue;
+                }
+                
+                // Check if this is an asteroid belt
+                if (planetType.includes('System Asteroid Belt')) {
+                    hasAsteroidBelt = true;
+                }
             }
             console.log(`Selected planet type: ${planetType}`);
 
@@ -2498,6 +2525,39 @@ function generateRegionalPlanetDistribution(systems) {
             }
 
             system.planets.push(planet);
+        }
+        
+        // After all planets are created, update asteroid belt resources
+        // to include all resources present in the system
+        const asteroidBelt = system.planets.find(p => {
+            const planetName = getPlanetTypeName(p.type);
+            return planetName && planetName.includes('System Asteroid Belt');
+        });
+        
+        if (asteroidBelt) {
+            // Collect all unique resources in the system
+            const allSystemResources = new Map();
+            
+            system.planets.forEach(planet => {
+                if (planet.resources) {
+                    planet.resources.forEach(resource => {
+                        // Use resource name as key to avoid duplicates
+                        if (!allSystemResources.has(resource.name)) {
+                            allSystemResources.set(resource.name, {
+                                type: resource.type,
+                                name: resource.name,
+                                richness: resource.richness || 1
+                            });
+                        }
+                    });
+                }
+            });
+            
+            // Replace asteroid belt resources with all system resources
+            if (allSystemResources.size > 0) {
+                asteroidBelt.resources = Array.from(allSystemResources.values());
+                console.log(`Updated ${system.name} asteroid belt with ${asteroidBelt.resources.length} resource types from the system`);
+            }
         }
     });
 

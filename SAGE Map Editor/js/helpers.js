@@ -387,13 +387,21 @@ function getDefaultResourcesForPlanetType(planetType) {
 }
 
 // Get all unique resources in a system
-function getAllSystemResources(system) {
+function getAllSystemResources(system, excludeAsteroids = false) {
     if (!system || !system.planets) return [];
 
     const allResources = new Set();
     const resourcesWithInfo = [];
 
     system.planets.forEach(planet => {
+        // Skip asteroid belts if excludeAsteroids is true
+        if (excludeAsteroids) {
+            const planetName = window.getPlanetTypeName ? window.getPlanetTypeName(planet.type) : '';
+            if (planetName && planetName.includes('System Asteroid Belt')) {
+                return; // Skip this planet
+            }
+        }
+        
         if (planet.resources) {
             planet.resources.forEach(resource => {
                 if (!allResources.has(resource.name)) {
