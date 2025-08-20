@@ -1100,6 +1100,74 @@ tr:hover {
     background-color: transparent;
 }
 
+/* Enhanced Help Modal */
+.help-tabs {
+    display: flex;
+    gap: 8px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 12px;
+}
+
+.help-tab {
+    background: var(--button-bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-bottom: none;
+    padding: 8px 12px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    cursor: pointer;
+}
+
+.help-tab.active {
+    background: var(--panel-bg-color);
+    font-weight: 600;
+}
+
+.help-content .tab-content {
+    display: none;
+}
+
+.help-content .tab-content.active {
+    display: block;
+}
+
+.help-section {
+    margin-bottom: 16px;
+}
+
+.help-section h5 {
+    margin: 8px 0;
+}
+
+.shortcut-section {
+    margin-bottom: 16px;
+}
+
+.shortcut-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 10px 16px;
+}
+
+.shortcut-item {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 10px;
+    border: 1px dashed var(--border-color);
+    border-radius: 6px;
+    background: var(--panel-bg-color);
+}
+
+.shortcut-keys {
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: 600;
+}
+
+.shortcut-description {
+    opacity: 0.85;
+}
+
 /* Drag handle */
 .drag-handle {
     display: inline-block;
