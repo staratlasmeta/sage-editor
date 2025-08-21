@@ -5692,6 +5692,13 @@ async function autoLoadConfigurationFiles() {
             
             // After loading main config, load individual ship files
             await loadIndividualShipFiles();
+            
+            // Add three empty ship columns automatically after loading completes
+            console.log('Adding three ship columns for comparison...');
+            for (let i = 0; i < 3; i++) {
+                addEmptyShipColumn();
+            }
+            console.log('Three ship columns added and ready for comparison');
         } else {
             console.error('Failed to load main configuration file:', configResponse.status);
             console.log('You can manually load configuration files using the File menu.');
