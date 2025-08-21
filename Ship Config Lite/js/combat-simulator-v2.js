@@ -128,6 +128,71 @@ function createCombatSimulatorModal() {
                     <!-- Center Section with VS, Fight Button -->
                     <div class="center-section">
                         <div class="vs-divider">VS</div>
+                        
+                        <!-- Alpha Controls -->
+                        <div class="alpha-controls-container">
+                            <!-- First Striker -->
+                            <div class="first-striker-control">
+                                <label class="control-label">First Striker:</label>
+                                <div class="radio-group">
+                                    <label><input type="radio" name="first-striker" value="left" checked> Left</label>
+                                    <label><input type="radio" name="first-striker" value="right"> Right</label>
+                                </div>
+                            </div>
+                            
+                            <div class="alpha-controls-grid">
+                                <!-- Left Fleet Alpha Controls -->
+                                <div class="alpha-control-group">
+                                    <h5 style="color: #4CAF50; margin: 0 0 5px 0;">Left Fleet</h5>
+                                    <div class="control-row">
+                                        <label>Alpha Strike:</label>
+                                        <select id="left-alpha-strike-tier" class="alpha-tier-select">
+                                            <option value="0">Tier 0 (0%)</option>
+                                            <option value="1">Tier 1 (10%)</option>
+                                            <option value="2">Tier 2 (20%)</option>
+                                            <option value="3">Tier 3 (30%)</option>
+                                            <option value="4">Tier 4 (40%)</option>
+                                        </select>
+                                    </div>
+                                    <div class="control-row">
+                                        <label>Alpha Shield:</label>
+                                        <select id="left-alpha-shield-tier" class="alpha-tier-select">
+                                            <option value="0">Tier 0 (0%)</option>
+                                            <option value="1">Tier 1 (10%)</option>
+                                            <option value="2">Tier 2 (20%)</option>
+                                            <option value="3">Tier 3 (30%)</option>
+                                            <option value="4">Tier 4 (40%)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <!-- Right Fleet Alpha Controls -->
+                                <div class="alpha-control-group">
+                                    <h5 style="color: #ff6b6b; margin: 0 0 5px 0;">Right Fleet</h5>
+                                    <div class="control-row">
+                                        <label>Alpha Strike:</label>
+                                        <select id="right-alpha-strike-tier" class="alpha-tier-select">
+                                            <option value="0">Tier 0 (0%)</option>
+                                            <option value="1">Tier 1 (10%)</option>
+                                            <option value="2">Tier 2 (20%)</option>
+                                            <option value="3">Tier 3 (30%)</option>
+                                            <option value="4">Tier 4 (40%)</option>
+                                        </select>
+                                    </div>
+                                    <div class="control-row">
+                                        <label>Alpha Shield:</label>
+                                        <select id="right-alpha-shield-tier" class="alpha-tier-select">
+                                            <option value="0">Tier 0 (0%)</option>
+                                            <option value="1">Tier 1 (10%)</option>
+                                            <option value="2">Tier 2 (20%)</option>
+                                            <option value="3">Tier 3 (30%)</option>
+                                            <option value="4">Tier 4 (40%)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <button class="fight-button" onclick="runCombatSimulation()">⚔️ FIGHT!</button>
                     </div>
                     
@@ -1858,24 +1923,50 @@ function displayPrebattleStats(container, stats, side) {
     
     // Define key pre-battle stats to display
     const keyStats = [
+        // Core combat stats
+        { name: 'ship_size', displayName: 'Ship Size' },
         { name: 'damage', displayName: 'Total Damage' },
         { name: 'hit_points', displayName: 'HP' },
         { name: 'shield_points', displayName: 'Shields' },
         { name: 'shield_recharge_rate', displayName: 'Shield Regen' },
-        { name: 'ap_recharge_time', displayName: 'AP Recharge' },
-        { name: 'max_ap', displayName: 'Max AP' },
-        { name: 'cargo_capacity', displayName: 'Cargo' },
+        { name: 'shield_break_delay', displayName: 'Shield Break Delay' },
+        
+        // Combat mechanics
         { name: 'ammo_capacity', displayName: 'Ammo' },
+        { name: 'hit_chance', displayName: 'Hit Chance' },
+        { name: 'aim_ability', displayName: 'Aim Ability' },
+        { name: 'crit_chance', displayName: 'Crit %' },
+        { name: 'crit_multiplier', displayName: 'Crit Mult' },
+        { name: 'damage_range', displayName: 'DMG Range' },
+        
+        // Detection/Stealth
+        { name: 'scan_power', displayName: 'Scan Power' },
+        { name: 'stealth_power', displayName: 'Stealth' },
+        
+        // Speed
+        { name: 'subwarp_speed', displayName: 'Subwarp Speed' },
+        { name: 'warp_speed', displayName: 'Warp Speed' },
+        
+        // Missiles
         { name: 'missile_capacity', displayName: 'Missiles' },
         { name: 'missile_power', displayName: 'Missile Pwr' },
-        { name: 'scanner_power', displayName: 'Scanner' },
-        { name: 'stealth_power', displayName: 'Stealth' },
-        { name: 'crit_chance', displayName: 'Crit %' },
-        { name: 'damage_range', displayName: 'DMG Range' },
-        { name: 'sub_warp_speed', displayName: 'Speed' },
+        
+        // Action Points
+        { name: 'max_ap', displayName: 'Max AP' },
+        { name: 'ap_recharge_time', displayName: 'AP Recharge' },
+        
+        // Key Counters
         { name: 'counter_healing_nanobots', displayName: 'Healing Bots' },
-        { name: 'counter_decoy', displayName: 'Decoy' },
-        { name: 'counter_energy_capacitor', displayName: 'Energy Cap' }
+        
+        // Individual damage types for diversity analysis
+        { name: 'damage_kinetic', displayName: 'Kinetic DMG' },
+        { name: 'damage_energy', displayName: 'Energy DMG' },
+        { name: 'damage_emp', displayName: 'EMP DMG' },
+        { name: 'damage_superchill', displayName: 'Superchill DMG' },
+        { name: 'damage_graygoo', displayName: 'Gray Goo DMG' },
+        { name: 'damage_shockwave', displayName: 'Shockwave DMG' },
+        { name: 'damage_heat', displayName: 'Heat DMG' },
+        { name: 'damage_bomb', displayName: 'Bomb DMG' }
     ];
     
     // Check for specific damage types if total damage isn't available
@@ -2232,6 +2323,21 @@ function runCombatSimulation() {
         breakdownDiv.innerHTML = '';
         breakdownDiv.style.display = 'block';
         breakdownDiv.className = '';
+    }
+    
+    // Set alpha tier levels from UI
+    window.leftAlphaStrikeLevel = parseInt(document.getElementById('left-alpha-strike-tier')?.value || '0');
+    window.leftAlphaShieldLevel = parseInt(document.getElementById('left-alpha-shield-tier')?.value || '0');
+    window.rightAlphaStrikeLevel = parseInt(document.getElementById('right-alpha-strike-tier')?.value || '0');
+    window.rightAlphaShieldLevel = parseInt(document.getElementById('right-alpha-shield-tier')?.value || '0');
+    
+    // Set first striker from UI
+    const firstStrikerRadios = document.getElementsByName('first-striker');
+    for (let radio of firstStrikerRadios) {
+        if (radio.checked) {
+            window.combatFirstStriker = radio.value;
+            break;
+        }
     }
     
     // Get aggregate stats

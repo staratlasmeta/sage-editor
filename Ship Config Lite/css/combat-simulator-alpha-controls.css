@@ -1,0 +1,150 @@
+/* Combat Simulator Alpha Controls Styles */
+
+/* Container for all alpha controls */
+.alpha-controls-container {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 15px;
+    margin: 15px 0;
+    width: 100%;
+    max-width: 400px;
+}
+
+/* First striker control */
+.first-striker-control {
+    text-align: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.control-label {
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-right: 10px;
+}
+
+.radio-group {
+    display: inline-flex;
+    gap: 20px;
+}
+
+.radio-group label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--text-color);
+}
+
+.radio-group input[type="radio"] {
+    cursor: pointer;
+}
+
+/* Alpha controls grid */
+.alpha-controls-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Individual control groups */
+.alpha-control-group {
+    background: rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.alpha-control-group h5 {
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    margin: 0 0 8px 0;
+}
+
+/* Control rows */
+.control-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.control-row:last-child {
+    margin-bottom: 0;
+}
+
+.control-row label {
+    font-size: 12px;
+    color: var(--secondary-text-color);
+    flex-shrink: 0;
+}
+
+/* Alpha tier select dropdowns */
+.alpha-tier-select {
+    background-color: var(--button-bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    padding: 4px 8px;
+    font-family: inherit;
+    font-size: 12px;
+    width: 120px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.alpha-tier-select:hover {
+    background-color: var(--button-hover-bg);
+}
+
+.alpha-tier-select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+/* Dark theme specific styles */
+.dark-theme .alpha-controls-container {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.dark-theme .alpha-control-group {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* Light theme specific styles */
+.light-theme .alpha-controls-container {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.light-theme .alpha-control-group {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .alpha-controls-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .alpha-controls-container {
+        padding: 10px;
+    }
+}
+
+/* Center section adjustments */
+.center-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    min-width: 200px;
+}
+
+/* Ensure fight button remains prominent */
+.center-section .fight-button {
+    margin-top: 10px;
+}

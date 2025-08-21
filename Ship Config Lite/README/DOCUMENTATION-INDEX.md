@@ -153,6 +153,38 @@ This index provides quick access to all documentation files for Ship Config Lite
 - Example formulas
 - Available stats
 
+### [COMBAT-SIMULATOR-ANALYSIS.md](COMBAT-SIMULATOR-ANALYSIS.md)
+**Combat engine analysis & enhancement plan**
+- Current implementation overview
+- Comparison with expected behavior
+- Key differences identified
+- Enhancement roadmap
+- Implementation strategy
+
+### [COMBAT-ENGINE-V3-ROADMAP.md](COMBAT-ENGINE-V3-ROADMAP.md)
+**Detailed combat engine v3 implementation plan**
+- Feature comparison table
+- Code changes required
+- Implementation phases
+- Testing checklist
+- Configuration parameters
+
+### [COMBAT-MECHANICS-QUICK-REFERENCE.md](COMBAT-MECHANICS-QUICK-REFERENCE.md)
+**Quick reference for combat mechanics**
+- Current vs expected behavior
+- Key implementation notes
+- Combat state tracking
+- Test scenarios
+- Common pitfalls to avoid
+
+### [COMBAT-EQUATION-ENHANCEMENT-PLAN.md](COMBAT-EQUATION-ENHANCEMENT-PLAN.md)
+**Specific plan for enhancing combat equation**
+- How the system actually works
+- What needs to change in combat_equation.js
+- Implementation strategy
+- Code examples
+- Testing approach
+
 ### [SHIP-SCORING.md](SHIP-SCORING.md)
 **Ship scoring and evaluation system**
 - 6 scoring categories explained
@@ -210,6 +242,10 @@ Last updated: Current version (v7.6)
 - Updated module count to 19 (including Combat Simulator)
 - Added ship scoring system documentation
 - Added this index file
+- Added combat simulator analysis documentation
+- Created combat engine v3 roadmap
+- Added combat mechanics quick reference
+- Created combat equation enhancement plan
 
 For the latest updates, check the modification dates of individual files. 
 
@@ -265,6 +301,10 @@ For the latest updates, check the modification dates of individual files.
 | MODULAR-ARCHITECTURE.md | ✅ Complete | Nov 2024 |
 | SAFE-SCALING-FORMULAS.md | ✅ Complete | Nov 2024 |
 | MULTIPLICATIVE-STATS-SYSTEM.md | ✅ Complete | Jan 2025 |
+| COMBAT-SIMULATOR-ANALYSIS.md | ✅ Complete | Jan 2025 |
+| COMBAT-ENGINE-V3-ROADMAP.md | ✅ Complete | Jan 2025 |
+| COMBAT-MECHANICS-QUICK-REFERENCE.md | ✅ Complete | Jan 2025 |
+| COMBAT-EQUATION-ENHANCEMENT-PLAN.md | ✅ Complete | Jan 2025 |
 | Others | 📝 Referenced | - |
 
 ## Contributing
