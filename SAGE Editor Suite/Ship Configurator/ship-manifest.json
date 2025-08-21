@@ -1,0 +1,250 @@
+{
+  "generated": "2025-08-21T20:17:15.681Z",
+  "shipCount": 61,
+  "ships": [
+    {
+      "filename": "1_XXS_Busan_Pulse_Busan.json",
+      "path": "ships/1_XXS_Busan_Pulse_Busan.json"
+    },
+    {
+      "filename": "1_XXS_Fimbul_Airbike_Fimbul.json",
+      "path": "ships/1_XXS_Fimbul_Airbike_Fimbul.json"
+    },
+    {
+      "filename": "1_XXS_Fimbul_ECOS_Unibomba_Fimbul ECOS.json",
+      "path": "ships/1_XXS_Fimbul_ECOS_Unibomba_Fimbul ECOS.json"
+    },
+    {
+      "filename": "1_XXS_Ogrika_Ruch_Ogrika.json",
+      "path": "ships/1_XXS_Ogrika_Ruch_Ogrika.json"
+    },
+    {
+      "filename": "1_XXS_Opal_Jet_Opal.json",
+      "path": "ships/1_XXS_Opal_Jet_Opal.json"
+    },
+    {
+      "filename": "1_XXS_Pearce_X4_Pearce.json",
+      "path": "ships/1_XXS_Pearce_X4_Pearce.json"
+    },
+    {
+      "filename": "1_XXS_VZUS_solos_VZUS.json",
+      "path": "ships/1_XXS_VZUS_solos_VZUS.json"
+    },
+    {
+      "filename": "2_XS_Calico_Maxhog_Calico.json",
+      "path": "ships/2_XS_Calico_Maxhog_Calico.json"
+    },
+    {
+      "filename": "2_XS_Calico_Scud_Calico.json",
+      "path": "ships/2_XS_Calico_Scud_Calico.json"
+    },
+    {
+      "filename": "2_XS_Fimbul_Lowbie_Fimbul.json",
+      "path": "ships/2_XS_Fimbul_Lowbie_Fimbul.json"
+    },
+    {
+      "filename": "2_XS_Ogrika_Niruch_Ogrika.json",
+      "path": "ships/2_XS_Ogrika_Niruch_Ogrika.json"
+    },
+    {
+      "filename": "2_XS_Opal_Jetjet_Opal.json",
+      "path": "ships/2_XS_Opal_Jetjet_Opal.json"
+    },
+    {
+      "filename": "2_XS_Pearce_X5_Pearce.json",
+      "path": "ships/2_XS_Pearce_X5_Pearce.json"
+    },
+    {
+      "filename": "3_Small_Armstrong_IMP_Tip_Armstrong.json",
+      "path": "ships/3_Small_Armstrong_IMP_Tip_Armstrong.json"
+    },
+    {
+      "filename": "3_Small_Busan_Thrill_of_Life_Busan.json",
+      "path": "ships/3_Small_Busan_Thrill_of_Life_Busan.json"
+    },
+    {
+      "filename": "3_Small_Calico_Medtech_Calico.json",
+      "path": "ships/3_Small_Calico_Medtech_Calico.json"
+    },
+    {
+      "filename": "3_Small_Calico_Shipit_Calico.json",
+      "path": "ships/3_Small_Calico_Shipit_Calico.json"
+    },
+    {
+      "filename": "3_Small_Fimbul_BYOS_Earp_Fimbul BYOS.json",
+      "path": "ships/3_Small_Fimbul_BYOS_Earp_Fimbul BYOS.json"
+    },
+    {
+      "filename": "3_Small_Ogrika_Mik_Ogrika.json",
+      "path": "ships/3_Small_Ogrika_Mik_Ogrika.json"
+    },
+    {
+      "filename": "3_Small_Opal_Rayfam_Opal.json",
+      "path": "ships/3_Small_Opal_Rayfam_Opal.json"
+    },
+    {
+      "filename": "3_Small_Pearce_R6_Pearce.json",
+      "path": "ships/3_Small_Pearce_R6_Pearce.json"
+    },
+    {
+      "filename": "3_Small_Pearce_X6_Pearce.json",
+      "path": "ships/3_Small_Pearce_X6_Pearce.json"
+    },
+    {
+      "filename": "3_Small_Rainbow_Chi_Rainbow.json",
+      "path": "ships/3_Small_Rainbow_Chi_Rainbow.json"
+    },
+    {
+      "filename": "3_Small_Tufa_Feist_Tufa.json",
+      "path": "ships/3_Small_Tufa_Feist_Tufa.json"
+    },
+    {
+      "filename": "3_Small_VZUS_ambwe_VZUS.json",
+      "path": "ships/3_Small_VZUS_ambwe_VZUS.json"
+    },
+    {
+      "filename": "4_Medium_Armstrong_IMP_Tap_Armstrong.json",
+      "path": "ships/4_Medium_Armstrong_IMP_Tap_Armstrong.json"
+    },
+    {
+      "filename": "4_Medium_Calico_ATS_Enforcer_Calico.json",
+      "path": "ships/4_Medium_Calico_ATS_Enforcer_Calico.json"
+    },
+    {
+      "filename": "4_Medium_Calico_Compakt_Hero_Calico.json",
+      "path": "ships/4_Medium_Calico_Compakt_Hero_Calico.json"
+    },
+    {
+      "filename": "4_Medium_Calico_Evac_Calico.json",
+      "path": "ships/4_Medium_Calico_Evac_Calico.json"
+    },
+    {
+      "filename": "4_Medium_Fimbul_BYOS_Packlite_Fimbul BYOS.json",
+      "path": "ships/4_Medium_Fimbul_BYOS_Packlite_Fimbul BYOS.json"
+    },
+    {
+      "filename": "4_Medium_Fimbul_BYOS_Ranger_Fimbul BYOS.json",
+      "path": "ships/4_Medium_Fimbul_BYOS_Ranger_Fimbul BYOS.json"
+    },
+    {
+      "filename": "4_Medium_Fimbul_Mamba_EX_Fimbul.json",
+      "path": "ships/4_Medium_Fimbul_Mamba_EX_Fimbul.json"
+    },
+    {
+      "filename": "4_Medium_Fimbul_Mamba_Fimbul.json",
+      "path": "ships/4_Medium_Fimbul_Mamba_Fimbul.json"
+    },
+    {
+      "filename": "4_Medium_Ogrika_Tursic_Ogrika.json",
+      "path": "ships/4_Medium_Ogrika_Tursic_Ogrika.json"
+    },
+    {
+      "filename": "4_Medium_Pearce_F4_Pearce.json",
+      "path": "ships/4_Medium_Pearce_F4_Pearce.json"
+    },
+    {
+      "filename": "4_Medium_Rainbow_Om_Rainbow.json",
+      "path": "ships/4_Medium_Rainbow_Om_Rainbow.json"
+    },
+    {
+      "filename": "4_Medium_VZUS_opod_VZUS.json",
+      "path": "ships/4_Medium_VZUS_opod_VZUS.json"
+    },
+    {
+      "filename": "5_Large_Fimbul_BYOS_Butch_Fimbul BYOS.json",
+      "path": "ships/5_Large_Fimbul_BYOS_Butch_Fimbul BYOS.json"
+    },
+    {
+      "filename": "5_Large_Fimbul_ECOS_Greenader_Fimbul ECOS.json",
+      "path": "ships/5_Large_Fimbul_ECOS_Greenader_Fimbul ECOS.json"
+    },
+    {
+      "filename": "5_Large_Ogrika_Sunpaa_Ogrika.json",
+      "path": "ships/5_Large_Ogrika_Sunpaa_Ogrika.json"
+    },
+    {
+      "filename": "5_Large_Ogrika_Thripid_Ogrika.json",
+      "path": "ships/5_Large_Ogrika_Thripid_Ogrika.json"
+    },
+    {
+      "filename": "5_Large_Opal_Bitboat_Opal.json",
+      "path": "ships/5_Large_Opal_Bitboat_Opal.json"
+    },
+    {
+      "filename": "5_Large_Pearce_R8_Pearce.json",
+      "path": "ships/5_Large_Pearce_R8_Pearce.json"
+    },
+    {
+      "filename": "5_Large_Rainbow_Arc_Rainbow.json",
+      "path": "ships/5_Large_Rainbow_Arc_Rainbow.json"
+    },
+    {
+      "filename": "6_Capital_Armstrong_IMP_Armstrong.json",
+      "path": "ships/6_Capital_Armstrong_IMP_Armstrong.json"
+    },
+    {
+      "filename": "6_Capital_Busan_Maiden_Heart_Busan.json",
+      "path": "ships/6_Capital_Busan_Maiden_Heart_Busan.json"
+    },
+    {
+      "filename": "6_Capital_Calico_Guardian_Calico.json",
+      "path": "ships/6_Capital_Calico_Guardian_Calico.json"
+    },
+    {
+      "filename": "6_Capital_Fimbul_ECOS_Bombarella_Fimbul ECOS.json",
+      "path": "ships/6_Capital_Fimbul_ECOS_Bombarella_Fimbul ECOS.json"
+    },
+    {
+      "filename": "6_Capital_Fimbul_Sledbarge_Fimbul.json",
+      "path": "ships/6_Capital_Fimbul_Sledbarge_Fimbul.json"
+    },
+    {
+      "filename": "6_Capital_Ogrika_Jod_Asteris_Ogrika.json",
+      "path": "ships/6_Capital_Ogrika_Jod_Asteris_Ogrika.json"
+    },
+    {
+      "filename": "6_Capital_Pearce_C9_Pearce.json",
+      "path": "ships/6_Capital_Pearce_C9_Pearce.json"
+    },
+    {
+      "filename": "6_Capital_Pearce_D9_Pearce.json",
+      "path": "ships/6_Capital_Pearce_D9_Pearce.json"
+    },
+    {
+      "filename": "6_Capital_VZUS_ballad_VZUS.json",
+      "path": "ships/6_Capital_VZUS_ballad_VZUS.json"
+    },
+    {
+      "filename": "7_Commander_Fimbul_BYOS_Tankship_Fimbul BYOS.json",
+      "path": "ships/7_Commander_Fimbul_BYOS_Tankship_Fimbul BYOS.json"
+    },
+    {
+      "filename": "7_Commander_Fimbul_ECOS_Treearrow_Fimbul ECOS.json",
+      "path": "ships/7_Commander_Fimbul_ECOS_Treearrow_Fimbul ECOS.json"
+    },
+    {
+      "filename": "7_Commander_Pearce_C11_Pearce.json",
+      "path": "ships/7_Commander_Pearce_C11_Pearce.json"
+    },
+    {
+      "filename": "9_Titan_Busan_The_Last_Stand_mk__VIII_Busan.json",
+      "path": "ships/9_Titan_Busan_The_Last_Stand_mk__VIII_Busan.json"
+    },
+    {
+      "filename": "9_Titan_Fimbul_BYOS_Gallowspine_Fimbul BYOS.json",
+      "path": "ships/9_Titan_Fimbul_BYOS_Gallowspine_Fimbul BYOS.json"
+    },
+    {
+      "filename": "9_Titan_Fimbul_ECOS_Superphoenix_Fimbul ECOS.json",
+      "path": "ships/9_Titan_Fimbul_ECOS_Superphoenix_Fimbul ECOS.json"
+    },
+    {
+      "filename": "9_Titan_Pearce_T1_Pearce.json",
+      "path": "ships/9_Titan_Pearce_T1_Pearce.json"
+    },
+    {
+      "filename": "9_Titan_Rainbow_Phi_Rainbow.json",
+      "path": "ships/9_Titan_Rainbow_Phi_Rainbow.json"
+    }
+  ]
+}

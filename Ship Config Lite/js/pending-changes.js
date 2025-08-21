@@ -96,20 +96,22 @@
         `;
         document.head.appendChild(pulseStyle);
         
-        updateRefreshButton();
-        
         // Add click handler
         refreshButton.addEventListener('click', performRefresh);
         
+        // Add button to DOM first
         buttonContainer.appendChild(refreshButton);
         document.body.appendChild(buttonContainer);
+        
+        // Now update the button (after it's in the DOM)
+        updateRefreshButton();
     }
     
     /**
      * Update the refresh button text and visibility
      */
     function updateRefreshButton() {
-        if (!refreshButton) return;
+        if (!refreshButton || !refreshButton.parentElement) return;
         
         const changeCount = pendingChanges.size;
         

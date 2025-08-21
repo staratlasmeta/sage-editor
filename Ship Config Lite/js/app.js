@@ -5673,12 +5673,308 @@ window.activeConfigIndices = activeConfigIndices;
 window.getShipIdentifier = getShipIdentifier;
 window.updateComparisonTable = updateComparisonTable;
 
+// Function to automatically load configuration files on startup
+async function autoLoadConfigurationFiles() {
+    console.log('Starting automatic configuration file loading...');
+    
+    try {
+        // Load the main ship configurations file
+        const configUrl = '../SAGE Editor Suite/Ship Configurator/ship_configurations-combatv5.json';
+        console.log('Loading main configuration file:', configUrl);
+        
+        const configResponse = await fetch(configUrl);
+        if (configResponse.ok) {
+            const configData = await configResponse.json();
+            console.log('Successfully loaded main configuration file');
+            
+            // Process the configuration data as if it was loaded via file input
+            processLoadedConfiguration(configData);
+            
+            // After loading main config, load individual ship files
+            await loadIndividualShipFiles();
+        } else {
+            console.error('Failed to load main configuration file:', configResponse.status);
+            console.log('You can manually load configuration files using the File menu.');
+        }
+    } catch (error) {
+        console.error('Error loading configuration files:', error);
+        
+        // Check if this is a CORS error from file:// protocol
+        if (window.location.protocol === 'file:') {
+            console.log('⚠️ CORS Error: Cannot load files when running from file:// protocol');
+            console.log('This is expected when running locally. The automatic loading will work when deployed to a web server.');
+            console.log('For local development, you can:');
+            console.log('1. Use a local web server (python -m http.server or Live Server extension)');
+            console.log('2. Manually load files using the File menu');
+            console.log('3. Deploy to GitHub Pages where it will work automatically');
+        } else {
+            console.log('You can manually load configuration files using the File menu.');
+        }
+    }
+}
+
+// Function to load individual ship JSON files from the ships subfolder
+async function loadIndividualShipFiles() {
+    console.log('Loading individual ship files...');
+    
+    try {
+        // First, try to load the ship manifest file
+        const manifestUrl = '../SAGE Editor Suite/Ship Configurator/ship-manifest.json';
+        console.log('Attempting to load ship manifest:', manifestUrl);
+        
+        const manifestResponse = await fetch(manifestUrl);
+        if (manifestResponse.ok) {
+            const manifest = await manifestResponse.json();
+            console.log(`Found ship manifest with ${manifest.shipCount} ships`);
+            
+            // Load each ship file listed in the manifest
+            let loadedCount = 0;
+            const shipDataArray = [];
+            
+            for (const shipEntry of manifest.ships) {
+                try {
+                    const shipUrl = `../SAGE Editor Suite/Ship Configurator/${shipEntry.path}`;
+                    const shipResponse = await fetch(shipUrl);
+                    
+                    if (shipResponse.ok) {
+                        const shipData = await shipResponse.json();
+                        shipDataArray.push(shipData);
+                        loadedCount++;
+                        
+                        // Log progress every 10 ships
+                        if (loadedCount % 10 === 0) {
+                            console.log(`Loaded ${loadedCount}/${manifest.shipCount} ship files...`);
+                        }
+                    }
+                } catch (error) {
+                    console.warn(`Failed to load ship file ${shipEntry.filename}:`, error);
+                }
+            }
+            
+            console.log(`Successfully loaded ${loadedCount} ship files`);
+            
+            // Process the loaded ship data
+            if (shipDataArray.length > 0) {
+                processLoadedShipData(shipDataArray);
+                console.log('Individual ship files processed successfully');
+            }
+            
+        } else if (manifestResponse.status === 404) {
+            console.log('No ship manifest found. To enable automatic ship loading:');
+            console.log('1. Navigate to the Ship Configurator folder');
+            console.log('2. Run: node generate-ship-manifest.js');
+            console.log('3. This will create a ship-manifest.json file');
+            console.log('You can still manually load ship files using File > Load Ship JSON.');
+        } else {
+            console.error('Error loading ship manifest:', manifestResponse.status);
+        }
+    } catch (error) {
+        console.error('Error loading individual ship files:', error);
+        console.log('You can manually load ship files using File > Load Ship JSON.');
+    }
+}
+
+// Function to process loaded ship data from individual files
+function processLoadedShipData(shipDataArray) {
+    try {
+        console.log(`Processing ${shipDataArray.length} loaded ship files...`);
+        
+        let processedCount = 0;
+        
+        shipDataArray.forEach((shipData, index) => {
+            try {
+                // Extract ship info from the data
+                if (shipData.ship) {
+                    // Add to master ship list if not already present
+                    const existingIndex = ships.findIndex(s => 
+                        s['Ship Name'] === shipData.ship['Ship Name'] && 
+                        s.Manufacturer === shipData.ship.Manufacturer
+                    );
+                    
+                    if (existingIndex === -1) {
+                        // Add new ship
+                        ships.push(shipData.ship);
+                        console.log(`Added new ship: ${shipData.ship['Ship Name']}`);
+                    } else {
+                        // Update existing ship
+                        ships[existingIndex] = shipData.ship;
+                        console.log(`Updated existing ship: ${shipData.ship['Ship Name']}`);
+                    }
+                    
+                    // Load configurations if present
+                    if (shipData.configurations && shipData.shipIdentifier) {
+                        shipConfigurations[shipData.shipIdentifier] = shipData.configurations;
+                        console.log(`Loaded ${shipData.configurations.length} configurations for ${shipData.shipIdentifier}`);
+                    }
+                    
+                    processedCount++;
+                }
+            } catch (error) {
+                console.error(`Error processing ship data at index ${index}:`, error);
+            }
+        });
+        
+        console.log(`Successfully processed ${processedCount} ship(s)`);
+        
+        // Update the comparison table if ships are displayed
+        if (addedShips.length > 0 && typeof updateComparisonTable === 'function') {
+            updateComparisonTable();
+        }
+        
+    } catch (error) {
+        console.error('Error processing ship data array:', error);
+    }
+}
+
+// Function to process loaded configuration data
+function processLoadedConfiguration(loadedData) {
+    try {
+        console.log('Processing loaded configuration data...');
+        
+        // This mimics the logic from loadConfigurations in file-io.js
+        if (!loadedData.shipConfigurations && !loadedData.configurations) {
+            console.error('Invalid configuration file format. No configuration data found.');
+            return;
+        }
+        
+        // Handle both old and new formats
+        let configurationsToLoad = loadedData.shipConfigurations || loadedData.configurations || {};
+        let activeIndicesToLoad = loadedData.activeConfigIndices || {};
+        
+        // Check for components
+        let componentsToLoad = null;
+        if (loadedData.components && loadedData.components.rewardTree) {
+            componentsToLoad = loadedData.components;
+            console.log('Found components in configuration file');
+        }
+        
+        // Load component system data if found
+        if (componentsToLoad) {
+            components = componentsToLoad;
+            componentsLoaded = true;
+            
+            // Process components after loading
+            if (typeof processComponentsAfterLoading === 'function') {
+                processComponentsAfterLoading();
+            }
+            
+            // Load component categories
+            if (loadedData.componentCategories) {
+                componentCategories = loadedData.componentCategories;
+            } else {
+                extractComponentCategories();
+            }
+            
+            // Load component attributes
+            if (loadedData.componentAttributes) {
+                componentAttributes = loadedData.componentAttributes;
+            } else {
+                if (typeof initComponentAttributes === 'function') {
+                    initComponentAttributes();
+                }
+            }
+            
+            // Migrate component attributes if needed
+            if (window.migrateComponentAttributesToNewFormat) {
+                window.migrateComponentAttributesToNewFormat(componentAttributes);
+                console.log('Migrated component attributes to new stat type system');
+            }
+            
+            // Load scaling formulas
+            if (loadedData.classScalingFormulas) {
+                classScalingFormulas = loadedData.classScalingFormulas;
+            }
+            if (loadedData.tierScalingFormulas) {
+                tierScalingFormulas = loadedData.tierScalingFormulas;
+            }
+            
+            // Create category buttons
+            if (typeof createCategoryButtons === 'function') {
+                createCategoryButtons();
+            }
+        }
+        
+        // Load ships data if available
+        if (loadedData.allShips && loadedData.allShips.length > 0) {
+            ships = loadedData.allShips;
+            console.log(`Loaded ${ships.length} ships from configuration file`);
+            
+            // Extract stats from the ship data if not provided
+            if (loadedData.statsFromCsv) {
+                statsFromCsv = loadedData.statsFromCsv;
+            } else if (ships.length > 0) {
+                statsFromCsv = Object.keys(ships[0]).filter(key => 
+                    !['Ship Name', 'Manufacturer', 'Spec', 'Class', 'id'].includes(key));
+            }
+            
+            // Re-initialize attribute order
+            if (typeof initAttributeOrder === 'function') {
+                initAttributeOrder();
+            }
+        }
+        
+        // Load the configurations
+        shipConfigurations = configurationsToLoad;
+        activeConfigIndices = activeIndicesToLoad;
+        
+        // Load custom attributes
+        if (loadedData.customAttributes) {
+            customAttributes = loadedData.customAttributes;
+        }
+        if (loadedData.customAttributeOrder) {
+            customAttributeOrder = loadedData.customAttributeOrder;
+        }
+        
+        // Load stat descriptions
+        if (loadedData.statDescriptions) {
+            statDescriptions = loadedData.statDescriptions;
+            window.statDescriptions = statDescriptions;
+        }
+        
+        // Update the comparison table if needed
+        if (typeof updateComparisonTable === 'function') {
+            updateComparisonTable();
+        }
+        
+        console.log('Configuration loaded successfully');
+        
+        // Show success notification
+        const notification = document.createElement('div');
+        notification.textContent = 'Configuration files loaded automatically';
+        notification.style.position = 'fixed';
+        notification.style.bottom = '20px';
+        notification.style.left = '50%';
+        notification.style.transform = 'translateX(-50%)';
+        notification.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+        notification.style.color = 'white';
+        notification.style.padding = '10px 20px';
+        notification.style.borderRadius = '5px';
+        notification.style.zIndex = '9999';
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            if (document.body.contains(notification)) {
+                document.body.removeChild(notification);
+            }
+        }, 3000);
+        
+    } catch (error) {
+        console.error('Error processing configuration data:', error);
+    }
+}
+
 // Initialize drag-and-drop for files when the module is loaded
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize the application
+    initApp();
+    
     // Initialize drag-and-drop for files
     if (window.FileDragDrop && window.FileDragDrop.init) {
         window.FileDragDrop.init();
         console.log('File drag-and-drop initialized');
     }
+    
+    // Auto-load configuration files
+    autoLoadConfigurationFiles();
 });
     
