@@ -10497,4 +10497,249 @@ td.stats-neutral > span {
     color: #fff;
     font-weight: 500;
 }
+
+/* Help Button Styles */
+.help-button {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+    transition: all 0.2s ease;
+    margin: 0 8px;
+}
+
+.help-button:hover {
+    background-color: var(--button-hover-bg);
+    border-color: var(--accent-color);
+}
+
+.help-button svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Help Modal Styles */
+.help-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.help-modal-overlay.active {
+    display: flex;
+}
+
+.help-modal-dialog {
+    position: relative;
+    background-color: var(--panel-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 900px;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.help-modal-content {
+    padding: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex: 1;
+}
+
+.help-modal-content h3 {
+    margin: 0 0 20px 0;
+    font-size: 1.5rem;
+    color: var(--text-color);
+}
+
+.help-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0;
+}
+
+.help-tab {
+    background: transparent;
+    border: none;
+    color: var(--secondary-text-color);
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    font-family: 'Chakra Petch', sans-serif;
+}
+
+.help-tab:hover {
+    color: var(--text-color);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.help-tab.active {
+    color: var(--accent-color);
+    border-bottom-color: var(--accent-color);
+    background: rgba(61, 139, 248, 0.1);
+}
+
+.help-content {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding: 10px 20px 10px 10px;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.help-section {
+    margin-bottom: 25px;
+}
+
+.help-section h4,
+.help-section h5 {
+    color: var(--accent-color);
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+
+.help-section h4 {
+    font-size: 1.1rem;
+}
+
+.help-section h5 {
+    font-size: 1rem;
+}
+
+.help-section ul,
+.help-section ol {
+    margin-left: 20px;
+    line-height: 1.8;
+    color: var(--secondary-text-color);
+}
+
+.help-section li {
+    margin-bottom: 8px;
+}
+
+.help-section strong {
+    color: var(--text-color);
+}
+
+.shortcut-section {
+    margin-bottom: 30px;
+}
+
+.shortcut-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.shortcut-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    background: var(--background-secondary);
+    border-radius: 4px;
+}
+
+.shortcut-keys {
+    font-family: 'Courier New', monospace;
+    background: var(--button-bg-color);
+    border: 1px solid var(--border-color);
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--text-color);
+    white-space: nowrap;
+}
+
+.shortcut-description {
+    color: var(--secondary-text-color);
+    font-size: 0.9rem;
+}
+
+.help-button-row {
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px 20px;
+    border-top: 1px solid var(--border-color);
+    background: var(--background-secondary);
+}
+
+#closeHelpBtn {
+    padding: 8px 20px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+#closeHelpBtn:hover {
+    background-color: var(--accent-hover-color);
+}
+
+/* Code blocks in help */
+.help-code {
+    background: var(--background-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 10px;
+    margin: 10px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    overflow-x: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .help-modal-dialog {
+        width: 95%;
+        max-height: 95vh;
+    }
+    
+    .help-tabs {
+        flex-wrap: wrap;
+    }
+    
+    .help-tab {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+    
+    .shortcut-grid {
+        grid-template-columns: 1fr;
+    }
+}
    
