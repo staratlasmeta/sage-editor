@@ -146,8 +146,10 @@ async function autoLoadResearchNodes() {
                 });
             }
             
-            // Center view
-            window.CanvasManager.centerView(editor);
+            // Fit view to show all nodes
+            if (window.CanvasManager && window.CanvasManager.fitToScreen) {
+                window.CanvasManager.fitToScreen(editor);
+            }
             
             // Update UI elements
             window.UIControls.updateSelectedNodeUI(editor);
