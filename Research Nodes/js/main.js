@@ -48,6 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
  * Initialize the editor
  */
 function initializeEditor() {
+    // Export editor for debugging and global access
+    window.editor = editor;
+    
     // Get canvas element - updated ID
     editor.canvas = document.getElementById('canvas');
     if (!editor.canvas) {
@@ -151,35 +154,37 @@ async function autoLoadResearchNodes() {
                 window.CanvasManager.fitToScreen(editor);
             }
             
-            // Update UI elements
-            window.UIControls.updateSelectedNodeUI(editor);
-            
             // Activate simulation mode
             console.log('Activating simulation mode...');
             
             // Add a small delay to ensure all elements are loaded
             setTimeout(() => {
-                window.UIControls.setMode(editor, 'simulation');
-                console.log('Simulation mode activated');
-                
-                // Check if career panel is visible
-                const careerPanel = document.getElementById('careerXPPanel');
-                if (careerPanel) {
-                    console.log('Career panel found, display:', careerPanel.style.display);
+                try {
+                    console.log('Setting mode to simulation...');
+                    window.UIControls.setMode(window.editor, 'simulation');
+                    console.log('Simulation mode activated');
                     
-                    // Force show the career panel
-                    careerPanel.style.display = 'block';
-                } else {
-                    console.log('Career panel not found!');
+                    // Check if career panel is visible
+                    const careerPanel = document.getElementById('careerXPPanel');
+                    if (careerPanel) {
+                        console.log('Career panel found, display:', careerPanel.style.display);
+                        
+                        // Force show the career panel
+                        careerPanel.style.display = 'block';
+                    } else {
+                        console.log('Career panel not found!');
+                    }
+                    
+                    // Ensure simulation is initialized
+                    if (window.Simulation && window.Simulation.initializeSimulation) {
+                        console.log('Initializing simulation...');
+                        window.Simulation.initializeSimulation(window.editor);
+                        window.Simulation.updateSimulationUI(window.editor);
+                    }
+                } catch (error) {
+                    console.error('Error activating simulation mode:', error);
                 }
-                
-                // Ensure simulation is initialized
-                if (window.Simulation && window.Simulation.initializeSimulation) {
-                    console.log('Initializing simulation...');
-                    window.Simulation.initializeSimulation(editor);
-                    window.Simulation.updateSimulationUI(editor);
-                }
-            }, 100);
+            }, 500);
             
             // Show success notification
             const notification = document.createElement('div');
@@ -220,7 +225,4 @@ async function autoLoadResearchNodes() {
             console.log('You can manually load node files using the File menu.');
         }
     }
-}
-
-// Export editor for debugging
-window.editor = editor; 
+} 
