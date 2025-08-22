@@ -92,9 +92,122 @@ function initApp() {
                 });
             }
         }, 500);
+        
+        // Auto-load the map file after filters are set up
+        setTimeout(() => {
+            autoLoadMapFile();
+        }, 600);
     }, 100);
     
     console.log('Application initialized successfully');
+}
+
+/**
+ * Automatically load the map file on startup
+ */
+async function autoLoadMapFile() {
+    console.log('Starting automatic map file loading...');
+    
+    try {
+        // Load the 69regions-v8.json file from SAGE Editor Suite
+        const mapUrl = '../SAGE Editor Suite/Map Editor/69regions-v8.json';
+        console.log('Loading map file:', mapUrl);
+        
+        const response = await fetch(mapUrl);
+        if (response.ok) {
+            const mapData = await response.json();
+            console.log('Successfully loaded map file');
+            
+            // Show import loader
+            createImportLoader();
+            updateImportProgress(5, 'LOADING MAP DATA...');
+            
+            // Set the filename
+            currentFilename = '69regions-v8.json';
+            
+            // Load the map data with progress tracking
+            setTimeout(() => {
+                loadMapData(mapData, () => {
+                    // After data is loaded, configure filters
+                    configureFiltersForRegionalView();
+                    
+                    // Draw the galaxy
+                    updateImportProgress(80, 'RENDERING GALAXY MAP...');
+                    
+                    setTimeout(() => {
+                        drawGalaxyMap();
+                        unsavedChanges = false;
+                        
+                        // Update the filename display in the UI
+                        updateTopBarInfo();
+                        
+                        // Show completion
+                        showImportComplete();
+                        
+                        // Show notification
+                        const notification = document.createElement('div');
+                        notification.textContent = 'Map loaded - Regional view active';
+                        notification.style.position = 'fixed';
+                        notification.style.bottom = '20px';
+                        notification.style.left = '50%';
+                        notification.style.transform = 'translateX(-50%)';
+                        notification.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+                        notification.style.color = 'white';
+                        notification.style.padding = '10px 20px';
+                        notification.style.borderRadius = '5px';
+                        notification.style.zIndex = '9999';
+                        document.body.appendChild(notification);
+                        
+                        setTimeout(() => {
+                            if (document.body.contains(notification)) {
+                                document.body.removeChild(notification);
+                            }
+                        }, 3000);
+                    }, 100);
+                });
+            }, 100);
+            
+        } else {
+            console.error('Failed to load map file:', response.status);
+            console.log('You can manually load map files using the Import button.');
+        }
+    } catch (error) {
+        console.error('Error loading map file:', error);
+        
+        // Check if this is a CORS error from file:// protocol
+        if (window.location.protocol === 'file:') {
+            console.log('⚠️ CORS Error: Cannot load files when running from file:// protocol');
+            console.log('This is expected when running locally. The automatic loading will work when deployed to a web server.');
+            console.log('For local development, you can:');
+            console.log('1. Use a local web server (python -m http.server or Live Server extension)');
+            console.log('2. Manually load files using the Import button');
+            console.log('3. Deploy to GitHub Pages where it will work automatically');
+        } else {
+            console.log('You can manually load map files using the Import button.');
+        }
+    }
+}
+
+/**
+ * Configure filters to show only regional view elements
+ */
+function configureFiltersForRegionalView() {
+    console.log('Configuring filters for regional view...');
+    
+    // Turn off all filters first
+    Object.keys(resourceFilterState).forEach(key => {
+        resourceFilterState[key] = false;
+    });
+    
+    // Enable only the regional filters shown in the screenshot
+    resourceFilterState["RegionalPolygon"] = true;    // Regional polygon
+    resourceFilterState["RegionalName"] = true;       // Regional name
+    resourceFilterState["RegionalIndicator"] = true;  // Region membership circles
+    
+    // Redraw the filter UI if it exists
+    if (typeof setupResourceFilter === 'function') {
+        setupResourceFilter();
+    }
 }
 
 // Export it immediately
