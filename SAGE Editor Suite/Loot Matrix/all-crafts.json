@@ -75517,7 +75517,7 @@
           "nameSource": "Drone Type"
         }
       ],
-      "expanded": true,
+      "expanded": false,
       "status": "done",
       "nameSource": "Category"
     }
