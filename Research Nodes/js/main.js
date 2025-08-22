@@ -156,7 +156,30 @@ async function autoLoadResearchNodes() {
             
             // Activate simulation mode
             console.log('Activating simulation mode...');
-            window.UIControls.setMode(editor, 'simulation');
+            
+            // Add a small delay to ensure all elements are loaded
+            setTimeout(() => {
+                window.UIControls.setMode(editor, 'simulation');
+                console.log('Simulation mode activated');
+                
+                // Check if career panel is visible
+                const careerPanel = document.getElementById('careerXPPanel');
+                if (careerPanel) {
+                    console.log('Career panel found, display:', careerPanel.style.display);
+                    
+                    // Force show the career panel
+                    careerPanel.style.display = 'block';
+                } else {
+                    console.log('Career panel not found!');
+                }
+                
+                // Ensure simulation is initialized
+                if (window.Simulation && window.Simulation.initializeSimulation) {
+                    console.log('Initializing simulation...');
+                    window.Simulation.initializeSimulation(editor);
+                    window.Simulation.updateSimulationUI(editor);
+                }
+            }, 100);
             
             // Show success notification
             const notification = document.createElement('div');
