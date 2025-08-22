@@ -154,7 +154,7 @@ async function autoLoadCraftsFile() {
     
     try {
         // Load the all-crafts.json file from the loot matrix subfolder
-        const craftsUrl = 'loot matrix/all-crafts.json';
+        const craftsUrl = '../SAGE Editor Suite/Loot Matrix/all-crafts.json';
         console.log('Loading crafts file:', craftsUrl);
         
         const response = await fetch(craftsUrl);
