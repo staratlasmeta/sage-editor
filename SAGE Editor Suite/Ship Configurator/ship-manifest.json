@@ -1,6 +1,6 @@
 {
-  "generated": "2025-08-21T20:17:15.681Z",
-  "shipCount": 61,
+  "generated": "2025-08-22T19:11:37.913Z",
+  "shipCount": 67,
   "ships": [
     {
       "filename": "1_XXS_Busan_Pulse_Busan.json",
@@ -225,6 +225,30 @@
     {
       "filename": "7_Commander_Pearce_C11_Pearce.json",
       "path": "ships/7_Commander_Pearce_C11_Pearce.json"
+    },
+    {
+      "filename": "8_Class 8_Starbase___Tier_0_Custom.json",
+      "path": "ships/8_Class 8_Starbase___Tier_0_Custom.json"
+    },
+    {
+      "filename": "8_Class 8_Starbase___Tier_1_Custom.json",
+      "path": "ships/8_Class 8_Starbase___Tier_1_Custom.json"
+    },
+    {
+      "filename": "8_Class 8_Starbase___Tier_2_Custom.json",
+      "path": "ships/8_Class 8_Starbase___Tier_2_Custom.json"
+    },
+    {
+      "filename": "8_Class 8_Starbase___Tier_3_Custom.json",
+      "path": "ships/8_Class 8_Starbase___Tier_3_Custom.json"
+    },
+    {
+      "filename": "8_Class 8_Starbase___Tier_4_Custom.json",
+      "path": "ships/8_Class 8_Starbase___Tier_4_Custom.json"
+    },
+    {
+      "filename": "8_Class 8_Starbase___Tier_5_Custom.json",
+      "path": "ships/8_Class 8_Starbase___Tier_5_Custom.json"
     },
     {
       "filename": "9_Titan_Busan_The_Last_Stand_mk__VIII_Busan.json",
