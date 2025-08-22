@@ -8,8 +8,9 @@ When you open the Research Nodes tool, it automatically:
 1. Attempts to load `../SAGE Editor Suite/Research Nodes/research_nodes-careercombatspread.json`
 2. If successful, loads all nodes, connections, milestones, and tags
 3. Centers the view on the loaded nodes
-4. Shows a brief notification confirming the load
-5. Restores any collapsed node states from the file
+4. Activates simulation mode (🎮) automatically
+5. Shows a brief notification confirming the load
+6. Restores any collapsed node states from the file
 
 ## File Location
 The tool expects the research nodes file at:
@@ -56,6 +57,15 @@ The automatic loading preserves all features from manual loading:
 - Milestones and tags
 - Collapsed/expanded node states
 - Parent-child relationships and color inheritance
+
+## Simulation Mode
+After successful loading, the tool automatically activates simulation mode, allowing you to:
+- Test career progression and XP accumulation
+- Unlock skills by spending renown points
+- View career progress and statistics
+- Control simulation speed (1x, 2x, 4x, 8x)
+
+You can toggle back to edit mode at any time using the 🎮 button in the toolbar.
 
 ## Troubleshooting
 

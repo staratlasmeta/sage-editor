@@ -152,9 +152,13 @@ async function autoLoadResearchNodes() {
             // Update UI elements
             window.UIControls.updateSelectedNodeUI(editor);
             
+            // Activate simulation mode
+            console.log('Activating simulation mode...');
+            window.UIControls.setMode(editor, 'simulation');
+            
             // Show success notification
             const notification = document.createElement('div');
-            notification.textContent = 'Research nodes loaded automatically';
+            notification.textContent = 'Research nodes loaded - Simulation mode active';
             notification.style.position = 'fixed';
             notification.style.bottom = '20px';
             notification.style.left = '50%';
