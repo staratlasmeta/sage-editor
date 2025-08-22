@@ -5,15 +5,16 @@ The Loot Matrix tool now supports automatic loading of the `all-crafts.json` fil
 
 ## How It Works
 When you open the Loot Matrix tool, it automatically:
-1. Attempts to load `loot matrix/all-crafts.json`
+1. Attempts to load `../SAGE Editor Suite/Loot Matrix/all-crafts.json`
 2. If successful, populates the reward tree and categories
 3. Shows a brief notification confirming the load
 4. Updates the document name to "all-crafts"
+5. Only falls back to localStorage data if the automatic load fails
 
 ## File Location
 The tool expects the crafts file at:
 ```
-loot matrix/all-crafts.json
+SAGE Editor Suite/Loot Matrix/all-crafts.json
 ```
 
 ## Local Development
@@ -51,8 +52,8 @@ You can still manually load different files using the Load button if needed. The
 ## Troubleshooting
 
 ### File Not Found (404)
-- Ensure `all-crafts.json` exists in the `loot matrix` subfolder
-- Check the file path is exactly `loot matrix/all-crafts.json`
+- Ensure `all-crafts.json` exists in the `SAGE Editor Suite/Loot Matrix` folder
+- Check the file path is exactly `../SAGE Editor Suite/Loot Matrix/all-crafts.json`
 - Verify the file is included in your deployment
 
 ### Console Messages
