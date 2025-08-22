@@ -104,18 +104,6 @@ function init() {
     // Set up auto-backup
     setupAutoBackup();
     
-    // Load saved data if available
-    loadFromLocalStorage();
-    
-    // If no data was loaded, then set up default categories
-    if (Object.keys(appState.categories).length === 0) {
-        setupDefaultCategories();
-        renderCategoriesTable();
-    }
-    
-    // Initialize unsaved changes indicator
-    updateUnsavedChangesIndicator();
-    
     // Apply saved panel sizes
     applySavedPanelSizes();
     
@@ -137,15 +125,24 @@ function init() {
     // Handle window resize for scrollbars
     window.addEventListener('resize', setupSynchronizedScrollbars);
     
-    // Add button to process category promotions
-    const processButton = document.createElement('button');
-    processButton.textContent = 'Process Category Promotions';
-    processButton.className = 'header-button';
-    processButton.addEventListener('click', processCategoryPromotions);
-    document.querySelector('.header-controls').appendChild(processButton);
+    // Button for process category promotions is already in the HTML, no need to create it
     
-    // Auto-load the all-crafts.json file
-    autoLoadCraftsFile();
+    // Try to auto-load the all-crafts.json file first
+    autoLoadCraftsFile().then(success => {
+        if (!success) {
+            // Only load from localStorage if auto-loading failed
+            loadFromLocalStorage();
+            
+            // If no data was loaded, then set up default categories
+            if (Object.keys(appState.categories).length === 0) {
+                setupDefaultCategories();
+                renderCategoriesTable();
+            }
+        }
+        
+        // Initialize unsaved changes indicator
+        updateUnsavedChangesIndicator();
+    });
 }
 
 // Function to automatically load the all-crafts.json file
@@ -153,7 +150,7 @@ async function autoLoadCraftsFile() {
     console.log('Starting automatic crafts file loading...');
     
     try {
-        // Load the all-crafts.json file from the loot matrix subfolder
+        // Load the all-crafts.json file from the SAGE Editor Suite
         const craftsUrl = '../SAGE Editor Suite/Loot Matrix/all-crafts.json';
         console.log('Loading crafts file:', craftsUrl);
         
@@ -212,9 +209,11 @@ async function autoLoadCraftsFile() {
                 }
             }, 3000);
             
+            return true; // Success
         } else {
             console.error('Failed to load crafts file:', response.status);
             console.log('You can manually load crafts files using the Load button.');
+            return false; // Failed
         }
     } catch (error) {
         console.error('Error loading crafts file:', error);
@@ -230,6 +229,7 @@ async function autoLoadCraftsFile() {
         } else {
             console.log('You can manually load crafts files using the Load button.');
         }
+        return false; // Failed
     }
 }
 
