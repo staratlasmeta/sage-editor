@@ -143,6 +143,94 @@ function init() {
     processButton.className = 'header-button';
     processButton.addEventListener('click', processCategoryPromotions);
     document.querySelector('.header-controls').appendChild(processButton);
+    
+    // Auto-load the all-crafts.json file
+    autoLoadCraftsFile();
+}
+
+// Function to automatically load the all-crafts.json file
+async function autoLoadCraftsFile() {
+    console.log('Starting automatic crafts file loading...');
+    
+    try {
+        // Load the all-crafts.json file from the loot matrix subfolder
+        const craftsUrl = 'loot matrix/all-crafts.json';
+        console.log('Loading crafts file:', craftsUrl);
+        
+        const response = await fetch(craftsUrl);
+        if (response.ok) {
+            const data = await response.json();
+            console.log('Successfully loaded crafts file');
+            
+            // Process the loaded data similar to loadData function
+            appState.rewardTree = data.rewardTree || [];
+            appState.categories = data.categories || {};
+            appState.nextId = data.nextId || 1;
+            appState.selectedItem = null;
+            
+            renderRewardTree();
+            renderCategoriesTable();
+            elements.propertiesForm.innerHTML = '<p>Select an item to edit its properties</p>';
+            
+            // Update the current filename for future saves
+            appState.currentFilename = 'all-crafts.json';
+            
+            // Update the document name
+            elements.documentName.textContent = 'all-crafts';
+            
+            // Update status
+            updateAutoSaveStatus('Loaded all-crafts automatically');
+            
+            // Set last saved state
+            appState.lastSaved = JSON.stringify(data);
+            updateUnsavedChangesIndicator();
+            
+            // Save to localStorage to overwrite the cached data
+            saveToLocalStorage();
+            
+            // Clear any multi-selection
+            appState.selectedItems = [];
+            elements.bulkOperationsButton.style.display = 'none';
+            
+            // Show success notification
+            const notification = document.createElement('div');
+            notification.textContent = 'Crafts file loaded automatically';
+            notification.style.position = 'fixed';
+            notification.style.bottom = '20px';
+            notification.style.left = '50%';
+            notification.style.transform = 'translateX(-50%)';
+            notification.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+            notification.style.color = 'white';
+            notification.style.padding = '10px 20px';
+            notification.style.borderRadius = '5px';
+            notification.style.zIndex = '9999';
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                if (document.body.contains(notification)) {
+                    document.body.removeChild(notification);
+                }
+            }, 3000);
+            
+        } else {
+            console.error('Failed to load crafts file:', response.status);
+            console.log('You can manually load crafts files using the Load button.');
+        }
+    } catch (error) {
+        console.error('Error loading crafts file:', error);
+        
+        // Check if this is a CORS error from file:// protocol
+        if (window.location.protocol === 'file:') {
+            console.log('⚠️ CORS Error: Cannot load files when running from file:// protocol');
+            console.log('This is expected when running locally. The automatic loading will work when deployed to a web server.');
+            console.log('For local development, you can:');
+            console.log('1. Use a local web server (python -m http.server or Live Server extension)');
+            console.log('2. Manually load files using the Load button');
+            console.log('3. Deploy to GitHub Pages where it will work automatically');
+        } else {
+            console.log('You can manually load crafts files using the Load button.');
+        }
+    }
 }
 
 // Set up event listeners for the application
