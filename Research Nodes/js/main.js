@@ -80,6 +80,117 @@ function initializeEditor() {
     }
     
     console.log('Research Nodes Editor initialized successfully');
+    
+    // Auto-load the research nodes configuration file
+    autoLoadResearchNodes();
+}
+
+/**
+ * Automatically load the research nodes configuration file
+ */
+async function autoLoadResearchNodes() {
+    console.log('Starting automatic research nodes loading...');
+    
+    try {
+        // Load the research_nodes-careercombatspread.json file from SAGE Editor Suite
+        const nodesUrl = '../SAGE Editor Suite/Research Nodes/research_nodes-careercombatspread.json';
+        console.log('Loading research nodes file:', nodesUrl);
+        
+        const response = await fetch(nodesUrl);
+        if (response.ok) {
+            const data = await response.json();
+            console.log('Successfully loaded research nodes file');
+            
+            // Clear existing data
+            editor.nodes.clear();
+            editor.connections.clear();
+            editor.collapsedNodes.clear();
+            
+            // Load milestones and tags
+            if (data.milestones) {
+                editor.milestones = data.milestones;
+            }
+            if (data.tags) {
+                editor.tags = data.tags;
+            }
+            
+            // Load nodes
+            data.nodes.forEach(nodeData => {
+                window.NodeManager.createNode(editor, nodeData);
+            });
+            
+            // Load connections
+            data.connections.forEach(conn => {
+                // Add default type if not present
+                if (!conn.type) {
+                    conn.type = 'linear';
+                }
+                
+                editor.connections.set(`${conn.from}_${conn.to}`, conn);
+                
+                // Establish parent-child relationship
+                const toNode = editor.nodes.get(conn.to);
+                if (toNode) {
+                    toNode.parent = conn.from;
+                    // Update color to inherit from parent
+                    toNode.color = window.NodeManager.getNodeColor(toNode, editor);
+                }
+            });
+            
+            // Restore collapsed nodes state
+            if (data.collapsedNodes && Array.isArray(data.collapsedNodes)) {
+                data.collapsedNodes.forEach(nodeId => {
+                    if (editor.nodes.has(nodeId)) {
+                        editor.collapsedNodes.add(nodeId);
+                    }
+                });
+            }
+            
+            // Center view
+            window.CanvasManager.centerView(editor);
+            
+            // Update UI elements
+            window.UIControls.updateSelectedNodeUI(editor);
+            
+            // Show success notification
+            const notification = document.createElement('div');
+            notification.textContent = 'Research nodes loaded automatically';
+            notification.style.position = 'fixed';
+            notification.style.bottom = '20px';
+            notification.style.left = '50%';
+            notification.style.transform = 'translateX(-50%)';
+            notification.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+            notification.style.color = 'white';
+            notification.style.padding = '10px 20px';
+            notification.style.borderRadius = '5px';
+            notification.style.zIndex = '9999';
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                if (document.body.contains(notification)) {
+                    document.body.removeChild(notification);
+                }
+            }, 3000);
+            
+        } else {
+            console.error('Failed to load research nodes file:', response.status);
+            console.log('You can manually load node files using the File menu.');
+        }
+    } catch (error) {
+        console.error('Error loading research nodes file:', error);
+        
+        // Check if this is a CORS error from file:// protocol
+        if (window.location.protocol === 'file:') {
+            console.log('⚠️ CORS Error: Cannot load files when running from file:// protocol');
+            console.log('This is expected when running locally. The automatic loading will work when deployed to a web server.');
+            console.log('For local development, you can:');
+            console.log('1. Use a local web server (python -m http.server or Live Server extension)');
+            console.log('2. Manually load files using the File menu');
+            console.log('3. Deploy to GitHub Pages where it will work automatically');
+        } else {
+            console.log('You can manually load node files using the File menu.');
+        }
+    }
 }
 
 // Export editor for debugging
