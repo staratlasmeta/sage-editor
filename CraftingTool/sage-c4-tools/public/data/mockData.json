@@ -1,0 +1,497 @@
+{
+  "planets": [
+    {
+      "id": "planet_mud_alpha",
+      "name": "Terra Prime",
+      "faction": "MUD",
+      "tier": 1,
+      "resources": [
+        "iron-ore",
+        "copper-ore",
+        "hydrogen"
+      ],
+      "richness": {
+        "iron-ore": 1.5,
+        "copper-ore": 1.0,
+        "hydrogen": 2.0
+      },
+      "tags": [
+        "terrestrial",
+        "mining",
+        "industrial"
+      ],
+      "rentPerDay": 100
+    },
+    {
+      "id": "planet_oni_beta",
+      "name": "Crystal Falls",
+      "faction": "ONI",
+      "tier": 2,
+      "resources": [
+        "copper-ore",
+        "silica",
+        "hydrogen"
+      ],
+      "richness": {
+        "copper-ore": 2.0,
+        "silica": 1.5,
+        "hydrogen": 1.0
+      },
+      "tags": [
+        "crystalline",
+        "tech",
+        "mining"
+      ],
+      "rentPerDay": 200
+    },
+    {
+      "id": "planet_ust_gamma",
+      "name": "Forge World",
+      "faction": "UST",
+      "tier": 3,
+      "resources": [
+        "iron-ore",
+        "coal",
+        "copper-ore"
+      ],
+      "richness": {
+        "iron-ore": 2.5,
+        "coal": 1.8,
+        "copper-ore": 1.2
+      },
+      "tags": [
+        "volcanic",
+        "industrial",
+        "forge"
+      ],
+      "rentPerDay": 300
+    }
+  ],
+  "buildings": [
+    {
+      "id": "central-hub-t1",
+      "name": "Central Hub T1",
+      "category": "infrastructure",
+      "tier": 1,
+      "slots": 5,
+      "power": 50,
+      "crew": 10,
+      "resourceUsage": {
+        "fuel": 1
+      },
+      "constructionCost": {
+        "steel": 100,
+        "electronics": 50
+      },
+      "constructionTime": 60,
+      "requiredTags": [],
+      "comesWithStake": true
+    },
+    {
+      "id": "extractor_basic",
+      "name": "Basic Extractor",
+      "category": "extraction",
+      "tier": 1,
+      "slots": 8,
+      "power": -20,
+      "crew": 10,
+      "extractionRate": {
+        "iron-ore": 1
+      },
+      "constructionCost": {
+        "steel": 150
+      },
+      "constructionTime": 60,
+      "requiredTags": [
+        "mining"
+      ],
+      "requiredResources": [
+        "iron-ore"
+      ]
+    },
+    {
+      "id": "generator_basic",
+      "name": "Basic Generator",
+      "category": "power",
+      "tier": 1,
+      "slots": 10,
+      "power": 80,
+      "crew": 5,
+      "resourceUsage": {
+        "fuel": 1.5
+      },
+      "constructionCost": {
+        "steel": 200,
+        "electronics": 100
+      },
+      "constructionTime": 90,
+      "requiredTags": []
+    },
+    {
+      "id": "storage_basic",
+      "name": "Basic Storage",
+      "category": "storage",
+      "tier": 1,
+      "slots": 4,
+      "power": -5,
+      "crew": 3,
+      "resourceStorage": {
+        "capacity": 500
+      },
+      "constructionCost": {
+        "steel": 50
+      },
+      "constructionTime": 30,
+      "requiredTags": []
+    },
+    {
+      "id": "power-plant-t1",
+      "name": "Power Plant T1",
+      "category": "power",
+      "tier": 1,
+      "slots": 8,
+      "power": 100,
+      "crew": 5,
+      "resourceUsage": {
+        "fuel": 2
+      },
+      "constructionCost": {
+        "steel": 150,
+        "electronics": 100
+      },
+      "constructionTime": 120,
+      "requiredTags": [
+        "industrial"
+      ]
+    },
+    {
+      "id": "iron-extractor-t1",
+      "name": "Iron Ore Extractor T1",
+      "category": "extraction",
+      "tier": 1,
+      "slots": 10,
+      "power": -20,
+      "crew": 15,
+      "extractionRate": {
+        "iron-ore": 1
+      },
+      "constructionCost": {
+        "steel": 200,
+        "electronics": 75
+      },
+      "constructionTime": 90,
+      "requiredTags": [
+        "mining"
+      ],
+      "requiredResources": [
+        "iron-ore"
+      ]
+    },
+    {
+      "id": "copper-extractor-t1",
+      "name": "Copper Ore Extractor T1",
+      "category": "extraction",
+      "tier": 1,
+      "slots": 10,
+      "power": -20,
+      "crew": 15,
+      "extractionRate": {
+        "copper-ore": 1
+      },
+      "constructionCost": {
+        "steel": 200,
+        "electronics": 75
+      },
+      "constructionTime": 90,
+      "requiredTags": [
+        "mining"
+      ],
+      "requiredResources": [
+        "copper-ore"
+      ]
+    },
+    {
+      "id": "hydrogen-extractor-t1",
+      "name": "Hydrogen Extractor T1",
+      "category": "extraction",
+      "tier": 1,
+      "slots": 8,
+      "power": -15,
+      "crew": 10,
+      "extractionRate": {
+        "hydrogen": 1
+      },
+      "constructionCost": {
+        "steel": 150,
+        "electronics": 100
+      },
+      "constructionTime": 60,
+      "requiredTags": [],
+      "requiredResources": [
+        "hydrogen"
+      ]
+    },
+    {
+      "id": "copper-processor-t1",
+      "name": "Copper Processor T1",
+      "category": "processing",
+      "tier": 1,
+      "slots": 12,
+      "power": -30,
+      "crew": 20,
+      "resourceUsage": {
+        "copper-ore": 2
+      },
+      "resourceProduction": {
+        "copper": 1
+      },
+      "constructionCost": {
+        "steel": 300,
+        "electronics": 150
+      },
+      "constructionTime": 150,
+      "requiredTags": [
+        "industrial",
+        "processing"
+      ]
+    },
+    {
+      "id": "steel-processor-t1",
+      "name": "Steel Processor T1",
+      "category": "processing",
+      "tier": 1,
+      "slots": 15,
+      "power": -40,
+      "crew": 25,
+      "resourceUsage": {
+        "iron-ore": 2,
+        "coal": 1
+      },
+      "resourceProduction": {
+        "steel": 1
+      },
+      "constructionCost": {
+        "steel": 400,
+        "electronics": 200
+      },
+      "constructionTime": 180,
+      "requiredTags": [
+        "industrial",
+        "forge"
+      ]
+    },
+    {
+      "id": "fuel-processor-t3",
+      "name": "Fuel Processor T3",
+      "category": "processing",
+      "tier": 3,
+      "slots": 20,
+      "power": -50,
+      "crew": 30,
+      "resourceUsage": {
+        "hydrogen": 2
+      },
+      "resourceProduction": {
+        "fuel": 1
+      },
+      "constructionCost": {
+        "steel": 800,
+        "electronics": 400,
+        "circuit-board": 100
+      },
+      "constructionTime": 300,
+      "requiredTags": [
+        "tech",
+        "processing"
+      ]
+    },
+    {
+      "id": "storage-hub-t1",
+      "name": "Storage Hub T1",
+      "category": "storage",
+      "tier": 1,
+      "slots": 5,
+      "power": -5,
+      "crew": 5,
+      "resourceStorage": {
+        "capacity": 1000
+      },
+      "constructionCost": {
+        "steel": 100
+      },
+      "constructionTime": 30,
+      "requiredTags": []
+    }
+  ],
+  "recipes": [
+    {
+      "id": "recipe_steel",
+      "name": "Steel",
+      "tier": 1,
+      "type": "component",
+      "constructionTime": 60,
+      "ingredients": [
+        {
+          "resource": "iron-ore",
+          "quantity": 2
+        },
+        {
+          "resource": "coal",
+          "quantity": 1
+        }
+      ],
+      "output": {
+        "resource": "steel",
+        "quantity": 1
+      }
+    },
+    {
+      "id": "recipe_copper",
+      "name": "Copper",
+      "tier": 1,
+      "type": "component",
+      "constructionTime": 45,
+      "ingredients": [
+        {
+          "resource": "copper-ore",
+          "quantity": 2
+        }
+      ],
+      "output": {
+        "resource": "copper",
+        "quantity": 1
+      }
+    },
+    {
+      "id": "recipe_electronics",
+      "name": "Electronics",
+      "tier": 2,
+      "type": "component",
+      "constructionTime": 90,
+      "ingredients": [
+        {
+          "resource": "copper",
+          "quantity": 2
+        },
+        {
+          "resource": "silica",
+          "quantity": 1
+        }
+      ],
+      "output": {
+        "resource": "electronics",
+        "quantity": 1
+      }
+    },
+    {
+      "id": "recipe_circuit_board",
+      "name": "Circuit Board",
+      "tier": 2,
+      "type": "component",
+      "constructionTime": 120,
+      "ingredients": [
+        {
+          "resource": "electronics",
+          "quantity": 2
+        },
+        {
+          "resource": "copper",
+          "quantity": 1
+        },
+        {
+          "resource": "plastic",
+          "quantity": 1
+        }
+      ],
+      "output": {
+        "resource": "circuit-board",
+        "quantity": 1
+      }
+    },
+    {
+      "id": "recipe_iron_plate",
+      "name": "Iron Plate",
+      "tier": 1,
+      "type": "component",
+      "constructionTime": 30,
+      "ingredients": [
+        {
+          "resource": "iron-ore",
+          "quantity": 1
+        }
+      ],
+      "output": {
+        "resource": "iron-plate",
+        "quantity": 2
+      }
+    },
+    {
+      "id": "recipe_fuel",
+      "name": "Fuel",
+      "tier": 3,
+      "type": "consumable",
+      "constructionTime": 120,
+      "ingredients": [
+        {
+          "resource": "hydrogen",
+          "quantity": 2
+        }
+      ],
+      "output": {
+        "resource": "fuel",
+        "quantity": 1
+      }
+    }
+  ],
+  "resources": {
+    "raw": [
+      "iron-ore",
+      "copper-ore",
+      "coal",
+      "silica",
+      "hydrogen"
+    ],
+    "processed": [
+      "steel",
+      "copper",
+      "iron-plate",
+      "fuel"
+    ],
+    "components": [
+      "electronics",
+      "circuit-board",
+      "plastic"
+    ]
+  },
+  "claimStakeDefinitions": [
+    {
+      "id": "claim-stake-t1",
+      "name": "Basic Claim Stake",
+      "tier": 1,
+      "slots": 20,
+      "rentMultiplier": 1.0
+    },
+    {
+      "id": "claim-stake-t2",
+      "name": "Advanced Claim Stake",
+      "tier": 2,
+      "slots": 40,
+      "rentMultiplier": 1.5
+    },
+    {
+      "id": "claim-stake-t3",
+      "name": "Industrial Claim Stake",
+      "tier": 3,
+      "slots": 60,
+      "rentMultiplier": 2.0
+    }
+  ],
+  "starbases": [
+    {
+      "id": "starbase_mud_alpha",
+      "name": "MUD Alpha Station",
+      "faction": "MUD",
+      "level": 3
+    }
+  ]
+}
