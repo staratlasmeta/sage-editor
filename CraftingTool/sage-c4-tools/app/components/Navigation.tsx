@@ -1,20 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router';
 import { AchievementPanel } from './AchievementPanel';
 import { SaveLoadManager } from './SaveLoadManager';
 import { NotificationSystem, useNotifications } from './NotificationSystem';
+import { SettingsPanel } from './SettingsPanel';
+import { ResourcesView } from './ResourcesView';
 
 interface NavigationProps {
     className?: string;
+    claimStakes?: any[];
 }
 
-export function Navigation({ className = '' }: NavigationProps) {
+export function Navigation({ className = '', claimStakes = [] }: NavigationProps) {
     const { notifications, showNotification, dismissNotification } = useNotifications();
+    const [showSettings, setShowSettings] = useState(false);
+    const [showResourcesView, setShowResourcesView] = useState(false);
 
     const handleHomeClick = () => {
         // Navigate back to SAGE Editor Suite
-        // Using relative path to go up to the SAGE Editor Suite
-        window.location.href = '../../SAGE Editor Suite/index.html';
+        // Check if we're in production (standalone build) or development
+        const isProduction = window.location.protocol === 'file:' || !window.location.host.includes('localhost');
+
+        if (isProduction) {
+            // In production, navigate to the SAGE Editor Suite
+            window.location.href = '../../SAGE Editor Suite/index.html';
+        } else {
+            // In development, just show an alert
+            alert('In production, this will navigate to the SAGE Editor Suite');
+        }
     };
 
     return (
@@ -38,7 +51,7 @@ export function Navigation({ className = '' }: NavigationProps) {
                     }}></div>
 
                     <NavLink
-                        to="/claim-stakes"
+                        to="/"
                         className={({ isActive }) => `tool-button ${isActive ? 'active' : ''}`}
                     >
                         <span className="tool-icon">🏭</span>
@@ -63,9 +76,16 @@ export function Navigation({ className = '' }: NavigationProps) {
                 </div>
 
                 <div className="global-actions">
+                    <button
+                        className="btn btn-secondary"
+                        onClick={() => setShowResourcesView(true)}
+                        title="Open Full Resource Management"
+                    >
+                        🌐 Global Resources
+                    </button>
                     <AchievementPanel />
                     <SaveLoadManager onNotification={showNotification} />
-                    <button className="btn btn-secondary" onClick={() => console.log('Settings')}>
+                    <button className="btn btn-secondary" onClick={() => setShowSettings(true)}>
                         ⚙️ Settings
                     </button>
                 </div>
@@ -75,6 +95,17 @@ export function Navigation({ className = '' }: NavigationProps) {
                 notifications={notifications}
                 onDismiss={dismissNotification}
             />
+
+            {showSettings && (
+                <SettingsPanel onClose={() => setShowSettings(false)} />
+            )}
+
+            {showResourcesView && (
+                <ResourcesView
+                    claimStakes={claimStakes}
+                    onClose={() => setShowResourcesView(false)}
+                />
+            )}
         </>
     );
 } 

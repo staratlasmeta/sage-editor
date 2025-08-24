@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Navigation } from '../components/Navigation';
 import { StarbaseControl } from '../components/StarbaseControl';
 import { useGameData } from '../contexts/DataContext';
 import { useSharedState, canPlaceClaimStake } from '../contexts/SharedStateContext';
 import { ResourceManager } from '../components/ResourceManager';
+import { NotificationSystem, useNotifications } from '../components/NotificationSystem';
 
 // Type definitions
 interface Planet {
@@ -25,8 +26,8 @@ interface Building {
     slots: number;
     power: number;
     crew: number;
-    constructionTime: number;
-    constructionCost: Record<string, number>;
+    constructionTime?: number;
+    constructionCost?: Record<string, number>;
     resourceUsage?: Record<string, number>;
     resourceProduction?: Record<string, number>;
     extractionRate?: Record<string, number>;
@@ -38,6 +39,8 @@ interface Building {
     resourceStorage?: {
         capacity: number;
     };
+    upgradeFamily?: string;
+    description?: string;
 }
 
 interface ClaimStakeInstance {
@@ -45,12 +48,13 @@ interface ClaimStakeInstance {
     planetId: string;
     tier: number;
     buildings: PlacedBuilding[];
-    isFinalized: boolean;
-    rentPaidUntil: number;
     resources: Record<string, number>;
+    isFinalized: boolean;
+    rent: number;
     lastUpdate: number;
     maxStorage: number;
     currentStorage: number;
+    maxSlots: number;  // Added for slot management
 }
 
 interface PlacedBuilding {
@@ -60,17 +64,24 @@ interface PlacedBuilding {
     constructionComplete?: number;
     isActive: boolean;
     inactiveSince?: number; // Track when building became inactive
+    stopReason?: string; // Track why building stopped
+}
+
+interface ResourceFlow {
+    resource: string;
+    extraction: number;
+    potentialExtraction: number;
+    production: number;
+    potentialProduction: number;
+    consumption: number;
+    net: number;
+    storage: number;
 }
 
 export default function ClaimStakes() {
     const { gameData, loading } = useGameData();
-    const { state: sharedState, updateStatistic, unlockAchievement, addToInventory, consumeFromInventory } = useSharedState();
-
-    // Get notification function from parent
-    const showNotification = (message: string, type: 'success' | 'error' | 'info' | 'warning' = 'info') => {
-        // For now, use console log. In a real app, this would come from a parent component
-        console.log(`[${type.toUpperCase()}] ${message}`);
-    };
+    const { state: sharedState, dispatch, updateStatistic, unlockAchievement, addToInventory, consumeFromInventory } = useSharedState();
+    const { notifications, showNotification, dismissNotification } = useNotifications();
 
     // State
     const [selectedPlanet, setSelectedPlanet] = useState<Planet | null>(null);
@@ -80,9 +91,15 @@ export default function ClaimStakes() {
         const saved = localStorage.getItem('claimStakeInstances');
         if (saved) {
             try {
-                return JSON.parse(saved);
+                const parsed = JSON.parse(saved);
+                // Return empty array if the parsed data is not an array or is empty
+                if (!Array.isArray(parsed)) {
+                    return [];
+                }
+                return parsed;
             } catch (e) {
-                console.error('Failed to load claim stakes:', e);
+                // Failed to parse, return empty array
+                return [];
             }
         }
         return [];
@@ -98,12 +115,24 @@ export default function ClaimStakes() {
     // Real-time simulation
     const simulationRef = useRef<NodeJS.Timeout | null>(null);
 
+    // Cleanup on component unmount
+    useEffect(() => {
+        return () => {
+            // Clear simulation interval on unmount
+            if (simulationRef.current) {
+                clearInterval(simulationRef.current);
+                simulationRef.current = null;
+            }
+        };
+    }, []);
+
     // Get active instance
     const activeInstance = claimStakeInstances.find(i => i.id === activeInstanceId);
 
     // Cast data with proper types
     const planets = (gameData?.planets || []) as Planet[];
     const buildings = (gameData?.buildings || []) as Building[];
+    const starbaseInventory = sharedState.starbaseInventory;
 
     // Filter available tiers based on starbase level
     const availableTiers = [1, 2, 3, 4, 5].filter(tier =>
@@ -111,175 +140,214 @@ export default function ClaimStakes() {
     );
 
     // Save claim stakes to localStorage when they change
+    // Track if this is the initial mount to avoid saving empty state immediately
+    const isInitialMount = useRef(true);
     useEffect(() => {
+        if (isInitialMount.current) {
+            isInitialMount.current = false;
+            // Don't save on initial mount
+            return;
+        }
         localStorage.setItem('claimStakeInstances', JSON.stringify(claimStakeInstances));
     }, [claimStakeInstances]);
 
-    // Start real-time simulation
+    // Start real-time simulation with smarter batch processing
     useEffect(() => {
-        if (claimStakeInstances.length > 0) {
+        // Clear any existing interval first
+        if (simulationRef.current) {
+            clearInterval(simulationRef.current);
+            simulationRef.current = null;
+        }
+
+        if (claimStakeInstances.length > 0 && buildings && planets) {
             simulationRef.current = setInterval(() => {
+                // Get fresh references to buildings and planets
+                const currentBuildings = buildings;
+                const currentPlanets = planets;
+
                 setClaimStakeInstances(prev => prev.map(instance => {
-                    if (!instance.isFinalized) {
-                        return instance;
-                    }
+                    if (!instance.isFinalized) return instance;
 
                     const now = Date.now();
-                    const deltaTime = (now - instance.lastUpdate) / 1000; // seconds
-
-                    // Calculate resource production/consumption
+                    const deltaTime = Math.min((now - instance.lastUpdate) / 1000, 1); // Cap at 1 second
                     const newResources = { ...instance.resources };
-                    let allBuildingsActive = true;
 
-                    // Calculate total storage capacity
-                    let maxStorage = 1000 * instance.tier; // Base storage
-                    instance.buildings.forEach(pb => {
-                        const building = buildings.find(b => b.id === pb.buildingId);
-                        if (building?.resourceStorage?.capacity) {
-                            maxStorage += building.resourceStorage.capacity;
+                    // Get building power balance
+                    let totalPower = 0;
+                    instance.buildings.forEach((pb: PlacedBuilding) => {
+                        const building = currentBuildings.find((b: Building) => b.id === pb.buildingId);
+                        if (building) {
+                            totalPower += building.power || 0;
                         }
                     });
 
-                    // Calculate current storage used
-                    let currentStorage = 0;
-                    for (const amount of Object.values(newResources)) {
-                        currentStorage += amount;
+                    // Calculate storage info
+                    const maxStorage = instance.maxStorage || 1000;
+                    const currentStorageUsed = Object.values(newResources).reduce((sum: number, val: any) => sum + val, 0);
+                    const storageUtilization = currentStorageUsed / maxStorage;
+
+                    // Check stopping conditions (no hysteresis - immediate stop when conditions are met)
+                    let shouldStop = false;
+                    let stopReason = '';
+
+                    // Check power
+                    if (totalPower < 0) {
+                        shouldStop = true;
+                        stopReason = 'Insufficient power';
                     }
 
-                    // First pass: check if we have required resources
-                    instance.buildings.forEach(pb => {
-                        const building = buildings.find(b => b.id === pb.buildingId);
-                        if (!building || !pb.isActive) return;
+                    // Check fuel
+                    const needsFuel = instance.buildings.some((pb: PlacedBuilding) => {
+                        const building = currentBuildings.find((b: Building) => b.id === pb.buildingId);
+                        return building?.resourceUsage && building.resourceUsage['fuel'] > 0;
+                    });
 
-                        // Check resource requirements
-                        if (building.resourceUsage) {
-                            for (const [resource, rate] of Object.entries(building.resourceUsage)) {
-                                const required = rate * deltaTime;
-                                if ((newResources[resource] || 0) < required) {
-                                    allBuildingsActive = false;
+                    if (needsFuel && (newResources['fuel'] || 0) <= 0) {
+                        shouldStop = true;
+                        stopReason = 'No fuel available';
+                    }
+
+                    // Check if storage is too full (95% threshold)
+                    if (storageUtilization >= 0.95) {
+                        // Check if we would produce net positive resources
+                        let wouldProduceMore = false;
+                        instance.buildings.forEach((pb: PlacedBuilding) => {
+                            const building = currentBuildings.find((b: Building) => b.id === pb.buildingId);
+                            if (building) {
+                                if (building.extractionRate || building.resourceProduction) {
+                                    wouldProduceMore = true;
                                 }
                             }
+                        });
+
+                        if (wouldProduceMore) {
+                            shouldStop = true;
+                            stopReason = 'Storage full (95%+)';
                         }
-                    });
-
-                    // Check fuel for central hub
-                    const centralHub = instance.buildings.find(pb => {
-                        const b = buildings.find(b => b.id === pb.buildingId);
-                        return b?.name.includes('Central Hub');
-                    });
-
-                    if (centralHub && (newResources.fuel || 0) <= 0) {
-                        allBuildingsActive = false;
                     }
 
-                    // Second pass: produce/consume resources if everything is running
-                    if (allBuildingsActive) {
-                        instance.buildings.forEach(pb => {
-                            const building = buildings.find(b => b.id === pb.buildingId);
-                            if (!building || !pb.isActive) return;
+                    // Update building states - once stopped, stay stopped until condition is resolved
+                    const updatedBuildings = instance.buildings.map((pb: PlacedBuilding) => {
+                        // If currently stopped, check if we can restart
+                        if (!pb.isActive) {
+                            // Only restart if ALL stop conditions are resolved
+                            let canRestart = true;
 
-                            // Consume resources
+                            // Re-check all conditions for restart
+                            if (totalPower < 0) canRestart = false;
+                            if (needsFuel && (newResources['fuel'] || 0) <= 5) canRestart = false; // Need at least 5 fuel to restart
+                            if (storageUtilization >= 0.90) canRestart = false; // Need space cleared to 90% to restart
+
+                            if (canRestart) {
+                                return { ...pb, isActive: true, inactiveSince: undefined };
+                            }
+                            return pb; // Stay stopped
+                        }
+
+                        // If currently active and should stop, stop it
+                        if (shouldStop) {
+                            return {
+                                ...pb,
+                                isActive: false,
+                                inactiveSince: now,
+                                stopReason: stopReason
+                            };
+                        }
+
+                        return pb; // Stay active
+                    });
+
+                    // Only process resources if buildings are active
+                    const anyActive = updatedBuildings.some(b => b.isActive);
+
+                    if (anyActive) {
+                        // Track resource flows for checking
+                        const resourceFlows: Record<string, any> = {};
+
+                        updatedBuildings.forEach((pb: PlacedBuilding) => {
+                            if (!pb.isActive) return;
+
+                            const building = currentBuildings.find((b: Building) => b.id === pb.buildingId);
+                            if (!building) return;
+
+                            // Process consumption
                             if (building.resourceUsage) {
-                                for (const [resource, rate] of Object.entries(building.resourceUsage)) {
-                                    const consumed = rate * deltaTime;
-                                    const oldAmount = newResources[resource] || 0;
-                                    newResources[resource] = oldAmount - consumed;
-
-                                    if (consumed > 0.1) {
-                                        console.log(`⚡ Consumed ${consumed.toFixed(2)} ${resource} (${oldAmount.toFixed(2)} → ${newResources[resource].toFixed(2)})`);
-                                    }
-                                }
-                            }
-
-                            // Produce resources (check storage capacity)
-                            if (building.resourceProduction) {
-                                for (const [resource, rate] of Object.entries(building.resourceProduction)) {
-                                    const produced = rate * deltaTime;
-                                    const oldAmount = newResources[resource] || 0;
-
-                                    // Check if adding this would exceed storage
-                                    const newTotal = currentStorage - oldAmount + oldAmount + produced;
-                                    if (newTotal <= maxStorage) {
-                                        newResources[resource] = oldAmount + produced;
-                                        currentStorage += produced;
-
-                                        if (produced > 0.1) {
-                                            console.log(`🏭 Produced ${produced.toFixed(2)} ${resource} (${oldAmount.toFixed(2)} → ${newResources[resource].toFixed(2)})`);
+                                Object.entries(building.resourceUsage).forEach(([resource, rate]) => {
+                                    const consumption = rate * deltaTime;
+                                    if (newResources[resource] >= consumption) {
+                                        newResources[resource] -= consumption;
+                                        if (!resourceFlows[resource]) {
+                                            resourceFlows[resource] = { production: 0, consumption: 0 };
                                         }
-                                    } else {
-                                        console.log(`📦 Storage full! Cannot produce ${resource}`);
+                                        resourceFlows[resource].consumption += rate;
                                     }
-                                }
+                                });
                             }
 
-                            // Extract resources (affected by planet richness and storage capacity)
+                            // Process extraction
                             if (building.extractionRate) {
-                                const planet = planets.find(p => p.id === instance.planetId);
-
-                                for (const [resource, rate] of Object.entries(building.extractionRate)) {
-                                    const richness = planet?.richness?.[resource] || 1.0;
-                                    if (planet?.resources?.includes(resource)) {
-                                        const extracted = rate * richness * deltaTime;
-                                        const oldAmount = newResources[resource] || 0;
-
-                                        // Check if adding this would exceed storage
-                                        const newTotal = currentStorage - oldAmount + oldAmount + extracted;
-                                        if (newTotal <= maxStorage) {
-                                            newResources[resource] = oldAmount + extracted;
-                                            currentStorage += extracted;
-
-                                            // Log significant resource changes
-                                            if (extracted > 0.1) {
-                                                console.log(`✅ Extracted ${extracted.toFixed(2)} ${resource} (${oldAmount.toFixed(2)} → ${newResources[resource].toFixed(2)})`);
-                                            }
-                                        } else {
-                                            console.log(`📦 Storage full! Cannot extract ${resource}`);
-                                        }
+                                const planet = currentPlanets.find((p: Planet) => p.id === instance.planetId);
+                                Object.entries(building.extractionRate).forEach(([resource, rate]) => {
+                                    const richness = planet?.richness?.[resource] || 1;
+                                    const production = rate * richness * deltaTime;
+                                    newResources[resource] = (newResources[resource] || 0) + production;
+                                    if (!resourceFlows[resource]) {
+                                        resourceFlows[resource] = { production: 0, consumption: 0 };
                                     }
-                                }
+                                    resourceFlows[resource].production += rate * richness;
+                                });
+                            }
+
+                            // Process production
+                            if (building.resourceProduction) {
+                                Object.entries(building.resourceProduction).forEach(([resource, rate]) => {
+                                    const production = rate * deltaTime;
+                                    newResources[resource] = (newResources[resource] || 0) + production;
+                                    if (!resourceFlows[resource]) {
+                                        resourceFlows[resource] = { production: 0, consumption: 0 };
+                                    }
+                                    resourceFlows[resource].production += rate;
+                                });
                             }
                         });
                     }
 
-                    // Update active state for all buildings
-                    const updatedBuildings = instance.buildings.map(pb => {
-                        const wasActive = pb.isActive;
-                        const isNowActive = allBuildingsActive;
-
-                        return {
-                            ...pb,
-                            isActive: isNowActive,
-                            // Track when building became inactive
-                            inactiveSince: !isNowActive && wasActive ? Date.now() :
-                                isNowActive ? undefined :
-                                    pb.inactiveSince
-                        };
-                    });
-
-                    // Recalculate current storage
-                    let finalStorage = 0;
-                    for (const amount of Object.values(newResources)) {
-                        finalStorage += amount;
+                    // Cap resources at max storage
+                    const newStorageUsed = Object.values(newResources).reduce((sum: number, val: any) => sum + val, 0);
+                    if (newStorageUsed > maxStorage) {
+                        // Scale down all resources proportionally
+                        const scale = maxStorage / newStorageUsed;
+                        Object.keys(newResources).forEach(resource => {
+                            newResources[resource] *= scale;
+                        });
                     }
 
                     return {
                         ...instance,
-                        resources: newResources,
                         buildings: updatedBuildings,
+                        resources: newResources,
                         lastUpdate: now,
-                        maxStorage: maxStorage,
-                        currentStorage: finalStorage
+                        currentStorage: Object.values(newResources).reduce((sum: number, val: any) => sum + val, 0)
                     };
                 }));
-            }, 1000); // Update every second
+            }, 1000); // Run every second
+
+            return () => {
+                if (simulationRef.current) {
+                    clearInterval(simulationRef.current);
+                    simulationRef.current = null;
+                }
+            };
         }
 
+        // Cleanup on unmount
         return () => {
             if (simulationRef.current) {
                 clearInterval(simulationRef.current);
+                simulationRef.current = null;
             }
         };
-    }, [claimStakeInstances.length, buildings, planets]);
+    }, [claimStakeInstances.length, buildings.length, planets.length]); // Use lengths to avoid reference issues
 
     // Calculate stats for current design or active instance
     const calculateStats = (buildingList: PlacedBuilding[]) => {
@@ -287,6 +355,10 @@ export default function ClaimStakes() {
         let totalPower = 0;
         let totalCrew = 0;
         const resourceFlow: Record<string, { production: number; consumption: number }> = {};
+
+        // Get current planet for richness values
+        const currentPlanet = selectedPlanet ||
+            (activeInstance ? planets.find(p => p.id === activeInstance.planetId) : null);
 
         buildingList.forEach(pb => {
             const building = buildings.find(b => b.id === pb.buildingId);
@@ -312,17 +384,40 @@ export default function ClaimStakes() {
                 }
             }
 
-            // Track extraction
-            if (building.extractionRate) {
-                const richness = 1.5; // Mock richness
+            // Track extraction with actual planet richness
+            if (building.extractionRate && currentPlanet) {
                 for (const [resource, rate] of Object.entries(building.extractionRate)) {
-                    if (!resourceFlow[resource]) resourceFlow[resource] = { production: 0, consumption: 0 };
-                    resourceFlow[resource].production += rate * richness;
+                    const richness = currentPlanet.richness?.[resource] || 1.0;
+                    if (currentPlanet.resources?.includes(resource)) {
+                        if (!resourceFlow[resource]) resourceFlow[resource] = { production: 0, consumption: 0 };
+                        resourceFlow[resource].production += rate * richness;
+                    }
                 }
             }
         });
 
-        const maxSlots = selectedTier * 20; // Mock: T1=20, T2=40, etc.
+        const maxSlots = selectedTier * 100; // Demo: T1=100, T2=200, T3=300, T4=400, T5=500
+
+        // Calculate overall efficiency based on multiple factors
+        let efficiency = 100;
+        if (totalSlots > 0) {
+            // Power efficiency
+            if (totalPower < 0) efficiency -= 30;
+            // Slot efficiency
+            const slotUsage = (totalSlots / maxSlots) * 100;
+            if (slotUsage < 50) efficiency -= 20;
+            // Resource balance
+            let hasNegativeFlow = false;
+            for (const [resource, flow] of Object.entries(resourceFlow)) {
+                if (flow.production - flow.consumption < 0 && resource !== 'fuel') {
+                    hasNegativeFlow = true;
+                    break;
+                }
+            }
+            if (hasNegativeFlow) efficiency -= 10;
+        } else {
+            efficiency = 0;
+        }
 
         return {
             totalSlots,
@@ -330,7 +425,7 @@ export default function ClaimStakes() {
             totalPower,
             totalCrew,
             resourceFlow,
-            efficiency: totalSlots > 0 ? Math.min(100, (totalPower >= 0 ? 100 : 50)) : 0
+            efficiency: Math.max(0, Math.min(100, efficiency))
         };
     };
 
@@ -349,20 +444,37 @@ export default function ClaimStakes() {
             planetId: selectedPlanet.id,
             tier: selectedTier,
             buildings: [],
-            isFinalized: false,
-            rentPaidUntil: Date.now() + (7 * 24 * 60 * 60 * 1000), // 7 days
             resources: {
                 fuel: 100, // Start with some fuel
             },
+            isFinalized: false,
+            rent: 0, // Placeholder, will be calculated
             lastUpdate: Date.now(),
             maxStorage: 1000 * selectedTier, // Base storage scales with tier
-            currentStorage: 100 // Just the initial fuel
+            currentStorage: 100, // Just the initial fuel
+            maxSlots: selectedTier * 100 // Demo: 5x slots - Max slots scales with tier
         };
 
         setClaimStakeInstances([...claimStakeInstances, newInstance]);
         setActiveInstanceId(newInstance.id);
         setDesignMode(true);
-        setCurrentDesign([]);
+
+        // Automatically add the central hub at the appropriate tier
+        const centralHub = buildings.find(b =>
+            b.upgradeFamily === 'central_hub' &&
+            b.tier === Math.min(selectedTier, 3) // Central hub maxes out at T3
+        );
+
+        if (centralHub) {
+            const hubPlacement: PlacedBuilding = {
+                id: `pb_${Date.now()}`,
+                buildingId: centralHub.id,
+                isActive: false
+            };
+            setCurrentDesign([hubPlacement]);
+        } else {
+            setCurrentDesign([]);
+        }
 
         // Achievements
         if (claimStakeInstances.length === 0) {
@@ -371,22 +483,64 @@ export default function ClaimStakes() {
         updateStatistic('totalClaimStakes', claimStakeInstances.length + 1);
     };
 
-    // Add building to design
+    // Add building to design with construction cost handling
     const addBuilding = (buildingId: string) => {
-        const building = buildings.find(b => b.id === buildingId);
+        if (!activeInstance || !designMode) return;
+
+        const building = buildings.find((b: Building) => b.id === buildingId);
         if (!building) return;
 
-        const newPlacedBuilding: PlacedBuilding = {
-            id: `pb_${Date.now()}`,
-            buildingId,
-            isActive: false
+        // Check if we have enough slots - use currentDesign during design mode
+        const currentSlots = currentDesign.reduce((sum, pb) => {
+            const b = buildings.find((bld: Building) => bld.id === pb.buildingId);
+            return sum + (b?.slots || 0);
+        }, 0);
+
+        if (currentSlots + building.slots > activeInstance.maxSlots) {
+            alert('Not enough slots available!');
+            return;
+        }
+
+        // Check if we have construction materials in starbase inventory
+        if (building.constructionCost) {
+            const missingMaterials: string[] = [];
+            Object.entries(building.constructionCost).forEach(([material, amount]) => {
+                const available = starbaseInventory[material] || 0;
+                if (available < amount) {
+                    missingMaterials.push(`${material}: need ${amount}, have ${available}`);
+                }
+            });
+
+            if (missingMaterials.length > 0) {
+                const useMagic = confirm(
+                    `Missing construction materials from starbase:\n${missingMaterials.join('\n')}\n\n` +
+                    `Would you like to add these materials to starbase inventory? (Simulator feature)`
+                );
+
+                if (useMagic) {
+                    // Add missing materials to starbase
+                    const toAdd: Record<string, number> = {};
+                    Object.entries(building.constructionCost).forEach(([material, amount]) => {
+                        const available = starbaseInventory[material] || 0;
+                        if (available < amount) {
+                            toAdd[material] = amount - available;
+                        }
+                    });
+                    addToInventory(toAdd);
+                } else {
+                    return;
+                }
+            }
+        }
+
+        const newBuilding: PlacedBuilding = {
+            id: `${buildingId}_${Date.now()}`,
+            buildingId: buildingId,
+            isActive: false // Will activate when finalized
         };
 
-        setCurrentDesign([...currentDesign, newPlacedBuilding]);
-
-        if (currentDesign.length === 0) {
-            unlockAchievement('first_building_placed');
-        }
+        // Update currentDesign for design mode UI
+        setCurrentDesign(prev => [...prev, newBuilding]);
     };
 
     // Remove building from design
@@ -394,44 +548,67 @@ export default function ClaimStakes() {
         setCurrentDesign(currentDesign.filter(b => b.id !== placedBuildingId));
     };
 
-    // Finalize design
+    // Finalize design - consume materials from starbase
     const finalizeDesign = () => {
         if (!activeInstance) {
             console.error('No active instance to finalize');
             return;
         }
 
-        console.log(`Finalizing design for claim stake ${activeInstance.id} on planet ${activeInstance.planetId}`);
-        console.log('Current design:', currentDesign);
+        if (activeInstance.isFinalized) {
+            return;
+        }
 
-        const now = Date.now();
-        const buildingsWithConstruction = currentDesign.map(pb => ({
-            ...pb,
-            constructionStarted: now,
-            constructionComplete: now + 60000, // 1 minute for simulation
-            isActive: true
-        }));
-
-        const updatedInstance = {
-            ...activeInstance,
-            buildings: buildingsWithConstruction,
-            isFinalized: true
-        };
-
-        console.log('Updated instance:', updatedInstance);
-
-        setClaimStakeInstances(prev => {
-            const updated = prev.map(instance =>
-                instance.id === activeInstanceId ? updatedInstance : instance
-            );
-            console.log('All claim stake instances after finalization:', updated);
-            return updated;
+        // Consume construction materials from starbase inventory
+        const totalCost: Record<string, number> = {};
+        currentDesign.forEach((pb: PlacedBuilding) => {
+            const building = buildings.find((b: Building) => b.id === pb.buildingId);
+            if (building?.constructionCost) {
+                Object.entries(building.constructionCost).forEach(([material, amount]) => {
+                    totalCost[material] = (totalCost[material] || 0) + amount;
+                });
+            }
         });
 
-        setDesignMode(false);
+        // Deduct from starbase inventory
+        if (Object.keys(totalCost).length > 0) {
+            const success = consumeFromInventory(totalCost);
+            if (!success) {
+                alert('Insufficient materials in starbase inventory!');
+                return;
+            }
+        }
 
-        // Update statistics
-        updateStatistic('totalClaimStakes', claimStakeInstances.length);
+        setClaimStakeInstances(prev => prev.map(instance => {
+            if (instance.id === activeInstance.id) {
+                const finalizedInstance = {
+                    ...instance,
+                    isFinalized: true,
+                    buildings: currentDesign.map((b: PlacedBuilding) => ({
+                        ...b,
+                        constructionStarted: Date.now(),
+                        constructionComplete: Date.now() + 1000, // 1 second for simulation
+                        isActive: true
+                    }))
+                };
+
+                // Initialize resources with some fuel to start
+                if (!finalizedInstance.resources['fuel']) {
+                    finalizedInstance.resources['fuel'] = 10; // Start with 10 fuel
+                }
+
+                return finalizedInstance;
+            }
+            return instance;
+        }));
+
+        setDesignMode(false);
+        setCurrentDesign([]); // Clear the design after finalizing
+
+        // Achievement
+        if (sharedState.achievements['first_stake_finalized'] === false) {
+            unlockAchievement('first_stake_finalized');
+        }
     };
 
     // Aggregate stats for all instances
@@ -458,18 +635,55 @@ export default function ClaimStakes() {
             return false;
         }
 
-        // Check tier requirements
-        if (building.tier > selectedTier) return false;
+        // For infrastructure, limit by claim stake tier
+        if (building.category === 'infrastructure' && building.tier > selectedTier) {
+            return false;
+        }
 
         // Check if slots available
         if (currentStats.totalSlots + building.slots > currentStats.maxSlots) return false;
 
+        // Only show base tier (T1) for new buildings
+        // If building family already exists, don't show it in available list (use upgrade instead)
+        if (building.upgradeFamily) {
+            const existingInFamily = (designMode ? currentDesign : activeInstance?.buildings || [])
+                .some(pb => {
+                    const placedBuilding = buildings.find(b => b.id === pb.buildingId);
+                    return placedBuilding?.upgradeFamily === building.upgradeFamily;
+                });
+
+            if (existingInFamily) {
+                return false; // Already have a building in this family, use upgrade instead
+            }
+
+            // Only show T1 for new buildings (or minimum tier for things like fuel processor)
+            const familyBuildings = buildings.filter(b => b.upgradeFamily === building.upgradeFamily);
+            const minTier = Math.min(...familyBuildings.map(b => b.tier));
+            if (building.tier !== minTier) {
+                return false;
+            }
+        }
+
         // Check required tags
         if (building.requiredTags && building.requiredTags.length > 0) {
             const planetTags = selectedPlanet?.tags || [];
-            const hasRequiredTags = building.requiredTags.every(tag => planetTags.includes(tag));
+
+            // Collect tags provided by existing buildings
+            const buildingProvidedTags = new Set<string>();
+            const currentBuildings = designMode ? currentDesign : (activeInstance?.buildings || []);
+            currentBuildings.forEach(pb => {
+                const placedBuilding = buildings.find(b => b.id === pb.buildingId);
+                if (placedBuilding?.providedTags) {
+                    placedBuilding.providedTags.forEach(tag => buildingProvidedTags.add(tag));
+                }
+            });
+
+            // Combine planet tags and building-provided tags
+            const allAvailableTags = [...planetTags, ...Array.from(buildingProvidedTags)];
+
+            const hasRequiredTags = building.requiredTags.every(tag => allAvailableTags.includes(tag));
             if (!hasRequiredTags) {
-                console.log(`Building ${building.name} requires tags ${building.requiredTags}, planet has ${planetTags}`);
+
                 return false;
             }
         }
@@ -479,7 +693,7 @@ export default function ClaimStakes() {
             const planetResources = selectedPlanet?.resources || [];
             const hasRequiredResources = building.requiredResources.every(resource => planetResources.includes(resource));
             if (!hasRequiredResources) {
-                console.log(`Building ${building.name} requires resources ${building.requiredResources}, planet has ${planetResources}`);
+
                 return false;
             }
         }
@@ -493,112 +707,247 @@ export default function ClaimStakes() {
         return true;
     });
 
-    // Calculate resource flows for a claim stake
-    const calculateResourceFlows = (stake: ClaimStakeInstance) => {
-        const flows: Record<string, any> = {};
+    // Calculate resource flows for display
+    const calculateResourceFlows = (instance: ClaimStakeInstance) => {
+        const flows: Record<string, ResourceFlow & {
+            potentialExtraction?: number;
+            potentialProduction?: number;
+            isActive?: boolean;
+            stopReasons?: string[];
+        }> = {};
+        const planet = planets.find((p: Planet) => p.id === instance.planetId);
 
-        if (!stake.buildings || !stake.isFinalized) return [];
+        // Check why buildings might be stopped
+        const checkStopReasons = () => {
+            const reasons: string[] = [];
 
-        // Initialize flows for all resources
-        const allResources = new Set<string>();
+            // Check power balance
+            let totalPower = 0;
+            instance.buildings.forEach((pb: PlacedBuilding) => {
+                const building = buildings.find((b: Building) => b.id === pb.buildingId);
+                if (building) {
+                    totalPower += building.power || 0;
+                }
+            });
+            if (totalPower < 0) {
+                reasons.push(`Insufficient power (${totalPower} MW)`);
+            }
 
-        stake.buildings.forEach((placedBuilding: PlacedBuilding) => {
-            // Get the actual building data
-            const building = buildings.find((b: Building) => b.id === placedBuilding.buildingId);
+            // Check fuel
+            const fuelNeeded = instance.buildings.some((pb: PlacedBuilding) => {
+                const building = buildings.find((b: Building) => b.id === pb.buildingId);
+                return building?.resourceUsage && building.resourceUsage['fuel'] > 0;
+            });
+            if (fuelNeeded && (instance.resources['fuel'] || 0) < 1) {
+                reasons.push('No fuel available');
+            }
+
+            // Check storage
+            const currentStorageUsed = Object.values(instance.resources || {}).reduce((sum: number, val: any) => sum + val, 0);
+            if (currentStorageUsed >= instance.maxStorage * 0.95) {
+                reasons.push('Storage nearly full (95%+)');
+            }
+
+            // Check if buildings are in cooldown
+            const inCooldown = instance.buildings.some((pb: PlacedBuilding) => {
+                if (pb.inactiveSince) {
+                    const timeSinceInactive = Date.now() - pb.inactiveSince;
+                    return timeSinceInactive < 5000; // 5 second cooldown
+                }
+                return false;
+            });
+            if (inCooldown) {
+                reasons.push('Buildings in cooldown period');
+            }
+
+            return reasons;
+        };
+
+        const stopReasons = checkStopReasons();
+        const areSystemsActive = instance.buildings.some((pb: PlacedBuilding) => pb.isActive);
+
+        instance.buildings.forEach((pb: PlacedBuilding) => {
+            const building = buildings.find((b: Building) => b.id === pb.buildingId);
             if (!building) return;
 
-            // Extractors
+            // Process extraction rates - show both actual and potential
             if (building.extractionRate) {
-                Object.keys(building.extractionRate).forEach(resource => {
-                    allResources.add(resource);
+                Object.entries(building.extractionRate).forEach(([resource, rate]) => {
                     if (!flows[resource]) {
                         flows[resource] = {
                             resource,
                             extraction: 0,
+                            potentialExtraction: 0,
                             production: 0,
+                            potentialProduction: 0,
                             consumption: 0,
                             net: 0,
-                            storage: stake.resources?.[resource] || 0
+                            storage: instance.resources[resource] || 0,
+                            isActive: pb.isActive,
+                            stopReasons: pb.isActive ? [] : stopReasons
                         };
                     }
 
-                    // Apply planet richness multiplier
-                    const planet = planets.find((p: Planet) => p.id === stake.planetId);
-                    const richness = planet?.richness?.[resource] || 1.0;
-                    flows[resource].extraction += (building.extractionRate?.[resource] || 0) * richness;
-                });
-            }
+                    const richness = planet?.richness?.[resource] || 1;
+                    const potentialRate = rate * richness;
+                    flows[resource].potentialExtraction! += potentialRate;
 
-            // Processors (consume and produce)
-            if (building.resourceUsage) {
-                Object.entries(building.resourceUsage).forEach(([resource, rate]) => {
-                    allResources.add(resource);
-                    if (!flows[resource]) {
-                        flows[resource] = {
-                            resource,
-                            extraction: 0,
-                            production: 0,
-                            consumption: 0,
-                            net: 0,
-                            storage: stake.resources?.[resource] || 0
-                        };
+                    if (pb.isActive) {
+                        flows[resource].extraction += potentialRate;
                     }
-                    flows[resource].consumption += rate as number;
                 });
             }
 
+            // Process production rates - show both actual and potential
             if (building.resourceProduction) {
                 Object.entries(building.resourceProduction).forEach(([resource, rate]) => {
-                    allResources.add(resource);
                     if (!flows[resource]) {
                         flows[resource] = {
                             resource,
                             extraction: 0,
+                            potentialExtraction: 0,
                             production: 0,
+                            potentialProduction: 0,
                             consumption: 0,
                             net: 0,
-                            storage: stake.resources?.[resource] || 0
+                            storage: instance.resources[resource] || 0,
+                            isActive: pb.isActive,
+                            stopReasons: pb.isActive ? [] : stopReasons
                         };
                     }
-                    flows[resource].production += rate as number;
+
+                    flows[resource].potentialProduction! += rate;
+
+                    if (pb.isActive) {
+                        flows[resource].production += rate;
+                    }
+                });
+            }
+
+            // Process consumption rates
+            if (building.resourceUsage) {
+                Object.entries(building.resourceUsage).forEach(([resource, rate]) => {
+                    if (!flows[resource]) {
+                        flows[resource] = {
+                            resource,
+                            extraction: 0,
+                            potentialExtraction: 0,
+                            production: 0,
+                            potentialProduction: 0,
+                            consumption: 0,
+                            net: 0,
+                            storage: instance.resources[resource] || 0,
+                            isActive: pb.isActive,
+                            stopReasons: pb.isActive ? [] : stopReasons
+                        };
+                    }
+
+                    flows[resource].consumption += rate;
                 });
             }
         });
 
-        // Calculate net flows
-        Object.values(flows).forEach((flow: any) => {
-            flow.net = flow.extraction + flow.production - flow.consumption;
+        // Add stored resources that aren't being produced/consumed
+        Object.entries(instance.resources || {}).forEach(([resource, amount]) => {
+            if (!flows[resource] && amount > 0) {
+                flows[resource] = {
+                    resource,
+                    extraction: 0,
+                    potentialExtraction: 0,
+                    production: 0,
+                    potentialProduction: 0,
+                    consumption: 0,
+                    net: 0,
+                    storage: amount as number,
+                    isActive: areSystemsActive,
+                    stopReasons: areSystemsActive ? [] : stopReasons
+                };
+            }
         });
 
-        return Object.values(flows);
+        // Calculate net flows and include ALL resources
+        const finalFlows: any[] = [];
+        Object.values(flows).forEach((flow: any) => {
+            flow.net = flow.extraction + flow.production - flow.consumption;
+            flow.isActive = areSystemsActive;
+
+            // Include ALL resources, not just active ones
+            finalFlows.push(flow);
+        });
+
+        return finalFlows;
     };
 
-    // Prepare data for ResourceManager
-    const claimStakeResources = claimStakeInstances.map(stake => {
-        const planet = planets.find((p: Planet) => p.id === stake.planetId);
-        const flows = calculateResourceFlows(stake);
-        console.log(`Claim stake ${stake.id} flows:`, flows);
-        return {
-            id: stake.id,
-            name: `${planet?.name || 'Unknown'} - T${stake.tier}`,
-            planetName: planet?.name || 'Unknown',
-            tier: stake.tier,
-            flows: flows,
-            totalStorage: stake.currentStorage || Object.values(stake.resources || {}).reduce((sum: number, val: any) => sum + val, 0),
-            maxStorage: stake.maxStorage
-        };
-    });
-    console.log('All claim stake resources:', claimStakeResources);
+    // Prepare data for ResourceManager - memoized to prevent infinite re-renders
+    const claimStakeResources = useMemo(() => {
+        return claimStakeInstances.map(stake => {
+            const planet = planets.find((p: Planet) => p.id === stake.planetId);
+            const flows = calculateResourceFlows(stake);
+
+            return {
+                id: stake.id,
+                name: `${planet?.name || 'Unknown'} - T${stake.tier}`,
+                planetName: planet?.name || 'Unknown',
+                tier: stake.tier,
+                resources: stake.resources || {},  // Include actual resources
+                flows: flows,
+                totalStorage: stake.currentStorage || Object.values(stake.resources || {}).reduce((sum: number, val: any) => sum + val, 0),
+                currentStorage: stake.currentStorage || Object.values(stake.resources || {}).reduce((sum: number, val: any) => sum + val, 0),
+                maxStorage: stake.maxStorage
+            };
+        });
+    }, [claimStakeInstances]); // Removed planets to avoid dependency issues
+
+    // Update global state with claim stakes data
+    useEffect(() => {
+        dispatch({ type: 'UPDATE_CLAIM_STAKES_DATA', payload: claimStakeResources });
+    }, [claimStakeResources, dispatch]);
 
     // Handle resource transfers
     const handleResourceTransfer = (from: string, to: string, resources: Record<string, number>) => {
-        // Update claim stake resources
-        if (from !== 'starbase' && from !== 'all-stakes') {
+        // Handle transfers from all stakes
+        if (from === 'all-stakes') {
+            // Calculate how much each stake contributes
+            const stakeContributions: Record<string, Record<string, number>> = {};
+
+            // First pass: figure out what each stake has
+            claimStakeInstances.forEach(stake => {
+                stakeContributions[stake.id] = {};
+                Object.entries(resources).forEach(([resource, totalAmount]) => {
+                    const stakeAmount = stake.resources?.[resource] || 0;
+                    if (stakeAmount > 0) {
+                        // This stake will contribute its full amount
+                        stakeContributions[stake.id][resource] = Math.min(stakeAmount, totalAmount);
+                    }
+                });
+            });
+
+            // Remove resources from each stake
+            setClaimStakeInstances(prev => prev.map(stake => {
+                const contribution = stakeContributions[stake.id];
+                if (contribution && Object.keys(contribution).length > 0) {
+                    const updatedResources = { ...stake.resources };
+                    Object.entries(contribution).forEach(([resource, amount]) => {
+                        updatedResources[resource] = Math.max(0, (updatedResources[resource] || 0) - amount);
+                        if (updatedResources[resource] <= 0) {
+                            delete updatedResources[resource];
+                        }
+                    });
+                    return { ...stake, resources: updatedResources };
+                }
+                return stake;
+            }));
+
+        } else if (from !== 'starbase') {
+            // Transfer from a specific claim stake
             setClaimStakeInstances(prev => prev.map(stake => {
                 if (stake.id === from) {
                     const updatedResources = { ...stake.resources };
                     Object.entries(resources).forEach(([resource, amount]) => {
                         updatedResources[resource] = Math.max(0, (updatedResources[resource] || 0) - amount);
+                        if (updatedResources[resource] <= 0) {
+                            delete updatedResources[resource];
+                        }
                     });
                     return { ...stake, resources: updatedResources };
                 }
@@ -606,7 +955,8 @@ export default function ClaimStakes() {
             }));
         }
 
-        if (to !== 'starbase') {
+        // Handle transfers to a specific stake
+        if (to !== 'starbase' && to !== 'all-stakes') {
             setClaimStakeInstances(prev => prev.map(stake => {
                 if (stake.id === to) {
                     const updatedResources = { ...stake.resources };
@@ -622,42 +972,54 @@ export default function ClaimStakes() {
         // Update starbase inventory
         if (to === 'starbase') {
             // Add resources to starbase
+            const resourcesToAdd: Record<string, number> = {};
             Object.entries(resources).forEach(([resource, amount]) => {
-                addToInventory({ [resource]: amount });
+                if (amount > 0) {
+                    resourcesToAdd[resource] = amount;
+                }
             });
-            showNotification('Resources transferred to starbase', 'success');
+            if (Object.keys(resourcesToAdd).length > 0) {
+                addToInventory(resourcesToAdd);
+                showNotification(`Resources transferred to starbase: ${Object.entries(resourcesToAdd).map(([r, a]) => `${Math.floor(a)} ${r}`).join(', ')}`, 'success');
+            }
         } else if (from === 'starbase') {
             // Remove resources from starbase
+            const resourcesToRemove: Record<string, number> = {};
             Object.entries(resources).forEach(([resource, amount]) => {
-                consumeFromInventory({ [resource]: amount });
+                if (amount > 0) {
+                    resourcesToRemove[resource] = amount;
+                }
             });
-            showNotification('Resources transferred from starbase', 'success');
+            if (Object.keys(resourcesToRemove).length > 0) {
+                consumeFromInventory(resourcesToRemove);
+                showNotification(`Resources transferred from starbase: ${Object.entries(resourcesToRemove).map(([r, a]) => `${Math.floor(a)} ${r}`).join(', ')}`, 'success');
+            }
         }
     };
 
-    // Add magic resources to a claim stake
+    // Add magic resources - focus on operational needs
     const handleMagicResources = (stakeId: string) => {
-        setClaimStakeInstances(prev => prev.map(stake => {
-            if (stake.id === stakeId) {
+        setClaimStakeInstances(prev => prev.map(instance => {
+            if (instance.id === stakeId) {
+                const updatedResources = { ...instance.resources };
+
+                // Add fuel for operations (main need)
+                updatedResources['fuel'] = (updatedResources['fuel'] || 0) + 100;
+
+                // Add small amounts of common resources for testing
+                updatedResources['iron-ore'] = (updatedResources['iron-ore'] || 0) + 50;
+                updatedResources['copper-ore'] = (updatedResources['copper-ore'] || 0) + 50;
+
                 return {
-                    ...stake,
-                    resources: {
-                        ...stake.resources,
-                        fuel: (stake.resources?.fuel || 0) + 100,
-                        'iron-ore': (stake.resources?.['iron-ore'] || 0) + 100,
-                        'copper-ore': (stake.resources?.['copper-ore'] || 0) + 100,
-                        hydrogen: (stake.resources?.hydrogen || 0) + 100,
-                        coal: (stake.resources?.coal || 0) + 50,
-                        silica: (stake.resources?.silica || 0) + 50,
-                        steel: (stake.resources?.steel || 0) + 25,
-                        electronics: (stake.resources?.electronics || 0) + 25
-                    }
+                    ...instance,
+                    resources: updatedResources,
+                    currentStorage: Object.values(updatedResources).reduce((sum: number, val: any) => sum + val, 0)
                 };
             }
-            return stake;
+            return instance;
         }));
 
-        showNotification('Magic resources added! 🪄', 'success');
+
     };
 
     if (loading) {
@@ -666,7 +1028,12 @@ export default function ClaimStakes() {
 
     return (
         <div className="claim-stakes-app">
-            <Navigation />
+            <Navigation claimStakes={claimStakeResources} />
+
+            <NotificationSystem
+                notifications={notifications}
+                onDismiss={dismissNotification}
+            />
 
             <div className="claim-stakes-content">
                 {/* Left Sidebar */}
@@ -741,7 +1108,6 @@ export default function ClaimStakes() {
                                             key={planet.id}
                                             className={`planet-card ${selectedPlanet?.id === planet.id ? 'selected' : ''}`}
                                             onClick={() => {
-                                                console.log('Planet clicked:', planet.id);
                                                 setSelectedPlanet(planet);
                                                 setActiveInstanceId(null); // Clear active instance to show purchase screen
                                             }}
@@ -827,7 +1193,7 @@ export default function ClaimStakes() {
                                         👥 {currentStats.totalCrew} crew
                                     </div>
                                     <div className={`stat ${activeInstance?.currentStorage && activeInstance.currentStorage >= activeInstance.maxStorage * 0.9 ? 'stat-warning' : ''}`}>
-                                        🏪 {Math.floor(activeInstance?.currentStorage || 0)}/{activeInstance?.maxStorage || 1000}
+                                        🏪 {Math.min(Math.floor(activeInstance?.currentStorage || 0), activeInstance?.maxStorage || 1000)}/{activeInstance?.maxStorage || 1000}
                                     </div>
                                     <div className={`stat ${currentStats.efficiency >= 90 ? 'stat-good' : ''}`}>
                                         ⚙️ {currentStats.efficiency.toFixed(0)}% efficiency
@@ -863,32 +1229,219 @@ export default function ClaimStakes() {
                                             const building = buildings.find(b => b.id === pb.buildingId);
                                             if (!building) return null;
 
+                                            // Check if building can be upgraded
+                                            const canUpgrade = () => {
+                                                if (!building.upgradeFamily) return false;
+
+                                                // Infrastructure limited by claim stake tier
+                                                if (building.category === 'infrastructure') {
+                                                    return building.tier < selectedTier;
+                                                }
+
+                                                // Other buildings can go to T5
+                                                if (building.tier >= 5) return false;
+
+                                                // Find next tier building
+                                                const nextTier = buildings.find(b =>
+                                                    b.upgradeFamily === building.upgradeFamily &&
+                                                    b.tier === building.tier + 1
+                                                );
+
+                                                if (!nextTier) return false;
+
+                                                // Check if we have enough slots
+                                                const slotIncrease = nextTier.slots - building.slots;
+                                                const maxSlots = selectedTier * 100; // Demo: 5x slots
+                                                const currentSlots = currentStats.totalSlots;
+
+                                                return (currentSlots + slotIncrease) <= maxSlots;
+                                            };
+
+                                            const getUpgradeInfo = () => {
+                                                if (!building.upgradeFamily) return null;
+
+                                                const nextTier = buildings.find(b =>
+                                                    b.upgradeFamily === building.upgradeFamily &&
+                                                    b.tier === building.tier + 1
+                                                );
+
+                                                if (!nextTier) return null;
+
+                                                // Calculate differential costs
+                                                const upgradeCost: Record<string, number> = {};
+                                                Object.entries(nextTier.constructionCost || {}).forEach(([resource, amount]) => {
+                                                    const currentCost = (building.constructionCost as any)?.[resource] || 0;
+                                                    const diff = amount - currentCost;
+                                                    if (diff > 0) upgradeCost[resource] = diff;
+                                                });
+
+                                                return {
+                                                    nextTier,
+                                                    upgradeCost,
+                                                    slotIncrease: nextTier.slots - building.slots,
+                                                    powerChange: nextTier.power - building.power,
+                                                    crewIncrease: nextTier.crew - building.crew
+                                                };
+                                            };
+
+                                            const upgradeInfo = getUpgradeInfo();
+
                                             return (
-                                                <div key={pb.id} className={`placed-building-card ${!pb.isActive ? 'inactive' : ''}`}>
+                                                <div key={pb.id} className={`placed-building-card ${!pb.isActive ? 'inactive' : ''} tier-${building.tier}`}>
                                                     <div className="building-header">
-                                                        <span className="building-icon">🏭</span>
+                                                        <span className="building-icon">
+                                                            {building.category === 'extraction' ? '⛏️' :
+                                                                building.category === 'processing' ? '🏭' :
+                                                                    building.category === 'power' ? '⚡' :
+                                                                        building.category === 'storage' ? '📦' :
+                                                                            building.category === 'infrastructure' ? '🏛️' : '🏗️'}
+                                                        </span>
                                                         <div>
-                                                            <h4>{building.name}</h4>
-                                                            <span className="building-tier">Tier {building.tier}</span>
+                                                            <h4>{building.name} T{building.tier}</h4>
+                                                            <span className="building-description">{building.description}</span>
                                                         </div>
                                                         {designMode && (
                                                             <button
                                                                 className="remove-button"
                                                                 onClick={() => removeBuilding(pb.id)}
+                                                                title="Remove building"
                                                             >
                                                                 ✕
                                                             </button>
                                                         )}
                                                     </div>
+
                                                     <div className="building-stats">
-                                                        <span>📦 {building.slots}</span>
-                                                        <span>⚡ {building.power}</span>
-                                                        <span>👥 {building.crew}</span>
+                                                        <span title="Slots used">📦 {building.slots}</span>
+                                                        <span title="Power" className={building.power > 0 ? 'positive' : 'negative'}>
+                                                            ⚡ {building.power > 0 ? '+' : ''}{building.power}
+                                                        </span>
+                                                        <span title="Crew required">👥 {building.crew}</span>
                                                     </div>
+
+                                                    {/* Production/Consumption Info */}
+                                                    {(building.extractionRate || building.resourceProduction || building.resourceUsage) && (
+                                                        <div className="resource-info">
+                                                            {building.extractionRate && (
+                                                                <div className="extraction-info">
+                                                                    <strong>Extracts:</strong>
+                                                                    {Object.entries(building.extractionRate).map(([res, rate]) => {
+                                                                        const planet = planets.find((p: Planet) => p.id === activeInstance?.planetId);
+                                                                        const richness = planet?.richness?.[res] || 1.0;
+                                                                        const actualRate = (rate as number) * richness;
+                                                                        return (
+                                                                            <span key={res} className="resource-rate">
+                                                                                {res}: {actualRate.toFixed(1)}/s
+                                                                                {richness !== 1.0 && (
+                                                                                    <span className="richness-info" title={`Base: ${(rate as number).toFixed(1)}/s × ${richness.toFixed(1)}x richness`}>
+                                                                                        {' '}(×{richness.toFixed(1)})
+                                                                                    </span>
+                                                                                )}
+                                                                            </span>
+                                                                        );
+                                                                    })}
+                                                                </div>
+                                                            )}
+                                                            {building.resourceUsage && (
+                                                                <div className="consumption-info">
+                                                                    <strong>Consumes:</strong>
+                                                                    {Object.entries(building.resourceUsage).map(([res, rate]) => (
+                                                                        <span key={res} className="resource-rate negative">
+                                                                            {res}: -{rate}/s
+                                                                        </span>
+                                                                    ))}
+                                                                </div>
+                                                            )}
+                                                            {building.resourceProduction && (
+                                                                <div className="production-info">
+                                                                    <strong>Produces:</strong>
+                                                                    {Object.entries(building.resourceProduction).map(([res, rate]) => (
+                                                                        <span key={res} className="resource-rate positive">
+                                                                            {res}: +{rate}/s
+                                                                        </span>
+                                                                    ))}
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    )}
+
+                                                    {/* Construction Cost (in design mode) */}
+                                                    {designMode && building.constructionCost && Object.keys(building.constructionCost).length > 0 && (
+                                                        <div className="construction-cost">
+                                                            <strong>Cost:</strong>
+                                                            {Object.entries(building.constructionCost).map(([res, amt]) => (
+                                                                <span key={res} className="cost-item">
+                                                                    {res}: {amt}
+                                                                </span>
+                                                            ))}
+                                                        </div>
+                                                    )}
+
+                                                    {/* Upgrade Button (in design mode) */}
+                                                    {designMode && canUpgrade() && upgradeInfo && (
+                                                        <div className="upgrade-section">
+                                                            <button
+                                                                className="btn btn-sm btn-upgrade"
+                                                                onClick={() => {
+                                                                    // Replace building with upgraded version
+                                                                    const upgraded = {
+                                                                        ...pb,
+                                                                        buildingId: upgradeInfo.nextTier.id
+                                                                    };
+
+                                                                    if (designMode) {
+                                                                        setCurrentDesign(prev =>
+                                                                            prev.map(b => b.id === pb.id ? upgraded : b)
+                                                                        );
+                                                                    } else {
+                                                                        setClaimStakeInstances(prev => prev.map(stake => {
+                                                                            if (stake.id === activeInstanceId) {
+                                                                                return {
+                                                                                    ...stake,
+                                                                                    buildings: stake.buildings.map(b =>
+                                                                                        b.id === pb.id ? upgraded : b
+                                                                                    )
+                                                                                };
+                                                                            }
+                                                                            return stake;
+                                                                        }));
+                                                                    }
+                                                                }}
+                                                                title={`Upgrade to T${building.tier + 1}`}
+                                                            >
+                                                                ⬆️ Upgrade to T{building.tier + 1}
+                                                            </button>
+                                                            <div className="upgrade-info">
+                                                                <div className="upgrade-changes">
+                                                                    <span>+{upgradeInfo.slotIncrease} slots</span>
+                                                                    <span>{upgradeInfo.powerChange > 0 ? '+' : ''}{upgradeInfo.powerChange} power</span>
+                                                                    <span>+{upgradeInfo.crewIncrease} crew</span>
+                                                                </div>
+                                                                <div className="upgrade-cost">
+                                                                    <strong>Upgrade cost:</strong>
+                                                                    {Object.entries(upgradeInfo.upgradeCost).map(([res, amt]) => (
+                                                                        <span key={res}>{res}: {amt}</span>
+                                                                    ))}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    )}
+
+                                                    {/* Inactive Indicator */}
                                                     {!designMode && !pb.isActive && pb.inactiveSince && (
-                                                        <div className="inactive-indicator" title="Building stopped - check resources/power">
+                                                        <div className="inactive-indicator"
+                                                            title={
+                                                                activeInstance?.resources.fuel <= 0
+                                                                    ? "Need 5+ fuel to restart"
+                                                                    : currentStats.totalPower < 0
+                                                                        ? "Fix power deficit to restart"
+                                                                        : "Check resource requirements"
+                                                            }
+                                                        >
                                                             <span className="status-dot status-inactive"></span>
-                                                            <span className="status-text">Inactive</span>
+                                                            <span className="status-text">
+                                                                {activeInstance?.resources.fuel <= 0 ? "No Fuel" : "Stopped"}
+                                                            </span>
                                                         </div>
                                                     )}
                                                 </div>
@@ -900,22 +1453,146 @@ export default function ClaimStakes() {
                                     {designMode && (
                                         <div className="available-buildings">
                                             <h4>Available Buildings</h4>
+
+                                            {/* Show available tags */}
+                                            <div className="available-tags">
+                                                <strong>Available Tags:</strong>
+                                                <div className="tag-list">
+                                                    {/* Planet tags */}
+                                                    {selectedPlanet?.tags?.map(tag => (
+                                                        <span key={tag} className="tag planet-tag" title="From planet">
+                                                            {tag}
+                                                        </span>
+                                                    ))}
+                                                    {/* Building-provided tags */}
+                                                    {(() => {
+                                                        const providedTags = new Set<string>();
+                                                        currentDesign.forEach(pb => {
+                                                            const building = buildings.find(b => b.id === pb.buildingId);
+                                                            building?.providedTags?.forEach(tag => providedTags.add(tag));
+                                                        });
+                                                        return Array.from(providedTags).map(tag => (
+                                                            <span key={tag} className="tag building-tag" title="From buildings">
+                                                                {tag}
+                                                            </span>
+                                                        ));
+                                                    })()}
+                                                </div>
+                                                <div className="tag-info">
+                                                    💡 Tip: Build <strong>Extraction Hub</strong> to enable extraction modules,
+                                                    <strong> Processing Hub</strong> to enable processing modules
+                                                </div>
+                                            </div>
+
+                                            <div className="building-categories">
+                                                <button
+                                                    className={`category-btn ${buildingCategoryFilter === 'all' ? 'active' : ''}`}
+                                                    onClick={() => setBuildingCategoryFilter('all')}
+                                                >
+                                                    All
+                                                </button>
+                                                <button
+                                                    className={`category-btn ${buildingCategoryFilter === 'infrastructure' ? 'active' : ''}`}
+                                                    onClick={() => setBuildingCategoryFilter('infrastructure')}
+                                                >
+                                                    🏛️ Infrastructure
+                                                </button>
+                                                <button
+                                                    className={`category-btn ${buildingCategoryFilter === 'extraction' ? 'active' : ''}`}
+                                                    onClick={() => setBuildingCategoryFilter('extraction')}
+                                                >
+                                                    ⛏️ Extraction
+                                                </button>
+                                                <button
+                                                    className={`category-btn ${buildingCategoryFilter === 'processing' ? 'active' : ''}`}
+                                                    onClick={() => setBuildingCategoryFilter('processing')}
+                                                >
+                                                    🏭 Processing
+                                                </button>
+                                                <button
+                                                    className={`category-btn ${buildingCategoryFilter === 'power' ? 'active' : ''}`}
+                                                    onClick={() => setBuildingCategoryFilter('power')}
+                                                >
+                                                    ⚡ Power
+                                                </button>
+                                                <button
+                                                    className={`category-btn ${buildingCategoryFilter === 'storage' ? 'active' : ''}`}
+                                                    onClick={() => setBuildingCategoryFilter('storage')}
+                                                >
+                                                    📦 Storage
+                                                </button>
+                                            </div>
                                             <div className="building-grid">
-                                                {availableBuildings.map(building => (
-                                                    <div
-                                                        key={building.id}
-                                                        className="building-card"
-                                                        onClick={() => addBuilding(building.id)}
-                                                    >
-                                                        <div className="building-icon">🏭</div>
-                                                        <h5>{building.name}</h5>
-                                                        <div className="building-requirements">
-                                                            <span>📦 {building.slots}</span>
-                                                            <span>⚡ {building.power}</span>
-                                                            <span>👥 {building.crew}</span>
-                                                        </div>
+                                                {availableBuildings.length === 0 ? (
+                                                    <div className="no-buildings">
+                                                        No buildings available in this category
                                                     </div>
-                                                ))}
+                                                ) : (
+                                                    availableBuildings.map(building => (
+                                                        <div
+                                                            key={building.id}
+                                                            className={`building-card available tier-${building.tier}`}
+                                                            onClick={() => addBuilding(building.id)}
+                                                        >
+                                                            <div className="building-header">
+                                                                <div className="building-icon">
+                                                                    {building.category === 'extraction' ? '⛏️' :
+                                                                        building.category === 'processing' ? '🏭' :
+                                                                            building.category === 'power' ? '⚡' :
+                                                                                building.category === 'storage' ? '📦' : '🏗️'}
+                                                                </div>
+                                                                <h5>{building.name} T{building.tier}</h5>
+                                                            </div>
+                                                            <div className="building-requirements">
+                                                                <span title="Slots">📦 {building.slots}</span>
+                                                                <span title="Power" className={building.power > 0 ? 'positive' : 'negative'}>
+                                                                    ⚡ {building.power > 0 ? '+' : ''}{building.power}
+                                                                </span>
+                                                                <span title="Crew">👥 {building.crew}</span>
+                                                            </div>
+
+                                                            {/* Production/Extraction preview */}
+                                                            {(building.extractionRate || building.resourceProduction) && (
+                                                                <div className="production-preview">
+                                                                    {building.extractionRate && (
+                                                                        <div className="mini-info">
+                                                                            <strong>Extracts:</strong>
+                                                                            {Object.entries(building.extractionRate).slice(0, 2).map(([res, rate]) => (
+                                                                                <span key={res}>{res}: {rate}/s</span>
+                                                                            ))}
+                                                                            {Object.keys(building.extractionRate).length > 2 && <span>...</span>}
+                                                                        </div>
+                                                                    )}
+                                                                    {building.resourceProduction && (
+                                                                        <div className="mini-info">
+                                                                            <strong>Produces:</strong>
+                                                                            {Object.entries(building.resourceProduction).map(([res, rate]) => (
+                                                                                <span key={res}>{res}: {rate}/s</span>
+                                                                            ))}
+                                                                        </div>
+                                                                    )}
+                                                                </div>
+                                                            )}
+
+                                                            {/* Construction Cost */}
+                                                            {building.constructionCost && Object.keys(building.constructionCost).length > 0 && (
+                                                                <div className="construction-cost-preview">
+                                                                    <strong>Cost:</strong>
+                                                                    {Object.entries(building.constructionCost).slice(0, 3).map(([res, amt]) => (
+                                                                        <span key={res}>{res}: {amt}</span>
+                                                                    ))}
+                                                                    {Object.keys(building.constructionCost).length > 3 && <span>...</span>}
+                                                                </div>
+                                                            )}
+
+                                                            {building.description && (
+                                                                <div className="building-description-mini">
+                                                                    {building.description}
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    ))
+                                                )}
                                             </div>
                                         </div>
                                     )}
@@ -954,6 +1631,55 @@ export default function ClaimStakes() {
                                     </div>
                                 )}
 
+                                {/* Design Cost Summary (in design mode) */}
+                                {designMode && currentDesign.length > 0 && (() => {
+                                    const totalCost: Record<string, number> = {};
+                                    let totalSlots = 0;
+                                    let totalPower = 0;
+                                    let totalCrew = 0;
+
+                                    currentDesign.forEach(pb => {
+                                        const building = buildings.find(b => b.id === pb.buildingId);
+                                        if (building) {
+                                            totalSlots += building.slots;
+                                            totalPower += building.power;
+                                            totalCrew += building.crew;
+
+                                            // Accumulate construction costs
+                                            if (building.constructionCost) {
+                                                Object.entries(building.constructionCost).forEach(([resource, amount]) => {
+                                                    totalCost[resource] = (totalCost[resource] || 0) + amount;
+                                                });
+                                            }
+                                        }
+                                    });
+
+                                    return (
+                                        <div className="design-cost-summary">
+                                            <h4>Design Summary</h4>
+                                            <div className="design-stats-summary">
+                                                <span>📦 {totalSlots}/{selectedTier * 100} slots</span>
+                                                <span className={totalPower >= 0 ? 'positive' : 'negative'}>
+                                                    ⚡ {totalPower > 0 ? '+' : ''}{totalPower} power
+                                                </span>
+                                                <span>👥 {totalCrew} crew</span>
+                                            </div>
+                                            {Object.keys(totalCost).length > 0 && (
+                                                <div className="total-construction-cost">
+                                                    <strong>Total Construction Cost:</strong>
+                                                    <div className="cost-breakdown">
+                                                        {Object.entries(totalCost).map(([resource, amount]) => (
+                                                            <span key={resource} className="cost-item">
+                                                                {resource}: {amount}
+                                                            </span>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
+                                    );
+                                })()}
+
                                 {/* Action Buttons */}
                                 <div className="action-buttons">
                                     {designMode ? (
@@ -987,33 +1713,64 @@ export default function ClaimStakes() {
                                                 <button
                                                     className="btn btn-warning"
                                                     onClick={() => {
-                                                        // Deconstruct all buildings (50% refund)
-                                                        if (confirm('Deconstruct all buildings? You will receive 50% of construction materials back.')) {
-                                                            const instance = claimStakeInstances.find(i => i.id === activeInstanceId);
-                                                            if (instance) {
-                                                                // Calculate 50% refund for all buildings
-                                                                const refundMaterials: Record<string, number> = {};
-                                                                instance.buildings.forEach(pb => {
-                                                                    const building = buildings.find(b => b.id === pb.buildingId);
-                                                                    if (building?.constructionCost) {
-                                                                        Object.entries(building.constructionCost).forEach(([material, amount]) => {
-                                                                            refundMaterials[material] = (refundMaterials[material] || 0) + Math.floor(amount / 2);
-                                                                        });
-                                                                    }
-                                                                });
+                                                        const instance = claimStakeInstances.find(i => i.id === activeInstanceId);
+                                                        if (instance) {
+                                                            // Calculate 50% refund for all buildings
+                                                            const refundMaterials: Record<string, number> = {};
+                                                            instance.buildings.forEach(pb => {
+                                                                const building = buildings.find(b => b.id === pb.buildingId);
+                                                                if (building?.constructionCost) {
+                                                                    Object.entries(building.constructionCost).forEach(([material, amount]) => {
+                                                                        refundMaterials[material] = (refundMaterials[material] || 0) + Math.floor(amount / 2);
+                                                                    });
+                                                                }
+                                                            });
 
+                                                            // Build confirmation message with refund details
+                                                            let confirmMessage = 'Deconstruct all buildings?\n\n';
+                                                            if (Object.keys(refundMaterials).length > 0) {
+                                                                confirmMessage += 'You will receive (50% refund):\n';
+                                                                Object.entries(refundMaterials).forEach(([material, amount]) => {
+                                                                    confirmMessage += `• ${amount} ${material}\n`;
+                                                                });
+                                                            } else {
+                                                                confirmMessage += 'No materials will be refunded.';
+                                                            }
+
+                                                            if (confirm(confirmMessage)) {
                                                                 // Add refund to starbase inventory
                                                                 if (Object.keys(refundMaterials).length > 0) {
                                                                     addToInventory(refundMaterials);
-                                                                    showNotification('Buildings deconstructed. 50% materials refunded to starbase.', 'info');
+                                                                    const refundList = Object.entries(refundMaterials)
+                                                                        .map(([mat, amt]) => `${amt} ${mat}`)
+                                                                        .join(', ');
+                                                                    showNotification(`Buildings deconstructed. Refunded: ${refundList}`, 'info');
                                                                 }
 
-                                                                // Clear buildings
+                                                                // Clear buildings and reset to design mode
                                                                 setClaimStakeInstances(prev => prev.map(instance =>
                                                                     instance.id === activeInstanceId
                                                                         ? { ...instance, buildings: [], isFinalized: false }
                                                                         : instance
                                                                 ));
+                                                                setDesignMode(true);
+
+                                                                // Re-add central hub at appropriate tier
+                                                                const centralHub = buildings.find(b =>
+                                                                    b.upgradeFamily === 'central_hub' &&
+                                                                    b.tier === Math.min(instance.tier, 3)
+                                                                );
+
+                                                                if (centralHub) {
+                                                                    const hubPlacement: PlacedBuilding = {
+                                                                        id: `pb_${Date.now()}`,
+                                                                        buildingId: centralHub.id,
+                                                                        isActive: false
+                                                                    };
+                                                                    setCurrentDesign([hubPlacement]);
+                                                                } else {
+                                                                    setCurrentDesign([]);
+                                                                }
                                                             }
                                                         }
                                                     }}
@@ -1105,15 +1862,44 @@ export default function ClaimStakes() {
                         </div>
                     )}
 
-                    {/* Tips */}
+                    {/* Dynamic Tips */}
                     <div className="tips-section">
-                        <h4>💡 Tips</h4>
+                        <h4>💡 Tips & Insights</h4>
                         <ul>
-                            <li>Keep power balance positive or buildings stop</li>
-                            <li>Central hub needs fuel to operate</li>
-                            <li>T3+ can build fuel processors for self-sustaining operations</li>
-                            <li>Deconstruct buildings to recover 50% of materials</li>
-                            <li>Buildings with missing resources will stop production</li>
+                            {/* Critical: Buildings stopped */}
+                            {activeInstance && activeInstance.buildings.some(b => !b.isActive) && (
+                                <li className="warning critical">
+                                    🛑 <strong>Buildings STOPPED!</strong>
+                                    {activeInstance.resources.fuel <= 0
+                                        ? ' Add at least 5 fuel to restart operations'
+                                        : currentStats.totalPower < 0
+                                            ? ' Fix power deficit to restart'
+                                            : ' Check resource requirements'}
+                                </li>
+                            )}
+
+                            {currentStats.totalPower < 0 && (
+                                <li className="warning">⚠️ Power deficit! Add generators or remove consumers</li>
+                            )}
+                            {activeInstance && activeInstance.resources.fuel < 10 && activeInstance.resources.fuel > 0 && (
+                                <li className="warning">⚠️ Low fuel! Central hub will stop when depleted</li>
+                            )}
+                            {activeInstance && activeInstance.resources.fuel <= 0 && (
+                                <li className="warning critical">🚫 NO FUEL! Need 5+ fuel to restart operations</li>
+                            )}
+                            {currentStats.efficiency < 50 && (
+                                <li>📉 Low efficiency - check power and resource balance</li>
+                            )}
+                            {Object.values(currentStats.resourceFlow).some(f => f.consumption > f.production) && (
+                                <li>⚖️ Some resources have negative flow - production chain may stop</li>
+                            )}
+                            {activeInstance && activeInstance.currentStorage / activeInstance.maxStorage > 0.8 && (
+                                <li className="warning">📦 Storage nearly full ({Math.floor((activeInstance.currentStorage / activeInstance.maxStorage) * 100)}%)</li>
+                            )}
+                            <li>💰 Deconstruct buildings to recover 50% of materials</li>
+                            {selectedTier >= 3 && (
+                                <li>🔋 T3+ can build fuel processors for self-sustaining operations</li>
+                            )}
                         </ul>
                     </div>
                 </aside>

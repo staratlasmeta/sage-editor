@@ -88,63 +88,6 @@
       "comesWithStake": true
     },
     {
-      "id": "extractor_basic",
-      "name": "Basic Extractor",
-      "category": "extraction",
-      "tier": 1,
-      "slots": 8,
-      "power": -20,
-      "crew": 10,
-      "extractionRate": {
-        "iron-ore": 1
-      },
-      "constructionCost": {
-        "steel": 150
-      },
-      "constructionTime": 60,
-      "requiredTags": [
-        "mining"
-      ],
-      "requiredResources": [
-        "iron-ore"
-      ]
-    },
-    {
-      "id": "generator_basic",
-      "name": "Basic Generator",
-      "category": "power",
-      "tier": 1,
-      "slots": 10,
-      "power": 80,
-      "crew": 5,
-      "resourceUsage": {
-        "fuel": 1.5
-      },
-      "constructionCost": {
-        "steel": 200,
-        "electronics": 100
-      },
-      "constructionTime": 90,
-      "requiredTags": []
-    },
-    {
-      "id": "storage_basic",
-      "name": "Basic Storage",
-      "category": "storage",
-      "tier": 1,
-      "slots": 4,
-      "power": -5,
-      "crew": 3,
-      "resourceStorage": {
-        "capacity": 500
-      },
-      "constructionCost": {
-        "steel": 50
-      },
-      "constructionTime": 30,
-      "requiredTags": []
-    },
-    {
       "id": "power-plant-t1",
       "name": "Power Plant T1",
       "category": "power",
@@ -468,21 +411,21 @@
       "id": "claim-stake-t1",
       "name": "Basic Claim Stake",
       "tier": 1,
-      "slots": 100,
+      "slots": 20,
       "rentMultiplier": 1.0
     },
     {
       "id": "claim-stake-t2",
       "name": "Advanced Claim Stake",
       "tier": 2,
-      "slots": 300,
+      "slots": 40,
       "rentMultiplier": 1.5
     },
     {
       "id": "claim-stake-t3",
       "name": "Industrial Claim Stake",
       "tier": 3,
-      "slots": 600,
+      "slots": 60,
       "rentMultiplier": 2.0
     }
   ],

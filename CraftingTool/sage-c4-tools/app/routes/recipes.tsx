@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Navigation } from '../components/Navigation';
 import { useGameData } from '../contexts/DataContext';
 import { useSharedState } from '../contexts/SharedStateContext';
+import { NotificationSystem, useNotifications } from '../components/NotificationSystem';
 
 // Type definitions
 interface Recipe {
@@ -30,9 +31,20 @@ interface PathAnalysis {
     efficiency: number;
 }
 
+interface BuildPlan {
+    id: string;
+    name: string;
+    recipe: Recipe;
+    quantity: number;
+    analysis: PathAnalysis;
+    created: number;
+    notes?: string;
+}
+
 export default function Recipes() {
     const { gameData, loading } = useGameData();
-    const { state: sharedState } = useSharedState();
+    const { state: sharedState, dispatch } = useSharedState();
+    const { notifications, showNotification, dismissNotification } = useNotifications();
 
     // State
     const [searchTerm, setSearchTerm] = useState('');
@@ -43,10 +55,60 @@ export default function Recipes() {
     const [hoveredNode, setHoveredNode] = useState<string | null>(null);
     const [pathAnalysis, setPathAnalysis] = useState<PathAnalysis | null>(null);
     const [targetQuantity, setTargetQuantity] = useState(1);
+    const [buildPlans, setBuildPlans] = useState<BuildPlan[]>([]);
+    const [showBuildPlans, setShowBuildPlans] = useState(false);
 
     // Canvas ref
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const animationRef = useRef<number | undefined>(undefined);
+
+    // Load build plans from localStorage on mount
+    useEffect(() => {
+        const savedPlans = localStorage.getItem('recipeBuildPlans');
+        if (savedPlans) {
+            try {
+                setBuildPlans(JSON.parse(savedPlans));
+            } catch (e) {
+                console.error('Failed to load build plans:', e);
+            }
+        }
+    }, []);
+
+    // Save build plan
+    const saveBuildPlan = (name: string, notes?: string) => {
+        if (!selectedRecipe || !pathAnalysis) return;
+
+        const newPlan: BuildPlan = {
+            id: `plan_${Date.now()}`,
+            name,
+            recipe: selectedRecipe,
+            quantity: targetQuantity,
+            analysis: pathAnalysis,
+            created: Date.now(),
+            notes
+        };
+
+        const updatedPlans = [...buildPlans, newPlan];
+        setBuildPlans(updatedPlans);
+        localStorage.setItem('recipeBuildPlans', JSON.stringify(updatedPlans));
+
+        alert(`Build plan "${name}" saved!`);
+    };
+
+    // Load build plan
+    const loadBuildPlan = (plan: BuildPlan) => {
+        setSelectedRecipe(plan.recipe);
+        setTargetQuantity(plan.quantity);
+        setPathAnalysis(plan.analysis);
+        setShowBuildPlans(false);
+    };
+
+    // Delete build plan
+    const deleteBuildPlan = (planId: string) => {
+        const updatedPlans = buildPlans.filter(p => p.id !== planId);
+        setBuildPlans(updatedPlans);
+        localStorage.setItem('recipeBuildPlans', JSON.stringify(updatedPlans));
+    };
 
     // Get recipes from game data or use mock data
     const recipes: Recipe[] = gameData?.recipes || [
@@ -425,6 +487,11 @@ export default function Recipes() {
         <div className="recipes-app">
             <Navigation />
 
+            <NotificationSystem
+                notifications={notifications}
+                onDismiss={dismissNotification}
+            />
+
             <div className="recipes-content">
                 {/* Left Sidebar - Recipe Browser */}
                 <aside className="sidebar">
@@ -537,14 +604,16 @@ export default function Recipes() {
                                 </div>
                             </div>
 
-                            <canvas
-                                ref={canvasRef}
-                                width={800}
-                                height={600}
-                                className="recipe-tree-canvas"
-                                onMouseMove={handleCanvasMouseMove}
-                                onMouseLeave={() => setHoveredNode(null)}
-                            />
+                            <div className="tree-container">
+                                <canvas
+                                    ref={canvasRef}
+                                    width={800}
+                                    height={500}
+                                    className="recipe-tree-canvas"
+                                    onMouseMove={handleCanvasMouseMove}
+                                    onMouseLeave={() => setHoveredNode(null)}
+                                />
+                            </div>
 
                             <div className="quantity-control">
                                 <label>Target Quantity:</label>
@@ -634,14 +703,88 @@ export default function Recipes() {
                                 <button
                                     className="btn btn-primary"
                                     onClick={() => {
-                                        // Export to crafting queue (future feature)
-                                        alert('Export to Crafting Hab coming soon!');
+                                        if (selectedRecipe && pathAnalysis) {
+                                            // Find the best available hab plot for this recipe
+                                            const craftingHabState = sharedState.craftingHabState;
+                                            let bestPlot: any = null;
+                                            let bestScore = -1;
+
+                                            if (craftingHabState?.habPlots) {
+                                                craftingHabState.habPlots.forEach((plot: any) => {
+                                                    if (plot.isRented && plot.habDesign) {
+                                                        // Calculate score based on available job slots and speed
+                                                        const activeJobs = (craftingHabState.craftingJobs || [])
+                                                            .filter((job: any) => job.habPlotId === plot.id && job.status !== 'completed')
+                                                            .length;
+                                                        const availableSlots = (plot.habDesign.totalJobSlots || 1) - activeJobs;
+
+                                                        if (availableSlots > 0) {
+                                                            const score = availableSlots * (plot.habDesign.craftingSpeed || 1);
+                                                            if (score > bestScore) {
+                                                                bestScore = score;
+                                                                bestPlot = plot;
+                                                            }
+                                                        }
+                                                    }
+                                                });
+                                            }
+
+                                            // Create recipe plan for queue
+                                            const recipePlan = {
+                                                id: `job_${Date.now()}`,
+                                                recipe: selectedRecipe,
+                                                recipeId: selectedRecipe.id,
+                                                quantity: targetQuantity,
+                                                requirements: pathAnalysis.totalResources,
+                                                totalTime: pathAnalysis.totalTime,
+                                                timestamp: Date.now(),
+                                                habPlotId: bestPlot?.id || null,
+                                                status: bestPlot ? 'queued' : 'pending',
+                                                priority: 'normal'
+                                            };
+
+                                            // Add to shared state queue
+                                            dispatch({
+                                                type: 'ADD_TO_CRAFTING_QUEUE',
+                                                payload: recipePlan
+                                            });
+
+                                            // Show notification
+                                            if (bestPlot) {
+                                                showNotification(
+                                                    `Recipe "${selectedRecipe.name}" x${targetQuantity} added to Plot T${bestPlot.tier} queue!`,
+                                                    'success'
+                                                );
+                                            } else {
+                                                showNotification(
+                                                    `Recipe "${selectedRecipe.name}" x${targetQuantity} added to queue (no hab plots available)`,
+                                                    'warning'
+                                                );
+                                            }
+                                        }
                                     }}
+                                    disabled={!selectedRecipe || !pathAnalysis}
                                 >
                                     Export to Queue
                                 </button>
-                                <button className="btn btn-secondary">
+                                <button
+                                    className="btn btn-secondary"
+                                    onClick={() => {
+                                        const name = prompt('Enter build plan name:');
+                                        if (name) {
+                                            const notes = prompt('Enter notes (optional):');
+                                            saveBuildPlan(name, notes || undefined);
+                                        }
+                                    }}
+                                    disabled={!selectedRecipe || !pathAnalysis}
+                                >
                                     Save Build Plan
+                                </button>
+                                <button
+                                    className="btn btn-secondary"
+                                    onClick={() => setShowBuildPlans(!showBuildPlans)}
+                                >
+                                    📋 View Plans ({buildPlans.length})
                                 </button>
                             </div>
                         </>
@@ -652,6 +795,74 @@ export default function Recipes() {
                     )}
                 </aside>
             </div>
+
+            {/* Build Plans Modal */}
+            {showBuildPlans && (
+                <div className="modal-overlay" onClick={() => setShowBuildPlans(false)}>
+                    <div className="modal-content build-plans-modal" onClick={e => e.stopPropagation()}>
+                        <div className="modal-header">
+                            <h2>Saved Build Plans</h2>
+                            <button className="close-button" onClick={() => setShowBuildPlans(false)}>×</button>
+                        </div>
+                        <div className="modal-body">
+                            {buildPlans.length === 0 ? (
+                                <p>No saved build plans yet.</p>
+                            ) : (
+                                <div className="build-plans-list">
+                                    {buildPlans.map(plan => (
+                                        <div key={plan.id} className="build-plan-card">
+                                            <div className="plan-header">
+                                                <h3>{plan.name}</h3>
+                                                <span className="plan-date">
+                                                    {new Date(plan.created).toLocaleDateString()}
+                                                </span>
+                                            </div>
+                                            <div className="plan-details">
+                                                <div>Recipe: {plan.recipe.name}</div>
+                                                <div>Quantity: {plan.quantity}</div>
+                                                <div>Time: {plan.analysis.totalTime}s</div>
+                                                {plan.notes && <div className="plan-notes">Notes: {plan.notes}</div>}
+                                            </div>
+                                            <div className="plan-resources">
+                                                <strong>Resources:</strong>
+                                                {Object.entries(plan.analysis.totalResources).map(([res, amt]) => (
+                                                    <span key={res} className="resource-chip">
+                                                        {res}: {amt}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                            <div className="plan-actions">
+                                                <button
+                                                    className="btn btn-sm btn-primary"
+                                                    onClick={() => loadBuildPlan(plan)}
+                                                >
+                                                    Load
+                                                </button>
+                                                <button
+                                                    className="btn btn-sm btn-danger"
+                                                    onClick={() => {
+                                                        if (confirm('Delete this build plan?')) {
+                                                            deleteBuildPlan(plan.id);
+                                                        }
+                                                    }}
+                                                >
+                                                    Delete
+                                                </button>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Notification System */}
+            <NotificationSystem
+                notifications={notifications}
+                onDismiss={dismissNotification}
+            />
         </div>
     );
 } 

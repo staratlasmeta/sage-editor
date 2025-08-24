@@ -4,8 +4,10 @@
   "type": "module",
   "scripts": {
     "build": "react-router build",
+    "build:standalone": "vite build --config vite.config.standalone.ts",
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
+    "test:standalone": "node test-server.js",
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
@@ -24,9 +26,12 @@
     "@types/papaparse": "^5.3.16",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
+    "@vitejs/plugin-react": "^4.3.1",
     "tailwindcss": "^4.1.4",
+    "terser": "^5.43.1",
     "typescript": "^5.8.3",
     "vite": "^6.3.3",
+    "vite-plugin-singlefile": "^2.0.2",
     "vite-tsconfig-paths": "^5.1.4"
   }
 }

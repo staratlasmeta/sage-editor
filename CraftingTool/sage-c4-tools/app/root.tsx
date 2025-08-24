@@ -1,28 +1,21 @@
+import React from 'react';
 import {
   Links,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
-  isRouteErrorResponse,
+  useLocation
 } from "react-router";
+import { DataProvider } from './contexts/DataContext';
+import { SharedStateProvider } from './contexts/SharedStateContext';
+import type { LinksFunction } from "react-router";
+import stylesheet from "./app.css?url";
+import themeStyles from "./styles/sage-theme.css?url";
 
-import type { Route } from "./+types/root";
-import "./styles/sage-theme.css";
-import { DataProvider } from "./contexts/DataContext";
-import { SharedStateProvider } from "./contexts/SharedStateContext";
-
-export const links: Route.LinksFunction = () => [
-  { rel: "preconnect", href: "https://fonts.googleapis.com" },
-  {
-    rel: "preconnect",
-    href: "https://fonts.gstatic.com",
-    crossOrigin: "anonymous",
-  },
-  {
-    rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Exo+2:wght@300;400;600&family=Audiowide&display=swap",
-  },
+export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: stylesheet },
+  { rel: "stylesheet", href: themeStyles },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -31,16 +24,83 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>SAGE C4 Tools - Star Atlas</title>
+        <title>SAGE C4 Integrated Tools</title>
         <Meta />
         <Links />
+        <style>{`
+                    /* Global styles for SAGE theme */
+                    :root {
+                        --primary-orange: #FF6B35;
+                        --primary-dark: #0A0A0A;
+                        --primary-light: #1A1A1A;
+                        --accent-blue: #00A8E8;
+                        --accent-green: #00C896;
+                        --accent-purple: #9B59B6;
+                        --accent-gold: #FFD700;
+                        --status-success: #2ECC40;
+                        --status-warning: #FF851B;
+                        --status-danger: #FF4136;
+                        --status-info: #0074D9;
+                        --faction-mud: #8B4513;
+                        --faction-oni: #FF1493;
+                        --faction-ust: #1E90FF;
+                        --border-color: #2A2A2A;
+                        --text-primary: #FFFFFF;
+                        --text-secondary: #999999;
+                        --text-dim: #666666;
+                    }
+
+                    * {
+                        margin: 0;
+                        padding: 0;
+                        box-sizing: border-box;
+                    }
+
+                    body {
+                        background: var(--primary-dark);
+                        color: var(--text-primary);
+                        font-family: 'Exo 2', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                        min-height: 100vh;
+                        overflow-x: hidden;
+                    }
+
+                    /* Scrollbar styling */
+                    ::-webkit-scrollbar {
+                        width: 10px;
+                        height: 10px;
+                    }
+
+                    ::-webkit-scrollbar-track {
+                        background: var(--primary-dark);
+                    }
+
+                    ::-webkit-scrollbar-thumb {
+                        background: var(--primary-orange);
+                        border-radius: 5px;
+                    }
+
+                    ::-webkit-scrollbar-thumb:hover {
+                        background: #ff8659;
+                    }
+                `}</style>
+        {/* Add hash routing script for production builds */}
+        <script dangerouslySetInnerHTML={{
+          __html: `
+                        // Handle hash routing for standalone SPA
+                        if (window.location.protocol === 'file:' || !window.location.host.includes('localhost')) {
+                            // In production/standalone mode
+                            if (!window.location.hash) {
+                                // Default to claim-stakes if no hash
+                                window.location.hash = '/';
+                            }
+                        }
+                    `
+        }} />
       </head>
       <body>
-        <DataProvider>
-          <SharedStateProvider>
-            {children}
-          </SharedStateProvider>
-        </DataProvider>
+        <div className="app-container">
+          {children}
+        </div>
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -49,34 +109,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
-}
-
-export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
-  let message = "Oops!";
-  let details = "An unexpected error occurred.";
-  let stack: string | undefined;
-
-  if (isRouteErrorResponse(error)) {
-    message = error.status === 404 ? "404" : "Error";
-    details =
-      error.status === 404
-        ? "The requested page could not be found."
-        : error.statusText || details;
-  } else if (import.meta.env.DEV && error && error instanceof Error) {
-    details = error.message;
-    stack = error.stack;
-  }
+  const location = useLocation();
 
   return (
-    <main className="error-screen">
-      <h1 className="heading-primary">{message}</h1>
-      <p className="body-text">{details}</p>
-      {stack && (
-        <pre className="w-full p-4 overflow-x-auto">
-          <code>{stack}</code>
-        </pre>
-      )}
-    </main>
+    <DataProvider>
+      <SharedStateProvider>
+        <Outlet key={location.pathname} />
+      </SharedStateProvider>
+    </DataProvider>
   );
 }

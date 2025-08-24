@@ -1,0 +1,8 @@
+OutputID,OutputName,OutputType,OutputTier,BuildingResourceTier,ConstructionTime,PlanetTypes,Factions,ResourceType,ProductionSteps,Ingredient1,Quantity1,Ingredient2,Quantity2,Ingredient3,Quantity3
+recipe_steel,Steel,Component,1,1,60,Industrial,All,Processed,2,iron-ore,2,coal,1,,
+recipe_copper,Copper,Component,1,1,45,Mining,All,Processed,1,copper-ore,2,,,,
+recipe_electronics,Electronics,Component,2,2,90,Tech,All,Component,2,copper,2,silica,1,,
+recipe_circuit_board,Circuit Board,Component,2,2,120,Tech,All,Component,3,electronics,2,copper,1,plastic,1
+recipe_iron_plate,Iron Plate,Component,1,1,30,Industrial,All,Processed,1,iron-ore,1,,,,
+recipe_fuel,Fuel,Consumable,3,3,120,Tech,All,Processed,1,hydrogen,2,,,,
+recipe_plastic,Plastic,Component,1,1,60,Industrial,All,Processed,1,carbon,2,,,, 

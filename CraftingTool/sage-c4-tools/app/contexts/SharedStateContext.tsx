@@ -24,7 +24,16 @@ interface SharedState {
         autoSave: boolean;
         crewMode: 'auto' | 'manual';
         tutorialCompleted: boolean;
+        simulationSpeed?: number;
     };
+    craftingHabState?: {
+        habPlots: any[];
+        craftingJobs: any[];
+        selectedStarbaseId?: string;
+        selectedPlotId?: string;
+    };
+    craftingQueue?: any[];
+    claimStakesData?: any[]; // Store claim stakes data globally
 }
 
 interface SharedStateContextType {
@@ -48,7 +57,11 @@ type Action =
     | { type: 'UNLOCK_ACHIEVEMENT'; payload: string }
     | { type: 'UPDATE_STATISTIC'; payload: { stat: keyof SharedState['statistics']; value: number } }
     | { type: 'UPDATE_SETTINGS'; payload: Partial<SharedState['settings']> }
-    | { type: 'LOAD_STATE'; payload: SharedState };
+    | { type: 'LOAD_STATE'; payload: SharedState }
+    | { type: 'UPDATE_CRAFTING_HAB_STATE'; payload: SharedState['craftingHabState'] }
+    | { type: 'ADD_TO_CRAFTING_QUEUE'; payload: any }
+    | { type: 'UPDATE_CRAFTING_QUEUE'; payload: any[] }
+    | { type: 'UPDATE_CLAIM_STAKES_DATA'; payload: any[] };
 
 // Initial state
 const initialState: SharedState = {
@@ -76,6 +89,7 @@ const initialState: SharedState = {
         autoSave: true,
         crewMode: 'auto',
         tutorialCompleted: false,
+        simulationSpeed: 1,
     },
 };
 
@@ -195,6 +209,29 @@ function sharedStateReducer(state: SharedState, action: Action): SharedState {
         case 'LOAD_STATE':
             return action.payload;
 
+        case 'UPDATE_CRAFTING_HAB_STATE':
+            return {
+                ...state,
+                craftingHabState: action.payload
+            };
+
+        case 'ADD_TO_CRAFTING_QUEUE':
+            return {
+                ...state,
+                craftingQueue: [...(state.craftingQueue || []), action.payload]
+            };
+
+        case 'UPDATE_CRAFTING_QUEUE':
+            return {
+                ...state,
+                craftingQueue: action.payload
+            };
+        case 'UPDATE_CLAIM_STAKES_DATA':
+            return {
+                ...state,
+                claimStakesData: action.payload
+            };
+
         default:
             return state;
     }
@@ -215,7 +252,7 @@ export function SharedStateProvider({ children }: { children: React.ReactNode })
                 const parsed = JSON.parse(savedState);
                 dispatch({ type: 'LOAD_STATE', payload: parsed });
             } catch (error) {
-                console.error('Failed to load saved state:', error);
+                // Failed to load saved state, will use initial state
             }
         }
     }, []);
@@ -272,7 +309,7 @@ export function SharedStateProvider({ children }: { children: React.ReactNode })
     const unlockAchievement = (achievementId: string) => {
         if (!state.achievements[achievementId]) {
             dispatch({ type: 'UNLOCK_ACHIEVEMENT', payload: achievementId });
-            // TODO: Show achievement notification
+            // Achievement notification is handled by components that use this function
         }
     };
 

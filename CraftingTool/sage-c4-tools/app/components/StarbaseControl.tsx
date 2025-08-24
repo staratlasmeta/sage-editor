@@ -1,112 +1,125 @@
 import React from 'react';
 import { useSharedState, STARBASE_LEVELS } from '../contexts/SharedStateContext';
 
-export function StarbaseControl() {
-    const { state, updateStarbaseLevel } = useSharedState();
-    const currentLevel = state.starbaseLevel;
-    const levelData = STARBASE_LEVELS[currentLevel as keyof typeof STARBASE_LEVELS];
-    const nextLevelData = STARBASE_LEVELS[(currentLevel + 1) as keyof typeof STARBASE_LEVELS];
+interface StarbaseControlProps {
+  onNotification?: (message: string, type: 'success' | 'error' | 'info' | 'warning') => void;
+}
 
-    const handleUpgrade = () => {
-        if (currentLevel < 6) {
-            updateStarbaseLevel(currentLevel + 1);
-            // TODO: Show upgrade animation/notification
-        }
-    };
+export function StarbaseControl({ onNotification }: StarbaseControlProps = {}) {
+  const { state, updateStarbaseLevel, unlockAchievement } = useSharedState();
+  const currentLevel = state.starbaseLevel;
+  const levelData = STARBASE_LEVELS[currentLevel as keyof typeof STARBASE_LEVELS];
+  const nextLevelData = STARBASE_LEVELS[(currentLevel + 1) as keyof typeof STARBASE_LEVELS];
 
-    return (
-        <div className="starbase-control panel">
-            <h3 className="heading-secondary">Starbase Command</h3>
+  const handleUpgrade = () => {
+    if (currentLevel < 6) {
+      updateStarbaseLevel(currentLevel + 1);
+      const nextLevel = STARBASE_LEVELS[(currentLevel + 1) as keyof typeof STARBASE_LEVELS];
 
-            <div className="starbase-info">
-                <div className="level-display">
-                    <span className="level-number">Level {currentLevel}</span>
-                    <h4 className="level-name">{levelData.name}</h4>
-                </div>
+      if (onNotification) {
+        onNotification(`Starbase upgraded to Level ${currentLevel + 1}: ${nextLevel.name}!`, 'success');
+      }
 
-                {currentLevel < 6 && (
-                    <div className="progress-bar">
-                        <div
-                            className="progress-fill"
-                            style={{ width: `${(currentLevel / 6) * 100}%` }}
-                        />
-                    </div>
-                )}
-            </div>
+      // Check for starbase achievements
+      if (currentLevel + 1 === 6) {
+        unlockAchievement('starbase_commander');
+      }
+    }
+  };
 
-            <div className="capabilities-grid">
-                <div className="capability-section">
-                    <h5 className="stat-text">Claim Stake Access</h5>
-                    <div className="tier-badges">
-                        {[1, 2, 3, 4, 5].map(tier => (
-                            <div
-                                key={tier}
-                                className={`tier-badge ${levelData.claimStakeTiers.includes(tier) ? 'unlocked' : 'locked'}`}
-                            >
-                                T{tier}
-                            </div>
-                        ))}
-                    </div>
-                </div>
+  return (
+    <div className="starbase-control panel">
+      <h3 className="heading-secondary">Starbase Command</h3>
 
-                <div className="capability-section">
-                    <h5 className="stat-text">Hab Plot Availability</h5>
-                    <div className="plot-counts">
-                        {Object.entries(levelData.habPlotsByTier).map(([tier, count]) => (
-                            <div key={tier} className="plot-count">
-                                <span className="tier-label">T{tier}:</span>
-                                <span className="count">{count}</span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                <div className="capability-section">
-                    <h5 className="stat-text">Features</h5>
-                    <ul className="feature-list">
-                        {levelData.features.map(feature => (
-                            <li key={feature} className="feature-item">
-                                <span className="feature-icon">✓</span>
-                                {feature}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            </div>
-
-            {currentLevel < 6 && nextLevelData && (
-                <div className="upgrade-section">
-                    <h5 className="stat-text">Next Level: {nextLevelData.name}</h5>
-                    <div className="upgrade-preview">
-                        <div className="new-features">
-                            <span className="text-dim">Unlocks:</span>
-                            <ul>
-                                {nextLevelData.features
-                                    .filter(f => !levelData.features.includes(f))
-                                    .map(feature => (
-                                        <li key={feature} className="text-success">+ {feature}</li>
-                                    ))}
-                            </ul>
-                        </div>
-                    </div>
-
-                    <button
-                        className="btn btn-primary"
-                        onClick={handleUpgrade}
-                    >
-                        Upgrade to Level {currentLevel + 1}
-                    </button>
-                </div>
-            )}
-
-            {currentLevel === 6 && (
-                <div className="max-level-badge">
-                    <span className="badge-icon">⭐</span>
-                    <span className="badge-text">Maximum Level Achieved</span>
-                </div>
-            )}
+      <div className="starbase-info">
+        <div className="level-display">
+          <span className="level-number">Level {currentLevel}</span>
+          <h4 className="level-name">{levelData.name}</h4>
         </div>
-    );
+
+        {currentLevel < 6 && (
+          <div className="progress-bar">
+            <div
+              className="progress-fill"
+              style={{ width: `${(currentLevel / 6) * 100}%` }}
+            />
+          </div>
+        )}
+      </div>
+
+      <div className="capabilities-grid">
+        <div className="capability-section">
+          <h5 className="stat-text">Claim Stake Access</h5>
+          <div className="tier-badges">
+            {[1, 2, 3, 4, 5].map(tier => (
+              <div
+                key={tier}
+                className={`tier-badge ${levelData.claimStakeTiers.includes(tier) ? 'unlocked' : 'locked'}`}
+              >
+                T{tier}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="capability-section">
+          <h5 className="stat-text">Hab Plot Availability</h5>
+          <div className="plot-counts">
+            {Object.entries(levelData.habPlotsByTier).map(([tier, count]) => (
+              <div key={tier} className="plot-count">
+                <span className="tier-label">T{tier}:</span>
+                <span className="count">{count}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="capability-section">
+          <h5 className="stat-text">Features</h5>
+          <ul className="feature-list">
+            {levelData.features.map(feature => (
+              <li key={feature} className="feature-item">
+                <span className="feature-icon">✓</span>
+                {feature}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      {currentLevel < 6 && nextLevelData && (
+        <div className="upgrade-section">
+          <h5 className="stat-text">Next Level: {nextLevelData.name}</h5>
+          <div className="upgrade-preview">
+            <div className="new-features">
+              <span className="text-dim">Unlocks:</span>
+              <ul>
+                {nextLevelData.features
+                  .filter(f => !levelData.features.includes(f))
+                  .map(feature => (
+                    <li key={feature} className="text-success">+ {feature}</li>
+                  ))}
+              </ul>
+            </div>
+          </div>
+
+          <button
+            className="btn btn-primary"
+            onClick={handleUpgrade}
+          >
+            Upgrade to Level {currentLevel + 1}
+          </button>
+        </div>
+      )}
+
+      {currentLevel === 6 && (
+        <div className="max-level-badge">
+          <span className="badge-icon">⭐</span>
+          <span className="badge-text">Maximum Level Achieved</span>
+        </div>
+      )}
+    </div>
+  );
 }
 
 // Add these styles to your sage-theme.css

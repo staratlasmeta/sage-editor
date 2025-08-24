@@ -1,26 +1,33 @@
 import React, { useState } from 'react';
+import './ResourceManager.css';
 
 interface ResourceFlow {
     resource: string;
-    extraction: number;      // Raw extraction per second
-    production: number;      // Processing output per second
-    consumption: number;     // Usage per second
-    net: number;            // Net gain/loss per second
-    storage: number;        // Current stored amount
+    extraction: number;
+    production: number;
+    consumption: number;
+    net: number;
+    storage: number;
+    potentialExtraction?: number;
+    potentialProduction?: number;
+    isActive?: boolean;
+    stopReasons?: string[];
 }
 
-interface ClaimStakeResources {
+interface ClaimStakeData {
     id: string;
     name: string;
     planetName: string;
     tier: number;
+    resources: Record<string, number>;
     flows: ResourceFlow[];
     totalStorage: number;
-    maxStorage: number;
+    currentStorage: number;
+    maxStorage?: number;
 }
 
 interface ResourceManagerProps {
-    claimStakes: ClaimStakeResources[];
+    claimStakes: ClaimStakeData[];
     starbaseInventory: Record<string, number>;
     onTransfer: (from: string, to: string, resources: Record<string, number>) => void;
     onMagicResources: (targetId: string) => void;
@@ -37,6 +44,7 @@ export function ResourceManager({
     const [transferAmounts, setTransferAmounts] = useState<Record<string, number>>({});
     const [viewMode, setViewMode] = useState<'individual' | 'aggregate'>('individual');
     const [expandedStake, setExpandedStake] = useState<string | null>(null);
+    const [hoveredResource, setHoveredResource] = useState<string | null>(null);
 
     // Calculate aggregate resource flows
     const aggregateFlows = () => {
@@ -51,7 +59,11 @@ export function ResourceManager({
                         production: 0,
                         consumption: 0,
                         net: 0,
-                        storage: 0
+                        storage: 0,
+                        potentialExtraction: 0,
+                        potentialProduction: 0,
+                        isActive: false,
+                        stopReasons: []
                     };
                 }
 
@@ -60,6 +72,13 @@ export function ResourceManager({
                 totals[flow.resource].consumption += flow.consumption;
                 totals[flow.resource].net += flow.net;
                 totals[flow.resource].storage += flow.storage;
+                totals[flow.resource].potentialExtraction! += flow.potentialExtraction || 0;
+                totals[flow.resource].potentialProduction! += flow.potentialProduction || 0;
+
+                // Mark as active if any stake is active
+                if (flow.isActive) {
+                    totals[flow.resource].isActive = true;
+                }
             });
         });
 
@@ -75,31 +94,97 @@ export function ResourceManager({
         setSelectedTarget(null);
     };
 
+    const handleTransferAmountChange = (resource: string, amount: number) => {
+        if (amount <= 0) {
+            const newAmounts = { ...transferAmounts };
+            delete newAmounts[resource];
+            setTransferAmounts(newAmounts);
+        } else {
+            setTransferAmounts({
+                ...transferAmounts,
+                [resource]: amount
+            });
+        }
+    };
+
+    const getAvailableResources = () => {
+        if (!selectedSource) return {};
+
+        if (selectedSource === 'starbase') {
+            return starbaseInventory;
+        }
+
+        const stake = claimStakes.find(s => s.id === selectedSource);
+        if (stake) {
+            return stake.resources || {};
+        }
+
+        return {};
+    };
+
     const formatRate = (rate: number) => {
-        if (Math.abs(rate) < 0.01) return '0';
+        if (rate === 0) return '0.00/s';
         const sign = rate > 0 ? '+' : '';
         return `${sign}${rate.toFixed(2)}/s`;
     };
 
-    const getFlowColor = (net: number) => {
-        if (net > 0) return 'var(--status-success)';
-        if (net < 0) return 'var(--status-danger)';
-        return 'var(--text-dim)';
+    const formatPotentialRate = (actual: number, potential: number) => {
+        if (potential === 0) return '0.00/s';
+        if (actual === potential) {
+            return formatRate(actual);
+        }
+        // Show actual/potential when different
+        return (
+            <span className="rate-display">
+                <span className="actual-rate">{formatRate(actual)}</span>
+                <span className="potential-rate"> ({formatRate(potential)})</span>
+            </span>
+        );
+    };
+
+    const getFlowColor = (value: number) => {
+        if (value > 0) return '#00c896';
+        if (value < 0) return '#ff6b35';
+        return '#999';
+    };
+
+    const renderStopIndicator = (flow: ResourceFlow) => {
+        if (flow.isActive) return null;
+
+        return (
+            <div
+                className="stop-indicator"
+                onMouseEnter={() => setHoveredResource(`${flow.resource}_stop`)}
+                onMouseLeave={() => setHoveredResource(null)}
+            >
+                <span className="stop-icon">⚠️</span>
+                {hoveredResource === `${flow.resource}_stop` && flow.stopReasons && flow.stopReasons.length > 0 && (
+                    <div className="stop-tooltip">
+                        <strong>Production Stopped:</strong>
+                        <ul>
+                            {flow.stopReasons.map((reason, idx) => (
+                                <li key={idx}>{reason}</li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
+            </div>
+        );
     };
 
     return (
         <div className="resource-manager">
             <div className="manager-header">
                 <h3>Resource Management</h3>
-                <div className="view-controls">
+                <div className="view-toggle">
                     <button
-                        className={`view-btn ${viewMode === 'individual' ? 'active' : ''}`}
+                        className={viewMode === 'individual' ? 'active' : ''}
                         onClick={() => setViewMode('individual')}
                     >
                         By Claim Stake
                     </button>
                     <button
-                        className={`view-btn ${viewMode === 'aggregate' ? 'active' : ''}`}
+                        className={viewMode === 'aggregate' ? 'active' : ''}
                         onClick={() => setViewMode('aggregate')}
                     >
                         Aggregate View
@@ -108,103 +193,81 @@ export function ResourceManager({
             </div>
 
             {viewMode === 'individual' ? (
-                <div className="individual-view">
+                <div className="claim-stakes-list">
                     {claimStakes.map(stake => (
-                        <div key={stake.id} className="stake-resources">
+                        <div key={stake.id} className="claim-stake-card">
                             <div
                                 className="stake-header"
                                 onClick={() => setExpandedStake(expandedStake === stake.id ? null : stake.id)}
                             >
-                                <div className="stake-info">
-                                    <h4>{stake.name}</h4>
-                                    <span className="planet-name">{stake.planetName} • T{stake.tier}</span>
-                                </div>
-                                <div className="stake-summary">
-                                    <span className="storage-indicator" title="Used Storage / Max Storage">
-                                        📦 {Math.floor(stake.totalStorage)}/{stake.maxStorage}
+                                <h4>{stake.name}</h4>
+                                <div className="stake-stats">
+                                    <span className="storage-indicator">
+                                        {stake.currentStorage.toFixed(2)}/{stake.maxStorage || 1000}
                                     </span>
-                                    <button
-                                        className="btn-icon"
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            onMagicResources(stake.id);
-                                        }}
-                                        title="Add magic resources"
-                                    >
-                                        🪄
-                                    </button>
-                                    <span className="expand-icon">
-                                        {expandedStake === stake.id ? '▼' : '▶'}
-                                    </span>
+                                    <span className="chevron">{expandedStake === stake.id ? '▼' : '▶'}</span>
                                 </div>
                             </div>
 
                             {expandedStake === stake.id && (
                                 <div className="stake-details">
-                                    <div className="resource-flows">
-                                        <table className="flow-table">
-                                            <thead>
-                                                <tr>
-                                                    <th>Resource</th>
-                                                    <th>Extract</th>
-                                                    <th>Process</th>
-                                                    <th>Consume</th>
-                                                    <th>Net</th>
-                                                    <th>Storage</th>
-                                                    <th>Actions</th>
+                                    <table className="flow-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Resource</th>
+                                                <th>Extract</th>
+                                                <th>Process</th>
+                                                <th>Consume</th>
+                                                <th>Net</th>
+                                                <th>Storage</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {stake.flows.map(flow => (
+                                                <tr key={flow.resource} className={!flow.isActive ? 'inactive-flow' : ''}>
+                                                    <td className="resource-name">{flow.resource}</td>
+                                                    <td className="extraction">
+                                                        {formatPotentialRate(flow.extraction, flow.potentialExtraction || flow.extraction)}
+                                                    </td>
+                                                    <td className="production">
+                                                        {formatPotentialRate(flow.production, flow.potentialProduction || flow.production)}
+                                                    </td>
+                                                    <td className="consumption">{formatRate(-flow.consumption)}</td>
+                                                    <td className="net" style={{ color: getFlowColor(flow.net) }}>
+                                                        {formatRate(flow.net)}
+                                                    </td>
+                                                    <td className="storage">{Math.floor(flow.storage)}</td>
+                                                    <td className="status">
+                                                        {renderStopIndicator(flow)}
+                                                    </td>
                                                 </tr>
-                                            </thead>
-                                            <tbody>
-                                                {stake.flows.map(flow => (
-                                                    <tr key={flow.resource}>
-                                                        <td className="resource-name">{flow.resource}</td>
-                                                        <td className="extraction">
-                                                            {flow.extraction > 0 && formatRate(flow.extraction)}
-                                                        </td>
-                                                        <td className="production">
-                                                            {flow.production > 0 && formatRate(flow.production)}
-                                                        </td>
-                                                        <td className="consumption">
-                                                            {flow.consumption > 0 && formatRate(-flow.consumption)}
-                                                        </td>
-                                                        <td className="net" style={{ color: getFlowColor(flow.net) }}>
-                                                            {formatRate(flow.net)}
-                                                        </td>
-                                                        <td className="storage">{Math.floor(flow.storage)}</td>
-                                                        <td className="actions">
-                                                            {flow.storage > 0 && (
-                                                                <button
-                                                                    className="btn-sm"
-                                                                    onClick={() => {
-                                                                        setSelectedSource(stake.id);
-                                                                        setTransferAmounts({
-                                                                            ...transferAmounts,
-                                                                            [flow.resource]: Math.floor(flow.storage)
-                                                                        });
-                                                                    }}
-                                                                >
-                                                                    Transfer
-                                                                </button>
-                                                            )}
-                                                        </td>
-                                                    </tr>
-                                                ))}
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                            ))}
+                                        </tbody>
+                                    </table>
 
                                     <div className="stake-actions">
                                         <button
-                                            className={`btn btn-secondary ${selectedSource === stake.id ? 'active' : ''}`}
-                                            onClick={() => setSelectedSource(stake.id)}
+                                            className="btn btn-secondary"
+                                            onClick={() => {
+                                                setSelectedSource(stake.id);
+                                                setSelectedTarget('starbase');
+                                            }}
                                         >
-                                            Set as Source
+                                            SET AS SOURCE
                                         </button>
                                         <button
-                                            className={`btn btn-secondary ${selectedTarget === stake.id ? 'active' : ''}`}
+                                            className="btn btn-secondary"
                                             onClick={() => setSelectedTarget(stake.id)}
                                         >
-                                            Set as Target
+                                            SET AS TARGET
+                                        </button>
+                                        <button
+                                            className="btn btn-magic"
+                                            onClick={() => onMagicResources(stake.id)}
+                                            title="Add 100 fuel for testing (mainly for keeping claim stake running)"
+                                        >
+                                            Add Fuel 🪄
                                         </button>
                                     </div>
                                 </div>
@@ -225,19 +288,29 @@ export function ResourceManager({
                                     <th>Total Consumption</th>
                                     <th>Net Rate</th>
                                     <th>Total Storage</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {aggregateFlows().map(flow => (
-                                    <tr key={flow.resource}>
+                                    <tr key={flow.resource} className={!flow.isActive ? 'inactive-flow' : ''}>
                                         <td className="resource-name">{flow.resource}</td>
-                                        <td className="extraction">{formatRate(flow.extraction)}</td>
-                                        <td className="production">{formatRate(flow.production)}</td>
+                                        <td className="extraction">
+                                            {formatPotentialRate(flow.extraction, flow.potentialExtraction || flow.extraction)}
+                                        </td>
+                                        <td className="production">
+                                            {formatPotentialRate(flow.production, flow.potentialProduction || flow.production)}
+                                        </td>
                                         <td className="consumption">{formatRate(-flow.consumption)}</td>
                                         <td className="net" style={{ color: getFlowColor(flow.net) }}>
                                             {formatRate(flow.net)}
                                         </td>
                                         <td className="storage">{Math.floor(flow.storage)}</td>
+                                        <td className="status">
+                                            {!flow.isActive && (
+                                                <span className="stop-icon" title="Some or all stakes stopped">⚠️</span>
+                                            )}
+                                        </td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -247,92 +320,92 @@ export function ResourceManager({
                     <div className="aggregate-actions">
                         <button
                             className="btn btn-primary"
-                            onClick={() => {
-                                // Transfer all resources to starbase
-                                const allResources: Record<string, number> = {};
-                                claimStakes.forEach(stake => {
-                                    stake.flows.forEach(flow => {
-                                        if (flow.storage > 0) {
-                                            allResources[flow.resource] = (allResources[flow.resource] || 0) + flow.storage;
-                                        }
-                                    });
-                                });
-
-                                if (Object.keys(allResources).length > 0) {
-                                    onTransfer('all-stakes', 'starbase', allResources);
-                                }
-                            }}
+                            onClick={() => setViewMode('individual')}
                         >
-                            Transfer All to Starbase
+                            View Individual Stakes
                         </button>
                     </div>
                 </div>
             )}
 
-            {/* Starbase Inventory */}
-            <div className="starbase-inventory-section">
-                <h4>Starbase Inventory</h4>
-                <div className="inventory-grid">
-                    {Object.entries(starbaseInventory).map(([resource, amount]) => (
-                        <div key={resource} className="inventory-item">
-                            <span className="resource">{resource}</span>
-                            <span className="amount">{amount}</span>
-                        </div>
-                    ))}
-                </div>
-                <button
-                    className={`btn btn-secondary ${selectedTarget === 'starbase' ? 'active' : ''}`}
-                    onClick={() => setSelectedTarget('starbase')}
-                >
-                    Set Starbase as Transfer Target
-                </button>
-            </div>
-
-            {/* Transfer Modal */}
-            {selectedSource && selectedTarget && (
-                <div className="transfer-modal">
-                    <h4>Transfer Resources</h4>
+            {/* Transfer Panel */}
+            {(selectedSource || selectedTarget) && (
+                <div className="transfer-panel">
+                    <h4>Resource Transfer</h4>
                     <div className="transfer-info">
-                        <span>From: {selectedSource === 'starbase' ? 'Starbase' : claimStakes.find(s => s.id === selectedSource)?.name}</span>
-                        <span>→</span>
-                        <span>To: {selectedTarget === 'starbase' ? 'Starbase' : claimStakes.find(s => s.id === selectedTarget)?.name}</span>
+                        <div>Source: {
+                            selectedSource === 'starbase' ? 'Starbase' :
+                                claimStakes.find(s => s.id === selectedSource)?.name || 'Not selected'
+                        }</div>
+                        <div>Target: {
+                            selectedTarget === 'starbase' ? 'Starbase' :
+                                claimStakes.find(s => s.id === selectedTarget)?.name || 'Not selected'
+                        }</div>
                     </div>
-
-                    <div className="transfer-resources">
-                        {Object.entries(transferAmounts).map(([resource, amount]) => (
-                            <div key={resource} className="transfer-item">
-                                <span>{resource}</span>
-                                <input
-                                    type="number"
-                                    min="0"
-                                    value={amount}
-                                    onChange={(e) => setTransferAmounts({
-                                        ...transferAmounts,
-                                        [resource]: parseInt(e.target.value) || 0
-                                    })}
-                                />
+                    {selectedSource && selectedTarget && (
+                        <div className="transfer-controls">
+                            <p className="info-text">Select resources to transfer:</p>
+                            <div className="resource-transfer-list">
+                                {Object.entries(getAvailableResources()).map(([resource, available]) => {
+                                    if (available <= 0) return null;
+                                    return (
+                                        <div key={resource} className="transfer-resource-item">
+                                            <span className="resource-label">{resource}</span>
+                                            <span className="available-amount">Available: {Math.floor(available)}</span>
+                                            <input
+                                                type="number"
+                                                min="0"
+                                                max={available}
+                                                value={transferAmounts[resource] || ''}
+                                                onChange={(e) => {
+                                                    const value = parseInt(e.target.value) || 0;
+                                                    handleTransferAmountChange(resource, Math.min(value, available));
+                                                }}
+                                                placeholder="0"
+                                                className="transfer-input"
+                                            />
+                                            <button
+                                                className="btn-transfer-max"
+                                                onClick={() => handleTransferAmountChange(resource, Math.floor(available))}
+                                                title="Transfer all"
+                                            >
+                                                MAX
+                                            </button>
+                                        </div>
+                                    );
+                                }).filter(Boolean)}
                             </div>
-                        ))}
-                    </div>
-
-                    <div className="transfer-actions">
-                        <button
-                            className="btn btn-secondary"
-                            onClick={() => {
-                                setSelectedSource(null);
-                                setSelectedTarget(null);
-                                setTransferAmounts({});
-                            }}
-                        >
-                            Cancel
-                        </button>
-                        <button
-                            className="btn btn-primary"
-                            onClick={initiateTransfer}
-                        >
-                            Confirm Transfer
-                        </button>
-                    </div>
+                            {Object.keys(transferAmounts).length > 0 && (
+                                <div className="transfer-summary">
+                                    <strong>Transfer Summary:</strong>
+                                    <ul>
+                                        {Object.entries(transferAmounts).map(([resource, amount]) => (
+                                            <li key={resource}>{resource}: {amount}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
+                            <div className="transfer-actions">
+                                <button
+                                    className="btn btn-secondary"
+                                    onClick={() => {
+                                        setSelectedSource(null);
+                                        setSelectedTarget(null);
+                                        setTransferAmounts({});
+                                    }}
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    className="btn btn-primary"
+                                    onClick={initiateTransfer}
+                                    disabled={Object.keys(transferAmounts).length === 0}
+                                >
+                                    Execute Transfer
+                                </button>
+                            </div>
+                        </div>
+                    )}
                 </div>
             )}
         </div>

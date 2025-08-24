@@ -47,109 +47,458 @@ const MOCK_DATA = {
         }
     ],
     buildings: [
+        // === INFRASTRUCTURE HUBS (tier limited by claim stake) ===
+
+        // Central Hub - Main control
         {
-            id: 'extractor_basic',
-            name: 'Basic Extractor',
-            category: 'extraction',
+            id: 'central_hub_t1',
+            name: 'Central Hub',
+            category: 'infrastructure',
             tier: 1,
-            slots: 2,
-            power: -10,
-            crew: 5,
-            extractionRate: {
-                'iron-ore': 1,
-                'copper-ore': 1,
-                'hydrogen': 1,
-                'coal': 1,
-                'silica': 1
-            },
-            requiredTags: ['mining']
-        },
-        {
-            id: 'generator_basic',
-            name: 'Basic Generator',
-            category: 'power',
-            tier: 1,
-            slots: 3,
-            power: 50,
-            crew: 3,
-            resourceUsage: {
-                'fuel': 0.5
-            }
-        },
-        {
-            id: 'storage_basic',
-            name: 'Basic Storage',
-            category: 'storage',
-            slots: 2,
-            power: -5,
-            crew: 2,
-            storage: 1000,
-            resourceStorage: {
-                capacity: 500
-            }
-        },
-        {
-            id: 'processor_copper',
-            name: 'Copper Processor',
-            category: 'processing',
-            tier: 1,
-            slots: 4,
-            power: -15,
-            crew: 8,
-            resourceUsage: {
-                'copper-ore': 1  // Consumes 1 copper ore per second
-            },
-            resourceProduction: {
-                'copper': 0.5  // Produces 0.5 copper per second
-            },
-            requiredTags: ['processing']
-        },
-        {
-            id: 'processor_steel',
-            name: 'Steel Processor',
-            category: 'processing',
-            tier: 2,
-            slots: 6,
-            power: -20,
+            slots: 5,
+            power: 100,
             crew: 10,
-            resourceUsage: {
-                'iron-ore': 2,  // Consumes 2 iron ore per second
-                'coal': 1       // Consumes 1 coal per second
-            },
-            resourceProduction: {
-                'steel': 0.8    // Produces 0.8 steel per second
-            },
-            requiredTags: ['processing', 'industrial']
+            resourceUsage: { 'fuel': 0.5 },  // T1 uses 0.5 fuel per second
+            comesWithStake: true,
+            constructionCost: {},
+            upgradeFamily: 'central_hub',
+            providedTags: ['basic-operations'],
+            description: 'Main control center - provides power and basic operations'
         },
         {
-            id: 'processor_fuel',
-            name: 'Fuel Processor',
-            category: 'processing',
-            tier: 3,
+            id: 'central_hub_t2',
+            name: 'Central Hub',
+            category: 'infrastructure',
+            tier: 2,
             slots: 8,
-            power: -25,
-            crew: 12,
-            resourceUsage: {
-                'hydrogen': 2   // Consumes 2 hydrogen per second
-            },
-            resourceProduction: {
-                'fuel': 1       // Produces 1 fuel per second - self-sustaining!
-            },
-            requiredTags: ['processing']
-        }
-    ],
+            power: 150,
+            crew: 15,
+            resourceUsage: { 'fuel': 0.7 },  // T2 uses 0.7 fuel per second
+            constructionCost: { 'steel': 50, 'electronics': 20 },
+            upgradeFamily: 'central_hub',
+            providedTags: ['basic-operations'],
+            description: 'Enhanced control center with improved efficiency'
+        },
+        {
+            id: 'central_hub_t3',
+            name: 'Central Hub',
+            category: 'infrastructure',
+            tier: 3,
+            slots: 12,
+            power: 200,
+            crew: 20,
+            resourceUsage: { 'fuel': 1.0 },  // T3 uses 1.0 fuel per second
+            constructionCost: { 'steel': 100, 'electronics': 50, 'copper': 30 },
+            upgradeFamily: 'central_hub',
+            providedTags: ['basic-operations'],
+            description: 'Advanced control center with maximum efficiency'
+        },
+
+        // Extraction Hub - Enables extraction modules
+        ...Array.from({ length: 3 }, (_, i) => {
+            const tier = i + 1;
+            return {
+                id: `extraction_hub_t${tier}`,
+                name: 'Extraction Hub',
+                category: 'infrastructure',
+                tier,
+                slots: 6 + tier * 2, // 8, 10, 12
+                power: 30 + tier * 20, // 50, 70, 90
+                crew: 8 + tier * 4, // 12, 16, 20
+                constructionCost: {
+                    'steel': 30 * Math.pow(2, tier - 1),
+                    'electronics': 15 * Math.pow(2, tier - 1),
+                    'copper': tier > 1 ? 20 * (tier - 1) : 0
+                },
+                upgradeFamily: 'extraction_hub',
+                providedTags: ['extraction-modules'],
+                description: `T${tier} extraction hub - enables extraction modules`
+            };
+        }),
+
+        // Processing Hub - Enables processing modules
+        ...Array.from({ length: 3 }, (_, i) => {
+            const tier = i + 1;
+            return {
+                id: `processing_hub_t${tier}`,
+                name: 'Processing Hub',
+                category: 'infrastructure',
+                tier,
+                slots: 8 + tier * 2, // 10, 12, 14
+                power: 40 + tier * 20, // 60, 80, 100
+                crew: 10 + tier * 4, // 14, 18, 22
+                constructionCost: {
+                    'steel': 40 * Math.pow(2, tier - 1),
+                    'electronics': 20 * Math.pow(2, tier - 1),
+                    'copper': 25 * tier
+                },
+                upgradeFamily: 'processing_hub',
+                providedTags: ['processing-modules'],
+                description: `T${tier} processing hub - enables processing modules`
+            };
+        }),
+
+        // Storage Hub - Large storage capacity
+        ...Array.from({ length: 3 }, (_, i) => {
+            const tier = i + 1;
+            const storageCapacity = 5000 * tier; // 5000, 10000, 15000
+            return {
+                id: `storage_hub_t${tier}`,
+                name: 'Storage Hub',
+                category: 'infrastructure',
+                tier,
+                slots: 10 + tier * 3, // 13, 16, 19
+                power: -10 - tier * 5, // -15, -20, -25
+                crew: 5 + tier * 2, // 7, 9, 11
+                resourceStorage: { capacity: storageCapacity },
+                constructionCost: {
+                    'steel': 50 * Math.pow(2, tier - 1),
+                    'electronics': 10 * tier,
+                    'copper': 15 * tier
+                },
+                upgradeFamily: 'storage_hub',
+                providedTags: ['bulk-storage'],
+                description: `T${tier} storage hub - adds ${storageCapacity} storage capacity`
+            };
+        }),
+
+        // === EXTRACTION MODULES (require extraction-modules tag) ===
+
+        // Iron Ore Extractor Module
+        ...Array.from({ length: 5 }, (_, i) => {
+            const tier = i + 1;
+            const efficiency = 1 + (tier - 1) * 0.5; // 1.0, 1.5, 2.0, 2.5, 3.0
+            return {
+                id: `extractor_iron_t${tier}`,
+                name: 'Iron Ore Extractor',
+                category: 'extraction',
+                tier,
+                slots: 3 + tier, // 4, 5, 6, 7, 8
+                power: -8 - tier * 4, // -12, -16, -20, -24, -28
+                crew: 4 + tier * 2, // 6, 8, 10, 12, 14
+                extractionRate: {
+                    'iron-ore': 1.2 * efficiency
+                },
+                constructionCost: {
+                    'steel': 8 * Math.pow(2, tier - 1),
+                    'electronics': 4 * Math.pow(2, tier - 1),
+                    'copper': tier > 2 ? 5 * (tier - 2) : 0
+                },
+                requiredTags: ['extraction-modules', 'mining'],
+                upgradeFamily: 'extractor_iron',
+                description: `T${tier} iron extractor - ${(1.2 * efficiency).toFixed(1)}/s extraction rate`
+            };
+        }),
+
+        // Copper Ore Extractor Module
+        ...Array.from({ length: 5 }, (_, i) => {
+            const tier = i + 1;
+            const efficiency = 1 + (tier - 1) * 0.5;
+            return {
+                id: `extractor_copper_t${tier}`,
+                name: 'Copper Ore Extractor',
+                category: 'extraction',
+                tier,
+                slots: 3 + tier, // 4, 5, 6, 7, 8
+                power: -8 - tier * 4, // -12, -16, -20, -24, -28
+                crew: 4 + tier * 2, // 6, 8, 10, 12, 14
+                extractionRate: {
+                    'copper-ore': 0.8 * efficiency
+                },
+                constructionCost: {
+                    'steel': 8 * Math.pow(2, tier - 1),
+                    'electronics': 4 * Math.pow(2, tier - 1),
+                    'copper': tier > 2 ? 5 * (tier - 2) : 0
+                },
+                requiredTags: ['extraction-modules', 'mining'],
+                upgradeFamily: 'extractor_copper',
+                description: `T${tier} copper extractor - ${(0.8 * efficiency).toFixed(1)}/s extraction rate`
+            };
+        }),
+
+        // Hydrogen Extractor Module
+        ...Array.from({ length: 5 }, (_, i) => {
+            const tier = i + 1;
+            const efficiency = 1 + (tier - 1) * 0.5;
+            return {
+                id: `extractor_hydrogen_t${tier}`,
+                name: 'Hydrogen Extractor',
+                category: 'extraction',
+                tier,
+                slots: 3 + tier, // 4, 5, 6, 7, 8
+                power: -10 - tier * 4, // -14, -18, -22, -26, -30
+                crew: 4 + tier * 2, // 6, 8, 10, 12, 14
+                extractionRate: {
+                    'hydrogen': 1.5 * efficiency
+                },
+                constructionCost: {
+                    'steel': 10 * Math.pow(2, tier - 1),
+                    'electronics': 6 * Math.pow(2, tier - 1),
+                    'copper': tier > 2 ? 8 * (tier - 2) : 0
+                },
+                requiredTags: ['extraction-modules'],
+                upgradeFamily: 'extractor_hydrogen',
+                description: `T${tier} hydrogen extractor - ${(1.5 * efficiency).toFixed(1)}/s extraction rate`
+            };
+        }),
+
+        // Coal Extractor Module
+        ...Array.from({ length: 5 }, (_, i) => {
+            const tier = i + 1;
+            const efficiency = 1 + (tier - 1) * 0.5;
+            return {
+                id: `extractor_coal_t${tier}`,
+                name: 'Coal Extractor',
+                category: 'extraction',
+                tier,
+                slots: 3 + tier, // 4, 5, 6, 7, 8
+                power: -7 - tier * 3, // -10, -13, -16, -19, -22
+                crew: 3 + tier * 2, // 5, 7, 9, 11, 13
+                extractionRate: {
+                    'coal': 1.0 * efficiency
+                },
+                constructionCost: {
+                    'steel': 6 * Math.pow(2, tier - 1),
+                    'electronics': 3 * Math.pow(2, tier - 1),
+                    'copper': tier > 2 ? 4 * (tier - 2) : 0
+                },
+                requiredTags: ['extraction-modules', 'mining'],
+                upgradeFamily: 'extractor_coal',
+                description: `T${tier} coal extractor - ${(1.0 * efficiency).toFixed(1)}/s extraction rate`
+            };
+        }),
+
+        // Silica Extractor Module
+        ...Array.from({ length: 5 }, (_, i) => {
+            const tier = i + 1;
+            const efficiency = 1 + (tier - 1) * 0.5;
+            return {
+                id: `extractor_silica_t${tier}`,
+                name: 'Silica Extractor',
+                category: 'extraction',
+                tier,
+                slots: 3 + tier, // 4, 5, 6, 7, 8
+                power: -6 - tier * 3, // -9, -12, -15, -18, -21
+                crew: 3 + tier * 2, // 5, 7, 9, 11, 13
+                extractionRate: {
+                    'silica': 0.9 * efficiency
+                },
+                constructionCost: {
+                    'steel': 5 * Math.pow(2, tier - 1),
+                    'electronics': 3 * Math.pow(2, tier - 1),
+                    'copper': tier > 2 ? 3 * (tier - 2) : 0
+                },
+                requiredTags: ['extraction-modules'],
+                upgradeFamily: 'extractor_silica',
+                description: `T${tier} silica extractor - ${(0.9 * efficiency).toFixed(1)}/s extraction rate`
+            };
+        }),
+
+        // === PROCESSING MODULES (require processing-modules tag) ===
+
+        // Copper Processor Module
+        ...Array.from({ length: 5 }, (_, i) => {
+            const tier = i + 1;
+            const efficiency = 0.5 + tier * 0.15; // 0.65, 0.80, 0.95, 1.10, 1.25
+            return {
+                id: `processor_copper_t${tier}`,
+                name: 'Copper Processor',
+                category: 'processing',
+                tier,
+                slots: 4 + tier * 2, // 6, 8, 10, 12, 14
+                power: -12 - tier * 6, // -18, -24, -30, -36, -42
+                crew: 6 + tier * 3, // 9, 12, 15, 18, 21
+                resourceUsage: { 'copper-ore': 1 + tier * 0.5 }, // 1.5, 2.0, 2.5, 3.0, 3.5
+                resourceProduction: { 'copper': efficiency },
+                constructionCost: {
+                    'steel': 20 * Math.pow(2, tier - 1),
+                    'electronics': 10 * Math.pow(2, tier - 1),
+                    'copper': tier > 1 ? 15 * (tier - 1) : 0
+                },
+                requiredTags: ['processing-modules'],
+                upgradeFamily: 'processor_copper',
+                description: `T${tier} processor - ${Math.floor(efficiency / (1 + tier * 0.5) * 100)}% conversion efficiency`
+            };
+        }),
+
+        // Steel Processor Module (starts at T2)
+        ...Array.from({ length: 4 }, (_, i) => {
+            const tier = i + 2; // Starts at T2
+            const efficiency = 0.8 + (tier - 2) * 0.25; // 0.8, 1.05, 1.30, 1.55
+            return {
+                id: `processor_steel_t${tier}`,
+                name: 'Steel Processor',
+                category: 'processing',
+                tier,
+                slots: 6 + tier * 2, // 10, 12, 14, 16
+                power: -18 - tier * 8, // -34, -42, -50, -58
+                crew: 8 + tier * 4, // 16, 20, 24, 28
+                resourceUsage: {
+                    'iron-ore': 2 + tier * 0.5, // 3, 3.5, 4, 4.5
+                    'coal': 1 + tier * 0.3 // 1.6, 1.9, 2.2, 2.5
+                },
+                resourceProduction: { 'steel': efficiency },
+                constructionCost: {
+                    'steel': 40 * Math.pow(2, tier - 2),
+                    'electronics': 20 * Math.pow(2, tier - 2),
+                    'copper': 30 * (tier - 1)
+                },
+                requiredTags: ['processing-modules', 'industrial'],
+                upgradeFamily: 'processor_steel',
+                description: `T${tier} steel processor - ${Math.floor(efficiency / ((2 + tier * 0.5) + (1 + tier * 0.3)) * 100)}% conversion efficiency`
+            };
+        }),
+
+        // Electronics Processor Module (starts at T2)
+        ...Array.from({ length: 4 }, (_, i) => {
+            const tier = i + 2; // Starts at T2
+            const efficiency = 0.4 + (tier - 2) * 0.2; // 0.4, 0.6, 0.8, 1.0
+            return {
+                id: `processor_electronics_t${tier}`,
+                name: 'Electronics Processor',
+                category: 'processing',
+                tier,
+                slots: 5 + tier * 2, // 9, 11, 13, 15
+                power: -20 - tier * 8, // -36, -44, -52, -60
+                crew: 10 + tier * 3, // 16, 19, 22, 25
+                resourceUsage: {
+                    'copper': 1 + tier * 0.3, // 1.6, 1.9, 2.2, 2.5
+                    'silica': 0.5 + tier * 0.2 // 0.9, 1.1, 1.3, 1.5
+                },
+                resourceProduction: { 'electronics': efficiency },
+                constructionCost: {
+                    'steel': 30 * Math.pow(2, tier - 2),
+                    'electronics': 25 * Math.pow(2, tier - 2),
+                    'copper': 40 * (tier - 1)
+                },
+                requiredTags: ['processing-modules'],
+                upgradeFamily: 'processor_electronics',
+                description: `T${tier} electronics processor - ${Math.floor(efficiency / ((1 + tier * 0.3) + (0.5 + tier * 0.2)) * 100)}% conversion`
+            };
+        }),
+
+        // Fuel Processor Module (starts at T3 - self-sustaining!)
+        ...Array.from({ length: 3 }, (_, i) => {
+            const tier = i + 3; // Starts at T3
+            const efficiency = 1 + (tier - 3) * 0.5; // 1.0, 1.5, 2.0
+            return {
+                id: `processor_fuel_t${tier}`,
+                name: 'Fuel Processor',
+                category: 'processing',
+                tier,
+                slots: 8 + tier * 3, // 17, 20, 23
+                power: -22 - tier * 8, // -46, -54, -62
+                crew: 10 + tier * 4, // 22, 26, 30
+                resourceUsage: { 'hydrogen': 2 + tier * 0.5 }, // 3.5, 4, 4.5
+                resourceProduction: { 'fuel': efficiency },
+                constructionCost: {
+                    'steel': 100 * Math.pow(2, tier - 3),
+                    'electronics': 50 * Math.pow(2, tier - 3),
+                    'titanium': tier > 3 ? 20 * (tier - 3) : 0
+                },
+                requiredTags: ['processing-modules'],
+                upgradeFamily: 'processor_fuel',
+                description: `T${tier} fuel processor - Self-sustaining! ${Math.floor(efficiency / (2 + tier * 0.5) * 100)}% conversion`
+            };
+        }),
+
+        // === POWER GENERATION ===
+
+        // Basic Generators (can go to T5)
+        ...Array.from({ length: 5 }, (_, i) => {
+            const tier = i + 1;
+            const power = 50 + tier * 30; // 80, 110, 140, 170, 200
+            const fuelUsage = 0.5 + tier * 0.1; // 0.6, 0.7, 0.8, 0.9, 1.0
+            return {
+                id: `generator_basic_t${tier}`,
+                name: 'Basic Generator',
+                category: 'power',
+                tier,
+                slots: 3 + tier * 2, // 5, 7, 9, 11, 13
+                power,
+                crew: 3 + tier * 2, // 5, 7, 9, 11, 13
+                resourceUsage: { 'fuel': fuelUsage },
+                constructionCost: tier === 1
+                    ? { 'steel': 15, 'copper': 10 }
+                    : {
+                        'steel': 15 * Math.pow(2, tier - 1),
+                        'copper': 10 * Math.pow(2, tier - 1),
+                        'electronics': tier > 2 ? 10 * (tier - 2) : 0
+                    },
+                upgradeFamily: 'generator_basic',
+                description: `T${tier} generator - ${power} power output, ${fuelUsage}/s fuel consumption`
+            };
+        }),
+
+        // Solar Arrays (no fuel needed, less power)
+        ...Array.from({ length: 3 }, (_, i) => {
+            const tier = i + 1;
+            const power = 30 + tier * 20; // 50, 70, 90
+            return {
+                id: `solar_array_t${tier}`,
+                name: 'Solar Array',
+                category: 'power',
+                tier,
+                slots: 5 + tier * 3, // 8, 11, 14
+                power,
+                crew: 2 + tier, // 3, 4, 5
+                constructionCost: {
+                    'steel': 20 * Math.pow(2, tier - 1),
+                    'silica': 15 * Math.pow(2, tier - 1),
+                    'electronics': 10 * tier
+                },
+                upgradeFamily: 'solar_array',
+                description: `T${tier} solar array - ${power} power output, no fuel needed`
+            };
+        }),
+
+        // === STORAGE ===
+
+        // Basic Storage Units
+        ...Array.from({ length: 5 }, (_, i) => {
+            const tier = i + 1;
+            const capacity = 1000 * tier; // 1000, 2000, 3000, 4000, 5000
+            return {
+                id: `storage_basic_t${tier}`,
+                name: 'Storage Unit',
+                category: 'storage',
+                tier,
+                slots: 2 + tier, // 3, 4, 5, 6, 7
+                power: -3 - tier * 2, // -5, -7, -9, -11, -13
+                crew: 2 + tier, // 3, 4, 5, 6, 7
+                resourceStorage: { capacity },
+                constructionCost: {
+                    'steel': 8 * Math.pow(2, tier - 1),
+                    'electronics': 3 * Math.pow(2, tier - 1)
+                },
+                upgradeFamily: 'storage_basic',
+                description: `T${tier} storage - adds ${capacity} storage capacity`
+            };
+        })
+    ].flat(),
     resources: [
-        { id: 'iron_ore', name: 'Iron Ore', category: 'raw' },
-        { id: 'copper_ore', name: 'Copper Ore', category: 'raw' },
+        // Raw materials
+        { id: 'iron-ore', name: 'Iron Ore', category: 'raw' },
+        { id: 'copper-ore', name: 'Copper Ore', category: 'raw' },
+        { id: 'coal', name: 'Coal', category: 'raw' },
+        { id: 'hydrogen', name: 'Hydrogen', category: 'raw' },
+        { id: 'silica', name: 'Silica', category: 'raw' },
+
+        // Processed materials
         { id: 'steel', name: 'Steel', category: 'processed' },
-        { id: 'electronics', name: 'Electronics', category: 'processed' }
+        { id: 'copper', name: 'Copper', category: 'processed' },
+        { id: 'electronics', name: 'Electronics', category: 'processed' },
+        { id: 'fuel', name: 'Fuel', category: 'processed' },
+
+        // Advanced materials (for construction costs)
+        { id: 'titanium', name: 'Titanium', category: 'advanced' }
     ],
     claimStakeDefinitions: [
         {
             id: 'cs_tier1_basic',
             name: 'Basic Claim Stake',
             tier: 1,
-            slots: 10,
+            slots: 100,
             rentMultiplier: 1.0,
             requiredTags: [],
             addedTags: ['industrial']

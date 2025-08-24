@@ -82,12 +82,12 @@ export function SaveLoadManager({ onNotification }: SaveLoadManagerProps) {
                 dispatch({ type: 'LOAD_STATE', payload: saveData.state });
             }
 
-            // Restore claim stakes
+            // Restore claim stakes (saveData.claimStakes is already a JSON string)
             if (saveData.claimStakes) {
                 localStorage.setItem('claimStakeInstances', saveData.claimStakes);
             }
 
-            // Restore crafting habs
+            // Restore crafting habs (saveData.craftingHabs is already a JSON string)
             if (saveData.craftingHabs) {
                 localStorage.setItem('craftingHabInstances', saveData.craftingHabs);
             }
