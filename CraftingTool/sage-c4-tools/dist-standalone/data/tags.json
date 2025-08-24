@@ -1,0 +1,72 @@
+[
+    {
+        "id": "terrestrial",
+        "name": "Terrestrial",
+        "category": "planet"
+    },
+    {
+        "id": "crystalline",
+        "name": "Crystalline",
+        "category": "planet"
+    },
+    {
+        "id": "volcanic",
+        "name": "Volcanic",
+        "category": "planet"
+    },
+    {
+        "id": "mining",
+        "name": "Mining",
+        "category": "operation"
+    },
+    {
+        "id": "industrial",
+        "name": "Industrial",
+        "category": "operation"
+    },
+    {
+        "id": "tech",
+        "name": "Technology",
+        "category": "operation"
+    },
+    {
+        "id": "forge",
+        "name": "Forge",
+        "category": "operation"
+    },
+    {
+        "id": "processing",
+        "name": "Processing",
+        "category": "operation"
+    },
+    {
+        "id": "trade",
+        "name": "Trade",
+        "category": "operation"
+    },
+    {
+        "id": "research",
+        "name": "Research",
+        "category": "operation"
+    },
+    {
+        "id": "infrastructure",
+        "name": "Infrastructure",
+        "category": "building"
+    },
+    {
+        "id": "extraction",
+        "name": "Extraction",
+        "category": "building"
+    },
+    {
+        "id": "power",
+        "name": "Power Generation",
+        "category": "building"
+    },
+    {
+        "id": "storage",
+        "name": "Storage",
+        "category": "building"
+    }
+]

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAGE C4 Tools - Redirecting...</title>
+    <style>
+        body {
+            background: #0A0A0A;
+            color: #FFFFFF;
+            font-family: 'Exo 2', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .loading {
+            text-align: center;
+        }
+
+        .loading h1 {
+            color: #FF6B35;
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid #2A2A2A;
+            border-top-color: #FF6B35;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 2rem auto;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .fallback {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid #FF6B35;
+            border-radius: 4px;
+        }
+
+        .fallback a {
+            color: #FF6B35;
+            text-decoration: none;
+        }
+
+        .fallback a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loading">
+        <h1>SAGE C4 TOOLS</h1>
+        <div class="spinner"></div>
+        <p>Loading application...</p>
+
+        <div class="fallback" style="display: none;" id="fallback">
+            <p>If you're not redirected automatically:</p>
+            <p>
+                <a href="http://localhost:5173" id="devLink">Open Development Server</a> |
+                <a href="./build/client/index.html" id="prodLink">Open Production Build</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Get the hash from the URL (e.g., #/claim-stakes)
+        const hash = window.location.hash;
+
+        // Function to check if development server is running
+        async function checkDevServer() {
+            try {
+                const response = await fetch('http://localhost:5173', { method: 'HEAD', mode: 'no-cors' });
+                return true; // If we get here, server is likely running
+            } catch (error) {
+                return false;
+            }
+        }
+
+        // Function to redirect
+        async function redirect() {
+            const isDevServerRunning = await checkDevServer();
+
+            if (isDevServerRunning) {
+                // Redirect to development server
+                window.location.href = `http://localhost:5173${hash}`;
+            } else {
+                // Check if production build exists
+                try {
+                    const response = await fetch('./build/client/index.html', { method: 'HEAD' });
+                    if (response.ok) {
+                        window.location.href = `./build/client/index.html${hash}`;
+                    } else {
+                        // Show fallback links
+                        document.getElementById('fallback').style.display = 'block';
+                    }
+                } catch (error) {
+                    // Show fallback links
+                    document.getElementById('fallback').style.display = 'block';
+                }
+            }
+        }
+
+        // Update fallback links with hash
+        document.getElementById('devLink').href = `http://localhost:5173${hash}`;
+        document.getElementById('prodLink').href = `./build/client/index.html${hash}`;
+
+        // Start redirect process
+        redirect();
+
+        // Show fallback after 3 seconds if still on page
+        setTimeout(() => {
+            document.getElementById('fallback').style.display = 'block';
+        }, 3000);
+    </script>
+</body>
+
+</html>

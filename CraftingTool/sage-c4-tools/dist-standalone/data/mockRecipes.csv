@@ -1,0 +1,21 @@
+OutputID,OutputName,OutputType,OutputTier,ConstructionTime,PlanetTypes,Factions,ResourceType,FunctionalPurpose,UsageCategory,Ingredient1,Quantity1,Ingredient2,Quantity2,Ingredient3,Quantity3,Ingredient4,Quantity4,Ingredient5,Quantity5,CompletionStatus,ProductionSteps,NOT_USED
+cargo-iron,Iron,Component,1,30,All,All,1,1,1,cargo-iron-ore,2,,,,,,,,,,Complete,1,FALSE
+cargo-copper,Copper,Component,1,30,All,All,1,1,1,cargo-copper-ore,2,,,,,,,,,,Complete,1,FALSE
+cargo-aluminum,Aluminum,Component,2,45,All,All,1,1,1,cargo-aluminum-ore,2,,,,,,,,,,Complete,1,FALSE
+cargo-titanium,Titanium,Component,2,60,All,All,1,1,1,cargo-titanium-ore,2,,,,,,,,,,Complete,1,FALSE
+cargo-steel,Steel,Component,2,60,All,All,2,2,2,cargo-iron,2,cargo-carbon,1,,,,,,,,Complete,2,FALSE
+cargo-electronics,Electronics,Component,2,45,All,All,2,2,2,cargo-copper,2,cargo-silica,1,,,,,,,,Complete,2,FALSE
+cargo-fuel,Fuel,Consumable,1,20,All,All,2,3,3,cargo-hydrogen,2,cargo-carbon,1,,,,,,,,Complete,2,FALSE
+cargo-food,Food,Consumable,1,15,All,All,1,3,3,cargo-biomass,2,,,,,,,,,,Complete,1,FALSE
+cargo-circuit-board,Circuit Board,Component,3,90,All,All,3,2,2,cargo-electronics,2,cargo-copper,1,cargo-silica,1,,,,,,Complete,3,FALSE
+cargo-high-density-alloy,High-Density Alloy,Advanced,3,120,All,All,3,2,2,cargo-steel,2,cargo-titanium,1,,,,,,,,Complete,3,FALSE
+cargo-power-cell,Power Cell,Component,3,75,All,All,3,2,2,cargo-aluminum,2,cargo-electronics,1,,,,,,,,Complete,2,FALSE
+comp-hull-plating,Hull Plating,Module,3,180,All,All,3,4,4,cargo-high-density-alloy,3,cargo-titanium,2,cargo-steel,1,,,,,,Complete,3,FALSE
+comp-sensor-array,Sensor Array,Module,3,150,All,All,3,4,4,cargo-circuit-board,2,cargo-electronics,3,cargo-aluminum,1,,,,,,Complete,3,FALSE
+comp-engine-core,Engine Core,Module,4,240,All,All,4,4,4,cargo-power-cell,3,cargo-high-density-alloy,2,cargo-circuit-board,1,,,,,,Complete,4,FALSE
+comp-weapon-system,Weapon System,Module,4,300,All,All,4,5,5,cargo-circuit-board,3,cargo-power-cell,2,cargo-steel,3,cargo-titanium,1,,,,Complete,4,FALSE
+comp-shield-generator,Shield Generator,Module,4,270,All,All,4,5,5,cargo-power-cell,4,cargo-circuit-board,2,cargo-high-density-alloy,1,,,,,,Complete,4,FALSE
+consumable-repair-kit,Repair Kit,Consumable,2,60,All,All,2,3,3,cargo-steel,1,cargo-electronics,1,cargo-aluminum,1,,,,,,Complete,2,FALSE
+consumable-energy-boost,Energy Boost,Consumable,2,45,All,All,2,3,3,cargo-power-cell,1,cargo-fuel,2,,,,,,,,Complete,2,FALSE
+consumable-crew-supplies,Crew Supplies,Consumable,1,30,All,All,1,3,3,cargo-food,3,cargo-fuel,1,,,,,,,,Complete,1,FALSE
+ship-fighter-basic,Basic Fighter,Ship,5,600,All,All,5,6,6,comp-hull-plating,2,comp-engine-core,1,comp-weapon-system,1,comp-sensor-array,1,,,,Complete,5,FALSE

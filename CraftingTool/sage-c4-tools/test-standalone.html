@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Standalone C4 Tools</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 2rem;
+            background: #0a0a0a;
+            color: white;
+        }
+
+        h1 {
+            color: #ff6b35;
+        }
+
+        a {
+            display: inline-block;
+            margin: 0.5rem;
+            padding: 1rem 2rem;
+            background: #ff6b35;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: opacity 0.3s;
+        }
+
+        a:hover {
+            opacity: 0.8;
+        }
+
+        .info {
+            margin: 2rem 0;
+            padding: 1rem;
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 4px;
+        }
+
+        code {
+            background: #2a2a2a;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>SAGE C4 Tools - Standalone Test</h1>
+
+    <div class="info">
+        <p>This page tests the standalone build of the C4 tools.</p>
+        <p>The standalone build should work without any server and without CORS errors.</p>
+        <p>All three tools are in a single HTML file with hash-based routing.</p>
+    </div>
+
+    <h2>Test Links:</h2>
+    <a href="dist-standalone/standalone.html">Claim Stakes (Default)</a>
+    <a href="dist-standalone/standalone.html#crafting-hab">Crafting Hab</a>
+    <a href="dist-standalone/standalone.html#recipes">Crafting Recipes</a>
+
+    <div class="info">
+        <h3>Features:</h3>
+        <ul>
+            <li>✅ Single HTML file (~400KB)</li>
+            <li>✅ No external dependencies</li>
+            <li>✅ Works with file:// protocol</li>
+            <li>✅ Hash-based routing between tools</li>
+            <li>✅ GitHub Pages compatible</li>
+            <li>✅ No CORS errors</li>
+        </ul>
+    </div>
+
+    <div class="info">
+        <h3>Build Command:</h3>
+        <code>npm run build:standalone</code>
+    </div>
+</body>
+
+</html>

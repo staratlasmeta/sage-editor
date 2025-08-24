@@ -1,0 +1,416 @@
+OutputID	OutputName	OutputType	OutputTier	ConstructionTime	PlanetTypes	Factions	Ingredient1	Quantity1	Ingredient2	Quantity2	Ingredient3	Quantity3	Ingredient4	Quantity4	Ingredient5	Quantity5	Ingredient6	Quantity6	Ingredient7	Quantity7	Ingredient8	Quantity8	Ingredient9	Quantity9
+chromite-ore	Chromite Ore	BASIC RESOURCE	1		Oceanic Planet;System Asteroid Belt;Ice Giant	MUD;ONI;USTUR																		
+abyssal-energy-crystals	Abyssal Energy Crystals	BASIC RESOURCE	4		Oceanic Planet	MUD;ONI;USTUR																		
+aluminum-ore	Aluminum Ore	BASIC RESOURCE	2		System Asteroid Belt;Terrestrial Planet;Ice Giant	MUD;ONI;USTUR																		
+amber-resin	Amber Resin	BASIC RESOURCE	2		Terrestrial Planet;System Asteroid Belt;Volcanic Planet	USTUR																		
+arco	Arco	BASIC RESOURCE	1		Terrestrial Planet;System Asteroid Belt;Volcanic Planet	MUD;ONI;USTUR																		
+argon	Argon	BASIC RESOURCE	2		Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR																		
+bathysphere-pearls	Bathysphere Pearls	BASIC RESOURCE	3		Oceanic Planet	MUD;ONI;USTUR																		
+beryllium-crystals	Beryllium Crystals	BASIC RESOURCE	5		Dark Planet;Ice Giant	MUD;ONI;USTUR																		
+biolumite	Biolumite	BASIC RESOURCE	5		Ice Giant	MUD																		
+biomass	Biomass	BASIC RESOURCE	1		Terrestrial Planet;System Asteroid Belt;Volcanic Planet	MUD;ONI;USTUR																		
+black-opal	Black Opal	BASIC RESOURCE	5		Barren Planet	USTUR																																	
+boron-ore	Boron Ore	BASIC RESOURCE	2		Terrestrial Planet;System Asteroid Belt	MUD;ONI;USTUR																		
+carbon	Carbon	BASIC RESOURCE	1		Terrestrial Planet;System Asteroid Belt;Volcanic Planet	MUD;ONI;USTUR																		
+cinnabar-crystals	Cinnabar Crystals	BASIC RESOURCE	3		Volcanic Planet	MUD																		
+cobalt-ore	Cobalt Ore	BASIC RESOURCE	2		Terrestrial Planet;Volcanic Planet	ONI																		
+copper-ore	Copper Ore	BASIC RESOURCE	1		Terrestrial Planet;System Asteroid Belt;Oceanic Planet	MUD;ONI;USTUR																		
+cryo-formation-crystals	Cryo Formation Crystals	BASIC RESOURCE	3		Ice Giant	MUD;ONI;USTUR																		
+diamond	Diamond	BASIC RESOURCE	2		Terrestrial Planet;Volcanic Planet	MUD																		
+dodiline-crystals	Dodiline Crystals	BASIC RESOURCE	4		Volcanic Planet	USTUR																		
+drywater	Drywater	BASIC RESOURCE	3		Ice Giant;Barren Planet	MUD;ONI;USTUR																		
+dysprosium	Dysprosium	BASIC RESOURCE	4		Terrestrial Planet	MUD;ONI;USTUR																		
+emerald-crystals	Emerald Crystals	BASIC RESOURCE	3		Dark Planet	MUD;ONI;USTUR																		
+fluorine-gas	Fluorine Gas	BASIC RESOURCE	2		Gas Giant;Volcanic Planet;Oceanic Planet	MUD;ONI;USTUR																		
+fusion-catalyst-deposits	Fusion Catalyst Deposits	BASIC RESOURCE	5		Dark Planet	MUD;ONI;USTUR																		
+garnet-crystals	Garnet Crystals	BASIC RESOURCE	2		Terrestrial Planet;System Asteroid Belt	MUD;ONI;USTUR																		
+germanium	Germanium	BASIC RESOURCE	1		Terrestrial Planet;System Asteroid Belt;Oceanic Planet	USTUR																		
+glowstone-crystals	Glowstone Crystals	BASIC RESOURCE	3		Volcanic Planet	ONI																		
+gold-ore	Gold Ore	BASIC RESOURCE	3		Terrestrial Planet	ONI																		
+hafnium-ore	Hafnium Ore	BASIC RESOURCE	2		Volcanic Planet;System Asteroid Belt;Ice Giant	MUD;ONI;USTUR																		
+hicenium-crystals	Hicenium Crystals	BASIC RESOURCE	4		Ice Giant	MUD																		
+hydrogen	Hydrogen	BASIC RESOURCE	1		Terrestrial Planet;System Asteroid Belt;Volcanic Planet	MUD;ONI;USTUR																		
+ink	Ink	BASIC RESOURCE	1			MUD;ONI;USTUR																		
+iridium-ore	Iridium Ore	BASIC RESOURCE	4		Volcanic Planet	MUD;ONI;USTUR																		
+iron-ore	Iron Ore	BASIC RESOURCE	1		Terrestrial Planet;System Asteroid Belt;Oceanic Planet	MUD;ONI;USTUR																		
+jasphorus-crystals	Jasphorus Crystals	BASIC RESOURCE	5		Barren Planet	ONI																		
+krypton	Krypton	BASIC RESOURCE	1		Terrestrial Planet;System Asteroid Belt;Volcanic Planet	MUD;ONI;USTUR																		
+lithium-ore	Lithium Ore	BASIC RESOURCE	2		Barren Planet;System Asteroid Belt	MUD;ONI;USTUR																		
+living-metal-symbionts	Living Metal Symbionts	BASIC RESOURCE	5		Dark Planet	MUD;ONI;USTUR																		
+lumanite	Lumanite	BASIC RESOURCE	1		Terrestrial Planet;System Asteroid Belt;Volcanic Planet	MUD;ONI;USTUR																		
+lunar-echo-crystals	Lunar Echo Crystals	BASIC RESOURCE	5		Oceanic Planet	MUD;ONI;USTUR																		
+manganese-ore	Manganese Ore	BASIC RESOURCE	2		System Asteroid Belt;Volcanic Planet	MUD;ONI;USTUR																		
+methane	Methane	BASIC RESOURCE	2		Terrestrial Planet;System Asteroid Belt	MUD;ONI;USTUR																		
+neodymium	Neodymium	BASIC RESOURCE	1		Terrestrial Planet;System Asteroid Belt;Volcanic Planet	MUD;ONI;USTUR																		
+neon	Neon	BASIC RESOURCE	3		Dark Planet;Gas Giant	MUD;ONI;USTUR																		
+neural-coral-compounds	Neural Coral Compounds	BASIC RESOURCE	3		Oceanic Planet	MUD;ONI;USTUR																		
+nitrogen	Nitrogen	BASIC RESOURCE	1		Terrestrial Planet;System Asteroid Belt;Volcanic Planet	MUD;ONI;USTUR																		
+ochre-ore	Ochre Ore	BASIC RESOURCE	4		Terrestrial Planet	USTUR																		
+opal-fragments	Opal Fragments	BASIC RESOURCE	5		Dark Planet	ONI																		
+osmium-ore	Osmium Ore	BASIC RESOURCE	1		Terrestrial Planet;System Asteroid Belt;Volcanic Planet	MUD;ONI;USTUR																		
+oxygen	Oxygen	BASIC RESOURCE	2		Terrestrial Planet;Oceanic Planet	MUD;ONI;USTUR																		
+palladium-ore	Palladium Ore	BASIC RESOURCE	3		Volcanic Planet	MUD;ONI;USTUR																		
+peridot-crystals	Peridot Crystals	BASIC RESOURCE	2		Ice Giant;Volcanic Planet;System Asteroid Belt	MUD;ONI;USTUR																		
+phase-shift-crystals	Phase Shift Crystals	BASIC RESOURCE	3		Oceanic Planet	MUD;ONI;USTUR																		
+plasma-containment-minerals	Plasma Containment Minerals	BASIC RESOURCE	3		Volcanic Planet	MUD;ONI;USTUR																		
+platinum-ore	Platinum Ore	BASIC RESOURCE	3		Volcanic Planet	MUD;ONI;USTUR																		
+quantum-computational-substrate	Quantum Computational Substrate	BASIC RESOURCE	4		Dark Planet	MUD;ONI;USTUR																		
+quantum-particle	Quantum Particle	BASIC RESOURCE	5		Dark Planet;Ice Giant	MUD;ONI;USTUR																		
+quartz-crystals	Quartz Crystals	BASIC RESOURCE	1		Terrestrial Planet;System Asteroid Belt;Oceanic Planet	MUD;ONI;USTUR																		
+radiant-dust	Radiant Dust	BASIC RESOURCE	2		Dark Planet	MUD																		
+raw-chisenic	Raw Chisenic	BASIC RESOURCE	3		Dark Planet	ONI																		
+resonium-ore	Resonium Ore	BASIC RESOURCE	5		Barren Planet	MUD																		
+rhenium-ore	Rhenium Ore	BASIC RESOURCE	1		Terrestrial Planet;System Asteroid Belt;Volcanic Planet	MUD;ONI;USTUR																		
+rhodium-ore	Rhodium Ore	BASIC RESOURCE	4		Volcanic Planet	MUD;ONI;USTUR																		
+rochinol	Rochinol	BASIC RESOURCE	2		Volcanic Planet;Ice Giant	MUD;ONI;USTUR																		
+ruby-crystals	Ruby Crystals	BASIC RESOURCE	2		Ice Giant	MUD;ONI;USTUR																		
+sapphire-crystals	Sapphire Crystals	BASIC RESOURCE	3		Ice Giant	MUD;ONI;USTUR																		
+scandium-ore	Scandium Ore	BASIC RESOURCE	2		System Asteroid Belt;Volcanic Planet;Gas Giant	MUD;ONI;USTUR																		
+silica	Silica	BASIC RESOURCE	1		Terrestrial Planet;System Asteroid Belt;Volcanic Planet	MUD;ONI;USTUR																		
+silicon-crystal	Silicon Crystal	BASIC RESOURCE	1		Terrestrial Planet;System Asteroid Belt;Oceanic Planet	MUD;ONI;USTUR																		
+silver-ore	Silver Ore	BASIC RESOURCE	2		Dark Planet;Volcanic Planet;Gas Giant	MUD;ONI;USTUR																		
+sodium-crystals	Sodium Crystals	BASIC RESOURCE	1		System Asteroid Belt;Volcanic Planet;System Asteroid Belt	MUD;ONI;USTUR																		
+strontium-crystals	Strontium Crystals	BASIC RESOURCE	5		System Asteroid Belt	MUD;ONI;USTUR																		
+tantalum-ore	Tantalum Ore	BASIC RESOURCE	1		Volcanic Planet	MUD;ONI;USTUR																		
+tenon-gas	Tenon Gas	BASIC RESOURCE	3		Gas Giant	MUD																		
+thermodyne	Thermodyne	BASIC RESOURCE	2		Oceanic Planet;Volcanic Planet;System Asteroid Belt	MUD;ONI;USTUR																		
+thermal-regulator-stone	Thermal Regulator Stone	BASIC RESOURCE	1		Volcanic Planet	MUD;ONI;USTUR																		
+thermoplastic-resin	Thermoplastic Resin	BASIC RESOURCE	1		Terrestrial Planet;System Asteroid Belt;Volcanic Planet	ONI																		
+tin-ore	Tin Ore	BASIC RESOURCE	1		Terrestrial Planet;System Asteroid Belt;Oceanic Planet	MUD;ONI;USTUR																		
+titanium-ore	Titanium Ore	BASIC RESOURCE	3		System Asteroid Belt	MUD;ONI;USTUR																		
+topaz-crystals	Topaz Crystals	BASIC RESOURCE	2		Dark Planet;Ice Giant	MUD;ONI;USTUR																		
+tritium-ore	Tritium Ore	BASIC RESOURCE	1		Terrestrial Planet;System Asteroid Belt;Oceanic Planet	MUD;ONI;USTUR																		
+tungsten-ore	Tungsten Ore	BASIC RESOURCE	3		Barren Planet	MUD;ONI;USTUR																		
+vanadium-ore	Vanadium Ore	BASIC RESOURCE	3		Barren Planet	MUD;ONI;USTUR																		
+viscovite-crystals	Viscovite Crystals	BASIC RESOURCE	3		Dark Planet	USTUR																		
+xenon	Xenon	BASIC RESOURCE	2		Dark Planet;Gas Giant;Ice Giant	MUD;ONI;USTUR																		
+zinc-ore	Zinc Ore	BASIC RESOURCE	1		Terrestrial Planet;System Asteroid Belt;Oceanic Planet	MUD;ONI;USTUR																		
+zirconium-ore	Zirconium Ore	BASIC RESOURCE	4		Ice Giant	MUD;ONI;USTUR																		
+aegis-barrier-cactus	Aegis Barrier Cactus	BASIC ORGANIC RESOURCE	2		Barren Planet	USTUR																		
+bioluminous-algae	Bioluminous Algae	BASIC ORGANIC RESOURCE	2		Oceanic Planet	MUD;ONI;USTUR																		
+cinder-crown-blossom	Cinder-Crown Blossom	BASIC ORGANIC RESOURCE	2		Volcanic Planet	MUD;ONI;USTUR																		
+magma-heart-bryophyte	Magma-Heart Bryophyte	BASIC ORGANIC RESOURCE	1		Volcanic Planet	MUD;ONI;USTUR																		
+marine-bio-extract	Marine Bio Extract	BASIC ORGANIC RESOURCE	1		Oceanic Planet	MUD;ONI;USTUR																		
+obsidian-shell-tuber	Obsidian Shell Tuber	BASIC ORGANIC RESOURCE	1		Volcanic Planet	MUD;ONI;USTUR																		
+plasma-burn-lichen	Plasma-Burn Lichen	BASIC ORGANIC RESOURCE	3		System Asteroid Belt	MUD																		
+pyroclast-energen	Pyroclast Energen	BASIC ORGANIC RESOURCE	1		Volcanic Planet	MUD;ONI;USTUR																		
+shadow-sight-fronds	Shadow-Sight Fronds	BASIC ORGANIC RESOURCE	1		Dark Planet	MUD;ONI;USTUR																		
+spectral-shade-moss	Spectral Shade Moss	BASIC ORGANIC RESOURCE	3		Dark Planet	ONI																		
+temporal-flux-orchid	Temporal Flux Orchid	BASIC ORGANIC RESOURCE	3		Dark Planet	MUD;ONI;USTUR																		
+umbral-rush-tendril	Umbral Rush Tendril	BASIC ORGANIC RESOURCE	2		Dark Planet	MUD;ONI;USTUR																		
+abyssal-energy-core	Abyssal Energy Core	COMPONENT	4		Ice Giant;Oceanic Planet;Volcanic Planet	MUD;ONI;USTUR	Abyssal Energy Crystals	1	Energy Crystal Matrix	1														
+adaptive-utility-core	Adaptive Utility Core	COMPONENT	5		Dark Planet;Terrestrial Planet	MUD;ONI;USTUR	Living Metal Symbionts	1	Chisenic Processor	1														
+advanced-defense-core	Advanced Defense Core	COMPONENT	5		Barren Planet;Dark Planet;Oceanic Planet;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Opal Defense Matrix	1	Lunar Defense Network	1	Dysprosium Shield	1												
+advanced-sensor-grid	Advanced Sensor Grid	COMPONENT	2		Dark Planet;Gas Giant;Ice Giant;System Asteroid Belt;Volcanic Planet	MUD;ONI;USTUR	Silver	1	Peridot Crystals	1														
+advanced-weapon-core	Advanced Weapon Core	COMPONENT	4		Terrestrial Planet	MUD;ONI;USTUR	Dysprosium	1																
+component-aerogel	Aerogel	COMPONENT	3	2	System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Nitrogen	2	Silica	4														
+alloy-frame	Alloy Frame	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Iron	1	Tin	1														
+component-aluminum	Aluminum	COMPONENT	2		Ice Giant;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Aluminum Ore	1																
+ammo-control-core	Ammo Control Core	COMPONENT	3		Barren Planet;System Asteroid Belt	MUD;ONI;USTUR	Tungsten Core	1	Vanadium Alloy	1														
+assembly-control-matrix	Assembly Control Matrix	COMPONENT	5		Dark Planet;Ice Giant;Volcanic Planet	MUD;ONI;USTUR	Living Metal Network	1	Quantum Interface Core	1	Zirconium Control Hub	1												
+barrier-material	Barrier Material	COMPONENT	1		System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Silica	2	Krypton	1														
+base-structure	Base Structure	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Tin	2	Silicon Crystal	1														
+beam-emitter	Beam Emitter	COMPONENT	2		System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Garnet Crystals	1	Diamond	1														
+beam-interface-core	Beam Interface Core	COMPONENT	3		Dark Planet;Oceanic Planet;Volcanic Planet	MUD;ONI;USTUR	Platinum Grid	1	Signal Modulator	1														
+beryllium-matrix	Beryllium Matrix	COMPONENT	5		Dark Planet;Ice Giant;Oceanic Planet	MUD;ONI;USTUR	Beryllium Crystals	1	Utility Core	1														
+bio-stabilizer	Bio Stabilizer	COMPONENT	2		System Asteroid Belt;Terrestrial Planet;Volcanic Planet	USTUR	Amber Resin	1																
+bioluminescent-interface	Bioluminescent Interface	COMPONENT	5		Ice Giant;Oceanic Planet;Volcanic Planet	MUD;ONI;USTUR	Biolumite	1	Neural Interface	1														
+blast-charges	Blast Charges	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Germanium Ingot	1	Hydrogen	1														
+component-boron	Boron	COMPONENT	2		System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Boron Ore	1	
+boron-composite	Boron Composite	COMPONENT	2		System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Boron	1	Argon	1														
+capacitor-matrix-core	Capacitor Matrix Core	COMPONENT	3		Ice Giant;Volcanic Planet	MUD;ONI;USTUR	Energy Crystal Matrix	1	Palladium Conductor	1														
+capacity-control-core	Capacity Control Core	COMPONENT	4		Ice Giant;Terrestrial Planet	MUD;ONI;USTUR	Zirconium Control Hub	1	Utility Matrix	1														
+chisenic-processor	Chisenic Processor	COMPONENT	3		Dark Planet;Terrestrial Planet	ONI	Raw Chisenic	1	Gold	1														
+chromite	Chromite	COMPONENT	1		Ice Giant;Oceanic Planet;System Asteroid Belt	MUD;ONI;USTUR	Chromite Ore	1																
+climate-controller	Climate Controller	COMPONENT	2		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Thermodyne	1	Argon	1														
+component-cobalt	Cobalt	COMPONENT	2		Terrestrial Planet;Volcanic Planet	ONI	Cobalt Ore	1																
+command-module	Command Module	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Processing Core	1	Monitoring Circuits	1														
+control-circuit	Control Circuit	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Silicon Wafers	1	Copper Wire	1														
+control-interface	Control Interface	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Quartz Crystals	1	Copper Wire	1														
+control-system-core	Control System Core	COMPONENT	4		Dark Planet;Oceanic Planet;Volcanic Planet	MUD;ONI;USTUR	Electromagnetic Resonator	1	Dodiline Matrix	1	EM Quantum Core	1												
+coolant-circulator	Coolant Circulator	COMPONENT	2		Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Argon	1																
+cooling-network-hub	Cooling Network Hub	COMPONENT	3		Gas Giant;Ice Giant	MUD;ONI;USTUR	Propulsion Gas Mix	1	Cryogenic Core	1														
+coordination-matrix	Coordination Matrix	COMPONENT	3		Oceanic Planet;Terrestrial Planet	MUD;ONI;USTUR	Utility Core	1	Gold Contacts	1														
+component-copper	Copper	COMPONENT	1	1	Oceanic Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Copper Ore	1																
+component-copper-wire	Copper Wire	COMPONENT	1	4	Oceanic Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Copper	1																
+core-stabilizer	Core Stabilizer	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Zinc	1	Silica	2														
+coupling-control-core	Coupling Control Core	COMPONENT	3		System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Titanium Framework	1	Gold Contacts	1														
+coupling-interface	Coupling Interface	COMPONENT	2		Barren Planet;System Asteroid Belt	MUD;ONI;USTUR	Lithium	1																
+cryogenic-catalyst	Cryogenic Catalyst	COMPONENT	1		System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Hydrogen	3	Krypton	2														
+cryogenic-core	Cryogenic Core	COMPONENT	3		Ice Giant	MUD;ONI;USTUR	Cryo Formation Crystals	1																
+component-crystal-lattice-1	Crystal Lattice MUD	COMPONENT	3	2	System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Diamond	2	Hydrogen	7														
+component-crystal-lattice-2	Crystal Lattice ONI	COMPONENT	3	2	Ice Giant;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Hydrogen	7	Rochinol	2														
+component-crystal-lattice-3	Crystal Lattice Ustur	COMPONENT	3	2	System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Arco	2	Hydrogen	7														
+crystal-matrix	Crystal Matrix	COMPONENT	2		Ice Giant;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Diamond	1	Hafnium Alloy	1														
+current-limiter	Current Limiter	COMPONENT	2		Terrestrial Planet;Volcanic Planet	MUD	Diamond	1																
+defense-command-node	Defense Command Node	COMPONENT	3		Dark Planet;Gas Giant	MUD;ONI;USTUR	Neon Buffer	1	Defense Crystal Array	1														
+defense-coordination-core	Defense Coordination Core	COMPONENT	4		Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Dysprosium Shield	1	Iridium Armor Plating	1														
+defense-crystal-array	Defense Crystal Array	COMPONENT	3		Dark Planet	MUD;ONI;USTUR	Emerald Crystals	1																
+defense-integration-core	Defense Integration Core	COMPONENT	3		Dark Planet;Volcanic Planet	MUD;ONI;USTUR	Defense Crystal Array	1	Luminous Shield Matrix	1														
+deployment-interface	Deployment Interface	COMPONENT	3		Dark Planet;Oceanic Planet;Terrestrial Planet	MUD;ONI;USTUR	Gold Contacts	1	Signal Modulator	1														
+dimensional-stabilizer	Dimensional Stabilizer	COMPONENT	1		Ice Giant;Oceanic Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Chromite	1	Tritium	2														
+dispersal-gas-mix	Dispersal Gas Mix	COMPONENT	1		System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Hydrogen	1	Krypton	1														
+dispersal-mechanism	Dispersal Mechanism	COMPONENT	1		System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Nitrogen	1	Krypton	1														
+dodiline-matrix	Dodiline Matrix	COMPONENT	4		Volcanic Planet	USTUR	Dodiline Crystals	1																
+drive-assembly-core	Drive Assembly Core	COMPONENT	5		Barren Planet;Dark Planet;Gas Giant;Ice Giant;Oceanic Planet;Volcanic Planet	MUD;ONI;USTUR	Jasphorus Propulsion Core	1	Quantum Drive Matrix	1	Quantum Processor	1	Navigation Control Core	1										
+dysprosium-shield	Dysprosium Shield	COMPONENT	4		Terrestrial Planet	MUD;ONI;USTUR	Dysprosium	1																
+component-electromagnet	Electromagnet	COMPONENT	2	16	Oceanic Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Copper Wire	4	Magnet	1														
+electromagnetic-barrier	Electromagnetic Barrier	COMPONENT	2		Dark Planet;Ice Giant;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Topaz Crystals	1	Cobalt	1														
+electromagnetic-resonator	Electromagnetic Resonator	COMPONENT	4		Oceanic Planet;Volcanic Planet	MUD;ONI;USTUR	Abyssal Energy Crystals	1	Palladium Conductor	1														
+component-electronics	Electronics	COMPONENT	1	14	Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Copper	1	Polymer	1														
+em-bio-core	EM Bio Core	COMPONENT	5		Dark Planet;Ice Giant;Oceanic Planet	MUD;ONI;USTUR	Biolumite	1	Signal Modulator	1														
+em-quantum-core	EM Quantum Core	COMPONENT	4		Dark Planet;Oceanic Planet	MUD;ONI;USTUR	Quantum Computational Substrate	1	Signal Modulator	1														
+em-shielding	EM Shielding	COMPONENT	2		Dark Planet;Ice Giant	MUD;ONI;USTUR	Topaz Crystals	1																
+em-weapon-interface	EM Weapon Interface	COMPONENT	3		Volcanic Planet	MUD	Cinnabar Crystals	1																
+emergency-matrix-core	Emergency Matrix Core	COMPONENT	3		Oceanic Planet;Volcanic Planet	MUD;ONI;USTUR	Luminous Shield Matrix	1	Utility Core	1														
+emergency-suppressant	Emergency Suppressant	COMPONENT	2		Gas Giant;Oceanic Planet;Volcanic Planet	MUD;ONI;USTUR	Fluorine Gas	1																
+emergency-transmitter	Emergency Transmitter	COMPONENT	2		Dark Planet;Gas Giant;Oceanic Planet;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Silver	1	Oxygen	1														
+emp-matrix-core	EMP Matrix Core	COMPONENT	3		Dark Planet;Oceanic Planet;Volcanic Planet	MUD;ONI;USTUR	Signal Modulator	1	Palladium Conductor	1														
+energy-absorption-core	Energy Absorption Core	COMPONENT	2		Dark Planet;Gas Giant;Ice Giant;Volcanic Planet	MUD;ONI;USTUR	Ruby Crystals	1	Silver	1														
+energy-burst-controller	Energy Burst Controller	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Sodium Crystals	1	Silicon Wafers	1														
+energy-cells	Energy Cells	COMPONENT	1		System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Sodium Crystals	1	Plastic Components	1														
+energy-connector	Energy Connector	COMPONENT	2		Gas Giant;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Scandium	1	Garnet Crystals	1														
+energy-crystal-matrix	Energy Crystal Matrix	COMPONENT	3		Ice Giant;Volcanic Planet	MUD;ONI;USTUR	Sapphire Crystals	1	Platinum	1														
+energy-focuser	Energy Focuser	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Optical Components	1	Sodium Crystals	1														
+energy-management-hub	Energy Management Hub	COMPONENT	3		Ice Giant;Volcanic Planet	MUD;ONI;USTUR	Platinum Grid	1	Energy Crystal Matrix	1														
+energy-modulator	Energy Modulator	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Sodium Crystals	1	Processing Core	1														
+energy-network-core	Energy Network Core	COMPONENT	5		Dark Planet;Ice Giant;Oceanic Planet;Volcanic Planet	MUD;ONI;USTUR	Fusion Energy Core	1	Lunar Energy Matrix	1	Abyssal Energy Core	1	Rhodium Power Core	1										
+component-energy-substrate	Energy Substrate	COMPONENT	4	6	System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Graphene	1	Polymer	2														
+exotic-matter-core	Exotic Matter Core	COMPONENT	1		Ice Giant;Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Chromite	1	Lumanite	1														
+explosive-compound	Explosive Compound	COMPONENT	1		System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Biomass	1	Carbon	1														
+explosive-core	Explosive Core	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Carbon	2	Germanium Ingot	1														
+extraction-tools	Extraction Tools	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Germanium Ingot	1	Rhenium	2														
+field-coils	Field Coils	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Lumanite	1	Copper	1														
+field-harmonizer	Field Harmonizer	COMPONENT	1		Ice Giant;Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Chromite	1	Hydrogen	2														
+component-field-stabilizer	Field Stabilizer	COMPONENT	1	24	System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Aerogel	1	Crystal Lattice	1														
+fire-control-core	Fire Control Core	COMPONENT	4		Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Advanced Weapon Core	1	Rhodium Weapon Matrix	1														
+fire-suppressant	Fire Suppressant	COMPONENT	1		System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Biomass	2	Krypton	3														
+flare-control-core	Flare Control Core	COMPONENT	3		Barren Planet;Volcanic Planet	MUD;ONI;USTUR	Tungsten Core	1	EM Weapon Interface	1														
+flow-controller	Flow Controller	COMPONENT	1		System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Osmium	1	Rhenium	1														
+foundation-anchor	Foundation Anchor	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Zinc	3	Osmium	1														
+component-framework-1	Framework	COMPONENT	1	18	Oceanic Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Iron	2																
+freeze-dispersal-unit	Freeze Dispersal Unit	COMPONENT	1		System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Nitrogen	2	Sodium Crystals	1														
+fuel-atomizer	Fuel Atomizer	COMPONENT	2		Gas Giant;System Asteroid Belt;Volcanic Planet	MUD;ONI;USTUR	Scandium	1																
+fuel-control-core	Fuel Control Core	COMPONENT	3		Gas Giant;Volcanic Planet	MUD;ONI;USTUR	Propulsion Gas Mix	1	Platinum Grid	1														
+fuel-injector	Fuel Injector	COMPONENT	1		System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Rhenium	1	Hydrogen	2														
+fuel-primer	Fuel Primer	COMPONENT	2		System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Methane	1																
+fusion-energy-core	Fusion Energy Core	COMPONENT	5		Dark Planet;Volcanic Planet	MUD;ONI;USTUR	Fusion Catalyst Deposits	1	Platinum Grid	1														
+fusion-weapon-core	Fusion Weapon Core	COMPONENT	5		Barren Planet;Dark Planet	MUD;ONI;USTUR	Fusion Catalyst Deposits	1	Tungsten Core	1														
+gas-circulation-system	Gas Circulation System	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Nitrogen	1	Neodymium Magnets	1														
+gas-stabilizer	Gas Stabilizer	COMPONENT	2		Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Argon	1																
+generator-coils	Generator Coils	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Copper	3	Neodymium Magnets	1														
+germanium-ingot	Germanium Ingot	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet	USTUR	Germanium	1																
+component-gold	Gold	COMPONENT	3		Terrestrial Planet	ONI	Gold Ore	1																
+gold-contacts	Gold Contacts	COMPONENT	3		Terrestrial Planet	ONI	Gold	1																
+component-graphene	Graphene	COMPONENT	1	2	System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Carbon	5																
+grid-controller	Grid Controller	COMPONENT	2		Gas Giant;System Asteroid Belt;Volcanic Planet	MUD;ONI;USTUR	Scandium	1																
+ground-plate	Ground Plate	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Zinc	1	Copper	1														
+guidance-processor	Guidance Processor	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Silicon Wafers	1	Tritium	1														
+component-hafnium	Hafnium	COMPONENT	2		Ice Giant;System Asteroid Belt;Volcanic Planet	MUD;ONI;USTUR	Hafnium Ore	1																
+hafnium-alloy	Hafnium Alloy	COMPONENT	2		Ice Giant;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Hafnium	1	Aluminum	1														
+heat-circulation-pipes	Heat Circulation Pipes	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Copper	2	Thermoplastic Resin	2														
+heat-dissipator	Heat Dissipator	COMPONENT	2		Ice Giant;Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Aluminum	1	Thermodyne	1														
+heat-distribution-grid	Heat Distribution Grid	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Iron	2	Nitrogen	1														
+heat-exchange-coils	Heat Exchange Coils	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Copper	3	Thermoplastic Resin	1														
+heat-sensor	Heat Sensor	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Thermal Regulator Stone	1	Quartz Crystals	1														
+heavy-alloy	Heavy Alloy	COMPONENT	1		Ice Giant;Oceanic Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Iron	1	Chromite	1														
+hicenium-lattice	Hicenium Lattice	COMPONENT	4		Ice Giant	MUD	Hicenium Crystals	1																
+hologram-generator	Hologram Generator	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Optical Components	1	Tritium	1														
+component-hydrocarbon	Hydrocarbon	COMPONENT	1	2	System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Carbon	2	Hydrogen	2														
+ignition-core	Ignition Core	COMPONENT	2		Dark Planet;Ice Giant	MUD;ONI;USTUR	Ruby Crystals	1	Radiant Dust	1														
+impact-charges	Impact Charges	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Germanium Ingot	1	Zinc	1														
+incendiary-mix	Incendiary Mix	COMPONENT	1		System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Carbon	1	Hydrogen	1														
+industrial-processor	Industrial Processor	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Silicon Wafers	1	Rhenium	1														
+inert-gas-canisters	Inert Gas Canisters	COMPONENT	1		System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Krypton	1																
+injection-controller	Injection Controller	COMPONENT	2		Dark Planet;Gas Giant;Ice Giant;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Methane	1	Xenon	1														
+insulation-material	Insulation Material	COMPONENT	1		Volcanic Planet	MUD;ONI;USTUR	Thermal Regulator Stone	1																
+interference-shield	Interference Shield	COMPONENT	2		System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Boron	1																
+interlock-mechanism	Interlock Mechanism	COMPONENT	2		System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Manganese	1	Amber Resin	1														
+component-iridium	Iridium	COMPONENT	4		Volcanic Planet	MUD;ONI;USTUR	Iridium Ore	1																
+iridium-armor-plating	Iridium Armor Plating	COMPONENT	4		Volcanic Planet	MUD;ONI;USTUR	Iridium	1																
+component-iron	Iron	COMPONENT	1	1	Oceanic Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Iron Ore	1																
+jasphorus-propulsion-core	Jasphorus Propulsion Core	COMPONENT	5		Barren Planet;Oceanic Planet;Volcanic Planet	MUD;ONI;USTUR	Jasphorus Crystals	1	Phase Drive Core	1														
+jasphorus-weapon-matrix	Jasphorus Weapon Matrix	COMPONENT	5		Barren Planet;Volcanic Planet	MUD;ONI	Jasphorus Crystals	1	EM Weapon Interface	1														
+joint-connectors	Joint Connectors	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Tin	2	Rhenium	1														
+kinetic-amplifier	Kinetic Amplifier	COMPONENT	4		Terrestrial Planet	USTUR	Ochre	1																
+kinetic-beryllium-core	Kinetic Beryllium Core	COMPONENT	5		Dark Planet;Ice Giant;System Asteroid Belt	MUD;ONI;USTUR	Beryllium Crystals	1	Titanium Framework	1														
+kinetic-opal-core	Kinetic Opal Core	COMPONENT	5		Barren Planet;System Asteroid Belt	MUD;ONI;USTUR	Black Opal	1	Vanadium Alloy	1														
+kinetic-projectiles	Kinetic Projectiles	COMPONENT	1		Ice Giant;Oceanic Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Chromite	1	Iron	1														
+kinetic-stabilizer	Kinetic Stabilizer	COMPONENT	1		Ice Giant;Oceanic Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Chromite	1	Zinc	1														
+kinetic-stabilizer-core	Kinetic Stabilizer Core	COMPONENT	4		Ice Giant;Volcanic Planet	MUD;ONI;USTUR	Iridium	1	Zirconium	1														
+kinetic-support-matrix	Kinetic Support Matrix	COMPONENT	4		Ice Giant;Volcanic Planet	MUD;ONI;USTUR	Hicenium Lattice	1	Kinetic Stabilizer Core	1														
+launch-control-core	Launch Control Core	COMPONENT	4		Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Ochre Weapon Frame	1	Rhodium Weapon Matrix	1														
+launch-platform-core	Launch Platform Core	COMPONENT	5		Barren Planet;Dark Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Weapon Synchronization Matrix	1	Fire Control Core	1	Launch Control Core	1	Weapon Targeting Core	1										
+launch-rails	Launch Rails	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Arco	1	Copper	1														
+life-support-hub	Life Support Hub	COMPONENT	3		Barren Planet;Ice Giant;System Asteroid Belt	MUD;ONI;USTUR	Vanadium Alloy	1	Cryogenic Core	1														
+lifting-mechanism	Lifting Mechanism	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Iron	1	Neodymium Magnets	2														
+lightning-rod	Lightning Rod	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Iron	1	Rhenium	1														
+component-lithium	Lithium	COMPONENT	2		Barren Planet;System Asteroid Belt	MUD;ONI;USTUR	Lithium Ore	1																
+living-metal-network	Living Metal Network	COMPONENT	5		Dark Planet;Volcanic Planet	MUD;ONI;USTUR	Living Metal Symbionts	1	Palladium Conductor	1														
+load-bearing-beams	Load Bearing Beams	COMPONENT	1		Ice Giant;Oceanic Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Chromite	2	Iron	3														
+loader-assembly	Loader Assembly	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Osmium	2	Tin	1														
+lumanite-crystals	Lumanite Crystals	COMPONENT	1		System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Lumanite	1																
+luminous-shield-matrix	Luminous Shield Matrix	COMPONENT	3		Volcanic Planet	ONI	Glowstone Crystals	1																
+lunar-defense-network	Lunar Defense Network	COMPONENT	5		Oceanic Planet;Volcanic Planet	MUD;ONI;USTUR	Lunar Echo Crystals	1	Luminous Shield Matrix	1														
+lunar-energy-matrix	Lunar Energy Matrix	COMPONENT	5		Ice Giant;Oceanic Planet;Volcanic Planet	MUD;ONI;USTUR	Lunar Echo Crystals	1	Energy Crystal Matrix	1														
+component-magnet	Magnet	COMPONENT	2	4	Oceanic Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Iron	2																
+magnetic-accelerator	Magnetic Accelerator	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Neodymium Magnets	1	Tantalum	1														
+magnetic-gripper	Magnetic Gripper	COMPONENT	2		Ice Giant;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Cobalt	1	Hafnium	1														
+maneuver-control-core	Maneuver Control Core	COMPONENT	3		Gas Giant;Oceanic Planet;Volcanic Planet	MUD;ONI;USTUR	Phase Drive Core	1	Propulsion Gas Mix	1														
+component-manganese	Manganese	COMPONENT	2		System Asteroid Belt;Volcanic Planet	MUD;ONI;USTUR	Manganese Ore	1																
+matter-containment	Matter Containment	COMPONENT	2		Dark Planet;Gas Giant;Ice Giant;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Xenon	1	Diamond	1														
+medical-hub-core	Medical Hub Core	COMPONENT	3		Barren Planet;Dark Planet;Gas Giant;System Asteroid Belt	MUD;ONI;USTUR	Vanadium Alloy	1	Neon Buffer	1														
+medical-nanites	Medical Nanites	COMPONENT	2		Oceanic Planet;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Diamond	1	Oxygen	1														
+mega-framework-core	Mega Framework Core	COMPONENT	4		Ice Giant	MUD;ONI;USTUR	Hicenium Lattice	2	Zirconium Framework	1														
+mine-control-core	Mine Control Core	COMPONENT	3		Barren Planet;System Asteroid Belt;Volcanic Planet	MUD;ONI;USTUR	EM Weapon Interface	1	Vanadium Alloy	1														
+mining-interface	Mining Interface	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Quartz Crystals	2	Copper	1														
+monitoring-circuits	Monitoring Circuits	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Quartz Crystals	1	Copper	1														
+multidrive-core	Multi-Drive Core	COMPONENT	2		Dark Planet;Gas Giant;Ice Giant	MUD;ONI;USTUR	Xenon	1	Topaz Crystals	1														
+nanomaterial-base	Nanomaterial Base	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Carbon	1	Germanium Ingot	1														
+navigation-control-core	Navigation Control Core	COMPONENT	4		Dark Planet;Volcanic Planet	MUD;ONI;USTUR	Quantum Processor	1																
+neodymium-magnets	Neodymium Magnets	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Neodymium	1	Iron	1														
+neon-buffer	Neon Buffer	COMPONENT	3		Dark Planet;Gas Giant	MUD;ONI;USTUR	Neon	1																
+neural-interface	Neural Interface	COMPONENT	3		Oceanic Planet;Volcanic Planet	MUD;ONI;USTUR	Neural Coral Compounds	1	Palladium	1														
+commponent-ochre	Ochre	COMPONENT	4		Terrestrial Planet	USTUR	Ochre Ore	1																
+ochre-weapon-frame	Ochre Weapon Frame	COMPONENT	4		Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Ochre	1	Iridium	1														
+opal-defense-matrix	Opal Defense Matrix	COMPONENT	5		Barren Planet;Dark Planet	MUD;ONI;USTUR	Black Opal	1	Defense Crystal Array	1														
+opal-utility-matrix	Opal Utility Matrix	COMPONENT	5		Dark Planet;Terrestrial Planet	ONI	Opal Fragments	1	Gold Contacts	1														
+opal-weapon-core	Opal Weapon Core	COMPONENT	5		Barren Planet;Dark Planet	MUD;ONI;USTUR	Opal Fragments	1	Tungsten Core	1														
+optical-components	Optical Components	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Silicon Crystal	1	Quartz Crystals	1														
+osmium	Osmium	COMPONENT	1		System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Osmium Ore	1																
+component-palladium	Palladium	COMPONENT	3		Volcanic Planet	MUD;ONI;USTUR	Palladium Ore	1																
+palladium-conductor	Palladium Conductor	COMPONENT	3		Volcanic Planet	MUD;ONI;USTUR	Palladium	1																
+component-particle-accelerator	Particle Accelerator	COMPONENT	5		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Strange Emitter	1	Super Conductor	1														
+passenger-hub-core	Passenger Hub Core	COMPONENT	3		Dark Planet;Gas Giant;System Asteroid Belt	MUD;ONI;USTUR	Titanium Framework	1	Neon Buffer	1														
+phase-drive-core	Phase Drive Core	COMPONENT	3		Oceanic Planet;Volcanic Planet	MUD;ONI;USTUR	Phase Shift Crystals	1	Platinum	1														
+photon-emitters	Photon Emitters	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Lumanite	2	Silicon Crystal	1														
+plasma-cell	Plasma Cell	COMPONENT	3		Volcanic Planet	MUD;ONI;USTUR	Plasma Containment Minerals	1																
+plastic-components	Plastic Components	COMPONENT	1		System Asteroid Belt;Terrestrial Planet;Volcanic Planet	ONI	Thermoplastic Resin	1																
+component-platinum	Platinum	COMPONENT	3		Volcanic Planet	MUD;ONI;USTUR	Platinum Ore	1																
+platinum-grid	Platinum Grid	COMPONENT	3		Volcanic Planet	MUD;ONI;USTUR	Platinum	1																
+component-polymer	Polymer	COMPONENT	1	4	System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Hydrocarbon	1																
+power-distribution-hub	Power Distribution Hub	COMPONENT	2		Dark Planet;Gas Giant;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Garnet Crystals	1	Silver	1														
+power-management-core	Power Management Core	COMPONENT	4		Ice Giant;Oceanic Planet;Volcanic Planet	MUD;ONI;USTUR	Abyssal Energy Core	1	Rhodium Power Core	1														
+power-router	Power Router	COMPONENT	2		Barren Planet;Dark Planet;Gas Giant;System Asteroid Belt;Volcanic Planet	MUD;ONI;USTUR	Lithium	1	Silver	1														
+component-power-source	Power Source	COMPONENT	1	15	System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Graphene	1	Lumanite	2														
+precision-detonator	Precision Detonator	COMPONENT	2		Ice Giant;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Rochinol	1	Diamond	1														
+pressure-relief	Pressure Relief	COMPONENT	2		Barren Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Methane	1	Lithium	1														
+pressure-wave-generator	Pressure Wave Generator	COMPONENT	1		System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Osmium	1	Thermal Regulator Stone	1														
+processing-chamber	Processing Chamber	COMPONENT	1		Ice Giant;Oceanic Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Chromite	1	Silicon Crystal	1														
+processing-control-core	Processing Control Core	COMPONENT	3		Dark Planet;Oceanic Planet;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Chisenic Processor	1	Neural Interface	1														
+processing-core	Processing Core	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Silicon Wafers	1	Tritium	1														
+processing-integration-core	Processing Integration Core	COMPONENT	5		Dark Planet;Ice Giant;Oceanic Planet;Volcanic Planet	MUD;ONI;USTUR	EM Bio Core	1	Living Metal Network	1	Quantum Interface Core	1	Electromagnetic Resonator	1	Dodiline Matrix	1								
+processing-matrix	Processing Matrix	COMPONENT	2		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Cobalt	1	Copper	1														
+processing-platform-core	Processing Platform Core	COMPONENT	5		Barren Planet;Dark Planet;Ice Giant;Oceanic Planet;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Utility Integration Core	1	Assembly Control Matrix	1	Service Management Core	1												
+projection-matrix	Projection Matrix	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Silica	1	Processing Core	1														
+propulsion-gas-mix	Propulsion Gas Mix	COMPONENT	3		Gas Giant	MUD	Tenon Gas	1																
+protective-coating	Protective Coating	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Thermoplastic Resin	1	Zinc	1														
+proximity-detector	Proximity Detector	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Quartz Crystals	1	Tritium	1														
+pulse-generator	Pulse Generator	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Tritium	1	Neodymium Magnets	1														
+pump-assembly	Pump Assembly	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Osmium	1	Neodymium Magnets	1														
+pyrotechnic-material	Pyrotechnic Material	COMPONENT	1		System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Biomass	1	Thermal Regulator Stone	1														
+quantum-drive-matrix	Quantum Drive Matrix	COMPONENT	5		Dark Planet;Gas Giant;Ice Giant	MUD;ONI;USTUR	Quantum Particle	1	Propulsion Gas Mix	1														
+quantum-interface-core	Quantum Interface Core	COMPONENT	5		Dark Planet;Ice Giant	MUD;ONI;USTUR	Quantum Particle	1	Viscovite Crystals	1														
+quantum-processor	Quantum Processor	COMPONENT	4		Dark Planet;Volcanic Planet	MUD;ONI;USTUR	Quantum Computational Substrate	1	Platinum Grid	1														
+component-radiation-absorber	Radiation Absorber	COMPONENT	4	48	System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Crystal Lattice	1	Energy Substrate	1														
+radiation-blocker	Radiation Blocker	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Osmium	3	Zinc	2														
+rapid-cycle-timer	Rapid Cycle Timer	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Quartz Crystals	2	Neodymium Magnets	1														
+reactive-coating	Reactive Coating	COMPONENT	2		Gas Giant;Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Fluorine Gas	1	Boron Composite	1														
+reinforcement-lattice	Reinforcement Lattice	COMPONENT	2		Ice Giant;System Asteroid Belt;Volcanic Planet	MUD;ONI;USTUR	Manganese	1	Hafnium	1														
+component-repair-kit-1	Repair Kit	COMPONENT	2	4	Oceanic Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Iron	2																
+repair-protocol	Repair Protocol	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Silicon Crystal	2	Tritium	1														
+replication-catalyst	Replication Catalyst	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Biomass	1	Silicon Crystal	1														
+resin-sealant	Resin Sealant	COMPONENT	2		System Asteroid Belt;Terrestrial Planet;Volcanic Planet	USTUR	Amber Resin	1																
+resistive-coils	Resistive Coils	COMPONENT	1		System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Carbon	2	Rhenium	1														
+component-resonium	Resonium	COMPONENT	5		Barren Planet	MUD	Resonium Ore	1																
+resonium-kinetic-core	Resonium Kinetic Core	COMPONENT	5		Barren Planet;Ice Giant	MUD	Resonium	1	Hicenium Lattice	1														
+resonium-utility-matrix	Resonium Utility Matrix	COMPONENT	5		Barren Planet;Ice Giant;Terrestrial Planet	MUD;ONI;USTUR	Resonium	1	Utility Matrix	1														
+resource-hub-core	Resource Hub Core	COMPONENT	3		Barren Planet;Oceanic Planet;System Asteroid Belt	MUD;ONI;USTUR	Utility Core	1	Vanadium Alloy	1														
+rhenium	Rhenium	COMPONENT	1		System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Rhenium Ore	1																
+component-rhodium	Rhodium	COMPONENT	4		Volcanic Planet	MUD;ONI;USTUR	Rhodium Ore	1																
+rhodium-power-core	Rhodium Power Core	COMPONENT	4		Volcanic Planet	MUD;ONI;USTUR	Rhodium	1																
+rhodium-weapon-matrix	Rhodium Weapon Matrix	COMPONENT	4		Volcanic Planet	MUD;ONI;USTUR	Rhodium	1																
+safety-buffer	Safety Buffer	COMPONENT	2		Ice Giant;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Aluminum	1																
+safety-shutoff	Safety Shutoff	COMPONENT	2		Ice Giant;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Aluminum	1																
+scaling-interface	Scaling Interface	COMPONENT	3		Dark Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Chisenic Processor	1	Titanium Framework	1														
+component-scandium	Scandium	COMPONENT	2		Gas Giant;System Asteroid Belt;Volcanic Planet	MUD;ONI;USTUR	Scandium Ore	1																
+scatter-pattern-generator	Scatter Pattern Generator	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Tantalum	1	Optical Components	1														
+security-lock	Security Lock	COMPONENT	2		Ice Giant;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Hafnium Alloy	1	Boron Composite	1														
+sensor-array	Sensor Array	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Silica	1	Copper	2														
+sensor-elements	Sensor Elements	COMPONENT	1		System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Silica	1																
+sensor-hub-core	Sensor Hub Core	COMPONENT	3		Oceanic Planet;Volcanic Planet	MUD;ONI;USTUR	Neural Interface	1	Palladium Conductor	1														
+service-management-core	Service Management Core	COMPONENT	4		Ice Giant;Terrestrial Planet	MUD;ONI;USTUR	Utility Matrix	1	Zirconium Control Hub	1														
+shield-framework	Shield Framework	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Arco	1	Iron	2														
+shield-generator	Shield Generator	COMPONENT	1		System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Lumanite	3	Hydrogen	1														
+signal-amplifier-array	Signal Amplifier Array	COMPONENT	2		Dark Planet;Gas Giant;Ice Giant;Volcanic Planet	MUD;ONI;USTUR	Topaz Crystals	1	Silver	1														
+signal-booster	Signal Booster	COMPONENT	2		Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Argon	1																
+signal-coupling	Signal Coupling	COMPONENT	2		Dark Planet;Ice Giant	MUD;ONI;USTUR	Topaz Crystals	1																
+signal-modulator	Signal Modulator	COMPONENT	3		Dark Planet;Oceanic Planet	MUD;ONI;USTUR	Viscovite Crystals	1	Neural Coral Compounds	1														
+signal-recorder	Signal Recorder	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Tritium	2	Quartz Crystals	1														
+silicon-wafers	Silicon Wafers	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Silicon Crystal	1	Germanium Ingot	1														
+component-silver	Silver	COMPONENT	2		Dark Planet;Gas Giant;Volcanic Planet	MUD;ONI;USTUR	Silver Ore	1																
+spray-nozzles	Spray Nozzles	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Tin	1	Nitrogen	2														
+stabilization-field	Stabilization Field	COMPONENT	2		Barren Planet;System Asteroid Belt	MUD;ONI;USTUR	Lithium	1																
+component-steel	Steel	COMPONENT	3	4	Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Carbon	2	Iron	1														
+storage-control-core	Storage Control Core	COMPONENT	3		Dark Planet;Terrestrial Planet	ONI	Chisenic Processor	2																
+storage-hub-core	Storage Hub Core	COMPONENT	3		Oceanic Planet;System Asteroid Belt	MUD;ONI;USTUR	Bathysphere Pearls	1	Titanium Framework	1														
+storage-matrix	Storage Matrix	COMPONENT	1		System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Lumanite Crystals	1	Plastic Components	1														
+storage-platform-core	Storage Platform Core	COMPONENT	5		Barren Planet;Dark Planet;Ice Giant;Oceanic Planet;Terrestrial Planet	MUD;ONI;USTUR	Resonium Utility Matrix	1	Beryllium Matrix	1	Capacity Control Core	1	Storage Control Core	1										
+component-strange-emitter	Strange Emitter	COMPONENT	5	6	System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Lumanite	4	Polymer	2														
+strontium-kinetic-matrix	Strontium Kinetic Matrix	COMPONENT	5		System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Strontium Crystals	1	Kinetic Amplifier	1														
+strontium-weapon-core	Strontium Weapon Core	COMPONENT	5		System Asteroid Belt;Volcanic Planet	MUD;ONI;USTUR	Strontium Crystals	1	Rhodium Weapon Matrix	1														
+structural-anchor	Structural Anchor	COMPONENT	2		System Asteroid Belt;Volcanic Planet	MUD;ONI;USTUR	Manganese	1																
+structural-brace	Structural Brace	COMPONENT	2		Ice Giant;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Aluminum	1																
+structural-control-array	Structural Control Array	COMPONENT	4		Ice Giant;Terrestrial Planet	MUD;ONI;USTUR	Zirconium Framework	1	Kinetic Amplifier	1														
+structural-joint	Structural Joint	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Arco	1	Iron	1														
+structural-shell	Structural Shell	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Alloy Frame	1	Insulation Material	1														
+sublight-matrix-core	Sublight Matrix Core	COMPONENT	3		Oceanic Planet;System Asteroid Belt;Volcanic Planet	MUD;ONI;USTUR	Titanium Framework	1	Phase Drive Core	1														
+subspace-coils	Subspace Coils	COMPONENT	1		System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Arco	2	Lumanite	1														
+subwarp-drive-matrix	Subwarp Drive Matrix	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Sodium Crystals	2	Tritium	1														
+component-super-conductor	Super Conductor	COMPONENT	5	8	Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Copper Wire	5	Graphene	2														
+suppression-hub-core	Suppression Hub Core	COMPONENT	3		Barren Planet;Volcanic Planet	MUD;ONI;USTUR	Plasma Cell	1	Tungsten Core	1														
+tank-shell	Tank Shell	COMPONENT	1		System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Rhenium	1	Plastic Components	1														
+tantalum	Tantalum	COMPONENT	1		Volcanic Planet	MUD;ONI;USTUR	Tantalum Ore	1																
+targeting-array	Targeting Array	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Tantalum	1	Copper Wire	1														
+temperature-regulator	Temperature Regulator	COMPONENT	2		Ice Giant;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Aluminum	1																
+temperature-sensor	Temperature Sensor	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Germanium Ingot	1	Quartz Crystals	1														
+thermal-catalyst	Thermal Catalyst	COMPONENT	2		Dark Planet;Oceanic Planet;System Asteroid Belt;Volcanic Planet	MUD;ONI;USTUR	Thermodyne	1	Radiant Dust	1														
+thermal-charges	Thermal Charges	COMPONENT	1		System Asteroid Belt;Volcanic Planet	MUD;ONI;USTUR	Thermal Regulator Stone	1	Sodium Crystals	1														
+thermal-control-unit	Thermal Control Unit	COMPONENT	1		System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Insulation Material	1	Sensor Elements	1														
+thermal-core-assembly	Thermal Core Assembly	COMPONENT	3		Ice Giant;Volcanic Planet	MUD;ONI;USTUR	Cryogenic Core	1	Plasma Cell	1														
+thermal-tracker	Thermal Tracker	COMPONENT	1		System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Thermal Regulator Stone	2	Sensor Elements	1														
+thermal-transfer-matrix	Thermal Transfer Matrix	COMPONENT	1		System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Thermal Regulator Stone	2	Silica	1														
+thrust-chamber	Thrust Chamber	COMPONENT	1		Ice Giant;Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Osmium	2	Chromite	1														
+thrust-modulator	Thrust Modulator	COMPONENT	2		Barren Planet;System Asteroid Belt	MUD;ONI;USTUR	Lithium	1																
+tin	Tin	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Tin Ore	1																
+titan-scale-framework	Titan Scale Framework	COMPONENT	5		Barren Planet;Dark Planet;Ice Giant;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Kinetic Beryllium Core	1	Kinetic Opal Core	1	Resonium Kinetic Core	1	Strontium Kinetic Matrix	1										
+titan-support-core	Titan Support Core	COMPONENT	5		Barren Planet;Dark Planet;Ice Giant;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Titan Scale Framework	1	Mega Framework Core	1	Structural Control Array	1												
+component-titanium	Titanium	COMPONENT	4	1	System Asteroid Belt	MUD;ONI;USTUR	Titanium Ore	1																
+titanium-framework	Titanium Framework	COMPONENT	3		System Asteroid Belt	MUD;ONI;USTUR	Titanium	1																
+tow-cable	Tow Cable	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Arco	3	Iron	1														
+transfer-lines	Transfer Lines	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Tin	1	Plastic Components	1														
+transmission-unit	Transmission Unit	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Copper Wire	1	Krypton	1														
+tritium	Tritium	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Tritium Ore	1																
+component-tungsten	Tungsten	COMPONENT	3		Barren Planet	MUD;ONI;USTUR	Tungsten Ore	1																
+tungsten-core	Tungsten Core	COMPONENT	3		Barren Planet	MUD;ONI;USTUR	Tungsten	1																
+utility-conduit	Utility Conduit	COMPONENT	2		Ice Giant;Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Peridot Crystals	1	Oxygen	1														
+utility-core	Utility Core	COMPONENT	3		Oceanic Planet	MUD;ONI;USTUR	Bathysphere Pearls	1																
+utility-integration-core	Utility Integration Core	COMPONENT	5		Barren Planet;Dark Planet;Ice Giant;Oceanic Planet;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Beryllium Matrix	1	Bioluminescent Interface	1	Adaptive Utility Core	1	Opal Utility Matrix	1	Resonium Utility Matrix	1								
+utility-interface	Utility Interface	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Silicon Crystal	1	Tantalum	1														
+utility-matrix	Utility Matrix	COMPONENT	4		Ice Giant;Terrestrial Planet	MUD;ONI;USTUR	Hicenium Crystals	1	Dysprosium	1														
+component-vanadium	Vanadium	COMPONENT	3		Barren Planet	MUD;ONI;USTUR	Vanadium Ore	1																
+vanadium-alloy	Vanadium Alloy	COMPONENT	3		Barren Planet;System Asteroid Belt	MUD;ONI;USTUR	Vanadium	1	Titanium	1														
+vector-controller	Vector Controller	COMPONENT	2		Dark Planet;Gas Giant;Ice Giant;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Xenon	1	Methane	1														
+voltage-regulator	Voltage Regulator	COMPONENT	2		Gas Giant;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Garnet Crystals	1	Scandium	1														
+warp-coils	Warp Coils	COMPONENT	1		System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Lumanite	4	Osmium	1														
+warp-control-core	Warp Control Core	COMPONENT	3		Ice Giant;Oceanic Planet;Volcanic Planet	MUD;ONI;USTUR	Phase Drive Core	2	Energy Crystal Matrix	1														
+weapon-amplifier	Weapon Amplifier	COMPONENT	4		Volcanic Planet	USTUR	Dodiline Crystals	1																
+weapon-catalyst	Weapon Catalyst	COMPONENT	2		Dark Planet;Ice Giant;Volcanic Planet	MUD;ONI;USTUR	Rochinol	1	Radiant Dust	1														
+weapon-frame	Weapon Frame	COMPONENT	2		Ice Giant;System Asteroid Belt;Volcanic Planet	MUD;ONI;USTUR	Hafnium	1	Manganese	1														
+weapon-synchronization-matrix	Weapon Synchronization Matrix	COMPONENT	5		Barren Planet;Dark Planet;System Asteroid Belt;Volcanic Planet	MUD;ONI;USTUR	Fusion Weapon Core	1	Jasphorus Weapon Matrix	1	Opal Weapon Core	1	Strontium Weapon Core	1										
+weapon-targeting-core	Weapon Targeting Core	COMPONENT	4		Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Weapon Amplifier	1	Ochre Weapon Frame	1														
+winch-mechanism	Winch Mechanism	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet;Volcanic Planet	MUD;ONI;USTUR	Rhenium	2	Neodymium Magnets	2														
+zinc	Zinc	COMPONENT	1		Oceanic Planet;System Asteroid Belt;Terrestrial Planet	MUD;ONI;USTUR	Zinc Ore	1																
+component-zirconium	Zirconium	COMPONENT	4		Ice Giant	MUD;ONI;USTUR	Zirconium Ore	1																
+zirconium-control-hub	Zirconium Control Hub	COMPONENT	4		Ice Giant	MUD;ONI;USTUR	Zirconium	1																
+zirconium-framework	Zirconium Framework	COMPONENT	4		Ice Giant	MUD;ONI;USTUR	Zirconium	1																
