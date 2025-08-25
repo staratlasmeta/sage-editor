@@ -30,10 +30,11 @@ export function StandaloneNavigation({ className = '', claimStakes = [], current
 
             // Check if we're in a subdirectory of the project
             if (pathParts.length > 0) {
-                // Navigate to the project root safely
-                const projectName = pathParts[0]; // This would be 'SAGE Editor Suite' or similar
-                // Use relative navigation for safety
-                window.location.href = `/${projectName}/SAGE Editor Suite/index.html`;
+                // For GitHub Pages, the structure is different
+                // The URL is like: https://[user].github.io/[project]/SAGE%20Editor%20Suite/
+                // We need to go to the main SAGE Editor Suite index
+                const basePath = pathParts.slice(0, 1).join('/'); // Keep the project name
+                window.location.href = `/${basePath}/SAGE%20Editor%20Suite/index.html`;
             } else {
                 // Fallback to relative path
                 window.location.href = '../../../SAGE Editor Suite/index.html';
@@ -41,17 +42,19 @@ export function StandaloneNavigation({ className = '', claimStakes = [], current
         } else if (isLocal) {
             // For local file:// protocol or localhost
             if (window.location.protocol === 'file:') {
-                // The standalone.html is at:
-                // sage-editor/CraftingTool/sage-c4-tools/dist-standalone/standalone.html
-                // We need to get to:
-                // sage-editor/SAGE Editor Suite/index.html
+                // Check if we're in the SAGE Editor Suite directory (c4-tools.html)
+                const currentPath = window.location.pathname;
 
-                // When viewing standalone.html, browser is in dist-standalone/ directory
-                // So we need:
-                // ../../../SAGE Editor Suite/index.html
-                // This goes: dist-standalone -> sage-c4-tools -> CraftingTool -> sage-editor
-
-                window.location.href = '../../../SAGE Editor Suite/index.html';
+                if (currentPath.includes('/SAGE Editor Suite/') || currentPath.includes('/SAGE%20Editor%20Suite/')) {
+                    // We're in the same directory as index.html
+                    window.location.href = 'index.html';
+                } else if (currentPath.includes('/CraftingTool/')) {
+                    // We're in the original location
+                    window.location.href = '../../../SAGE Editor Suite/index.html';
+                } else {
+                    // Try the same directory first
+                    window.location.href = 'index.html';
+                }
             } else {
                 // For localhost development
                 alert('In development mode - navigation to SAGE Editor Suite');

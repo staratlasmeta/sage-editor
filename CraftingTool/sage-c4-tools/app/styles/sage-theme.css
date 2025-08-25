@@ -1244,13 +1244,21 @@ body
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    margin-top: 0.5rem;
-    padding: 0.25rem 0.5rem;
-    background: rgba(255, 65, 54, 0.15);
-    border: 1px solid rgba(255, 65, 54, 0.4);
+    margin-top: 0.75rem;
+    padding: 0.375rem 0.625rem;
+    background: linear-gradient(135deg, rgba(255, 65, 54, 0.2) 0%, rgba(255, 107, 53, 0.15) 100%);
+    border: 1px solid rgba(255, 65, 54, 0.5);
+    border-left: 3px solid #ff4136;
     border-radius: 4px;
-    font-size: 0.75rem;
-    transition: all 0.5s ease;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(255, 65, 54, 0.15);
+}
+
+.inactive-indicator:hover
+{
+    background: rgba(255, 65, 54, 0.25);
+    box-shadow: 0 3px 12px rgba(255, 65, 54, 0.25);
 }
 
 .status-dot
@@ -1258,24 +1266,41 @@ body
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    /* Remove pulsing animation for stable display */
-    opacity: 1;
+    background: #ff4136;
+    box-shadow: 0 0 8px rgba(255, 65, 54, 0.8);
+    animation: gentle-pulse 2s infinite;
+}
+
+@keyframes gentle-pulse
+{
+
+    0%,
+    100%
+    {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50%
+    {
+        opacity: 0.7;
+        transform: scale(1.1);
+    }
 }
 
 .status-inactive
 {
     background: #ff4136;
-    box-shadow: 0 0 4px rgba(255, 65, 54, 0.5);
+    box-shadow: 0 0 6px rgba(255, 65, 54, 0.8);
 }
-
-/* Removed pulse animation to prevent flashing */
 
 .status-text
 {
-    color: #ff4136;
-    font-size: 0.75rem;
+    color: #ff6666;
+    font-size: 0.8rem;
     font-weight: 600;
-    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .building-grid
@@ -3921,14 +3946,18 @@ body
     align-items: center;
     gap: 0.75rem;
     padding: 1rem 1.25rem;
-    background: var(--primary-dark);
-    border: 1px solid;
+    background: #0A0A0A;
+    /* Solid black background */
+    border: 2px solid;
+    /* Thicker border for better visibility */
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
     pointer-events: all;
     animation: slideInRight 0.3s ease-out;
     min-width: 300px;
     max-width: 500px;
+    backdrop-filter: none;
+    /* Remove any backdrop effects */
 }
 
 @keyframes slideInRight
@@ -3949,25 +3978,29 @@ body
 .notification-success
 {
     border-color: var(--status-success);
-    background: rgba(46, 204, 64, 0.1);
+    background: linear-gradient(135deg, #0A0A0A 0%, #0D1F0F 100%);
+    /* Solid with subtle success tint */
 }
 
 .notification-error
 {
     border-color: var(--status-danger);
-    background: rgba(255, 65, 54, 0.1);
+    background: linear-gradient(135deg, #0A0A0A 0%, #1F0D0C 100%);
+    /* Solid with subtle error tint */
 }
 
 .notification-warning
 {
     border-color: var(--status-warning);
-    background: rgba(255, 133, 27, 0.1);
+    background: linear-gradient(135deg, #0A0A0A 0%, #1F130A 100%);
+    /* Solid with subtle warning tint */
 }
 
 .notification-info
 {
     border-color: var(--status-info);
-    background: rgba(0, 116, 217, 0.1);
+    background: linear-gradient(135deg, #0A0A0A 0%, #0A111F 100%);
+    /* Solid with subtle info tint */
 }
 
 .notification-icon
@@ -4681,18 +4714,25 @@ body
 
 .resources-header .close-button
 {
+    position: relative;
     width: 40px;
     height: 40px;
     border-radius: 50%;
     background: rgba(255, 107, 53, 0.2);
     border: 2px solid var(--primary-orange);
     color: var(--primary-orange);
-    font-size: 1.5rem;
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 1;
     cursor: pointer;
     transition: all 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0;
+    padding-bottom: 2px;
+    /* Compensate for × character baseline */
+    text-align: center;
 }
 
 .resources-header .close-button:hover
@@ -4711,14 +4751,6 @@ body
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     flex-wrap: wrap;
     align-items: center;
-}
-
-.search-section.resources-search
-
-/* Only for resources view */
-{
-    flex: 1;
-    min-width: 300px;
 }
 
 .filter-section
@@ -6254,18 +6286,25 @@ body
 
 .resources-header .close-button
 {
+    position: relative;
     width: 40px;
     height: 40px;
     border-radius: 50%;
     background: rgba(255, 107, 53, 0.2);
     border: 2px solid var(--primary-orange);
     color: var(--primary-orange);
-    font-size: 1.5rem;
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 1;
     cursor: pointer;
     transition: all 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0;
+    padding-bottom: 2px;
+    /* Compensate for × character baseline */
+    text-align: center;
 }
 
 .resources-header .close-button:hover
@@ -7573,4 +7612,1495 @@ body
 .global-resource-panel .stop-tooltip li
 {
     margin: 0.25rem 0;
+}
+
+/* ============================================
+   Crafting Hab Enhanced UI Styles
+   ============================================ */
+
+/* View Mode Tabs */
+.view-mode-tabs
+{
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0;
+}
+
+.view-tab
+{
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: var(--text-secondary);
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: -2px;
+}
+
+.view-tab:hover:not(:disabled)
+{
+    color: var(--primary-orange);
+}
+
+.view-tab.active
+{
+    color: var(--primary-orange);
+    border-bottom-color: var(--primary-orange);
+}
+
+.view-tab:disabled
+{
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Plot Selector Bar */
+.plot-selector-bar
+{
+    background: var(--primary-light);
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.plot-selector-bar label
+{
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.plot-tabs
+{
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.plot-tab
+{
+    padding: 0.5rem 1rem;
+    background: var(--primary-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.plot-tab:hover
+{
+    border-color: var(--primary-orange);
+    background: rgba(255, 107, 53, 0.1);
+}
+
+.plot-tab.active
+{
+    background: var(--primary-orange);
+    color: white;
+    border-color: var(--primary-orange);
+}
+
+.plot-tab-tier
+{
+    font-weight: bold;
+    font-family: 'Orbitron', monospace;
+}
+
+.plot-tab.new-plot
+{
+    border-style: dashed;
+    color: var(--accent-green);
+}
+
+/* Overview View */
+.overview-view
+{
+    padding: 1rem;
+}
+
+.overview-sections
+{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.overview-section
+{
+    background: var(--primary-light);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+}
+
+.overview-section h3
+{
+    color: var(--primary-orange);
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-family: 'Orbitron', monospace;
+}
+
+.plot-grid.compact
+{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+}
+
+.plot-overview-card
+{
+    background: var(--primary-dark);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.plot-overview-card:hover
+{
+    border-color: var(--primary-orange);
+    transform: translateY(-2px);
+}
+
+.plot-overview-card.owned
+{
+    border-color: var(--accent-green);
+}
+
+.plot-overview-header
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.plot-tier-badge
+{
+    background: var(--primary-orange);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-weight: bold;
+    font-family: 'Orbitron', monospace;
+}
+
+.plot-status-badge.owned
+{
+    color: var(--accent-green);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.plot-overview-stats
+{
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.needs-setup
+{
+    color: var(--accent-gold);
+    font-style: italic;
+}
+
+/* Jobs Summary */
+.jobs-summary
+{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.job-summary-card
+{
+    background: var(--primary-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.job-header
+{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.job-recipe
+{
+    color: var(--primary-orange);
+    font-weight: 600;
+}
+
+.job-plot
+{
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+/* Statistics Grid */
+.stats-grid
+{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.stat-card
+{
+    background: var(--primary-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.stat-label
+{
+    display: block;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+}
+
+.stat-value
+{
+    display: block;
+    color: var(--primary-orange);
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: 'Orbitron', monospace;
+}
+
+/* Construction View */
+.construction-view
+{
+    padding: 1rem;
+}
+
+.construction-header
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.construction-header h3
+{
+    margin: 0;
+    color: var(--primary-orange);
+    font-family: 'Orbitron', monospace;
+}
+
+.btn-xs
+{
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+}
+
+/* Compact Job Cards */
+.job-queue.compact
+{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-height: calc(100vh - 400px);
+    overflow-y: auto;
+    padding-right: 0.25rem;
+}
+
+.job-card-compact
+{
+    background: var(--primary-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    transition: all 0.2s ease;
+}
+
+.job-card-compact:hover
+{
+    border-color: var(--primary-orange);
+    background: rgba(255, 107, 53, 0.05);
+}
+
+.job-card-compact.completed
+{
+    border-color: var(--accent-green);
+    background: rgba(0, 200, 150, 0.05);
+}
+
+.job-main
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.job-info
+{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+}
+
+.job-name
+{
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px;
+}
+
+.job-quantity
+{
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.priority-icon
+{
+    font-size: 0.75rem;
+}
+
+.job-meta
+{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.job-plot
+{
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    background: var(--primary-light);
+    padding: 0.125rem 0.25rem;
+    border-radius: 3px;
+    font-family: 'Orbitron', monospace;
+}
+
+.job-time
+{
+    font-size: 0.75rem;
+    color: var(--accent-blue);
+    font-weight: 500;
+}
+
+.job-done
+{
+    color: var(--accent-green);
+    font-size: 0.9rem;
+}
+
+.job-progress
+{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.progress-bar-compact
+{
+    flex: 1;
+    height: 4px;
+    background: var(--primary-light);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress-bar-compact .progress-fill
+{
+    height: 100%;
+    background: var(--primary-orange);
+    transition: width 0.3s ease;
+}
+
+.progress-bar-compact .progress-fill.completed
+{
+    background: var(--accent-green);
+}
+
+.progress-bar-compact .progress-fill.paused
+{
+    background: var(--accent-gold);
+}
+
+.progress-text
+{
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    min-width: 35px;
+    text-align: right;
+}
+
+.job-controls
+{
+    display: flex;
+    gap: 0.25rem;
+    justify-content: flex-end;
+}
+
+.btn-icon
+{
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: var(--primary-dark);
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    font-size: 0.75rem;
+}
+
+.btn-icon:hover
+{
+    background: var(--primary-light);
+    border-color: var(--primary-orange);
+    color: var(--primary-orange);
+}
+
+.btn-icon.btn-success
+{
+    border-color: var(--accent-green);
+    color: var(--accent-green);
+}
+
+.btn-icon.btn-success:hover
+{
+    background: rgba(0, 200, 150, 0.2);
+}
+
+.btn-icon.btn-danger
+{
+    color: var(--status-danger);
+}
+
+.btn-icon.btn-danger:hover
+{
+    background: rgba(255, 65, 54, 0.2);
+    border-color: var(--status-danger);
+}
+
+/* Job Actions Bar */
+.job-actions-bar
+{
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.job-actions-bar .btn-xs
+{
+    flex: 1;
+}
+
+/* Sidebar Header Improvements */
+.sidebar-header
+{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.sidebar-header h3
+{
+    margin: 0;
+    color: var(--primary-orange);
+    font-size: 1rem;
+    font-family: 'Orbitron', monospace;
+}
+
+/* Enhanced Crafting Interface */
+.crafting-interface-enhanced
+{
+    display: grid;
+    grid-template-columns: 200px 400px 1fr;
+    gap: 1rem;
+    height: calc(100vh - 200px);
+}
+
+/* Filters Panel */
+.recipe-filters-panel
+{
+    background: var(--primary-light);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow-y: auto;
+}
+
+.recipe-filters-panel h4
+{
+    color: var(--primary-orange);
+    font-size: 0.9rem;
+    margin: 0;
+    font-family: 'Orbitron', monospace;
+}
+
+.filter-section
+{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.filter-section label
+{
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.filter-input,
+.filter-select
+{
+    background: var(--primary-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 0.5rem;
+    color: var(--text-primary);
+    font-size: 0.85rem;
+}
+
+.filter-input:focus,
+.filter-select:focus
+{
+    outline: none;
+    border-color: var(--primary-orange);
+}
+
+.tier-filters
+{
+    display: flex;
+    gap: 0.25rem;
+}
+
+.tier-btn
+{
+    flex: 1;
+    padding: 0.25rem;
+    background: var(--primary-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tier-btn:hover
+{
+    border-color: var(--primary-orange);
+    color: var(--primary-orange);
+}
+
+.tier-btn.active
+{
+    background: var(--primary-orange);
+    border-color: var(--primary-orange);
+    color: var(--primary-dark);
+}
+
+.status-filters
+{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.checkbox-label
+{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+}
+
+.checkbox-label input[type="checkbox"]
+{
+    width: 16px;
+    height: 16px;
+    accent-color: var(--primary-orange);
+}
+
+.filter-actions
+{
+    margin-top: auto;
+}
+
+.filter-stats
+{
+    text-align: center;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-secondary);
+}
+
+/* Recipe List Panel */
+.recipe-list-panel
+{
+    background: var(--primary-light);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.recipe-list-header
+{
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.recipe-list-header h3
+{
+    margin: 0;
+    color: var(--primary-orange);
+    font-size: 1rem;
+    font-family: 'Orbitron', monospace;
+}
+
+.recent-recipes
+{
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    background: rgba(255, 107, 53, 0.05);
+}
+
+.recent-recipes h5
+{
+    margin: 0 0 0.5rem 0;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+}
+
+.recent-list
+{
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.recent-chip
+{
+    padding: 0.25rem 0.75rem;
+    background: var(--primary-dark);
+    border: 1px solid var(--primary-orange);
+    border-radius: 12px;
+    color: var(--primary-orange);
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.recent-chip:hover
+{
+    background: var(--primary-orange);
+    color: var(--primary-dark);
+}
+
+.recipe-list-scrollable
+{
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.5rem;
+}
+
+.recipe-list-item
+{
+    padding: 0.75rem;
+    background: var(--primary-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.recipe-list-item:hover
+{
+    border-color: var(--primary-orange);
+    background: rgba(255, 107, 53, 0.05);
+}
+
+.recipe-list-item.selected
+{
+    border-color: var(--primary-orange);
+    background: rgba(255, 107, 53, 0.1);
+    box-shadow: 0 0 10px rgba(255, 107, 53, 0.3);
+}
+
+.recipe-list-item.cannot-craft
+{
+    opacity: 0.5;
+}
+
+.recipe-item-header
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.25rem;
+}
+
+.recipe-name
+{
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+.recipe-badges
+{
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.tier-badge
+{
+    padding: 0.125rem 0.375rem;
+    background: var(--primary-light);
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    font-family: 'Orbitron', monospace;
+}
+
+.tier-badge.large
+{
+    padding: 0.25rem 0.75rem;
+    font-size: 0.9rem;
+}
+
+.craftable-badge
+{
+    color: var(--accent-green);
+    font-size: 0.9rem;
+}
+
+.favorite-btn
+{
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    padding: 0;
+}
+
+.favorite-btn:hover,
+.favorite-btn.active
+{
+    color: var(--accent-gold);
+}
+
+.recipe-item-details
+{
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.recipe-output
+{
+    color: var(--accent-green);
+}
+
+.recipe-time
+{
+    color: var(--accent-blue);
+}
+
+/* Recipe Details Panel */
+.recipe-details-panel
+{
+    background: var(--primary-light);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.recipe-details-header
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.recipe-details-header h3
+{
+    margin: 0;
+    color: var(--primary-orange);
+    font-size: 1.25rem;
+    font-family: 'Orbitron', monospace;
+}
+
+.recipe-details-content
+{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.ingredients-section,
+.output-section
+{
+    background: var(--primary-dark);
+    border-radius: 6px;
+    padding: 1rem;
+}
+
+.ingredients-section h4,
+.output-section h4
+{
+    margin: 0 0 0.75rem 0;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.ingredients-list
+{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.ingredient-row
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    background: var(--primary-light);
+    border-radius: 4px;
+}
+
+.ingredient-row.insufficient
+{
+    background: rgba(255, 65, 54, 0.1);
+    border: 1px solid rgba(255, 65, 54, 0.3);
+}
+
+.ingredient-name
+{
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+.ingredient-amount
+{
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.has-enough
+{
+    color: var(--accent-green);
+}
+
+.not-enough
+{
+    color: var(--status-danger);
+}
+
+.output-info
+{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.output-amount
+{
+    color: var(--accent-green);
+    font-weight: 600;
+}
+
+.output-resource
+{
+    color: var(--text-primary);
+}
+
+/* Craft Configuration */
+.craft-config
+{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.quantity-control
+{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.quantity-control label
+{
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+}
+
+.quantity-input-group
+{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.qty-btn
+{
+    width: 32px;
+    height: 32px;
+    background: var(--primary-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.qty-btn:hover
+{
+    border-color: var(--primary-orange);
+    color: var(--primary-orange);
+}
+
+.qty-input
+{
+    width: 80px;
+    padding: 0.5rem;
+    background: var(--primary-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-primary);
+    text-align: center;
+    font-size: 1rem;
+}
+
+.quick-qty-buttons
+{
+    display: flex;
+    gap: 0.25rem;
+    margin-top: 0.5rem;
+}
+
+.quick-qty
+{
+    flex: 1;
+    padding: 0.25rem;
+    background: var(--primary-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.quick-qty:hover
+{
+    border-color: var(--primary-orange);
+    color: var(--primary-orange);
+}
+
+.time-section
+{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.time-info
+{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.time-value
+{
+    font-size: 1.2rem;
+    color: var(--accent-blue);
+    font-weight: 600;
+}
+
+.speed-bonus
+{
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.priority-section
+{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.priority-buttons
+{
+    display: flex;
+    gap: 0.5rem;
+}
+
+.priority-btn
+{
+    flex: 1;
+    padding: 0.5rem;
+    background: var(--primary-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.priority-btn:hover
+{
+    border-color: var(--primary-orange);
+    color: var(--primary-orange);
+}
+
+.priority-btn.active
+{
+    background: var(--primary-orange);
+    border-color: var(--primary-orange);
+    color: var(--primary-dark);
+}
+
+.btn-large
+{
+    padding: 1rem;
+    font-size: 1rem;
+    margin-top: 1rem;
+}
+
+.no-recipe-selected
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+.no-recipe-selected h3
+{
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.no-results
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+.hint
+{
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+}
+
+/* ============================================
+   Design Summary - Top Position
+   ============================================ */
+.design-summary-top
+{
+    background: var(--primary-light);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    animation: fadeIn 0.3s ease;
+}
+
+.design-summary-top h3
+{
+    color: var(--primary-orange);
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+.design-stats-row
+{
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.design-stats-row .stat-card
+{
+    flex: 1;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 107, 53, 0.2);
+    border-radius: 6px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.stat-card .stat-label
+{
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+}
+
+.stat-card .stat-value
+{
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-family: 'Orbitron', monospace;
+}
+
+.stat-card .stat-value.error
+{
+    color: var(--status-danger);
+    animation: errorPulse 1s ease-in-out infinite;
+}
+
+.stat-card .stat-value.positive
+{
+    color: var(--status-success);
+}
+
+/* Construction Requirements */
+.construction-requirements
+{
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.construction-requirements h4
+{
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.resource-requirements
+{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.resource-requirement
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.resource-requirement.insufficient
+{
+    border-color: rgba(255, 65, 54, 0.5);
+    background: rgba(255, 65, 54, 0.1);
+}
+
+.resource-requirement.sufficient
+{
+    border-color: rgba(46, 204, 64, 0.3);
+}
+
+.resource-name
+{
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    text-transform: capitalize;
+}
+
+.resource-amounts
+{
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-family: 'Orbitron', monospace;
+    font-size: 0.95rem;
+}
+
+.amount-ok
+{
+    color: var(--status-success);
+    font-weight: 600;
+}
+
+.amount-short
+{
+    color: var(--status-danger);
+    font-weight: 600;
+}
+
+.separator
+{
+    color: var(--text-dim);
+}
+
+.amount-needed
+{
+    color: var(--text-secondary);
+}
+
+/* Missing Resources Actions */
+.missing-resources-actions
+{
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(255, 133, 27, 0.1);
+    border: 1px solid rgba(255, 133, 27, 0.3);
+    border-radius: 6px;
+}
+
+.missing-resources-actions .warning-message
+{
+    color: var(--status-warning);
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.missing-resources-actions .btn-sm
+{
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+@keyframes errorPulse
+{
+
+    0%,
+    100%
+    {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50%
+    {
+        transform: scale(1.05);
+        opacity: 0.9;
+    }
+}
+
+/* Improved Inventory Section */
+.starbase-inventory
+{
+    padding: 1rem;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+    border-radius: 8px;
+    margin-top: 1rem;
+}
+
+.inventory-header
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.inventory-header h3
+{
+    margin: 0;
+    color: var(--primary-orange);
+    font-size: 1.1rem;
+}
+
+.inventory-count
+{
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    background: rgba(255, 107, 53, 0.1);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+}
+
+.resource-grid
+{
+    display: grid;
+    gap: 0.5rem;
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 0.25rem;
+    margin-bottom: 1rem;
+}
+
+/* Inventory-specific resource card styles */
+.starbase-inventory .resource-card
+{
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 107, 53, 0.2);
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.starbase-inventory .resource-card:hover
+{
+    background: rgba(255, 107, 53, 0.05);
+    border-color: rgba(255, 107, 53, 0.4);
+    transform: translateX(2px);
+}
+
+.starbase-inventory .resource-icon
+{
+    font-size: 1.25rem;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 107, 53, 0.1);
+    border-radius: 4px;
+}
+
+.starbase-inventory .resource-info
+{
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.starbase-inventory .resource-name
+{
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.starbase-inventory .resource-amount
+{
+    color: var(--accent-green);
+    font-weight: 600;
+    font-family: 'Orbitron', monospace;
+}
+
+.btn-magic
+{
+    width: 100%;
+    background: linear-gradient(135deg, #FF6B35 0%, #FF4500 100%);
+    border: 2px solid transparent;
+    color: white;
+    font-weight: 600;
+    padding: 0.75rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.875rem;
+}
+
+.btn-magic:hover
+{
+    background: linear-gradient(135deg, #FF4500 0%, #FF6B35 100%);
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+    transform: translateY(-1px);
+}
+
+/* Scrollbar styling for resource grid */
+.resource-grid::-webkit-scrollbar
+{
+    width: 6px;
+}
+
+.resource-grid::-webkit-scrollbar-track
+{
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 3px;
+}
+
+.resource-grid::-webkit-scrollbar-thumb
+{
+    background: rgba(255, 107, 53, 0.3);
+    border-radius: 3px;
+}
+
+.resource-grid::-webkit-scrollbar-thumb:hover
+{
+    background: rgba(255, 107, 53, 0.5);
 }

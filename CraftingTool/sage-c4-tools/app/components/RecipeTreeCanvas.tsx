@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react';
+import React, { useRef, useEffect, useState, useCallback, useMemo } from 'react';
 import './RecipeTreeCanvas.css';
 
 interface Recipe {
@@ -8,7 +8,8 @@ interface Recipe {
     tier: number;
     constructionTime: number;
     ingredients: { resource: string; quantity: number }[];
-    output: { resource: string; quantity: number };
+    output?: { resource: string; quantity: number } | null;
+    requiredQuantity?: number;  // For raw resources - amount needed by parent recipe
 }
 
 interface TreeNode {
@@ -43,7 +44,7 @@ interface RecipeTreeCanvasProps {
     onResourceAnalysis?: (info: ResourceInfo) => void;
 }
 
-export function RecipeTreeCanvas({
+function RecipeTreeCanvasComponent({
     recipe,
     recipes = [],
     planets = [],
@@ -66,28 +67,48 @@ export function RecipeTreeCanvas({
         lastPos: { x: 0, y: 0 }
     });
 
-    // Build tree
+    // Use RAF for smooth animations
+    const animationFrameRef = useRef<number | undefined>(undefined);
+
+    // Memoize recipe map for faster lookups
+    const recipeMap = useMemo(() => {
+        const map = new Map<string, Recipe>();
+        recipes.forEach(r => {
+            map.set(r.id, r);
+            if (r.output?.resource) {
+                map.set(r.output.resource, r);
+                map.set(`recipe_${r.output.resource}`, r);
+            }
+        });
+        return map;
+    }, [recipes]);
+
+    // Build tree with memoization
     const buildRecipeTree = useCallback((recipeId: string, depth = 0, visited = new Set<string>()): TreeNode | null => {
         if (visited.has(recipeId) || depth > 8) return null;
         visited.add(recipeId);
 
-        const rec = recipes.find(r => r.id === recipeId);
+        const rec = recipeMap.get(recipeId) || recipes.find(r => r.id === recipeId);
         if (!rec) return null;
 
         const children: TreeNode[] = [];
 
         if (rec.ingredients && Array.isArray(rec.ingredients)) {
             rec.ingredients.forEach(ingredient => {
-                const producerRecipe = recipes.find(r =>
-                    r.output?.resource === ingredient.resource ||
-                    r.output?.resource === `recipe_${ingredient.resource}` ||
-                    `recipe_${r.output?.resource}` === ingredient.resource
-                );
+                // Use map for faster lookup
+                const producerRecipe = recipeMap.get(ingredient.resource) ||
+                    recipeMap.get(`recipe_${ingredient.resource}`) ||
+                    recipes.find(r =>
+                        r.output?.resource === ingredient.resource ||
+                        r.output?.resource === `recipe_${ingredient.resource}` ||
+                        `recipe_${r.output?.resource}` === ingredient.resource
+                    );
 
                 if (producerRecipe) {
                     const childNode = buildRecipeTree(producerRecipe.id, depth + 1, new Set(visited));
                     if (childNode) children.push(childNode);
                 } else {
+                    // Raw resources don't have an output - they need to be extracted/obtained
                     children.push({
                         id: `raw_${ingredient.resource}`,
                         recipe: {
@@ -97,7 +118,8 @@ export function RecipeTreeCanvas({
                             type: 'raw',
                             constructionTime: 0,
                             ingredients: [],
-                            output: { resource: ingredient.resource, quantity: ingredient.quantity }
+                            output: null,  // Raw resources don't produce anything
+                            requiredQuantity: ingredient.quantity  // Amount needed by parent recipe
                         },
                         x: 0,
                         y: 0,
@@ -116,7 +138,7 @@ export function RecipeTreeCanvas({
             children,
             depth
         };
-    }, [recipes]);
+    }, [recipeMap, recipes]);
 
     // Calculate positions
     const calculateNodePositions = useCallback((root: TreeNode, canvasWidth: number, canvasHeight: number) => {
@@ -311,6 +333,44 @@ export function RecipeTreeCanvas({
         }));
     }, [viewport]);
 
+    // Improved hit detection with proper circular hitbox
+    const isPointInNode = useCallback((x: number, y: number, node: TreeNode, radius: number = 45) => {
+        const distance = Math.sqrt(Math.pow(x - node.x, 2) + Math.pow(y - node.y, 2));
+        return distance <= radius;
+    }, []);
+
+    // Resource analysis
+    const analyzeResource = useCallback((resourceId: string) => {
+        const usedInRecipes = recipes.filter(r =>
+            r.ingredients?.some(ing => ing.resource === resourceId)
+        );
+
+        const producedBy = recipes.filter(r =>
+            r.output?.resource === resourceId
+        );
+
+        const availableOnPlanets = planets.filter(p =>
+            p.resources?.includes(resourceId)
+        );
+
+        const info: ResourceInfo = {
+            id: resourceId,
+            name: resourceId,
+            usageCount: usedInRecipes.length,
+            recipes: usedInRecipes.map(r => r.name),
+            planets: availableOnPlanets.map((p: any) => p.name || p.id),
+            accessibility: availableOnPlanets.length / Math.max(1, planets.length),
+            value: usedInRecipes.length * 100 + producedBy.length * 50,
+            tier: Math.max(...usedInRecipes.map(r => r.tier || 0), 0)
+        };
+
+        if (onResourceAnalysis) {
+            onResourceAnalysis(info);
+        }
+
+        return info;
+    }, [recipes, planets, onResourceAnalysis]);
+
     // Mouse handlers
     const handleMouseDown = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {
         const canvas = canvasRef.current;
@@ -325,9 +385,13 @@ export function RecipeTreeCanvas({
 
         let clickedNode: TreeNode | null = null;
         const checkNodeClick = (node: TreeNode) => {
-            const distance = Math.sqrt(Math.pow(worldX - node.x, 2) + Math.pow(worldY - node.y, 2));
-            if (distance < 45) {
+            if (isPointInNode(worldX, worldY, node)) {
                 clickedNode = node;
+
+                // Analyze resource if it's a raw material
+                if (node.recipe.type === 'raw') {
+                    analyzeResource(node.recipe.name);
+                }
             }
             node.children.forEach(checkNodeClick);
         };
@@ -345,7 +409,7 @@ export function RecipeTreeCanvas({
                 lastPos: { x: prev.x, y: prev.y }
             }));
         }
-    }, [treeRoot, viewport, onNodeClick]);
+    }, [treeRoot, viewport, onNodeClick, isPointInNode, analyzeResource]);
 
     const handleMouseMove = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {
         const canvas = canvasRef.current;
@@ -370,8 +434,7 @@ export function RecipeTreeCanvas({
 
             let foundNode: TreeNode | null = null;
             const checkNodeHover = (node: TreeNode) => {
-                const distance = Math.sqrt(Math.pow(worldX - node.x, 2) + Math.pow(worldY - node.y, 2));
-                if (distance < 45) {
+                if (isPointInNode(worldX, worldY, node)) {
                     foundNode = node;
                 }
                 node.children.forEach(checkNodeHover);
@@ -382,7 +445,7 @@ export function RecipeTreeCanvas({
 
             canvas.style.cursor = foundNode ? 'pointer' : viewport.isDragging ? 'grabbing' : 'grab';
         }
-    }, [treeRoot, viewport]);
+    }, [treeRoot, viewport, isPointInNode]);
 
     const handleMouseUp = useCallback(() => {
         setViewport(prev => ({
@@ -461,25 +524,65 @@ export function RecipeTreeCanvas({
             {selectedNode && (
                 <div className="node-info-panel">
                     <h3>{selectedNode.recipe.name}</h3>
-                    <p>Tier {selectedNode.recipe.tier}</p>
-                    {selectedNode.recipe.constructionTime > 0 && (
-                        <p>Time: {selectedNode.recipe.constructionTime}s</p>
-                    )}
-                    {selectedNode.recipe.ingredients.length > 0 && (
-                        <div>
-                            <h4>Requires:</h4>
-                            <ul>
-                                {selectedNode.recipe.ingredients.map((ing, i) => (
-                                    <li key={i}>{ing.quantity}x {ing.resource}</li>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
-                    {selectedNode.recipe.output && (
-                        <p>Produces: {selectedNode.recipe.output.quantity}x {selectedNode.recipe.output.resource}</p>
+                    {selectedNode.recipe.type === 'raw' ? (
+                        <>
+                            <p className="resource-type">Raw Material</p>
+                            {selectedNode.recipe.requiredQuantity && (
+                                <p className="required-amount">
+                                    <strong>Amount needed:</strong> {selectedNode.recipe.requiredQuantity}x
+                                </p>
+                            )}
+                            <div className="resource-details">
+                                <p className="extraction-note">
+                                    <em>This is a raw material that needs to be:</em>
+                                </p>
+                                <ul className="extraction-methods">
+                                    <li>Extracted from planets with this resource</li>
+                                    <li>Purchased from markets</li>
+                                    <li>Obtained through other means</li>
+                                </ul>
+                            </div>
+                            <button
+                                className="btn btn-small"
+                                onClick={() => analyzeResource(selectedNode.recipe.name)}
+                            >
+                                📊 Analyze Resource
+                            </button>
+                        </>
+                    ) : (
+                        <>
+                            <p>Tier {selectedNode.recipe.tier}</p>
+                            {selectedNode.recipe.constructionTime > 0 && (
+                                <p>Time: {selectedNode.recipe.constructionTime}s</p>
+                            )}
+                            {selectedNode.recipe.ingredients.length > 0 && (
+                                <div>
+                                    <h4>Requires:</h4>
+                                    <ul>
+                                        {selectedNode.recipe.ingredients.map((ing, i) => (
+                                            <li key={i}>
+                                                {ing.quantity}x {ing.resource}
+                                                <button
+                                                    className="btn-link"
+                                                    onClick={() => analyzeResource(ing.resource)}
+                                                    style={{ marginLeft: '8px', fontSize: '0.85rem' }}
+                                                >
+                                                    (analyze)
+                                                </button>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
+                            {selectedNode.recipe.output && (
+                                <p>Produces: {selectedNode.recipe.output.quantity}x {selectedNode.recipe.output.resource}</p>
+                            )}
+                        </>
                     )}
                 </div>
             )}
         </div>
     );
-} 
+}
+
+export const RecipeTreeCanvas = React.memo(RecipeTreeCanvasComponent); 
