@@ -91,6 +91,12 @@ const initialState: SharedState = {
         tutorialCompleted: false,
         simulationSpeed: 1,
     },
+    claimStakesData: [],
+    craftingHabState: {
+        habPlots: [],
+        craftingJobs: [],
+    },
+    craftingQueue: [],
 };
 
 // Starbase level definitions
@@ -207,7 +213,11 @@ function sharedStateReducer(state: SharedState, action: Action): SharedState {
             };
 
         case 'LOAD_STATE':
-            return action.payload;
+            return {
+                ...initialState, // Start with initial state to ensure all fields exist
+                ...action.payload, // Override with saved values
+                claimStakesData: action.payload.claimStakesData || [], // Ensure claimStakesData is always an array
+            };
 
         case 'UPDATE_CRAFTING_HAB_STATE':
             return {

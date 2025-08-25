@@ -1028,7 +1028,10 @@ export default function ClaimStakes() {
 
     return (
         <div className="claim-stakes-app">
-            <Navigation claimStakes={claimStakeResources} />
+            {/* Only render Navigation in dev mode, not in standalone */}
+            {typeof window !== 'undefined' && !(window as any).__STANDALONE_BUILD__ && (
+                <Navigation claimStakes={claimStakeResources} />
+            )}
 
             <NotificationSystem
                 notifications={notifications}

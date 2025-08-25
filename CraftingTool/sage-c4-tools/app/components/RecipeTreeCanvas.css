@@ -1,0 +1,196 @@
+.recipe-tree-canvas-container
+{
+    position: relative;
+    width: 100%;
+    height: 600px;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    border: 2px solid var(--primary-orange);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.recipe-tree-canvas
+{
+    width: 100%;
+    height: 100%;
+    cursor: grab;
+}
+
+.recipe-tree-canvas:active
+{
+    cursor: grabbing;
+}
+
+.node-info-panel
+{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 280px;
+    background: rgba(26, 26, 26, 0.95);
+    border: 2px solid var(--primary-orange);
+    border-radius: 8px;
+    padding: 1rem;
+    color: white;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn
+{
+    from
+    {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to
+    {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.node-info-panel h3
+{
+    font-family: 'Orbitron', monospace;
+    color: var(--primary-orange);
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.node-info-panel h4
+{
+    font-family: 'Orbitron', monospace;
+    color: var(--accent-green);
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.node-info-panel p
+{
+    font-family: 'Exo 2', sans-serif;
+    font-size: 0.9rem;
+    margin: 0.25rem 0;
+    color: #ccc;
+}
+
+.node-info-panel ul
+{
+    list-style: none;
+    padding-left: 0;
+    margin: 0.5rem 0;
+}
+
+.node-info-panel li
+{
+    font-family: 'Exo 2', sans-serif;
+    font-size: 0.85rem;
+    color: #aaa;
+    padding: 0.25rem 0;
+    border-left: 3px solid var(--accent-blue);
+    padding-left: 0.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.resource-intelligence-panel
+{
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    width: 320px;
+    background: rgba(26, 26, 26, 0.95);
+    border: 2px solid #00C896;
+    border-radius: 8px;
+    padding: 1rem;
+    color: white;
+    backdrop-filter: blur(10px);
+}
+
+.resource-intelligence-panel h3
+{
+    font-family: 'Orbitron', monospace;
+    color: #00C896;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+.value-indicator
+{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.value-bar
+{
+    flex: 1;
+    height: 20px;
+    background: #333;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.value-fill
+{
+    height: 100%;
+    background: linear-gradient(90deg, #00C896 0%, #FFD700 100%);
+    transition: width 0.3s ease;
+}
+
+.planet-list
+{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.planet-badge
+{
+    background: var(--primary-light);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    font-family: 'Exo 2', sans-serif;
+    color: #aaa;
+}
+
+.recipe-usage-list
+{
+    max-height: 150px;
+    overflow-y: auto;
+    margin-top: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.recipe-usage-list::-webkit-scrollbar
+{
+    width: 6px;
+}
+
+.recipe-usage-list::-webkit-scrollbar-track
+{
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+}
+
+.recipe-usage-list::-webkit-scrollbar-thumb
+{
+    background: var(--primary-orange);
+    border-radius: 3px;
+}
+
+.recipe-usage-item
+{
+    padding: 0.25rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.85rem;
+    color: #aaa;
+}

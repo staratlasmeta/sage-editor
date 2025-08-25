@@ -557,7 +557,10 @@ export default function CraftingHab() {
 
     return (
         <div className="crafting-hab-app">
-            <Navigation />
+            {/* Only render Navigation in dev mode, not in standalone */}
+            {typeof window !== 'undefined' && !(window as any).__STANDALONE_BUILD__ && (
+                <Navigation />
+            )}
 
             <NotificationSystem
                 notifications={notifications}

@@ -18,14 +18,25 @@ export function StandaloneNavigation({ className = '', claimStakes = [], current
 
     const handleHomeClick = () => {
         // Navigate back to SAGE Editor Suite
-        // For GitHub Pages deployment, use relative path
-        const isGitHubPages = window.location.hostname.includes('github.io');
-        const isLocal = window.location.protocol === 'file:' || window.location.hostname === 'localhost';
+        const hostname = window.location.hostname;
+        const isGitHubPages = hostname.includes('.github.io');
+        const isLocal = window.location.protocol === 'file:' || hostname === 'localhost';
 
         if (isGitHubPages) {
-            // For GitHub Pages, go up to the main index
-            window.location.href = '../../../SAGE Editor Suite/index.html';
-        } else if (isLocal && !window.location.hostname.includes('localhost')) {
+            // For GitHub Pages with format: https://[user].github.io/[project]/
+            // Extract the base path and navigate to the main index
+            const pathParts = window.location.pathname.split('/').filter(Boolean);
+
+            // Check if we're in a subdirectory of the project
+            if (pathParts.length > 0) {
+                // Navigate to the project root
+                const projectName = pathParts[0]; // This would be 'SAGE Editor Suite' or similar
+                window.location.href = `/${projectName}/SAGE Editor Suite/index.html`;
+            } else {
+                // Fallback to relative path
+                window.location.href = '../../../SAGE Editor Suite/index.html';
+            }
+        } else if (isLocal && !hostname.includes('localhost')) {
             // For local file:// protocol
             window.location.href = '../../SAGE Editor Suite/index.html';
         } else {
@@ -88,21 +99,17 @@ export function StandaloneNavigation({ className = '', claimStakes = [], current
                 </div>
 
                 <div className="global-actions">
-                    <SaveLoadManager onNotification={showNotification} />
-                    <AchievementPanel />
                     <button
-                        className="settings-button"
-                        onClick={() => setShowResourcesView(!showResourcesView)}
-                        title="View Resources"
+                        className="btn btn-secondary"
+                        onClick={() => setShowResourcesView(true)}
+                        title="Open Full Resource Management"
                     >
-                        📊
+                        🌐 Global Resources
                     </button>
-                    <button
-                        className="settings-button"
-                        onClick={() => setShowSettings(!showSettings)}
-                        title="Settings"
-                    >
-                        ⚙️
+                    <AchievementPanel />
+                    <SaveLoadManager onNotification={showNotification} />
+                    <button className="btn btn-secondary" onClick={() => setShowSettings(true)}>
+                        ⚙️ Settings
                     </button>
                 </div>
             </nav>
@@ -112,7 +119,42 @@ export function StandaloneNavigation({ className = '', claimStakes = [], current
             )}
 
             {showResourcesView && (
-                <ResourcesView claimStakes={claimStakes} onClose={() => setShowResourcesView(false)} />
+                <div className="modal-overlay" style={{
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    background: 'rgba(0, 0, 0, 0.8)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    zIndex: 9999
+                }} onClick={() => setShowResourcesView(false)}>
+                    <div className="modal-content large" style={{
+                        background: 'var(--primary-light, #1a1a1a)',
+                        border: '2px solid var(--primary-orange, #ff6b35)',
+                        borderRadius: '8px',
+                        padding: '2rem',
+                        width: '90vw',
+                        maxWidth: '1200px',
+                        maxHeight: '90vh',
+                        overflow: 'auto',
+                        position: 'relative'
+                    }} onClick={(e) => e.stopPropagation()}>
+                        <button style={{
+                            position: 'absolute',
+                            top: '10px',
+                            right: '10px',
+                            background: 'transparent',
+                            border: 'none',
+                            color: 'var(--primary-orange, #ff6b35)',
+                            fontSize: '2rem',
+                            cursor: 'pointer'
+                        }} onClick={() => setShowResourcesView(false)}>×</button>
+                        <ResourcesView claimStakes={claimStakes} onClose={() => setShowResourcesView(false)} />
+                    </div>
+                </div>
             )}
 
             <NotificationSystem
