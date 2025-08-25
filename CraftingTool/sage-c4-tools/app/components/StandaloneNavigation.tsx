@@ -41,7 +41,17 @@ export function StandaloneNavigation({ className = '', claimStakes = [], current
         } else if (isLocal) {
             // For local file:// protocol or localhost
             if (window.location.protocol === 'file:') {
-                window.location.href = '../../SAGE Editor Suite/index.html';
+                // The standalone.html is at:
+                // sage-editor/CraftingTool/sage-c4-tools/dist-standalone/standalone.html
+                // We need to get to:
+                // sage-editor/SAGE Editor Suite/index.html
+
+                // When viewing standalone.html, browser is in dist-standalone/ directory
+                // So we need:
+                // ../../../SAGE Editor Suite/index.html
+                // This goes: dist-standalone -> sage-c4-tools -> CraftingTool -> sage-editor
+
+                window.location.href = '../../../SAGE Editor Suite/index.html';
             } else {
                 // For localhost development
                 alert('In development mode - navigation to SAGE Editor Suite');
