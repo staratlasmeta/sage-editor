@@ -19,8 +19,9 @@ export function StandaloneNavigation({ className = '', claimStakes = [], current
     const handleHomeClick = () => {
         // Navigate back to SAGE Editor Suite
         const hostname = window.location.hostname;
-        const isGitHubPages = hostname.includes('.github.io');
-        const isLocal = window.location.protocol === 'file:' || hostname === 'localhost';
+        // Secure check: ensure hostname ENDS with .github.io (not just contains it)
+        const isGitHubPages = hostname.endsWith('.github.io');
+        const isLocal = window.location.protocol === 'file:' || hostname === 'localhost' || hostname === '127.0.0.1';
 
         if (isGitHubPages) {
             // For GitHub Pages with format: https://[user].github.io/[project]/
@@ -29,19 +30,25 @@ export function StandaloneNavigation({ className = '', claimStakes = [], current
 
             // Check if we're in a subdirectory of the project
             if (pathParts.length > 0) {
-                // Navigate to the project root
+                // Navigate to the project root safely
                 const projectName = pathParts[0]; // This would be 'SAGE Editor Suite' or similar
+                // Use relative navigation for safety
                 window.location.href = `/${projectName}/SAGE Editor Suite/index.html`;
             } else {
                 // Fallback to relative path
                 window.location.href = '../../../SAGE Editor Suite/index.html';
             }
-        } else if (isLocal && !hostname.includes('localhost')) {
-            // For local file:// protocol
-            window.location.href = '../../SAGE Editor Suite/index.html';
+        } else if (isLocal) {
+            // For local file:// protocol or localhost
+            if (window.location.protocol === 'file:') {
+                window.location.href = '../../SAGE Editor Suite/index.html';
+            } else {
+                // For localhost development
+                alert('In development mode - navigation to SAGE Editor Suite');
+            }
         } else {
-            // For development
-            alert('In production, this will navigate to the SAGE Editor Suite');
+            // For other deployments
+            alert('Navigation not configured for this deployment');
         }
     };
 
