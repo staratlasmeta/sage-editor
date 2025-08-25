@@ -3,6 +3,7 @@ import { Navigation } from '../components/Navigation';
 import { useGameData } from '../contexts/DataContext';
 import { useSharedState } from '../contexts/SharedStateContext';
 import { NotificationSystem, useNotifications } from '../components/NotificationSystem';
+import { RecipeTreeCanvas } from '../components/RecipeTreeCanvas';
 
 // Type definitions
 interface Recipe {
@@ -58,8 +59,7 @@ export default function Recipes() {
     const [buildPlans, setBuildPlans] = useState<BuildPlan[]>([]);
     const [showBuildPlans, setShowBuildPlans] = useState(false);
 
-    // Canvas ref
-    const canvasRef = useRef<HTMLCanvasElement>(null);
+    // Animation ref for potential future animations
     const animationRef = useRef<number | undefined>(undefined);
 
     // Load build plans from localStorage on mount
@@ -272,142 +272,7 @@ export default function Recipes() {
         });
     };
 
-    // Draw recipe tree
-    const drawRecipeTree = (ctx: CanvasRenderingContext2D, root: TreeNode | null) => {
-        if (!root || !canvasRef.current) return;
-
-        const canvas = canvasRef.current;
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        // Calculate positions
-        calculateNodePositions(root, canvas.width, canvas.height);
-
-        // Draw connections
-        const drawConnections = (node: TreeNode) => {
-            node.children.forEach(child => {
-                ctx.beginPath();
-                ctx.moveTo(node.x, node.y);
-
-                // Curved lines
-                const controlY = (node.y + child.y) / 2;
-                ctx.bezierCurveTo(
-                    node.x, controlY,
-                    child.x, controlY,
-                    child.x, child.y
-                );
-
-                ctx.strokeStyle = viewMode === 'efficiency'
-                    ? `rgba(0, 200, 150, ${0.3 + node.depth * 0.15})`
-                    : 'rgba(255, 107, 53, 0.5)';
-                ctx.lineWidth = 2;
-                ctx.stroke();
-
-                // Draw arrow
-                const angle = Math.atan2(child.y - controlY, child.x - node.x);
-                const arrowSize = 8;
-                ctx.beginPath();
-                ctx.moveTo(child.x, child.y);
-                ctx.lineTo(
-                    child.x - arrowSize * Math.cos(angle - Math.PI / 6),
-                    child.y - arrowSize * Math.sin(angle - Math.PI / 6)
-                );
-                ctx.lineTo(
-                    child.x - arrowSize * Math.cos(angle + Math.PI / 6),
-                    child.y - arrowSize * Math.sin(angle + Math.PI / 6)
-                );
-                ctx.closePath();
-                ctx.fillStyle = ctx.strokeStyle;
-                ctx.fill();
-
-                drawConnections(child);
-            });
-        };
-
-        drawConnections(root);
-
-        // Draw nodes
-        const drawNode = (node: TreeNode) => {
-            const isHovered = hoveredNode === node.id;
-            const nodeRadius = 40 + (isHovered ? 5 : 0);
-            const isRawMaterial = node.recipe.type === 'raw' || node.recipe.tier === 0;
-
-            // Node background
-            ctx.beginPath();
-            ctx.arc(node.x, node.y, nodeRadius, 0, Math.PI * 2);
-
-            const gradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, nodeRadius);
-            if (isRawMaterial) {
-                // Green gradient for raw materials
-                gradient.addColorStop(0, `rgba(0, 200, 150, ${isHovered ? 0.9 : 0.7})`);
-                gradient.addColorStop(1, `rgba(0, 200, 150, ${isHovered ? 0.5 : 0.3})`);
-            } else {
-                // Orange gradient for recipes
-                gradient.addColorStop(0, `rgba(255, 107, 53, ${isHovered ? 0.9 : 0.7})`);
-                gradient.addColorStop(1, `rgba(255, 107, 53, ${isHovered ? 0.5 : 0.3})`);
-            }
-            ctx.fillStyle = gradient;
-            ctx.fill();
-
-            ctx.strokeStyle = isRawMaterial ?
-                (isHovered ? '#00C896' : 'rgba(0, 200, 150, 0.8)') :
-                (isHovered ? '#FF6B35' : 'rgba(255, 107, 53, 0.8)');
-            ctx.lineWidth = isHovered ? 3 : 2;
-            ctx.stroke();
-
-            // Node icon/tier
-            ctx.fillStyle = '#FFFFFF';
-            ctx.font = 'bold 20px Orbitron';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            if (isRawMaterial) {
-                ctx.fillText('RAW', node.x, node.y - 10);
-            } else {
-                ctx.fillText(`T${node.recipe.tier}`, node.x, node.y - 10);
-            }
-
-            // Node name
-            ctx.font = '12px Exo 2';
-            ctx.fillText(node.recipe.name, node.x, node.y + 10);
-
-            // Quantity (if in detailed mode)
-            if (viewMode === 'detailed' && node.recipe.output) {
-                ctx.font = '10px Exo 2';
-                ctx.fillStyle = '#00C896';
-                ctx.fillText(`×${node.recipe.output.quantity || 1}`, node.x, node.y + 25);
-            }
-
-            node.children.forEach(drawNode);
-        };
-
-        drawNode(root);
-    };
-
-    // Handle canvas mouse events
-    const handleCanvasMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
-        if (!canvasRef.current || !selectedRecipe) return;
-
-        const rect = canvasRef.current.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        // Check if hovering over a node
-        const tree = buildRecipeTree(selectedRecipe.id);
-        if (!tree) return;
-
-        calculateNodePositions(tree, canvasRef.current.width, canvasRef.current.height);
-
-        let foundNode: string | null = null;
-        const checkNode = (node: TreeNode) => {
-            const distance = Math.sqrt(Math.pow(x - node.x, 2) + Math.pow(y - node.y, 2));
-            if (distance < 40) {
-                foundNode = node.id;
-            }
-            node.children.forEach(checkNode);
-        };
-
-        checkNode(tree);
-        setHoveredNode(foundNode);
-    };
+    // The drawing is now handled by RecipeTreeCanvas component
 
     // Calculate path analysis
     const calculatePathAnalysis = (recipe: Recipe, quantity: number): PathAnalysis => {
@@ -452,32 +317,14 @@ export default function Recipes() {
         };
     };
 
-    // Update canvas on recipe selection
+    // Update analysis on recipe selection
     useEffect(() => {
-        if (!canvasRef.current || !selectedRecipe) return;
-
-        const ctx = canvasRef.current.getContext('2d');
-        if (!ctx) return;
-
-        const tree = buildRecipeTree(selectedRecipe.id);
-
-        const animate = () => {
-            drawRecipeTree(ctx, tree);
-            animationRef.current = requestAnimationFrame(animate);
-        };
-
-        animate();
+        if (!selectedRecipe) return;
 
         // Calculate path analysis
         const analysis = calculatePathAnalysis(selectedRecipe, targetQuantity);
         setPathAnalysis(analysis);
-
-        return () => {
-            if (animationRef.current) {
-                cancelAnimationFrame(animationRef.current);
-            }
-        };
-    }, [selectedRecipe, viewMode, hoveredNode, targetQuantity]);
+    }, [selectedRecipe, targetQuantity]);
 
     if (loading) {
         return <div className="loading-screen">Loading game data...</div>;
@@ -485,7 +332,10 @@ export default function Recipes() {
 
     return (
         <div className="recipes-app">
-            <Navigation />
+            {/* Only render Navigation in dev mode, not in standalone */}
+            {typeof window !== 'undefined' && !(window as any).__STANDALONE_BUILD__ && (
+                <Navigation />
+            )}
 
             <NotificationSystem
                 notifications={notifications}
@@ -605,13 +455,19 @@ export default function Recipes() {
                             </div>
 
                             <div className="tree-container">
-                                <canvas
-                                    ref={canvasRef}
-                                    width={800}
-                                    height={500}
-                                    className="recipe-tree-canvas"
-                                    onMouseMove={handleCanvasMouseMove}
-                                    onMouseLeave={() => setHoveredNode(null)}
+                                <RecipeTreeCanvas
+                                    recipe={selectedRecipe}
+                                    recipes={recipes}
+                                    planets={gameData?.planets || []}
+                                    resources={gameData?.resources || []}
+                                    quantity={targetQuantity}
+                                    viewMode={viewMode}
+                                    onNodeClick={(node) => {
+                                        console.log('Node clicked:', node);
+                                    }}
+                                    onResourceAnalysis={(info) => {
+                                        console.log('Resource analysis:', info);
+                                    }}
                                 />
                             </div>
 

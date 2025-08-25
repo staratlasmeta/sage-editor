@@ -36,7 +36,11 @@ export default defineConfig({
     },
     resolve: {
         alias: {
-            '@': resolve(__dirname, './app')
+            '@': resolve(__dirname, './app'),
+            './contexts/DataContext': resolve(__dirname, './app/contexts/StandaloneDataContext.tsx'),
+            '../contexts/DataContext': resolve(__dirname, './app/contexts/StandaloneDataContext.tsx'),
+            'react-router': resolve(__dirname, './app/stubs/react-router-stub.tsx'),
+            'react-router-dom': resolve(__dirname, './app/stubs/react-router-stub.tsx')
         }
     },
     define: {

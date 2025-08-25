@@ -6,15 +6,17 @@ import ClaimStakes from './routes/claim-stakes';
 import CraftingHab from './routes/crafting-hab';
 import Recipes from './routes/recipes';
 import { StandaloneNavigation } from './components/StandaloneNavigation';
-import { GlobalResourcePanel } from './components/GlobalResourcePanel';
-import { SaveLoadManager } from './components/SaveLoadManager';
-import { StarbaseControl } from './components/StarbaseControl';
 import './app.css';
 import './styles/sage-theme.css';
 
 // Simple hash-based router for standalone build
 function StandaloneApp() {
     const [currentRoute, setCurrentRoute] = useState('claim-stakes');
+
+    // Mark this as standalone build
+    useEffect(() => {
+        (window as any).__STANDALONE_BUILD__ = true;
+    }, []);
 
     useEffect(() => {
         // Handle hash changes
@@ -49,20 +51,9 @@ function StandaloneApp() {
                 <div className="app-container">
                     <StandaloneNavigation currentRoute={currentRoute} />
 
-                    <div className="main-layout">
-                        <div className="left-sidebar">
-                            <SaveLoadManager onNotification={(msg) => console.log(msg)} />
-                            <StarbaseControl />
-                        </div>
-
-                        <main className="main-content">
-                            {renderContent()}
-                        </main>
-
-                        <div className="right-sidebar">
-                            <GlobalResourcePanel />
-                        </div>
-                    </div>
+                    <main className="main-content" style={{ width: '100%', maxWidth: '100%' }}>
+                        {renderContent()}
+                    </main>
                 </div>
             </DataProvider>
         </SharedStateProvider>
