@@ -31,6 +31,9 @@ interface SharedState {
         craftingJobs: any[];
         selectedStarbaseId?: string;
         selectedPlotId?: string;
+        viewMode?: 'overview' | 'construction' | 'crafting';
+        favoriteRecipes?: string[];
+        recentRecipes?: string[];
     };
     craftingQueue?: any[];
     claimStakesData?: any[]; // Store claim stakes data globally
@@ -220,6 +223,11 @@ function sharedStateReducer(state: SharedState, action: Action): SharedState {
             };
 
         case 'UPDATE_CRAFTING_HAB_STATE':
+            // Only log when there are hab designs being saved
+            const designCount = action.payload?.habPlots?.filter((p: any) => p.habDesign).length || 0;
+            if (designCount > 0) {
+                console.log('🔄 REDUCER: Saving hab state with', designCount, 'configured plots');
+            }
             return {
                 ...state,
                 craftingHabState: action.payload

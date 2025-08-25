@@ -567,7 +567,7 @@ export default function Recipes() {
 
                                             if (craftingHabState?.habPlots) {
                                                 craftingHabState.habPlots.forEach((plot: any) => {
-                                                    if (plot.isRented && plot.habDesign) {
+                                                    if (plot.isOwned && plot.habDesign) {
                                                         // Calculate score based on available job slots and speed
                                                         const activeJobs = (craftingHabState.craftingJobs || [])
                                                             .filter((job: any) => job.habPlotId === plot.id && job.status !== 'completed')

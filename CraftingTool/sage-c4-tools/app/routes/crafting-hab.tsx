@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useContext, useRef, useMemo } from 'react';
 import { Navigation } from '../components/Navigation';
 import { useGameData } from '../contexts/DataContext';
 import { useSharedState, STARBASE_LEVELS, getAvailableHabPlots } from '../contexts/SharedStateContext';
@@ -18,7 +18,7 @@ interface HabPlot {
     starbaseId: string;
     tier: number;
     rentCost: number;
-    isRented: boolean;
+    isOwned: boolean;
     habDesign?: HabDesign;
 }
 
@@ -71,48 +71,170 @@ export default function CraftingHab() {
     const { state: sharedState, dispatch, updateStatistic, unlockAchievement, addToInventory, consumeFromInventory } = useSharedState();
     const { notifications, showNotification, dismissNotification } = useNotifications();
 
-    // State
+    // State - Initialize from SharedState using lazy initializers
     const [selectedStarbase, setSelectedStarbase] = useState<Starbase | null>(null);
-    const [habPlots, setHabPlots] = useState<HabPlot[]>([]);
-    const [selectedPlotId, setSelectedPlotId] = useState<string | null>(null);
+    const [habPlots, setHabPlots] = useState<HabPlot[]>(() => {
+        const saved = sharedState.craftingHabState?.habPlots;
+        console.log('🔧 Initializing habPlots:', saved?.length || 0, 'plots');
+        return saved || [];
+    });
+    const [selectedPlotId, setSelectedPlotId] = useState<string | null>(() => {
+        return sharedState.craftingHabState?.selectedPlotId || null;
+    });
     const [designMode, setDesignMode] = useState(false);
     const [currentDesign, setCurrentDesign] = useState<PlacedHabBuilding[]>([]);
-    const [craftingJobs, setCraftingJobs] = useState<CraftingJob[]>([]);
+    const [craftingJobs, setCraftingJobs] = useState<CraftingJob[]>(() => {
+        const saved = sharedState.craftingHabState?.craftingJobs;
+        return saved || [];
+    });
     const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
     const [craftQuantity, setCraftQuantity] = useState(1);
     const [categoryFilter, setCategoryFilter] = useState('all');
     const [searchTerm, setSearchTerm] = useState('');
     const [plotTierFilter, setPlotTierFilter] = useState<number | null>(null); // Add tier filter
+    const [viewMode, setViewMode] = useState<'overview' | 'construction' | 'crafting'>(() => {
+        return sharedState.craftingHabState?.viewMode || 'overview';
+    });
+    const [favoriteRecipes, setFavoriteRecipes] = useState<string[]>(() => {
+        return sharedState.craftingHabState?.favoriteRecipes || [];
+    });
+    const [recentRecipes, setRecentRecipes] = useState<string[]>(() => {
+        return sharedState.craftingHabState?.recentRecipes || [];
+    });
+    const [queuedItems, setQueuedItems] = useState<any[]>([]);
+    const [recipePriorities, setRecipePriorities] = useState<Record<string, 'low' | 'normal' | 'high'>>({});
 
-    // Real-time job simulation
+    // Refs for managing state updates
+    const previousViewMode = useRef(viewMode);
+    const previousStateRef = useRef<any>({});
     const simulationRef = useRef<NodeJS.Timeout | null>(null);
+    const hasInitialSave = useRef(false);  // Track if we've done the initial save
 
-    // Load state from SharedState on mount
+    // Enhanced filtering states
+    const [tierFilter, setTierFilter] = useState<number | null>(null);
+    const [canCraftFilter, setCanCraftFilter] = useState(false);
+    const [showFavorites, setShowFavorites] = useState(false);
+    const [resourceFilter, setResourceFilter] = useState('');
+    const [craftPriority, setCraftPriority] = useState<'low' | 'normal' | 'high'>('normal');
+
+    // Log initial state
     useEffect(() => {
-        if (sharedState.craftingHabState) {
-            const { habPlots: savedPlots, craftingJobs: savedJobs, selectedStarbaseId, selectedPlotId: savedPlotId } = sharedState.craftingHabState;
-            if (savedPlots) setHabPlots(savedPlots);
-            if (savedJobs) setCraftingJobs(savedJobs);
-            if (selectedStarbaseId) {
-                const starbase = starbases.find(sb => sb.id === selectedStarbaseId);
-                if (starbase) setSelectedStarbase(starbase);
-            }
-            if (savedPlotId) setSelectedPlotId(savedPlotId);
-        }
+        console.log('📊 Component mounted with state:', {
+            habPlotsCount: habPlots.length,
+            habPlotsWithDesigns: habPlots.filter(p => p.habDesign).length,
+            selectedPlotId,
+            viewMode,
+            craftingJobsCount: craftingJobs.length,
+            habPlots: habPlots.map(p => ({
+                id: p.id,
+                isOwned: p.isOwned,
+                hasDesign: !!p.habDesign,
+                tier: p.tier,
+                buildingCount: p.habDesign?.buildings?.length || 0
+            }))
+        });
     }, []);
 
-    // Save state to SharedState whenever it changes
+    // Additional debugging for habPlots changes
     useEffect(() => {
+        console.log('🔄 habPlots changed:', {
+            count: habPlots.length,
+            ownedCount: habPlots.filter(p => p.isOwned).length,
+            withDesigns: habPlots.filter(p => p.habDesign).length,
+            details: habPlots.map(p => ({
+                id: p.id,
+                isOwned: p.isOwned,
+                hasDesign: !!p.habDesign,
+                tier: p.tier
+            }))
+        });
+    }, [habPlots]);
+
+    // Debug selectedPlot
+    useEffect(() => {
+        const selectedPlot = habPlots.find(p => p.id === selectedPlotId);
+        console.log('🎯 Selected plot:', {
+            id: selectedPlotId,
+            found: !!selectedPlot,
+            isOwned: selectedPlot?.isOwned,
+            hasDesign: !!selectedPlot?.habDesign,
+            viewMode
+        });
+    }, [selectedPlotId, habPlots, viewMode]);
+
+    // Save state to SharedState only when it meaningfully changes
+    useEffect(() => {
+        // Skip the very first save if we just loaded from storage
+        if (!hasInitialSave.current) {
+            hasInitialSave.current = true;
+            // Initialize previousStateRef with current state to prevent immediate save
+            previousStateRef.current = {
+                habPlots: JSON.stringify(habPlots),
+                craftingJobs: JSON.stringify(craftingJobs),
+                selectedStarbaseId: selectedStarbase?.id,
+                selectedPlotId,
+                viewMode,
+                favoriteRecipes: JSON.stringify(favoriteRecipes),
+                recentRecipes: JSON.stringify(recentRecipes)
+            };
+            return;
+        }
+
+        const currentState = {
+            habPlots: JSON.stringify(habPlots),
+            craftingJobs: JSON.stringify(craftingJobs),
+            selectedStarbaseId: selectedStarbase?.id,
+            selectedPlotId,
+            viewMode,
+            favoriteRecipes: JSON.stringify(favoriteRecipes),
+            recentRecipes: JSON.stringify(recentRecipes)
+        };
+
+        // Check if state actually changed
+        const hasChanged = Object.keys(currentState).some(
+            key => (currentState as any)[key] !== previousStateRef.current[key]
+        );
+
+        if (!hasChanged) {
+            return; // No changes, don't save
+        }
+
+        // Only log significant changes (not crafting updates)
+        const designCount = habPlots.filter(p => p.habDesign).length;
+        const prevDesignCount = previousStateRef.current.habPlots ?
+            JSON.parse(previousStateRef.current.habPlots).filter((p: any) => p.habDesign).length : 0;
+
+        // Only log if design count changed
+        if (designCount !== prevDesignCount && designCount > 0) {
+            console.log('💾 SAVING HAB DESIGNS:', { habPlotsWithDesigns: designCount });
+        }
+
         dispatch({
             type: 'UPDATE_CRAFTING_HAB_STATE',
             payload: {
                 habPlots,
                 craftingJobs,
                 selectedStarbaseId: selectedStarbase?.id,
-                selectedPlotId: selectedPlotId || undefined
+                selectedPlotId: selectedPlotId || undefined,
+                viewMode,
+                favoriteRecipes,
+                recentRecipes
             }
         });
-    }, [habPlots, craftingJobs, selectedStarbase, selectedPlotId, dispatch]);
+
+        previousStateRef.current = currentState;
+    }, [habPlots, craftingJobs, selectedStarbase?.id, selectedPlotId, viewMode, favoriteRecipes, recentRecipes, dispatch]);
+
+    // Load existing design when entering construction mode
+    useEffect(() => {
+        const plot = habPlots.find(p => p.id === selectedPlotId);
+
+        if (viewMode === 'construction' && previousViewMode.current !== 'construction' && plot?.habDesign && !designMode) {
+            // Load the existing design into currentDesign for viewing
+            setCurrentDesign([...(plot.habDesign.buildings || [])]);
+        }
+        previousViewMode.current = viewMode;
+    }, [viewMode, selectedPlotId, habPlots, designMode]);
 
     // Process items from the shared crafting queue
     useEffect(() => {
@@ -167,7 +289,8 @@ export default function CraftingHab() {
     }, [sharedState.craftingQueue, habPlots, craftingJobs]);
 
     // Mock data - in real app would come from gameData
-    const starbases: Starbase[] = [
+    // Memoize starbases to prevent recreation on every render
+    const starbases: Starbase[] = useMemo(() => [
         {
             id: 'sb_001',
             name: 'Unity Station',
@@ -177,7 +300,21 @@ export default function CraftingHab() {
         },
         { id: 'sb_002', name: 'Phoenix Hub', faction: 'ONI', level: sharedState.starbaseLevel, inventory: sharedState.starbaseInventory },
         { id: 'sb_003', name: 'Liberty Complex', faction: 'UST', level: sharedState.starbaseLevel, inventory: sharedState.starbaseInventory }
-    ];
+    ], [sharedState.starbaseLevel, sharedState.starbaseInventory]);
+
+    // Restore selected starbase after starbases is defined
+    useEffect(() => {
+        const savedStarbaseId = sharedState.craftingHabState?.selectedStarbaseId;
+        if (savedStarbaseId && !selectedStarbase) {
+            const starbase = starbases.find(sb => sb.id === savedStarbaseId);
+            if (starbase) {
+                console.log('✅ Restoring starbase:', savedStarbaseId);
+                setSelectedStarbase(starbase);
+            } else {
+                console.log('⚠️ Could not find starbase:', savedStarbaseId);
+            }
+        }
+    }, [sharedState.craftingHabState?.selectedStarbaseId, starbases]);
 
     const recipes: Recipe[] = gameData?.recipes || [
         {
@@ -234,7 +371,9 @@ export default function CraftingHab() {
 
     // Initialize hab plots based on starbase
     useEffect(() => {
-        if (selectedStarbase) {
+        if (selectedStarbase && habPlots.length === 0) {
+            // Only initialize if we don't have plots already
+            console.log('🏗️ Initializing new hab plots for starbase:', selectedStarbase.id);
             const levelData = STARBASE_LEVELS[selectedStarbase.level as keyof typeof STARBASE_LEVELS];
             const plots: HabPlot[] = [];
 
@@ -246,14 +385,16 @@ export default function CraftingHab() {
                         starbaseId: selectedStarbase.id,
                         tier: parseInt(tier),
                         rentCost: parseInt(tier) * 100, // Mock rent cost
-                        isRented: false
+                        isOwned: false
                     });
                 }
             });
 
             setHabPlots(plots);
+        } else if (selectedStarbase && habPlots.length > 0) {
+            console.log('✅ Keeping existing hab plots:', habPlots.length, 'plots');
         }
-    }, [selectedStarbase]);
+    }, [selectedStarbase, habPlots.length]);
 
     // Check for recipes from Recipe Tool
     useEffect(() => {
@@ -274,10 +415,12 @@ export default function CraftingHab() {
         return () => clearInterval(interval);
     }, []);
 
-    // Job simulation
+    // Job simulation with fixed dispatch calls
     useEffect(() => {
         if (craftingJobs.filter(j => j.status === 'active').length > 0) {
             simulationRef.current = setInterval(() => {
+                const completedJobs: CraftingJob[] = [];
+
                 setCraftingJobs(prev => prev.map(job => {
                     if (job.status !== 'active') return job;
 
@@ -286,24 +429,41 @@ export default function CraftingHab() {
                     const progress = Math.min(100, (elapsed / job.totalTime) * 100);
 
                     if (progress >= 100) {
-                        // Complete job
-                        const recipe = recipes.find(r => r.id === job.recipeId);
-                        if (recipe) {
-                            // Add output to inventory
-                            addToInventory({
-                                [recipe.output?.resource || '']: (recipe.output?.quantity || 0) * job.quantity
-                            });
-
-                            // Achievement
-                            unlockAchievement('first_craft_complete');
-                            updateStatistic('totalItemsCrafted', 1);
-                        }
-
+                        // Mark for completion
+                        completedJobs.push(job);
                         return { ...job, progress: 100, status: 'completed' };
                     }
 
                     return { ...job, progress };
                 }));
+
+                // Handle completed jobs outside of setState callback
+                if (completedJobs.length > 0) {
+                    setTimeout(() => {
+                        completedJobs.forEach(job => {
+                            const recipe = recipes.find(r => r.id === job.recipeId);
+                            if (recipe) {
+                                // Add output to inventory
+                                const outputQuantity = (recipe.output?.quantity || 0) * job.quantity;
+                                const outputResource = recipe.output?.resource || 'unknown';
+
+                                addToInventory({
+                                    [outputResource]: outputQuantity
+                                });
+
+                                // Show notification for completed craft
+                                showNotification(
+                                    `✅ Crafting Complete: ${outputQuantity}x ${outputResource}`,
+                                    'success'
+                                );
+
+                                // Achievement
+                                unlockAchievement('first_craft_complete');
+                                updateStatistic('totalItemsCrafted', 1);
+                            }
+                        });
+                    }, 0);
+                }
             }, 100); // Update every 100ms for smooth progress
         }
 
@@ -328,8 +488,8 @@ export default function CraftingHab() {
             } else if (building.type === 'crafting-station') {
                 const station = habBuildings.craftingStations.find((s: any) => s.id === building.buildingId);
                 if (station) {
-                    craftingSpeed *= station.speedBonus;
-                    jobSlots += station.slots;
+                    craftingSpeed *= station.speedBonus || 1;
+                    jobSlots += station.jobSlots || 0;
                 }
             } else if (building.type === 'cargo-storage') {
                 const storage = habBuildings.cargoStorage.find((s: any) => s.id === building.buildingId);
@@ -354,10 +514,10 @@ export default function CraftingHab() {
             ? calculateHabStats(selectedPlot.habDesign.buildings)
             : null;
 
-    // Rent plot
-    const rentPlot = (plotId: string) => {
+    // Select plot for building
+    const selectPlot = (plotId: string) => {
         setHabPlots(prev => prev.map(plot =>
-            plot.id === plotId ? { ...plot, isRented: true } : plot
+            plot.id === plotId ? { ...plot, isOwned: true } : plot
         ));
         setSelectedPlotId(plotId);
         setDesignMode(true);
@@ -394,9 +554,17 @@ export default function CraftingHab() {
 
         const habTier = currentDesign.find(b => b.type === 'hab')?.buildingId.match(/t(\d)/)?.[1] || 1;
 
-        setHabPlots(prev => prev.map(plot =>
-            plot.id === selectedPlotId
-                ? {
+        console.log('🔨 FINALIZING DESIGN:', {
+            plotId: selectedPlotId,
+            habTier,
+            buildingsCount: currentDesign.length,
+            buildings: currentDesign.map(b => ({ id: b.id, type: b.type, buildingId: b.buildingId })),
+            stats: currentStats
+        });
+
+        const updatedPlots = (prev: HabPlot[]) => prev.map((plot: HabPlot) => {
+            if (plot.id === selectedPlotId) {
+                const updatedPlot = {
                     ...plot,
                     habDesign: {
                         habTier: parseInt(habTier as string),
@@ -404,12 +572,17 @@ export default function CraftingHab() {
                         totalSlots: currentStats.totalSlots,
                         craftingSpeed: currentStats.craftingSpeed,
                         storageBonus: 0,
-                        unlockedRecipes: currentStats.unlockedRecipes
+                        unlockedRecipes: currentStats.unlockedRecipes,
+                        totalJobSlots: currentStats.jobSlots  // Add this to save job slots
                     }
-                }
-                : plot
-        ));
+                };
+                console.log('✅ PLOT UPDATED:', updatedPlot);
+                return updatedPlot;
+            }
+            return plot;
+        });
 
+        setHabPlots(updatedPlots);
         setDesignMode(false);
     };
 
@@ -517,17 +690,12 @@ export default function CraftingHab() {
         setCraftingJobs(prev => prev.filter(j => j.id !== jobId));
     };
 
-    // Collect completed job
-    const collectJob = (jobId: string) => {
+    // Clear completed job (resources already added automatically)
+    const clearCompletedJob = (jobId: string) => {
         const job = craftingJobs.find(j => j.id === jobId);
         if (!job || job.status !== 'completed') return;
 
-        // Add output to inventory
-        if (job.output) {
-            addToInventory({ [job.output.resource]: job.output.quantity });
-        }
-
-        // Remove job and activate next queued
+        // Just remove the job from the list (resources were already added when it completed)
         setCraftingJobs(prev => {
             const updated = prev.filter(j => j.id !== jobId);
             const nextQueued = updated.find(j => j.status === 'queued');
@@ -539,17 +707,65 @@ export default function CraftingHab() {
             }
             return updated;
         });
-
-        // Achievement
-        updateStatistic('totalItemsCrafted', job.quantity);
     };
 
-    // Filter recipes
-    const filteredRecipes = recipes.filter(recipe => {
+    // Helper functions
+    const toggleFavorite = (recipeId: string) => {
+        setFavoriteRecipes(prev =>
+            prev.includes(recipeId)
+                ? prev.filter(id => id !== recipeId)
+                : [...prev, recipeId]
+        );
+    };
+
+    const addToRecentRecipes = (recipeId: string) => {
+        setRecentRecipes(prev => {
+            const updated = [recipeId, ...prev.filter(id => id !== recipeId)];
+            return updated.slice(0, 10); // Keep last 10
+        });
+    };
+
+    // Enhanced filtering logic
+    const enhancedFilteredRecipes = recipes.filter((recipe: Recipe) => {
+        // Category filter
         if (categoryFilter !== 'all' && recipe.type !== categoryFilter) return false;
+
+        // Search filter
         if (searchTerm && !recipe.name.toLowerCase().includes(searchTerm.toLowerCase())) return false;
+
+        // Tier filter
+        if (tierFilter !== null && recipe.tier !== tierFilter) return false;
+
+        // Craftable only filter
+        if (canCraftFilter) {
+            const canCraft = recipe.ingredients && Array.isArray(recipe.ingredients) &&
+                recipe.ingredients.every((ing: any) =>
+                    (sharedState.starbaseInventory[ing.resource] || 0) >= ing.quantity
+                );
+            if (!canCraft) return false;
+        }
+
+        // Favorites filter
+        if (showFavorites && !favoriteRecipes.includes(recipe.id)) return false;
+
+        // Resource filter
+        if (resourceFilter) {
+            const hasResource = recipe.ingredients && Array.isArray(recipe.ingredients) &&
+                recipe.ingredients.some((ing: any) =>
+                    ing.resource.toLowerCase().includes(resourceFilter.toLowerCase())
+                );
+            if (!hasResource) return false;
+        }
+
         return true;
     });
+
+    // Check if selected recipe can be crafted
+    const canCraftSelected = selectedRecipe && selectedRecipe.ingredients &&
+        Array.isArray(selectedRecipe.ingredients) &&
+        selectedRecipe.ingredients.every((ing: any) =>
+            (sharedState.starbaseInventory[ing.resource] || 0) >= ing.quantity * craftQuantity
+        );
 
     if (loading) {
         return <div className="loading-screen">Loading game data...</div>;
@@ -595,28 +811,64 @@ export default function CraftingHab() {
 
                     {selectedStarbase && (
                         <div className="starbase-inventory">
-                            <h3>Inventory</h3>
-                            <div className="resource-list">
-                                {Object.entries(selectedStarbase.inventory).map(([resource, amount]) => (
-                                    <div key={resource} className="resource-item">
-                                        <span>{resource}</span>
-                                        <span className="amount">{amount}</span>
-                                    </div>
-                                ))}
+                            <div className="inventory-header">
+                                <h3>📦 Inventory</h3>
+                                <span className="inventory-count">
+                                    {Object.keys(selectedStarbase.inventory).length} types
+                                </span>
+                            </div>
+                            <div className="resource-grid">
+                                {Object.entries(selectedStarbase.inventory)
+                                    .sort(([a], [b]) => a.localeCompare(b))
+                                    .map(([resource, amount]) => {
+                                        // Format resource name for display
+                                        const displayName = resource
+                                            .split('-')
+                                            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                                            .join(' ');
+
+                                        return (
+                                            <div key={resource} className="resource-card">
+                                                <div className="resource-icon">
+                                                    {resource.includes('ore') ? '⛏️' :
+                                                        resource.includes('fuel') ? '⚡' :
+                                                            resource.includes('electronics') ? '🔌' :
+                                                                resource.includes('circuit') ? '🔧' :
+                                                                    resource.includes('steel') ? '🔩' :
+                                                                        resource.includes('copper') ? '🟠' :
+                                                                            resource.includes('iron') ? '⚙️' :
+                                                                                resource.includes('silica') ? '💎' :
+                                                                                    resource.includes('hydrogen') ? '💧' :
+                                                                                        '📦'}
+                                                </div>
+                                                <div className="resource-info">
+                                                    <div className="resource-name">{displayName}</div>
+                                                    <div className="resource-amount">{amount.toLocaleString()}</div>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
                             </div>
                             <button
-                                className="btn btn-secondary"
+                                className="btn btn-magic"
                                 onClick={() => {
                                     // Magic resources
                                     addToInventory({
                                         'iron-ore': 100,
-                                        'copper': 100,
+                                        'copper-ore': 100,
                                         'silica': 100,
-                                        'fuel': 100
+                                        'fuel': 100,
+                                        'hydrogen': 100,
+                                        'copper': 50,
+                                        'iron-plate': 50,
+                                        'steel': 50,
+                                        'electronics': 50,
+                                        'circuit-board': 20
                                     });
+                                    showNotification('✨ Resources added!', 'success');
                                 }}
                             >
-                                🪄 Add Resources
+                                🪄 ADD RESOURCES
                             </button>
                         </div>
                     )}
@@ -628,76 +880,325 @@ export default function CraftingHab() {
                         <div className="hab-management">
                             <div className="management-header">
                                 <h2>{selectedStarbase.name} - Crafting Habs</h2>
+
+                                {/* View Mode Tabs */}
+                                <div className="view-mode-tabs">
+                                    <button
+                                        className={`view-tab ${viewMode === 'overview' ? 'active' : ''}`}
+                                        onClick={() => setViewMode('overview')}
+                                    >
+                                        📊 Overview
+                                    </button>
+                                    <button
+                                        className={`view-tab ${viewMode === 'construction' ? 'active' : ''}`}
+                                        onClick={() => setViewMode('construction')}
+                                        disabled={!habPlots.some(p => p.isOwned)}
+                                    >
+                                        🔨 Construction
+                                    </button>
+                                    <button
+                                        className={`view-tab ${viewMode === 'crafting' ? 'active' : ''}`}
+                                        onClick={() => setViewMode('crafting')}
+                                        disabled={!habPlots.some(p => p.isOwned && p.habDesign)}
+                                    >
+                                        ⚙️ Crafting
+                                    </button>
+                                </div>
                             </div>
 
-                            {/* Plot Grid */}
-                            <div className="plot-section">
-                                <h3>Available Plots</h3>
+                            {/* Plot Selector (always visible for owned plots) */}
+                            {habPlots.some(p => p.isOwned) && (
+                                <div className="plot-selector-bar">
+                                    <label>Select Plot:</label>
+                                    <div className="plot-tabs">
+                                        {habPlots.filter(p => p.isOwned).map(plot => {
+                                            const stats = plot.habDesign ? calculateHabStats(plot.habDesign.buildings) : null;
+                                            const activeJobs = craftingJobs.filter(j => j.habPlotId === plot.id && j.status !== 'completed').length;
 
-                                {/* Add Plot Filters */}
-                                <div className="plot-filters">
-                                    <button
-                                        className={`tier-filter-btn ${plotTierFilter === null ? 'active' : ''}`}
-                                        onClick={() => setPlotTierFilter(null)}
-                                    >
-                                        All Tiers
-                                    </button>
-                                    {[1, 2, 3, 4, 5].map(tier => {
-                                        const plotsForTier = habPlots.filter(p => p.tier === tier).length;
-                                        if (plotsForTier === 0) return null;
+                                            return (
+                                                <button
+                                                    key={plot.id}
+                                                    className={`plot-tab ${selectedPlotId === plot.id ? 'active' : ''}`}
+                                                    onClick={() => {
+                                                        setSelectedPlotId(plot.id);
+                                                        // If plot needs setup, always go to construction tab
+                                                        if (!plot.habDesign) {
+                                                            setViewMode('construction');
+                                                        }
+                                                    }}
+                                                >
+                                                    <span className="plot-tab-tier">T{plot.tier}</span>
+                                                    <span className="plot-tab-status">
+                                                        {plot.habDesign ? (
+                                                            <>
+                                                                🏭 {activeJobs}/{stats?.jobSlots || 0} jobs
+                                                            </>
+                                                        ) : (
+                                                            '🔨 Setup needed'
+                                                        )}
+                                                    </span>
+                                                </button>
+                                            );
+                                        })}
+                                        <button
+                                            className="plot-tab new-plot"
+                                            onClick={() => setViewMode('overview')}
+                                        >
+                                            + Add Plot
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* View Content */}
+                            {viewMode === 'overview' && (
+                                <div className="overview-view">
+                                    <div className="overview-sections">
+                                        {/* Available Plots Section */}
+                                        <div className="overview-section">
+                                            <h3>Available Plots</h3>
+                                            <div className="plot-grid compact">
+                                                {habPlots.map(plot => {
+                                                    const isOwned = plot.isOwned;
+                                                    const stats = plot.habDesign ? calculateHabStats(plot.habDesign.buildings) : null;
+                                                    const activeJobs = craftingJobs.filter(j => j.habPlotId === plot.id && j.status !== 'completed').length;
+
+                                                    return (
+                                                        <div
+                                                            key={plot.id}
+                                                            className={`plot-overview-card ${isOwned ? 'owned' : 'available'}`}
+                                                            onClick={() => {
+                                                                if (isOwned) {
+                                                                    setSelectedPlotId(plot.id);
+                                                                    setViewMode(plot.habDesign ? 'crafting' : 'construction');
+                                                                }
+                                                            }}
+                                                        >
+                                                            <div className="plot-overview-header">
+                                                                <span className="plot-tier-badge">T{plot.tier}</span>
+                                                                {isOwned ? (
+                                                                    <span className="plot-status-badge owned">Owned</span>
+                                                                ) : (
+                                                                    <button
+                                                                        className="btn btn-xs btn-primary"
+                                                                        onClick={(e) => {
+                                                                            e.stopPropagation();
+                                                                            selectPlot(plot.id);
+                                                                        }}
+                                                                    >
+                                                                        Build Here
+                                                                    </button>
+                                                                )}
+                                                            </div>
+                                                            {isOwned && (
+                                                                <div className="plot-overview-stats">
+                                                                    {plot.habDesign ? (
+                                                                        <>
+                                                                            <div>Jobs: {activeJobs}/{stats?.jobSlots || 0}</div>
+                                                                            <div>Speed: {((stats?.craftingSpeed || 1) * 100).toFixed(0)}%</div>
+                                                                        </>
+                                                                    ) : (
+                                                                        <div className="needs-setup">Needs Setup</div>
+                                                                    )}
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
+
+                                        {/* Active Jobs Summary */}
+                                        {craftingJobs.filter(j => j.status !== 'completed').length > 0 && (
+                                            <div className="overview-section">
+                                                <h3>Active Crafting Jobs</h3>
+                                                <div className="jobs-summary">
+                                                    {craftingJobs
+                                                        .filter(j => j.status !== 'completed')
+                                                        .map(job => {
+                                                            const plot = habPlots.find(p => p.id === job.habPlotId);
+                                                            const recipe = recipes.find(r => r.id === job.recipeId);
+
+                                                            return (
+                                                                <div key={job.id} className="job-summary-card">
+                                                                    <div className="job-header">
+                                                                        <span className="job-recipe">{recipe?.name || job.recipeId}</span>
+                                                                        <span className="job-plot">Plot T{plot?.tier}</span>
+                                                                    </div>
+                                                                    <div className="job-progress">
+                                                                        <div className="progress-bar">
+                                                                            <div
+                                                                                className="progress-fill"
+                                                                                style={{ width: `${job.progress}%` }}
+                                                                            />
+                                                                        </div>
+                                                                        <span className="progress-text">{job.progress.toFixed(0)}%</span>
+                                                                    </div>
+                                                                    {job.output && (
+                                                                        <div className="job-output">
+                                                                            Output: {job.output.quantity}x {job.output.resource}
+                                                                        </div>
+                                                                    )}
+                                                                </div>
+                                                            );
+                                                        })}
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        {/* Production Statistics */}
+                                        <div className="overview-section">
+                                            <h3>Production Statistics</h3>
+                                            <div className="stats-grid">
+                                                <div className="stat-card">
+                                                    <span className="stat-label">Total Plots</span>
+                                                    <span className="stat-value">{habPlots.filter(p => p.isOwned).length}</span>
+                                                </div>
+                                                <div className="stat-card">
+                                                    <span className="stat-label">Active Jobs</span>
+                                                    <span className="stat-value">{craftingJobs.filter(j => j.status === 'active').length}</span>
+                                                </div>
+                                                <div className="stat-card">
+                                                    <span className="stat-label">Completed Jobs</span>
+                                                    <span className="stat-value">{craftingJobs.filter(j => j.status === 'completed').length}</span>
+                                                </div>
+                                                <div className="stat-card">
+                                                    <span className="stat-label">Total Job Slots</span>
+                                                    <span className="stat-value">
+                                                        {habPlots
+                                                            .filter(p => p.isOwned && p.habDesign)
+                                                            .reduce((sum, p) => sum + (calculateHabStats(p.habDesign!.buildings).jobSlots || 0), 0)}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Construction View */}
+                            {viewMode === 'construction' && selectedPlot && (
+                                <div className="construction-view">
+                                    <div className="construction-header">
+                                        <h3>Construction - Plot T{selectedPlot.tier}</h3>
+                                        {selectedPlot.habDesign && !designMode && (
+                                            <button
+                                                className="btn btn-secondary"
+                                                onClick={() => {
+                                                    setDesignMode(true);
+                                                    setCurrentDesign([...(selectedPlot.habDesign?.buildings || [])]);
+                                                }}
+                                            >
+                                                Continue Construction
+                                            </button>
+                                        )}
+                                    </div>
+
+                                    {/* Design Summary (Moved to Top) */}
+                                    {designMode && currentDesign.length > 0 && (() => {
+                                        const totalCost: Record<string, number> = {};
+                                        const missingResources: Record<string, { needed: number, available: number }> = {};
+                                        let hasAllResources = true;
+
+                                        currentDesign.forEach(pb => {
+                                            let building: any = null;
+                                            if (pb.type === 'hab') {
+                                                building = habBuildings.habs.find((h: any) => h.id === pb.buildingId);
+                                            } else if (pb.type === 'crafting-station') {
+                                                building = habBuildings.craftingStations.find((s: any) => s.id === pb.buildingId);
+                                            } else if (pb.type === 'cargo-storage') {
+                                                building = habBuildings.cargoStorage.find((c: any) => c.id === pb.buildingId);
+                                            }
+
+                                            if (building?.constructionCost) {
+                                                Object.entries(building.constructionCost).forEach(([resource, amount]) => {
+                                                    totalCost[resource] = (totalCost[resource] || 0) + (amount as number);
+                                                });
+                                            }
+                                        });
+
+                                        // Check resource availability
+                                        Object.entries(totalCost).forEach(([resource, needed]) => {
+                                            const available = sharedState.starbaseInventory[resource] || 0;
+                                            if (available < needed) {
+                                                missingResources[resource] = { needed, available };
+                                                hasAllResources = false;
+                                            }
+                                        });
+
+                                        const stats = calculateHabStats(currentDesign);
 
                                         return (
-                                            <button
-                                                key={tier}
-                                                className={`tier-filter-btn ${plotTierFilter === tier ? 'active' : ''}`}
-                                                onClick={() => setPlotTierFilter(tier)}
-                                            >
-                                                T{tier} ({plotsForTier})
-                                            </button>
-                                        );
-                                    })}
-                                </div>
-
-                                <div className={`plot-grid ${plotTierFilter !== null ? 'filtered' : ''}`}>
-                                    {habPlots
-                                        .filter(plot => plotTierFilter === null || plot.tier === plotTierFilter)
-                                        .map(plot => (
-                                            <div
-                                                key={plot.id}
-                                                className={`plot-card ${plot.isRented ? 'rented' : ''} ${selectedPlotId === plot.id ? 'selected' : ''}`}
-                                                onClick={() => plot.isRented && setSelectedPlotId(plot.id)}
-                                            >
-                                                <div className="plot-tier">T{plot.tier}</div>
-                                                <div className="plot-status">
-                                                    {plot.isRented ? (
-                                                        plot.habDesign ? '🏭 Active' : '🔨 Design'
-                                                    ) : (
-                                                        `💰 ${plot.rentCost}/day`
-                                                    )}
+                                            <div className="design-summary-top">
+                                                <h3>Design Overview</h3>
+                                                <div className="design-stats-row">
+                                                    <div className="stat-card">
+                                                        <span className="stat-label">Slots</span>
+                                                        <span className={`stat-value ${stats && stats.usedSlots > stats.totalSlots ? 'error' : ''}`}>
+                                                            {stats?.usedSlots || 0}/{stats?.totalSlots || 0}
+                                                        </span>
+                                                    </div>
+                                                    <div className="stat-card">
+                                                        <span className="stat-label">Job Slots</span>
+                                                        <span className="stat-value">
+                                                            {stats?.jobSlots || 0}
+                                                        </span>
+                                                    </div>
+                                                    <div className="stat-card">
+                                                        <span className="stat-label">Speed</span>
+                                                        <span className="stat-value positive">
+                                                            {((stats?.craftingSpeed || 1) * 100).toFixed(0)}%
+                                                        </span>
+                                                    </div>
                                                 </div>
-                                                {!plot.isRented && (
-                                                    <button
-                                                        className="btn btn-sm"
-                                                        onClick={(e) => {
-                                                            e.stopPropagation();
-                                                            rentPlot(plot.id);
-                                                        }}
-                                                    >
-                                                        Rent
-                                                    </button>
+
+                                                {Object.keys(totalCost).length > 0 && (
+                                                    <div className="construction-requirements">
+                                                        <h4>Construction Requirements</h4>
+                                                        <div className="resource-requirements">
+                                                            {Object.entries(totalCost).map(([resource, needed]) => {
+                                                                const available = sharedState.starbaseInventory[resource] || 0;
+                                                                const sufficient = available >= needed;
+                                                                return (
+                                                                    <div key={resource} className={`resource-requirement ${sufficient ? 'sufficient' : 'insufficient'}`}>
+                                                                        <span className="resource-name">{resource}</span>
+                                                                        <span className="resource-amounts">
+                                                                            <span className={sufficient ? 'amount-ok' : 'amount-short'}>
+                                                                                {available}
+                                                                            </span>
+                                                                            <span className="separator">/</span>
+                                                                            <span className="amount-needed">{needed}</span>
+                                                                        </span>
+                                                                    </div>
+                                                                );
+                                                            })}
+                                                        </div>
+
+                                                        {!hasAllResources && (
+                                                            <div className="missing-resources-actions">
+                                                                <div className="warning-message">
+                                                                    ⚠️ Insufficient resources to finalize construction
+                                                                </div>
+                                                                <button
+                                                                    className="btn btn-secondary btn-sm"
+                                                                    onClick={() => {
+                                                                        const toAdd: Record<string, number> = {};
+                                                                        Object.entries(missingResources).forEach(([resource, data]) => {
+                                                                            toAdd[resource] = data.needed - data.available;
+                                                                        });
+                                                                        addToInventory(toAdd);
+                                                                        showNotification('Added missing resources to starbase inventory');
+                                                                    }}
+                                                                >
+                                                                    🪄 Add Missing Resources (Simulator)
+                                                                </button>
+                                                            </div>
+                                                        )}
+                                                    </div>
                                                 )}
                                             </div>
-                                        ))}
-                                </div>
-                            </div>
-
-                            {/* Hab Designer */}
-                            {selectedPlot && (
-                                <div className="hab-designer">
-                                    <h3>
-                                        Plot T{selectedPlot.tier}
-                                        {designMode && ' - Design Mode'}
-                                    </h3>
+                                        );
+                                    })()}
 
                                     <div className="design-area">
                                         {/* Current Design */}
@@ -738,44 +1239,7 @@ export default function CraftingHab() {
                                                 </div>
                                             )}
 
-                                            {/* Construction Cost Summary */}
-                                            {designMode && currentDesign.length > 0 && (
-                                                <div className="design-cost-summary">
-                                                    <h4>Total Construction Cost</h4>
-                                                    <div className="total-construction-cost">
-                                                        {(() => {
-                                                            const totalCost: Record<string, number> = {};
-                                                            currentDesign.forEach(pb => {
-                                                                // Find the building in the appropriate list
-                                                                let building: any = null;
-                                                                if (pb.type === 'hab') {
-                                                                    building = habBuildings.habs.find((h: any) => h.id === pb.buildingId);
-                                                                } else if (pb.type === 'crafting-station') {
-                                                                    building = habBuildings.craftingStations.find((s: any) => s.id === pb.buildingId);
-                                                                } else if (pb.type === 'cargo-storage') {
-                                                                    building = habBuildings.cargoStorage.find((c: any) => c.id === pb.buildingId);
-                                                                }
 
-                                                                if (building?.constructionCost) {
-                                                                    Object.entries(building.constructionCost).forEach(([resource, amount]) => {
-                                                                        totalCost[resource] = (totalCost[resource] || 0) + (amount as number);
-                                                                    });
-                                                                }
-                                                            });
-
-                                                            if (Object.keys(totalCost).length === 0) {
-                                                                return <span className="no-cost">No construction materials required</span>;
-                                                            }
-
-                                                            return Object.entries(totalCost).map(([resource, amount]) => (
-                                                                <span key={resource} className="cost-item">
-                                                                    {resource}: <strong>{amount}</strong>
-                                                                </span>
-                                                            ));
-                                                        })()}
-                                                    </div>
-                                                </div>
-                                            )}
                                         </div>
 
                                         {/* Available Buildings */}
@@ -859,76 +1323,92 @@ export default function CraftingHab() {
                                     </div>
 
                                     {/* Action Buttons */}
-                                    <div className="action-buttons">
-                                        {designMode ? (
-                                            <>
-                                                <button
-                                                    className="btn btn-secondary"
-                                                    onClick={() => {
-                                                        setDesignMode(false);
-                                                        setCurrentDesign([]);
-                                                    }}
-                                                >
-                                                    Cancel
-                                                </button>
-                                                <button
-                                                    className="btn btn-primary"
-                                                    onClick={finalizeDesign}
-                                                    disabled={!currentDesign.find(b => b.type === 'hab')}
-                                                >
-                                                    Finalize Design
-                                                </button>
-                                            </>
-                                        ) : (
+                                    {designMode && (
+                                        <div className="action-buttons">
                                             <button
                                                 className="btn btn-secondary"
                                                 onClick={() => {
-                                                    setDesignMode(true);
-                                                    setCurrentDesign(selectedPlot.habDesign?.buildings || []);
+                                                    setDesignMode(false);
+                                                    setCurrentDesign([]);
                                                 }}
                                             >
-                                                Redesign
+                                                Cancel
                                             </button>
-                                        )}
-                                    </div>
+                                            <button
+                                                className="btn btn-primary"
+                                                onClick={finalizeDesign}
+                                                disabled={!currentDesign.find(b => b.type === 'hab') || (() => {
+                                                    // Check if we have all resources
+                                                    const totalCost: Record<string, number> = {};
+                                                    currentDesign.forEach(pb => {
+                                                        let building: any = null;
+                                                        if (pb.type === 'hab') {
+                                                            building = habBuildings.habs.find((h: any) => h.id === pb.buildingId);
+                                                        } else if (pb.type === 'crafting-station') {
+                                                            building = habBuildings.craftingStations.find((s: any) => s.id === pb.buildingId);
+                                                        } else if (pb.type === 'cargo-storage') {
+                                                            building = habBuildings.cargoStorage.find((c: any) => c.id === pb.buildingId);
+                                                        }
+
+                                                        if (building?.constructionCost) {
+                                                            Object.entries(building.constructionCost).forEach(([resource, amount]) => {
+                                                                totalCost[resource] = (totalCost[resource] || 0) + (amount as number);
+                                                            });
+                                                        }
+                                                    });
+
+                                                    // Check resource availability
+                                                    for (const [resource, needed] of Object.entries(totalCost)) {
+                                                        const available = sharedState.starbaseInventory[resource] || 0;
+                                                        if (available < needed) {
+                                                            return true; // Disabled if missing resources
+                                                        }
+                                                    }
+                                                    return false;
+                                                })()}
+                                                title={!currentDesign.find(b => b.type === 'hab') ? 'Add a hab first' : 'Finalize and start operation'}
+                                            >
+                                                Finalize Construction
+                                            </button>
+                                        </div>
+                                    )}
+
+                                    {!designMode && !selectedPlot.habDesign && (
+                                        <div className="action-buttons">
+                                            <button
+                                                className="btn btn-primary"
+                                                onClick={() => {
+                                                    setDesignMode(true);
+                                                    setCurrentDesign([]);
+                                                }}
+                                            >
+                                                Start Construction
+                                            </button>
+                                        </div>
+                                    )}
                                 </div>
                             )}
 
-                            {/* Crafting Interface */}
-                            {selectedPlot?.habDesign && !designMode && (
-                                <div className="crafting-interface">
-                                    <h3>Crafting</h3>
+                            {/* Crafting View */}
+                            {viewMode === 'crafting' && selectedPlot?.habDesign && (
+                                <div className="crafting-interface-enhanced">
+                                    {/* Advanced Filters Sidebar */}
+                                    <div className="recipe-filters-panel">
+                                        <h4>Filters</h4>
 
-                                    {/* Import from Recipe Tool */}
-                                    <div className="queue-import" style={{ marginBottom: '1rem' }}>
-                                        <button
-                                            className="btn btn-secondary"
-                                            onClick={() => {
-                                                const queueStr = localStorage.getItem('craftingQueue');
-                                                if (queueStr) {
-                                                    const queue = JSON.parse(queueStr);
-                                                    if (queue.length > 0) {
-                                                        const plan = queue[0];
-                                                        setSelectedRecipe(plan.recipe);
-                                                        setCraftQuantity(plan.quantity);
-                                                        // Remove from queue
-                                                        queue.shift();
-                                                        localStorage.setItem('craftingQueue', JSON.stringify(queue));
-                                                        alert(`Loaded recipe: ${plan.recipe.name} x${plan.quantity}`);
-                                                    } else {
-                                                        alert('No recipes in queue');
-                                                    }
-                                                } else {
-                                                    alert('No recipes in queue');
-                                                }
-                                            }}
-                                        >
-                                            📥 Import from Recipe Tool
-                                        </button>
-                                    </div>
+                                        <div className="filter-section">
+                                            <label>Search</label>
+                                            <input
+                                                type="text"
+                                                placeholder="Recipe name..."
+                                                value={searchTerm}
+                                                onChange={(e) => setSearchTerm(e.target.value)}
+                                                className="filter-input"
+                                            />
+                                        </div>
 
-                                    <div className="recipe-selection">
-                                        <div className="recipe-filters">
+                                        <div className="filter-section">
+                                            <label>Category</label>
                                             <select
                                                 value={categoryFilter}
                                                 onChange={(e) => setCategoryFilter(e.target.value)}
@@ -938,84 +1418,336 @@ export default function CraftingHab() {
                                                 <option value="component">Components</option>
                                                 <option value="module">Modules</option>
                                                 <option value="consumable">Consumables</option>
+                                                <option value="ship">Ship Parts</option>
                                             </select>
+                                        </div>
 
+                                        <div className="filter-section">
+                                            <label>Tier</label>
+                                            <div className="tier-filters">
+                                                {[1, 2, 3, 4, 5].map(tier => (
+                                                    <button
+                                                        key={tier}
+                                                        className={`tier-btn ${tierFilter === tier ? 'active' : ''}`}
+                                                        onClick={() => setTierFilter(tierFilter === tier ? null : tier)}
+                                                    >
+                                                        T{tier}
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        </div>
+
+                                        <div className="filter-section">
+                                            <label>Status</label>
+                                            <div className="status-filters">
+                                                <label className="checkbox-label">
+                                                    <input
+                                                        type="checkbox"
+                                                        checked={canCraftFilter}
+                                                        onChange={(e) => setCanCraftFilter(e.target.checked)}
+                                                    />
+                                                    <span>Craftable Only</span>
+                                                </label>
+                                                <label className="checkbox-label">
+                                                    <input
+                                                        type="checkbox"
+                                                        checked={showFavorites}
+                                                        onChange={(e) => setShowFavorites(e.target.checked)}
+                                                    />
+                                                    <span>Favorites ⭐</span>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div className="filter-section">
+                                            <label>Contains Resource</label>
                                             <input
                                                 type="text"
-                                                placeholder="Search recipes..."
-                                                value={searchTerm}
-                                                onChange={(e) => setSearchTerm(e.target.value)}
-                                                className="search-input"
+                                                placeholder="e.g., copper, iron..."
+                                                value={resourceFilter}
+                                                onChange={(e) => setResourceFilter(e.target.value)}
+                                                className="filter-input"
                                             />
                                         </div>
 
-                                        <div className="recipe-grid">
-                                            {filteredRecipes.map(recipe => {
-                                                const canCraft = recipe.ingredients && Array.isArray(recipe.ingredients) &&
-                                                    recipe.ingredients.every(ing =>
-                                                        (sharedState.starbaseInventory[ing.resource] || 0) >= ing.quantity
-                                                    );
-
-                                                return (
-                                                    <div
-                                                        key={recipe.id}
-                                                        className={`recipe-card ${selectedRecipe?.id === recipe.id ? 'selected' : ''} ${!canCraft ? 'disabled' : ''}`}
-                                                        onClick={() => canCraft && setSelectedRecipe(recipe)}
-                                                    >
-                                                        <h5>{recipe.name}</h5>
-                                                        <div className="recipe-tier">Tier {recipe.tier}</div>
-                                                        <div className="recipe-ingredients">
-                                                            {recipe.ingredients && Array.isArray(recipe.ingredients) && recipe.ingredients.map(ing => (
-                                                                <span key={ing.resource} className="ingredient">
-                                                                    {ing.quantity} {ing.resource}
-                                                                </span>
-                                                            ))}
-                                                        </div>
-                                                        <div className="recipe-output">
-                                                            → {recipe.output?.quantity || 0} {recipe.output?.resource || ''}
-                                                        </div>
-                                                    </div>
-                                                );
-                                            })}
+                                        <div className="filter-actions">
+                                            <button
+                                                className="btn btn-secondary btn-sm"
+                                                onClick={() => {
+                                                    setSearchTerm('');
+                                                    setCategoryFilter('all');
+                                                    setTierFilter(null);
+                                                    setCanCraftFilter(false);
+                                                    setShowFavorites(false);
+                                                    setResourceFilter('');
+                                                }}
+                                            >
+                                                Clear Filters
+                                            </button>
                                         </div>
 
-                                        {selectedRecipe && (
-                                            <div className="craft-controls">
-                                                <h4>Craft {selectedRecipe.name}</h4>
-                                                <div className="quantity-selector">
-                                                    <label>Quantity:</label>
-                                                    <input
-                                                        type="number"
-                                                        min="1"
-                                                        max="100"
-                                                        value={craftQuantity}
-                                                        onChange={(e) => setCraftQuantity(parseInt(e.target.value) || 1)}
-                                                    />
+                                        <div className="filter-stats">
+                                            <small>{enhancedFilteredRecipes.length} of {recipes.length} recipes</small>
+                                        </div>
+                                    </div>
+
+                                    {/* Recipe List */}
+                                    <div className="recipe-list-panel">
+                                        <div className="recipe-list-header">
+                                            <h3>Recipes</h3>
+                                            <button
+                                                className="btn btn-secondary btn-sm"
+                                                onClick={() => {
+                                                    const queueStr = localStorage.getItem('craftingQueue');
+                                                    if (queueStr) {
+                                                        const queue = JSON.parse(queueStr);
+                                                        if (queue.length > 0) {
+                                                            const plan = queue[0];
+                                                            setSelectedRecipe(plan.recipe);
+                                                            setCraftQuantity(plan.quantity);
+                                                            queue.shift();
+                                                            localStorage.setItem('craftingQueue', JSON.stringify(queue));
+                                                            showNotification(`Loaded: ${plan.recipe.name} x${plan.quantity}`, 'info');
+                                                        } else {
+                                                            showNotification('No recipes in queue', 'warning');
+                                                        }
+                                                    }
+                                                }}
+                                            >
+                                                📥 Import Queue
+                                            </button>
+                                        </div>
+
+                                        {/* Recently Used */}
+                                        {recentRecipes.length > 0 && (
+                                            <div className="recent-recipes">
+                                                <h5>Recently Used</h5>
+                                                <div className="recent-list">
+                                                    {recentRecipes.slice(0, 3).map(recipeId => {
+                                                        const recipe = recipes.find(r => r.id === recipeId);
+                                                        if (!recipe) return null;
+                                                        return (
+                                                            <button
+                                                                key={recipe.id}
+                                                                className="recent-chip"
+                                                                onClick={() => setSelectedRecipe(recipe)}
+                                                            >
+                                                                {recipe.name}
+                                                            </button>
+                                                        );
+                                                    })}
                                                 </div>
-                                                <div className="craft-summary">
-                                                    <div>Time: {(selectedRecipe.constructionTime * craftQuantity / (currentStats?.craftingSpeed || 1)).toFixed(0)}s</div>
-                                                    <div>Output: {(selectedRecipe.output?.quantity || 0) * craftQuantity} {selectedRecipe.output?.resource || ''}</div>
-                                                </div>
-                                                <div className="craft-actions">
-                                                    <select
-                                                        className="priority-selector"
-                                                        value="normal"
-                                                        onChange={(e) => {
-                                                            const priority = e.target.value as 'low' | 'normal' | 'high';
-                                                            startCraftingJob(priority);
+                                            </div>
+                                        )}
+
+                                        {/* Virtualized Recipe List */}
+                                        <div className="recipe-list-scrollable">
+                                            {enhancedFilteredRecipes.length === 0 ? (
+                                                <div className="no-results">
+                                                    <p>No recipes match your filters</p>
+                                                    <button
+                                                        className="btn btn-secondary btn-sm"
+                                                        onClick={() => {
+                                                            setSearchTerm('');
+                                                            setCategoryFilter('all');
+                                                            setTierFilter(null);
+                                                            setCanCraftFilter(false);
+                                                            setShowFavorites(false);
+                                                            setResourceFilter('');
                                                         }}
                                                     >
-                                                        <option value="low">Low Priority</option>
-                                                        <option value="normal">Normal Priority</option>
-                                                        <option value="high">High Priority</option>
-                                                    </select>
-                                                    <button
-                                                        className="btn btn-primary"
-                                                        onClick={() => startCraftingJob('normal')}
-                                                    >
-                                                        Start Crafting
+                                                        Clear Filters
                                                     </button>
                                                 </div>
+                                            ) : (
+                                                enhancedFilteredRecipes.map(recipe => {
+                                                    const canCraft = recipe.ingredients && Array.isArray(recipe.ingredients) &&
+                                                        recipe.ingredients.every(ing =>
+                                                            (sharedState.starbaseInventory[ing.resource] || 0) >= ing.quantity
+                                                        );
+                                                    const isFavorite = favoriteRecipes.includes(recipe.id);
+
+                                                    return (
+                                                        <div
+                                                            key={recipe.id}
+                                                            className={`recipe-list-item ${selectedRecipe?.id === recipe.id ? 'selected' : ''} ${!canCraft ? 'cannot-craft' : ''}`}
+                                                            onClick={() => setSelectedRecipe(recipe)}
+                                                        >
+                                                            <div className="recipe-item-header">
+                                                                <span className="recipe-name">{recipe.name}</span>
+                                                                <div className="recipe-badges">
+                                                                    <span className="tier-badge">T{recipe.tier}</span>
+                                                                    {canCraft && <span className="craftable-badge">✓</span>}
+                                                                    <button
+                                                                        className={`favorite-btn ${isFavorite ? 'active' : ''}`}
+                                                                        onClick={(e) => {
+                                                                            e.stopPropagation();
+                                                                            toggleFavorite(recipe.id);
+                                                                        }}
+                                                                    >
+                                                                        {isFavorite ? '⭐' : '☆'}
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                            <div className="recipe-item-details">
+                                                                <span className="recipe-output">
+                                                                    → {recipe.output?.quantity || 0} {recipe.output?.resource || ''}
+                                                                </span>
+                                                                <span className="recipe-time">{recipe.constructionTime}s</span>
+                                                            </div>
+                                                        </div>
+                                                    );
+                                                })
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    {/* Recipe Details Panel */}
+                                    <div className="recipe-details-panel">
+                                        {selectedRecipe ? (
+                                            <>
+                                                <div className="recipe-details-header">
+                                                    <h3>{selectedRecipe.name}</h3>
+                                                    <span className="tier-badge large">Tier {selectedRecipe.tier}</span>
+                                                </div>
+
+                                                <div className="recipe-details-content">
+                                                    <div className="ingredients-section">
+                                                        <h4>Ingredients Required</h4>
+                                                        <div className="ingredients-list">
+                                                            {selectedRecipe.ingredients && Array.isArray(selectedRecipe.ingredients) &&
+                                                                selectedRecipe.ingredients.map(ing => {
+                                                                    const available = sharedState.starbaseInventory[ing.resource] || 0;
+                                                                    const needed = ing.quantity * craftQuantity;
+                                                                    const hasEnough = available >= needed;
+
+                                                                    return (
+                                                                        <div key={ing.resource} className={`ingredient-row ${!hasEnough ? 'insufficient' : ''}`}>
+                                                                            <span className="ingredient-name">{ing.resource}</span>
+                                                                            <span className="ingredient-amount">
+                                                                                <span className={hasEnough ? 'has-enough' : 'not-enough'}>
+                                                                                    {available}
+                                                                                </span>
+                                                                                / {needed}
+                                                                            </span>
+                                                                        </div>
+                                                                    );
+                                                                })}
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="output-section">
+                                                        <h4>Output</h4>
+                                                        <div className="output-info">
+                                                            <span className="output-amount">
+                                                                {(selectedRecipe.output?.quantity || 0) * craftQuantity}x
+                                                            </span>
+                                                            <span className="output-resource">
+                                                                {selectedRecipe.output?.resource || ''}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="craft-config">
+                                                        <div className="quantity-control">
+                                                            <label>Quantity</label>
+                                                            <div className="quantity-input-group">
+                                                                <button
+                                                                    className="qty-btn"
+                                                                    onClick={() => setCraftQuantity(Math.max(1, craftQuantity - 1))}
+                                                                >
+                                                                    -
+                                                                </button>
+                                                                <input
+                                                                    type="number"
+                                                                    min="1"
+                                                                    max="100"
+                                                                    value={craftQuantity}
+                                                                    onChange={(e) => setCraftQuantity(Math.max(1, parseInt(e.target.value) || 1))}
+                                                                    className="qty-input"
+                                                                />
+                                                                <button
+                                                                    className="qty-btn"
+                                                                    onClick={() => setCraftQuantity(Math.min(100, craftQuantity + 1))}
+                                                                >
+                                                                    +
+                                                                </button>
+                                                            </div>
+                                                            <div className="quick-qty-buttons">
+                                                                <button onClick={() => setCraftQuantity(1)} className="quick-qty">1</button>
+                                                                <button onClick={() => setCraftQuantity(5)} className="quick-qty">5</button>
+                                                                <button onClick={() => setCraftQuantity(10)} className="quick-qty">10</button>
+                                                                <button onClick={() => setCraftQuantity(25)} className="quick-qty">25</button>
+                                                                <button onClick={() => {
+                                                                    // Calculate max craftable
+                                                                    const maxCraftable = selectedRecipe.ingredients ?
+                                                                        Math.min(...selectedRecipe.ingredients.map(ing =>
+                                                                            Math.floor((sharedState.starbaseInventory[ing.resource] || 0) / ing.quantity)
+                                                                        )) : 0;
+                                                                    setCraftQuantity(Math.min(100, Math.max(1, maxCraftable)));
+                                                                }} className="quick-qty">MAX</button>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="time-section">
+                                                            <label>Crafting Time</label>
+                                                            <div className="time-info">
+                                                                <span className="time-value">
+                                                                    {Math.ceil(selectedRecipe.constructionTime * craftQuantity / (currentStats?.craftingSpeed || 1))}s
+                                                                </span>
+                                                                {currentStats?.craftingSpeed && currentStats.craftingSpeed !== 1 && (
+                                                                    <span className="speed-bonus">
+                                                                        ({(currentStats.craftingSpeed * 100).toFixed(0)}% speed)
+                                                                    </span>
+                                                                )}
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="priority-section">
+                                                            <label>Priority</label>
+                                                            <div className="priority-buttons">
+                                                                <button
+                                                                    className={`priority-btn ${craftPriority === 'low' ? 'active' : ''}`}
+                                                                    onClick={() => setCraftPriority('low')}
+                                                                >
+                                                                    🐢 Low
+                                                                </button>
+                                                                <button
+                                                                    className={`priority-btn ${craftPriority === 'normal' ? 'active' : ''}`}
+                                                                    onClick={() => setCraftPriority('normal')}
+                                                                >
+                                                                    Normal
+                                                                </button>
+                                                                <button
+                                                                    className={`priority-btn ${craftPriority === 'high' ? 'active' : ''}`}
+                                                                    onClick={() => setCraftPriority('high')}
+                                                                >
+                                                                    ⚡ High
+                                                                </button>
+                                                            </div>
+                                                        </div>
+
+                                                        <button
+                                                            className="btn btn-primary btn-large"
+                                                            onClick={() => {
+                                                                startCraftingJob(craftPriority);
+                                                                addToRecentRecipes(selectedRecipe.id);
+                                                            }}
+                                                            disabled={!canCraftSelected}
+                                                        >
+                                                            {canCraftSelected ? 'Start Crafting' : 'Insufficient Resources'}
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </>
+                                        ) : (
+                                            <div className="no-recipe-selected">
+                                                <h3>Select a Recipe</h3>
+                                                <p>Choose a recipe from the list to view details and start crafting</p>
+
+                                                {enhancedFilteredRecipes.length === 0 && (
+                                                    <p className="hint">No recipes match your current filters. Try adjusting them.</p>
+                                                )}
                                             </div>
                                         )}
                                     </div>
@@ -1033,11 +1765,11 @@ export default function CraftingHab() {
                 {/* Right Sidebar - Active Jobs */}
                 <aside className="sidebar right">
                     {/* Rented Hab Plots Summary */}
-                    {habPlots.filter(p => p.isRented).length > 0 && (
-                        <div className="rented-plots-summary">
+                    {habPlots.filter(p => p.isOwned).length > 0 && (
+                        <div className="owned-plots-summary">
                             <h3>Your Hab Plots</h3>
                             <div className="plots-list">
-                                {habPlots.filter(p => p.isRented).map(plot => {
+                                {habPlots.filter(p => p.isOwned).map(plot => {
                                     const stats = plot.habDesign ? calculateHabStats(plot.habDesign.buildings) : null;
                                     const activeJobs = craftingJobs.filter(j => j.habPlotId === plot.id && j.status !== 'completed').length;
                                     return (
@@ -1064,83 +1796,96 @@ export default function CraftingHab() {
                     )}
 
                     <div className="sidebar-header">
-                        <h3>Active Jobs</h3>
-                        {craftingJobs.filter(j => j.status === 'completed').length > 0 && (
-                            <button
-                                className="btn btn-sm btn-secondary"
-                                onClick={() => {
-                                    const completedJobs = craftingJobs.filter(j => j.status === 'completed');
-                                    completedJobs.forEach(job => {
-                                        if (job.output) {
-                                            addToInventory({ [job.output.resource]: job.output.quantity });
+                        <h3>Active Jobs ({craftingJobs.length})</h3>
+                        <div className="job-actions-bar">
+                            {craftingJobs.filter(j => j.status === 'completed').length > 0 && (
+                                <button
+                                    className="btn btn-xs btn-success"
+                                    onClick={() => {
+                                        const completedJobs = craftingJobs.filter(j => j.status === 'completed');
+                                        // Resources already added when jobs completed, just clear them
+                                        setCraftingJobs(prev => prev.filter(j => j.status !== 'completed'));
+                                        showNotification(`Cleared ${completedJobs.length} completed jobs!`, 'info');
+                                    }}
+                                >
+                                    Clear Completed ({craftingJobs.filter(j => j.status === 'completed').length})
+                                </button>
+                            )}
+                            {craftingJobs.length > 0 && (
+                                <button
+                                    className="btn btn-xs btn-danger"
+                                    onClick={() => {
+                                        if (confirm('Clear all jobs? This will cancel active jobs and remove completed ones.')) {
+                                            // Resources already added for completed jobs, just clear all
+                                            setCraftingJobs([]);
+                                            showNotification('All jobs cleared', 'info');
                                         }
-                                    });
-                                    setCraftingJobs(prev => prev.filter(j => j.status !== 'completed'));
-                                    updateStatistic('totalItemsCrafted', completedJobs.reduce((sum, j) => sum + j.quantity, 0));
-                                }}
-                            >
-                                Clear {craftingJobs.filter(j => j.status === 'completed').length} Completed
-                            </button>
-                        )}
+                                    }}
+                                >
+                                    Clear All
+                                </button>
+                            )}
+                        </div>
                     </div>
 
-                    <div className="job-queue">
+                    <div className="job-queue compact">
                         {craftingJobs.map(job => {
                             const recipe = recipes.find(r => r.id === job.recipeId);
                             const plot = habPlots.find(p => p.id === job.habPlotId);
 
                             return (
-                                <div key={job.id} className={`job-card ${job.status} ${job.priority || 'normal'}-priority`}>
-                                    <div className="job-header">
-                                        <h4>{recipe?.name}</h4>
-                                        <span className="job-quantity">×{job.quantity}</span>
-                                        {job.priority && job.priority !== 'normal' && (
-                                            <span className={`priority-badge ${job.priority}`}>
-                                                {job.priority === 'high' ? '⚡' : '🐢'} {job.priority}
-                                            </span>
-                                        )}
+                                <div key={job.id} className={`job-card-compact ${job.status} ${job.priority || 'normal'}-priority`}>
+                                    <div className="job-main">
+                                        <div className="job-info">
+                                            <span className="job-name">{recipe?.name}</span>
+                                            <span className="job-quantity">×{job.quantity}</span>
+                                            {job.priority === 'high' && <span className="priority-icon">⚡</span>}
+                                            {job.priority === 'low' && <span className="priority-icon">🐢</span>}
+                                        </div>
+                                        <div className="job-meta">
+                                            <span className="job-plot">T{plot?.tier}</span>
+                                            {job.status === 'active' && (
+                                                <span className="job-time">{Math.ceil((100 - job.progress) / 100 * job.totalTime)}s</span>
+                                            )}
+                                            {job.status === 'completed' && <span className="job-done">✓</span>}
+                                        </div>
                                     </div>
-                                    <div className="job-plot">
-                                        Plot T{plot?.tier}
-                                        {job.status === 'queued' && ' • Queued'}
-                                        {job.status === 'paused' && ' • Paused'}
+                                    <div className="job-progress">
+                                        <div className="progress-bar-compact">
+                                            <div
+                                                className={`progress-fill ${job.status}`}
+                                                style={{ width: `${job.progress}%` }}
+                                            />
+                                        </div>
+                                        <span className="progress-text">{job.progress.toFixed(0)}%</span>
                                     </div>
-                                    <div className="progress-bar">
-                                        <div
-                                            className={`progress-fill ${job.status}`}
-                                            style={{ width: `${job.progress}%` }}
-                                        />
-                                    </div>
-                                    <div className="job-status">
-                                        {job.status === 'active' && `${job.progress.toFixed(0)}% • ${Math.ceil((100 - job.progress) / 100 * job.totalTime)}s`}
-                                        {job.status === 'completed' && '✓ Complete'}
-                                        {job.status === 'queued' && 'Waiting...'}
-                                        {job.status === 'paused' && `Paused at ${job.progress.toFixed(0)}%`}
-                                    </div>
-                                    <div className="job-actions">
+                                    <div className="job-controls">
                                         {job.status === 'completed' && (
                                             <button
-                                                className="btn btn-sm btn-success"
-                                                onClick={() => collectJob(job.id)}
+                                                className="btn-icon btn-success"
+                                                onClick={() => clearCompletedJob(job.id)}
+                                                title="Clear"
                                             >
-                                                Collect
+                                                ✓
                                             </button>
                                         )}
                                         {(job.status === 'active' || job.status === 'paused') && (
                                             <>
                                                 <button
-                                                    className="btn btn-sm"
+                                                    className="btn-icon"
                                                     onClick={() => toggleJobPause(job.id)}
+                                                    title={job.status === 'active' ? 'Pause' : 'Resume'}
                                                 >
-                                                    {job.status === 'active' ? '⏸️' : '▶️'}
+                                                    {job.status === 'active' ? '⏸' : '▶'}
                                                 </button>
                                                 <button
-                                                    className="btn btn-sm btn-danger"
+                                                    className="btn-icon btn-danger"
                                                     onClick={() => {
                                                         if (confirm(`Cancel job? ${job.progress < 100 ? 'You\'ll get 50% refund on remaining resources.' : ''}`)) {
                                                             cancelJob(job.id);
                                                         }
                                                     }}
+                                                    title="Cancel"
                                                 >
                                                     ✕
                                                 </button>
@@ -1148,10 +1893,11 @@ export default function CraftingHab() {
                                         )}
                                         {job.status === 'queued' && (
                                             <button
-                                                className="btn btn-sm btn-danger"
+                                                className="btn-icon btn-danger"
                                                 onClick={() => cancelJob(job.id)}
+                                                title="Cancel"
                                             >
-                                                Cancel
+                                                ✕
                                             </button>
                                         )}
                                     </div>

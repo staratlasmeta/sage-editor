@@ -403,7 +403,7 @@ export function ResourcesView({ claimStakes = [], onTransfer, onClose }: Resourc
                                             </div>
                                         )}
 
-                                        <div className="resource-stats-grid">
+                                        {/* <div className="resource-stats-grid">
                                             {resource.production > 0 && (
                                                 <div className="stat-item production">
                                                     <span className="stat-icon">↑</span>
@@ -416,7 +416,7 @@ export function ResourcesView({ claimStakes = [], onTransfer, onClose }: Resourc
                                                     <span className="stat-value">{formatRate(resource.consumption)}</span>
                                                 </div>
                                             )}
-                                        </div>
+                                        </div> */}
 
                                         <div className="resource-locations-summary">
                                             <div className="locations-header">

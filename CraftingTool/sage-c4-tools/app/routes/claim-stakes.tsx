@@ -96,7 +96,16 @@ export default function ClaimStakes() {
                 if (!Array.isArray(parsed)) {
                     return [];
                 }
-                return parsed;
+                // Update old instances with new maxSlots calculation (5x slots)
+                const updated = parsed.map((instance: ClaimStakeInstance) => {
+                    const updatedMaxSlots = instance.tier * 100; // Demo: 5x slots
+                    if (instance.maxSlots !== updatedMaxSlots) {
+                        console.log(`🔧 Updating maxSlots for instance T${instance.tier}: ${instance.maxSlots} → ${updatedMaxSlots}`);
+                        return { ...instance, maxSlots: updatedMaxSlots };
+                    }
+                    return instance;
+                });
+                return updated;
             } catch (e) {
                 // Failed to parse, return empty array
                 return [];
@@ -207,8 +216,8 @@ export default function ClaimStakes() {
                         stopReason = 'No fuel available';
                     }
 
-                    // Check if storage is too full (95% threshold)
-                    if (storageUtilization >= 0.95) {
+                    // Check if storage is completely full (100%)
+                    if (storageUtilization >= 1.0) {
                         // Check if we would produce net positive resources
                         let wouldProduceMore = false;
                         instance.buildings.forEach((pb: PlacedBuilding) => {
@@ -222,7 +231,7 @@ export default function ClaimStakes() {
 
                         if (wouldProduceMore) {
                             shouldStop = true;
-                            stopReason = 'Storage full (95%+)';
+                            stopReason = 'Storage full (100%)';
                         }
                     }
 
@@ -270,22 +279,52 @@ export default function ClaimStakes() {
                             const building = currentBuildings.find((b: Building) => b.id === pb.buildingId);
                             if (!building) return;
 
-                            // Process consumption
+                            // Check if building has required resources to operate
+                            let canProduce = true;
+
+                            // Process consumption and check availability
                             if (building.resourceUsage) {
-                                Object.entries(building.resourceUsage).forEach(([resource, rate]) => {
+                                // First check if all required resources are available
+                                for (const [resource, rate] of Object.entries(building.resourceUsage)) {
                                     const consumption = rate * deltaTime;
-                                    if (newResources[resource] >= consumption) {
-                                        newResources[resource] -= consumption;
+                                    if ((newResources[resource] || 0) < consumption) {
+                                        canProduce = false;
+                                        // Mark building as stopped due to lack of input
+                                        pb.isActive = false;
+                                        pb.stopReason = `Missing ${resource}`;
+                                        pb.inactiveSince = Date.now();
+                                        break;
+                                    }
+                                }
+
+                                // Only consume if we can produce
+                                if (canProduce) {
+                                    // Clear stop reason when building can operate
+                                    pb.stopReason = undefined;
+                                    pb.inactiveSince = undefined;
+
+                                    Object.entries(building.resourceUsage).forEach(([resource, rate]) => {
+                                        const consumption = rate * deltaTime;
+                                        newResources[resource] = (newResources[resource] || 0) - consumption;
                                         if (!resourceFlows[resource]) {
                                             resourceFlows[resource] = { production: 0, consumption: 0 };
                                         }
                                         resourceFlows[resource].consumption += rate;
-                                    }
-                                });
+                                    });
+                                } else {
+                                    // Still show consumption in flows even if not actually consuming
+                                    Object.entries(building.resourceUsage).forEach(([resource, rate]) => {
+                                        if (!resourceFlows[resource]) {
+                                            resourceFlows[resource] = { production: 0, consumption: 0 };
+                                        }
+                                        // Show what would be consumed if resources were available
+                                        resourceFlows[resource].consumption += rate;
+                                    });
+                                }
                             }
 
-                            // Process extraction
-                            if (building.extractionRate) {
+                            // Process extraction (doesn't require inputs, just extracts from planet)
+                            if (building.extractionRate && canProduce) {
                                 const planet = currentPlanets.find((p: Planet) => p.id === instance.planetId);
                                 Object.entries(building.extractionRate).forEach(([resource, rate]) => {
                                     const richness = planet?.richness?.[resource] || 1;
@@ -298,8 +337,8 @@ export default function ClaimStakes() {
                                 });
                             }
 
-                            // Process production
-                            if (building.resourceProduction) {
+                            // Process production ONLY if we have the required inputs
+                            if (building.resourceProduction && canProduce) {
                                 Object.entries(building.resourceProduction).forEach(([resource, rate]) => {
                                     const production = rate * deltaTime;
                                     newResources[resource] = (newResources[resource] || 0) + production;
@@ -496,42 +535,21 @@ export default function ClaimStakes() {
             return sum + (b?.slots || 0);
         }, 0);
 
+        console.log('🔍 SLOT CHECK:', {
+            currentSlots,
+            buildingSlots: building.slots,
+            totalAfterAdd: currentSlots + building.slots,
+            maxSlots: activeInstance.maxSlots,
+            wouldExceed: currentSlots + building.slots > activeInstance.maxSlots
+        });
+
         if (currentSlots + building.slots > activeInstance.maxSlots) {
-            alert('Not enough slots available!');
+            alert(`Not enough slots available! Current: ${currentSlots}, Building needs: ${building.slots}, Max: ${activeInstance.maxSlots}`);
             return;
         }
 
-        // Check if we have construction materials in starbase inventory
-        if (building.constructionCost) {
-            const missingMaterials: string[] = [];
-            Object.entries(building.constructionCost).forEach(([material, amount]) => {
-                const available = starbaseInventory[material] || 0;
-                if (available < amount) {
-                    missingMaterials.push(`${material}: need ${amount}, have ${available}`);
-                }
-            });
-
-            if (missingMaterials.length > 0) {
-                const useMagic = confirm(
-                    `Missing construction materials from starbase:\n${missingMaterials.join('\n')}\n\n` +
-                    `Would you like to add these materials to starbase inventory? (Simulator feature)`
-                );
-
-                if (useMagic) {
-                    // Add missing materials to starbase
-                    const toAdd: Record<string, number> = {};
-                    Object.entries(building.constructionCost).forEach(([material, amount]) => {
-                        const available = starbaseInventory[material] || 0;
-                        if (available < amount) {
-                            toAdd[material] = amount - available;
-                        }
-                    });
-                    addToInventory(toAdd);
-                } else {
-                    return;
-                }
-            }
-        }
+        // Don't check materials during design mode - we'll check at finalize
+        // Just add the building to the design
 
         const newBuilding: PlacedBuilding = {
             id: `${buildingId}_${Date.now()}`,
@@ -744,7 +762,9 @@ export default function ClaimStakes() {
 
             // Check storage
             const currentStorageUsed = Object.values(instance.resources || {}).reduce((sum: number, val: any) => sum + val, 0);
-            if (currentStorageUsed >= instance.maxStorage * 0.95) {
+            if (currentStorageUsed >= instance.maxStorage) {
+                reasons.push('Storage full (100%)');
+            } else if (currentStorageUsed >= instance.maxStorage * 0.95) {
                 reasons.push('Storage nearly full (95%+)');
             }
 
@@ -1043,137 +1063,128 @@ export default function ClaimStakes() {
                 <aside className="sidebar">
                     <div className="sidebar-header">
                         <h2>Select Planet</h2>
-                        <button
-                            className={`tool-button ${showStarbaseControl ? 'active' : ''}`}
-                            onClick={() => setShowStarbaseControl(!showStarbaseControl)}
-                        >
-                            ⚙️ Starbase
-                        </button>
+
                     </div>
 
-                    {showStarbaseControl ? (
-                        <StarbaseControl />
-                    ) : (
-                        <>
-                            {/* Filters */}
-                            <div className="filters">
-                                <select
-                                    value={factionFilter}
-                                    onChange={(e) => setFactionFilter(e.target.value)}
-                                    className="filter-select"
-                                >
-                                    <option value="all">All Factions</option>
-                                    <option value="MUD">MUD</option>
-                                    <option value="ONI">ONI</option>
-                                    <option value="UST">UST</option>
-                                </select>
+                    <>
+                        {/* Filters */}
+                        <div className="filters">
+                            <select
+                                value={factionFilter}
+                                onChange={(e) => setFactionFilter(e.target.value)}
+                                className="filter-select"
+                            >
+                                <option value="all">All Factions</option>
+                                <option value="MUD">MUD</option>
+                                <option value="ONI">ONI</option>
+                                <option value="UST">UST</option>
+                            </select>
 
-                                <input
-                                    type="text"
-                                    placeholder="Search planets..."
-                                    value={searchTerm}
-                                    onChange={(e) => setSearchTerm(e.target.value)}
-                                    className="search-input"
-                                />
+                            <input
+                                type="text"
+                                placeholder="Search planets..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                className="search-input"
+                            />
+                        </div>
+
+                        {/* Tier Selection */}
+                        <div className="tier-selector">
+                            <h3>Claim Stake Tier</h3>
+                            <div className="tier-buttons">
+                                {[1, 2, 3, 4, 5].map(tier => {
+                                    const isAvailable = availableTiers.includes(tier);
+                                    return (
+                                        <button
+                                            key={tier}
+                                            className={`tier-button ${selectedTier === tier ? 'active' : ''} ${!isAvailable ? 'locked' : ''}`}
+                                            onClick={() => isAvailable && setSelectedTier(tier)}
+                                            disabled={!isAvailable}
+                                            title={!isAvailable ? `Requires Starbase Level ${tier - 1}` : ''}
+                                        >
+                                            T{tier}
+                                        </button>
+                                    );
+                                })}
                             </div>
+                        </div>
 
-                            {/* Tier Selection */}
-                            <div className="tier-selector">
-                                <h3>Claim Stake Tier</h3>
-                                <div className="tier-buttons">
-                                    {[1, 2, 3, 4, 5].map(tier => {
-                                        const isAvailable = availableTiers.includes(tier);
+                        {/* Planet List */}
+                        <div className="planet-list">
+                            {planets
+                                .filter(planet =>
+                                    (factionFilter === 'all' || planet.faction === factionFilter) &&
+                                    planet.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+                                    !claimStakeInstances.some(stake => stake.planetId === planet.id)
+                                )
+                                .map(planet => (
+                                    <div
+                                        key={planet.id}
+                                        className={`planet-card ${selectedPlanet?.id === planet.id ? 'selected' : ''}`}
+                                        onClick={() => {
+                                            setSelectedPlanet(planet);
+                                            setActiveInstanceId(null); // Clear active instance to show purchase screen
+                                        }}
+                                    >
+                                        <div className="planet-icon">🌍</div>
+                                        <div className="planet-info">
+                                            <h4>{planet.name}</h4>
+                                            <div className="planet-stats">
+                                                <span className={`faction-badge faction-${planet.faction.toLowerCase()}`}>
+                                                    {planet.faction}
+                                                </span>
+                                                <span className="rent-cost">
+                                                    💰 {planet.rentCost}/day
+                                                </span>
+                                            </div>
+                                            <div className="resource-badges">
+                                                {planet.resources?.slice(0, 3).map(resource => (
+                                                    <span key={resource} className="resource-badge">
+                                                        {resource}
+                                                    </span>
+                                                ))}
+                                                {planet.resources && planet.resources.length > 3 && (
+                                                    <span className="resource-badge">+{planet.resources.length - 3}</span>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                        </div>
+
+                        {/* Claim Stake Instances */}
+                        {claimStakeInstances.length > 0 && (
+                            <div className="instances-section">
+                                <h3>Your Claim Stakes ({claimStakeInstances.length})</h3>
+                                <div className="instances-list">
+                                    {claimStakeInstances.map(instance => {
+                                        const planet = planets.find(p => p.id === instance.planetId);
+                                        const stats = calculateStats(instance.buildings);
                                         return (
-                                            <button
-                                                key={tier}
-                                                className={`tier-button ${selectedTier === tier ? 'active' : ''} ${!isAvailable ? 'locked' : ''}`}
-                                                onClick={() => isAvailable && setSelectedTier(tier)}
-                                                disabled={!isAvailable}
-                                                title={!isAvailable ? `Requires Starbase Level ${tier - 1}` : ''}
+                                            <div
+                                                key={instance.id}
+                                                className={`instance-card ${activeInstanceId === instance.id ? 'active' : ''}`}
+                                                onClick={() => {
+                                                    setActiveInstanceId(instance.id);
+                                                    setDesignMode(false);
+                                                }}
                                             >
-                                                T{tier}
-                                            </button>
+                                                <h5>{planet?.name} - T{instance.tier}</h5>
+                                                <div className="instance-stats">
+                                                    <span>⚡ {stats.totalPower}</span>
+                                                    <span>👥 {stats.totalCrew}</span>
+                                                    <span className={instance.isFinalized ? 'status-active' : 'status-design'}>
+                                                        {instance.isFinalized ? '🟢 Active' : '🟡 Design'}
+                                                    </span>
+                                                </div>
+                                            </div>
                                         );
                                     })}
                                 </div>
                             </div>
-
-                            {/* Planet List */}
-                            <div className="planet-list">
-                                {planets
-                                    .filter(planet =>
-                                        (factionFilter === 'all' || planet.faction === factionFilter) &&
-                                        planet.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-                                        !claimStakeInstances.some(stake => stake.planetId === planet.id)
-                                    )
-                                    .map(planet => (
-                                        <div
-                                            key={planet.id}
-                                            className={`planet-card ${selectedPlanet?.id === planet.id ? 'selected' : ''}`}
-                                            onClick={() => {
-                                                setSelectedPlanet(planet);
-                                                setActiveInstanceId(null); // Clear active instance to show purchase screen
-                                            }}
-                                        >
-                                            <div className="planet-icon">🌍</div>
-                                            <div className="planet-info">
-                                                <h4>{planet.name}</h4>
-                                                <div className="planet-stats">
-                                                    <span className={`faction-badge faction-${planet.faction.toLowerCase()}`}>
-                                                        {planet.faction}
-                                                    </span>
-                                                    <span className="rent-cost">
-                                                        💰 {planet.rentCost}/day
-                                                    </span>
-                                                </div>
-                                                <div className="resource-badges">
-                                                    {planet.resources?.slice(0, 3).map(resource => (
-                                                        <span key={resource} className="resource-badge">
-                                                            {resource}
-                                                        </span>
-                                                    ))}
-                                                    {planet.resources && planet.resources.length > 3 && (
-                                                        <span className="resource-badge">+{planet.resources.length - 3}</span>
-                                                    )}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))}
-                            </div>
-
-                            {/* Claim Stake Instances */}
-                            {claimStakeInstances.length > 0 && (
-                                <div className="instances-section">
-                                    <h3>Your Claim Stakes ({claimStakeInstances.length})</h3>
-                                    <div className="instances-list">
-                                        {claimStakeInstances.map(instance => {
-                                            const planet = planets.find(p => p.id === instance.planetId);
-                                            const stats = calculateStats(instance.buildings);
-                                            return (
-                                                <div
-                                                    key={instance.id}
-                                                    className={`instance-card ${activeInstanceId === instance.id ? 'active' : ''}`}
-                                                    onClick={() => {
-                                                        setActiveInstanceId(instance.id);
-                                                        setDesignMode(false);
-                                                    }}
-                                                >
-                                                    <h5>{planet?.name} - T{instance.tier}</h5>
-                                                    <div className="instance-stats">
-                                                        <span>⚡ {stats.totalPower}</span>
-                                                        <span>👥 {stats.totalCrew}</span>
-                                                        <span className={instance.isFinalized ? 'status-active' : 'status-design'}>
-                                                            {instance.isFinalized ? '🟢 Active' : '🟡 Design'}
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            );
-                                        })}
-                                    </div>
-                                </div>
-                            )}
-                        </>
-                    )}
+                        )}
+                    </>
                 </aside>
 
                 {/* Main Content */}
@@ -1203,6 +1214,117 @@ export default function ClaimStakes() {
                                     </div>
                                 </div>
                             </div>
+
+                            {/* Design Summary (Moved to Top) */}
+                            {designMode && currentDesign.length > 0 && (() => {
+                                const buildings = designMode ? currentDesign : activeInstance.buildings;
+                                let totalSlots = 0;
+                                let totalPower = 0;
+                                let totalCrew = 0;
+                                const totalCost: Record<string, number> = {};
+                                const missingResources: Record<string, { needed: number, available: number }> = {};
+                                let hasAllResources = true;
+
+                                buildings.forEach(pb => {
+                                    const building = gameData?.buildings?.find((b: Building) => b.id === pb.buildingId);
+                                    if (building) {
+                                        totalSlots += building.slots;
+                                        totalPower += building.power || 0;
+                                        totalCrew += building.crew || 0;
+
+                                        // Accumulate construction costs
+                                        if (building.constructionCost) {
+                                            Object.entries(building.constructionCost).forEach(([resource, amount]) => {
+                                                totalCost[resource] = (totalCost[resource] || 0) + (amount as number);
+                                            });
+                                        }
+                                    }
+                                });
+
+                                // Check resource availability
+                                Object.entries(totalCost).forEach(([resource, needed]) => {
+                                    const available = starbaseInventory[resource] || 0;
+                                    if (available < needed) {
+                                        missingResources[resource] = { needed, available };
+                                        hasAllResources = false;
+                                    }
+                                });
+
+                                return (
+                                    <div className="design-summary-top">
+                                        <h3>Design Overview</h3>
+                                        <div className="design-stats-row">
+                                            <div className="stat-card">
+                                                <span className="stat-label">Slots</span>
+                                                <span className={`stat-value ${totalSlots > activeInstance.maxSlots ? 'error' : ''}`}>
+                                                    {totalSlots}/{activeInstance.maxSlots}
+                                                </span>
+                                            </div>
+                                            <div className="stat-card">
+                                                <span className="stat-label">Power</span>
+                                                <span className={`stat-value ${totalPower < 0 ? 'error' : totalPower > 0 ? 'positive' : ''}`}>
+                                                    {totalPower > 0 ? '+' : ''}{totalPower}
+                                                </span>
+                                            </div>
+                                            <div className="stat-card">
+                                                <span className="stat-label">Crew</span>
+                                                <span className="stat-value">{totalCrew}</span>
+                                            </div>
+                                        </div>
+
+                                        {Object.keys(totalCost).length > 0 && (
+                                            <div className="construction-requirements">
+                                                <h4>Construction Requirements</h4>
+                                                <div className="resource-requirements">
+                                                    {Object.entries(totalCost).map(([resource, needed]) => {
+                                                        const available = starbaseInventory[resource] || 0;
+                                                        const sufficient = available >= needed;
+                                                        return (
+                                                            <div key={resource} className={`resource-requirement ${sufficient ? 'sufficient' : 'insufficient'}`}>
+                                                                <span className="resource-name">{resource}</span>
+                                                                <span className="resource-amounts">
+                                                                    <span className={sufficient ? 'amount-ok' : 'amount-short'}>
+                                                                        {available}
+                                                                    </span>
+                                                                    <span className="separator">/</span>
+                                                                    <span className="amount-needed">{needed}</span>
+                                                                </span>
+                                                            </div>
+                                                        );
+                                                    })}
+                                                </div>
+
+                                                {!hasAllResources && (
+                                                    <div className="missing-resources-actions">
+                                                        <div className="warning-message">
+                                                            ⚠️ Insufficient resources to finalize design
+                                                        </div>
+                                                        <button
+                                                            className="btn btn-secondary btn-sm"
+                                                            onClick={() => {
+                                                                const toAdd: Record<string, number> = {};
+                                                                Object.entries(missingResources).forEach(([resource, data]) => {
+                                                                    toAdd[resource] = data.needed - data.available;
+                                                                });
+                                                                addToInventory(toAdd);
+                                                                showNotification('Added missing resources to starbase inventory', 'success');
+                                                            }}
+                                                        >
+                                                            🪄 Add Missing Resources (Simulator)
+                                                        </button>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )}
+
+                                        {totalPower < 0 && (
+                                            <div className="warning-message">
+                                                ⚠️ Negative power balance - buildings will not operate!
+                                            </div>
+                                        )}
+                                    </div>
+                                );
+                            })()}
 
                             {/* Building Management */}
                             <div className="building-management">
@@ -1431,19 +1553,22 @@ export default function ClaimStakes() {
                                                     )}
 
                                                     {/* Inactive Indicator */}
-                                                    {!designMode && !pb.isActive && pb.inactiveSince && (
+                                                    {!designMode && !pb.isActive && (
                                                         <div className="inactive-indicator"
                                                             title={
-                                                                activeInstance?.resources.fuel <= 0
-                                                                    ? "Need 5+ fuel to restart"
-                                                                    : currentStats.totalPower < 0
-                                                                        ? "Fix power deficit to restart"
-                                                                        : "Check resource requirements"
+                                                                pb.stopReason ? pb.stopReason :
+                                                                    activeInstance?.resources.fuel <= 0
+                                                                        ? "Central hub needs fuel to operate"
+                                                                        : currentStats.totalPower < 0
+                                                                            ? "Power deficit - add generators"
+                                                                            : "Building stopped"
                                                             }
                                                         >
                                                             <span className="status-dot status-inactive"></span>
                                                             <span className="status-text">
-                                                                {activeInstance?.resources.fuel <= 0 ? "No Fuel" : "Stopped"}
+                                                                {pb.stopReason ? pb.stopReason :
+                                                                    activeInstance?.resources.fuel <= 0 ? "No Fuel" :
+                                                                        currentStats.totalPower < 0 ? "No Power" : "Stopped"}
                                                             </span>
                                                         </div>
                                                     )}
@@ -1634,54 +1759,7 @@ export default function ClaimStakes() {
                                     </div>
                                 )}
 
-                                {/* Design Cost Summary (in design mode) */}
-                                {designMode && currentDesign.length > 0 && (() => {
-                                    const totalCost: Record<string, number> = {};
-                                    let totalSlots = 0;
-                                    let totalPower = 0;
-                                    let totalCrew = 0;
 
-                                    currentDesign.forEach(pb => {
-                                        const building = buildings.find(b => b.id === pb.buildingId);
-                                        if (building) {
-                                            totalSlots += building.slots;
-                                            totalPower += building.power;
-                                            totalCrew += building.crew;
-
-                                            // Accumulate construction costs
-                                            if (building.constructionCost) {
-                                                Object.entries(building.constructionCost).forEach(([resource, amount]) => {
-                                                    totalCost[resource] = (totalCost[resource] || 0) + amount;
-                                                });
-                                            }
-                                        }
-                                    });
-
-                                    return (
-                                        <div className="design-cost-summary">
-                                            <h4>Design Summary</h4>
-                                            <div className="design-stats-summary">
-                                                <span>📦 {totalSlots}/{selectedTier * 100} slots</span>
-                                                <span className={totalPower >= 0 ? 'positive' : 'negative'}>
-                                                    ⚡ {totalPower > 0 ? '+' : ''}{totalPower} power
-                                                </span>
-                                                <span>👥 {totalCrew} crew</span>
-                                            </div>
-                                            {Object.keys(totalCost).length > 0 && (
-                                                <div className="total-construction-cost">
-                                                    <strong>Total Construction Cost:</strong>
-                                                    <div className="cost-breakdown">
-                                                        {Object.entries(totalCost).map(([resource, amount]) => (
-                                                            <span key={resource} className="cost-item">
-                                                                {resource}: {amount}
-                                                            </span>
-                                                        ))}
-                                                    </div>
-                                                </div>
-                                            )}
-                                        </div>
-                                    );
-                                })()}
 
                                 {/* Action Buttons */}
                                 <div className="action-buttons">
@@ -1696,7 +1774,28 @@ export default function ClaimStakes() {
                                             <button
                                                 className="btn btn-primary"
                                                 onClick={finalizeDesign}
-                                                disabled={currentDesign.length === 0}
+                                                disabled={currentDesign.length === 0 || (() => {
+                                                    // Check if we have all resources
+                                                    const totalCost: Record<string, number> = {};
+                                                    currentDesign.forEach(pb => {
+                                                        const building = gameData?.buildings?.find((b: Building) => b.id === pb.buildingId);
+                                                        if (building?.constructionCost) {
+                                                            Object.entries(building.constructionCost).forEach(([resource, amount]) => {
+                                                                totalCost[resource] = (totalCost[resource] || 0) + (amount as number);
+                                                            });
+                                                        }
+                                                    });
+
+                                                    // Check resource availability
+                                                    for (const [resource, needed] of Object.entries(totalCost)) {
+                                                        const available = starbaseInventory[resource] || 0;
+                                                        if (available < needed) {
+                                                            return true; // Disabled if missing resources
+                                                        }
+                                                    }
+                                                    return false;
+                                                })()}
+                                                title={currentDesign.length === 0 ? 'Add buildings to design' : 'Finalize and start construction'}
                                             >
                                                 Finalize Design
                                             </button>
@@ -1710,7 +1809,7 @@ export default function ClaimStakes() {
                                                     setCurrentDesign([...activeInstance.buildings]);
                                                 }}
                                             >
-                                                Redesign
+                                                Continue Construction
                                             </button>
                                             {activeInstance.buildings.length > 0 && (
                                                 <button
@@ -1896,7 +1995,10 @@ export default function ClaimStakes() {
                             {Object.values(currentStats.resourceFlow).some(f => f.consumption > f.production) && (
                                 <li>⚖️ Some resources have negative flow - production chain may stop</li>
                             )}
-                            {activeInstance && activeInstance.currentStorage / activeInstance.maxStorage > 0.8 && (
+                            {activeInstance && activeInstance.currentStorage / activeInstance.maxStorage >= 0.95 && (
+                                <li className="warning critical">📦 Storage critical! ({Math.floor((activeInstance.currentStorage / activeInstance.maxStorage) * 100)}%) - Production will stop at 100%</li>
+                            )}
+                            {activeInstance && activeInstance.currentStorage / activeInstance.maxStorage >= 0.8 && activeInstance.currentStorage / activeInstance.maxStorage < 0.95 && (
                                 <li className="warning">📦 Storage nearly full ({Math.floor((activeInstance.currentStorage / activeInstance.maxStorage) * 100)}%)</li>
                             )}
                             <li>💰 Deconstruct buildings to recover 50% of materials</li>

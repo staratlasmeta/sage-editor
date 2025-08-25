@@ -96,6 +96,28 @@
     margin-bottom: 0.25rem;
 }
 
+.node-info-panel .resource-type
+{
+    font-family: 'Orbitron', monospace;
+    font-size: 0.9rem;
+    color: var(--accent-green);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0.5rem 0;
+}
+
+.node-info-panel .extraction-note
+{
+    font-family: 'Exo 2', sans-serif;
+    font-size: 0.85rem;
+    color: #888;
+    font-style: italic;
+    margin-top: 1rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid #333;
+}
+
 .resource-intelligence-panel
 {
     position: absolute;

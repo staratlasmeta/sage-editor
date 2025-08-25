@@ -248,7 +248,7 @@ export function ResourceManager({
 
                                     <div className="stake-actions">
                                         <button
-                                            className="btn btn-secondary"
+                                            className="btn btn-secondary btn-sm"
                                             onClick={() => {
                                                 setSelectedSource(stake.id);
                                                 setSelectedTarget('starbase');
@@ -257,17 +257,17 @@ export function ResourceManager({
                                             SET AS SOURCE
                                         </button>
                                         <button
-                                            className="btn btn-secondary"
+                                            className="btn btn-secondary btn-sm"
                                             onClick={() => setSelectedTarget(stake.id)}
                                         >
                                             SET AS TARGET
                                         </button>
                                         <button
-                                            className="btn btn-magic"
+                                            className="btn btn-secondary btn-sm"
                                             onClick={() => onMagicResources(stake.id)}
                                             title="Add 100 fuel for testing (mainly for keeping claim stake running)"
                                         >
-                                            Add Fuel 🪄
+                                            ADD FUEL 🪄
                                         </button>
                                     </div>
                                 </div>
