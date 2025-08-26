@@ -590,9 +590,12 @@ function RecipeTreeCanvasComponent({
                                 <div className="planet-types-info">
                                     <strong>CAN BE EXTRACTED FROM:</strong>
                                     <div className="planet-types-list">
-                                        {selectedNode.recipe.planetTypes.split(';').map((planet, idx) => (
+                                        {(Array.isArray(selectedNode.recipe.planetTypes)
+                                            ? selectedNode.recipe.planetTypes
+                                            : selectedNode.recipe.planetTypes.split(';')
+                                        ).map((planet, idx) => (
                                             <span key={idx} className="planet-type-tag">
-                                                {planet.trim()}
+                                                {typeof planet === 'string' ? planet.trim() : planet}
                                             </span>
                                         ))}
                                     </div>
@@ -603,11 +606,17 @@ function RecipeTreeCanvasComponent({
                                 <div className="factions-info">
                                     <strong>FACTION REGIONS:</strong>
                                     <div className="factions-list">
-                                        {selectedNode.recipe.factions.split(';').map((faction, idx) => (
-                                            <span key={idx} className={`faction-tag faction-${faction.trim().toLowerCase()}`}>
-                                                {faction.trim()}
-                                            </span>
-                                        ))}
+                                        {(Array.isArray(selectedNode.recipe.factions)
+                                            ? selectedNode.recipe.factions
+                                            : selectedNode.recipe.factions.split(';')
+                                        ).map((faction, idx) => {
+                                            const factionStr = typeof faction === 'string' ? faction.trim() : faction;
+                                            return (
+                                                <span key={idx} className={`faction-tag faction-${factionStr.toLowerCase()}`}>
+                                                    {factionStr}
+                                                </span>
+                                            );
+                                        })}
                                     </div>
                                 </div>
                             )}
@@ -623,9 +632,12 @@ function RecipeTreeCanvasComponent({
                                 <div className="planet-types-info">
                                     <strong>CAN BE CRAFTED ON:</strong>
                                     <div className="planet-types-list">
-                                        {selectedNode.recipe.planetTypes.split(';').map((planet, idx) => (
+                                        {(Array.isArray(selectedNode.recipe.planetTypes)
+                                            ? selectedNode.recipe.planetTypes
+                                            : selectedNode.recipe.planetTypes.split(';')
+                                        ).map((planet, idx) => (
                                             <span key={idx} className="planet-type-tag">
-                                                {planet.trim()}
+                                                {typeof planet === 'string' ? planet.trim() : planet}
                                             </span>
                                         ))}
                                     </div>
@@ -636,11 +648,17 @@ function RecipeTreeCanvasComponent({
                                 <div className="factions-info">
                                     <strong>LIMITED TO FACTIONS:</strong>
                                     <div className="factions-list">
-                                        {selectedNode.recipe.factions.split(';').map((faction, idx) => (
-                                            <span key={idx} className={`faction-tag faction-${faction.trim().toLowerCase()}`}>
-                                                {faction.trim()}
-                                            </span>
-                                        ))}
+                                        {(Array.isArray(selectedNode.recipe.factions)
+                                            ? selectedNode.recipe.factions
+                                            : selectedNode.recipe.factions.split(';')
+                                        ).map((faction, idx) => {
+                                            const factionStr = typeof faction === 'string' ? faction.trim() : faction;
+                                            return (
+                                                <span key={idx} className={`faction-tag faction-${factionStr.toLowerCase()}`}>
+                                                    {factionStr}
+                                                </span>
+                                            );
+                                        })}
                                     </div>
                                 </div>
                             )}
