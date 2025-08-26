@@ -5938,6 +5938,24 @@ function processLoadedConfiguration(loadedData) {
             window.statDescriptions = statDescriptions;
         }
         
+        // Load combat formula
+        if (loadedData.combatFormula && window.combatSimulator) {
+            window.combatSimulator.formula = loadedData.combatFormula;
+            localStorage.setItem('combatSimulatorFormula', loadedData.combatFormula);
+            console.log('Loaded combat formula from configuration file');
+            
+            // Refresh syntax highlighting if combat simulator is open
+            if (window.refreshCombatFormulaSyntax) {
+                window.refreshCombatFormulaSyntax();
+            }
+            
+            // Update the formula input if it exists
+            const formulaInput = document.getElementById('combat-formula-input');
+            if (formulaInput) {
+                formulaInput.value = loadedData.combatFormula;
+            }
+        }
+        
         // Update the comparison table if needed
         if (typeof updateComparisonTable === 'function') {
             updateComparisonTable();
