@@ -768,7 +768,10 @@ function initializeSimulationUI(editor) {
                 html += `
                     <div class="career-xp-bar" data-career-id="${nodeId}">
                         <div class="career-header">
-                            <div class="career-name" style="color: ${nodeColor}">${node.name.toUpperCase()}</div>
+                            <div class="career-name-container">
+                                <span class="career-name" style="color: ${nodeColor}">${node.name.toUpperCase()}</span>
+                                <span class="earning-indicator" data-career-id="${nodeId}" style="display: none;">EARNING XP</span>
+                            </div>
                             <button class="career-play-button" data-career-id="${nodeId}"
                                     onclick="window.Simulation.toggleCareer('${nodeId}')" 
                                     title="Play ${node.name}">
@@ -865,6 +868,16 @@ function updateSimulationUI(editor) {
             } else {
                 careerBar.classList.remove('active');
                 careerBar.classList.add('paused');
+            }
+        }
+        
+        // Update earning indicator
+        const earningIndicator = document.querySelector(`.earning-indicator[data-career-id="${nodeId}"]`);
+        if (earningIndicator) {
+            if (careerData.isActive) {
+                earningIndicator.style.display = 'inline-block';
+            } else {
+                earningIndicator.style.display = 'none';
             }
         }
         
