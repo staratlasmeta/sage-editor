@@ -516,9 +516,13 @@ function RecipeTreeCanvasComponent({
                     calculateNodePositions(tree, canvasRef.current.width, canvasRef.current.height);
                     setTreeRoot(tree);
                     setViewport(prev => ({ ...prev, x: 0, y: 0, scale: 1 }));
+                    // Force immediate draw after setting tree
+                    requestAnimationFrame(() => {
+                        drawTree();
+                    });
                 }
                 setIsLoading(false);
-            }, 50);
+            }, 10); // Reduced delay from 50ms to 10ms for faster response
             return () => {
                 clearTimeout(timeoutId);
                 setIsLoading(false);
@@ -527,12 +531,14 @@ function RecipeTreeCanvasComponent({
             setTreeRoot(null);
             setIsLoading(false);
         }
-    }, [recipe?.id, recipes.length, buildRecipeTree, calculateNodePositions]);
+    }, [recipe?.id, recipes.length, buildRecipeTree, calculateNodePositions, drawTree]);
 
-    // Draw when state changes
+    // Draw when state changes (viewport, hovering, selection)
     useEffect(() => {
-        drawTree();
-    }, [drawTree]);
+        if (treeRoot) {
+            drawTree();
+        }
+    }, [treeRoot, hoveredNode, selectedNode, viewport.x, viewport.y, viewport.scale, drawTree]);
 
     // Canvas event listeners
     useEffect(() => {
