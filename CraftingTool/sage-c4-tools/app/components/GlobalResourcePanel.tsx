@@ -132,22 +132,46 @@ export function GlobalResourcePanel({ className = '' }: GlobalResourcePanelProps
         }
     });
 
-    const handleMagicResources = () => {
-        const magicResources = {
-            'fuel': 100,
-            'iron-ore': 500,
-            'copper-ore': 500,
-            'hydrogen': 300,
-            'coal': 200,
-            'silica': 200,
-            'copper': 100,
-            'steel': 50,
-            'iron-plate': 50,
-            'circuit-board': 20,
-            'electronics': 20
-        };
+    // Add all of the raw resources to the inventory from mockData.json
 
-        addToInventory(magicResources);
+    const handleMagicResources = () => {
+        const magicResources: Record<string, number> = {};
+
+        // Add all extractable raw resources from mockData.json
+        const extractableResources = [
+            'iron-ore', 'copper-ore', 'aluminum-ore', 'titanium-ore',
+            'silica', 'carbon', 'hydrogen', 'coal',
+            'chromite-ore', 'osmium-ore', 'tritium-ore',
+            'arco', 'lumanite', 'biomass'
+        ];
+
+        // Add raw resources - 1000 of each
+        extractableResources.forEach(resource => {
+            magicResources[resource] = 1000;
+        });
+
+        // Add some processed resources for testing
+        const processedResources = [
+            'iron', 'copper', 'aluminum', 'titanium',
+            'steel', 'electronics', 'fuel',
+            'chromite', 'osmium', 'tritium'
+        ];
+
+        processedResources.forEach(resource => {
+            magicResources[resource] = 500;
+        });
+
+        // Add some advanced resources
+        const advancedResources = [
+            'circuit-board', 'high-density-alloy', 'power-cell'
+        ];
+
+        advancedResources.forEach(resource => {
+            magicResources[resource] = 100;
+        });
+
+        addToInventory(magicResources as Record<string, number>);
+        console.log('✨ Magic resources added:', magicResources);
     };
 
     const formatNumber = (num: number): string => {

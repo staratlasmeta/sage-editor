@@ -188,6 +188,7 @@
     position: relative;
     display: inline-flex;
     align-items: center;
+    z-index: 10;
 }
 
 .stop-icon
@@ -218,13 +219,15 @@
     bottom: 100%;
     left: 50%;
     transform: translateX(-50%);
-    background: var(--primary-dark);
-    border: 1px solid var(--primary-orange);
+    background: var(--primary-dark, #0A0A0A);
+    border: 1px solid var(--primary-orange, #FF6B35);
     border-radius: 4px;
     padding: 0.5rem;
     min-width: 200px;
-    z-index: 1000;
+    z-index: 9999;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+    display: block;
 }
 
 .stop-tooltip strong
@@ -240,6 +243,7 @@
     padding-left: 1.25rem;
     color: var(--text-primary);
     font-size: 0.875rem;
+    white-space: normal;
 }
 
 .stop-tooltip li

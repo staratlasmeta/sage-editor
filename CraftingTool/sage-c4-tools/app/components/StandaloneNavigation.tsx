@@ -18,51 +18,37 @@ export function StandaloneNavigation({ className = '', claimStakes = [], current
 
     const handleHomeClick = () => {
         // Navigate back to SAGE Editor Suite
+        const protocol = window.location.protocol;
         const hostname = window.location.hostname;
-        // Secure check: ensure hostname ENDS with .github.io (not just contains it)
-        const isGitHubPages = hostname.endsWith('.github.io');
-        const isLocal = window.location.protocol === 'file:' || hostname === 'localhost' || hostname === '127.0.0.1';
+        const pathname = window.location.pathname;
 
-        if (isGitHubPages) {
-            // For GitHub Pages with format: https://[user].github.io/[project]/
-            // Extract the base path and navigate to the main index
-            const pathParts = window.location.pathname.split('/').filter(Boolean);
+        // Handle file protocol first
+        if (protocol === 'file:') {
+            // Check where we are in the file system
+            if (pathname.includes('/SAGE Editor Suite/') || pathname.includes('/SAGE%20Editor%20Suite/')) {
+                // We're already in SAGE Editor Suite, go to index.html in same directory
+                window.location.href = '../index.html';
+            } else {
+                // Default to parent directory
+                window.location.href = '../index.html';
+            }
+            return;
+        }
 
-            // Check if we're in a subdirectory of the project
+        // Handle GitHub Pages
+        if (hostname.endsWith('.github.io')) {
+            const pathParts = pathname.split('/').filter(Boolean);
             if (pathParts.length > 0) {
-                // For GitHub Pages, the structure is different
-                // The URL is like: https://[user].github.io/[project]/SAGE%20Editor%20Suite/
-                // We need to go to the main SAGE Editor Suite index
-                const basePath = pathParts.slice(0, 1).join('/'); // Keep the project name
+                const basePath = pathParts.slice(0, 1).join('/');
                 window.location.href = `/${basePath}/SAGE%20Editor%20Suite/index.html`;
             } else {
-                // Fallback to relative path
-                window.location.href = '../../../SAGE Editor Suite/index.html';
+                window.location.href = '../index.html';
             }
-        } else if (isLocal) {
-            // For local file:// protocol or localhost
-            if (window.location.protocol === 'file:') {
-                // Check if we're in the SAGE Editor Suite directory (c4-tools.html)
-                const currentPath = window.location.pathname;
-
-                if (currentPath.includes('/SAGE Editor Suite/') || currentPath.includes('/SAGE%20Editor%20Suite/')) {
-                    // We're in the same directory as index.html
-                    window.location.href = 'index.html';
-                } else if (currentPath.includes('/CraftingTool/')) {
-                    // We're in the original location
-                    window.location.href = '../../../SAGE Editor Suite/index.html';
-                } else {
-                    // Try the same directory first
-                    window.location.href = 'index.html';
-                }
-            } else {
-                // For localhost development
-                alert('In development mode - navigation to SAGE Editor Suite');
-            }
-        } else {
-            // For other deployments
-            alert('Navigation not configured for this deployment');
+            return;
         }
+
+        // Default for any deployment (including localhost) - just try parent directory
+        window.location.href = '../index.html';
     };
 
     const handleNavClick = (route: string) => {
