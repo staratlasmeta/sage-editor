@@ -616,8 +616,22 @@ export class DataLoader {
 
                 console.log('Processed resources:', resourcesArray.length, 'items');
 
-                // Process recipes from mockData
-                const processedRecipes = mockDataFile.recipes || [];
+                // Load recipes from CSV file
+                let processedRecipes: any[] = [];
+                try {
+                    const recipesCSV = await this.loadCSV('/data/mockRecipes.csv');
+                    if (recipesCSV && recipesCSV.length > 0) {
+                        processedRecipes = this.processRecipes(recipesCSV);
+                        console.log('Loaded', processedRecipes.length, 'recipes from mockRecipes.csv');
+                    } else {
+                        // Fallback to recipes in mockData if CSV fails
+                        processedRecipes = mockDataFile.recipes || [];
+                        console.log('Using', processedRecipes.length, 'recipes from mockData.json');
+                    }
+                } catch (error) {
+                    console.warn('Failed to load mockRecipes.csv, using mockData recipes:', error);
+                    processedRecipes = mockDataFile.recipes || [];
+                }
 
                 const loadedData = {
                     cargo: resourcesObject,
@@ -635,7 +649,8 @@ export class DataLoader {
                     starbases: mockDataFile.starbases || []
                 };
 
-                console.log('Returning data with', loadedData.buildings.length, 'buildings and', loadedData.resources.length, 'resources');
+                console.log('Returning data with', loadedData.buildings.length, 'buildings,',
+                    loadedData.resources.length, 'resources, and', loadedData.recipes.length, 'recipes');
                 return loadedData;
             }
 
