@@ -1,0 +1,745 @@
+{
+  "planets": [
+    {
+      "id": "planet_mud_terrestrial_alpha",
+      "name": "Terra Prime",
+      "faction": "MUD",
+      "type": "Terrestrial",
+      "tier": 1,
+      "resources": [
+        "iron-ore",
+        "copper-ore",
+        "hydrogen",
+        "lumanite"
+      ],
+      "richness": {
+        "iron-ore": 1.5,
+        "copper-ore": 1.0,
+        "hydrogen": 2.0,
+        "lumanite": 1.2
+      },
+      "tags": [
+        "terrestrial",
+        "mining",
+        "industrial"
+      ],
+      "rentPerDay": 100
+    },
+    {
+      "id": "planet_oni_oceanic_beta",
+      "name": "Crystal Falls",
+      "faction": "ONI",
+      "type": "Oceanic",
+      "tier": 2,
+      "resources": [
+        "copper-ore",
+        "silica",
+        "hydrogen",
+        "chromite-ore",
+        "tritium-ore"
+      ],
+      "richness": {
+        "copper-ore": 2.0,
+        "silica": 1.5,
+        "hydrogen": 1.0,
+        "chromite-ore": 1.8,
+        "tritium-ore": 1.2
+      },
+      "tags": [
+        "oceanic",
+        "tech",
+        "mining"
+      ],
+      "rentPerDay": 200
+    },
+    {
+      "id": "planet_ust_volcanic_gamma",
+      "name": "Forge World",
+      "faction": "UST",
+      "type": "Volcanic",
+      "tier": 3,
+      "resources": [
+        "iron-ore",
+        "coal",
+        "osmium-ore",
+        "lumanite",
+        "arco"
+      ],
+      "richness": {
+        "iron-ore": 2.5,
+        "coal": 1.8,
+        "osmium-ore": 2.0,
+        "lumanite": 1.5,
+        "arco": 1.3
+      },
+      "tags": [
+        "volcanic",
+        "industrial",
+        "forge"
+      ],
+      "rentPerDay": 300
+    },
+    {
+      "id": "planet_mud_asteroid_delta",
+      "name": "Mining Belt Alpha",
+      "faction": "MUD",
+      "type": "System Asteroid Belt",
+      "tier": 2,
+      "resources": [
+        "aluminum-ore",
+        "titanium-ore",
+        "tritium-ore",
+        "chromite-ore",
+        "hydrogen"
+      ],
+      "richness": {
+        "aluminum-ore": 2.0,
+        "titanium-ore": 1.8,
+        "tritium-ore": 2.5,
+        "chromite-ore": 1.5,
+        "hydrogen": 1.0
+      },
+      "tags": [
+        "asteroid",
+        "mining",
+        "zero-g"
+      ],
+      "rentPerDay": 250
+    },
+    {
+      "id": "planet_oni_gas_giant_epsilon",
+      "name": "Azure Storm",
+      "faction": "ONI",
+      "type": "Gas Giant",
+      "tier": 3,
+      "resources": [
+        "hydrogen",
+        "lumanite",
+        "osmium-ore"
+      ],
+      "richness": {
+        "hydrogen": 3.0,
+        "lumanite": 1.5,
+        "osmium-ore": 1.2
+      },
+      "tags": [
+        "gas-giant",
+        "fuel",
+        "atmospheric"
+      ],
+      "rentPerDay": 350
+    },
+    {
+      "id": "planet_ust_barren_zeta",
+      "name": "Desolate Rock",
+      "faction": "UST",
+      "type": "Barren",
+      "tier": 1,
+      "resources": [
+        "silica",
+        "arco",
+        "carbon"
+      ],
+      "richness": {
+        "silica": 2.0,
+        "arco": 2.5,
+        "carbon": 1.5
+      },
+      "tags": [
+        "barren",
+        "remote",
+        "mining"
+      ],
+      "rentPerDay": 150
+    },
+    {
+      "id": "planet_mud_ice_giant_eta",
+      "name": "Frozen Titan",
+      "faction": "MUD",
+      "type": "Ice Giant",
+      "tier": 4,
+      "resources": [
+        "arco",
+        "chromite-ore",
+        "hydrogen"
+      ],
+      "richness": {
+        "arco": 2.0,
+        "chromite-ore": 1.8,
+        "hydrogen": 2.2
+      },
+      "tags": [
+        "ice-giant",
+        "extreme",
+        "research"
+      ],
+      "rentPerDay": 400
+    },
+    {
+      "id": "planet_ust_ice_planet_theta",
+      "name": "Absolute Zero",
+      "faction": "UST",
+      "type": "Ice Planet",
+      "tier": 5,
+      "resources": [
+        "titanium-ore",
+        "aluminum-ore",
+        "tritium-ore"
+      ],
+      "richness": {
+        "titanium-ore": 2.5,
+        "aluminum-ore": 2.0,
+        "tritium-ore": 3.0
+      },
+      "tags": [
+        "ice-planet",
+        "extreme-cold",
+        "advanced"
+      ],
+      "rentPerDay": 500
+    },
+    {
+      "id": "planet_oni_dark_iota",
+      "name": "Shadow Realm",
+      "faction": "ONI",
+      "type": "Dark",
+      "tier": 3,
+      "resources": [
+        "arco",
+        "lumanite",
+        "carbon"
+      ],
+      "richness": {
+        "arco": 3.0,
+        "lumanite": 2.5,
+        "carbon": 2.0
+      },
+      "tags": [
+        "dark",
+        "mysterious",
+        "energy"
+      ],
+      "rentPerDay": 350
+    }
+  ],
+  "buildings": [
+    {
+      "id": "central-hub-t1",
+      "name": "Central Hub T1",
+      "category": "infrastructure",
+      "tier": 1,
+      "slots": 5,
+      "power": 50,
+      "crew": 10,
+      "storage": 100,
+      "resourceUsage": {
+        "fuel": 1
+      },
+      "constructionCost": {
+        "steel": 100,
+        "electronics": 50
+      },
+      "constructionTime": 60,
+      "requiredTags": [],
+      "comesWithStake": true
+    },
+    {
+      "id": "central-hub-t2",
+      "name": "Central Hub T2",
+      "category": "infrastructure",
+      "tier": 2,
+      "slots": 8,
+      "power": 75,
+      "crew": 15,
+      "storage": 150,
+      "resourceUsage": {
+        "fuel": 1.5
+      },
+      "constructionCost": {
+        "steel": 200,
+        "electronics": 100
+      },
+      "constructionTime": 90
+    },
+    {
+      "id": "central-hub-t3",
+      "name": "Central Hub T3",
+      "category": "infrastructure",
+      "tier": 3,
+      "slots": 12,
+      "power": 100,
+      "crew": 20,
+      "storage": 200,
+      "resourceUsage": {
+        "fuel": 2
+      },
+      "constructionCost": {
+        "high-density-alloy": 150,
+        "circuit-board": 75
+      },
+      "constructionTime": 120
+    },
+    {
+      "id": "storage-module-t1",
+      "name": "Storage Module T1",
+      "category": "storage",
+      "tier": 1,
+      "slots": 3,
+      "power": -5,
+      "crew": 2,
+      "storage": 500,
+      "constructionCost": {
+        "steel": 50,
+        "aluminum": 30
+      },
+      "constructionTime": 30,
+      "description": "Basic storage module - adds 500 storage capacity"
+    },
+    {
+      "id": "storage-module-t2",
+      "name": "Storage Module T2",
+      "category": "storage",
+      "tier": 2,
+      "slots": 4,
+      "power": -8,
+      "crew": 3,
+      "storage": 1000,
+      "constructionCost": {
+        "steel": 100,
+        "aluminum": 60
+      },
+      "constructionTime": 45,
+      "description": "Advanced storage module - adds 1000 storage capacity"
+    },
+    {
+      "id": "storage-hub-t1",
+      "name": "Storage Hub T1",
+      "category": "storage",
+      "tier": 1,
+      "slots": 10,
+      "power": -15,
+      "crew": 5,
+      "storage": 2000,
+      "constructionCost": {
+        "steel": 200,
+        "aluminum": 100,
+        "electronics": 50
+      },
+      "constructionTime": 60,
+      "description": "Large storage hub - adds 2000 storage capacity",
+      "requiredTags": [
+        "industrial"
+      ]
+    },
+    {
+      "id": "storage-hub-t2",
+      "name": "Storage Hub T2",
+      "category": "storage",
+      "tier": 2,
+      "slots": 15,
+      "power": -20,
+      "crew": 8,
+      "storage": 4000,
+      "constructionCost": {
+        "steel": 400,
+        "aluminum": 200,
+        "electronics": 100
+      },
+      "constructionTime": 90,
+      "description": "Advanced storage hub - adds 4000 storage capacity"
+    },
+    {
+      "id": "extractor-iron",
+      "name": "Iron Ore Extractor",
+      "category": "extraction",
+      "tier": 1,
+      "slots": 8,
+      "power": -20,
+      "crew": 10,
+      "storage": 50,
+      "extractionRate": {
+        "iron-ore": 2
+      },
+      "constructionCost": {
+        "steel": 150,
+        "electronics": 50
+      },
+      "constructionTime": 45,
+      "requiredResources": [
+        "iron-ore"
+      ]
+    },
+    {
+      "id": "extractor-copper",
+      "name": "Copper Ore Extractor",
+      "category": "extraction",
+      "tier": 1,
+      "slots": 8,
+      "power": -20,
+      "crew": 10,
+      "storage": 50,
+      "extractionRate": {
+        "copper-ore": 2
+      },
+      "constructionCost": {
+        "steel": 150,
+        "electronics": 50
+      },
+      "constructionTime": 45,
+      "requiredResources": [
+        "copper-ore"
+      ]
+    },
+    {
+      "id": "extractor-hydrogen",
+      "name": "Hydrogen Extractor",
+      "category": "extraction",
+      "tier": 1,
+      "slots": 10,
+      "power": -25,
+      "crew": 12,
+      "storage": 75,
+      "extractionRate": {
+        "hydrogen": 3
+      },
+      "constructionCost": {
+        "steel": 200,
+        "electronics": 75
+      },
+      "constructionTime": 60,
+      "requiredResources": [
+        "hydrogen"
+      ]
+    },
+    {
+      "id": "extractor-chromite",
+      "name": "Chromite Ore Extractor",
+      "category": "extraction",
+      "tier": 2,
+      "slots": 10,
+      "power": -25,
+      "crew": 12,
+      "storage": 50,
+      "extractionRate": {
+        "chromite-ore": 1.5
+      },
+      "constructionCost": {
+        "steel": 250,
+        "electronics": 100
+      },
+      "constructionTime": 60,
+      "requiredResources": [
+        "chromite-ore"
+      ]
+    },
+    {
+      "id": "extractor-osmium",
+      "name": "Osmium Ore Extractor",
+      "category": "extraction",
+      "tier": 2,
+      "slots": 12,
+      "power": -30,
+      "crew": 15,
+      "storage": 50,
+      "extractionRate": {
+        "osmium-ore": 1.5
+      },
+      "constructionCost": {
+        "steel": 300,
+        "electronics": 125
+      },
+      "constructionTime": 75,
+      "requiredResources": [
+        "osmium-ore"
+      ]
+    },
+    {
+      "id": "extractor-tritium",
+      "name": "Tritium Ore Extractor",
+      "category": "extraction",
+      "tier": 2,
+      "slots": 15,
+      "power": -35,
+      "crew": 18,
+      "storage": 50,
+      "extractionRate": {
+        "tritium-ore": 1
+      },
+      "constructionCost": {
+        "steel": 400,
+        "electronics": 150
+      },
+      "constructionTime": 90,
+      "requiredResources": [
+        "tritium-ore"
+      ]
+    },
+    {
+      "id": "extractor-arco",
+      "name": "Arco Extractor",
+      "category": "extraction",
+      "tier": 2,
+      "slots": 10,
+      "power": -25,
+      "crew": 12,
+      "storage": 50,
+      "extractionRate": {
+        "arco": 2
+      },
+      "constructionCost": {
+        "steel": 250,
+        "electronics": 100
+      },
+      "constructionTime": 60,
+      "requiredResources": [
+        "arco"
+      ]
+    },
+    {
+      "id": "extractor-lumanite",
+      "name": "Lumanite Extractor",
+      "category": "extraction",
+      "tier": 2,
+      "slots": 12,
+      "power": -30,
+      "crew": 15,
+      "storage": 50,
+      "extractionRate": {
+        "lumanite": 1.5
+      },
+      "constructionCost": {
+        "steel": 300,
+        "electronics": 125
+      },
+      "constructionTime": 75,
+      "requiredResources": [
+        "lumanite"
+      ]
+    },
+    {
+      "id": "processor-steel",
+      "name": "Steel Processor",
+      "category": "processing",
+      "tier": 2,
+      "slots": 12,
+      "power": -30,
+      "crew": 15,
+      "storage": 75,
+      "resourceUsage": {
+        "iron": 2,
+        "carbon": 1
+      },
+      "resourceProduction": {
+        "steel": 1
+      },
+      "constructionCost": {
+        "steel": 200,
+        "electronics": 100
+      },
+      "constructionTime": 60
+    },
+    {
+      "id": "processor-copper",
+      "name": "Copper Processor T1",
+      "category": "processing",
+      "tier": 1,
+      "slots": 12,
+      "power": -30,
+      "crew": 15,
+      "storage": 50,
+      "resourceUsage": {
+        "copper-ore": 2
+      },
+      "resourceProduction": {
+        "copper": 1
+      },
+      "constructionCost": {
+        "steel": 200,
+        "electronics": 75
+      },
+      "constructionTime": 60,
+      "requiredTags": [
+        "processing-modules"
+      ]
+    },
+    {
+      "id": "processor-electronics",
+      "name": "Electronics Processor T1",
+      "category": "processing",
+      "tier": 1,
+      "slots": 10,
+      "power": -25,
+      "crew": 12,
+      "storage": 50,
+      "resourceUsage": {
+        "copper": 3,
+        "silica": 2
+      },
+      "resourceProduction": {
+        "electronics": 1
+      },
+      "constructionCost": {
+        "steel": 150,
+        "copper": 100
+      },
+      "constructionTime": 45
+    },
+    {
+      "id": "processor-fuel",
+      "name": "Fuel Processor T1",
+      "category": "processing",
+      "tier": 1,
+      "slots": 15,
+      "power": -35,
+      "crew": 20,
+      "storage": 100,
+      "resourceUsage": {
+        "hydrogen": 4,
+        "carbon": 1
+      },
+      "resourceProduction": {
+        "fuel": 2
+      },
+      "constructionCost": {
+        "steel": 300,
+        "electronics": 150
+      },
+      "constructionTime": 75
+    },
+    {
+      "id": "power-plant-t1",
+      "name": "Power Plant T1",
+      "category": "power",
+      "tier": 1,
+      "slots": 8,
+      "power": 100,
+      "crew": 8,
+      "storage": 25,
+      "resourceUsage": {
+        "fuel": 2
+      },
+      "constructionCost": {
+        "steel": 200,
+        "electronics": 100
+      },
+      "constructionTime": 60,
+      "description": "Basic power generation facility"
+    },
+    {
+      "id": "solar-array-t1",
+      "name": "Solar Array T1",
+      "category": "power",
+      "tier": 1,
+      "slots": 6,
+      "power": 60,
+      "crew": 2,
+      "storage": 10,
+      "constructionCost": {
+        "aluminum": 150,
+        "electronics": 75
+      },
+      "constructionTime": 45,
+      "description": "Clean energy from solar power"
+    },
+    {
+      "id": "extraction-hub-t1",
+      "name": "Extraction Hub T1",
+      "category": "infrastructure",
+      "tier": 1,
+      "slots": 10,
+      "power": -20,
+      "crew": 15,
+      "storage": 150,
+      "constructionCost": {
+        "steel": 300,
+        "electronics": 150
+      },
+      "constructionTime": 90,
+      "description": "Enables extraction modules",
+      "providedTags": [
+        "extraction"
+      ]
+    },
+    {
+      "id": "processing-hub-t1",
+      "name": "Processing Hub T1",
+      "category": "infrastructure",
+      "tier": 1,
+      "slots": 12,
+      "power": -25,
+      "crew": 18,
+      "storage": 200,
+      "constructionCost": {
+        "steel": 400,
+        "electronics": 200
+      },
+      "constructionTime": 120,
+      "description": "Enables processing modules",
+      "providedTags": [
+        "processing"
+      ]
+    }
+  ],
+  "starbases": [
+    {
+      "id": "starbase_mud_001",
+      "name": "Unity Station",
+      "faction": "MUD",
+      "level": 0
+    },
+    {
+      "id": "starbase_oni_001",
+      "name": "Phoenix Hub",
+      "faction": "ONI",
+      "level": 1
+    },
+    {
+      "id": "starbase_ust_001",
+      "name": "Liberty Complex",
+      "faction": "UST",
+      "level": 2
+    }
+  ],
+  "resources": {
+    "raw": [
+      "iron-ore",
+      "copper-ore",
+      "aluminum-ore",
+      "titanium-ore",
+      "silica",
+      "carbon",
+      "hydrogen",
+      "biomass",
+      "coal",
+      "chromite-ore",
+      "osmium-ore",
+      "tritium-ore",
+      "arco",
+      "lumanite"
+    ],
+    "processed": [
+      "iron",
+      "copper",
+      "aluminum",
+      "titanium",
+      "steel",
+      "electronics",
+      "fuel",
+      "food",
+      "chromite",
+      "osmium",
+      "tritium"
+    ],
+    "advanced": [
+      "circuit-board",
+      "high-density-alloy",
+      "power-cell",
+      "subspace-coils",
+      "warp-coils",
+      "dimensional-stabilizer",
+      "field-harmonizer",
+      "subspace-conduit",
+      "warp-field-generator"
+    ]
+  }
+}
