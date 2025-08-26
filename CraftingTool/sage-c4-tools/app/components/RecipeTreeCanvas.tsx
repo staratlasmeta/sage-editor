@@ -60,6 +60,7 @@ function RecipeTreeCanvasComponent({
     const [hoveredNode, setHoveredNode] = useState<TreeNode | null>(null);
     const [selectedNode, setSelectedNode] = useState<TreeNode | null>(null);
     const [treeRoot, setTreeRoot] = useState<TreeNode | null>(null);
+    const [isLoading, setIsLoading] = useState(false);
     const [viewport, setViewport] = useState({
         x: 0,
         y: 0,
@@ -72,9 +73,11 @@ function RecipeTreeCanvasComponent({
     // Use RAF for smooth animations
     const animationFrameRef = useRef<number | undefined>(undefined);
 
-    // Memoize recipe map for faster lookups
+    // Memoize recipe map for faster lookups - only rebuild when recipes count changes
     const recipeMap = useMemo(() => {
         const map = new Map<string, Recipe>();
+        if (!recipes || recipes.length === 0) return map;
+
         recipes.forEach(r => {
             map.set(r.id, r);
             if (r.output?.resource) {
@@ -83,14 +86,14 @@ function RecipeTreeCanvasComponent({
             }
         });
         return map;
-    }, [recipes]);
+    }, [recipes.length]);
 
     // Build tree with memoization
     const buildRecipeTree = useCallback((recipeId: string, depth = 0, visited = new Set<string>()): TreeNode | null => {
         if (visited.has(recipeId) || depth > 8) return null;
         visited.add(recipeId);
 
-        const rec = recipeMap.get(recipeId) || recipes.find(r => r.id === recipeId);
+        const rec = recipeMap.get(recipeId);
         if (!rec) return null;
 
         const children: TreeNode[] = [];
@@ -99,12 +102,7 @@ function RecipeTreeCanvasComponent({
             rec.ingredients.forEach(ingredient => {
                 // Use map for faster lookup
                 const producerRecipe = recipeMap.get(ingredient.resource) ||
-                    recipeMap.get(`recipe_${ingredient.resource}`) ||
-                    recipes.find(r =>
-                        r.output?.resource === ingredient.resource ||
-                        r.output?.resource === `recipe_${ingredient.resource}` ||
-                        `recipe_${r.output?.resource}` === ingredient.resource
-                    );
+                    recipeMap.get(`recipe_${ingredient.resource}`);
 
                 if (producerRecipe) {
                     const childNode = buildRecipeTree(producerRecipe.id, depth + 1, new Set(visited));
@@ -507,19 +505,29 @@ function RecipeTreeCanvasComponent({
         }));
     }, []);
 
-    // Build tree when recipe changes
+    // Build tree when recipe changes - only depend on recipe ID to avoid rebuilding on every render
     useEffect(() => {
-        if (recipe) {
-            const tree = buildRecipeTree(recipe.id);
-            if (tree && canvasRef.current) {
-                calculateNodePositions(tree, canvasRef.current.width, canvasRef.current.height);
-                setTreeRoot(tree);
-                setViewport(prev => ({ ...prev, x: 0, y: 0, scale: 1 }));
-            }
+        if (recipe?.id && recipes.length > 0) {
+            setIsLoading(true);
+            // Use a small delay to debounce rapid changes
+            const timeoutId = setTimeout(() => {
+                const tree = buildRecipeTree(recipe.id);
+                if (tree && canvasRef.current) {
+                    calculateNodePositions(tree, canvasRef.current.width, canvasRef.current.height);
+                    setTreeRoot(tree);
+                    setViewport(prev => ({ ...prev, x: 0, y: 0, scale: 1 }));
+                }
+                setIsLoading(false);
+            }, 50);
+            return () => {
+                clearTimeout(timeoutId);
+                setIsLoading(false);
+            };
         } else {
             setTreeRoot(null);
+            setIsLoading(false);
         }
-    }, [recipe, buildRecipeTree, calculateNodePositions]);
+    }, [recipe?.id, recipes.length, buildRecipeTree, calculateNodePositions]);
 
     // Draw when state changes
     useEffect(() => {
@@ -565,6 +573,11 @@ function RecipeTreeCanvasComponent({
 
     return (
         <div className="recipe-tree-canvas-container">
+            {isLoading && (
+                <div className="tree-loading-indicator">
+                    <span>Building recipe tree...</span>
+                </div>
+            )}
             <canvas
                 ref={canvasRef}
                 className="recipe-tree-canvas"
