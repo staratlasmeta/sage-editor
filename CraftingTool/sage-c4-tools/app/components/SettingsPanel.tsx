@@ -357,50 +357,6 @@ export function SettingsPanel({ onClose }: SettingsPanelProps) {
                                 >
                                     🗑️ Start Fresh (Clear All Data)
                                 </button>
-
-                                {/* Debug button to check localStorage */}
-                                <button
-                                    className="btn"
-                                    onClick={() => {
-                                        const storageInfo = [];
-                                        for (let i = 0; i < localStorage.length; i++) {
-                                            const key = localStorage.key(i);
-                                            if (key) {
-                                                const value = localStorage.getItem(key);
-                                                const size = value ? value.length : 0;
-
-                                                // For our app keys, show a preview of the content
-                                                if (key === 'claimStakeInstances') {
-                                                    try {
-                                                        const parsed = JSON.parse(value || '[]');
-                                                        storageInfo.push(`${key}: ${size} chars (${parsed.length} instances)`);
-                                                    } catch {
-                                                        storageInfo.push(`${key}: ${size} chars (invalid JSON)`);
-                                                    }
-                                                } else if (key === 'sageC4SharedState') {
-                                                    storageInfo.push(`${key}: ${size} chars (app state)`);
-                                                } else {
-                                                    storageInfo.push(`${key}: ${size} chars`);
-                                                }
-                                            }
-                                        }
-
-                                        if (storageInfo.length === 0) {
-                                            alert('✅ LocalStorage is empty!');
-                                        } else {
-                                            alert('LocalStorage contents:\n\n' + storageInfo.join('\n') +
-                                                '\n\nNote: walletlink is from an external service and is preserved.');
-                                        }
-                                    }}
-                                    style={{
-                                        marginTop: '1rem',
-                                        width: '100%',
-                                        padding: '0.5rem',
-                                        fontSize: '0.9rem'
-                                    }}
-                                >
-                                    🔍 Debug: Check localStorage Contents
-                                </button>
                                 <p style={{
                                     marginTop: '0.5rem',
                                     fontSize: '0.85rem',

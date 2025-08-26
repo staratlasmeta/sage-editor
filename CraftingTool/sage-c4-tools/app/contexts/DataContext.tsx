@@ -4,14 +4,15 @@ import { DataLoader } from '../services/DataLoader';
 interface GameData {
     planets?: any[];
     buildings?: any[];
-    resources?: any[];
+    resources?: any[] | Record<string, any>;
     recipes?: any[];
     claimStakeDefinitions?: any[];
     craftingHabBuildings?: any[];
     planetArchetypes?: any[];
     starbaseDefinitions?: any[];
-    tags?: any[];
-    cargo?: any[];
+    starbases?: any[];
+    tags?: any[] | Record<string, any>;
+    cargo?: any[] | Record<string, any>;
 }
 
 interface DataContextType {

@@ -570,7 +570,76 @@ export class DataLoader {
 
     static async loadAll() {
         try {
-            // Try to load real data files
+            // First try to load the comprehensive mockData.json file
+            const mockDataFile = await this.loadJSON('/data/mockData.json');
+
+            if (mockDataFile) {
+                console.log('Using mockData.json file for development');
+                console.log('Loaded planets:', mockDataFile.planets?.length || 0);
+                console.log('Loaded buildings:', mockDataFile.buildings?.length || 0);
+
+                // Process resources from the structured format
+                let resourcesArray: any[] = [];
+                let resourcesObject: any = {};
+
+                if (mockDataFile.resources) {
+                    // If resources are structured with categories
+                    if (mockDataFile.resources.raw || mockDataFile.resources.processed || mockDataFile.resources.advanced) {
+                        const allResources = [
+                            ...(mockDataFile.resources.raw || []),
+                            ...(mockDataFile.resources.processed || []),
+                            ...(mockDataFile.resources.advanced || [])
+                        ];
+
+                        // Convert to array format for compatibility
+                        resourcesArray = allResources.map(id => ({
+                            id,
+                            name: id.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase()),
+                            category: mockDataFile.resources.raw?.includes(id) ? 'raw' :
+                                mockDataFile.resources.processed?.includes(id) ? 'processed' : 'advanced'
+                        }));
+
+                        // Also create object format
+                        allResources.forEach(id => {
+                            resourcesObject[id] = {
+                                name: id.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase()),
+                                category: mockDataFile.resources.raw?.includes(id) ? 'raw' :
+                                    mockDataFile.resources.processed?.includes(id) ? 'processed' : 'advanced'
+                            };
+                        });
+                    } else {
+                        // Resources are already in the right format
+                        resourcesArray = mockDataFile.resources;
+                        resourcesObject = mockDataFile.resources;
+                    }
+                }
+
+                console.log('Processed resources:', resourcesArray.length, 'items');
+
+                // Process recipes from mockData
+                const processedRecipes = mockDataFile.recipes || [];
+
+                const loadedData = {
+                    cargo: resourcesObject,
+                    tags: mockDataFile.tags || [],
+                    planetArchetypes: mockDataFile.planetArchetypes || [],
+                    claimStakeBuildings: mockDataFile.buildings || [],
+                    craftingHabBuildings: mockDataFile.craftingHabBuildings || mockDataFile.buildings?.filter((b: any) =>
+                        b.category === 'hab' || b.category === 'crafting'
+                    ) || [],
+                    recipes: processedRecipes,
+                    planets: mockDataFile.planets || [],
+                    buildings: mockDataFile.buildings || [],
+                    resources: resourcesArray,
+                    claimStakeDefinitions: mockDataFile.claimStakeDefinitions || [],
+                    starbases: mockDataFile.starbases || []
+                };
+
+                console.log('Returning data with', loadedData.buildings.length, 'buildings and', loadedData.resources.length, 'resources');
+                return loadedData;
+            }
+
+            // Fallback to trying individual files if mockData.json doesn't load
             const [
                 cargoData,
                 tagsData,
@@ -607,7 +676,7 @@ export class DataLoader {
                 claimStakeDefinitions: MOCK_DATA.claimStakeDefinitions,
             };
         } catch (error) {
-            console.warn('Using mock data for development:', error);
+            console.warn('Using fallback mock data for development:', error);
             return MOCK_DATA;
         }
     }

@@ -10,6 +10,8 @@ interface Recipe {
     ingredients: { resource: string; quantity: number }[];
     output?: { resource: string; quantity: number } | null;
     requiredQuantity?: number;  // For raw resources - amount needed by parent recipe
+    planetTypes?: string;  // Semicolon-separated list of planet types
+    factions?: string;     // Semicolon-separated list of factions
 }
 
 interface TreeNode {
@@ -541,6 +543,32 @@ function RecipeTreeCanvasComponent({
                                     <li>Purchased from markets</li>
                                     <li>Obtained through other means</li>
                                 </ul>
+
+                                {selectedNode.recipe.planetTypes && (
+                                    <div className="planet-types-info">
+                                        <strong>Available on:</strong>
+                                        <div className="planet-types-list">
+                                            {selectedNode.recipe.planetTypes.split(';').map((planet, idx) => (
+                                                <span key={idx} className="planet-type-tag">
+                                                    {planet.trim()}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {selectedNode.recipe.factions && selectedNode.recipe.factions !== 'All' && (
+                                    <div className="factions-info">
+                                        <strong>Faction regions:</strong>
+                                        <div className="factions-list">
+                                            {selectedNode.recipe.factions.split(';').map((faction, idx) => (
+                                                <span key={idx} className={`faction-tag faction-${faction.trim().toLowerCase()}`}>
+                                                    {faction.trim()}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                             <button
                                 className="btn btn-small"
@@ -555,6 +583,33 @@ function RecipeTreeCanvasComponent({
                             {selectedNode.recipe.constructionTime > 0 && (
                                 <p>Time: {selectedNode.recipe.constructionTime}s</p>
                             )}
+
+                            {selectedNode.recipe.planetTypes && (
+                                <div className="planet-types-info">
+                                    <strong>Can be crafted on:</strong>
+                                    <div className="planet-types-list">
+                                        {selectedNode.recipe.planetTypes.split(';').map((planet, idx) => (
+                                            <span key={idx} className="planet-type-tag">
+                                                {planet.trim()}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {selectedNode.recipe.factions && selectedNode.recipe.factions !== 'All' && selectedNode.recipe.factions !== 'MUD;ONI;UST' && (
+                                <div className="factions-info">
+                                    <strong>Limited to factions:</strong>
+                                    <div className="factions-list">
+                                        {selectedNode.recipe.factions.split(';').map((faction, idx) => (
+                                            <span key={idx} className={`faction-tag faction-${faction.trim().toLowerCase()}`}>
+                                                {faction.trim()}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
                             {selectedNode.recipe.ingredients.length > 0 && (
                                 <div>
                                     <h4>Requires:</h4>
