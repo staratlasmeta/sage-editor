@@ -1596,6 +1596,13 @@ body.bulk-editing .floating-details {
     opacity: 0.6;
 }
 
+.career-xp-bar.active {
+    opacity: 1;
+    background: rgba(0, 255, 136, 0.03);
+    border: 1px solid rgba(0, 255, 136, 0.15);
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
+}
+
 .career-header {
     display: flex;
     justify-content: space-between;
@@ -1603,11 +1610,45 @@ body.bulk-editing .floating-details {
     margin-bottom: 5px;
 }
 
+.career-name-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .career-name {
     font-size: 14px;
     color: #e0e0e0;
     font-weight: bold;
     letter-spacing: 0.5px;
+}
+
+.earning-indicator {
+    font-size: 11px;
+    color: #00ff88;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    background: rgba(0, 255, 136, 0.15);
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    border-radius: 4px;
+    animation: earning-pulse 1.5s ease-in-out infinite;
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+}
+
+@keyframes earning-pulse {
+    0%, 100% {
+        opacity: 0.7;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+        text-shadow: 0 0 20px rgba(0, 255, 136, 0.8);
+        border-color: rgba(0, 255, 136, 0.6);
+        background: rgba(0, 255, 136, 0.25);
+    }
 }
 
 .career-play-button {
