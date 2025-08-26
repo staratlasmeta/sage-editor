@@ -376,13 +376,13 @@ export function ResourcesView({ claimStakes = [], onTransfer, onClose }: Resourc
                             >
                                 ☰
                             </button>
-                            <button
+                            {/* <button
                                 className={`view-button ${viewMode === 'flow' ? 'active' : ''}`}
                                 onClick={() => setViewMode('flow')}
                                 title="Flow View"
                             >
                                 ⇄
-                            </button>
+                            </button> */}
                         </div>
                     </div>
                 </div>
@@ -449,7 +449,7 @@ export function ResourcesView({ claimStakes = [], onTransfer, onClose }: Resourc
                                                 <span className="locations-count">{resource.locations.length}</span>
                                                 <span className="locations-label">locations</span>
                                             </div>
-                                            {selectedResource === resource.id && (
+                                            {/* {selectedResource === resource.id && (
                                                 <div className="locations-details">
                                                     {resource.locations.map(loc => (
                                                         <div key={loc.id} className="location-detail">
@@ -462,7 +462,7 @@ export function ResourcesView({ claimStakes = [], onTransfer, onClose }: Resourc
                                                         </div>
                                                     ))}
                                                 </div>
-                                            )}
+                                            )} */}
                                         </div>
                                     </div>
                                 );

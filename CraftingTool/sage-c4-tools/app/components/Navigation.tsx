@@ -18,15 +18,14 @@ export function Navigation({ className = '', claimStakes = [] }: NavigationProps
 
     const handleHomeClick = () => {
         // Navigate back to SAGE Editor Suite
-        // Check if we're in production (standalone build) or development
-        const isProduction = window.location.protocol === 'file:' || !window.location.host.includes('localhost');
-
-        if (isProduction) {
-            // In production, navigate to the SAGE Editor Suite
-            window.location.href = '../../SAGE Editor Suite/index.html';
-        } else {
+        // Check if we're in development
+        if (window.location.host.includes('localhost')) {
             // In development, just show an alert
             alert('In production, this will navigate to the SAGE Editor Suite');
+        } else {
+            // In production/standalone, use simple relative navigation
+            // When in C4 Tools folder, go up one level to SAGE Editor Suite
+            window.location.href = '../index.html';
         }
     };
 

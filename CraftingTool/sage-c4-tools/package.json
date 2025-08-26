@@ -3,14 +3,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "react-router build",
+    "dev": "vite",
+    "build": "vite build",
     "build:standalone": "vite build --config vite.config.standalone.ts",
-    "dev": "react-router dev",
-    "start": "react-router-serve ./build/server/index.js",
-    "test:standalone": "node test-server.js",
+    "build:suite": "npm run build:standalone && node build-for-sage-suite.js",
     "copy:suite": "node copy-to-suite.js",
-    "build:suite": "npm run build:standalone && npm run copy:suite",
-    "typecheck": "react-router typegen && tsc"
+    "preview": "vite preview",
+    "clean": "rm -rf dist dist-standalone"
   },
   "dependencies": {
     "@react-router/node": "^7.7.1",

@@ -72,7 +72,7 @@ export default function CraftingHab() {
     const { notifications, showNotification, dismissNotification } = useNotifications();
 
     // State - Initialize from SharedState using lazy initializers
-    const [selectedStarbase, setSelectedStarbase] = useState<Starbase | null>(null);
+    const [selectedStarbaseId, setSelectedStarbaseId] = useState<string | null>(null);
     const [habPlots, setHabPlots] = useState<HabPlot[]>(() => {
         const saved = sharedState.craftingHabState?.habPlots;
         console.log('🔧 Initializing habPlots:', saved?.length || 0, 'plots');
@@ -171,7 +171,7 @@ export default function CraftingHab() {
             previousStateRef.current = {
                 habPlots: JSON.stringify(habPlots),
                 craftingJobs: JSON.stringify(craftingJobs),
-                selectedStarbaseId: selectedStarbase?.id,
+                selectedStarbaseId: selectedStarbaseId,
                 selectedPlotId,
                 viewMode,
                 favoriteRecipes: JSON.stringify(favoriteRecipes),
@@ -183,7 +183,7 @@ export default function CraftingHab() {
         const currentState = {
             habPlots: JSON.stringify(habPlots),
             craftingJobs: JSON.stringify(craftingJobs),
-            selectedStarbaseId: selectedStarbase?.id,
+            selectedStarbaseId: selectedStarbaseId,
             selectedPlotId,
             viewMode,
             favoriteRecipes: JSON.stringify(favoriteRecipes),
@@ -214,7 +214,7 @@ export default function CraftingHab() {
             payload: {
                 habPlots,
                 craftingJobs,
-                selectedStarbaseId: selectedStarbase?.id,
+                selectedStarbaseId: selectedStarbaseId || undefined,
                 selectedPlotId: selectedPlotId || undefined,
                 viewMode,
                 favoriteRecipes,
@@ -223,7 +223,7 @@ export default function CraftingHab() {
         });
 
         previousStateRef.current = currentState;
-    }, [habPlots, craftingJobs, selectedStarbase?.id, selectedPlotId, viewMode, favoriteRecipes, recentRecipes, dispatch]);
+    }, [habPlots, craftingJobs, selectedStarbaseId, selectedPlotId, viewMode, favoriteRecipes, recentRecipes, dispatch]);
 
     // Load existing design when entering construction mode
     useEffect(() => {
@@ -302,19 +302,17 @@ export default function CraftingHab() {
         { id: 'sb_003', name: 'Liberty Complex', faction: 'UST', level: sharedState.starbaseLevel, inventory: sharedState.starbaseInventory }
     ], [sharedState.starbaseLevel, sharedState.starbaseInventory]);
 
-    // Restore selected starbase after starbases is defined
+    // Derive selected starbase from starbases array using selectedStarbaseId
+    const selectedStarbase = selectedStarbaseId ? starbases.find(sb => sb.id === selectedStarbaseId) || null : null;
+
+    // Restore selected starbase ID after starbases is defined
     useEffect(() => {
         const savedStarbaseId = sharedState.craftingHabState?.selectedStarbaseId;
-        if (savedStarbaseId && !selectedStarbase) {
-            const starbase = starbases.find(sb => sb.id === savedStarbaseId);
-            if (starbase) {
-                console.log('✅ Restoring starbase:', savedStarbaseId);
-                setSelectedStarbase(starbase);
-            } else {
-                console.log('⚠️ Could not find starbase:', savedStarbaseId);
-            }
+        if (savedStarbaseId && !selectedStarbaseId) {
+            console.log('✅ Restoring starbase:', savedStarbaseId);
+            setSelectedStarbaseId(savedStarbaseId);
         }
-    }, [sharedState.craftingHabState?.selectedStarbaseId, starbases]);
+    }, [sharedState.craftingHabState?.selectedStarbaseId]);
 
     const recipes: Recipe[] = gameData?.recipes || [
         {
@@ -522,6 +520,7 @@ export default function CraftingHab() {
         setSelectedPlotId(plotId);
         setDesignMode(true);
         setCurrentDesign([]);
+        setViewMode('construction'); // Ensure we switch to construction view
 
         unlockAchievement('first_hab_plot');
     };
@@ -793,7 +792,7 @@ export default function CraftingHab() {
                             <div
                                 key={starbase.id}
                                 className={`starbase-card ${selectedStarbase?.id === starbase.id ? 'selected' : ''}`}
-                                onClick={() => setSelectedStarbase(starbase)}
+                                onClick={() => setSelectedStarbaseId(starbase.id)}
                             >
                                 <div className="starbase-header">
                                     <h3>{starbase.name}</h3>
@@ -821,8 +820,9 @@ export default function CraftingHab() {
                                 {Object.entries(selectedStarbase.inventory)
                                     .sort(([a], [b]) => a.localeCompare(b))
                                     .map(([resource, amount]) => {
-                                        // Format resource name for display
-                                        const displayName = resource
+                                        // Format resource name for display (remove cargo- prefix if present)
+                                        const cleanResource = resource.replace(/^cargo-/, '');
+                                        const displayName = cleanResource
                                             .split('-')
                                             .map(word => word.charAt(0).toUpperCase() + word.slice(1))
                                             .join(' ');
@@ -852,20 +852,43 @@ export default function CraftingHab() {
                             <button
                                 className="btn btn-magic"
                                 onClick={() => {
-                                    // Magic resources
-                                    addToInventory({
-                                        'iron-ore': 100,
-                                        'copper-ore': 100,
-                                        'silica': 100,
-                                        'fuel': 100,
-                                        'hydrogen': 100,
-                                        'copper': 50,
-                                        'iron-plate': 50,
-                                        'steel': 50,
-                                        'electronics': 50,
-                                        'circuit-board': 20
+                                    // Magic resources - includes all extractable resources from mockData.json
+                                    const magicResources: Record<string, number> = {};
+
+                                    // Add all extractable raw resources (with cargo- prefix to match recipes)
+                                    const extractableResources = [
+                                        'cargo-iron-ore', 'cargo-copper-ore', 'cargo-aluminum-ore', 'cargo-titanium-ore',
+                                        'cargo-silica', 'cargo-carbon', 'cargo-hydrogen', 'cargo-coal',
+                                        'cargo-chromite-ore', 'cargo-osmium-ore', 'cargo-tritium-ore',
+                                        'cargo-arco', 'cargo-lumanite', 'cargo-biomass'
+                                    ];
+
+                                    extractableResources.forEach(resource => {
+                                        magicResources[resource] = 1000;
                                     });
-                                    showNotification('✨ Resources added!', 'success');
+
+                                    // Add processed resources (with cargo- prefix to match recipes)
+                                    const processedResources = [
+                                        'cargo-iron', 'cargo-copper', 'cargo-aluminum', 'cargo-titanium',
+                                        'cargo-steel', 'cargo-electronics', 'cargo-fuel',
+                                        'cargo-chromite', 'cargo-osmium', 'cargo-tritium'
+                                    ];
+
+                                    processedResources.forEach(resource => {
+                                        magicResources[resource] = 500;
+                                    });
+
+                                    // Add advanced resources (with cargo- prefix to match recipes)
+                                    const advancedResources = [
+                                        'cargo-circuit-board', 'cargo-high-density-alloy', 'cargo-power-cell'
+                                    ];
+
+                                    advancedResources.forEach(resource => {
+                                        magicResources[resource] = 100;
+                                    });
+
+                                    addToInventory(magicResources);
+                                    showNotification('✨ Magic resources added!', 'success');
                                 }}
                             >
                                 🪄 ADD RESOURCES
@@ -924,6 +947,12 @@ export default function CraftingHab() {
                                                         // If plot needs setup, always go to construction tab
                                                         if (!plot.habDesign) {
                                                             setViewMode('construction');
+                                                            // Automatically enter design mode for new plots
+                                                            setDesignMode(true);
+                                                            setCurrentDesign([]);
+                                                        } else {
+                                                            // If plot has design, don't automatically enter design mode
+                                                            setDesignMode(false);
                                                         }
                                                     }}
                                                 >
@@ -970,7 +999,14 @@ export default function CraftingHab() {
                                                             onClick={() => {
                                                                 if (isOwned) {
                                                                     setSelectedPlotId(plot.id);
-                                                                    setViewMode(plot.habDesign ? 'crafting' : 'construction');
+                                                                    if (plot.habDesign) {
+                                                                        setViewMode('crafting');
+                                                                        setDesignMode(false);
+                                                                    } else {
+                                                                        setViewMode('construction');
+                                                                        setDesignMode(true);
+                                                                        setCurrentDesign([]);
+                                                                    }
                                                                 }
                                                             }}
                                                         >
@@ -1081,17 +1117,74 @@ export default function CraftingHab() {
                                 <div className="construction-view">
                                     <div className="construction-header">
                                         <h3>Construction - Plot T{selectedPlot.tier}</h3>
-                                        {selectedPlot.habDesign && !designMode && (
-                                            <button
-                                                className="btn btn-secondary"
-                                                onClick={() => {
-                                                    setDesignMode(true);
-                                                    setCurrentDesign([...(selectedPlot.habDesign?.buildings || [])]);
-                                                }}
-                                            >
-                                                Continue Construction
-                                            </button>
-                                        )}
+
+                                        {/* Action Buttons in Header */}
+                                        <div className="header-actions">
+                                            {designMode ? (
+                                                <>
+                                                    <button
+                                                        className="btn btn-secondary"
+                                                        onClick={() => {
+                                                            setDesignMode(false);
+                                                            setCurrentDesign([]);
+                                                        }}
+                                                    >
+                                                        Cancel
+                                                    </button>
+                                                    <button
+                                                        className="btn btn-primary"
+                                                        onClick={finalizeDesign}
+                                                        disabled={!currentDesign.find(b => b.type === 'hab') || (() => {
+                                                            // Check if we have all resources
+                                                            const totalCost: Record<string, number> = {};
+                                                            currentDesign.forEach(pb => {
+                                                                let building: any = null;
+                                                                if (pb.type === 'hab') {
+                                                                    building = habBuildings.habs.find((h: any) => h.id === pb.buildingId);
+                                                                } else if (pb.type === 'crafting-station') {
+                                                                    building = habBuildings.craftingStations.find((s: any) => s.id === pb.buildingId);
+                                                                } else if (pb.type === 'cargo-storage') {
+                                                                    building = habBuildings.cargoStorage.find((c: any) => c.id === pb.buildingId);
+                                                                }
+
+                                                                if (building?.constructionCost) {
+                                                                    Object.entries(building.constructionCost).forEach(([resource, amount]) => {
+                                                                        totalCost[resource] = (totalCost[resource] || 0) + (amount as number);
+                                                                    });
+                                                                }
+                                                            });
+
+                                                            // Check resource availability
+                                                            for (const [resource, needed] of Object.entries(totalCost)) {
+                                                                const available = sharedState.starbaseInventory[resource] || 0;
+                                                                if (available < needed) {
+                                                                    return true; // Disabled if missing resources
+                                                                }
+                                                            }
+                                                            return false;
+                                                        })()}
+                                                        title={!currentDesign.find(b => b.type === 'hab') ? 'Add a hab first' : 'Finalize and start operation'}
+                                                    >
+                                                        Finalize Design
+                                                    </button>
+                                                </>
+                                            ) : (
+                                                <button
+                                                    className="btn btn-secondary"
+                                                    onClick={() => {
+                                                        setDesignMode(true);
+                                                        // If plot has a design, load it. Otherwise start fresh
+                                                        if (selectedPlot.habDesign) {
+                                                            setCurrentDesign([...(selectedPlot.habDesign?.buildings || [])]);
+                                                        } else {
+                                                            setCurrentDesign([]);
+                                                        }
+                                                    }}
+                                                >
+                                                    {selectedPlot.habDesign ? 'Continue Construction' : 'Start Construction'}
+                                                </button>
+                                            )}
+                                        </div>
                                     </div>
 
                                     {/* Design Summary (Moved to Top) */}
@@ -1321,71 +1414,6 @@ export default function CraftingHab() {
                                             </div>
                                         )}
                                     </div>
-
-                                    {/* Action Buttons */}
-                                    {designMode && (
-                                        <div className="action-buttons">
-                                            <button
-                                                className="btn btn-secondary"
-                                                onClick={() => {
-                                                    setDesignMode(false);
-                                                    setCurrentDesign([]);
-                                                }}
-                                            >
-                                                Cancel
-                                            </button>
-                                            <button
-                                                className="btn btn-primary"
-                                                onClick={finalizeDesign}
-                                                disabled={!currentDesign.find(b => b.type === 'hab') || (() => {
-                                                    // Check if we have all resources
-                                                    const totalCost: Record<string, number> = {};
-                                                    currentDesign.forEach(pb => {
-                                                        let building: any = null;
-                                                        if (pb.type === 'hab') {
-                                                            building = habBuildings.habs.find((h: any) => h.id === pb.buildingId);
-                                                        } else if (pb.type === 'crafting-station') {
-                                                            building = habBuildings.craftingStations.find((s: any) => s.id === pb.buildingId);
-                                                        } else if (pb.type === 'cargo-storage') {
-                                                            building = habBuildings.cargoStorage.find((c: any) => c.id === pb.buildingId);
-                                                        }
-
-                                                        if (building?.constructionCost) {
-                                                            Object.entries(building.constructionCost).forEach(([resource, amount]) => {
-                                                                totalCost[resource] = (totalCost[resource] || 0) + (amount as number);
-                                                            });
-                                                        }
-                                                    });
-
-                                                    // Check resource availability
-                                                    for (const [resource, needed] of Object.entries(totalCost)) {
-                                                        const available = sharedState.starbaseInventory[resource] || 0;
-                                                        if (available < needed) {
-                                                            return true; // Disabled if missing resources
-                                                        }
-                                                    }
-                                                    return false;
-                                                })()}
-                                                title={!currentDesign.find(b => b.type === 'hab') ? 'Add a hab first' : 'Finalize and start operation'}
-                                            >
-                                                Finalize Construction
-                                            </button>
-                                        </div>
-                                    )}
-
-                                    {!designMode && !selectedPlot.habDesign && (
-                                        <div className="action-buttons">
-                                            <button
-                                                className="btn btn-primary"
-                                                onClick={() => {
-                                                    setDesignMode(true);
-                                                    setCurrentDesign([]);
-                                                }}
-                                            >
-                                                Start Construction
-                                            </button>
-                                        </div>
-                                    )}
                                 </div>
                             )}
 
