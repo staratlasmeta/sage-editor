@@ -676,17 +676,33 @@ export class DataLoader {
                 ? this.processRecipes(recipesCSV)
                 : MOCK_DATA.craftingRecipes;
 
-            // Merge all data, using mock data as fallback
+            // Process claimStakeBuildings to extract buildings and planets
+            let finalBuildings = [];
+            let finalPlanets = [];
+
+            if (claimStakeBuildingsData?.buildings) {
+                finalBuildings = claimStakeBuildingsData.buildings;
+            } else if (MOCK_DATA.buildings) {
+                finalBuildings = MOCK_DATA.buildings;
+            }
+
+            if (claimStakeBuildingsData?.planets) {
+                finalPlanets = claimStakeBuildingsData.planets;
+            } else if (MOCK_DATA.planets) {
+                finalPlanets = MOCK_DATA.planets;
+            }
+
+            // Merge all data, using proper priorities
             return {
                 cargo: cargoData || [],
                 tags: tagsData || [],
                 planetArchetypes: planetArchetypesData || MOCK_DATA.planetArchetypes,
-                claimStakeBuildings: claimStakeBuildingsData || MOCK_DATA.buildings,
+                claimStakeBuildings: claimStakeBuildingsData || { buildings: MOCK_DATA.buildings, planets: MOCK_DATA.planets },
                 craftingHabBuildings: craftingHabBuildingsData || [],
                 recipes: processedRecipes,
-                // Include mock data for development
-                planets: MOCK_DATA.planets,
-                buildings: MOCK_DATA.buildings,
+                // Use proper data sources
+                planets: finalPlanets,
+                buildings: finalBuildings,
                 resources: MOCK_DATA.resources,
                 claimStakeDefinitions: MOCK_DATA.claimStakeDefinitions,
             };

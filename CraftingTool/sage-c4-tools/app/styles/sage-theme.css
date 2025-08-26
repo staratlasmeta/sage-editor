@@ -903,7 +903,7 @@ body
 .planet-list
 {
     display: flex;
-    flex-direction: column;
+    flex-direction: column !important;
     gap: 0.75rem;
     max-height: 400px;
     overflow-y: auto;
@@ -6442,7 +6442,7 @@ body
 .planet-list
 {
     display: flex;
-    flex-direction: column;
+    flex-direction: column !important;
     gap: 0.75rem;
     max-height: 400px;
     overflow-y: auto;
@@ -7550,7 +7550,7 @@ body
     margin-bottom: 1rem;
 }
 
-.resource-grid
+.claim-stakes-resource-grid
 {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
