@@ -257,6 +257,42 @@ export class StandaloneDataLoader {
         });
     }
 
+    static processRecipes(csvData: any[]): any[] {
+        return csvData.map(row => ({
+            id: row.OutputID,
+            name: row.OutputName,
+            type: row.OutputType,
+            tier: parseInt(row.OutputTier) || 1,
+            buildingResourceTier: row.BuildingResourceTier,
+            constructionTime: parseInt(row.ConstructionTime) || 60,
+            planetTypes: row.PlanetTypes?.split(';') || [],
+            factions: row.Factions?.split(';') || [],
+            resourceType: row.ResourceType,
+            productionSteps: parseInt(row.ProductionSteps) || 1,
+            ingredients: this.extractIngredients(row),
+            output: {
+                resource: row.OutputID,
+                quantity: 1
+            },
+            crewRequired: 10
+        }));
+    }
+
+    static extractIngredients(row: any): Array<{ resource: string, quantity: number }> {
+        const ingredients: Array<{ resource: string, quantity: number }> = [];
+        for (let i = 1; i <= 8; i++) {
+            const ingredient = row[`Ingredient${i}`];
+            const quantity = row[`Quantity${i}`];
+            if (ingredient && quantity) {
+                ingredients.push({
+                    resource: ingredient,
+                    quantity: parseInt(quantity, 10)
+                });
+            }
+        }
+        return ingredients;
+    }
+
     static async loadGameData() {
         console.log('Loading game data for standalone build...');
 
@@ -303,7 +339,30 @@ export class StandaloneDataLoader {
                     }
                 }
 
-                console.log('Loaded', mockDataFile.planets?.length, 'planets,', mockDataFile.buildings?.length, 'buildings,', resourcesArray.length, 'resources');
+                // Load recipes from CSV file
+                let processedRecipes: any[] = [];
+                try {
+                    const recipesResponse = await fetch('./data/mockRecipes.csv');
+                    if (recipesResponse.ok) {
+                        const csvText = await recipesResponse.text();
+                        const csvData = await this.parseCSV(csvText);
+                        if (csvData && csvData.length > 0) {
+                            processedRecipes = this.processRecipes(csvData);
+                            console.log('Loaded', processedRecipes.length, 'recipes from mockRecipes.csv');
+                        }
+                    }
+                } catch (error) {
+                    console.warn('Failed to load mockRecipes.csv:', error);
+                }
+
+                // Fallback to recipes in mockData if CSV loading failed
+                if (processedRecipes.length === 0) {
+                    processedRecipes = mockDataFile.recipes || [];
+                    console.log('Using', processedRecipes.length, 'recipes from mockData.json');
+                }
+
+                console.log('Loaded', mockDataFile.planets?.length, 'planets,', mockDataFile.buildings?.length, 'buildings,',
+                    resourcesArray.length, 'resources,', processedRecipes.length, 'recipes');
 
                 return {
                     cargo: resourcesObject,
@@ -313,7 +372,7 @@ export class StandaloneDataLoader {
                     craftingHabBuildings: mockDataFile.craftingHabBuildings || mockDataFile.buildings?.filter((b: any) =>
                         b.category === 'hab' || b.category === 'crafting'
                     ) || [],
-                    recipes: mockDataFile.recipes || [],
+                    recipes: processedRecipes,
                     planets: mockDataFile.planets || [],
                     buildings: mockDataFile.buildings || [],
                     resources: resourcesArray,

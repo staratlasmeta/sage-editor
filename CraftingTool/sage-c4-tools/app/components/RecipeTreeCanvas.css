@@ -35,6 +35,34 @@
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     animation: slideIn 0.3s ease-out;
+    z-index: 10;
+    max-height: calc(100% - 20px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-orange) rgba(0, 0, 0, 0.3);
+}
+
+/* Custom scrollbar for webkit browsers */
+.node-info-panel::-webkit-scrollbar
+{
+    width: 6px;
+}
+
+.node-info-panel::-webkit-scrollbar-track
+{
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+}
+
+.node-info-panel::-webkit-scrollbar-thumb
+{
+    background: var(--primary-orange);
+    border-radius: 3px;
+}
+
+.node-info-panel::-webkit-scrollbar-thumb:hover
+{
+    background: var(--primary-orange-light, #ff8555);
 }
 
 @keyframes slideIn
@@ -57,7 +85,7 @@
     font-family: 'Orbitron', monospace;
     color: var(--primary-orange);
     margin-top: 0;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
     font-size: 1.2rem;
 }
 
@@ -67,7 +95,10 @@
     color: var(--accent-green);
     margin-top: 1rem;
     margin-bottom: 0.5rem;
-    font-size: 0.9rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
 }
 
 .node-info-panel p
@@ -107,6 +138,23 @@
     margin: 0.5rem 0;
 }
 
+.node-info-panel .required-amount
+{
+    background: rgba(255, 107, 53, 0.1);
+    border-left: 3px solid var(--primary-orange);
+    padding: 0.5rem;
+    margin: 0.75rem 0;
+    border-radius: 0 4px 4px 0;
+    font-size: 0.9rem;
+}
+
+.node-info-panel .required-amount strong
+{
+    color: var(--primary-orange);
+}
+
+
+
 .node-info-panel .extraction-note
 {
     font-family: 'Exo 2', sans-serif;
@@ -117,6 +165,19 @@
     padding-top: 0.5rem;
     border-top: 1px solid #333;
 }
+
+/* Ensure proper spacing for content */
+.node-info-panel .resource-details
+{
+    padding-bottom: 0.5rem;
+}
+
+.node-info-panel .extraction-methods
+{
+    margin-bottom: 1rem;
+}
+
+
 
 .resource-intelligence-panel
 {
@@ -231,11 +292,13 @@
 {
     display: block;
     font-family: 'Orbitron', monospace;
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     color: #00C896;
     margin-bottom: 0.5rem;
+    margin-top: 1rem;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.1em;
+    font-weight: 600;
 }
 
 .planet-types-list,
