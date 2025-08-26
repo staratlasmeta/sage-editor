@@ -111,6 +111,55 @@ function RecipeTreeCanvasComponent({
                     if (childNode) children.push(childNode);
                 } else {
                     // Raw resources don't have an output - they need to be extracted/obtained
+                    // Find recipes that use this raw material to determine where it can be extracted
+                    const recipesUsingRaw = recipes.filter(r =>
+                        r.ingredients?.some(ing => ing.resource === ingredient.resource)
+                    );
+
+                    // Also check if this raw material produces something (like iron-ore -> iron)
+                    // This would give us the planet types where it can be extracted
+                    const processedMaterialName = ingredient.resource.replace('-ore', '').replace('cargo-', '');
+                    const processingRecipes = recipes.filter(r => {
+                        const outputName = r.output?.resource || '';
+                        return outputName === `cargo-${processedMaterialName}` ||
+                            outputName === processedMaterialName ||
+                            (r.ingredients?.length === 1 && r.ingredients[0].resource === ingredient.resource);
+                    });
+
+                    // Aggregate planet types and factions from all recipes using this raw material
+                    const planetTypesSet = new Set<string>();
+                    const factionsSet = new Set<string>();
+
+                    // Debug log
+                    if (recipesUsingRaw.length > 0 || processingRecipes.length > 0) {
+                        console.log(`Raw material ${ingredient.resource}:`,
+                            'Used in:', recipesUsingRaw.map(r => r.name),
+                            'Processed by:', processingRecipes.map(r => r.name));
+                    }
+
+                    // Combine both sets of recipes to get planet types
+                    [...recipesUsingRaw, ...processingRecipes].forEach(r => {
+                        if (r.planetTypes) {
+                            if (Array.isArray(r.planetTypes)) {
+                                r.planetTypes.forEach(pt => planetTypesSet.add(pt));
+                            } else if (typeof r.planetTypes === 'string') {
+                                r.planetTypes.split(';').forEach(pt => planetTypesSet.add(pt.trim()));
+                            }
+                        }
+                        if (r.factions && r.factions !== 'All') {
+                            if (Array.isArray(r.factions)) {
+                                r.factions.forEach(f => factionsSet.add(f));
+                            } else if (typeof r.factions === 'string') {
+                                r.factions.split(';').forEach(f => factionsSet.add(f.trim()));
+                            }
+                        }
+                    });
+
+                    // More debug logging
+                    if (planetTypesSet.size > 0) {
+                        console.log(`Planet types for ${ingredient.resource}:`, Array.from(planetTypesSet));
+                    }
+
                     children.push({
                         id: `raw_${ingredient.resource}`,
                         recipe: {
@@ -121,7 +170,9 @@ function RecipeTreeCanvasComponent({
                             constructionTime: 0,
                             ingredients: [],
                             output: null,  // Raw resources don't produce anything
-                            requiredQuantity: ingredient.quantity  // Amount needed by parent recipe
+                            requiredQuantity: ingredient.quantity,  // Amount needed by parent recipe
+                            planetTypes: planetTypesSet.size > 0 ? Array.from(planetTypesSet).join(';') : undefined,
+                            factions: factionsSet.size > 0 && factionsSet.size < 3 ? Array.from(factionsSet).join(';') : undefined
                         },
                         x: 0,
                         y: 0,
@@ -534,48 +585,32 @@ function RecipeTreeCanvasComponent({
                                     <strong>Amount needed:</strong> {selectedNode.recipe.requiredQuantity}x
                                 </p>
                             )}
-                            <div className="resource-details">
-                                <p className="extraction-note">
-                                    <em>This is a raw material that needs to be:</em>
-                                </p>
-                                <ul className="extraction-methods">
-                                    <li>Extracted from planets with this resource</li>
-                                    <li>Purchased from markets</li>
-                                    <li>Obtained through other means</li>
-                                </ul>
 
-                                {selectedNode.recipe.planetTypes && (
-                                    <div className="planet-types-info">
-                                        <strong>Available on:</strong>
-                                        <div className="planet-types-list">
-                                            {selectedNode.recipe.planetTypes.split(';').map((planet, idx) => (
-                                                <span key={idx} className="planet-type-tag">
-                                                    {planet.trim()}
-                                                </span>
-                                            ))}
-                                        </div>
+                            {selectedNode.recipe.planetTypes && (
+                                <div className="planet-types-info">
+                                    <strong>CAN BE EXTRACTED FROM:</strong>
+                                    <div className="planet-types-list">
+                                        {selectedNode.recipe.planetTypes.split(';').map((planet, idx) => (
+                                            <span key={idx} className="planet-type-tag">
+                                                {planet.trim()}
+                                            </span>
+                                        ))}
                                     </div>
-                                )}
+                                </div>
+                            )}
 
-                                {selectedNode.recipe.factions && selectedNode.recipe.factions !== 'All' && (
-                                    <div className="factions-info">
-                                        <strong>Faction regions:</strong>
-                                        <div className="factions-list">
-                                            {selectedNode.recipe.factions.split(';').map((faction, idx) => (
-                                                <span key={idx} className={`faction-tag faction-${faction.trim().toLowerCase()}`}>
-                                                    {faction.trim()}
-                                                </span>
-                                            ))}
-                                        </div>
+                            {selectedNode.recipe.factions && selectedNode.recipe.factions !== 'All' && (
+                                <div className="factions-info">
+                                    <strong>FACTION REGIONS:</strong>
+                                    <div className="factions-list">
+                                        {selectedNode.recipe.factions.split(';').map((faction, idx) => (
+                                            <span key={idx} className={`faction-tag faction-${faction.trim().toLowerCase()}`}>
+                                                {faction.trim()}
+                                            </span>
+                                        ))}
                                     </div>
-                                )}
-                            </div>
-                            <button
-                                className="btn btn-small"
-                                onClick={() => analyzeResource(selectedNode.recipe.name)}
-                            >
-                                📊 Analyze Resource
-                            </button>
+                                </div>
+                            )}
                         </>
                     ) : (
                         <>
@@ -586,7 +621,7 @@ function RecipeTreeCanvasComponent({
 
                             {selectedNode.recipe.planetTypes && (
                                 <div className="planet-types-info">
-                                    <strong>Can be crafted on:</strong>
+                                    <strong>CAN BE CRAFTED ON:</strong>
                                     <div className="planet-types-list">
                                         {selectedNode.recipe.planetTypes.split(';').map((planet, idx) => (
                                             <span key={idx} className="planet-type-tag">
@@ -599,7 +634,7 @@ function RecipeTreeCanvasComponent({
 
                             {selectedNode.recipe.factions && selectedNode.recipe.factions !== 'All' && selectedNode.recipe.factions !== 'MUD;ONI;UST' && (
                                 <div className="factions-info">
-                                    <strong>Limited to factions:</strong>
+                                    <strong>LIMITED TO FACTIONS:</strong>
                                     <div className="factions-list">
                                         {selectedNode.recipe.factions.split(';').map((faction, idx) => (
                                             <span key={idx} className={`faction-tag faction-${faction.trim().toLowerCase()}`}>
@@ -612,7 +647,7 @@ function RecipeTreeCanvasComponent({
 
                             {selectedNode.recipe.ingredients.length > 0 && (
                                 <div>
-                                    <h4>Requires:</h4>
+                                    <h4>REQUIRES:</h4>
                                     <ul>
                                         {selectedNode.recipe.ingredients.map((ing, i) => (
                                             <li key={i}>
