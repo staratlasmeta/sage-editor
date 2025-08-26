@@ -26,6 +26,7 @@ function initCombatSimulator() {
     createCombatSimulatorModal();
     
     // Load saved formula if exists
+    // Note: This will be overwritten by auto-load from configuration JSON if present
     const savedFormula = localStorage.getItem('combatSimulatorFormula');
     if (savedFormula) {
         window.combatSimulator.formula = savedFormula;
