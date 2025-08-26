@@ -1640,6 +1640,22 @@ body
     margin: 0.1rem;
     background: rgba(0, 0, 0, 0.3);
     border-radius: 3px;
+    font-size: 0.65rem;
+    white-space: nowrap;
+}
+
+.cost-items-row
+{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin-top: 0.25rem;
+}
+
+.cost-item.more
+{
+    background: rgba(255, 107, 53, 0.2);
+    font-style: italic;
 }
 
 /* Upgrade section */

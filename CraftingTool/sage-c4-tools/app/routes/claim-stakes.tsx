@@ -1628,10 +1628,16 @@ export default function ClaimStakes() {
                                                             {building.constructionCost && Object.keys(building.constructionCost).length > 0 && (
                                                                 <div className="construction-cost-preview">
                                                                     <strong>Cost:</strong>
-                                                                    {Object.entries(building.constructionCost).slice(0, 3).map(([res, amt]) => (
-                                                                        <span key={res}>{res}: {amt}</span>
-                                                                    ))}
-                                                                    {Object.keys(building.constructionCost).length > 3 && <span>...</span>}
+                                                                    <div className="cost-items-row">
+                                                                        {Object.entries(building.constructionCost).slice(0, 3).map(([res, amt]) => (
+                                                                            <span key={res} className="cost-item">
+                                                                                {res.replace('cargo-', '').replace(/-/g, ' ')}: {amt.toLocaleString()}
+                                                                            </span>
+                                                                        ))}
+                                                                        {Object.keys(building.constructionCost).length > 3 && (
+                                                                            <span className="cost-item more">+{Object.keys(building.constructionCost).length - 3} more</span>
+                                                                        )}
+                                                                    </div>
                                                                 </div>
                                                             )}
 
