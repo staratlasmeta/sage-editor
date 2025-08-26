@@ -32,6 +32,31 @@ let customAttributeOrder = []; // Store the order of all attributes (both origin
 let isDraggingRow = false; // Flag to track if a row is being dragged
 let rowDragData = null; // Data about the currently dragged row
 let attributesPanelLocked = false; // Track locked state of attributes panel
+window.attributesPanelLocked = false; // Make it globally accessible
+
+// Function for lock button
+window.toggleAttributesLock = function() {
+    window.attributesPanelLocked = !window.attributesPanelLocked;
+    attributesPanelLocked = window.attributesPanelLocked;
+    
+    const lockBtn = document.getElementById('lock-attributes-panel');
+    if (lockBtn) {
+        if (window.attributesPanelLocked) {
+            lockBtn.innerHTML = '🔒 Locked';
+            lockBtn.title = 'Click to unlock (show all rows)';
+            lockBtn.style.backgroundColor = '#444';
+        } else {
+            lockBtn.innerHTML = '🔓 Unlocked';
+            lockBtn.title = 'Click to lock (hide zero values)';
+            lockBtn.style.backgroundColor = '#333';
+        }
+    }
+    
+    // Refresh the attributes editor
+    if (currentCategory && currentComponentGroup) {
+        populateAttributesEditor(currentCategory, currentComponentGroup);
+    }
+}
 
 // Global variable for stat descriptions
 let statDescriptions = {}; // Store descriptions for each stat
@@ -1932,29 +1957,7 @@ function initApp() {
     // Add event listeners for the attributes panel
     document.getElementById('close-attributes-panel').addEventListener('click', closeAttributesPanel);
     
-    // Add event listener for the lock button
-    const lockAttributesBtn = document.getElementById('lock-attributes-panel');
-    if (lockAttributesBtn) {
-        lockAttributesBtn.addEventListener('click', function() {
-            attributesPanelLocked = !attributesPanelLocked;
-            
-            // Update button appearance
-            if (attributesPanelLocked) {
-                this.innerHTML = '🔒 Locked';
-                this.title = 'Click to unlock (show all rows)';
-                this.style.backgroundColor = '#444';
-            } else {
-                this.innerHTML = '🔓 Unlocked';
-                this.title = 'Click to lock (hide zero values)';
-                this.style.backgroundColor = '#333';
-            }
-            
-            // Refresh the attributes editor to apply the lock state
-            if (currentCategory && currentComponentGroup) {
-                populateAttributesEditor(currentCategory, currentComponentGroup);
-            }
-        });
-    }
+    // Lock button now uses onclick handler in HTML, no need for event listener here
     
     // Initialize drag and drop functionality for ships
     initDragAndDrop();
@@ -3706,7 +3709,7 @@ function calculateStatModificationDetails(ship, config, statName, isPanelRefresh
 }
 
 // Start the application when DOM is loaded
-document.addEventListener('DOMContentLoaded', initApp); 
+// Removed - initApp is called in the DOMContentLoaded handler at the end of the file 
 
 // Initialize the top scrollbar and sync with the table
 function initTopScrollbar() {

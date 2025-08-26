@@ -400,12 +400,13 @@ function populateAttributesEditor(category, groupName) {
             // Create rows for each stat
             orderedStats.forEach(statName => {
                 // Check if we should skip this row when locked
-                if (attributesPanelLocked) {
+                if (window.attributesPanelLocked) {
                     const baseStat = nodeAttrs[statName] || { baseValue: undefined };
                     
                     // Initialize stat with type system if needed
                     const initializedStat = window.StatTypeSystem ? 
                         window.StatTypeSystem.initializeStatWithType(baseStat) : baseStat;
+                    
                     
                     // Check if base stat has been edited (non-default values)
                     let baseEdited = false;
@@ -423,6 +424,8 @@ function populateAttributesEditor(category, groupName) {
                     
                     // Check if all values in this row are default (base and all sub-groups)
                     let allDefault = !baseEdited;
+                    
+
                     
                     if (hasSubGroups && allDefault) {
                         // Check sub-group values too
@@ -447,8 +450,10 @@ function populateAttributesEditor(category, groupName) {
                         });
                     }
                     
+                    
                     // Skip this row if all values are default
                     if (allDefault) {
+
                         return;
                     }
                 }
@@ -507,10 +512,11 @@ function populateAttributesEditor(category, groupName) {
                 const stat = nodeAttrs[statName] || { baseValue: undefined };
                 
                 // Check if we should skip this stat when locked
-                if (attributesPanelLocked) {
+                if (window.attributesPanelLocked) {
                     // Initialize stat with type system if needed
                     const initializedStat = window.StatTypeSystem ? 
                         window.StatTypeSystem.initializeStatWithType(stat) : stat;
+                    
                     
                     // Check if stat has been edited (non-default values)
                     let isEdited = false;
@@ -525,6 +531,8 @@ function populateAttributesEditor(category, groupName) {
                         // Fallback for legacy stats
                         isEdited = (stat.baseValue || 0) !== 0;
                     }
+                    
+
                     
                     if (!isEdited) {
                         return; // Skip non-edited values
@@ -686,7 +694,7 @@ function populateAttributesEditor(category, groupName) {
             updateStatAtPath(statName, stat, path);
             
             // Check if we need to refresh when changing from default in locked mode
-            if (attributesPanelLocked && oldValue === 0 && value !== 0) {
+            if (window.attributesPanelLocked && oldValue === 0 && value !== 0) {
                 setTimeout(() => {
                     populateAttributesEditor(currentCategory, currentComponentGroup);
                 }, 100);
@@ -715,7 +723,7 @@ function populateAttributesEditor(category, groupName) {
             updateStatAtPath(statName, stat, path);
             
             // Check if we need to refresh when changing from default in locked mode
-            if (attributesPanelLocked && oldValue === 1.0 && stat.multiplicativeValue !== 1.0) {
+            if (window.attributesPanelLocked && oldValue === 1.0 && stat.multiplicativeValue !== 1.0) {
                 setTimeout(() => {
                     populateAttributesEditor(currentCategory, currentComponentGroup);
                 }, 100);
@@ -729,7 +737,7 @@ function populateAttributesEditor(category, groupName) {
             updateStatAtPath(statName, stat, path);
             
             // Check if we need to refresh when changing from default in locked mode
-            if (attributesPanelLocked && oldValue === 1.0 && stat.multiplicativeValue !== 1.0) {
+            if (window.attributesPanelLocked && oldValue === 1.0 && stat.multiplicativeValue !== 1.0) {
                 setTimeout(() => {
                     populateAttributesEditor(currentCategory, currentComponentGroup);
                 }, 100);
@@ -810,7 +818,7 @@ function populateAttributesEditor(category, groupName) {
             updateStatAtPath(statName, value, path);
             
             // Check if we need to refresh when changing from default in locked mode
-            if (attributesPanelLocked) {
+            if (window.attributesPanelLocked) {
                 // Refresh if we changed from default to non-default
                 let needsRefresh = false;
                 if (stat.type === window.STAT_TYPES.ADDITIVE || stat.type === 'additive') {
