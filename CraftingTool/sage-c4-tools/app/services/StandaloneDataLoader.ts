@@ -138,6 +138,19 @@ const MOCK_DATA = {
             requiredTags: ['processing-hub']
         },
         {
+            id: 'copper-ore-processor-t1',
+            name: 'Copper Ore Processor T1',
+            category: 'processing',
+            tier: 1,
+            slots: 3,
+            power: -10,
+            crew: 15,
+            resourceUsage: { 'copper-ore': 0.5 },
+            resourceProduction: { 'cargo-copper': 0.4 },
+            constructionCost: { 'cargo-steel': 75, 'cargo-electronics': 35 },
+            requiredTags: ['processing-hub']
+        },
+        {
             id: 'power-plant-t1',
             name: 'Power Plant T1',
             category: 'power',
@@ -245,9 +258,75 @@ export class StandaloneDataLoader {
     }
 
     static async loadGameData() {
-        console.log('Loading embedded game data for standalone build...');
+        console.log('Loading game data for standalone build...');
 
-        // Return mock data directly
+        try {
+            // First try to load the mockData.json file from the data directory
+            const response = await fetch('./data/mockData.json');
+            if (response.ok) {
+                const mockDataFile = await response.json();
+                console.log('Successfully loaded mockData.json file');
+
+                // Process resources from the structured format
+                let resourcesArray: any[] = [];
+                let resourcesObject: any = {};
+
+                if (mockDataFile.resources) {
+                    // If resources are structured with categories
+                    if (mockDataFile.resources.raw || mockDataFile.resources.processed || mockDataFile.resources.advanced) {
+                        const allResources = [
+                            ...(mockDataFile.resources.raw || []),
+                            ...(mockDataFile.resources.processed || []),
+                            ...(mockDataFile.resources.advanced || [])
+                        ];
+
+                        // Convert to array format for compatibility
+                        resourcesArray = allResources.map((id: string) => ({
+                            id,
+                            name: id.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase()),
+                            category: mockDataFile.resources.raw?.includes(id) ? 'raw' :
+                                mockDataFile.resources.processed?.includes(id) ? 'processed' : 'advanced'
+                        }));
+
+                        // Also create object format
+                        allResources.forEach((id: string) => {
+                            resourcesObject[id] = {
+                                name: id.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase()),
+                                category: mockDataFile.resources.raw?.includes(id) ? 'raw' :
+                                    mockDataFile.resources.processed?.includes(id) ? 'processed' : 'advanced'
+                            };
+                        });
+                    } else {
+                        // Resources are already in the right format
+                        resourcesArray = mockDataFile.resources;
+                        resourcesObject = mockDataFile.resources;
+                    }
+                }
+
+                console.log('Loaded', mockDataFile.planets?.length, 'planets,', mockDataFile.buildings?.length, 'buildings,', resourcesArray.length, 'resources');
+
+                return {
+                    cargo: resourcesObject,
+                    tags: mockDataFile.tags || {},
+                    planetArchetypes: mockDataFile.planetArchetypes || {},
+                    claimStakeBuildings: mockDataFile.buildings || [],
+                    craftingHabBuildings: mockDataFile.craftingHabBuildings || mockDataFile.buildings?.filter((b: any) =>
+                        b.category === 'hab' || b.category === 'crafting'
+                    ) || [],
+                    recipes: mockDataFile.recipes || [],
+                    planets: mockDataFile.planets || [],
+                    buildings: mockDataFile.buildings || [],
+                    resources: resourcesArray,
+                    claimStakeDefinitions: mockDataFile.claimStakeDefinitions || [],
+                    starbases: mockDataFile.starbases || []
+                };
+            }
+        } catch (error) {
+            console.warn('Failed to load mockData.json, using fallback data:', error);
+        }
+
+        // Fallback to embedded mock data
+        console.log('Using embedded fallback mock data');
         return {
             cargo: MOCK_DATA.resources,
             tags: {},

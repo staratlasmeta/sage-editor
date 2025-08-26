@@ -57,6 +57,36 @@ export function ResourcesView({ claimStakes = [], onTransfer, onClose }: Resourc
     const [searchTerm, setSearchTerm] = useState('');
     const [showOnlyActive, setShowOnlyActive] = useState(false);
     const [sortBy, setSortBy] = useState<'name' | 'amount' | 'production' | 'net'>('name');
+    const [transferModal, setTransferModal] = useState<{
+        show: boolean;
+        from?: string;
+        resource?: string;
+        maxAmount?: number
+    }>({ show: false });
+
+    // Handle transfer button click
+    const handleTransferClick = (locationId: string, resourceName: string, availableAmount: number) => {
+        setTransferModal({
+            show: true,
+            from: locationId,
+            resource: resourceName,
+            maxAmount: availableAmount
+        });
+    };
+
+    // Handle actual transfer
+    const handleTransfer = (amount: number) => {
+        if (transferModal.resource && transferModal.from && onTransfer) {
+            // For now, we'll transfer from starbase to a default location
+            // In a full implementation, you'd have a destination selector
+            const resources = { [transferModal.resource]: amount };
+            onTransfer(transferModal.from, 'claim-stake', resources);
+
+            // Show success message (you could add a toast notification here)
+            console.log(`Transferred ${amount} ${transferModal.resource}`);
+        }
+        setTransferModal({ show: false });
+    };
 
     // Aggregate all resources
     const aggregatedResources = useMemo(() => {
@@ -302,8 +332,7 @@ export function ResourcesView({ claimStakes = [], onTransfer, onClose }: Resourc
                             className="search-input"
                         />
                     </div>
-
-                    <div className="filter-section">
+                    <div className="view-controls">
                         <select
                             value={selectedCategory}
                             onChange={(e) => setSelectedCategory(e.target.value)}
@@ -321,9 +350,6 @@ export function ResourcesView({ claimStakes = [], onTransfer, onClose }: Resourc
                         >
                             {showOnlyActive ? '✓ ' : ''}Active Only
                         </button>
-                    </div>
-
-                    <div className="view-controls">
                         <select
                             value={sortBy}
                             onChange={(e) => setSortBy(e.target.value as any)}
@@ -361,7 +387,7 @@ export function ResourcesView({ claimStakes = [], onTransfer, onClose }: Resourc
                     </div>
                 </div>
 
-                <div className={`resources-content view-${viewMode}`}>
+                <div className={`resources-content view-${viewMode} ${selectedResource ? 'has-details' : ''}`}>
                     {viewMode === 'grid' && (
                         <div className="resources-grid">
                             {filteredResources.map(resource => {
@@ -652,7 +678,16 @@ export function ResourcesView({ claimStakes = [], onTransfer, onClose }: Resourc
                 {/* Resource Details Panel */}
                 {selectedResource && (
                     <div className="resource-details">
-                        <h3>{aggregatedResources[selectedResource].name} Details</h3>
+                        <div className="details-header">
+                            <h3>{aggregatedResources[selectedResource].name} Details</h3>
+                            <button
+                                className="details-close-btn"
+                                onClick={() => setSelectedResource(null)}
+                                title="Close details"
+                            >
+                                ×
+                            </button>
+                        </div>
                         <div className="details-content">
                             <div className="locations-list">
                                 <h4>Storage Locations:</h4>
@@ -663,29 +698,84 @@ export function ResourcesView({ claimStakes = [], onTransfer, onClose }: Resourc
                                             <span className="location-type">{loc.type}</span>
                                         </div>
                                         <div className="location-stats">
-                                            <span>Amount: {Math.floor(loc.amount)}</span>
-                                            {loc.production && (
-                                                <span className="positive">Prod: {formatRate(loc.production)}</span>
+                                            <span>📦 Amount: {Math.floor(loc.amount).toLocaleString()}</span>
+                                            {loc.production && loc.production > 0 && (
+                                                <span className="positive">📈 Prod: {formatRate(loc.production)}</span>
                                             )}
-                                            {loc.consumption && (
-                                                <span className="negative">Cons: {formatRate(-loc.consumption)}</span>
+                                            {loc.consumption && loc.consumption > 0 && (
+                                                <span className="negative">📉 Cons: {formatRate(-loc.consumption)}</span>
                                             )}
                                             {loc.storage !== undefined && (
-                                                <span>Storage: {Math.floor(loc.storage)}/{loc.maxStorage}</span>
+                                                <span>🏭 Storage: {Math.floor(loc.storage).toLocaleString()}/{loc.maxStorage?.toLocaleString() || '∞'}</span>
                                             )}
                                         </div>
-                                        {onTransfer && (
+                                        {onTransfer && loc.type === 'starbase' && (
                                             <button
-                                                className="btn-sm transfer-btn"
+                                                className="transfer-btn"
                                                 onClick={() => {
-                                                    // Open transfer modal
+                                                    // Handle transfer
+                                                    handleTransferClick(loc.id, aggregatedResources[selectedResource].name, loc.amount);
                                                 }}
                                             >
-                                                Transfer
+                                                🚀 Transfer
                                             </button>
                                         )}
                                     </div>
                                 ))}
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* Transfer Modal */}
+                {transferModal.show && (
+                    <div className="transfer-modal-overlay" onClick={() => setTransferModal({ show: false })}>
+                        <div className="transfer-modal" onClick={(e) => e.stopPropagation()}>
+                            <div className="transfer-modal-header">
+                                <h3>Transfer {transferModal.resource}</h3>
+                                <button
+                                    className="modal-close-btn"
+                                    onClick={() => setTransferModal({ show: false })}
+                                >
+                                    ×
+                                </button>
+                            </div>
+                            <div className="transfer-modal-content">
+                                <div className="transfer-info">
+                                    <p>Available: <strong>{transferModal.maxAmount?.toLocaleString()}</strong></p>
+                                    <p>From: <strong>{transferModal.from}</strong></p>
+                                </div>
+                                <div className="transfer-input-group">
+                                    <label htmlFor="transfer-amount">Amount to Transfer:</label>
+                                    <input
+                                        type="number"
+                                        id="transfer-amount"
+                                        min="1"
+                                        max={transferModal.maxAmount}
+                                        defaultValue={Math.min(100, transferModal.maxAmount || 0)}
+                                        className="transfer-amount-input"
+                                    />
+                                </div>
+                                <div className="transfer-actions">
+                                    <button
+                                        className="btn-cancel"
+                                        onClick={() => setTransferModal({ show: false })}
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button
+                                        className="btn-primary transfer-confirm"
+                                        onClick={() => {
+                                            const input = document.getElementById('transfer-amount') as HTMLInputElement;
+                                            const amount = parseInt(input.value);
+                                            if (amount > 0 && amount <= (transferModal.maxAmount || 0)) {
+                                                handleTransfer(amount);
+                                            }
+                                        }}
+                                    >
+                                        Transfer
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>

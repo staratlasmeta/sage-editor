@@ -216,3 +216,86 @@
     font-size: 0.85rem;
     color: #aaa;
 }
+
+/* Planet Types and Faction Info */
+.planet-types-info,
+.factions-info
+{
+    margin-top: 1rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid #333;
+}
+
+.planet-types-info strong,
+.factions-info strong
+{
+    display: block;
+    font-family: 'Orbitron', monospace;
+    font-size: 0.85rem;
+    color: #00C896;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.planet-types-list,
+.factions-list
+{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.planet-type-tag
+{
+    background: linear-gradient(135deg, #1e3a5f 0%, #2a4a7f 100%);
+    border: 1px solid #3a5a8f;
+    border-radius: 4px;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    font-family: 'Exo 2', sans-serif;
+    color: #a0c0ff;
+    white-space: nowrap;
+}
+
+.faction-tag
+{
+    border-radius: 4px;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    font-family: 'Orbitron', monospace;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+}
+
+.faction-tag.faction-mud
+{
+    background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+    border: 1px solid #CD853F;
+    color: #FFE4B5;
+}
+
+.faction-tag.faction-oni
+{
+    background: linear-gradient(135deg, #C71585 0%, #FF1493 100%);
+    border: 1px solid #FF69B4;
+    color: #FFE0F0;
+}
+
+.faction-tag.faction-ust,
+.faction-tag.faction-ustur
+{
+    background: linear-gradient(135deg, #1E90FF 0%, #4169E1 100%);
+    border: 1px solid #6495ED;
+    color: #E0F0FF;
+}
+
+.faction-tag.faction-all
+{
+    background: linear-gradient(135deg, #4B4B4B 0%, #6B6B6B 100%);
+    border: 1px solid #888;
+    color: #DDD;
+}
