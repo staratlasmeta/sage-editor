@@ -832,11 +832,20 @@ function loadConfigurations(event) {
                 console.log('Loaded stat descriptions:', Object.keys(statDescriptions).length);
             }
             
-            // Load combat formula
-            if (loadedData.combatFormula && window.combatSimulator) {
-                window.combatSimulator.formula = loadedData.combatFormula;
-                localStorage.setItem('combatSimulatorFormula', loadedData.combatFormula);
-                console.log('Loaded combat formula from configuration file');
+            // Load combat formula - always overwrite localStorage when loading from file
+            if (window.combatSimulator) {
+                // Get the formula from file (or empty string if not present)
+                const formulaFromFile = loadedData.combatFormula || '';
+                
+                // Always overwrite the combat simulator formula and localStorage
+                window.combatSimulator.formula = formulaFromFile;
+                localStorage.setItem('combatSimulatorFormula', formulaFromFile);
+                
+                if (formulaFromFile) {
+                    console.log('Loaded combat formula from configuration file');
+                } else {
+                    console.log('No combat formula in configuration file, cleared existing formula');
+                }
                 
                 // Refresh syntax highlighting if combat simulator is open
                 if (window.refreshCombatFormulaSyntax) {

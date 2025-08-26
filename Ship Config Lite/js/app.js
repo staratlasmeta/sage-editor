@@ -5941,11 +5941,20 @@ function processLoadedConfiguration(loadedData) {
             window.statDescriptions = statDescriptions;
         }
         
-        // Load combat formula
-        if (loadedData.combatFormula && window.combatSimulator) {
-            window.combatSimulator.formula = loadedData.combatFormula;
-            localStorage.setItem('combatSimulatorFormula', loadedData.combatFormula);
-            console.log('Loaded combat formula from configuration file');
+        // Load combat formula - always overwrite localStorage when loading from JSON
+        if (window.combatSimulator) {
+            // Get the formula from JSON (or empty string if not present)
+            const formulaFromJson = loadedData.combatFormula || '';
+            
+            // Always overwrite the combat simulator formula and localStorage
+            window.combatSimulator.formula = formulaFromJson;
+            localStorage.setItem('combatSimulatorFormula', formulaFromJson);
+            
+            if (formulaFromJson) {
+                console.log('Loaded combat formula from configuration file');
+            } else {
+                console.log('No combat formula in configuration file, cleared existing formula');
+            }
             
             // Refresh syntax highlighting if combat simulator is open
             if (window.refreshCombatFormulaSyntax) {
@@ -5955,7 +5964,7 @@ function processLoadedConfiguration(loadedData) {
             // Update the formula input if it exists
             const formulaInput = document.getElementById('combat-formula-input');
             if (formulaInput) {
-                formulaInput.value = loadedData.combatFormula;
+                formulaInput.value = formulaFromJson;
             }
         }
         
