@@ -1,0 +1,80 @@
+[
+    {
+        "id": "iron-ore",
+        "name": "Iron Ore",
+        "type": "raw",
+        "category": "mineral"
+    },
+    {
+        "id": "copper-ore",
+        "name": "Copper Ore",
+        "type": "raw",
+        "category": "mineral"
+    },
+    {
+        "id": "coal",
+        "name": "Coal",
+        "type": "raw",
+        "category": "mineral"
+    },
+    {
+        "id": "silica",
+        "name": "Silica",
+        "type": "raw",
+        "category": "mineral"
+    },
+    {
+        "id": "hydrogen",
+        "name": "Hydrogen",
+        "type": "raw",
+        "category": "gas"
+    },
+    {
+        "id": "steel",
+        "name": "Steel",
+        "type": "processed",
+        "category": "metal"
+    },
+    {
+        "id": "copper",
+        "name": "Copper",
+        "type": "processed",
+        "category": "metal"
+    },
+    {
+        "id": "iron-plate",
+        "name": "Iron Plate",
+        "type": "processed",
+        "category": "metal"
+    },
+    {
+        "id": "fuel",
+        "name": "Fuel",
+        "type": "consumable",
+        "category": "energy"
+    },
+    {
+        "id": "electronics",
+        "name": "Electronics",
+        "type": "component",
+        "category": "tech"
+    },
+    {
+        "id": "circuit-board",
+        "name": "Circuit Board",
+        "type": "component",
+        "category": "tech"
+    },
+    {
+        "id": "plastic",
+        "name": "Plastic",
+        "type": "processed",
+        "category": "synthetic"
+    },
+    {
+        "id": "carbon",
+        "name": "Carbon",
+        "type": "raw",
+        "category": "mineral"
+    }
+]

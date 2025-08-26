@@ -138,9 +138,274 @@ export default function ClaimStakes() {
     // Get active instance
     const activeInstance = claimStakeInstances.find(i => i.id === activeInstanceId);
 
+    const buildingNameWithoutDuplicateTier = (building: Building) => {
+        return building.name.replace(/ T\d+$/, '');
+    }
+
     // Cast data with proper types
     const planets = (gameData?.planets || []) as Planet[];
-    const buildings = (gameData?.buildings || []) as Building[];
+    const rawBuildings = (gameData?.buildings || []) as Building[];
+
+    // Add upgradeFamily to buildings and generate higher tier versions
+    const buildings = useMemo(() => {
+        const processedBuildings: Building[] = [];
+
+        // Generate planet-specific infrastructure variants if we have a selected planet
+        if (selectedPlanet && planets.length > 0) {
+            // Get available resources for the selected planet
+            const planetResources = selectedPlanet.resources || [];
+
+            // Generate planet-specific infrastructure buildings
+            const infrastructureTemplates = [
+                {
+                    baseId: 'central-hub',
+                    baseName: 'Central Hub',
+                    category: 'infrastructure',
+                    baseSlots: 5,
+                    basePower: 50,
+                    baseCrew: 10,
+                    extractionMultiplier: 0.2, // Low extraction rate
+                    comesWithStake: true
+                },
+                {
+                    baseId: 'extraction-hub',
+                    baseName: 'Extraction Hub',
+                    category: 'infrastructure',
+                    baseSlots: 8,
+                    basePower: 30,
+                    baseCrew: 15,
+                    extractionMultiplier: 0.5, // Higher extraction rate
+                    comesWithStake: false
+                },
+                {
+                    baseId: 'processing-hub',
+                    baseName: 'Processing Hub',
+                    category: 'infrastructure',
+                    baseSlots: 10,
+                    basePower: -30, // Consumes power
+                    baseCrew: 20,
+                    processingCapability: true,
+                    comesWithStake: false
+                }
+            ];
+
+            infrastructureTemplates.forEach(template => {
+                // Create extraction rates for all available raw resources (if this building extracts)
+                const extractionRate: Record<string, number> = {};
+                if (template.extractionMultiplier !== undefined) {
+                    planetResources.forEach((resource: string) => {
+                        // Extract all raw resources on the planet
+                        // Check if this is a raw material (not processed like steel, copper, etc.)
+                        const isRawResource = resource.includes('-ore') ||
+                            resource === 'hydrogen' ||
+                            resource === 'silica' ||
+                            resource === 'carbon' ||
+                            resource === 'arco' ||
+                            resource === 'biomass' ||
+                            resource === 'coal' ||
+                            resource === 'iron' ||
+                            resource === 'diamond' ||
+                            resource === 'lumanite' ||
+                            resource === 'rochinol' ||
+                            resource === 'aerogel' ||
+                            resource === 'nitrogen' ||
+                            // Default: if not clearly processed (no 'cargo-' prefix), assume it's raw
+                            (!resource.includes('cargo-') && !resource.includes('fuel') && !resource.includes('steel') && !resource.includes('electronics'));
+
+                        if (isRawResource) {
+                            const richness = selectedPlanet.richness?.[resource] || 1;
+                            extractionRate[resource] = template.extractionMultiplier * richness;
+                        }
+                    });
+                }
+
+                // Create base T1 infrastructure building
+                const baseInfrastructure: Building = {
+                    id: `${template.baseId}-t1-${selectedPlanet.id}`,
+                    name: `${template.baseName} T1`,
+                    category: template.category,
+                    tier: 1,
+                    slots: template.baseSlots,
+                    power: template.basePower,
+                    crew: template.baseCrew,
+                    extractionRate: Object.keys(extractionRate).length > 0 ? extractionRate : undefined,
+                    resourceUsage: template.baseId === 'central-hub' ? { fuel: 1 } : undefined,
+                    constructionCost: {
+                        steel: 100 + (template.baseSlots * 10),
+                        electronics: 50 + (template.baseSlots * 5)
+                    },
+                    constructionTime: 60,
+                    requiredTags: [],
+                    comesWithStake: template.comesWithStake,
+                    upgradeFamily: template.baseId,
+                    description: template.processingCapability
+                        ? `${template.baseName} for ${selectedPlanet.name}`
+                        : `${template.baseName} for ${selectedPlanet.name} - Extracts all available resources`
+                };
+
+                // Add processing capability if needed
+                if (template.processingCapability) {
+                    // Processing hub can process one recipe at a time
+                    // We'll add common processing recipes based on planet resources
+                    if (planetResources.includes('iron-ore')) {
+                        baseInfrastructure.resourceProduction = { steel: 0.5 };
+                        baseInfrastructure.resourceUsage = { 'iron-ore': 1 };
+                        baseInfrastructure.description = `${template.baseName} for ${selectedPlanet.name} - Processes iron-ore into steel`;
+                    } else if (planetResources.includes('copper-ore')) {
+                        baseInfrastructure.resourceProduction = { copper: 0.5 };
+                        baseInfrastructure.resourceUsage = { 'copper-ore': 1 };
+                        baseInfrastructure.description = `${template.baseName} for ${selectedPlanet.name} - Processes copper-ore into copper`;
+                    } else if (planetResources.includes('silica')) {
+                        baseInfrastructure.resourceProduction = { electronics: 0.3 };
+                        baseInfrastructure.resourceUsage = { silica: 1, copper: 0.5 };
+                        baseInfrastructure.description = `${template.baseName} for ${selectedPlanet.name} - Processes silica and copper into electronics`;
+                    } else {
+                        // Default to fuel processing if hydrogen is available
+                        baseInfrastructure.resourceProduction = { fuel: 0.2 };
+                        baseInfrastructure.resourceUsage = { hydrogen: 1 };
+                        baseInfrastructure.description = `${template.baseName} for ${selectedPlanet.name} - Processes hydrogen into fuel`;
+                    }
+                }
+
+                processedBuildings.push(baseInfrastructure);
+
+                // Generate T2-T5 versions
+                for (let tier = 2; tier <= 5; tier++) {
+                    const scaledExtraction: Record<string, number> = {};
+                    if (baseInfrastructure.extractionRate) {
+                        Object.entries(baseInfrastructure.extractionRate).forEach(([resource, rate]) => {
+                            scaledExtraction[resource] = rate * (1 + (tier - 1) * 0.5);
+                        });
+                    }
+
+                    const tierBuilding: Building = {
+                        ...baseInfrastructure,
+                        id: `${template.baseId}-t${tier}-${selectedPlanet.id}`,
+                        name: `${template.baseName} T${tier}`,
+                        tier: tier,
+                        slots: Math.ceil(template.baseSlots * (1 + (tier - 1) * 0.5)),
+                        power: Math.floor(template.basePower * (1 + (tier - 1) * 0.3)),
+                        crew: Math.ceil(template.baseCrew * (1 + (tier - 1) * 0.2)),
+                        extractionRate: Object.keys(scaledExtraction).length > 0 ? scaledExtraction : undefined,
+                        constructionCost: Object.entries(baseInfrastructure.constructionCost || {}).reduce((acc, [resource, amount]) => {
+                            acc[resource] = Math.ceil(amount * Math.pow(1.5, tier - 1));
+                            return acc;
+                        }, {} as Record<string, number>),
+                        comesWithStake: false // Only T1 comes with stake
+                    };
+
+                    if (template.processingCapability && baseInfrastructure.resourceProduction && baseInfrastructure.resourceUsage) {
+                        // Scale processing rates for higher tiers
+                        tierBuilding.resourceProduction = {};
+                        tierBuilding.resourceUsage = {};
+
+                        Object.entries(baseInfrastructure.resourceProduction).forEach(([resource, rate]) => {
+                            tierBuilding.resourceProduction![resource] = rate * (1 + (tier - 1) * 0.5);
+                        });
+
+                        Object.entries(baseInfrastructure.resourceUsage).forEach(([resource, rate]) => {
+                            tierBuilding.resourceUsage![resource] = rate * (1 + (tier - 1) * 0.3);
+                        });
+
+                        tierBuilding.description = baseInfrastructure.description;
+                    }
+
+                    processedBuildings.push(tierBuilding);
+                }
+            });
+        }
+
+        // Process each base building from raw data
+        rawBuildings.forEach(baseBuilding => {
+            // Skip if building has tier > 1 (we only want to process T1 buildings as base)
+            if (baseBuilding.tier && baseBuilding.tier > 1) {
+                return;
+            }
+
+            // Skip infrastructure buildings as we generate planet-specific ones above
+            if (baseBuilding.category === 'infrastructure') {
+                return;
+            }
+
+            // Derive upgradeFamily from building name by removing tier suffix
+            const upgradeFamilyName = baseBuilding.name
+                .toLowerCase()
+                .replace(/ t[1-5]$/i, '') // Remove T1, T2, etc.
+                .replace(/ tier [1-5]$/i, '') // Remove Tier 1, Tier 2, etc.
+                .replace(/\s+/g, '_'); // Replace spaces with underscores
+
+            // Ensure the base building is T1 - don't add T1 if already present
+            const baseBuildingT1 = {
+                ...baseBuilding,
+                name: baseBuilding.name, // Keep original name (should already have T1)
+                tier: 1, // Force tier 1
+                upgradeFamily: baseBuilding.upgradeFamily || upgradeFamilyName
+            };
+            processedBuildings.push(baseBuildingT1);
+
+            // Generate higher tier versions (T2-T5)
+            // Infrastructure will be filtered by claim stake tier later
+            const maxTier = 5;
+
+            for (let tier = 2; tier <= maxTier; tier++) {
+                // Generate consistent tier naming
+                let tierName = baseBuilding.name;
+
+                // If name has T1 or Tier 1, replace it
+                if (/T1|Tier 1/i.test(tierName)) {
+                    tierName = tierName.replace(/T1|Tier 1/i, `T${tier}`);
+                } else {
+                    // Otherwise add T{tier} to the end
+                    tierName = `${tierName} T${tier}`;
+                }
+
+                // Generate ID with tier suffix
+                let tierId = baseBuilding.id;
+                if (/t1|tier1/i.test(tierId)) {
+                    tierId = tierId.replace(/t1|tier1/i, `t${tier}`);
+                } else {
+                    tierId = `${tierId}-t${tier}`;
+                }
+
+                // Check if this tier already exists
+                const exists = rawBuildings.some(b => b.id === tierId);
+                if (!exists) {
+                    const tierBuilding: Building = {
+                        ...baseBuilding,
+                        id: tierId,
+                        name: tierName,
+                        tier: tier,
+                        upgradeFamily: upgradeFamilyName,
+                        // Scale up stats for higher tiers
+                        slots: Math.ceil(baseBuilding.slots * (1 + (tier - 1) * 0.5)),
+                        power: Math.floor(baseBuilding.power * (1 + (tier - 1) * 0.3)),
+                        crew: Math.ceil(baseBuilding.crew * (1 + (tier - 1) * 0.2)),
+                        constructionCost: Object.entries(baseBuilding.constructionCost || {}).reduce((acc, [resource, amount]) => {
+                            acc[resource] = Math.ceil((amount as number) * Math.pow(1.5, tier - 1));
+                            return acc;
+                        }, {} as Record<string, number>),
+                        // Scale production/extraction rates
+                        ...(baseBuilding.extractionRate && {
+                            extractionRate: Object.entries(baseBuilding.extractionRate).reduce((acc, [resource, rate]) => {
+                                acc[resource] = (rate as number) * (1 + (tier - 1) * 0.5);
+                                return acc;
+                            }, {} as Record<string, number>)
+                        }),
+                        ...(baseBuilding.resourceProduction && {
+                            resourceProduction: Object.entries(baseBuilding.resourceProduction).reduce((acc, [resource, rate]) => {
+                                acc[resource] = (rate as number) * (1 + (tier - 1) * 0.5);
+                                return acc;
+                            }, {} as Record<string, number>)
+                        })
+                    };
+                    processedBuildings.push(tierBuilding);
+                }
+            }
+        });
+
+        return processedBuildings;
+    }, [rawBuildings, selectedPlanet, planets]);
+
     const starbaseInventory = sharedState.starbaseInventory;
 
     // Debug logging to verify data loading
@@ -522,10 +787,11 @@ export default function ClaimStakes() {
         setActiveInstanceId(newInstance.id);
         setDesignMode(true);
 
-        // Automatically add the central hub at the appropriate tier
+        // Automatically add the planet-specific central hub at the appropriate tier
         const centralHub = buildings.find(b =>
-            b.upgradeFamily === 'central_hub' &&
-            b.tier === Math.min(selectedTier, 3) // Central hub maxes out at T3
+            b.upgradeFamily === 'central-hub' &&
+            b.tier === 1 && // Start with T1
+            b.id.includes(selectedPlanet?.id || '') // Planet-specific
         );
 
         if (centralHub) {
@@ -1331,6 +1597,8 @@ export default function ClaimStakes() {
 
                                             const upgradeInfo = getUpgradeInfo();
 
+
+
                                             return (
                                                 <div key={pb.id} className={`placed-building-card ${!pb.isActive ? 'inactive' : ''} tier-${building.tier}`}>
                                                     <div className="building-header">
@@ -1342,7 +1610,7 @@ export default function ClaimStakes() {
                                                                             building.category === 'infrastructure' ? '🏛️' : '🏗️'}
                                                         </span>
                                                         <div>
-                                                            <h4>{building.name} T{building.tier}</h4>
+                                                            <h4>{buildingNameWithoutDuplicateTier(building)} T{building.tier}</h4>
                                                             <span className="building-description">{building.description}</span>
                                                         </div>
                                                         {designMode && (
@@ -1591,7 +1859,7 @@ export default function ClaimStakes() {
                                                                             building.category === 'power' ? '⚡' :
                                                                                 building.category === 'storage' ? '📦' : '🏗️'}
                                                                 </div>
-                                                                <h5>{building.name} T{building.tier}</h5>
+                                                                <h5>{buildingNameWithoutDuplicateTier(building)} T{building.tier}</h5>
                                                             </div>
                                                             <div className="building-requirements">
                                                                 <span title="Slots">📦 {building.slots}</span>
@@ -1658,7 +1926,7 @@ export default function ClaimStakes() {
                                 {activeInstance.isFinalized && (
                                     <div className="resource-storage">
                                         <h3>Resource Storage</h3>
-                                        <div className="resource-grid">
+                                        <div className="claim-stakes-resource-grid">
                                             {Object.entries(activeInstance.resources).map(([resource, amount]) => (
                                                 <div key={resource} className="resource-item">
                                                     <span className="resource-name">{resource}</span>
@@ -1785,10 +2053,12 @@ export default function ClaimStakes() {
                                                                 ));
                                                                 setDesignMode(true);
 
-                                                                // Re-add central hub at appropriate tier
+                                                                // Re-add planet-specific central hub at T1
+                                                                const planet = planets.find(p => p.id === instance.planetId);
                                                                 const centralHub = buildings.find(b =>
-                                                                    b.upgradeFamily === 'central_hub' &&
-                                                                    b.tier === Math.min(instance.tier, 3)
+                                                                    b.upgradeFamily === 'central-hub' &&
+                                                                    b.tier === 1 &&
+                                                                    b.id.includes(planet?.id || '')
                                                                 );
 
                                                                 if (centralHub) {
@@ -1853,7 +2123,7 @@ export default function ClaimStakes() {
                 <aside className="sidebar right">
                     {/* Design Summary - Always visible when in design mode or have buildings */}
                     {(designMode || (activeInstance && activeInstance.buildings.length > 0)) && activeInstance && (() => {
-                        const buildings = designMode ? currentDesign : activeInstance.buildings;
+                        const placedBuildings = designMode ? currentDesign : activeInstance.buildings;
                         let totalSlots = 0;
                         let totalPower = 0;
                         let totalCrew = 0;
@@ -1861,8 +2131,9 @@ export default function ClaimStakes() {
                         let hasAllResources = true;
                         const missingResources: Record<string, { needed: number; available: number }> = {};
 
-                        buildings.forEach((pb: PlacedBuilding) => {
-                            const building = gameData?.buildings?.find((b: any) => b.id === pb.buildingId);
+                        placedBuildings.forEach((pb: PlacedBuilding) => {
+                            // Use the processed buildings array which includes planet-specific variants
+                            const building = buildings.find((b: Building) => b.id === pb.buildingId);
                             if (building) {
                                 totalSlots += building.slots || 0;
                                 totalPower += building.power || 0;
