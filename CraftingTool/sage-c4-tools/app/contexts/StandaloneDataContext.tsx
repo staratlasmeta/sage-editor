@@ -2,11 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { StandaloneDataLoader } from '../services/StandaloneDataLoader';
 
 interface DataContextType {
-    planets: any[];
-    buildings: any[];
-    resources: any[];
-    starbases: any[];
-    recipes: any[];
+    gameData: any;
     isLoading: boolean;
     error: string | null;
 }
@@ -15,11 +11,7 @@ const DataContext = createContext<DataContextType | undefined>(undefined);
 
 export function StandaloneDataProvider({ children }: { children: React.ReactNode }) {
     const [data, setData] = useState<DataContextType>({
-        planets: [],
-        buildings: [],
-        resources: [],
-        starbases: [],
-        recipes: [],
+        gameData: null,
         isLoading: true,
         error: null
     });
@@ -29,21 +21,9 @@ export function StandaloneDataProvider({ children }: { children: React.ReactNode
             try {
                 console.log('Loading standalone data...');
                 const gameData = await StandaloneDataLoader.loadGameData();
-                const mockData = await StandaloneDataLoader.loadMockData();
-
-                // Convert resources object to array format
-                const resourcesObj = gameData.resources || mockData.resources || {};
-                const resourcesArray = Object.entries(resourcesObj).map(([id, data]: [string, any]) => ({
-                    id,
-                    ...data
-                }));
 
                 setData({
-                    planets: gameData.planets || mockData.planets || [],
-                    buildings: gameData.buildings || mockData.buildings || [],
-                    resources: resourcesArray,
-                    starbases: gameData.starbases || mockData.starbases || [],
-                    recipes: gameData.recipes || mockData.recipes || [],
+                    gameData: gameData,
                     isLoading: false,
                     error: null
                 });
@@ -78,15 +58,9 @@ export function useGameData() {
         throw new Error('useGameData must be used within a DataProvider');
     }
 
-    // Transform to match the expected interface
+    // Return the full gameData object with all properties
     return {
-        gameData: {
-            planets: context.planets,
-            buildings: context.buildings,
-            resources: context.resources,
-            starbases: context.starbases,
-            recipes: context.recipes
-        },
+        gameData: context.gameData,
         loading: context.isLoading,
         error: context.error
     };
