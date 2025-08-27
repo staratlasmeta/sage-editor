@@ -1,5 +1,4 @@
-.recipe-tree-canvas-container
-{
+.recipe-tree-canvas-container {
     position: relative;
     width: 100%;
     height: 600px;
@@ -9,8 +8,7 @@
     overflow: hidden;
 }
 
-.tree-loading-indicator
-{
+.tree-loading-indicator {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -23,8 +21,7 @@
     animation: fadeIn 0.3s ease-in-out;
 }
 
-.tree-loading-indicator span
-{
+.tree-loading-indicator span {
     color: var(--primary-orange);
     font-family: 'Orbitron', monospace;
     font-size: 0.9rem;
@@ -33,50 +30,41 @@
     animation: pulse 1.5s ease-in-out infinite;
 }
 
-@keyframes fadeIn
-{
-    from
-    {
+@keyframes fadeIn {
+    from {
         opacity: 0;
         transform: translate(-50%, -50%) scale(0.9);
     }
 
-    to
-    {
+    to {
         opacity: 1;
         transform: translate(-50%, -50%) scale(1);
     }
 }
 
-@keyframes pulse
-{
+@keyframes pulse {
 
     0%,
-    100%
-    {
+    100% {
         opacity: 1;
     }
 
-    50%
-    {
+    50% {
         opacity: 0.7;
     }
 }
 
-.recipe-tree-canvas
-{
+.recipe-tree-canvas {
     width: 100%;
     height: 100%;
     cursor: grab;
 }
 
-.recipe-tree-canvas:active
-{
+.recipe-tree-canvas:active {
     cursor: grabbing;
 }
 
-.node-info-panel
-{
+.node-info-panel {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -97,45 +85,37 @@
 }
 
 /* Custom scrollbar for webkit browsers */
-.node-info-panel::-webkit-scrollbar
-{
+.node-info-panel::-webkit-scrollbar {
     width: 6px;
 }
 
-.node-info-panel::-webkit-scrollbar-track
-{
+.node-info-panel::-webkit-scrollbar-track {
     background: rgba(0, 0, 0, 0.3);
     border-radius: 3px;
 }
 
-.node-info-panel::-webkit-scrollbar-thumb
-{
+.node-info-panel::-webkit-scrollbar-thumb {
     background: var(--primary-orange);
     border-radius: 3px;
 }
 
-.node-info-panel::-webkit-scrollbar-thumb:hover
-{
+.node-info-panel::-webkit-scrollbar-thumb:hover {
     background: var(--primary-orange-light, #ff8555);
 }
 
-@keyframes slideIn
-{
-    from
-    {
+@keyframes slideIn {
+    from {
         transform: translateX(100%);
         opacity: 0;
     }
 
-    to
-    {
+    to {
         transform: translateX(0);
         opacity: 1;
     }
 }
 
-.node-info-panel h3
-{
+.node-info-panel h3 {
     font-family: 'Orbitron', monospace;
     color: var(--primary-orange);
     margin-top: 0;
@@ -143,8 +123,7 @@
     font-size: 1.2rem;
 }
 
-.node-info-panel h4
-{
+.node-info-panel h4 {
     font-family: 'Orbitron', monospace;
     color: var(--accent-green);
     margin-top: 1rem;
@@ -155,23 +134,20 @@
     font-weight: 600;
 }
 
-.node-info-panel p
-{
+.node-info-panel p {
     font-family: 'Exo 2', sans-serif;
     font-size: 0.9rem;
     margin: 0.25rem 0;
     color: #ccc;
 }
 
-.node-info-panel ul
-{
+.node-info-panel ul {
     list-style: none;
     padding-left: 0;
     margin: 0.5rem 0;
 }
 
-.node-info-panel li
-{
+.node-info-panel li {
     font-family: 'Exo 2', sans-serif;
     font-size: 0.85rem;
     color: #aaa;
@@ -181,8 +157,7 @@
     margin-bottom: 0.25rem;
 }
 
-.node-info-panel .resource-type
-{
+.node-info-panel .resource-type {
     font-family: 'Orbitron', monospace;
     font-size: 0.9rem;
     color: var(--accent-green);
@@ -192,8 +167,7 @@
     margin: 0.5rem 0;
 }
 
-.node-info-panel .required-amount
-{
+.node-info-panel .required-amount {
     background: rgba(255, 107, 53, 0.1);
     border-left: 3px solid var(--primary-orange);
     padding: 0.5rem;
@@ -202,15 +176,13 @@
     font-size: 0.9rem;
 }
 
-.node-info-panel .required-amount strong
-{
+.node-info-panel .required-amount strong {
     color: var(--primary-orange);
 }
 
 
 
-.node-info-panel .extraction-note
-{
+.node-info-panel .extraction-note {
     font-family: 'Exo 2', sans-serif;
     font-size: 0.85rem;
     color: #888;
@@ -221,20 +193,17 @@
 }
 
 /* Ensure proper spacing for content */
-.node-info-panel .resource-details
-{
+.node-info-panel .resource-details {
     padding-bottom: 0.5rem;
 }
 
-.node-info-panel .extraction-methods
-{
+.node-info-panel .extraction-methods {
     margin-bottom: 1rem;
 }
 
 
 
-.resource-intelligence-panel
-{
+.resource-intelligence-panel {
     position: absolute;
     bottom: 10px;
     left: 10px;
@@ -247,24 +216,21 @@
     backdrop-filter: blur(10px);
 }
 
-.resource-intelligence-panel h3
-{
+.resource-intelligence-panel h3 {
     font-family: 'Orbitron', monospace;
     color: #00C896;
     margin-top: 0;
     margin-bottom: 0.5rem;
 }
 
-.value-indicator
-{
+.value-indicator {
     display: flex;
     align-items: center;
     gap: 1rem;
     margin: 1rem 0;
 }
 
-.value-bar
-{
+.value-bar {
     flex: 1;
     height: 20px;
     background: #333;
@@ -273,23 +239,19 @@
     position: relative;
 }
 
-.value-fill
-{
+.value-fill {
     height: 100%;
     background: linear-gradient(90deg, #00C896 0%, #FFD700 100%);
     transition: width 0.3s ease;
 }
 
-.planet-list
-{
+.planet-list {
     display: flex;
-    flex-wrap: wrap;
     gap: 0.5rem;
     margin-top: 0.5rem;
 }
 
-.planet-badge
-{
+.planet-badge {
     background: var(--primary-light);
     border: 1px solid var(--border-color);
     border-radius: 4px;
@@ -299,33 +261,28 @@
     color: #aaa;
 }
 
-.recipe-usage-list
-{
+.recipe-usage-list {
     max-height: 150px;
     overflow-y: auto;
     margin-top: 0.5rem;
     padding-right: 0.5rem;
 }
 
-.recipe-usage-list::-webkit-scrollbar
-{
+.recipe-usage-list::-webkit-scrollbar {
     width: 6px;
 }
 
-.recipe-usage-list::-webkit-scrollbar-track
-{
+.recipe-usage-list::-webkit-scrollbar-track {
     background: rgba(0, 0, 0, 0.3);
     border-radius: 3px;
 }
 
-.recipe-usage-list::-webkit-scrollbar-thumb
-{
+.recipe-usage-list::-webkit-scrollbar-thumb {
     background: var(--primary-orange);
     border-radius: 3px;
 }
 
-.recipe-usage-item
-{
+.recipe-usage-item {
     padding: 0.25rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     font-size: 0.85rem;
@@ -334,16 +291,14 @@
 
 /* Planet Types and Faction Info */
 .planet-types-info,
-.factions-info
-{
+.factions-info {
     margin-top: 1rem;
     padding-top: 0.5rem;
     border-top: 1px solid #333;
 }
 
 .planet-types-info strong,
-.factions-info strong
-{
+.factions-info strong {
     display: block;
     font-family: 'Orbitron', monospace;
     font-size: 0.75rem;
@@ -356,16 +311,14 @@
 }
 
 .planet-types-list,
-.factions-list
-{
+.factions-list {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
     margin-top: 0.5rem;
 }
 
-.planet-type-tag
-{
+.planet-type-tag {
     background: linear-gradient(135deg, #1e3a5f 0%, #2a4a7f 100%);
     border: 1px solid #3a5a8f;
     border-radius: 4px;
@@ -376,8 +329,7 @@
     white-space: nowrap;
 }
 
-.faction-tag
-{
+.faction-tag {
     border-radius: 4px;
     padding: 0.25rem 0.5rem;
     font-size: 0.75rem;
@@ -388,30 +340,26 @@
     white-space: nowrap;
 }
 
-.faction-tag.faction-mud
-{
+.faction-tag.faction-mud {
     background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
     border: 1px solid #CD853F;
     color: #FFE4B5;
 }
 
-.faction-tag.faction-oni
-{
+.faction-tag.faction-oni {
     background: linear-gradient(135deg, #C71585 0%, #FF1493 100%);
     border: 1px solid #FF69B4;
     color: #FFE0F0;
 }
 
 .faction-tag.faction-ust,
-.faction-tag.faction-ustur
-{
+.faction-tag.faction-ustur {
     background: linear-gradient(135deg, #1E90FF 0%, #4169E1 100%);
     border: 1px solid #6495ED;
     color: #E0F0FF;
 }
 
-.faction-tag.faction-all
-{
+.faction-tag.faction-all {
     background: linear-gradient(135deg, #4B4B4B 0%, #6B6B6B 100%);
     border: 1px solid #888;
     color: #DDD;
