@@ -279,9 +279,20 @@ export function ResourcesView({ claimStakes = [], onTransfer, onClose }: Resourc
     }, [aggregatedResources]);
 
     const formatRate = (rate: number) => {
-        if (Math.abs(rate) < 0.01) return '0';
+        // Adaptive decimal places based on the magnitude
+        if (rate === 0) return '0/s';
+
+        const absRate = Math.abs(rate);
         const sign = rate > 0 ? '+' : '';
-        return `${sign}${rate.toFixed(2)}/s`;
+
+        // If rate is very small, show more decimal places
+        if (absRate < 0.001) return `${sign}${rate.toFixed(4)}/s`;
+        if (absRate < 0.01) return `${sign}${rate.toFixed(3)}/s`;
+        if (absRate < 1) return `${sign}${rate.toFixed(2)}/s`;
+        if (absRate < 100) return `${sign}${rate.toFixed(1)}/s`;
+
+        // For large numbers, no decimals needed
+        return `${sign}${Math.floor(rate)}/s`;
     };
 
     const getFlowColor = (net: number) => {
@@ -307,11 +318,11 @@ export function ResourcesView({ claimStakes = [], onTransfer, onClose }: Resourc
                             </span>
                             <span className="stat-badge production">
                                 <span className="stat-label">Production:</span>
-                                <span className="stat-value">+{totals.totalProduction.toFixed(2)}/s</span>
+                                <span className="stat-value">{formatRate(totals.totalProduction)}</span>
                             </span>
                             <span className="stat-badge consumption">
                                 <span className="stat-label">Consumption:</span>
-                                <span className="stat-value">-{totals.totalConsumption.toFixed(2)}/s</span>
+                                <span className="stat-value">{formatRate(-totals.totalConsumption)}</span>
                             </span>
                             <span className={`stat-badge net-flow ${totals.netFlow >= 0 ? 'positive' : 'negative'}`}>
                                 <span className="stat-label">Net:</span>

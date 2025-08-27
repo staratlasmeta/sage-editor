@@ -60,7 +60,7 @@ function NotificationItem({ notification, onDismiss }: { notification: Notificat
 export function useNotifications() {
     const [notifications, setNotifications] = useState<Notification[]>([]);
 
-    const showNotification = (message: string, type: Notification['type'] = 'info', duration?: number) => {
+    const showNotification = (message: string, type: Notification['type'] = 'info', duration: number = 3000) => {
         const id = `notification-${Date.now()}-${Math.random()}`;
         const notification: Notification = { id, message, type, duration };
         setNotifications(prev => [...prev, notification]);

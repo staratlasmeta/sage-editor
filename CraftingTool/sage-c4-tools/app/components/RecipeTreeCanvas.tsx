@@ -35,15 +35,26 @@ interface ResourceInfo {
     tier: number;
 }
 
+interface TreeControls {
+    resetView: () => void;
+    centerTree: () => void;
+    fitToScreen: () => void;
+    setZoom: (zoom: number) => void;
+    getZoom: () => number;
+    exportImage: () => void;
+}
+
 interface RecipeTreeCanvasProps {
     recipe: Recipe | null;
     recipes: Recipe[];
     planets?: any[];
     resources?: any[];
     quantity?: number;
-    viewMode?: 'simple' | 'detailed' | 'efficiency';
+    viewMode?: 'simple' | 'detailed';
     onNodeClick?: (node: TreeNode) => void;
     onResourceAnalysis?: (info: ResourceInfo) => void;
+    onControlsReady?: (controls: TreeControls) => void;
+    maxDepth?: number;
 }
 
 function RecipeTreeCanvasComponent({
@@ -54,13 +65,17 @@ function RecipeTreeCanvasComponent({
     quantity = 1,
     viewMode = 'simple',
     onNodeClick,
-    onResourceAnalysis
+    onResourceAnalysis,
+    onControlsReady,
+    maxDepth = 10
 }: RecipeTreeCanvasProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [hoveredNode, setHoveredNode] = useState<TreeNode | null>(null);
     const [selectedNode, setSelectedNode] = useState<TreeNode | null>(null);
     const [treeRoot, setTreeRoot] = useState<TreeNode | null>(null);
     const [isLoading, setIsLoading] = useState(false);
+    const treeCache = useRef<Map<string, TreeNode>>(new Map());
+    const buildTimeoutRef = useRef<NodeJS.Timeout>();
     const [viewport, setViewport] = useState({
         x: 0,
         y: 0,
@@ -69,6 +84,12 @@ function RecipeTreeCanvasComponent({
         dragStart: { x: 0, y: 0 },
         lastPos: { x: 0, y: 0 }
     });
+
+    // Use ref to access viewport without causing re-renders
+    const viewportRef = useRef(viewport);
+    useEffect(() => {
+        viewportRef.current = viewport;
+    }, [viewport]);
 
     // Use RAF for smooth animations
     const animationFrameRef = useRef<number | undefined>(undefined);
@@ -79,10 +100,30 @@ function RecipeTreeCanvasComponent({
         if (!recipes || recipes.length === 0) return map;
 
         recipes.forEach(r => {
+            // Map by id
             map.set(r.id, r);
+
+            // Map by outputId if it exists (from recipes.json)
+            if ((r as any).outputId) {
+                map.set((r as any).outputId, r);
+            }
+
+            // Map by outputName if it exists (from recipes.json)  
+            if ((r as any).outputName) {
+                map.set((r as any).outputName, r);
+                map.set((r as any).outputName.toLowerCase(), r);
+            }
+
+            // Map by output.resource (old format)
             if (r.output?.resource) {
                 map.set(r.output.resource, r);
                 map.set(`recipe_${r.output.resource}`, r);
+            }
+
+            // Map by name
+            if (r.name) {
+                map.set(r.name, r);
+                map.set(r.name.toLowerCase(), r);
             }
         });
         return map;
@@ -90,7 +131,8 @@ function RecipeTreeCanvasComponent({
 
     // Build tree with memoization
     const buildRecipeTree = useCallback((recipeId: string, depth = 0, visited = new Set<string>()): TreeNode | null => {
-        if (visited.has(recipeId) || depth > 8) return null;
+        // Use maxDepth prop for performance control
+        if (visited.has(recipeId) || depth >= maxDepth) return null;
         visited.add(recipeId);
 
         const rec = recipeMap.get(recipeId);
@@ -100,28 +142,67 @@ function RecipeTreeCanvasComponent({
 
         if (rec.ingredients && Array.isArray(rec.ingredients)) {
             rec.ingredients.forEach(ingredient => {
-                // Use map for faster lookup
-                const producerRecipe = recipeMap.get(ingredient.resource) ||
-                    recipeMap.get(`recipe_${ingredient.resource}`);
+                // Handle both 'resource' and 'name' fields for ingredients
+                const ingredientName = ingredient.resource || ingredient.name;
+
+                // Try multiple lookups to find the producer recipe
+                // Also try converting spaces to hyphens and vice versa
+                const hyphenated = ingredientName.replace(/\s+/g, '-').toLowerCase();
+                const spaced = ingredientName.replace(/-/g, ' ');
+
+                const producerRecipe = recipeMap.get(ingredientName) ||
+                    recipeMap.get(ingredientName.toLowerCase()) ||
+                    recipeMap.get(hyphenated) ||
+                    recipeMap.get(spaced) ||
+                    recipeMap.get(spaced.toLowerCase()) ||
+                    recipeMap.get(`recipe_${ingredientName}`) ||
+                    recipeMap.get(`cargo-${ingredientName}`) ||
+                    recipes.find(r =>
+                        (r as any).outputName === ingredientName ||
+                        (r as any).outputName?.toLowerCase() === ingredientName.toLowerCase() ||
+                        (r as any).outputId === hyphenated
+                    );
 
                 if (producerRecipe) {
                     const childNode = buildRecipeTree(producerRecipe.id, depth + 1, new Set(visited));
                     if (childNode) children.push(childNode);
                 } else {
-                    // Raw resources don't have an output - they need to be extracted/obtained
+                    // This ingredient doesn't have a recipe, so check if it's truly a raw material
+                    // A raw material either has no recipe that produces it, or has a recipe with empty ingredients
+                    const rawMaterialRecipe = recipes.find(r =>
+                        ((r as any).outputName === ingredientName ||
+                            (r as any).outputId === ingredientName?.toLowerCase().replace(/\s+/g, '-') ||
+                            r.output?.resource === ingredientName ||
+                            r.name === ingredientName) &&
+                        (!r.ingredients || r.ingredients.length === 0)
+                    );
+
+                    const isRawMaterial = rawMaterialRecipe || !recipes.some(r =>
+                        (r as any).outputName === ingredientName ||
+                        (r as any).outputId === ingredientName?.toLowerCase().replace(/\s+/g, '-') ||
+                        r.output?.resource === ingredientName ||
+                        r.name === ingredientName
+                    );
+
+                    if (!isRawMaterial) {
+                        // This should have a recipe but we couldn't find it
+                        // Log for debugging  
+                        console.warn(`Could not find recipe for ${ingredientName}, but it's not a raw material`);
+                    }
+
                     // Find recipes that use this raw material to determine where it can be extracted
                     const recipesUsingRaw = recipes.filter(r =>
-                        r.ingredients?.some(ing => ing.resource === ingredient.resource)
+                        r.ingredients?.some(ing => (ing.resource || ing.name) === ingredientName)
                     );
 
                     // Also check if this raw material produces something (like iron-ore -> iron)
                     // This would give us the planet types where it can be extracted
-                    const processedMaterialName = ingredient.resource.replace('-ore', '').replace('cargo-', '');
+                    const processedMaterialName = ingredientName.replace('-ore', '').replace('cargo-', '');
                     const processingRecipes = recipes.filter(r => {
-                        const outputName = r.output?.resource || '';
+                        const outputName = (r as any).outputName || r.output?.resource || '';
                         return outputName === `cargo-${processedMaterialName}` ||
                             outputName === processedMaterialName ||
-                            (r.ingredients?.length === 1 && r.ingredients[0].resource === ingredient.resource);
+                            (r.ingredients?.length === 1 && (r.ingredients[0].resource || r.ingredients[0].name) === ingredientName);
                     });
 
                     // Aggregate planet types and factions from all recipes using this raw material
@@ -130,7 +211,7 @@ function RecipeTreeCanvasComponent({
 
                     // Debug log
                     if (recipesUsingRaw.length > 0 || processingRecipes.length > 0) {
-                        console.log(`Raw material ${ingredient.resource}:`,
+                        console.log(`Raw material ${ingredientName}:`,
                             'Used in:', recipesUsingRaw.map(r => r.name),
                             'Processed by:', processingRecipes.map(r => r.name));
                     }
@@ -155,19 +236,23 @@ function RecipeTreeCanvasComponent({
 
                     // More debug logging
                     if (planetTypesSet.size > 0) {
-                        console.log(`Planet types for ${ingredient.resource}:`, Array.from(planetTypesSet));
+                        console.log(`Planet types for ${ingredientName}:`, Array.from(planetTypesSet));
                     }
 
+                    // Get tier from raw material recipe if it exists
+                    const rawTier = rawMaterialRecipe ?
+                        ((rawMaterialRecipe as any).outputTier || rawMaterialRecipe.tier || 0) : 0;
+
                     children.push({
-                        id: `raw_${ingredient.resource}`,
+                        id: `raw_${ingredientName}`,
                         recipe: {
-                            id: `raw_${ingredient.resource}`,
-                            name: ingredient.resource,
-                            tier: 0,
+                            id: `raw_${ingredientName}`,
+                            name: ingredientName,
+                            tier: rawTier,
                             type: 'raw',
                             constructionTime: 0,
                             ingredients: [],
-                            output: null,  // Raw resources don't produce anything
+                            output: { resource: ingredientName, quantity: 1 },  // Set output for consistency
                             requiredQuantity: ingredient.quantity,  // Amount needed by parent recipe
                             planetTypes: planetTypesSet.size > 0 ? Array.from(planetTypesSet).join(';') : undefined,
                             factions: factionsSet.size > 0 && factionsSet.size < 3 ? Array.from(factionsSet).join(';') : undefined
@@ -189,7 +274,7 @@ function RecipeTreeCanvasComponent({
             children,
             depth
         };
-    }, [recipeMap, recipes]);
+    }, [recipeMap, recipes, maxDepth]);
 
     // Calculate positions
     const calculateNodePositions = useCallback((root: TreeNode, canvasWidth: number, canvasHeight: number) => {
@@ -315,7 +400,9 @@ function RecipeTreeCanvasComponent({
             ctx.textBaseline = 'middle';
 
             if (isRaw) {
-                ctx.fillText('RAW', node.x, node.y - 15);
+                // Show tier for raw materials if they have one, otherwise show RAW
+                const rawTier = node.recipe.tier || 0;
+                ctx.fillText(rawTier > 0 ? `T${rawTier}` : 'RAW', node.x, node.y - 15);
             } else {
                 ctx.fillText(`T${node.recipe.tier}`, node.x, node.y - 15);
             }
@@ -343,6 +430,21 @@ function RecipeTreeCanvasComponent({
                 ctx.fillText(text, node.x, node.y + (index * 12));
             });
 
+            // Detailed mode - show additional info
+            if (viewMode === 'detailed' && !isRaw) {
+                ctx.font = `${10 / viewport.scale}px Exo 2`;
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+
+                // Show construction time
+                ctx.fillText(`${node.recipe.constructionTime}s`, node.x, node.y + 25);
+
+                // Show quantity if greater than 1
+                if (node.recipe.output?.quantity && node.recipe.output.quantity > 1) {
+                    ctx.fillStyle = '#FFD700';
+                    ctx.fillText(`x${node.recipe.output.quantity}`, node.x, node.y + 35);
+                }
+            }
+
             node.children.forEach(drawNode);
         };
 
@@ -354,7 +456,7 @@ function RecipeTreeCanvasComponent({
         ctx.font = '12px Exo 2';
         ctx.textAlign = 'left';
         ctx.fillText('Scroll: Zoom | Drag: Pan | Click: Select', 10, canvas.height - 10);
-    }, [treeRoot, hoveredNode, selectedNode, viewport]);
+    }, [treeRoot, hoveredNode, selectedNode, viewport, viewMode]);
 
     // Handle wheel
     const handleWheel = useCallback((e: WheelEvent) => {
@@ -435,15 +537,18 @@ function RecipeTreeCanvasComponent({
         const worldY = (mouseY - viewport.y) / viewport.scale;
 
         let clickedNode: TreeNode | null = null;
-        const checkNodeClick = (node: TreeNode) => {
-            if (isPointInNode(worldX, worldY, node)) {
-                clickedNode = node;
+        let closestDistance = Infinity;
 
-                // Analyze resource if it's a raw material
-                if (node.recipe.type === 'raw') {
-                    analyzeResource(node.recipe.name);
-                }
+        // Find the closest node to the click
+        const checkNodeClick = (node: TreeNode) => {
+            const distance = Math.sqrt(Math.pow(worldX - node.x, 2) + Math.pow(worldY - node.y, 2));
+            const radius = node.recipe.type === 'raw' ? 50 : 45; // Slightly larger hitbox for raw materials
+
+            if (distance <= radius && distance < closestDistance) {
+                closestDistance = distance;
+                clickedNode = node;
             }
+
             node.children.forEach(checkNodeClick);
         };
 
@@ -451,6 +556,13 @@ function RecipeTreeCanvasComponent({
 
         if (clickedNode) {
             setSelectedNode(clickedNode);
+
+            // Analyze resource if it's a raw material
+            if (clickedNode.recipe.type === 'raw') {
+                console.log('Raw material clicked:', clickedNode.recipe.name);
+                analyzeResource(clickedNode.recipe.name);
+            }
+
             if (onNodeClick) onNodeClick(clickedNode);
         } else {
             setViewport(prev => ({
@@ -460,7 +572,7 @@ function RecipeTreeCanvasComponent({
                 lastPos: { x: prev.x, y: prev.y }
             }));
         }
-    }, [treeRoot, viewport, onNodeClick, isPointInNode, analyzeResource]);
+    }, [treeRoot, viewport, onNodeClick, analyzeResource]);
 
     const handleMouseMove = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {
         const canvas = canvasRef.current;
@@ -505,40 +617,175 @@ function RecipeTreeCanvasComponent({
         }));
     }, []);
 
+    // Tree control methods
+    const resetView = useCallback(() => {
+        setViewport({
+            x: 0,
+            y: 0,
+            scale: 1,
+            isDragging: false,
+            dragStart: { x: 0, y: 0 },
+            lastPos: { x: 0, y: 0 }
+        });
+    }, []);
+
+    const centerTree = useCallback(() => {
+        if (!treeRoot || !canvasRef.current) return;
+
+        const canvas = canvasRef.current;
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+
+        // Find the bounds of the tree
+        let minX = Infinity, maxX = -Infinity;
+        let minY = Infinity, maxY = -Infinity;
+
+        const findBounds = (node: TreeNode) => {
+            minX = Math.min(minX, node.x - 40);
+            maxX = Math.max(maxX, node.x + 40);
+            minY = Math.min(minY, node.y - 30);
+            maxY = Math.max(maxY, node.y + 30);
+            node.children.forEach(findBounds);
+        };
+        findBounds(treeRoot);
+
+        const treeCenterX = (minX + maxX) / 2;
+        const treeCenterY = (minY + maxY) / 2;
+
+        setViewport(prev => ({
+            ...prev,
+            x: centerX - treeCenterX * prev.scale,
+            y: centerY - treeCenterY * prev.scale
+        }));
+    }, [treeRoot]);
+
+    const fitToScreen = useCallback(() => {
+        if (!treeRoot || !canvasRef.current) return;
+
+        const canvas = canvasRef.current;
+
+        // Find the bounds of the tree
+        let minX = Infinity, maxX = -Infinity;
+        let minY = Infinity, maxY = -Infinity;
+
+        const findBounds = (node: TreeNode) => {
+            minX = Math.min(minX, node.x - 40);
+            maxX = Math.max(maxX, node.x + 40);
+            minY = Math.min(minY, node.y - 30);
+            maxY = Math.max(maxY, node.y + 30);
+            node.children.forEach(findBounds);
+        };
+        findBounds(treeRoot);
+
+        const treeWidth = maxX - minX;
+        const treeHeight = maxY - minY;
+        const padding = 50;
+
+        const scaleX = (canvas.width - padding * 2) / treeWidth;
+        const scaleY = (canvas.height - padding * 2) / treeHeight;
+        const newScale = Math.min(scaleX, scaleY, 2);
+
+        const treeCenterX = (minX + maxX) / 2;
+        const treeCenterY = (minY + maxY) / 2;
+
+        setViewport({
+            x: canvas.width / 2 - treeCenterX * newScale,
+            y: canvas.height / 2 - treeCenterY * newScale,
+            scale: newScale,
+            isDragging: false,
+            dragStart: { x: 0, y: 0 },
+            lastPos: { x: 0, y: 0 }
+        });
+    }, [treeRoot]);
+
+    const setZoom = useCallback((zoom: number) => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+
+        const newScale = Math.max(0.5, Math.min(3, zoom));
+
+        setViewport(prev => {
+            const scaleDiff = newScale - prev.scale;
+            const offsetX = -(centerX * scaleDiff) / newScale;
+            const offsetY = -(centerY * scaleDiff) / newScale;
+
+            return {
+                ...prev,
+                x: prev.x + offsetX,
+                y: prev.y + offsetY,
+                scale: newScale
+            };
+        });
+    }, []);
+
+    const getZoom = useCallback(() => {
+        return viewportRef.current.scale;
+    }, []);
+
+    const exportImage = useCallback(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+
+        // Create a link element and trigger download
+        const link = document.createElement('a');
+        link.download = `${recipe?.name || 'recipe'}-tree.png`;
+        link.href = canvas.toDataURL();
+        link.click();
+    }, [recipe]);
+
+    // Expose controls to parent - only call once on mount
+    useEffect(() => {
+        if (onControlsReady) {
+            onControlsReady({
+                resetView,
+                centerTree,
+                fitToScreen,
+                setZoom,
+                getZoom,
+                exportImage
+            });
+        }
+        // Only run once on mount
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     // Build tree when recipe changes - only depend on recipe ID to avoid rebuilding on every render
     useEffect(() => {
         if (recipe?.id && recipes.length > 0) {
             setIsLoading(true);
-            // Use a small delay to debounce rapid changes
-            const timeoutId = setTimeout(() => {
+            // Use requestAnimationFrame to prevent flashing
+            const frameId = requestAnimationFrame(() => {
                 const tree = buildRecipeTree(recipe.id);
                 if (tree && canvasRef.current) {
                     calculateNodePositions(tree, canvasRef.current.width, canvasRef.current.height);
                     setTreeRoot(tree);
                     setViewport(prev => ({ ...prev, x: 0, y: 0, scale: 1 }));
-                    // Force immediate draw after setting tree
-                    requestAnimationFrame(() => {
-                        drawTree();
-                    });
                 }
                 setIsLoading(false);
-            }, 10); // Reduced delay from 50ms to 10ms for faster response
+            });
             return () => {
-                clearTimeout(timeoutId);
+                cancelAnimationFrame(frameId);
                 setIsLoading(false);
             };
         } else {
             setTreeRoot(null);
             setIsLoading(false);
         }
-    }, [recipe?.id, recipes.length, buildRecipeTree, calculateNodePositions, drawTree]);
+    }, [recipe?.id, recipes.length]); // Removed function dependencies to prevent re-renders
 
     // Draw when state changes (viewport, hovering, selection)
     useEffect(() => {
         if (treeRoot) {
-            drawTree();
+            // Use requestAnimationFrame to prevent flashing
+            const frameId = requestAnimationFrame(() => {
+                drawTree();
+            });
+            return () => cancelAnimationFrame(frameId);
         }
-    }, [treeRoot, hoveredNode, selectedNode, viewport.x, viewport.y, viewport.scale, drawTree]);
+    }, [treeRoot, hoveredNode, selectedNode, viewport.x, viewport.y, viewport.scale, quantity, viewMode]); // Removed drawTree from deps
 
     // Canvas event listeners
     useEffect(() => {
@@ -565,7 +812,11 @@ function RecipeTreeCanvasComponent({
             canvas.height = container.clientHeight;
 
             if (treeRoot) {
-                calculateNodePositions(treeRoot, canvas.width, canvas.height);
+                // Recalculate positions on resize
+                const recalculate = () => {
+                    calculateNodePositions(treeRoot, canvas.width, canvas.height);
+                };
+                requestAnimationFrame(recalculate);
             }
         };
 
@@ -575,7 +826,7 @@ function RecipeTreeCanvasComponent({
         return () => {
             window.removeEventListener('resize', handleResize);
         };
-    }, [treeRoot, calculateNodePositions]);
+    }, [treeRoot]); // Removed calculateNodePositions from deps
 
     return (
         <div className="recipe-tree-canvas-container">
@@ -592,6 +843,13 @@ function RecipeTreeCanvasComponent({
                 onMouseUp={handleMouseUp}
                 onMouseLeave={handleMouseUp}
             />
+
+            <div className="canvas-controls-overlay">
+                <button className="canvas-control" onClick={resetView} title="Reset View">⟲</button>
+                <button className="canvas-control" onClick={centerTree} title="Center Tree">⊕</button>
+                <button className="canvas-control" onClick={fitToScreen} title="Fit to Screen">⛶</button>
+                <button className="canvas-control" onClick={exportImage} title="Export Image">📷</button>
+            </div>
 
             {selectedNode && (
                 <div className="node-info-panel">

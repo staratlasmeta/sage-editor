@@ -57,7 +57,7 @@ function RecipeExplorer({ recipes, resources, onSelectRecipe }) {
                                 <strong>Inputs:</strong>
                                 {Object.entries(recipe.inputs || recipe.ingredients || {}).map(([item, qty]) => (
                                     <div key={item} className="ingredient">
-                                        {item.replace('cargo-', '')}: {qty}
+                                        {item.replace(/-/g, ' ')}: {qty}
                                     </div>
                                 ))}
                             </div>
@@ -67,7 +67,7 @@ function RecipeExplorer({ recipes, resources, onSelectRecipe }) {
                                     <strong>Outputs:</strong>
                                     {Object.entries(recipe.outputs).map(([item, qty]) => (
                                         <div key={item} className="output">
-                                            {item.replace('cargo-', '')}: {qty}
+                                            {item.replace(/-/g, ' ')}: {qty}
                                         </div>
                                     ))}
                                 </div>

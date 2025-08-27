@@ -1,0 +1,212 @@
+{
+  "habs": [
+    {
+      "id": "hab-t1",
+      "name": "Basic Hab",
+      "tier": 1,
+      "slots": 10,
+      "description": "Basic habitat module for crafting operations",
+      "constructionCost": {
+        "steel": 20,
+        "aluminum": 15
+      }
+    },
+    {
+      "id": "hab-t2",
+      "name": "Standard Hab",
+      "tier": 2,
+      "slots": 20,
+      "description": "Standard habitat with improved capacity",
+      "constructionCost": {
+        "steel": 40,
+        "aluminum": 30,
+        "electronics": 10
+      }
+    },
+    {
+      "id": "hab-t3",
+      "name": "Advanced Hab",
+      "tier": 3,
+      "slots": 30,
+      "description": "Advanced habitat with maximum efficiency",
+      "constructionCost": {
+        "steel": 80,
+        "aluminum": 60,
+        "electronics": 20,
+        "circuit-board": 5
+      }
+    },
+    {
+      "id": "hab-t4",
+      "name": "Industrial Hab",
+      "tier": 4,
+      "slots": 40,
+      "description": "Industrial-grade habitat for large operations",
+      "constructionCost": {
+        "steel": 160,
+        "aluminum": 120,
+        "electronics": 40,
+        "circuit-board": 10
+      }
+    },
+    {
+      "id": "hab-t5",
+      "name": "Elite Hab",
+      "tier": 5,
+      "slots": 50,
+      "description": "Elite habitat with cutting-edge technology",
+      "constructionCost": {
+        "steel": 320,
+        "aluminum": 240,
+        "electronics": 80,
+        "circuit-board": 20,
+        "high-density-alloy": 10
+      }
+    }
+  ],
+  "craftingStations": [
+    {
+      "id": "station-xxs",
+      "name": "XXS Crafting Station",
+      "size": "XXS",
+      "speedBonus": 1.0,
+      "jobSlots": 1,
+      "description": "Tiny crafting station for basic items",
+      "constructionCost": {
+        "steel": 10,
+        "electronics": 5
+      }
+    },
+    {
+      "id": "station-xs",
+      "name": "XS Crafting Station",
+      "size": "XS",
+      "speedBonus": 1.1,
+      "jobSlots": 2,
+      "description": "Extra small crafting station",
+      "constructionCost": {
+        "steel": 20,
+        "electronics": 10
+      }
+    },
+    {
+      "id": "station-s",
+      "name": "S Crafting Station",
+      "size": "S",
+      "speedBonus": 1.2,
+      "jobSlots": 3,
+      "description": "Small crafting station with improved efficiency",
+      "constructionCost": {
+        "steel": 40,
+        "electronics": 20,
+        "circuit-board": 2
+      }
+    },
+    {
+      "id": "station-m",
+      "name": "M Crafting Station",
+      "size": "M",
+      "speedBonus": 1.3,
+      "jobSlots": 4,
+      "description": "Medium crafting station for standard operations",
+      "constructionCost": {
+        "steel": 80,
+        "electronics": 40,
+        "circuit-board": 5
+      }
+    },
+    {
+      "id": "station-l",
+      "name": "L Crafting Station",
+      "size": "L",
+      "speedBonus": 1.4,
+      "jobSlots": 5,
+      "description": "Large crafting station for complex items",
+      "constructionCost": {
+        "steel": 160,
+        "electronics": 80,
+        "circuit-board": 10,
+        "high-density-alloy": 5
+      }
+    },
+    {
+      "id": "station-capital",
+      "name": "Capital Crafting Station",
+      "size": "Capital",
+      "speedBonus": 1.5,
+      "jobSlots": 6,
+      "description": "Capital-class crafting station for massive projects",
+      "constructionCost": {
+        "steel": 320,
+        "electronics": 160,
+        "circuit-board": 20,
+        "high-density-alloy": 10
+      }
+    }
+  ],
+  "cargoStorage": [
+    {
+      "id": "cargo-t1",
+      "name": "Cargo Storage T1",
+      "tier": 1,
+      "storageBonus": 100,
+      "jobSlotBonus": 1,
+      "description": "Basic cargo storage module",
+      "constructionCost": {
+        "steel": 15,
+        "aluminum": 10
+      }
+    },
+    {
+      "id": "cargo-t2",
+      "name": "Cargo Storage T2",
+      "tier": 2,
+      "storageBonus": 200,
+      "jobSlotBonus": 2,
+      "description": "Improved cargo storage with better organization",
+      "constructionCost": {
+        "steel": 30,
+        "aluminum": 20
+      }
+    },
+    {
+      "id": "cargo-t3",
+      "name": "Cargo Storage T3",
+      "tier": 3,
+      "storageBonus": 400,
+      "jobSlotBonus": 3,
+      "description": "Advanced cargo storage system",
+      "constructionCost": {
+        "steel": 60,
+        "aluminum": 40,
+        "electronics": 10
+      }
+    },
+    {
+      "id": "cargo-t4",
+      "name": "Cargo Storage T4",
+      "tier": 4,
+      "storageBonus": 800,
+      "jobSlotBonus": 4,
+      "description": "High-capacity cargo storage",
+      "constructionCost": {
+        "steel": 120,
+        "aluminum": 80,
+        "electronics": 20
+      }
+    },
+    {
+      "id": "cargo-t5",
+      "name": "Cargo Storage T5",
+      "tier": 5,
+      "storageBonus": 1600,
+      "jobSlotBonus": 5,
+      "description": "Maximum capacity cargo storage",
+      "constructionCost": {
+        "steel": 240,
+        "aluminum": 160,
+        "electronics": 40
+      }
+    }
+  ]
+}

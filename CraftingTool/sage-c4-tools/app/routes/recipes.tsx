@@ -4,15 +4,26 @@ import { useGameData } from '../contexts/DataContext';
 import { useSharedState } from '../contexts/SharedStateContext';
 import { NotificationSystem, useNotifications } from '../components/NotificationSystem';
 import { RecipeTreeCanvas } from '../components/RecipeTreeCanvas';
+import { RecipeSearch } from '../components/RecipeSearch';
+import { RecipeAnalysis } from '../components/RecipeAnalysis';
+import recipesStyles from '../styles/recipes.css?url';
+
+export const links = () => [
+    { rel: 'stylesheet', href: recipesStyles }
+];
 
 // Type definitions
 interface Recipe {
     id: string;
+    outputId?: string;  // From actual JSON
     name: string;
+    outputName?: string;  // From actual JSON
     type: string;
+    outputType?: string;  // From actual JSON
     tier: number;
+    outputTier?: number;  // From actual JSON
     constructionTime: number;
-    ingredients: { resource: string; quantity: number }[];
+    ingredients: { resource?: string; name?: string; quantity: number }[];
     output: { resource: string; quantity: number };
 }
 
@@ -52,12 +63,14 @@ export default function Recipes() {
     const [tierFilter, setTierFilter] = useState('all');
     const [typeFilter, setTypeFilter] = useState('all');
     const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
-    const [viewMode, setViewMode] = useState<'simple' | 'detailed' | 'efficiency'>('simple');
+    const [viewMode, setViewMode] = useState<'simple' | 'detailed'>('simple');
     const [hoveredNode, setHoveredNode] = useState<string | null>(null);
     const [pathAnalysis, setPathAnalysis] = useState<PathAnalysis | null>(null);
     const [targetQuantity, setTargetQuantity] = useState(1);
     const [buildPlans, setBuildPlans] = useState<BuildPlan[]>([]);
     const [showBuildPlans, setShowBuildPlans] = useState(false);
+    const [treeControls, setTreeControls] = useState<any>(null);
+    const [currentZoom, setCurrentZoom] = useState(1);
 
     // Animation ref for potential future animations
     const animationRef = useRef<number | undefined>(undefined);
@@ -111,7 +124,29 @@ export default function Recipes() {
     };
 
     // Get recipes from game data or use mock data
-    const recipes: Recipe[] = gameData?.recipes || [
+    const rawRecipes = gameData?.recipes || [];
+
+    // Transform raw recipes to match our interface
+    const recipes: Recipe[] = rawRecipes.length > 0 ? rawRecipes.map((r: any) => ({
+        id: r.outputId || r.id,
+        name: r.outputName || r.name,
+        type: r.outputType || r.type || 'component',
+        tier: r.outputTier || r.tier || 1,
+        constructionTime: r.constructionTime || 60,
+        ingredients: (r.ingredients || []).map((ing: any) => ({
+            resource: ing.name || ing.resource,
+            quantity: ing.quantity || 1
+        })),
+        output: {
+            resource: r.outputId || r.id,
+            quantity: r.outputQuantity || 1
+        },
+        // Keep original fields for reference
+        outputId: r.outputId,
+        outputName: r.outputName,
+        outputType: r.outputType,
+        outputTier: r.outputTier
+    })) : [
         {
             id: 'comp_001',
             name: 'Iron Plate',
@@ -187,43 +222,50 @@ export default function Recipes() {
         if (visited.has(recipeId) || depth > 5) return null; // Prevent infinite loops
         visited.add(recipeId);
 
-        const recipe = recipes.find(r => r.id === recipeId);
-        if (!recipe) return null;
+        // Try to find recipe by id or outputId
+        const recipe = recipes.find(r => r.id === recipeId || r.outputId === recipeId);
+        if (!recipe) {
+            console.warn(`Recipe not found for id: ${recipeId}`);
+            return null;
+        }
 
         const children: TreeNode[] = [];
 
         // Find recipes that produce this recipe's ingredients
         if (recipe.ingredients && Array.isArray(recipe.ingredients)) {
             recipe.ingredients.forEach(ingredient => {
+                const ingredientResource = ingredient.resource || ingredient.name;
                 // Log all recipes that might produce this resource
-                console.log(`Looking for producer of ${ingredient.resource}`);
+                console.log(`Looking for producer of ${ingredientResource}`);
                 console.log('Available recipe outputs:', recipes.map(r => `${r.id} => ${r.output?.resource}`).join(', '));
 
                 const producerRecipe = recipes.find(r => {
-                    // Check both with and without recipe_ prefix
-                    return r.output?.resource === ingredient.resource ||
-                        r.output?.resource === `recipe_${ingredient.resource}` ||
-                        `recipe_${r.output?.resource}` === ingredient.resource;
+                    // Check if recipe outputs this ingredient
+                    return r.output?.resource === ingredientResource ||
+                        r.outputId === ingredientResource ||
+                        r.id === ingredientResource ||
+                        r.output?.resource === `recipe_${ingredientResource}` ||
+                        `recipe_${r.output?.resource}` === ingredientResource;
                 });
                 if (producerRecipe) {
-                    console.log(`Found producer for ${ingredient.resource}: ${producerRecipe.name}`);
+                    console.log(`Found producer for ${ingredientResource}: ${producerRecipe.name}`);
                     const childNode = buildRecipeTree(producerRecipe.id, depth + 1, new Set(visited));
                     if (childNode) {
                         children.push(childNode);
                     }
                 } else {
                     // This is a raw material - create a leaf node for it
-                    console.log(`${ingredient.resource} is a raw material`);
+                    console.log(`${ingredientResource} is a raw material`);
                     children.push({
-                        id: `raw_${ingredient.resource}`,
+                        id: `raw_${ingredientResource}`,
                         recipe: {
-                            id: `raw_${ingredient.resource}`,
-                            name: ingredient.resource,
+                            id: `raw_${ingredientResource}`,
+                            name: ingredientResource,
                             tier: 0,
                             type: 'raw',
                             ingredients: [],
                             output: {
-                                resource: ingredient.resource,
+                                resource: ingredientResource,
                                 quantity: ingredient.quantity
                             }
                         } as any,
@@ -345,85 +387,21 @@ export default function Recipes() {
             <div className="recipes-content">
                 {/* Left Sidebar - Recipe Browser */}
                 <aside className="sidebar">
-                    <h2>Recipe Browser</h2>
-
-                    <div className="search-section">
-                        <input
-                            type="text"
-                            placeholder="Search recipes..."
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            className="search-input"
-                        />
-                    </div>
-
-                    <div className="filters">
-                        <select
-                            value={tierFilter}
-                            onChange={(e) => setTierFilter(e.target.value)}
-                            className="filter-select"
-                        >
-                            <option value="all">All Tiers</option>
-                            <option value="1">Tier 1</option>
-                            <option value="2">Tier 2</option>
-                            <option value="3">Tier 3</option>
-                            <option value="4">Tier 4</option>
-                            <option value="5">Tier 5</option>
-                        </select>
-
-                        <select
-                            value={typeFilter}
-                            onChange={(e) => setTypeFilter(e.target.value)}
-                            className="filter-select"
-                        >
-                            <option value="all">All Types</option>
-                            <option value="component">Components</option>
-                            <option value="module">Modules</option>
-                            <option value="consumable">Consumables</option>
-                            <option value="ship">Ship Parts</option>
-                        </select>
-                    </div>
-
-                    <div className="recipe-list">
-                        {filteredRecipes.map(recipe => {
-                            const hasIngredients = recipe.ingredients && Array.isArray(recipe.ingredients) &&
-                                recipe.ingredients.every(ing =>
-                                    sharedState.starbaseInventory[ing.resource] >= ing.quantity * targetQuantity
-                                );
-
-                            return (
-                                <div
-                                    key={recipe.id}
-                                    className={`recipe-list-item ${selectedRecipe?.id === recipe.id ? 'selected' : ''} ${!hasIngredients ? 'insufficient' : ''}`}
-                                    onClick={() => setSelectedRecipe(recipe)}
-                                >
-                                    <div className="recipe-header">
-                                        <h4>{recipe.name}</h4>
-                                        <span className={`tier-badge tier-${recipe.tier}`}>T{recipe.tier}</span>
-                                    </div>
-                                    <div className="recipe-quick-info">
-                                        <span className="recipe-type">{recipe.type}</span>
-                                        <span className="recipe-time">{recipe.constructionTime}s</span>
-                                    </div>
-                                    <div className="recipe-io">
-                                        <div className="inputs">
-                                            {recipe.ingredients && Array.isArray(recipe.ingredients) && recipe.ingredients.map((ing, idx) => (
-                                                <span key={idx} className="ingredient-chip">
-                                                    {ing.quantity} {ing.resource}
-                                                </span>
-                                            ))}
-                                        </div>
-                                        <span className="arrow">→</span>
-                                        <div className="output">
-                                            <span className="output-chip">
-                                                {recipe.output?.quantity || 0} {recipe.output?.resource || 'Unknown'}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
+                    <RecipeSearch
+                        recipes={recipes}
+                        resources={gameData?.resources || []}
+                        planets={gameData?.planets || []}
+                        onRecipeSelect={(recipe) => {
+                            setSelectedRecipe(recipe);
+                            showNotification(`Selected recipe: ${recipe.name}`, 'info');
+                        }}
+                        onIngredientSearch={(ingredient, recipes) => {
+                            showNotification(
+                                `Found ${recipes.length} recipes using ${ingredient}`,
+                                'info'
                             );
-                        })}
-                    </div>
+                        }}
+                    />
                 </aside>
 
                 {/* Main Content - Tree Visualization */}
@@ -445,12 +423,6 @@ export default function Recipes() {
                                     >
                                         Detailed
                                     </button>
-                                    <button
-                                        className={`view-btn ${viewMode === 'efficiency' ? 'active' : ''}`}
-                                        onClick={() => setViewMode('efficiency')}
-                                    >
-                                        Efficiency
-                                    </button>
                                 </div>
                             </div>
 
@@ -468,19 +440,115 @@ export default function Recipes() {
                                     onResourceAnalysis={(info) => {
                                         console.log('Resource analysis:', info);
                                     }}
+                                    onControlsReady={(controls) => {
+                                        setTreeControls(controls);
+                                        if (controls.getZoom) {
+                                            setCurrentZoom(controls.getZoom());
+                                        }
+                                    }}
                                 />
                             </div>
 
-                            <div className="quantity-control">
-                                <label>Target Quantity:</label>
-                                <input
-                                    type="number"
-                                    min="1"
-                                    max="1000"
-                                    value={targetQuantity}
-                                    onChange={(e) => setTargetQuantity(parseInt(e.target.value) || 1)}
-                                />
+                            {/* Enhanced Control Panel */}
+                            <div className="control-panel">
+                                <div className="control-group">
+                                    <label>Target Quantity</label>
+                                    <div className="control-input-group">
+                                        <input
+                                            type="number"
+                                            min="1"
+                                            max="1000"
+                                            value={targetQuantity}
+                                            onChange={(e) => setTargetQuantity(parseInt(e.target.value) || 1)}
+                                        />
+                                        <button className="quick-btn" onClick={() => setTargetQuantity(10)}>10</button>
+                                        <button className="quick-btn" onClick={() => setTargetQuantity(100)}>100</button>
+                                        <button className="quick-btn" onClick={() => setTargetQuantity(targetQuantity * 2)}>2x</button>
+                                    </div>
+                                </div>
+
+                                <div className="control-group">
+                                    <label>Zoom Level</label>
+                                    <div className="control-slider">
+                                        <input
+                                            type="range"
+                                            className="slider"
+                                            min="0.5"
+                                            max="2"
+                                            step="0.1"
+                                            value={currentZoom}
+                                            onChange={(e) => {
+                                                const zoom = parseFloat(e.target.value);
+                                                setCurrentZoom(zoom);
+                                                if (treeControls?.setZoom) {
+                                                    treeControls.setZoom(zoom);
+                                                }
+                                            }}
+                                        />
+                                        <div className="slider-value">{Math.round(currentZoom * 100)}%</div>
+                                    </div>
+                                </div>
+
+                                <div className="control-group">
+                                    <label>Tree Controls</label>
+                                    <div className="tree-controls">
+                                        <button
+                                            className="tree-control-btn"
+                                            title="Reset View"
+                                            onClick={() => {
+                                                if (treeControls?.resetView) {
+                                                    treeControls.resetView();
+                                                    setCurrentZoom(1);
+                                                }
+                                            }}
+                                        >⟲</button>
+                                        <button
+                                            className="tree-control-btn"
+                                            title="Center Tree"
+                                            onClick={() => treeControls?.centerTree?.()}
+                                        >⊕</button>
+                                        <button
+                                            className="tree-control-btn"
+                                            title="Fit to Screen"
+                                            onClick={() => {
+                                                if (treeControls?.fitToScreen) {
+                                                    treeControls.fitToScreen();
+                                                    if (treeControls.getZoom) {
+                                                        setCurrentZoom(treeControls.getZoom());
+                                                    }
+                                                }
+                                            }}
+                                        >⛶</button>
+                                        <button
+                                            className="tree-control-btn"
+                                            title="Export Image"
+                                            onClick={() => treeControls?.exportImage?.()}
+                                        >📷</button>
+                                    </div>
+                                </div>
                             </div>
+
+                            {/* Resource Stats Panel */}
+                            {pathAnalysis && (
+                                <div className="resource-stats">
+                                    <div className="stat-item">
+                                        <span className="stat-label">Total Time</span>
+                                        <span className="stat-value">{Math.round(pathAnalysis.totalTime)}s</span>
+                                    </div>
+                                    <div className="stat-item">
+                                        <span className="stat-label">Efficiency</span>
+                                        <span className="stat-value">{Math.round(pathAnalysis.efficiency * 100)}%</span>
+                                    </div>
+                                    <div className="stat-item">
+                                        <span className="stat-label">Resources</span>
+                                        <span className="stat-value">{Object.keys(pathAnalysis.totalResources).length}</span>
+                                    </div>
+                                    <div className="stat-item">
+                                        <span className="stat-label">Complexity</span>
+                                        <span className="stat-value">{pathAnalysis.criticalPath.length} steps</span>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     ) : (
                         <div className="empty-visualization">
@@ -492,68 +560,16 @@ export default function Recipes() {
 
                 {/* Right Sidebar - Analysis */}
                 <aside className="sidebar right">
-                    <h2>Analysis</h2>
-
-                    {selectedRecipe && pathAnalysis ? (
+                    {selectedRecipe ? (
                         <>
-                            <div className="analysis-section">
-                                <h3>Resource Requirements</h3>
-                                <div className="resource-requirements">
-                                    <h4>Raw Materials Needed:</h4>
-                                    {Object.entries(pathAnalysis.totalResources).map(([resource, amount]) => {
-                                        const available = sharedState.starbaseInventory[resource] || 0;
-                                        const sufficient = available >= amount;
-
-                                        return (
-                                            <div key={resource} className="requirement-item">
-                                                <span className="resource-name">{resource}</span>
-                                                <div className="requirement-amounts">
-                                                    <span className={`required ${sufficient ? 'sufficient' : 'insufficient'}`}>
-                                                        {Math.ceil(amount)}
-                                                    </span>
-                                                    <span className="available">/ {available}</span>
-                                                </div>
-                                            </div>
-                                        );
-                                    })}
-                                </div>
-                            </div>
-
-                            <div className="analysis-section">
-                                <h3>Time Analysis</h3>
-                                <div className="time-breakdown">
-                                    <div className="time-stat">
-                                        <span>Total Time:</span>
-                                        <span className="value">{Math.ceil(pathAnalysis.totalTime)}s</span>
-                                    </div>
-                                    <div className="time-stat">
-                                        <span>With Bonuses:</span>
-                                        <span className="value">{Math.ceil(pathAnalysis.totalTime * 0.8)}s</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="analysis-section">
-                                <h3>Efficiency Metrics</h3>
-                                <div className="efficiency-display">
-                                    <div className="efficiency-meter">
-                                        <div
-                                            className="efficiency-fill"
-                                            style={{ width: `${pathAnalysis.efficiency}%` }}
-                                        />
-                                    </div>
-                                    <span className="efficiency-value">{pathAnalysis.efficiency}%</span>
-                                </div>
-                            </div>
-
-                            <div className="analysis-section">
-                                <h3>Optimization Tips</h3>
-                                <ul className="tips-list">
-                                    <li>Build multiple {selectedRecipe.name} stations for parallel production</li>
-                                    <li>Stockpile intermediate components</li>
-                                    <li>Use T{selectedRecipe.tier} crafting stations for speed bonus</li>
-                                </ul>
-                            </div>
+                            <RecipeAnalysis
+                                recipe={selectedRecipe}
+                                recipes={recipes}
+                                planets={gameData?.planets || []}
+                                quantity={targetQuantity}
+                                starbaseInventory={sharedState.starbaseInventory}
+                                resources={gameData?.resources || []}
+                            />
 
                             <div className="action-buttons">
                                 <button

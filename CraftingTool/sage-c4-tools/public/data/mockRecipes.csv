@@ -1,35 +1,24 @@
-OutputID,OutputName,OutputType,OutputTier,ConstructionTime,PlanetTypes,Factions,ResourceType,FunctionalPurpose,UsageCategory,Ingredient1,Quantity1,Ingredient2,Quantity2,Ingredient3,Quantity3,Ingredient4,Quantity4,Ingredient5,Quantity5,CompletionStatus,ProductionSteps,NOT_USED
-cargo-iron,Iron,Component,1,30,Rocky;Terrestrial,All,1,1,1,cargo-iron-ore,2,,,,,,,,,,Complete,1,FALSE
-cargo-copper,Copper,Component,1,30,Rocky;Terrestrial,All,1,1,1,cargo-copper-ore,2,,,,,,,,,,Complete,1,FALSE
-cargo-aluminum,Aluminum,Component,2,45,Rocky;Mining,All,1,1,1,cargo-aluminum-ore,3,,,,,,,,,,Complete,1,FALSE
-cargo-titanium,Titanium,Component,2,60,Volcanic;Metallic,All,1,1,1,cargo-titanium-ore,3,,,,,,,,,,Complete,1,FALSE
-cargo-steel,Steel,Component,2,60,Industrial,All,2,2,2,cargo-iron,2,cargo-carbon,1,,,,,,,,Complete,2,FALSE
-cargo-electronics,Electronics,Component,2,45,Tech,All,2,2,2,cargo-copper,3,cargo-silica,2,,,,,,,,Complete,2,FALSE
-cargo-fuel,Fuel,Consumable,1,20,All,All,2,3,3,cargo-hydrogen,4,cargo-carbon,1,,,,,,,,Complete,2,FALSE
-cargo-food,Food,Consumable,1,15,All,All,1,3,3,cargo-biomass,2,,,,,,,,,,Complete,1,FALSE
-cargo-circuit-board,Circuit Board,Component,3,90,All,All,3,2,2,cargo-electronics,2,cargo-copper,1,cargo-silica,1,,,,,,Complete,3,FALSE
-cargo-high-density-alloy,High-Density Alloy,Advanced,3,120,All,All,3,2,2,cargo-steel,3,cargo-titanium,2,,,,,,,,Complete,3,FALSE
-cargo-power-cell,Power Cell,Component,3,75,All,All,3,2,2,cargo-aluminum,2,cargo-electronics,1,,,,,,,,Complete,2,FALSE
-cargo-chromite,Chromite,Component,1,45,Oceanic;System Asteroid Belt,MUD;ONI;UST,1,1,1,cargo-chromite-ore,2,,,,,,,,,,Complete,1,FALSE
-cargo-osmium,Osmium,Component,1,60,Volcanic,MUD;ONI;UST,1,1,1,cargo-osmium-ore,2,,,,,,,,,,Complete,1,FALSE
-cargo-tritium,Tritium,Component,1,90,System Asteroid Belt,MUD;ONI;UST,1,1,1,cargo-tritium-ore,3,,,,,,,,,,Complete,1,FALSE
-cargo-subspace-coils,Subspace Coils,Component,2,120,Barren;Dark;Ice Giant;Volcanic,MUD;ONI;UST,2,2,2,cargo-arco,4,cargo-lumanite,2,,,,,,,,Complete,2,FALSE
-cargo-warp-coils,Warp Coils,Component,2,150,Volcanic,MUD;ONI;UST,2,2,2,cargo-lumanite,8,cargo-osmium,2,,,,,,,,Complete,2,FALSE
-cargo-dimensional-stabilizer,Dimensional Stabilizer,Component,2,180,Oceanic;System Asteroid Belt,MUD;ONI;UST,2,2,2,cargo-chromite,2,cargo-tritium,4,,,,,,,,Complete,2,FALSE
-cargo-field-harmonizer,Field Harmonizer,Component,2,180,Gas Giant;Oceanic;Terrestrial,MUD;ONI;UST,2,2,2,cargo-chromite,2,cargo-hydrogen,5,,,,,,,,Complete,2,FALSE
-cargo-subspace-conduit,Subspace Conduit,Ingredient,3,240,Barren;Dark;Ice Giant;Oceanic;System Asteroid Belt;Volcanic,MUD;ONI;UST,3,3,3,cargo-subspace-coils,2,cargo-dimensional-stabilizer,1,,,,,,,,Complete,3,FALSE
-cargo-warp-field-generator,Warp Field Generator,Ingredient,3,240,Gas Giant;Oceanic;Terrestrial;Volcanic,MUD;ONI;UST,3,3,3,cargo-warp-coils,2,cargo-field-harmonizer,1,,,,,,,,Complete,3,FALSE
-ship-component-warp-drive-xxs-t1,Warp Drive XXS T1,Ship Component,1,360,Terrestrial,MUD;ONI;UST,4,5,5,cargo-warp-field-generator,1,cargo-subspace-conduit,1,,,,,,,,Complete,4,FALSE
-ship-component-warp-drive-xxs-t2,Warp Drive XXS T2,Ship Component,2,480,Terrestrial,MUD;ONI;UST,5,5,5,ship-component-warp-drive-xxs-t1,1,cargo-warp-field-generator,2,cargo-subspace-conduit,2,,,,,,Complete,5,FALSE
-ship-component-warp-drive-xxs-t3,Warp Drive XXS T3,Ship Component,3,720,Terrestrial;Volcanic;Gas Giant,MUD;ONI;UST,6,5,5,ship-component-warp-drive-xxs-t2,1,cargo-warp-field-generator,3,cargo-subspace-conduit,3,,,,,,Complete,6,FALSE
-ship-component-warp-drive-xxs-t4,Warp Drive XXS T4,Ship Component,4,1200,Volcanic;Ice Planet,MUD;UST,7,5,5,ship-component-warp-drive-xxs-t3,1,cargo-warp-field-generator,4,cargo-subspace-conduit,4,,,,,,Complete,7,FALSE
-ship-component-warp-drive-xxs-t5,Warp Drive XXS T5,Ship Component,5,2400,Volcanic;Ice Planet,UST,8,5,5,ship-component-warp-drive-xxs-t4,1,cargo-warp-field-generator,5,cargo-subspace-conduit,5,,,,,,Complete,8,FALSE
-comp-hull-plating,Hull Plating,Module,3,180,All,All,3,4,4,cargo-high-density-alloy,3,cargo-titanium,2,cargo-steel,1,,,,,,Complete,3,FALSE
-comp-sensor-array,Sensor Array,Module,3,150,All,All,3,4,4,cargo-circuit-board,2,cargo-electronics,3,cargo-aluminum,1,,,,,,Complete,3,FALSE
-comp-engine-core,Engine Core,Module,4,240,All,All,4,4,4,cargo-power-cell,3,cargo-high-density-alloy,2,cargo-circuit-board,1,,,,,,Complete,4,FALSE
-comp-weapon-system,Weapon System,Module,4,300,All,All,4,5,5,cargo-circuit-board,3,cargo-power-cell,2,cargo-steel,3,cargo-titanium,1,,,,Complete,4,FALSE
-comp-shield-generator,Shield Generator,Module,4,270,All,All,4,5,5,cargo-power-cell,4,cargo-circuit-board,2,cargo-high-density-alloy,1,,,,,,Complete,4,FALSE
-consumable-repair-kit,Repair Kit,Consumable,2,60,All,All,2,3,3,cargo-steel,1,cargo-electronics,1,cargo-aluminum,1,,,,,,Complete,2,FALSE
-consumable-energy-boost,Energy Boost,Consumable,2,45,All,All,2,3,3,cargo-power-cell,1,cargo-fuel,2,,,,,,,,Complete,2,FALSE
-consumable-crew-supplies,Crew Supplies,Consumable,1,30,All,All,1,3,3,cargo-food,3,cargo-fuel,1,,,,,,,,Complete,1,FALSE
-ship-fighter-basic,Basic Fighter,Ship,5,600,All,All,5,6,6,comp-hull-plating,2,comp-engine-core,1,comp-weapon-system,1,comp-sensor-array,1,,,,Complete,5,FALSE
+OutputID,OutputName,OutputType,OutputTier,BuildingResourceTier,ConstructionTime,PlanetTypes,Factions,ResourceType,ProductionSteps,Ingredient1,Quantity1,Ingredient2,Quantity2,Ingredient3,Quantity3,Ingredient4,Quantity4,Ingredient5,Quantity5
+iron,Iron,Component,1,1,30,Rocky;Terrestrial,All,Processed,1,iron-ore,2,,,,,,,,
+copper,Copper,Component,1,1,30,Rocky;Terrestrial,All,Processed,1,copper-ore,2,,,,,,,,
+aluminum,Aluminum,Component,2,1,45,Rocky;Mining,All,Processed,1,aluminum-ore,3,,,,,,,,
+titanium,Titanium,Component,2,1,60,Volcanic;Metallic,All,Processed,1,titanium-ore,3,,,,,,,,
+steel,Steel,Component,2,2,60,Industrial,All,Processed,2,iron,2,carbon,1,,,,,,
+electronics,Electronics,Component,2,2,45,Tech,All,Processed,2,copper,3,silica,2,,,,,,
+fuel,Fuel,Consumable,1,3,20,All,All,Processed,3,hydrogen,4,carbon,1,,,,,,
+food,Food,Consumable,1,3,15,All,All,Processed,3,biomass,2,,,,,,,,
+circuit-board,Circuit Board,Component,3,2,90,All,All,Advanced,2,electronics,2,copper,1,silica,1,,,,
+high-density-alloy,High-Density Alloy,Advanced,3,2,120,All,All,Advanced,2,steel,3,titanium,2,,,,,,
+power-cell,Power Cell,Component,3,2,75,All,All,Advanced,2,aluminum,2,electronics,1,,,,,,
+chromite,Chromite,Component,1,1,45,Oceanic;System Asteroid Belt,MUD;ONI;UST,Processed,1,chromite-ore,2,,,,,,,,
+osmium,Osmium,Component,1,1,60,Volcanic,MUD;ONI;UST,Processed,1,osmium-ore,2,,,,,,,,
+tritium,Tritium,Component,1,1,90,System Asteroid Belt,MUD;ONI;UST,Processed,1,tritium-ore,3,,,,,,,,
+subspace-coils,Subspace Coils,Component,2,2,120,Barren;Dark;Ice Giant;Volcanic,MUD;ONI;UST,Advanced,2,arco,4,lumanite,2,,,,,,
+warp-coils,Warp Coils,Component,2,2,150,Volcanic,MUD;ONI;UST,Advanced,2,lumanite,8,osmium,2,,,,,,
+dimensional-stabilizer,Dimensional Stabilizer,Component,2,2,180,Oceanic;System Asteroid Belt,MUD;ONI;UST,Advanced,2,chromite,2,tritium,4,,,,,,
+field-harmonizer,Field Harmonizer,Component,2,2,180,Gas Giant;Oceanic;Terrestrial,MUD;ONI;UST,Advanced,2,chromite,2,hydrogen,5,,,,,,
+subspace-conduit,Subspace Conduit,Ingredient,3,3,240,Barren;Dark;Ice Giant;Oceanic;System Asteroid Belt;Volcanic,MUD;ONI;UST,Advanced,3,subspace-coils,2,dimensional-stabilizer,1,,,,,,
+warp-field-generator,Warp Field Generator,Ingredient,3,3,240,Gas Giant;Oceanic;Terrestrial;Volcanic,MUD;ONI;UST,Advanced,3,warp-coils,2,field-harmonizer,1,,,,,,
+repair-kit,Repair Kit,Consumable,2,3,60,All,All,Consumable,3,steel,1,electronics,1,aluminum,1,,,,
+energy-boost,Energy Boost,Consumable,2,3,45,All,All,Consumable,3,power-cell,1,fuel,2,,,,,,
+crew-supplies,Crew Supplies,Consumable,1,3,30,All,All,Consumable,3,food,3,fuel,1,,,,,,

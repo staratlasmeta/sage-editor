@@ -8,7 +8,7 @@ export function AchievementPanel() {
     const [showPanel, setShowPanel] = useState(false);
 
     // Calculate achievement progress
-    const unlockedCount = Object.keys(state.achievements || {}).length;
+    const unlockedCount = Object.keys(state.achievements || {}).filter(key => state.achievements[key]).length;
     const totalCount = Object.keys(ACHIEVEMENTS).length;
     const percentage = Math.round((unlockedCount / totalCount) * 100);
 
@@ -26,7 +26,7 @@ export function AchievementPanel() {
                 title="View Achievements"
             >
                 <span className="achievement-icon">🏆</span>
-                <span className="achievement-progress">{unlockedCount}/{totalCount}</span>
+                <span className="achievement-progress" title={`${percentage}% Complete`}>{unlockedCount}/{totalCount}</span>
             </button>
 
             {/* Achievement panel */}
@@ -37,6 +37,7 @@ export function AchievementPanel() {
                         <button
                             className="close-button"
                             onClick={() => setShowPanel(false)}
+                            title="Close"
                         >
                             ×
                         </button>
@@ -73,6 +74,7 @@ export function AchievementPanel() {
                     <div className="achievement-list">
                         {filteredAchievements.map(achievement => {
                             const isUnlocked = state.achievements?.[achievement.id];
+                            const progress = state.achievementProgress?.[achievement.id];
                             return (
                                 <div
                                     key={achievement.id}
@@ -89,22 +91,22 @@ export function AchievementPanel() {
                                                 Unlocked ✓
                                             </span>
                                         )}
-                                    </div>
-                                    {!isUnlocked && achievement.progress && (
-                                        <div className="achievement-progress">
-                                            <div className="mini-progress-bar">
-                                                <div
-                                                    className="mini-progress-fill"
-                                                    style={{
-                                                        width: `${(achievement.progress.current / achievement.progress.target) * 100}%`
-                                                    }}
-                                                />
+                                        {!isUnlocked && progress && (
+                                            <div className="achievement-progress-inline">
+                                                <div className="mini-progress-bar">
+                                                    <div
+                                                        className="mini-progress-fill"
+                                                        style={{
+                                                            width: `${Math.min((progress.current / progress.target) * 100, 100)}%`
+                                                        }}
+                                                    />
+                                                </div>
+                                                <span className="progress-numbers">
+                                                    {progress.current.toLocaleString()}/{progress.target.toLocaleString()}
+                                                </span>
                                             </div>
-                                            <span className="progress-numbers">
-                                                {achievement.progress.current}/{achievement.progress.target}
-                                            </span>
-                                        </div>
-                                    )}
+                                        )}
+                                    </div>
                                 </div>
                             );
                         })}

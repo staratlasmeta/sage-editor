@@ -9,13 +9,18 @@ import {
 } from "react-router";
 import { DataProvider } from './contexts/DataContext';
 import { SharedStateProvider } from './contexts/SharedStateContext';
+import { AchievementManager } from './components/AchievementNotification';
 import type { LinksFunction } from "react-router";
 import stylesheet from "./app.css?url";
 import themeStyles from "./styles/sage-theme.css?url";
+import settingsStyles from "./styles/settings-panel.css?url";
+import achievementsStyles from "./styles/achievements.css?url";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
   { rel: "stylesheet", href: themeStyles },
+  { rel: "stylesheet", href: settingsStyles },
+  { rel: "stylesheet", href: achievementsStyles },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -59,7 +64,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                     body {
                         background: var(--primary-dark);
                         color: var(--text-primary);
-                        font-family: 'Exo 2', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                        font-family: "Exo 2", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
                         min-height: 100vh;
                         overflow-x: hidden;
                     }
@@ -114,7 +119,9 @@ export default function App() {
   return (
     <DataProvider>
       <SharedStateProvider>
-        <Outlet key={location.pathname} />
+        <AchievementManager>
+          <Outlet key={location.pathname} />
+        </AchievementManager>
       </SharedStateProvider>
     </DataProvider>
   );
