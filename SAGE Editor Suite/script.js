@@ -34,10 +34,10 @@ function showThemeNotification(accentNumber) {
         '0': 'Original Orange',
         '1': 'Orange Red',
         '2': 'Electric Blue', 
-        '3': 'Cyber Green',
+        '3': 'Zink Green',
         '4': 'Magenta',
         '5': 'Gold',
-        '6': 'Cyan',
+        '6': 'Atlas',
         '7': 'Hot Pink',
         '8': 'Lime Green',
         '9': 'Purple'
