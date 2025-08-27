@@ -142,7 +142,8 @@ body:has(.recipes-container) {
     display: flex;
     flex-direction: column;
     position: relative;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .main-content::before {

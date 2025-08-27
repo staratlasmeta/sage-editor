@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Navigation } from '../components/Navigation';
+import { StandaloneNavigation } from '../components/StandaloneNavigation';
 import { StarbaseControl } from '../components/StarbaseControl';
 import { useGameData } from '../contexts/DataContext';
 import { useSharedState, canPlaceClaimStake } from '../contexts/SharedStateContext';
@@ -2099,8 +2100,10 @@ export default function ClaimStakes() {
 
     return (
         <div className="claim-stakes-app">
-            {/* Only render Navigation in dev mode, not in standalone */}
-            {typeof window !== 'undefined' && !(window as any).__STANDALONE_BUILD__ && (
+            {/* Render appropriate navigation based on build mode */}
+            {typeof window !== 'undefined' && (window as any).__STANDALONE_BUILD__ ? (
+                <StandaloneNavigation currentRoute="claim-stakes" claimStakes={claimStakeResources} />
+            ) : (
                 <Navigation claimStakes={claimStakeResources} />
             )}
 

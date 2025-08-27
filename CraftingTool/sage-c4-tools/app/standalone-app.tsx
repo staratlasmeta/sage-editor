@@ -50,13 +50,7 @@ function StandaloneApp() {
     return (
         <SharedStateProvider>
             <DataProvider>
-                <div className="app-container">
-                    <StandaloneNavigation currentRoute={currentRoute} />
-
-                    <main className="main-content" style={{ width: '100%', maxWidth: '100%' }}>
-                        {renderContent()}
-                    </main>
-                </div>
+                {renderContent()}
             </DataProvider>
         </SharedStateProvider>
     );
