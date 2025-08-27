@@ -266,14 +266,14 @@ export default function CraftingHab() {
                         habPlotId: plot.id,
                         quantity: item.quantity,
                         progress: 0,
-                        totalTime: (item.totalTime || 60) / (plot.habDesign.craftingSpeed || 1),
+                        totalTime: (item.totalTime || 60) * item.quantity / (plot.habDesign.craftingSpeed || 1),
                         startTime: Date.now(),
                         crewAssigned: 10,
                         status: 'queued',
                         priority: item.priority || 'normal',
                         output: {
                             resource: item.recipe?.output?.resource || 'unknown',
-                            quantity: item.recipe?.output?.quantity || 1
+                            quantity: (item.recipe?.output?.quantity || 1) * item.quantity
                         }
                     };
 
@@ -773,7 +773,7 @@ export default function CraftingHab() {
             habPlotId: selectedPlot.id,
             quantity: craftQuantity,
             progress: 0,
-            totalTime: (selectedRecipe.constructionTime || 60) / (selectedPlot.habDesign.craftingSpeed || 1),
+            totalTime: (selectedRecipe.constructionTime || 60) * craftQuantity / (selectedPlot.habDesign.craftingSpeed || 1),
             startTime: Date.now(),
             crewAssigned: 10 + (priority === 'high' ? 5 : priority === 'low' ? -2 : 0), // Crew affects speed
             status: activeJobs.length < 3 ? 'active' : 'queued', // Only 3 active at a time

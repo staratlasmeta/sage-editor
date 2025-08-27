@@ -144,7 +144,33 @@ export class DataLoader {
 
             if (claimStakeBuildingsData) {
                 if (claimStakeBuildingsData.buildings) {
-                    claimStakeBuildings = claimStakeBuildingsData.buildings;
+                    // Add category field based on building ID/name patterns if missing
+                    claimStakeBuildings = claimStakeBuildingsData.buildings.map((building: any) => {
+                        // Add category field if missing
+                        if (!building.category) {
+                            // Infrastructure buildings are hubs (central, processing, extraction, storage, farm)
+                            if (building.id?.includes('-hub') || building.name?.toLowerCase().includes('hub')) {
+                                building.category = 'infrastructure';
+                            }
+                            // Other category detection based on ID patterns
+                            else if (building.id?.includes('extractor') || building.id?.includes('extraction')) {
+                                building.category = 'extraction';
+                            }
+                            else if (building.id?.includes('processor') || building.id?.includes('processing')) {
+                                building.category = 'processing';
+                            }
+                            else if (building.id?.includes('storage')) {
+                                building.category = 'storage';
+                            }
+                            else if (building.id?.includes('power')) {
+                                building.category = 'power';
+                            }
+                            else if (building.id?.includes('farm')) {
+                                building.category = 'farm';
+                            }
+                        }
+                        return building;
+                    });
                 }
                 if (claimStakeBuildingsData.claimStakeDefinitions) {
                     claimStakeDefinitions = claimStakeBuildingsData.claimStakeDefinitions;
@@ -199,7 +225,16 @@ export class DataLoader {
                     factions: recipe.factions || recipe.Factions || 'All',
                     resourceType: recipe.resourceType || recipe.ResourceType || 'Processed',
                     productionSteps: recipe.productionSteps || parseInt(recipe.ProductionSteps) || 1,
-                    ingredients: recipe.ingredients || [],
+                    ingredients: (recipe.ingredients || []).map((ing: any) => {
+                        // Convert ingredient name to resource ID if needed
+                        if (ing.name && !ing.resource) {
+                            return {
+                                resource: ing.name.toLowerCase().replace(/\s+/g, '-'),
+                                quantity: ing.quantity || 1
+                            };
+                        }
+                        return ing;
+                    }),
                     output: recipe.output || {
                         resource: recipe.id || recipe.OutputID || recipe.outputId,
                         quantity: recipe.outputQuantity || 1

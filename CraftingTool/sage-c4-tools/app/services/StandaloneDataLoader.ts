@@ -315,11 +315,57 @@ export class StandaloneDataLoader {
                 const archetypesData = archetypesResponse?.ok ? await archetypesResponse.json() : null;
                 const buildingsData = await buildingsResponse.json();
                 const craftingBuildingsData = craftingBuildingsResponse?.ok ? await craftingBuildingsResponse.json() : null;
-                const recipesData = recipesResponse?.ok ? await recipesResponse.json() : null;
+                const recipesDataRaw = recipesResponse?.ok ? await recipesResponse.json() : null;
                 const starbasesData = starbasesResponse?.ok ? await starbasesResponse.json() : null;
 
+                // Process recipes to ensure ingredients have resource IDs
+                let recipesData = null;
+                if (recipesDataRaw) {
+                    const recipesList = recipesDataRaw.recipes || recipesDataRaw;
+                    recipesData = Array.isArray(recipesList) ?
+                        recipesList.map((recipe: any) => ({
+                            ...recipe,
+                            ingredients: (recipe.ingredients || []).map((ing: any) => {
+                                // Convert ingredient name to resource ID if needed
+                                if (ing.name && !ing.resource) {
+                                    return {
+                                        resource: ing.name.toLowerCase().replace(/\s+/g, '-'),
+                                        quantity: ing.quantity || 1
+                                    };
+                                }
+                                return ing;
+                            })
+                        })) : recipesList;
+                }
+
                 // Process buildings - keep them SEPARATE, don't merge!
-                const claimStakeBuildings = buildingsData.buildings || [];
+                // Also add category field based on building ID/name patterns
+                const claimStakeBuildings = (buildingsData.buildings || []).map((building: any) => {
+                    // Add category field if missing
+                    if (!building.category) {
+                        // Infrastructure buildings are hubs (central, processing, extraction, storage, farm)
+                        if (building.id?.includes('-hub') || building.name?.toLowerCase().includes('hub')) {
+                            building.category = 'infrastructure';
+                        }
+                        // Other category detection based on ID patterns
+                        else if (building.id?.includes('extractor') || building.id?.includes('extraction')) {
+                            building.category = 'extraction';
+                        }
+                        else if (building.id?.includes('processor') || building.id?.includes('processing')) {
+                            building.category = 'processing';
+                        }
+                        else if (building.id?.includes('storage')) {
+                            building.category = 'storage';
+                        }
+                        else if (building.id?.includes('power')) {
+                            building.category = 'power';
+                        }
+                        else if (building.id?.includes('farm')) {
+                            building.category = 'farm';
+                        }
+                    }
+                    return building;
+                });
 
                 // Log what we loaded
                 console.log('✅ Game data loaded successfully:', {
@@ -331,7 +377,7 @@ export class StandaloneDataLoader {
                     craftingHabs: (craftingBuildingsData?.habs || []).length,
                     craftingStations: (craftingBuildingsData?.craftingStations || []).length,
                     cargoStorage: (craftingBuildingsData?.cargoStorage || []).length,
-                    recipes: (recipesData?.recipes || recipesData || []).length,
+                    recipes: (recipesData || []).length,
                     starbases: (starbasesData?.starbases || starbasesData || []).length
                 });
 
@@ -347,8 +393,8 @@ export class StandaloneDataLoader {
                         craftingStations: [],
                         cargoStorage: []
                     },
-                    recipes: recipesData?.recipes || recipesData || [],
-                    craftingRecipes: recipesData?.recipes || recipesData || [],
+                    recipes: recipesData || [],
+                    craftingRecipes: recipesData || [],
                     starbases: starbasesData?.starbases || starbasesData || [],
 
                     // Helper methods
