@@ -14,6 +14,7 @@
     --sa-accent: #FF4500;
     --sa-accent-hover: #FF5722;
     --sa-accent-active: #E63900;
+    --sa-accent-rgb: 255, 69, 0;
     
     /* Typography */
     --font-display: 'Audiowide', 'Orbitron', sans-serif;
@@ -1160,6 +1161,23 @@ body {
 
 .tool-card:hover .tool-title {
     color: var(--sa-accent);
+    text-shadow: 
+        /* Simple black outline */
+        -1px -1px 0 rgba(0, 0, 0, 0.8),
+        1px -1px 0 rgba(0, 0, 0, 0.8),
+        -1px 1px 0 rgba(0, 0, 0, 0.8),
+        1px 1px 0 rgba(0, 0, 0, 0.8),
+        /* Subtle glow */
+        0 0 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Light theme - bright white glow */
+[data-theme="light"] .tool-card:hover .tool-title {
+    text-shadow: 
+        0 0 10px rgba(255, 255, 255, 0.9),
+        0 0 20px rgba(255, 255, 255, 0.7),
+        0 0 30px rgba(255, 255, 255, 0.5),
+        0 0 40px rgba(255, 255, 255, 0.3);
 }
 
 .tool-description {

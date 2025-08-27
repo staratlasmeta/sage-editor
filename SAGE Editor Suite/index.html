@@ -417,7 +417,7 @@
     <script>
         // Pixel Effect Implementation for Tool Cards
         class Pixel {
-            constructor(canvas, context, x, y, color, speed, delay, distanceRatio, pixelSize = 3) {
+            constructor(canvas, context, x, y, color, speed, delay, distanceRatio, pixelSize = 3, textFadeFactor = 1) {
                 this.width = canvas.width
                 this.height = canvas.height
                 this.ctx = context
@@ -441,6 +441,7 @@
                 this.isReverse = false
                 this.isShimmer = false
                 this.distanceRatio = distanceRatio
+                this.textFadeFactor = textFadeFactor  // Factor for text area fading
             }
 
             getRandomValue(min, max) {
@@ -453,7 +454,8 @@
                 // Apply vignetting to opacity
                 this.ctx.save()
                 const vignetteOpacity = 1 - Math.pow(this.distanceRatio, 1.5) * 0.7
-                this.ctx.globalAlpha = this.ctx.globalAlpha * vignetteOpacity
+                // Combine vignette with text fade factor
+                this.ctx.globalAlpha = this.ctx.globalAlpha * vignetteOpacity * this.textFadeFactor
                 
                 this.ctx.fillStyle = this.color
                 this.ctx.fillRect(
@@ -673,9 +675,32 @@
                     Math.pow(height / 2, 2)
                 )
 
+                // Define text area (approximate location of title text)
+                const textAreaTop = height * 0.4  // Roughly where title starts
+                const textAreaBottom = height * 0.65  // Roughly where title ends
+                const textAreaLeft = width * 0.1
+                const textAreaRight = width * 0.9
+
                 // Create pixels based on CSS dimensions, not canvas dimensions
                 for (let x = 0; x < width; x += this.gap) {
                     for (let y = 0; y < height; y += this.gap) {
+                        // Calculate distance to text area center for gradual fade
+                        const textCenterX = width * 0.14  // Text is left-aligned, aligned with icon and title
+                        const textCenterY = height * 0.38  // Text appears higher up in the card, moved up by 15%
+                        const distanceToText = Math.sqrt(
+                            Math.pow(x - textCenterX, 2) + 
+                            Math.pow(y - textCenterY, 2)
+                        )
+                        
+                        // Define fade zone around text (larger = more gradual fade)
+                        const fadeRadius = Math.min(width, height) * 0.45  // Much larger fade area
+                        const textExclusionRadius = Math.min(width, height) * 0.12  // Smaller exclusion area for more gradual fade
+                        
+                        // Skip pixels too close to text center
+                        if (distanceToText < textExclusionRadius) {
+                            continue;
+                        }
+                        
                         const color = this.colors[Math.floor(Math.random() * this.colors.length)]
                         // Enhanced delay calculation for clearer radial effect
                         let delay = 0
@@ -687,8 +712,15 @@
                             delay = distanceRatio * 200  // Increased from 150 to slow down
                         }
 
+                        // Calculate text fade factor for gradual opacity reduction
+                        let textFadeFactor = 1
+                        if (distanceToText < fadeRadius) {
+                            textFadeFactor = (distanceToText - textExclusionRadius) / (fadeRadius - textExclusionRadius)
+                            textFadeFactor = Math.max(0, Math.min(1, textFadeFactor))
+                        }
+
                         this.pixels.push(
-                            new Pixel(this.canvas, this.ctx, x, y, color, this.speed, delay, distanceRatio, this.pixelSize)
+                            new Pixel(this.canvas, this.ctx, x, y, color, this.speed, delay, distanceRatio, this.pixelSize, textFadeFactor)
                         )
                     }
                 }
