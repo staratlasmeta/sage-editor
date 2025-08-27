@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Navigation } from '../components/Navigation';
+import { StandaloneNavigation } from '../components/StandaloneNavigation';
 import { useGameData } from '../contexts/DataContext';
 import { useSharedState } from '../contexts/SharedStateContext';
 import { NotificationSystem, useNotifications } from '../components/NotificationSystem';
@@ -374,8 +375,10 @@ export default function Recipes() {
 
     return (
         <div className="recipes-app">
-            {/* Only render Navigation in dev mode, not in standalone */}
-            {typeof window !== 'undefined' && !(window as any).__STANDALONE_BUILD__ && (
+            {/* Render appropriate navigation based on build mode */}
+            {typeof window !== 'undefined' && (window as any).__STANDALONE_BUILD__ ? (
+                <StandaloneNavigation currentRoute="recipes" />
+            ) : (
                 <Navigation />
             )}
 

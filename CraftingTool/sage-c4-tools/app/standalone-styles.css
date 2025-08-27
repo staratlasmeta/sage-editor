@@ -10,3 +10,11 @@
 @import './components/RecipeAnalysis.css';
 @import './components/RecipeSearch.css';
 @import './components/RecipeTreeCanvas.css';
+
+/* Ensure proper scrolling for standalone build */
+.claim-stakes-app,
+.crafting-hab-app,
+.recipes-app {
+    overflow-y: auto !important;
+    height: 100vh !important;
+}
