@@ -339,8 +339,8 @@ function updateFileList() {
     // Real JSON files from the subfolders as shown in screenshot
     const realJsonFiles = [
         // Map Editor files
-        { name: '69regions-v5', folder: 'map', path: 'Map Editor' },
-        { name: '69regions-v6', folder: 'map', path: 'Map Editor' },
+        { name: '69regions-v7', folder: 'map', path: 'Map Editor' },
+        { name: '69regions-v8', folder: 'map', path: 'Map Editor' },
         // Loot Matrix files
         { name: 'all-components', folder: 'loot', path: 'Loot Matrix' },
         { name: 'all-crafts', folder: 'loot', path: 'Loot Matrix' },
