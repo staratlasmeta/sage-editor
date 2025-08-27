@@ -1,16 +1,6 @@
 import Papa from 'papaparse';
 
-// Embedded mock data for standalone build
-const EMBEDDED_DATA = {
-    cargo: {},  // Will be populated with minimal data
-    tags: {},
-    planetArchetypes: {},
-    claimStakeBuildings: {},
-    craftingHabBuildings: {},
-    recipes: []
-};
-
-// Fallback/mock data for standalone
+// No mock data - always use proper data files
 const MOCK_DATA = {
     planets: [
         {
@@ -328,27 +318,21 @@ export class StandaloneDataLoader {
                 const recipesData = recipesResponse?.ok ? await recipesResponse.json() : null;
                 const starbasesData = starbasesResponse?.ok ? await starbasesResponse.json() : null;
 
-                // Merge buildings from both files
-                const allBuildings = [
-                    ...(buildingsData.buildings || []),
-                    ...(craftingBuildingsData?.habs || []),
-                    ...(craftingBuildingsData?.craftingStations || []),
-                    ...(craftingBuildingsData?.cargoStorage || [])
-                ];
+                // Process buildings - keep them SEPARATE, don't merge!
+                const claimStakeBuildings = buildingsData.buildings || [];
 
                 // Log what we loaded
                 console.log('✅ Game data loaded successfully:', {
                     resources: (resourcesData.resources || resourcesData || []).length,
                     planets: (planetsData.planets || planetsData || []).length,
                     planetArchetypes: (archetypesData?.archetypes || archetypesData || []).length,
-                    buildings: (buildingsData.buildings || []).length,
+                    buildings: claimStakeBuildings.length,
                     claimStakeDefinitions: (buildingsData.claimStakeDefinitions || []).length,
                     craftingHabs: (craftingBuildingsData?.habs || []).length,
                     craftingStations: (craftingBuildingsData?.craftingStations || []).length,
                     cargoStorage: (craftingBuildingsData?.cargoStorage || []).length,
                     recipes: (recipesData?.recipes || recipesData || []).length,
-                    starbases: (starbasesData?.starbases || starbasesData || []).length,
-                    totalBuildings: allBuildings.length
+                    starbases: (starbasesData?.starbases || starbasesData || []).length
                 });
 
                 return {
@@ -356,7 +340,7 @@ export class StandaloneDataLoader {
                     resourceCategories: resourcesData.categories || {},
                     planets: planetsData.planets || planetsData || [],
                     planetArchetypes: archetypesData?.archetypes || archetypesData || [],
-                    buildings: allBuildings,
+                    buildings: claimStakeBuildings,
                     claimStakeDefinitions: buildingsData.claimStakeDefinitions || [],
                     craftingHabBuildings: craftingBuildingsData || {
                         habs: [],
@@ -473,22 +457,9 @@ export class StandaloneDataLoader {
             console.warn('Failed to load mockData.json, using fallback data:', error);
         }
 
-        // Fallback to embedded mock data
-        console.log('Using embedded fallback mock data');
-        return {
-            cargo: MOCK_DATA.resources,
-            tags: {},
-            planetArchetypes: {},
-            claimStakeBuildings: MOCK_DATA.buildings,
-            craftingHabBuildings: MOCK_DATA.buildings.filter(b =>
-                b.category === 'hab' || b.category === 'crafting'
-            ),
-            recipes: MOCK_DATA.recipes,
-            planets: MOCK_DATA.planets,
-            buildings: MOCK_DATA.buildings,
-            resources: MOCK_DATA.resources,
-            starbases: MOCK_DATA.starbases
-        };
+        // No fallback - data files must exist
+        console.error('Failed to load required data files');
+        throw new Error('Failed to load required data files. Please ensure all JSON files are present in /data/ folder.');
     }
 
     static async loadMockData() {
