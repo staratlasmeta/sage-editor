@@ -1,8 +1,12 @@
-/* Consolidated styles for standalone build */
+/* Consolidated styles for standalone build - Including ALL CSS files */
 @import './app.css';
 @import './styles/sage-theme.css';
 @import './styles/planet-purchase.css';
 @import './styles/ship-transfer-modal.css';
-@import './components/ResourceManager.css';
+@import './styles/recipes.css';
 @import './styles/settings-panel.css';
 @import './styles/achievements.css';
+@import './components/ResourceManager.css';
+@import './components/RecipeAnalysis.css';
+@import './components/RecipeSearch.css';
+@import './components/RecipeTreeCanvas.css';
