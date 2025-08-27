@@ -297,7 +297,67 @@ export class StandaloneDataLoader {
         console.log('Loading game data for standalone build...');
 
         try {
-            // First try to load the mockData.json file from the data directory
+            // First try to load the proper data files
+            const [
+                resourcesResponse,
+                planetsResponse,
+                archetypesResponse,
+                buildingsResponse,
+                recipesResponse
+            ] = await Promise.all([
+                fetch('./data/resources.json').catch(() => null),
+                fetch('./data/planets.json').catch(() => null),
+                fetch('./data/planetArchetypes.json').catch(() => null),
+                fetch('./data/claimStakeBuildings.json').catch(() => null),
+                fetch('./data/recipes.json').catch(() => null)
+            ]);
+
+            // If all proper data files exist, use them
+            if (resourcesResponse?.ok && planetsResponse?.ok && buildingsResponse?.ok) {
+                console.log('Loading proper data files...');
+
+                const resourcesData = await resourcesResponse.json();
+                const planetsData = await planetsResponse.json();
+                const archetypesData = archetypesResponse?.ok ? await archetypesResponse.json() : null;
+                const buildingsData = await buildingsResponse.json();
+                const recipesData = recipesResponse?.ok ? await recipesResponse.json() : null;
+
+                return {
+                    resources: resourcesData.resources || resourcesData || [],
+                    resourceCategories: resourcesData.categories || {},
+                    planets: planetsData.planets || planetsData || [],
+                    planetArchetypes: archetypesData?.archetypes || archetypesData || [],
+                    buildings: buildingsData.buildings || buildingsData || [],
+                    claimStakeDefinitions: buildingsData.claimStakeDefinitions || [],
+                    craftingHabBuildings: {
+                        habs: buildingsData.habs || [],
+                        craftingStations: buildingsData.craftingStations || [],
+                        cargoStorage: buildingsData.cargoStorage || []
+                    },
+                    recipes: recipesData?.recipes || recipesData || [],
+                    craftingRecipes: recipesData?.recipes || recipesData || [],
+                    starbases: [],
+
+                    // Helper methods
+                    getResourceById: (id: string) => {
+                        const resources = resourcesData.resources || resourcesData || [];
+                        return resources.find((r: any) => r.id === id);
+                    },
+                    getResourceCategory: (resourceId: string) => {
+                        const resources = resourcesData.resources || resourcesData || [];
+                        const resource = resources.find((r: any) => r.id === resourceId);
+                        return resource ? resource.category : 'unknown';
+                    },
+                    getResourceName: (resourceId: string) => {
+                        const resources = resourcesData.resources || resourcesData || [];
+                        const resource = resources.find((r: any) => r.id === resourceId);
+                        return resource ? resource.name : resourceId;
+                    }
+                };
+            }
+
+            // Fall back to mockData.json if proper files don't exist
+            console.log('Falling back to mockData.json...');
             const response = await fetch('./data/mockData.json');
             if (response.ok) {
                 const mockDataFile = await response.json();

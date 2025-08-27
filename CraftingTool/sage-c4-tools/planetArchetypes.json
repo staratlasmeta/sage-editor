@@ -1,0 +1,145 @@
+{
+  "archetypes": [
+    {
+      "id": "terrestrial",
+      "name": "Terrestrial",
+      "description": "Earth-like planets with solid surfaces and diverse resources",
+      "defaultResources": [
+        "iron-ore",
+        "copper-ore",
+        "silica",
+        "coal"
+      ],
+      "richnessModifier": 1.0,
+      "tags": [
+        "mining",
+        "industrial",
+        "habitable"
+      ],
+      "extractionDifficulty": 1.0,
+      "habitability": 0.8
+    },
+    {
+      "id": "gas-giant",
+      "name": "Gas Giant",
+      "description": "Massive gas planets rich in atmospheric resources",
+      "defaultResources": [
+        "hydrogen",
+        "helium"
+      ],
+      "richnessModifier": 1.5,
+      "tags": [
+        "gas-extraction",
+        "orbital-only"
+      ],
+      "extractionDifficulty": 1.3,
+      "habitability": 0.0
+    },
+    {
+      "id": "volcanic",
+      "name": "Volcanic",
+      "description": "Highly active volcanic worlds with rare minerals",
+      "defaultResources": [
+        "titanium-ore",
+        "osmium-ore",
+        "carbon"
+      ],
+      "richnessModifier": 1.3,
+      "tags": [
+        "extreme-mining",
+        "hazardous",
+        "high-value"
+      ],
+      "extractionDifficulty": 1.5,
+      "habitability": 0.2
+    },
+    {
+      "id": "oceanic",
+      "name": "Oceanic",
+      "description": "Water-covered planets with unique marine resources",
+      "defaultResources": [
+        "chromite-ore",
+        "hydrogen",
+        "biomass"
+      ],
+      "richnessModifier": 1.1,
+      "tags": [
+        "aquatic",
+        "life-supporting"
+      ],
+      "extractionDifficulty": 1.2,
+      "habitability": 0.6
+    },
+    {
+      "id": "ice",
+      "name": "Ice Planet",
+      "description": "Frozen worlds with volatile compounds",
+      "defaultResources": [
+        "hydrogen",
+        "tritium-ore",
+        "silica"
+      ],
+      "richnessModifier": 0.9,
+      "tags": [
+        "cold",
+        "tritium-rich"
+      ],
+      "extractionDifficulty": 1.1,
+      "habitability": 0.3
+    },
+    {
+      "id": "asteroid",
+      "name": "Asteroid Belt",
+      "description": "Dense asteroid fields with concentrated minerals",
+      "defaultResources": [
+        "iron-ore",
+        "aluminum-ore",
+        "tritium-ore",
+        "arco"
+      ],
+      "richnessModifier": 1.4,
+      "tags": [
+        "zero-g",
+        "mining",
+        "rare-resources"
+      ],
+      "extractionDifficulty": 0.8,
+      "habitability": 0.1
+    },
+    {
+      "id": "barren",
+      "name": "Barren",
+      "description": "Lifeless rocky planets with basic minerals",
+      "defaultResources": [
+        "iron-ore",
+        "silica"
+      ],
+      "richnessModifier": 0.7,
+      "tags": [
+        "low-value",
+        "easy-access"
+      ],
+      "extractionDifficulty": 0.9,
+      "habitability": 0.4
+    },
+    {
+      "id": "metallic",
+      "name": "Metallic",
+      "description": "Dense metal-rich planets",
+      "defaultResources": [
+        "iron-ore",
+        "copper-ore",
+        "aluminum-ore",
+        "titanium-ore"
+      ],
+      "richnessModifier": 1.6,
+      "tags": [
+        "mining",
+        "high-density",
+        "valuable"
+      ],
+      "extractionDifficulty": 1.4,
+      "habitability": 0.3
+    }
+  ]
+}

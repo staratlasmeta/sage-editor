@@ -1,0 +1,364 @@
+{
+    "resources": [
+        {
+            "id": "iron-ore",
+            "name": "Iron Ore",
+            "category": "raw",
+            "tier": 1,
+            "description": "Raw iron ore extracted from rocky planets",
+            "stackSize": 100,
+            "baseValue": 10
+        },
+        {
+            "id": "copper-ore",
+            "name": "Copper Ore",
+            "category": "raw",
+            "tier": 1,
+            "description": "Raw copper ore extracted from terrestrial planets",
+            "stackSize": 100,
+            "baseValue": 12
+        },
+        {
+            "id": "aluminum-ore",
+            "name": "Aluminum Ore",
+            "category": "raw",
+            "tier": 2,
+            "description": "Raw aluminum ore extracted from mining planets",
+            "stackSize": 100,
+            "baseValue": 15
+        },
+        {
+            "id": "titanium-ore",
+            "name": "Titanium Ore",
+            "category": "raw",
+            "tier": 2,
+            "description": "Raw titanium ore extracted from volcanic planets",
+            "stackSize": 100,
+            "baseValue": 20
+        },
+        {
+            "id": "chromite-ore",
+            "name": "Chromite Ore",
+            "category": "raw",
+            "tier": 3,
+            "description": "Rare chromite ore found in oceanic and asteroid belt systems",
+            "stackSize": 100,
+            "baseValue": 30
+        },
+        {
+            "id": "osmium-ore",
+            "name": "Osmium Ore",
+            "category": "raw",
+            "tier": 3,
+            "description": "Dense osmium ore found on volcanic planets",
+            "stackSize": 100,
+            "baseValue": 35
+        },
+        {
+            "id": "tritium-ore",
+            "name": "Tritium Ore",
+            "category": "raw",
+            "tier": 3,
+            "description": "Radioactive tritium ore from asteroid belts",
+            "stackSize": 100,
+            "baseValue": 40
+        },
+        {
+            "id": "coal",
+            "name": "Coal",
+            "category": "raw",
+            "tier": 1,
+            "description": "Carbon-rich fuel source",
+            "stackSize": 100,
+            "baseValue": 8
+        },
+        {
+            "id": "silica",
+            "name": "Silica",
+            "category": "raw",
+            "tier": 1,
+            "description": "Silicon dioxide used in electronics",
+            "stackSize": 100,
+            "baseValue": 10
+        },
+        {
+            "id": "carbon",
+            "name": "Carbon",
+            "category": "raw",
+            "tier": 1,
+            "description": "Pure carbon for industrial processes",
+            "stackSize": 100,
+            "baseValue": 10
+        },
+        {
+            "id": "hydrogen",
+            "name": "Hydrogen",
+            "category": "raw",
+            "tier": 1,
+            "description": "Hydrogen gas extracted from gas giants",
+            "stackSize": 100,
+            "baseValue": 5
+        },
+        {
+            "id": "biomass",
+            "name": "Biomass",
+            "category": "raw",
+            "tier": 1,
+            "description": "Organic material for food production",
+            "stackSize": 100,
+            "baseValue": 8
+        },
+        {
+            "id": "arco",
+            "name": "Arco",
+            "category": "raw",
+            "tier": 3,
+            "description": "Exotic material for advanced technology",
+            "stackSize": 100,
+            "baseValue": 50
+        },
+        {
+            "id": "lumanite",
+            "name": "Lumanite",
+            "category": "raw",
+            "tier": 3,
+            "description": "Luminescent crystal with unique properties",
+            "stackSize": 100,
+            "baseValue": 45
+        },
+        {
+            "id": "iron",
+            "name": "Iron",
+            "category": "processed",
+            "tier": 1,
+            "description": "Processed iron ingots",
+            "stackSize": 50,
+            "baseValue": 20
+        },
+        {
+            "id": "copper",
+            "name": "Copper",
+            "category": "processed",
+            "tier": 1,
+            "description": "Processed copper ingots",
+            "stackSize": 50,
+            "baseValue": 24
+        },
+        {
+            "id": "aluminum",
+            "name": "Aluminum",
+            "category": "processed",
+            "tier": 2,
+            "description": "Processed aluminum ingots",
+            "stackSize": 50,
+            "baseValue": 30
+        },
+        {
+            "id": "titanium",
+            "name": "Titanium",
+            "category": "processed",
+            "tier": 2,
+            "description": "Processed titanium ingots",
+            "stackSize": 50,
+            "baseValue": 40
+        },
+        {
+            "id": "steel",
+            "name": "Steel",
+            "category": "processed",
+            "tier": 2,
+            "description": "High-strength steel alloy",
+            "stackSize": 50,
+            "baseValue": 35
+        },
+        {
+            "id": "chromite",
+            "name": "Chromite",
+            "category": "processed",
+            "tier": 3,
+            "description": "Processed chromite",
+            "stackSize": 50,
+            "baseValue": 60
+        },
+        {
+            "id": "osmium",
+            "name": "Osmium",
+            "category": "processed",
+            "tier": 3,
+            "description": "Processed osmium",
+            "stackSize": 50,
+            "baseValue": 70
+        },
+        {
+            "id": "tritium",
+            "name": "Tritium",
+            "category": "processed",
+            "tier": 3,
+            "description": "Processed tritium",
+            "stackSize": 50,
+            "baseValue": 80
+        },
+        {
+            "id": "electronics",
+            "name": "Electronics",
+            "category": "component",
+            "tier": 2,
+            "description": "Basic electronic components",
+            "stackSize": 25,
+            "baseValue": 50
+        },
+        {
+            "id": "circuit-board",
+            "name": "Circuit Board",
+            "category": "component",
+            "tier": 3,
+            "description": "Advanced circuit board",
+            "stackSize": 25,
+            "baseValue": 100
+        },
+        {
+            "id": "power-cell",
+            "name": "Power Cell",
+            "category": "component",
+            "tier": 3,
+            "description": "High-capacity power storage",
+            "stackSize": 25,
+            "baseValue": 75
+        },
+        {
+            "id": "high-density-alloy",
+            "name": "High-Density Alloy",
+            "category": "component",
+            "tier": 3,
+            "description": "Ultra-strong composite material",
+            "stackSize": 25,
+            "baseValue": 120
+        },
+        {
+            "id": "subspace-coils",
+            "name": "Subspace Coils",
+            "category": "component",
+            "tier": 2,
+            "description": "Component for FTL technology",
+            "stackSize": 25,
+            "baseValue": 150
+        },
+        {
+            "id": "warp-coils",
+            "name": "Warp Coils",
+            "category": "component",
+            "tier": 2,
+            "description": "Advanced warp drive component",
+            "stackSize": 25,
+            "baseValue": 180
+        },
+        {
+            "id": "dimensional-stabilizer",
+            "name": "Dimensional Stabilizer",
+            "category": "component",
+            "tier": 2,
+            "description": "Stabilizes dimensional fields",
+            "stackSize": 25,
+            "baseValue": 200
+        },
+        {
+            "id": "field-harmonizer",
+            "name": "Field Harmonizer",
+            "category": "component",
+            "tier": 2,
+            "description": "Harmonizes energy fields",
+            "stackSize": 25,
+            "baseValue": 190
+        },
+        {
+            "id": "subspace-conduit",
+            "name": "Subspace Conduit",
+            "category": "advanced",
+            "tier": 3,
+            "description": "Advanced subspace component",
+            "stackSize": 10,
+            "baseValue": 300
+        },
+        {
+            "id": "warp-field-generator",
+            "name": "Warp Field Generator",
+            "category": "advanced",
+            "tier": 3,
+            "description": "Generates warp fields for FTL travel",
+            "stackSize": 10,
+            "baseValue": 350
+        },
+        {
+            "id": "fuel",
+            "name": "Fuel",
+            "category": "consumable",
+            "tier": 1,
+            "description": "Standard starship fuel",
+            "stackSize": 100,
+            "baseValue": 15
+        },
+        {
+            "id": "food",
+            "name": "Food",
+            "category": "consumable",
+            "tier": 1,
+            "description": "Processed food rations",
+            "stackSize": 100,
+            "baseValue": 10
+        },
+        {
+            "id": "repair-kit",
+            "name": "Repair Kit",
+            "category": "consumable",
+            "tier": 2,
+            "description": "Emergency repair supplies",
+            "stackSize": 20,
+            "baseValue": 60
+        },
+        {
+            "id": "energy-boost",
+            "name": "Energy Boost",
+            "category": "consumable",
+            "tier": 2,
+            "description": "Temporary energy enhancement",
+            "stackSize": 20,
+            "baseValue": 45
+        },
+        {
+            "id": "crew-supplies",
+            "name": "Crew Supplies",
+            "category": "consumable",
+            "tier": 1,
+            "description": "Essential crew provisions",
+            "stackSize": 50,
+            "baseValue": 30
+        }
+    ],
+    "categories": {
+        "raw": {
+            "name": "Raw Materials",
+            "color": "#8B4513",
+            "icon": "⛏️"
+        },
+        "processed": {
+            "name": "Processed Materials",
+            "color": "#4682B4",
+            "icon": "🏭"
+        },
+        "component": {
+            "name": "Components",
+            "color": "#9370DB",
+            "icon": "⚙️"
+        },
+        "advanced": {
+            "name": "Advanced Components",
+            "color": "#FFD700",
+            "icon": "💎"
+        },
+        "consumable": {
+            "name": "Consumables",
+            "color": "#32CD32",
+            "icon": "🔋"
+        }
+    }
+}

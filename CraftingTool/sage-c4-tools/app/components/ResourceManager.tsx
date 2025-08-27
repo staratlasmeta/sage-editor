@@ -123,13 +123,24 @@ export function ResourceManager({
     };
 
     const formatRate = (rate: number) => {
-        if (rate === 0) return '0.00/s';
+        // Adaptive decimal places based on the magnitude
+        if (rate === 0) return '0/s';
+
+        const absRate = Math.abs(rate);
         const sign = rate > 0 ? '+' : '';
-        return `${sign}${rate.toFixed(2)}/s`;
+
+        // If rate is very small, show more decimal places
+        if (absRate < 0.001) return `${sign}${rate.toFixed(4)}/s`;
+        if (absRate < 0.01) return `${sign}${rate.toFixed(3)}/s`;
+        if (absRate < 1) return `${sign}${rate.toFixed(2)}/s`;
+        if (absRate < 100) return `${sign}${rate.toFixed(1)}/s`;
+
+        // For large numbers, no decimals needed
+        return `${sign}${Math.floor(rate)}/s`;
     };
 
     const formatPotentialRate = (actual: number, potential: number) => {
-        if (potential === 0) return '0.00/s';
+        if (potential === 0) return '0/s';
         if (actual === potential) {
             return formatRate(actual);
         }
@@ -178,13 +189,13 @@ export function ResourceManager({
                 <h3>Resource Management</h3>
                 <div className="view-toggle">
                     <button
-                        className={viewMode === 'individual' ? 'active' : ''}
+                        className={`btn-toggle ${viewMode === 'individual' ? 'active' : ''}`}
                         onClick={() => setViewMode('individual')}
                     >
                         By Claim Stake
                     </button>
                     <button
-                        className={viewMode === 'aggregate' ? 'active' : ''}
+                        className={`btn-toggle ${viewMode === 'aggregate' ? 'active' : ''}`}
                         onClick={() => setViewMode('aggregate')}
                     >
                         Aggregate View
@@ -345,11 +356,56 @@ export function ResourceManager({
                     {selectedSource && selectedTarget && (
                         <div className="transfer-controls">
                             <p className="info-text">Select resources to transfer:</p>
+
+                            {/* Quick Actions */}
+                            <div className="transfer-quick-actions">
+                                <button
+                                    className="btn btn-quick-action"
+                                    onClick={() => {
+                                        const resources = getAvailableResources();
+                                        const newAmounts: Record<string, number> = {};
+                                        Object.entries(resources).forEach(([resource, amount]) => {
+                                            if (amount > 0) {
+                                                newAmounts[resource] = Math.floor(amount);
+                                            }
+                                        });
+                                        setTransferAmounts(newAmounts);
+                                    }}
+                                    title="Transfer all available resources"
+                                >
+                                    Transfer All
+                                </button>
+                                <button
+                                    className="btn btn-quick-action"
+                                    onClick={() => {
+                                        const resources = getAvailableResources();
+                                        const newAmounts: Record<string, number> = {};
+                                        Object.entries(resources).forEach(([resource, amount]) => {
+                                            if (amount > 0 && resource !== 'fuel') {
+                                                newAmounts[resource] = Math.floor(amount);
+                                            }
+                                        });
+                                        setTransferAmounts(newAmounts);
+                                    }}
+                                    title="Transfer all except fuel"
+                                >
+                                    All Except Fuel
+                                </button>
+                                <button
+                                    className="btn btn-quick-action"
+                                    onClick={() => setTransferAmounts({})}
+                                    title="Clear all selections"
+                                >
+                                    Clear All
+                                </button>
+                            </div>
+
                             <div className="resource-transfer-list">
                                 {Object.entries(getAvailableResources()).map(([resource, available]) => {
                                     if (available <= 0) return null;
+                                    const isSelected = transferAmounts[resource] && transferAmounts[resource] > 0;
                                     return (
-                                        <div key={resource} className="transfer-resource-item">
+                                        <div key={resource} className={`transfer-resource-item ${isSelected ? 'selected' : ''}`}>
                                             <span className="resource-label">{resource}</span>
                                             <span className="available-amount">Available: {Math.floor(available)}</span>
                                             <input
@@ -367,10 +423,19 @@ export function ResourceManager({
                                             <button
                                                 className="btn-transfer-max"
                                                 onClick={() => handleTransferAmountChange(resource, Math.floor(available))}
-                                                title="Transfer all"
+                                                title="Transfer all of this resource"
                                             >
                                                 MAX
                                             </button>
+                                            {isSelected && (
+                                                <button
+                                                    className="btn-transfer-clear"
+                                                    onClick={() => handleTransferAmountChange(resource, 0)}
+                                                    title="Remove from transfer"
+                                                >
+                                                    ✖
+                                                </button>
+                                            )}
                                         </div>
                                     );
                                 }).filter(Boolean)}
@@ -378,11 +443,23 @@ export function ResourceManager({
                             {Object.keys(transferAmounts).length > 0 && (
                                 <div className="transfer-summary">
                                     <strong>Transfer Summary:</strong>
-                                    <ul>
+                                    <div className="summary-items">
                                         {Object.entries(transferAmounts).map(([resource, amount]) => (
-                                            <li key={resource}>{resource}: {amount}</li>
+                                            amount > 0 && (
+                                                <div key={resource} className="summary-item">
+                                                    <span className="summary-resource">{resource}:</span>
+                                                    <span className="summary-amount">{amount}</span>
+                                                    <button
+                                                        className="summary-remove"
+                                                        onClick={() => handleTransferAmountChange(resource, 0)}
+                                                        title="Remove from transfer"
+                                                    >
+                                                        ✖
+                                                    </button>
+                                                </div>
+                                            )
                                         ))}
-                                    </ul>
+                                    </div>
                                 </div>
                             )}
                             <div className="transfer-actions">

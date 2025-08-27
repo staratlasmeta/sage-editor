@@ -44,7 +44,7 @@ function PlanetBrowser({ systems, planetArchetypes, onSelectPlanet, playerFactio
                                 <div className="resources-preview">
                                     {Object.entries(archetype?.richness || {}).slice(0, 3).map(([resource, richness]) => (
                                         <span key={resource} className="resource-badge">
-                                            {resource.replace('cargo-', '')}: {richness}x
+                                            {resource.replace(/-/g, ' ')}: {richness}x
                                         </span>
                                     ))}
                                 </div>

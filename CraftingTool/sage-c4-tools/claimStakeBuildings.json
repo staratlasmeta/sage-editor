@@ -1,0 +1,377 @@
+{
+  "buildings": [
+    {
+      "id": "central-hub-t1",
+      "name": "Central Hub T1",
+      "category": "infrastructure",
+      "tier": 1,
+      "slots": 5,
+      "power": 100,
+      "crew": 10,
+      "comesWithStake": true,
+      "cannotRemove": true,
+      "description": "Main control center for your claim stake operations",
+      "requiredTags": [],
+      "providedTags": [
+        "basic-operations"
+      ],
+      "resourceUsage": {
+        "fuel": 1
+      },
+      "constructionCost": {},
+      "constructionTime": 0
+    },
+    {
+      "id": "central-hub-t2",
+      "name": "Central Hub T2",
+      "category": "infrastructure",
+      "tier": 2,
+      "slots": 8,
+      "power": 150,
+      "crew": 15,
+      "comesWithStake": true,
+      "cannotRemove": true,
+      "description": "Advanced control center with improved capacity",
+      "requiredTags": [],
+      "providedTags": [
+        "basic-operations",
+        "advanced-operations"
+      ],
+      "resourceUsage": {
+        "fuel": 1.5
+      },
+      "constructionCost": {},
+      "constructionTime": 0
+    },
+    {
+      "id": "extraction-hub",
+      "name": "Extraction Hub",
+      "category": "infrastructure",
+      "tier": 1,
+      "slots": 3,
+      "power": -20,
+      "crew": 5,
+      "description": "Enables resource extraction operations",
+      "requiredTags": [
+        "basic-operations"
+      ],
+      "providedTags": [
+        "extraction-modules"
+      ],
+      "constructionCost": {
+        "steel": 20,
+        "electronics": 10
+      },
+      "constructionTime": 120
+    },
+    {
+      "id": "extractor-t1",
+      "name": "Basic Extractor",
+      "category": "extraction",
+      "tier": 1,
+      "slots": 2,
+      "power": -10,
+      "crew": 3,
+      "description": "Extracts raw resources from the planet",
+      "requiredTags": [
+        "extraction-modules"
+      ],
+      "providedTags": [],
+      "extractionRate": {
+        "iron-ore": 0.5,
+        "copper-ore": 0.3
+      },
+      "constructionCost": {
+        "steel": 10,
+        "copper": 5
+      },
+      "constructionTime": 60
+    },
+    {
+      "id": "extractor-t2",
+      "name": "Advanced Extractor",
+      "category": "extraction",
+      "tier": 2,
+      "slots": 3,
+      "power": -15,
+      "crew": 5,
+      "description": "Improved extraction rates and efficiency",
+      "requiredTags": [
+        "extraction-modules",
+        "advanced-operations"
+      ],
+      "providedTags": [],
+      "extractionRate": {
+        "iron-ore": 1.0,
+        "copper-ore": 0.8,
+        "aluminum-ore": 0.5,
+        "titanium-ore": 0.3
+      },
+      "constructionCost": {
+        "steel": 25,
+        "copper": 15,
+        "electronics": 5
+      },
+      "constructionTime": 90
+    },
+    {
+      "id": "refinery-t1",
+      "name": "Basic Refinery",
+      "category": "processing",
+      "tier": 1,
+      "slots": 4,
+      "power": -25,
+      "crew": 8,
+      "description": "Processes raw materials into refined resources",
+      "requiredTags": [
+        "basic-operations"
+      ],
+      "providedTags": [
+        "processing-capable"
+      ],
+      "resourceUsage": {
+        "fuel": 0.5
+      },
+      "resourceProduction": {
+        "steel": 0.2,
+        "copper": 0.15
+      },
+      "constructionCost": {
+        "steel": 30,
+        "copper": 20,
+        "electronics": 10
+      },
+      "constructionTime": 180
+    },
+    {
+      "id": "power-plant-t1",
+      "name": "Power Plant T1",
+      "category": "infrastructure",
+      "tier": 1,
+      "slots": 3,
+      "power": 50,
+      "crew": 4,
+      "description": "Generates power for your operations",
+      "requiredTags": [
+        "basic-operations"
+      ],
+      "providedTags": [
+        "power-generation"
+      ],
+      "resourceUsage": {
+        "fuel": 0.8
+      },
+      "constructionCost": {
+        "steel": 25,
+        "electronics": 15
+      },
+      "constructionTime": 120
+    },
+    {
+      "id": "power-plant-t2",
+      "name": "Power Plant T2",
+      "category": "infrastructure",
+      "tier": 2,
+      "slots": 4,
+      "power": 100,
+      "crew": 6,
+      "description": "Advanced power generation facility",
+      "requiredTags": [
+        "advanced-operations"
+      ],
+      "providedTags": [
+        "power-generation",
+        "advanced-power"
+      ],
+      "resourceUsage": {
+        "fuel": 1.2
+      },
+      "constructionCost": {
+        "steel": 50,
+        "electronics": 30,
+        "circuit-board": 5
+      },
+      "constructionTime": 180
+    },
+    {
+      "id": "storage-t1",
+      "name": "Storage Facility T1",
+      "category": "infrastructure",
+      "tier": 1,
+      "slots": 2,
+      "power": -5,
+      "crew": 2,
+      "storageBonus": 500,
+      "description": "Increases resource storage capacity",
+      "requiredTags": [
+        "basic-operations"
+      ],
+      "providedTags": [],
+      "constructionCost": {
+        "steel": 15,
+        "aluminum": 10
+      },
+      "constructionTime": 60
+    },
+    {
+      "id": "crew-quarters-t1",
+      "name": "Crew Quarters T1",
+      "category": "infrastructure",
+      "tier": 1,
+      "slots": 2,
+      "power": -10,
+      "crew": -5,
+      "description": "Houses additional crew members",
+      "requiredTags": [
+        "basic-operations"
+      ],
+      "providedTags": [
+        "crew-housing"
+      ],
+      "resourceUsage": {
+        "food": 0.1
+      },
+      "constructionCost": {
+        "steel": 10,
+        "aluminum": 5
+      },
+      "constructionTime": 45
+    },
+    {
+      "id": "processing-hub",
+      "name": "Processing Hub",
+      "category": "infrastructure",
+      "tier": 2,
+      "slots": 4,
+      "power": -30,
+      "crew": 10,
+      "description": "Central facility for advanced material processing",
+      "requiredTags": [
+        "advanced-operations"
+      ],
+      "providedTags": [
+        "advanced-processing"
+      ],
+      "unlocks": [
+        "advanced-refinery",
+        "chemical-plant"
+      ],
+      "resourceUsage": {
+        "fuel": 1.0,
+        "electronics": 0.1
+      },
+      "constructionCost": {
+        "steel": 40,
+        "electronics": 25,
+        "circuit-board": 10
+      },
+      "constructionTime": 240
+    },
+    {
+      "id": "advanced-refinery",
+      "name": "Advanced Refinery",
+      "category": "processing",
+      "tier": 2,
+      "slots": 5,
+      "power": -40,
+      "crew": 12,
+      "description": "High-efficiency refinery for advanced materials",
+      "requiredTags": [
+        "advanced-processing"
+      ],
+      "providedTags": [],
+      "resourceUsage": {
+        "fuel": 1.0,
+        "electronics": 0.2
+      },
+      "resourceProduction": {
+        "high-density-alloy": 0.1,
+        "circuit-board": 0.05
+      },
+      "constructionCost": {
+        "steel": 60,
+        "electronics": 40,
+        "circuit-board": 15
+      },
+      "constructionTime": 300
+    }
+  ],
+  "claimStakeDefinitions": [
+    {
+      "id": "claim-stake-t1",
+      "name": "Basic Claim Stake",
+      "tier": 1,
+      "slots": 20,
+      "rentMultiplier": 1.0,
+      "maxBuildings": 10,
+      "defaultBuilding": "central-hub-t1",
+      "allowedBuildingTiers": [
+        1
+      ]
+    },
+    {
+      "id": "claim-stake-t2",
+      "name": "Advanced Claim Stake",
+      "tier": 2,
+      "slots": 40,
+      "rentMultiplier": 1.5,
+      "maxBuildings": 20,
+      "defaultBuilding": "central-hub-t2",
+      "allowedBuildingTiers": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "claim-stake-t3",
+      "name": "Industrial Claim Stake",
+      "tier": 3,
+      "slots": 60,
+      "rentMultiplier": 2.0,
+      "maxBuildings": 30,
+      "defaultBuilding": "central-hub-t2",
+      "allowedBuildingTiers": [
+        1,
+        2,
+        3
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "id": "basic-operations",
+      "name": "Basic Operations",
+      "description": "Enables basic claim stake functionality"
+    },
+    {
+      "id": "advanced-operations",
+      "name": "Advanced Operations",
+      "description": "Enables advanced tier 2+ buildings"
+    },
+    {
+      "id": "extraction-modules",
+      "name": "Extraction Modules",
+      "description": "Required for resource extraction buildings"
+    },
+    {
+      "id": "processing-capable",
+      "name": "Processing Capable",
+      "description": "Can process raw materials"
+    },
+    {
+      "id": "advanced-processing",
+      "name": "Advanced Processing",
+      "description": "Enables advanced material processing"
+    },
+    {
+      "id": "power-generation",
+      "name": "Power Generation",
+      "description": "Provides power to the claim stake"
+    },
+    {
+      "id": "crew-housing",
+      "name": "Crew Housing",
+      "description": "Houses crew members"
+    }
+  ]
+}

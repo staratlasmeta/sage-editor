@@ -48,16 +48,16 @@ export function SettingsPanel({ onClose }: SettingsPanelProps) {
                         🚀 Starbase
                     </button>
                     <button
-                        className={`settings-tab ${activeTab === 'simulation' ? 'active' : ''}`}
-                        onClick={() => setActiveTab('simulation')}
-                    >
-                        🎮 Simulation
-                    </button>
-                    <button
                         className={`settings-tab ${activeTab === 'preferences' ? 'active' : ''}`}
                         onClick={() => setActiveTab('preferences')}
                     >
-                        🎨 Preferences
+                        ⚙️ Preferences
+                    </button>
+                    <button
+                        className={`settings-tab ${activeTab === 'data' ? 'active' : ''}`}
+                        onClick={() => setActiveTab('data')}
+                    >
+                        💾 Data
                     </button>
                     <button
                         className={`settings-tab ${activeTab === 'about' ? 'active' : ''}`}
@@ -74,8 +74,11 @@ export function SettingsPanel({ onClose }: SettingsPanelProps) {
                                 <h3>Current Starbase</h3>
                                 <div className="starbase-level-display">
                                     <div className="level-badge">
-                                        <span className="level-number">Level {state.starbaseLevel}</span>
-                                        <span className="level-name">{currentLevelData.name}</span>
+                                        <div className="level-number">
+                                            <div>Level</div>
+                                            <div>{state.starbaseLevel}</div>
+                                        </div>
+                                        <div className="level-name">{currentLevelData.name}</div>
                                     </div>
                                     <div className="level-progress">
                                         <div
@@ -86,7 +89,7 @@ export function SettingsPanel({ onClose }: SettingsPanelProps) {
                                 </div>
 
                                 <div className="starbase-features">
-                                    <h4>Current Features</h4>
+                                    <h4>✨ Current Features</h4>
                                     <ul>
                                         {currentLevelData.features.map(feature => (
                                             <li key={feature}>✓ {feature}</li>
@@ -96,12 +99,12 @@ export function SettingsPanel({ onClose }: SettingsPanelProps) {
 
                                 <div className="starbase-capabilities">
                                     <div className="capability">
-                                        <h4>Claim Stake Tiers</h4>
-                                        <div className="tier-badges">
+                                        <h4>🏭 Claim Stake Tiers</h4>
+                                        <div className="settings-tier-badges">
                                             {[1, 2, 3, 4, 5].map(tier => (
                                                 <span
                                                     key={tier}
-                                                    className={`tier-badge ${currentLevelData.claimStakeTiers.includes(tier) ? 'unlocked' : 'locked'}`}
+                                                    className={`settings-tier-badge ${currentLevelData.claimStakeTiers.includes(tier) ? 'unlocked' : 'locked'}`}
                                                 >
                                                     T{tier}
                                                 </span>
@@ -110,7 +113,7 @@ export function SettingsPanel({ onClose }: SettingsPanelProps) {
                                     </div>
 
                                     <div className="capability">
-                                        <h4>Crafting Hab Plots</h4>
+                                        <h4>🔧 Crafting Hab Plots</h4>
                                         <div className="plot-counts">
                                             {Object.entries(currentLevelData.habPlotsByTier).map(([tier, count]) => (
                                                 <div key={tier} className="plot-count">
@@ -159,192 +162,257 @@ export function SettingsPanel({ onClose }: SettingsPanelProps) {
                         </div>
                     )}
 
-                    {activeTab === 'simulation' && (
-                        <div className="simulation-settings">
-                            <h3>Simulation Settings</h3>
+                    {activeTab === 'preferences' && (
+                        <div className="preferences-settings">
+                            <h3>Application Settings</h3>
 
                             <div className="setting-group">
                                 <label>
-                                    <span>Auto-Save</span>
+                                    <span>🔄 Auto-Save</span>
                                     <input
                                         type="checkbox"
                                         checked={state.settings.autoSave}
                                         onChange={e => handleSettingChange('autoSave', e.target.checked)}
                                     />
                                 </label>
-                            </div>
-
-                            <div className="setting-group">
-                                <label>
-                                    <span>Crew Management Mode</span>
-                                    <select
-                                        value={state.settings.crewMode}
-                                        onChange={e => handleSettingChange('crewMode', e.target.value)}
-                                    >
-                                        <option value="auto">Automatic</option>
-                                        <option value="manual">Manual</option>
-                                    </select>
-                                </label>
-                            </div>
-
-                            <div className="setting-group">
-                                <label>
-                                    <span>Tutorial Mode</span>
-                                    <input
-                                        type="checkbox"
-                                        checked={!state.settings.tutorialCompleted}
-                                        onChange={e => handleSettingChange('tutorialCompleted', !e.target.checked)}
-                                    />
-                                </label>
-                            </div>
-
-                            <div className="setting-group">
-                                <h4>Simulation Speed</h4>
-                                <div className="speed-controls">
-                                    <button
-                                        className={`btn btn-sm ${state.settings?.simulationSpeed === 0.5 ? 'btn-primary' : ''}`}
-                                        onClick={() => handleSettingChange('simulationSpeed', 0.5)}
-                                    >
-                                        0.5x
-                                    </button>
-                                    <button
-                                        className={`btn btn-sm ${(!state.settings?.simulationSpeed || state.settings?.simulationSpeed === 1) ? 'btn-primary' : ''}`}
-                                        onClick={() => handleSettingChange('simulationSpeed', 1)}
-                                    >
-                                        1x
-                                    </button>
-                                    <button
-                                        className={`btn btn-sm ${state.settings?.simulationSpeed === 2 ? 'btn-primary' : ''}`}
-                                        onClick={() => handleSettingChange('simulationSpeed', 2)}
-                                    >
-                                        2x
-                                    </button>
-                                    <button
-                                        className={`btn btn-sm ${state.settings?.simulationSpeed === 5 ? 'btn-primary' : ''}`}
-                                        onClick={() => handleSettingChange('simulationSpeed', 5)}
-                                    >
-                                        5x
-                                    </button>
-                                </div>
                                 <p style={{
                                     marginTop: '0.5rem',
                                     fontSize: '0.85rem',
                                     color: 'var(--text-secondary)'
                                 }}>
-                                    Current speed: {state.settings?.simulationSpeed || 1}x
+                                    Automatically save your progress every few seconds
                                 </p>
+                            </div>
+
+                            <div className="setting-group" style={{ marginTop: '2rem' }}>
+                                <h4>💾 Save/Load Game State</h4>
+                                <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+                                    <button
+                                        className="btn btn-secondary"
+                                        onClick={() => {
+                                            const savedData = {
+                                                version: '1.0.0',
+                                                timestamp: Date.now(),
+                                                state: state,
+                                                claimStakes: localStorage.getItem('claimStakeInstances'),
+                                                craftingHabs: localStorage.getItem('craftingHabInstances'),
+                                                recipes: localStorage.getItem('recipeBuildPlans')
+                                            };
+                                            const dataStr = JSON.stringify(savedData, null, 2);
+                                            const blob = new Blob([dataStr], { type: 'application/json' });
+                                            const url = URL.createObjectURL(blob);
+                                            const a = document.createElement('a');
+                                            a.href = url;
+                                            a.download = `sage-c4-save-${Date.now()}.json`;
+                                            a.click();
+                                            URL.revokeObjectURL(url);
+                                        }}
+                                        style={{ flex: 1 }}
+                                    >
+                                        📥 Export Save
+                                    </button>
+                                    <button
+                                        className="btn btn-secondary"
+                                        onClick={() => {
+                                            const input = document.createElement('input');
+                                            input.type = 'file';
+                                            input.accept = '.json';
+                                            input.onchange = (e) => {
+                                                const file = (e.target as HTMLInputElement).files?.[0];
+                                                if (file) {
+                                                    const reader = new FileReader();
+                                                    reader.onload = (event) => {
+                                                        try {
+                                                            const savedData = JSON.parse(event.target?.result as string);
+                                                            if (savedData.claimStakes) {
+                                                                localStorage.setItem('claimStakeInstances', savedData.claimStakes);
+                                                            }
+                                                            if (savedData.craftingHabs) {
+                                                                localStorage.setItem('craftingHabInstances', savedData.craftingHabs);
+                                                            }
+                                                            if (savedData.recipes) {
+                                                                localStorage.setItem('recipeBuildPlans', savedData.recipes);
+                                                            }
+                                                            if (savedData.state) {
+                                                                localStorage.setItem('sageC4SharedState', JSON.stringify(savedData.state));
+                                                            }
+                                                            alert('Save loaded successfully! The page will now reload.');
+                                                            window.location.reload();
+                                                        } catch (err) {
+                                                            alert('Error loading save file. Please check the file format.');
+                                                        }
+                                                    };
+                                                    reader.readAsText(file);
+                                                }
+                                            };
+                                            input.click();
+                                        }}
+                                        style={{ flex: 1 }}
+                                    >
+                                        📤 Import Save
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     )}
 
-                    {activeTab === 'preferences' && (
-                        <div className="preferences-settings">
-                            <h3>Display Preferences</h3>
+                    {activeTab === 'data' && (
+                        <div className="data-settings">
+                            <h3>Data Management</h3>
 
                             <div className="setting-group">
-                                <label>
-                                    <span>Show Resource Icons</span>
-                                    <input type="checkbox" defaultChecked />
-                                </label>
+                                <h4>📊 Current Saved Data</h4>
+                                <ul style={{ listStyle: 'none', padding: 0 }}>
+                                    <li style={{ padding: '0.5rem 0', borderBottom: '1px solid var(--border-color)' }}>
+                                        <span>🏭 Claim Stakes: </span>
+                                        <strong>{(() => {
+                                            try {
+                                                const data = localStorage.getItem('claimStakeInstances');
+                                                return data ? JSON.parse(data).length : 0;
+                                            } catch {
+                                                return 0;
+                                            }
+                                        })()}</strong> saved
+                                    </li>
+                                    <li style={{ padding: '0.5rem 0', borderBottom: '1px solid var(--border-color)' }}>
+                                        <span>🔧 Crafting Habs: </span>
+                                        <strong>{(() => {
+                                            try {
+                                                const data = localStorage.getItem('craftingHabInstances');
+                                                return data ? JSON.parse(data).length : 0;
+                                            } catch {
+                                                return 0;
+                                            }
+                                        })()}</strong> saved
+                                    </li>
+                                    <li style={{ padding: '0.5rem 0', borderBottom: '1px solid var(--border-color)' }}>
+                                        <span>📋 Recipe Plans: </span>
+                                        <strong>{(() => {
+                                            try {
+                                                const data = localStorage.getItem('recipeBuildPlans');
+                                                return data ? JSON.parse(data).length : 0;
+                                            } catch {
+                                                return 0;
+                                            }
+                                        })()}</strong> saved
+                                    </li>
+                                </ul>
                             </div>
 
-                            <div className="setting-group">
-                                <label>
-                                    <span>Compact Mode</span>
-                                    <input type="checkbox" />
-                                </label>
-                            </div>
-
-                            <div className="setting-group">
-                                <label>
-                                    <span>Number Format</span>
-                                    <select>
-                                        <option>Standard (1,234)</option>
-                                        <option>Scientific (1.23e3)</option>
-                                        <option>Abbreviated (1.2K)</option>
-                                    </select>
-                                </label>
-                            </div>
-
-                            <div className="setting-group">
-                                <label>
-                                    <span>Animation Speed</span>
-                                    <input
-                                        type="range"
-                                        min="0"
-                                        max="100"
-                                        defaultValue="50"
-                                    />
-                                </label>
-                            </div>
-
-                            <h3 style={{ marginTop: '2rem' }}>Data Management</h3>
-
-                            <div className="setting-group" style={{ marginTop: '1rem' }}>
+                            <div className="setting-group" style={{ marginTop: '2rem' }}>
                                 <button
                                     className="btn btn-danger"
                                     onClick={() => {
-                                        if (confirm('Are you sure you want to clear all saved data? This will reset:\n\n' +
-                                            '• All claim stakes\n' +
-                                            '• Crafting hab designs\n' +
-                                            '• Saved games\n' +
-                                            '• Achievements\n' +
-                                            '• Settings\n\n' +
-                                            'This action cannot be undone!')) {
-                                            // Clear ALL localStorage items related to the app
+                                        if (confirm('Are you sure you want to clear all saved data?\n\nThis will reset:\n• All claim stakes\n• Crafting hab designs\n• Saved games\n• Settings\n• Achievements\n• All progress\n\nThis action cannot be undone!')) {
+                                            console.log('🗑️ === STARTING DATA CLEAR PROCESS ===');
+
+                                            // Check current state before clearing
+                                            const beforeClear = localStorage.getItem('claimStakeInstances');
+                                            if (beforeClear) {
+                                                console.log('📦 Found claimStakeInstances before clear:', beforeClear.length, 'chars');
+                                                try {
+                                                    const parsed = JSON.parse(beforeClear);
+                                                    console.log('📦 Contains', parsed.length, 'claim stakes');
+                                                } catch (e) {
+                                                    console.error('Could not parse existing data');
+                                                }
+                                            } else {
+                                                console.log('📦 No claimStakeInstances found before clear');
+                                            }
+
+                                            // Clear ALL localStorage keys related to this app
+                                            const keysToRemove: string[] = [];
+
+                                            // Get all localStorage keys
+                                            // We need to collect keys first because we can't modify while iterating
+                                            const allKeys: string[] = [];
+                                            for (let i = 0; i < localStorage.length; i++) {
+                                                const key = localStorage.key(i);
+                                                if (key) {
+                                                    allKeys.push(key);
+                                                }
+                                            }
+
+                                            // Now check which keys to remove
+                                            for (const key of allKeys) {
+                                                // Remove all app-related keys
+                                                if (
+                                                    key === 'claimStakeInstances' ||
+                                                    key === 'craftingHabInstances' ||
+                                                    key === 'sageC4SharedState' ||
+                                                    key === 'recipeBuildPlans' ||
+                                                    key === 'craftingQueue' ||
+                                                    key === 'achievementTrackerExpanded' ||
+                                                    key === 'achievementTrackerVisible' ||
+                                                    key === 'showAchievementProgress' ||
+                                                    key.startsWith('tutorial_') ||
+                                                    key.startsWith('save_') ||
+                                                    key.startsWith('quickSave') ||
+                                                    key.startsWith('autoSave')
+                                                ) {
+                                                    keysToRemove.push(key);
+                                                }
+                                            }
+
+                                            console.log('Clearing localStorage keys:', keysToRemove);
+
+                                            // Remove all identified keys
+                                            keysToRemove.forEach(key => {
+                                                localStorage.removeItem(key);
+                                            });
+
+                                            // Explicitly ensure critical keys are removed
+                                            localStorage.removeItem('claimStakeInstances');
+                                            localStorage.removeItem('sageC4SharedState');
+                                            localStorage.removeItem('craftingHabInstances');
+                                            localStorage.removeItem('recipeBuildPlans');
+                                            localStorage.removeItem('craftingQueue');
+
+                                            // Verify that claimStakeInstances is actually gone
+                                            const verifyRemoved = localStorage.getItem('claimStakeInstances');
+                                            if (verifyRemoved) {
+                                                console.error('Failed to remove claimStakeInstances!', verifyRemoved);
+                                            } else {
+                                                console.log('Successfully cleared claimStakeInstances');
+                                            }
+
+                                            // Also clear sessionStorage in case anything is cached there
                                             try {
-                                                // Get all keys first
-                                                const allKeys = [];
+                                                sessionStorage.clear();
+                                            } catch (e) {
+                                                console.warn('Could not clear sessionStorage:', e);
+                                            }
+
+                                            // Also reset the shared state context directly
+                                            dispatch({ type: 'RESET_STATE' });
+
+                                            // Mark that we're clearing to prevent any saves during this time
+                                            (window as any).isClearing = true;
+
+                                            // Final verification before reload
+                                            setTimeout(() => {
+                                                const finalCheck = localStorage.getItem('claimStakeInstances');
+                                                if (finalCheck) {
+                                                    console.error('❌ CRITICAL: claimStakeInstances still exists after clear!');
+                                                    console.error('Content:', finalCheck);
+                                                    // Try to remove it again
+                                                    localStorage.removeItem('claimStakeInstances');
+                                                    console.warn('Attempted to remove it again');
+                                                }
+
+                                                // List all remaining localStorage keys
+                                                console.log('📋 Final localStorage state before reload:');
                                                 for (let i = 0; i < localStorage.length; i++) {
                                                     const key = localStorage.key(i);
                                                     if (key) {
-                                                        allKeys.push(key);
+                                                        console.log(`  - ${key}: ${localStorage.getItem(key)?.length || 0} chars`);
                                                     }
                                                 }
 
-                                                // Remove ALL keys except walletlink (which is from an external service)
-                                                allKeys.forEach(key => {
-                                                    // Keep wallet-related keys if they exist
-                                                    if (!key.includes('walletlink') && !key.includes('wallet')) {
-                                                        console.log('Removing localStorage key:', key);
-                                                        localStorage.removeItem(key);
-                                                    }
-                                                });
-
-                                                // Double-check that our specific keys are removed
-                                                const appKeys = [
-                                                    'claimStakeInstances',
-                                                    'craftingHabInstances',
-                                                    'sageC4SharedState',
-                                                    'recipeBuildPlans',
-                                                    'craftingQueue'
-                                                ];
-
-                                                appKeys.forEach(key => {
-                                                    if (localStorage.getItem(key) !== null) {
-                                                        console.log('Force removing:', key);
-                                                        localStorage.removeItem(key);
-                                                    }
-                                                });
-
-                                                // Small delay to ensure localStorage operations complete
-                                                setTimeout(() => {
-                                                    // Final verification before reload
-                                                    const remaining = localStorage.getItem('claimStakeInstances');
-                                                    if (remaining) {
-                                                        console.error('Failed to clear claimStakeInstances, trying localStorage.clear()');
-                                                        localStorage.clear();
-                                                    }
-                                                    window.location.reload();
-                                                }, 100);
-                                            } catch (error) {
-                                                console.error('Error clearing localStorage:', error);
-                                                // Try a simpler approach if the above fails
-                                                localStorage.clear();
-                                                setTimeout(() => {
-                                                    window.location.reload();
-                                                }, 100);
-                                            }
+                                                console.log('🔄 Performing hard reload...');
+                                                // Use location.href for a hard reload that bypasses cache
+                                                window.location.href = window.location.href;
+                                            }, 250);
                                         }
                                     }}
                                     style={{
@@ -355,7 +423,7 @@ export function SettingsPanel({ onClose }: SettingsPanelProps) {
                                         fontWeight: 'bold'
                                     }}
                                 >
-                                    🗑️ Start Fresh (Clear All Data)
+                                    🗑️ Clear All Data
                                 </button>
                                 <p style={{
                                     marginTop: '0.5rem',
@@ -398,14 +466,50 @@ export function SettingsPanel({ onClose }: SettingsPanelProps) {
                                     <li>• Upgrade your starbase to unlock more features</li>
                                 </ul>
 
+                                <h4>⌨️ Keyboard Shortcuts</h4>
+                                <ul>
+                                    <li>• <kbd style={{
+                                        background: 'linear-gradient(135deg, rgba(255, 107, 53, 0.2), rgba(255, 215, 0, 0.1))',
+                                        padding: '2px 6px',
+                                        borderRadius: '4px',
+                                        border: '1px solid rgba(255, 107, 53, 0.3)',
+                                        color: '#FF6B35',
+                                        fontWeight: 'bold'
+                                    }}>Ctrl</kbd> + <kbd style={{
+                                        background: 'linear-gradient(135deg, rgba(255, 107, 53, 0.2), rgba(255, 215, 0, 0.1))',
+                                        padding: '2px 6px',
+                                        borderRadius: '4px',
+                                        border: '1px solid rgba(255, 107, 53, 0.3)',
+                                        color: '#FF6B35',
+                                        fontWeight: 'bold'
+                                    }}>S</kbd> - Quick save</li>
+                                    <li>• <kbd style={{
+                                        background: 'linear-gradient(135deg, rgba(255, 107, 53, 0.2), rgba(255, 215, 0, 0.1))',
+                                        padding: '2px 6px',
+                                        borderRadius: '4px',
+                                        border: '1px solid rgba(255, 107, 53, 0.3)',
+                                        color: '#FF6B35',
+                                        fontWeight: 'bold'
+                                    }}>Esc</kbd> - Close dialogs</li>
+                                    <li>• <kbd style={{
+                                        background: 'linear-gradient(135deg, rgba(255, 107, 53, 0.2), rgba(255, 215, 0, 0.1))',
+                                        padding: '2px 6px',
+                                        borderRadius: '4px',
+                                        border: '1px solid rgba(255, 107, 53, 0.3)',
+                                        color: '#FF6B35',
+                                        fontWeight: 'bold'
+                                    }}>Tab</kbd> - Navigate between tools</li>
+                                </ul>
+
                                 <div className="credits">
-                                    <p>Built with ❤️ for Star Atlas</p>
+                                    <p>Built with <span style={{ color: '#FF4136', fontSize: '1.2em' }}>❤️</span> for Star Atlas</p>
+                                    <p style={{ fontSize: '0.9rem', opacity: 0.7, marginTop: '0.5rem' }}>© 2024 SAGE C4 Tools</p>
                                 </div>
                             </div>
                         </div>
                     )}
                 </div>
             </div>
-        </div>
+        </div >
     );
 } 

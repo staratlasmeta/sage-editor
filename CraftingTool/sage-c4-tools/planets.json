@@ -1,0 +1,183 @@
+{
+    "planets": [
+        {
+            "id": "planet-001",
+            "name": "Terra Prime",
+            "type": "terrestrial",
+            "faction": "MUD",
+            "resources": {
+                "iron-ore": {
+                    "richness": 1.5
+                },
+                "copper-ore": {
+                    "richness": 1.2
+                },
+                "silica": {
+                    "richness": 0.8
+                }
+            },
+            "tags": [
+                "mining",
+                "industrial"
+            ],
+            "coordinates": {
+                "x": 100,
+                "y": 200
+            },
+            "description": "Rich terrestrial planet ideal for mining operations"
+        },
+        {
+            "id": "planet-002",
+            "name": "Gaseous Giant Alpha",
+            "type": "gas-giant",
+            "faction": "ONI",
+            "resources": {
+                "hydrogen": {
+                    "richness": 2.0
+                }
+            },
+            "tags": [
+                "gas-extraction"
+            ],
+            "coordinates": {
+                "x": 300,
+                "y": 150
+            },
+            "description": "Massive gas giant with abundant hydrogen"
+        },
+        {
+            "id": "planet-003",
+            "name": "Volcanic Forge",
+            "type": "volcanic",
+            "faction": "UST",
+            "resources": {
+                "titanium-ore": {
+                    "richness": 1.8
+                },
+                "osmium-ore": {
+                    "richness": 1.3
+                },
+                "carbon": {
+                    "richness": 1.0
+                }
+            },
+            "tags": [
+                "extreme-mining",
+                "hazardous"
+            ],
+            "coordinates": {
+                "x": 500,
+                "y": 400
+            },
+            "description": "Dangerous volcanic world with rare materials"
+        },
+        {
+            "id": "planet-004",
+            "name": "Frozen Wastes",
+            "type": "ice",
+            "faction": "MUD",
+            "resources": {
+                "hydrogen": {
+                    "richness": 1.2
+                },
+                "tritium-ore": {
+                    "richness": 1.5
+                },
+                "silica": {
+                    "richness": 0.9
+                }
+            },
+            "tags": [
+                "cold",
+                "tritium-rich"
+            ],
+            "coordinates": {
+                "x": 150,
+                "y": 450
+            },
+            "description": "Frozen planet with tritium deposits"
+        },
+        {
+            "id": "planet-005",
+            "name": "Ocean World",
+            "type": "oceanic",
+            "faction": "ONI",
+            "resources": {
+                "chromite-ore": {
+                    "richness": 1.4
+                },
+                "hydrogen": {
+                    "richness": 1.1
+                },
+                "biomass": {
+                    "richness": 1.6
+                }
+            },
+            "tags": [
+                "aquatic",
+                "life-supporting"
+            ],
+            "coordinates": {
+                "x": 400,
+                "y": 250
+            },
+            "description": "Water world supporting primitive life"
+        },
+        {
+            "id": "planet-006",
+            "name": "Mining Colony Beta",
+            "type": "terrestrial",
+            "faction": "UST",
+            "resources": {
+                "iron-ore": {
+                    "richness": 1.3
+                },
+                "aluminum-ore": {
+                    "richness": 1.4
+                },
+                "coal": {
+                    "richness": 1.1
+                }
+            },
+            "tags": [
+                "mining",
+                "colonized"
+            ],
+            "coordinates": {
+                "x": 250,
+                "y": 350
+            },
+            "description": "Established mining colony with infrastructure"
+        },
+        {
+            "id": "asteroid-001",
+            "name": "Asteroid Field Delta",
+            "type": "asteroid",
+            "faction": "Neutral",
+            "resources": {
+                "iron-ore": {
+                    "richness": 1.4
+                },
+                "aluminum-ore": {
+                    "richness": 1.3
+                },
+                "tritium-ore": {
+                    "richness": 0.8
+                },
+                "arco": {
+                    "richness": 0.5
+                }
+            },
+            "tags": [
+                "zero-g",
+                "mining",
+                "rare-resources"
+            ],
+            "coordinates": {
+                "x": 350,
+                "y": 200
+            },
+            "description": "Dense asteroid field with rare materials"
+        }
+    ]
+}

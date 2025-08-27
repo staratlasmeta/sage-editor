@@ -5,10 +5,8 @@ export interface Achievement {
     icon: string;
     category: 'production' | 'crafting' | 'efficiency' | 'exploration' | 'mastery';
     hidden?: boolean;
-    progress?: {
-        current: number;
-        target: number;
-    };
+    trackProgress?: boolean;  // Indicates if this achievement should track progress
+    progressTarget?: number;  // The target number for progress tracking
 }
 
 export const ACHIEVEMENTS: Record<string, Achievement> = {
@@ -25,14 +23,18 @@ export const ACHIEVEMENTS: Record<string, Achievement> = {
         name: 'Multi-Planetary',
         description: 'Own claim stakes on 5 different planets',
         icon: '🌌',
-        category: 'exploration'
+        category: 'exploration',
+        trackProgress: true,
+        progressTarget: 5
     },
     efficient_builder: {
         id: 'efficient_builder',
         name: 'Efficient Builder',
         description: 'Place 5+ buildings in a single claim stake',
         icon: '📐',
-        category: 'efficiency'
+        category: 'efficiency',
+        trackProgress: true,
+        progressTarget: 5
     },
     power_positive: {
         id: 'power_positive',
@@ -62,14 +64,18 @@ export const ACHIEVEMENTS: Record<string, Achievement> = {
         name: 'Million Unit Club',
         description: 'Produce 1,000,000 units of any resource',
         icon: '📊',
-        category: 'production'
+        category: 'production',
+        trackProgress: true,
+        progressTarget: 1000000
     },
     resource_mogul: {
         id: 'resource_mogul',
         name: 'Resource Mogul',
         description: 'Have 10,000+ units of 5 different resources',
         icon: '💎',
-        category: 'production'
+        category: 'production',
+        trackProgress: true,
+        progressTarget: 5
     },
 
     // Crafting Achievements
@@ -99,7 +105,9 @@ export const ACHIEVEMENTS: Record<string, Achievement> = {
         name: 'Production Line',
         description: 'Run 10 crafting jobs simultaneously',
         icon: '🏭',
-        category: 'crafting'
+        category: 'crafting',
+        trackProgress: true,
+        progressTarget: 10
     },
 
     // Efficiency Achievements
@@ -131,7 +139,9 @@ export const ACHIEVEMENTS: Record<string, Achievement> = {
         name: 'Industrial Empire',
         description: 'Own 10+ active claim stakes',
         icon: '🏛️',
-        category: 'mastery'
+        category: 'mastery',
+        trackProgress: true,
+        progressTarget: 10
     },
     recipe_master: {
         id: 'recipe_master',

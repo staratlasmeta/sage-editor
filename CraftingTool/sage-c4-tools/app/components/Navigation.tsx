@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router';
 import { AchievementPanel } from './AchievementPanel';
+import { AchievementTracker } from './AchievementTracker';
 import { SaveLoadManager } from './SaveLoadManager';
 import { NotificationSystem, useNotifications } from './NotificationSystem';
 import { SettingsPanel } from './SettingsPanel';
@@ -74,7 +75,12 @@ export function Navigation({ className = '', claimStakes = [] }: NavigationProps
                     </NavLink>
                 </div>
 
+                <div className="achievement-tracker-container">
+                    <AchievementTracker />
+                </div>
+
                 <div className="global-actions">
+                    <AchievementPanel />
                     <button
                         className="btn btn-secondary"
                         onClick={() => setShowResourcesView(true)}
@@ -82,7 +88,6 @@ export function Navigation({ className = '', claimStakes = [] }: NavigationProps
                     >
                         🌐 Global Resources
                     </button>
-                    <AchievementPanel />
                     <SaveLoadManager onNotification={showNotification} />
                     <button className="btn btn-secondary" onClick={() => setShowSettings(true)}>
                         ⚙️ Settings

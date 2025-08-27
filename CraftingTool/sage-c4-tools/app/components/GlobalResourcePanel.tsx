@@ -132,12 +132,12 @@ export function GlobalResourcePanel({ className = '' }: GlobalResourcePanelProps
         }
     });
 
-    // Add all of the raw resources to the inventory from mockData.json
+    // Add all of the raw resources to the inventory from resources.json
 
     const handleMagicResources = () => {
         const magicResources: Record<string, number> = {};
 
-        // Add all extractable raw resources from mockData.json
+        // Add all extractable raw resources from resources.json
         const extractableResources = [
             'iron-ore', 'copper-ore', 'aluminum-ore', 'titanium-ore',
             'silica', 'carbon', 'hydrogen', 'coal',
@@ -181,9 +181,20 @@ export function GlobalResourcePanel({ className = '' }: GlobalResourcePanelProps
     };
 
     const formatRate = (rate: number): string => {
+        // Adaptive decimal places based on the magnitude
         if (rate === 0) return '0/s';
+
+        const absRate = Math.abs(rate);
         const sign = rate > 0 ? '+' : '';
-        return `${sign}${rate.toFixed(2)}/s`;
+
+        // If rate is very small, show more decimal places
+        if (absRate < 0.001) return `${sign}${rate.toFixed(4)}/s`;
+        if (absRate < 0.01) return `${sign}${rate.toFixed(3)}/s`;
+        if (absRate < 1) return `${sign}${rate.toFixed(2)}/s`;
+        if (absRate < 100) return `${sign}${rate.toFixed(1)}/s`;
+
+        // For large numbers, no decimals needed
+        return `${sign}${Math.floor(rate)}/s`;
     };
 
     const getResourceIcon = (resource: string): string => {

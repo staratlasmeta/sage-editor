@@ -14,6 +14,7 @@ interface SharedState {
     starbaseLevel: number;
     starbaseInventory: Record<string, number>;
     achievements: Record<string, boolean>;
+    achievementProgress: Record<string, { current: number; target: number }>;
     statistics: {
         totalResourcesExtracted: number;
         totalItemsCrafted: number;
@@ -22,9 +23,6 @@ interface SharedState {
     };
     settings: {
         autoSave: boolean;
-        crewMode: 'auto' | 'manual';
-        tutorialCompleted: boolean;
-        simulationSpeed?: number;
     };
     craftingHabState?: {
         habPlots: any[];
@@ -48,6 +46,7 @@ interface SharedStateContextType {
     addToInventory: (resources: Record<string, number>) => void;
     consumeFromInventory: (resources: Record<string, number>) => boolean;
     unlockAchievement: (achievementId: string) => void;
+    updateAchievementProgress: (achievementId: string, current: number, target: number) => void;
     updateStatistic: (stat: keyof SharedState['statistics'], value: number) => void;
 }
 
@@ -58,30 +57,25 @@ type Action =
     | { type: 'UPDATE_INVENTORY'; payload: Record<string, number> }
     | { type: 'TRANSFER_RESOURCES'; payload: { from: string; to: string; resources: Record<string, number> } }
     | { type: 'UNLOCK_ACHIEVEMENT'; payload: string }
+    | { type: 'UPDATE_ACHIEVEMENT_PROGRESS'; payload: { id: string; current: number; target: number } }
     | { type: 'UPDATE_STATISTIC'; payload: { stat: keyof SharedState['statistics']; value: number } }
     | { type: 'UPDATE_SETTINGS'; payload: Partial<SharedState['settings']> }
     | { type: 'LOAD_STATE'; payload: SharedState }
     | { type: 'UPDATE_CRAFTING_HAB_STATE'; payload: SharedState['craftingHabState'] }
     | { type: 'ADD_TO_CRAFTING_QUEUE'; payload: any }
     | { type: 'UPDATE_CRAFTING_QUEUE'; payload: any[] }
-    | { type: 'UPDATE_CLAIM_STAKES_DATA'; payload: any[] };
+    | { type: 'UPDATE_CLAIM_STAKES_DATA'; payload: any[] }
+    | { type: 'RESET_STATE' };
 
 // Initial state
 const initialState: SharedState = {
     selectedStarbase: null,
     starbaseLevel: 0,
     starbaseInventory: {
-        // Add some initial resources for testing
-        'iron-ore': 1000,
-        'copper-ore': 500,
-        'fuel': 100,
-        'silica': 300,
-        'hydrogen': 200,
-        'copper': 250,
-        'iron-plate': 100,
-        'circuit-board': 20
+        // Empty inventory - no auto-added resources
     },
     achievements: {},
+    achievementProgress: {},
     statistics: {
         totalResourcesExtracted: 0,
         totalItemsCrafted: 0,
@@ -89,10 +83,7 @@ const initialState: SharedState = {
         totalCraftingHabs: 0
     },
     settings: {
-        autoSave: true,
-        crewMode: 'auto',
-        tutorialCompleted: false,
-        simulationSpeed: 1,
+        autoSave: true
     },
     claimStakesData: [],
     craftingHabState: {
@@ -189,12 +180,41 @@ function sharedStateReducer(state: SharedState, action: Action): SharedState {
             return state;
 
         case 'UNLOCK_ACHIEVEMENT':
+            // Dispatch custom event for notification
+            window.dispatchEvent(new CustomEvent('achievement-unlocked', {
+                detail: { achievementId: action.payload }
+            }));
             return {
                 ...state,
                 achievements: {
                     ...state.achievements,
                     [action.payload]: true,
                 },
+                // Clear progress for this achievement
+                achievementProgress: {
+                    ...state.achievementProgress,
+                    [action.payload]: undefined
+                }
+            };
+
+        case 'UPDATE_ACHIEVEMENT_PROGRESS':
+            // Dispatch custom event for progress update
+            window.dispatchEvent(new CustomEvent('achievement-progress', {
+                detail: {
+                    achievementId: action.payload.id,
+                    current: action.payload.current,
+                    target: action.payload.target
+                }
+            }));
+            return {
+                ...state,
+                achievementProgress: {
+                    ...state.achievementProgress,
+                    [action.payload.id]: {
+                        current: action.payload.current,
+                        target: action.payload.target
+                    }
+                }
             };
 
         case 'UPDATE_STATISTIC':
@@ -249,6 +269,9 @@ function sharedStateReducer(state: SharedState, action: Action): SharedState {
                 ...state,
                 claimStakesData: action.payload
             };
+
+        case 'RESET_STATE':
+            return initialState;
 
         default:
             return state;
@@ -327,7 +350,18 @@ export function SharedStateProvider({ children }: { children: React.ReactNode })
     const unlockAchievement = (achievementId: string) => {
         if (!state.achievements[achievementId]) {
             dispatch({ type: 'UNLOCK_ACHIEVEMENT', payload: achievementId });
-            // Achievement notification is handled by components that use this function
+        }
+    };
+
+    const updateAchievementProgress = (achievementId: string, current: number, target: number) => {
+        // Auto-unlock if progress is complete
+        if (current >= target && !state.achievements[achievementId]) {
+            unlockAchievement(achievementId);
+        } else {
+            dispatch({
+                type: 'UPDATE_ACHIEVEMENT_PROGRESS',
+                payload: { id: achievementId, current, target }
+            });
         }
     };
 
@@ -343,6 +377,7 @@ export function SharedStateProvider({ children }: { children: React.ReactNode })
         addToInventory,
         consumeFromInventory,
         unlockAchievement,
+        updateAchievementProgress,
         updateStatistic,
     };
 

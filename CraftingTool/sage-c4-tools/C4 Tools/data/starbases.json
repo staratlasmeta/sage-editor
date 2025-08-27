@@ -1,0 +1,40 @@
+{
+  "starbases": [
+    {
+      "id": "starbase-mud-alpha",
+      "name": "MUD Central Command",
+      "faction": "MUD",
+      "level": 5,
+      "coordinates": {
+        "x": 500,
+        "y": 500
+      },
+      "habPlots": 10,
+      "description": "Main MUD faction starbase with full services"
+    },
+    {
+      "id": "starbase-oni-prime",
+      "name": "ONI Strategic Hub",
+      "faction": "ONI",
+      "level": 5,
+      "coordinates": {
+        "x": 300,
+        "y": 700
+      },
+      "habPlots": 10,
+      "description": "Primary ONI faction starbase"
+    },
+    {
+      "id": "starbase-ustur-nexus",
+      "name": "USTUR Trade Nexus",
+      "faction": "USTUR",
+      "level": 5,
+      "coordinates": {
+        "x": 700,
+        "y": 300
+      },
+      "habPlots": 10,
+      "description": "Central USTUR trading and crafting hub"
+    }
+  ]
+}

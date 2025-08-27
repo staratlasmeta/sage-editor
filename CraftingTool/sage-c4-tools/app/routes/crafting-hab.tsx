@@ -60,6 +60,7 @@ interface Recipe {
     id: string;
     name: string;
     type: string;
+    outputType?: string; // Added for proper filtering by category
     tier: number;
     constructionTime: number;
     ingredients: { resource: string; quantity: number }[];
@@ -68,7 +69,7 @@ interface Recipe {
 
 export default function CraftingHab() {
     const { gameData, loading } = useGameData();
-    const { state: sharedState, dispatch, updateStatistic, unlockAchievement, addToInventory, consumeFromInventory } = useSharedState();
+    const { state: sharedState, dispatch, updateStatistic, unlockAchievement, updateAchievementProgress, addToInventory, consumeFromInventory } = useSharedState();
     const { notifications, showNotification, dismissNotification } = useNotifications();
 
     // State - Initialize from SharedState using lazy initializers
@@ -314,55 +315,138 @@ export default function CraftingHab() {
         }
     }, [sharedState.craftingHabState?.selectedStarbaseId]);
 
-    const recipes: Recipe[] = gameData?.recipes || [
-        {
-            id: 'comp_001',
-            name: 'Iron Plate',
-            type: 'component',
-            tier: 1,
-            constructionTime: 60,
-            ingredients: [
-                { resource: 'iron-ore', quantity: 10 },
-                { resource: 'fuel', quantity: 2 }
-            ],
-            output: { resource: 'iron-plate', quantity: 5 }
-        },
-        {
-            id: 'comp_002',
-            name: 'Circuit Board',
-            type: 'component',
-            tier: 2,
-            constructionTime: 120,
-            ingredients: [
-                { resource: 'copper', quantity: 5 },
-                { resource: 'silica', quantity: 3 }
-            ],
-            output: { resource: 'circuit-board', quantity: 2 }
-        }
-    ];
+    // Filter out raw materials and buildings (recipes without ingredients or with empty ingredients)
+    const recipes: Recipe[] = useMemo(() => {
+        const allRecipes = gameData?.recipes || [];
 
-    const habBuildings = (gameData as any)?.habBuildings || {
-        habs: [
-            { id: 'hab-t1', name: 'Hab T1', tier: 1, slots: 10, constructionCost: { steel: 20, electronics: 10 } },
-            { id: 'hab-t2', name: 'Hab T2', tier: 2, slots: 15, constructionCost: { steel: 40, electronics: 20, copper: 15 } },
-            { id: 'hab-t3', name: 'Hab T3', tier: 3, slots: 20, constructionCost: { steel: 80, electronics: 40, copper: 30 } },
-            { id: 'hab-t4', name: 'Hab T4', tier: 4, slots: 25, constructionCost: { steel: 160, electronics: 80, copper: 60, titanium: 20 } },
-            { id: 'hab-t5', name: 'Hab T5', tier: 5, slots: 30, constructionCost: { steel: 320, electronics: 160, copper: 120, titanium: 50 } }
-        ],
-        craftingStations: [
-            { id: 'craft-xxs', name: 'Crafting Station XXS', size: 'XXS', speedBonus: 1.0, jobSlots: 1, constructionCost: { steel: 10, electronics: 5 } },
-            { id: 'craft-xs', name: 'Crafting Station XS', size: 'XS', speedBonus: 1.1, jobSlots: 2, constructionCost: { steel: 20, electronics: 10 } },
-            { id: 'craft-s', name: 'Crafting Station S', size: 'S', speedBonus: 1.2, jobSlots: 3, constructionCost: { steel: 40, electronics: 20, copper: 10 } },
-            { id: 'craft-m', name: 'Crafting Station M', size: 'M', speedBonus: 1.3, jobSlots: 5, constructionCost: { steel: 80, electronics: 40, copper: 20 } }
-        ],
-        cargoStorage: [
-            { id: 'cargo-t1', name: 'Cargo Storage T1', tier: 1, storageBonus: 100, jobSlots: 1, constructionCost: { steel: 15, copper: 10 } },
-            { id: 'cargo-t2', name: 'Cargo Storage T2', tier: 2, storageBonus: 200, jobSlots: 2, constructionCost: { steel: 30, copper: 20 } },
-            { id: 'cargo-t3', name: 'Cargo Storage T3', tier: 3, storageBonus: 400, jobSlots: 3, constructionCost: { steel: 60, copper: 40, electronics: 10 } },
-            { id: 'cargo-t4', name: 'Cargo Storage T4', tier: 4, storageBonus: 800, jobSlots: 4, constructionCost: { steel: 120, copper: 80, electronics: 20 } },
-            { id: 'cargo-t5', name: 'Cargo Storage T5', tier: 5, storageBonus: 1600, jobSlots: 5, constructionCost: { steel: 240, copper: 160, electronics: 40 } }
-        ]
-    };
+        // Only include recipes that have actual ingredients and are not buildings or hab assets
+        const filtered = allRecipes.filter((recipe: any) => {
+            // Must have ingredients
+            if (!recipe.ingredients || !Array.isArray(recipe.ingredients) || recipe.ingredients.length === 0) {
+                return false;
+            }
+
+            // Check outputType with various formats (spaces, underscores, case variations)
+            const outputType = (recipe.outputType || '').toUpperCase().replace(/[_\s]+/g, '');
+
+            // Filter out BUILDING and HAB ASSETS entirely
+            if (outputType === 'BUILDING' ||
+                outputType === 'BUILDINGS' ||
+                outputType === 'HABASSET' ||
+                outputType === 'HABASSETS' ||
+                outputType === 'BASICRESOURCE' ||
+                outputType === 'BASICORGANICRESOURCE') {
+                return false;
+            }
+
+            // Also check the type field (legacy format)
+            const recipeType = (recipe.type || '').toLowerCase().replace(/[_\s]+/g, '');
+            if (recipeType === 'building' ||
+                recipeType === 'buildings' ||
+                recipeType === 'habasset' ||
+                recipeType === 'habassets') {
+                return false;
+            }
+
+            // Check if the output name suggests it's a building (extra safety check)
+            const outputName = ((recipe as any).outputName || (recipe as any).outputId || '').toLowerCase();
+            if (outputName.includes('central hub') ||
+                outputName.includes('central-hub') ||
+                outputName.includes('cultivation hub') ||
+                outputName.includes('extraction hub') ||
+                outputName.includes('processing hub') ||
+                outputName.includes('storage hub') ||
+                outputName.includes('power plant') ||
+                outputName.includes('extractor') ||
+                outputName.includes('processor')) {
+                return false;
+            }
+
+            // Filter out 1:1 conversions (raw materials)
+            if (recipe.ingredients.length === 1) {
+                const ingredientName = recipe.ingredients[0].resource || recipe.ingredients[0].name;
+                const outputResource = (recipe as any).outputName || (recipe as any).outputId || recipe.output?.resource;
+                if (ingredientName === outputResource) {
+                    return false;
+                }
+            }
+
+            return true;
+        });
+
+        // Fallback to mock data if no recipes loaded
+        if (filtered.length === 0) {
+            return [
+                {
+                    id: 'comp_001',
+                    name: 'Iron Plate',
+                    type: 'component',
+                    tier: 1,
+                    constructionTime: 60,
+                    ingredients: [
+                        { resource: 'iron-ore', quantity: 10 },
+                        { resource: 'fuel', quantity: 2 }
+                    ],
+                    output: { resource: 'iron-plate', quantity: 5 }
+                },
+                {
+                    id: 'comp_002',
+                    name: 'Circuit Board',
+                    type: 'component',
+                    tier: 2,
+                    constructionTime: 120,
+                    ingredients: [
+                        { resource: 'copper', quantity: 5 },
+                        { resource: 'silica', quantity: 3 }
+                    ],
+                    output: { resource: 'circuit-board', quantity: 2 }
+                }
+            ];
+        }
+
+        // Map to include outputType for proper filtering
+        const mapped = filtered.map((recipe: any) => ({
+            id: recipe.outputId || recipe.id,
+            name: recipe.outputName || recipe.name || recipe.id,
+            type: recipe.type || 'component',
+            outputType: recipe.outputType, // Include outputType
+            tier: recipe.outputTier || recipe.tier || 1,
+            constructionTime: recipe.constructionTime || 60,
+            ingredients: (recipe.ingredients || []).map((ing: any) => ({
+                resource: ing.name || ing.resource,
+                quantity: ing.quantity || 1
+            })),
+            output: {
+                resource: recipe.outputId || recipe.id,
+                quantity: recipe.outputQuantity || 1
+            }
+        }));
+
+        return mapped;
+    }, [gameData?.recipes]);
+
+    // Use craftingHabBuildings from loaded JSON data
+    const habBuildings = useMemo(() => {
+        if ((gameData as any)?.craftingHabBuildings) {
+            // Filter out unwanted buildings (landing pads, paint, pet house)
+            const data = (gameData as any).craftingHabBuildings;
+            return {
+                habs: data.habs?.filter((hab: any) => {
+                    const id = hab.id.toLowerCase();
+                    // Keep only the main hab tiers, not landing pads, paint, or pet houses
+                    return id.startsWith('hab-t') && !id.includes('landing') && !id.includes('paint') && !id.includes('pet');
+                }) || [],
+                craftingStations: data.craftingStations || [],
+                cargoStorage: data.cargoStorage || []
+            };
+        }
+        // Fallback with empty structure if data not loaded
+        return {
+            habs: [],
+            craftingStations: [],
+            cargoStorage: []
+        };
+    }, [gameData]);
 
     // Get selected plot
     const selectedPlot = habPlots.find(p => p.id === selectedPlotId);
@@ -439,25 +523,41 @@ export default function CraftingHab() {
                 if (completedJobs.length > 0) {
                     setTimeout(() => {
                         completedJobs.forEach(job => {
-                            const recipe = recipes.find(r => r.id === job.recipeId);
-                            if (recipe) {
-                                // Add output to inventory
-                                const outputQuantity = (recipe.output?.quantity || 0) * job.quantity;
-                                const outputResource = recipe.output?.resource || 'unknown';
+                            // Use the output stored in the job itself
+                            if (job.output) {
+                                const outputResource = job.output.resource;
+                                const outputQuantity = job.output.quantity;
 
+                                // Add output to inventory
                                 addToInventory({
                                     [outputResource]: outputQuantity
                                 });
 
                                 // Show notification for completed craft
+                                const resourceData = gameData?.resources?.find((r: any) => r.id === outputResource);
+                                const resourceName = resourceData?.name || outputResource.split('-').map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
                                 showNotification(
-                                    `✅ Crafting Complete: ${outputQuantity}x ${outputResource}`,
+                                    `✅ Crafting Complete: ${outputQuantity}x ${resourceName}`,
                                     'success'
                                 );
 
                                 // Achievement
-                                unlockAchievement('first_craft_complete');
+                                if (!sharedState.achievements['first_craft']) {
+                                    unlockAchievement('first_craft');
+                                    showNotification('🏆 First Creation! You\'ve completed your first crafting job!', 'success', 5000);
+                                }
+
+                                // Track master crafter progress (tier 5 components)
+                                const recipeData = gameData?.recipes?.find((r: any) => r.outputId === job.recipeId || r.id === job.recipeId);
+                                const recipeTier = recipeData?.outputTier || 1;
+                                if (recipeTier === 5) {
+                                    unlockAchievement('master_crafter');
+                                    showNotification('🏆 Master Crafter! You\'ve crafted a Tier 5 component!', 'success', 5000);
+                                }
+
                                 updateStatistic('totalItemsCrafted', 1);
+                            } else {
+                                console.error('Crafting job completed but has no output:', job);
                             }
                         });
                     }, 0);
@@ -470,38 +570,50 @@ export default function CraftingHab() {
                 clearInterval(simulationRef.current);
             }
         };
-    }, [craftingJobs, recipes, addToInventory, unlockAchievement, updateStatistic]);
+    }, [craftingJobs, recipes, addToInventory, unlockAchievement, updateAchievementProgress, updateStatistic, showNotification]);
 
     // Calculate hab stats
     const calculateHabStats = (buildings: PlacedHabBuilding[]) => {
-        let totalSlots = 0;
+        let baseSlots = 0;  // Slots provided by the hab
+        let consumedSlots = 0;  // Slots consumed by buildings
         let craftingSpeed = 1.0;
-        let jobSlots = 0;
+        let storageBonus = 0;
+        let jobSlots = 0;  // Available crafting job slots
         const unlockedRecipes: string[] = [];
 
         buildings.forEach(building => {
             if (building.type === 'hab') {
                 const hab = habBuildings.habs.find((h: any) => h.id === building.buildingId);
-                if (hab) totalSlots = hab.slots;
+                if (hab) {
+                    baseSlots = hab.slots || 0;  // Hab provides base slots
+                    jobSlots = hab.jobSlots || 0;  // Hab provides base job slots
+                }
             } else if (building.type === 'crafting-station') {
                 const station = habBuildings.craftingStations.find((s: any) => s.id === building.buildingId);
                 if (station) {
                     craftingSpeed *= station.speedBonus || 1;
-                    jobSlots += station.jobSlots || 0;
+                    consumedSlots += station.slots || 1;  // Station consumes slots
+                    jobSlots += station.jobSlots || 0;  // Station may add job slots
                 }
             } else if (building.type === 'cargo-storage') {
                 const storage = habBuildings.cargoStorage.find((s: any) => s.id === building.buildingId);
                 if (storage) {
-                    jobSlots += storage.jobSlots;
+                    storageBonus += storage.storageBonus || storage.storage || 0;
+                    consumedSlots += storage.slots || 1;  // Storage consumes slots
+                    jobSlots += storage.jobSlotBonus || storage.jobSlots || 0;  // Storage may add job slots
                 }
             }
         });
 
+        const availableSlots = baseSlots - consumedSlots;
+
         return {
-            totalSlots,
-            usedSlots: buildings.filter(b => b.type !== 'hab').length,
+            totalSlots: baseSlots,  // Total slots provided by hab
+            usedSlots: consumedSlots,  // Slots consumed by buildings
+            availableSlots,  // Remaining slots available
             craftingSpeed,
-            jobSlots,
+            jobSlots,  // Total job slots for crafting
+            storageBonus,
             unlockedRecipes
         };
     };
@@ -522,7 +634,10 @@ export default function CraftingHab() {
         setCurrentDesign([]);
         setViewMode('construction'); // Ensure we switch to construction view
 
-        unlockAchievement('first_hab_plot');
+        // Achievement for first hab plot
+        if (habPlots.length === 0) {
+            showNotification('🏆 First Hab Plot! You\'ve created your first crafting hab!', 'success', 5000);
+        }
     };
 
     // Add building to design
@@ -553,12 +668,41 @@ export default function CraftingHab() {
 
         const habTier = currentDesign.find(b => b.type === 'hab')?.buildingId.match(/t(\d)/)?.[1] || 1;
 
+        // Calculate total construction cost
+        const totalCost: Record<string, number> = {};
+        currentDesign.forEach(pb => {
+            let building: any = null;
+            if (pb.type === 'hab') {
+                building = habBuildings.habs.find((h: any) => h.id === pb.buildingId);
+            } else if (pb.type === 'crafting-station') {
+                building = habBuildings.craftingStations.find((s: any) => s.id === pb.buildingId);
+            } else if (pb.type === 'cargo-storage') {
+                building = habBuildings.cargoStorage.find((c: any) => c.id === pb.buildingId);
+            }
+
+            if (building?.constructionCost) {
+                Object.entries(building.constructionCost).forEach(([resource, amount]) => {
+                    totalCost[resource] = (totalCost[resource] || 0) + (amount as number);
+                });
+            }
+        });
+
+        // Deduct from starbase inventory
+        if (Object.keys(totalCost).length > 0) {
+            const success = consumeFromInventory(totalCost);
+            if (!success) {
+                showNotification('Insufficient materials in starbase inventory!', 'error');
+                return;
+            }
+        }
+
         console.log('🔨 FINALIZING DESIGN:', {
             plotId: selectedPlotId,
             habTier,
             buildingsCount: currentDesign.length,
             buildings: currentDesign.map(b => ({ id: b.id, type: b.type, buildingId: b.buildingId })),
-            stats: currentStats
+            stats: currentStats,
+            resourcesConsumed: totalCost
         });
 
         const updatedPlots = (prev: HabPlot[]) => prev.map((plot: HabPlot) => {
@@ -583,6 +727,7 @@ export default function CraftingHab() {
 
         setHabPlots(updatedPlots);
         setDesignMode(false);
+        showNotification('Hab construction completed! Resources consumed.', 'success');
     };
 
     // Start crafting job
@@ -634,7 +779,7 @@ export default function CraftingHab() {
             status: activeJobs.length < 3 ? 'active' : 'queued', // Only 3 active at a time
             priority: priority,
             output: {
-                resource: selectedRecipe.output?.resource || selectedRecipe.name,
+                resource: selectedRecipe.output?.resource || selectedRecipe.id,
                 quantity: (selectedRecipe.output?.quantity || 1) * craftQuantity
             }
         };
@@ -644,11 +789,11 @@ export default function CraftingHab() {
         setCraftQuantity(1);
 
         // Achievement tracking
-        if (craftingJobs.length === 0) {
-            unlockAchievement('first_craft_started');
-        }
-        if (activeJobs.length >= 9) {
+        if (activeJobs.length >= 10) {
             unlockAchievement('production_line');
+            showNotification('🏆 Production Line! You\'re running 10 crafting jobs simultaneously!', 'success', 5000);
+        } else if (activeJobs.length > 0) {
+            updateAchievementProgress('production_line', activeJobs.length, 10);
         }
     };
 
@@ -726,8 +871,11 @@ export default function CraftingHab() {
 
     // Enhanced filtering logic
     const enhancedFilteredRecipes = recipes.filter((recipe: Recipe) => {
-        // Category filter
-        if (categoryFilter !== 'all' && recipe.type !== categoryFilter) return false;
+        // Category filter - use outputType from the recipe
+        if (categoryFilter !== 'all') {
+            const recipeType = (recipe as any).outputType || recipe.type;
+            if (recipeType !== categoryFilter) return false;
+        }
 
         // Search filter
         if (searchTerm && !recipe.name.toLowerCase().includes(searchTerm.toLowerCase())) return false;
@@ -813,18 +961,20 @@ export default function CraftingHab() {
                             <div className="inventory-header">
                                 <h3>📦 Inventory</h3>
                                 <span className="inventory-count">
-                                    {Object.keys(selectedStarbase.inventory).length} types
+                                    {Object.entries(selectedStarbase.inventory).filter(([_, amount]) => amount > 0).length} types
                                 </span>
                             </div>
                             <div className="resource-grid">
                                 {Object.entries(selectedStarbase.inventory)
+                                    .filter(([resource, amount]) => amount > 0) // Only show resources with amount > 0
                                     .sort(([a], [b]) => a.localeCompare(b))
                                     .map(([resource, amount]) => {
-                                        // Format resource name for display (remove cargo- prefix if present)
-                                        const cleanResource = resource.replace(/^cargo-/, '');
+                                        // Format resource name for display
+                                        const resourceData = gameData?.resources?.find((r: any) => r.id === resource);
+                                        const cleanResource = resourceData?.name || resource;
                                         const displayName = cleanResource
                                             .split('-')
-                                            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                                            .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
                                             .join(' ');
 
                                         return (
@@ -852,46 +1002,22 @@ export default function CraftingHab() {
                             <button
                                 className="btn btn-magic"
                                 onClick={() => {
-                                    // Magic resources - includes all extractable resources from mockData.json
+                                    // Magic resources - only add raw materials (BASIC RESOURCE types)
                                     const magicResources: Record<string, number> = {};
 
-                                    // Add all extractable raw resources (with cargo- prefix to match recipes)
-                                    const extractableResources = [
-                                        'cargo-iron-ore', 'cargo-copper-ore', 'cargo-aluminum-ore', 'cargo-titanium-ore',
-                                        'cargo-silica', 'cargo-carbon', 'cargo-hydrogen', 'cargo-coal',
-                                        'cargo-chromite-ore', 'cargo-osmium-ore', 'cargo-tritium-ore',
-                                        'cargo-arco', 'cargo-lumanite', 'cargo-biomass'
-                                    ];
+                                    // Only add raw resources from gameData
+                                    const rawResources = gameData?.resources?.filter((r: any) => r.category === 'raw') || [];
+                                    const extractableResources = rawResources.map((r: any) => r.id);
 
-                                    extractableResources.forEach(resource => {
+                                    extractableResources.forEach((resource: string) => {
                                         magicResources[resource] = 1000;
                                     });
 
-                                    // Add processed resources (with cargo- prefix to match recipes)
-                                    const processedResources = [
-                                        'cargo-iron', 'cargo-copper', 'cargo-aluminum', 'cargo-titanium',
-                                        'cargo-steel', 'cargo-electronics', 'cargo-fuel',
-                                        'cargo-chromite', 'cargo-osmium', 'cargo-tritium'
-                                    ];
-
-                                    processedResources.forEach(resource => {
-                                        magicResources[resource] = 500;
-                                    });
-
-                                    // Add advanced resources (with cargo- prefix to match recipes)
-                                    const advancedResources = [
-                                        'cargo-circuit-board', 'cargo-high-density-alloy', 'cargo-power-cell'
-                                    ];
-
-                                    advancedResources.forEach(resource => {
-                                        magicResources[resource] = 100;
-                                    });
-
                                     addToInventory(magicResources);
-                                    showNotification('✨ Magic resources added!', 'success');
+                                    showNotification('✨ Raw materials added!', 'success');
                                 }}
                             >
-                                🪄 ADD RESOURCES
+                                🪄 ADD RAW MATERIALS
                             </button>
                         </div>
                     )}
@@ -1443,10 +1569,15 @@ export default function CraftingHab() {
                                                 className="filter-select"
                                             >
                                                 <option value="all">All Categories</option>
-                                                <option value="component">Components</option>
-                                                <option value="module">Modules</option>
-                                                <option value="consumable">Consumables</option>
-                                                <option value="ship">Ship Parts</option>
+                                                <option value="COMPONENT">Component</option>
+                                                <option value="INGREDIENT">Ingredient</option>
+                                                <option value="SHIP_COMPONENTS">Ship Components</option>
+                                                <option value="SHIP_MODULES">Ship Modules</option>
+                                                <option value="SHIP_WEAPONS">Ship Weapons</option>
+                                                <option value="COUNTERMEASURES">Countermeasures</option>
+                                                <option value="MISSILES">Missiles</option>
+                                                <option value="DRONE">Drone</option>
+                                                <option value="R4">R4</option>
                                             </select>
                                         </div>
 
@@ -1649,9 +1780,15 @@ export default function CraftingHab() {
                                                                     const needed = ing.quantity * craftQuantity;
                                                                     const hasEnough = available >= needed;
 
+                                                                    // Check if this ingredient is a raw material (no recipe)
+                                                                    const ingredientResource = gameData?.resources?.find((r: any) => r.id === ing.resource);
+                                                                    const isRawMaterial = ingredientResource?.category === 'raw';
+
                                                                     return (
-                                                                        <div key={ing.resource} className={`ingredient-row ${!hasEnough ? 'insufficient' : ''}`}>
-                                                                            <span className="ingredient-name">{ing.resource}</span>
+                                                                        <div key={ing.resource} className={`ingredient-row ${!hasEnough ? 'insufficient' : ''} ${isRawMaterial ? 'raw-material' : ''}`}>
+                                                                            <span className="ingredient-name" style={isRawMaterial ? { color: '#4CAF50' } : {}}>
+                                                                                {ing.resource}
+                                                                            </span>
                                                                             <span className="ingredient-amount">
                                                                                 <span className={hasEnough ? 'has-enough' : 'not-enough'}>
                                                                                     {available}
@@ -1731,7 +1868,7 @@ export default function CraftingHab() {
                                                             </div>
                                                         </div>
 
-                                                        <div className="priority-section">
+                                                        {/* <div className="priority-section">
                                                             <label>Priority</label>
                                                             <div className="priority-buttons">
                                                                 <button
@@ -1753,7 +1890,7 @@ export default function CraftingHab() {
                                                                     ⚡ High
                                                                 </button>
                                                             </div>
-                                                        </div>
+                                                        </div> */}
 
                                                         <button
                                                             className="btn btn-primary btn-large"

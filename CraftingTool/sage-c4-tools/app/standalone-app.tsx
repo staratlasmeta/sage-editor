@@ -21,7 +21,9 @@ function StandaloneApp() {
     useEffect(() => {
         // Handle hash changes
         const handleHashChange = () => {
-            const hash = window.location.hash.slice(1) || 'claim-stakes';
+            // Remove # and any leading slash from hash
+            const hash = window.location.hash.replace('#/', '').replace('#', '') || 'claim-stakes';
+
             if (hash === 'crafting-hab' || hash === 'recipes') {
                 setCurrentRoute(hash);
             } else {
