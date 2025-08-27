@@ -6,8 +6,8 @@ import ClaimStakes from './routes/claim-stakes';
 import CraftingHab from './routes/crafting-hab';
 import Recipes from './routes/recipes';
 import { StandaloneNavigation } from './components/StandaloneNavigation';
-import './app.css';
-import './styles/sage-theme.css';
+// Import all styles through a single CSS file for proper bundling
+import './standalone-styles.css';
 
 // Simple hash-based router for standalone build
 function StandaloneApp() {

@@ -1,0 +1,8 @@
+/* Consolidated styles for standalone build */
+@import './app.css';
+@import './styles/sage-theme.css';
+@import './styles/planet-purchase.css';
+@import './styles/ship-transfer-modal.css';
+@import './components/ResourceManager.css';
+@import './styles/settings-panel.css';
+@import './styles/achievements.css';

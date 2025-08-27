@@ -7,6 +7,13 @@ import { ResourceManager } from '../components/ResourceManager';
 import { ShipTransferModal } from '../components/ShipTransferModal';
 import { NotificationSystem, useNotifications } from '../components/NotificationSystem';
 import type { LinksFunction } from "react-router";
+
+// Import CSS directly for Vite to bundle them
+import '../styles/planet-purchase.css';
+import '../styles/ship-transfer-modal.css';
+import '../components/ResourceManager.css';
+
+// URL imports for React Router links function
 import planetPurchaseStyles from "../styles/planet-purchase.css?url";
 import shipTransferStyles from "../styles/ship-transfer-modal.css?url";
 import resourceManagerStyles from "../components/ResourceManager.css?url";
