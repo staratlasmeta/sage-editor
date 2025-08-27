@@ -303,40 +303,69 @@ export class StandaloneDataLoader {
                 planetsResponse,
                 archetypesResponse,
                 buildingsResponse,
-                recipesResponse
+                craftingBuildingsResponse,
+                recipesResponse,
+                starbasesResponse
             ] = await Promise.all([
                 fetch('./data/resources.json').catch(() => null),
                 fetch('./data/planets.json').catch(() => null),
                 fetch('./data/planetArchetypes.json').catch(() => null),
                 fetch('./data/claimStakeBuildings.json').catch(() => null),
-                fetch('./data/recipes.json').catch(() => null)
+                fetch('./data/craftingHabBuildings.json').catch(() => null),
+                fetch('./data/recipes.json').catch(() => null),
+                fetch('./data/starbases.json').catch(() => null)
             ]);
 
             // If all proper data files exist, use them
             if (resourcesResponse?.ok && planetsResponse?.ok && buildingsResponse?.ok) {
-                console.log('Loading proper data files...');
+                console.log('✅ Loading proper data files from /data/ folder...');
 
                 const resourcesData = await resourcesResponse.json();
                 const planetsData = await planetsResponse.json();
                 const archetypesData = archetypesResponse?.ok ? await archetypesResponse.json() : null;
                 const buildingsData = await buildingsResponse.json();
+                const craftingBuildingsData = craftingBuildingsResponse?.ok ? await craftingBuildingsResponse.json() : null;
                 const recipesData = recipesResponse?.ok ? await recipesResponse.json() : null;
+                const starbasesData = starbasesResponse?.ok ? await starbasesResponse.json() : null;
+
+                // Merge buildings from both files
+                const allBuildings = [
+                    ...(buildingsData.buildings || []),
+                    ...(craftingBuildingsData?.habs || []),
+                    ...(craftingBuildingsData?.craftingStations || []),
+                    ...(craftingBuildingsData?.cargoStorage || [])
+                ];
+
+                // Log what we loaded
+                console.log('✅ Game data loaded successfully:', {
+                    resources: (resourcesData.resources || resourcesData || []).length,
+                    planets: (planetsData.planets || planetsData || []).length,
+                    planetArchetypes: (archetypesData?.archetypes || archetypesData || []).length,
+                    buildings: (buildingsData.buildings || []).length,
+                    claimStakeDefinitions: (buildingsData.claimStakeDefinitions || []).length,
+                    craftingHabs: (craftingBuildingsData?.habs || []).length,
+                    craftingStations: (craftingBuildingsData?.craftingStations || []).length,
+                    cargoStorage: (craftingBuildingsData?.cargoStorage || []).length,
+                    recipes: (recipesData?.recipes || recipesData || []).length,
+                    starbases: (starbasesData?.starbases || starbasesData || []).length,
+                    totalBuildings: allBuildings.length
+                });
 
                 return {
                     resources: resourcesData.resources || resourcesData || [],
                     resourceCategories: resourcesData.categories || {},
                     planets: planetsData.planets || planetsData || [],
                     planetArchetypes: archetypesData?.archetypes || archetypesData || [],
-                    buildings: buildingsData.buildings || buildingsData || [],
+                    buildings: allBuildings,
                     claimStakeDefinitions: buildingsData.claimStakeDefinitions || [],
-                    craftingHabBuildings: {
-                        habs: buildingsData.habs || [],
-                        craftingStations: buildingsData.craftingStations || [],
-                        cargoStorage: buildingsData.cargoStorage || []
+                    craftingHabBuildings: craftingBuildingsData || {
+                        habs: [],
+                        craftingStations: [],
+                        cargoStorage: []
                     },
                     recipes: recipesData?.recipes || recipesData || [],
                     craftingRecipes: recipesData?.recipes || recipesData || [],
-                    starbases: [],
+                    starbases: starbasesData?.starbases || starbasesData || [],
 
                     // Helper methods
                     getResourceById: (id: string) => {
