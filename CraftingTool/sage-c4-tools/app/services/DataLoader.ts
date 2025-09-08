@@ -148,25 +148,36 @@ export class DataLoader {
                     claimStakeBuildings = claimStakeBuildingsData.buildings.map((building: any) => {
                         // Add category field if missing
                         if (!building.category) {
-                            // Infrastructure buildings are hubs (central, processing, extraction, storage, farm)
-                            if (building.id?.includes('-hub') || building.name?.toLowerCase().includes('hub')) {
+                            const name = building.name?.toLowerCase() || '';
+                            const id = building.id?.toLowerCase() || '';
+
+                            // Infrastructure: ONLY Central Hub and Crew Quarters
+                            if (name.includes('central hub') || name.includes('crew quarters') || id.includes('central-hub')) {
                                 building.category = 'infrastructure';
                             }
-                            // Other category detection based on ID patterns
-                            else if (building.id?.includes('extractor') || building.id?.includes('extraction')) {
-                                building.category = 'extraction';
-                            }
-                            else if (building.id?.includes('processor') || building.id?.includes('processing')) {
-                                building.category = 'processing';
-                            }
-                            else if (building.id?.includes('storage')) {
-                                building.category = 'storage';
-                            }
-                            else if (building.id?.includes('power')) {
+                            // Power: Power plants and solar arrays
+                            else if (name.includes('power plant') || name.includes('solar array') || name.includes('power') || id.includes('power')) {
                                 building.category = 'power';
                             }
-                            else if (building.id?.includes('farm')) {
+                            // Extraction: Extraction Hub and all extractor buildings
+                            else if (name.includes('extraction hub') || name.includes('extractor') || id.includes('extraction') || id.includes('extractor')) {
+                                building.category = 'extraction';
+                            }
+                            // Processing: Processing Hub and all processor buildings
+                            else if (name.includes('processing hub') || name.includes('processor') || id.includes('processing') || id.includes('processor')) {
+                                building.category = 'processing';
+                            }
+                            // Farm: Farm Hub and all buildings with "farm" in the name
+                            else if (name.includes('farm') || name.includes('cultivation hub') || id.includes('farm')) {
                                 building.category = 'farm';
+                            }
+                            // Storage: Storage Hub and storage buildings
+                            else if (name.includes('storage hub') || name.includes('storage') || id.includes('storage')) {
+                                building.category = 'storage';
+                            }
+                            // Default fallback
+                            else {
+                                building.category = 'general';
                             }
                         }
                         return building;

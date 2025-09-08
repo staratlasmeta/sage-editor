@@ -49,7 +49,7 @@ export function RecipeSearch({
         return Array.from(ingredients).sort();
     }, [recipes]);
 
-    // Calculate resource metrics
+    // Calculate resource metrics (keyed by both ID and display name)
     const resourceMetrics = useMemo(() => {
         const metrics = new Map<string, {
             usageCount: number;
@@ -60,12 +60,43 @@ export function RecipeSearch({
             value: number;
         }>();
 
+        // Helper to add metrics for both resource ID and display name
+        const addMetrics = (resourceId: string, data: any) => {
+            // Add metrics for resource ID
+            const existing = metrics.get(resourceId) || {
+                usageCount: 0,
+                recipeCount: 0,
+                planetCount: 0,
+                scarcity: 0,
+                demand: 0,
+                value: 0
+            };
+            Object.assign(existing, data);
+            metrics.set(resourceId, existing);
+
+            // Also add metrics for display name
+            const resource = resources?.find(res => res.id === resourceId);
+            if (resource?.name) {
+                const displayMetrics = metrics.get(resource.name) || {
+                    usageCount: 0,
+                    recipeCount: 0,
+                    planetCount: 0,
+                    scarcity: 0,
+                    demand: 0,
+                    value: 0
+                };
+                Object.assign(displayMetrics, data);
+                metrics.set(resource.name, displayMetrics);
+            }
+        };
+
         // Count usage in recipes
         recipes.forEach(recipe => {
             recipe.ingredients?.forEach(ing => {
-                const ingredientName = ing.name || ing.resource;
-                if (!ingredientName) return;
-                const existing = metrics.get(ingredientName) || {
+                const resourceId = ing.resource || ing.name;
+                if (!resourceId) return;
+
+                const existing = metrics.get(resourceId) || {
                     usageCount: 0,
                     recipeCount: 0,
                     planetCount: 0,
@@ -75,17 +106,19 @@ export function RecipeSearch({
                 };
                 existing.usageCount += ing.quantity;
                 existing.recipeCount++;
-                metrics.set(ingredientName, existing);
+
+                addMetrics(resourceId, existing);
             });
         });
 
         // Count planet availability
         planets.forEach(planet => {
             if (planet.resources) {
-                Object.keys(planet.resources).forEach(resource => {
-                    const existing = metrics.get(resource);
+                Object.keys(planet.resources).forEach(resourceId => {
+                    const existing = metrics.get(resourceId);
                     if (existing) {
                         existing.planetCount++;
+                        addMetrics(resourceId, existing);
                     }
                 });
             }
@@ -121,8 +154,29 @@ export function RecipeSearch({
                 case 'ingredient':
                     filtered = filtered.filter(r =>
                         r.ingredients?.some(ing => {
-                            const ingredientName = (ing.name || ing.resource || '').toLowerCase();
-                            return ingredientName.includes(searchTerm.toLowerCase());
+                            // Get the ingredient's resource ID
+                            const resourceId = ing.resource || ing.name;
+
+                            // Find the resource definition to get the display name
+                            const resource = resources?.find(res => res.id === resourceId);
+                            const displayName = resource?.name || resourceId || '';
+
+                            // Search both the resource ID and display name (case insensitive)
+                            const searchLower = searchTerm.toLowerCase().trim();
+
+                            // Check resource ID match
+                            const resourceIdLower = (resourceId || '').toLowerCase();
+                            const resourceIdMatch = resourceIdLower.includes(searchLower);
+
+                            // Check display name match
+                            const displayNameLower = (displayName || '').toLowerCase();
+                            const displayNameMatch = displayNameLower.includes(searchLower);
+
+                            // Check ingredient name match (fallback)
+                            const ingredientNameLower = (ing.name || '').toLowerCase();
+                            const ingredientNameMatch = ingredientNameLower.includes(searchLower);
+
+                            return resourceIdMatch || displayNameMatch || ingredientNameMatch;
                         })
                     );
                     break;
@@ -388,12 +442,14 @@ export function RecipeSearch({
                                         <div className="ingredients-section">
                                             <h6>Ingredients:</h6>
                                             {recipe.ingredients?.map((ing, idx) => {
-                                                const ingredientName = ing.name || ing.resource;
-                                                const metrics = resourceMetrics.get(ingredientName);
+                                                const resourceId = ing.resource || ing.name;
+                                                const resource = resources?.find(res => res.id === resourceId);
+                                                const displayName = resource?.name || resourceId;
+                                                const metrics = resourceMetrics.get(displayName);
                                                 return (
                                                     <div key={idx} className="ingredient-item">
                                                         <span className="quantity">{ing.quantity}x</span>
-                                                        <span className="resource-name">{ingredientName}</span>
+                                                        <span className="resource-name">{displayName}</span>
                                                         {metrics && (
                                                             <span className="resource-value"
                                                                 title={`Scarcity: ${metrics.scarcity.toFixed(0)}%, Demand: ${metrics.demand.toFixed(0)}%`}>
@@ -405,7 +461,7 @@ export function RecipeSearch({
                                                             onClick={(e) => {
                                                                 e.stopPropagation();
                                                                 setSearchMode('ingredient');
-                                                                setSearchTerm(ing.name || ing.resource);
+                                                                setSearchTerm(displayName);
                                                             }}
                                                             title="Search recipes using this ingredient"
                                                         >
@@ -474,7 +530,10 @@ export function RecipeSearch({
                 </div>
                 <div className="ingredient-chips">
                     {allIngredients.slice(0, expandIngredients ? allIngredients.length : 10).map(ingredient => {
-                        const metrics = resourceMetrics.get(ingredient);
+                        // Convert resource ID to display name
+                        const resource = resources?.find(res => res.id === ingredient);
+                        const displayName = resource?.name || ingredient;
+                        const metrics = resourceMetrics.get(displayName);
                         return (
                             <button
                                 key={ingredient}
@@ -482,7 +541,7 @@ export function RecipeSearch({
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     setSearchMode('ingredient');
-                                    setSearchTerm(ingredient);
+                                    setSearchTerm(displayName);
                                 }}
                                 style={{
                                     borderColor: metrics ?
@@ -491,7 +550,7 @@ export function RecipeSearch({
                                 }}
                                 title={metrics ? `Value: ${metrics.value.toFixed(0)}, Used in ${metrics.recipeCount} recipes` : ''}
                             >
-                                {ingredient}
+                                {displayName}
                                 {metrics && (
                                     <span className="chip-value">
                                         {metrics.value.toFixed(0)}

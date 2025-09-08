@@ -415,147 +415,6 @@ export default function ClaimStakes() {
             });
         }
 
-        // Generate extractors for each raw resource on the planet
-        if (selectedPlanet && planetResources.length > 0) {
-            planetResources.forEach(resource => {
-                // Check if this is a raw material
-                const isRawResource = gameData?.resources?.find((r: any) =>
-                    r.id === resource && r.category === 'raw'
-                );
-
-                if (isRawResource || resource.includes('-ore') || resource.includes('crystal')) {
-                    const resourceName = resource.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
-
-                    // Create extractor buildings for this resource (T1-T5)
-                    for (let tier = 1; tier <= 5; tier++) {
-                        const extractorBuilding: Building = {
-                            id: `${resource}-extractor-t${tier}`,
-                            name: `${resourceName} Extractor T${tier}`,
-                            category: 'extraction',
-                            tier: tier,
-                            slots: 8 + (tier - 1) * 2, // 8, 10, 12, 14, 16 slots
-                            power: -25 - (tier - 1) * 10, // Power consumption increases
-                            crew: 5 + (tier - 1) * 2, // 5, 7, 9, 11, 13 crew
-                            extractionRate: {
-                                [resource]: 0.01 * (1 + (tier - 1) * 0.5) // Scales with tier
-                            },
-                            constructionCost: {
-                                'chromite-ore': 25 * Math.pow(1.5, tier - 1),
-                                'copper': 20 * Math.pow(1.5, tier - 1),
-                                'copper-ore': tier === 1 ? 15 : 0 // Only T1 uses ore
-                            },
-                            constructionTime: 60 + (tier - 1) * 30,
-                            requiredTags: [`extraction-hub`], // Requires extraction hub
-                            upgradeFamily: `${resource}-extractor`,
-                            description: `${resourceName} Extractor - extractor building`
-                        };
-
-                        processedBuildings.push(extractorBuilding);
-                    }
-                }
-            });
-
-            // Add processing buildings
-            for (let tier = 1; tier <= 5; tier++) {
-                const processorBuilding: Building = {
-                    id: `terrestrial-processor-t${tier}`,
-                    name: `Terrestrial Processor T${tier}`,
-                    category: 'processing',
-                    tier: tier,
-                    slots: 4 + (tier - 1) * 2,
-                    power: -35 - (tier - 1) * 15,
-                    crew: 8 + (tier - 1) * 3,
-                    resourceProduction: {
-                        'arco': 0.005 * (1 + (tier - 1) * 0.5)
-                    },
-                    resourceUsage: {
-                        'arco': 0.01 * (1 + (tier - 1) * 0.3),
-                        'framework': 0.005 * (1 + (tier - 1) * 0.3)
-                    },
-                    constructionCost: {
-                        'arco': 25 * Math.pow(1.5, tier - 1),
-                        'framework': 20 * Math.pow(1.5, tier - 1),
-                        'copper-ore': tier === 1 ? 15 : 0
-                    },
-                    constructionTime: 90 + (tier - 1) * 30,
-                    requiredTags: [`processing-hub`],
-                    upgradeFamily: 'terrestrial-processor',
-                    description: 'Terrestrial Processor - processing building'
-                };
-                processedBuildings.push(processorBuilding);
-            }
-
-            // Add power buildings
-            for (let tier = 1; tier <= 5; tier++) {
-                const powerBuilding: Building = {
-                    id: `solar-array-t${tier}`,
-                    name: `Solar Array T${tier}`,
-                    category: 'power',
-                    tier: tier,
-                    slots: 6 + (tier - 1) * 2,
-                    power: 50 + (tier - 1) * 25, // Generates power
-                    crew: 2 + tier,
-                    constructionCost: {
-                        'electronics': 30 * Math.pow(1.5, tier - 1),
-                        'arco': 20 * Math.pow(1.5, tier - 1)
-                    },
-                    constructionTime: 75 + (tier - 1) * 30,
-                    requiredTags: [],
-                    upgradeFamily: 'solar-array',
-                    description: 'Solar Array - power generation building'
-                };
-                processedBuildings.push(powerBuilding);
-            }
-
-            // Add storage buildings
-            for (let tier = 1; tier <= 5; tier++) {
-                const storageBuilding: Building = {
-                    id: `warehouse-t${tier}`,
-                    name: `Warehouse T${tier}`,
-                    category: 'storage',
-                    tier: tier,
-                    slots: 10 + (tier - 1) * 5,
-                    power: -10,
-                    crew: 3 + tier,
-                    storage: 1000 * Math.pow(2, tier - 1), // 1000, 2000, 4000, 8000, 16000
-                    constructionCost: {
-                        'steel': 40 * Math.pow(1.5, tier - 1),
-                        'arco': 25 * Math.pow(1.5, tier - 1)
-                    },
-                    constructionTime: 60 + (tier - 1) * 30,
-                    requiredTags: [`storage-hub`],
-                    upgradeFamily: 'warehouse',
-                    description: 'Warehouse - storage building'
-                };
-                processedBuildings.push(storageBuilding);
-            }
-
-            // Add farm buildings
-            for (let tier = 1; tier <= 5; tier++) {
-                const farmBuilding: Building = {
-                    id: `hydroponic-farm-t${tier}`,
-                    name: `Hydroponic Farm T${tier}`,
-                    category: 'farm',
-                    tier: tier,
-                    slots: 12 + (tier - 1) * 3,
-                    power: -20 - (tier - 1) * 10,
-                    crew: 6 + (tier - 1) * 2,
-                    extractionRate: {
-                        'biomass': 0.008 * (1 + (tier - 1) * 0.5)
-                    },
-                    constructionCost: {
-                        'framework': 35 * Math.pow(1.5, tier - 1),
-                        'electronics': 20 * Math.pow(1.5, tier - 1)
-                    },
-                    constructionTime: 80 + (tier - 1) * 30,
-                    requiredTags: [`farm-hub`],
-                    upgradeFamily: 'hydroponic-farm',
-                    description: 'Hydroponic Farm - farm building'
-                };
-                processedBuildings.push(farmBuilding);
-            }
-        }
-
         // First, process ALL buildings from raw data to ensure they have upgradeFamily
         rawBuildings.forEach(building => {
             // Derive upgradeFamily from building ID by removing tier suffix
@@ -571,37 +430,36 @@ export default function ClaimStakes() {
                 const name = building.name.toLowerCase();
                 const id = building.id.toLowerCase();
 
-                // Check tags and name for categorization
-                // Check for processing first (using tags)
-                if (tags.includes('processing-hub') || tags.includes('enables-processors')) {
-                    category = 'processing';
-                } else if (tags.includes('extraction-hub') || tags.includes('enables-extractors')) {
+                // Infrastructure: ONLY Central Hub and Crew Quarters
+                if (name.includes('central hub') || name.includes('crew quarters') || tags.includes('central-hub')) {
+                    category = 'infrastructure';
+                }
+                // Power: Power plants and solar arrays
+                else if (name.includes('power plant') || name.includes('solar array') || name.includes('power')) {
+                    category = 'power';
+                }
+                // Extraction: Extraction Hub and all extractor buildings
+                else if (name.includes('extraction hub') || name.includes('extractor') ||
+                    tags.includes('extraction-hub') || tags.includes('enables-extractors')) {
                     category = 'extraction';
-                } else if (tags.includes('storage-hub') || tags.includes('enables-storage-hub')) {
-                    category = 'storage';
-                } else if (tags.includes('farm-hub') || tags.includes('enables-farm-hub')) {
+                }
+                // Processing: Processing Hub and all processor buildings
+                else if (name.includes('processing hub') || name.includes('processor') ||
+                    tags.includes('processing-hub') || tags.includes('enables-processors')) {
+                    category = 'processing';
+                }
+                // Farm: Farm Hub and all buildings with "farm" in the name
+                else if (name.includes('farm') || name.includes('cultivation hub') ||
+                    tags.includes('farm-hub') || tags.includes('enables-farm-hub')) {
                     category = 'farm';
                 }
-                // Then check by name patterns
-                else if (name.includes('processing hub')) {
-                    category = 'processing';
-                } else if (name.includes('extraction hub')) {
-                    category = 'extraction';
-                } else if (name.includes('storage hub')) {
+                // Storage: Storage Hub and storage buildings
+                else if (name.includes('storage hub') || name.includes('storage') ||
+                    tags.includes('storage-hub') || tags.includes('enables-storage-hub')) {
                     category = 'storage';
-                } else if (name.includes('cultivation hub') || name.includes('farm')) {
-                    category = 'farm';
-                } else if (name.includes('power plant') || name.includes('solar array')) {
-                    category = 'power';
-                } else if (name.includes('extractor')) {
-                    category = 'extraction';
-                } else if (name.includes('processor')) {
-                    category = 'processing';
-                } else if (name.includes('crew quarters') || tags.includes('central-hub') ||
-                    (name.includes('central hub') || (name.includes('hub') && !name.includes('processing') &&
-                        !name.includes('extraction') && !name.includes('storage') && !name.includes('cultivation')))) {
-                    category = 'infrastructure';
-                } else {
+                }
+                // Default fallback
+                else {
                     category = 'general';
                 }
             }
@@ -716,6 +574,39 @@ export default function ClaimStakes() {
 
         return processedBuildings;
     }, [rawBuildings, selectedPlanet, planets]);
+
+    // Helper function to get cumulative tags from entire upgrade family
+    const getCumulativeFamilyTags = (building: Building, buildings: Building[]): string[] => {
+        if (!building.upgradeFamily) return building.addedTags || [];
+
+        // Get all buildings in this upgrade family
+        const familyBuildings = buildings.filter(b => b.upgradeFamily === building.upgradeFamily);
+
+        // Get all buildings from T1 up to current tier
+        const cumulativeTags = new Set<string>();
+
+        for (let tier = 1; tier <= building.tier; tier++) {
+            const tierBuilding = familyBuildings.find(b => b.tier === tier);
+            if (tierBuilding?.addedTags) {
+                tierBuilding.addedTags.forEach(tag => cumulativeTags.add(tag));
+            }
+        }
+
+        return Array.from(cumulativeTags);
+    };
+
+    // Helper function to get all tags currently provided by a design (for validation)
+    const getAllProvidedTags = (design: PlacedBuilding[]): string[] => {
+        const allTags = new Set<string>();
+        design.forEach(pb => {
+            const building = buildings.find(b => b.id === pb.buildingId);
+            if (building) {
+                const cumulativeTags = getCumulativeFamilyTags(building, buildings);
+                cumulativeTags.forEach(tag => allTags.add(tag));
+            }
+        });
+        return Array.from(allTags);
+    };
 
     const starbaseInventory = sharedState.starbaseInventory;
 
@@ -1641,14 +1532,16 @@ export default function ClaimStakes() {
                 }
             }
 
-            // Collect tags provided by existing buildings
+            // Collect tags provided by existing buildings (with cumulative family tags)
             const buildingProvidedTags = new Set<string>();
             const currentBuildings = designMode ? currentDesign : (activeInstance?.buildings || []);
             currentBuildings.forEach(pb => {
                 const placedBuilding = buildings.find(b => b.id === pb.buildingId);
-                // Check both providedTags and addedTags (JSON uses addedTags)
-                const tags = placedBuilding?.providedTags || placedBuilding?.addedTags || [];
-                tags.forEach(tag => buildingProvidedTags.add(tag));
+                if (placedBuilding) {
+                    // Get cumulative tags from entire upgrade family
+                    const cumulativeTags = getCumulativeFamilyTags(placedBuilding, buildings);
+                    cumulativeTags.forEach(tag => buildingProvidedTags.add(tag));
+                }
             });
 
             // Combine all tags: planet, archetype, stake definition, and building-provided tags
@@ -2560,6 +2453,17 @@ export default function ClaimStakes() {
                                                                         buildingId: upgradeInfo.nextTier.id
                                                                     };
 
+                                                                    // Debug logging for tag persistence
+                                                                    console.log('Building Upgrade - Tag Persistence Check:', {
+                                                                        oldBuilding: building.name,
+                                                                        oldTier: building.tier,
+                                                                        oldTags: building.addedTags || [],
+                                                                        newBuilding: upgradeInfo.nextTier.name,
+                                                                        newTier: upgradeInfo.nextTier.tier,
+                                                                        newTags: upgradeInfo.nextTier.addedTags || [],
+                                                                        cumulativeTags: getCumulativeFamilyTags(upgradeInfo.nextTier, buildings)
+                                                                    });
+
                                                                     if (designMode) {
                                                                         setCurrentDesign(prev =>
                                                                             prev.map(b => b.id === pb.id ? upgraded : b)
@@ -2686,9 +2590,11 @@ export default function ClaimStakes() {
                                                             const providedTags = new Set<string>();
                                                             currentDesign.forEach(pb => {
                                                                 const building = buildings.find(b => b.id === pb.buildingId);
-                                                                // Check both providedTags and addedTags (JSON uses addedTags)
-                                                                const tags = building?.providedTags || building?.addedTags || [];
-                                                                tags.forEach(tag => providedTags.add(tag));
+                                                                if (building) {
+                                                                    // Get cumulative tags from entire upgrade family
+                                                                    const cumulativeTags = getCumulativeFamilyTags(building, buildings);
+                                                                    cumulativeTags.forEach(tag => providedTags.add(tag));
+                                                                }
                                                             });
                                                             return Array.from(providedTags).map(tag => (
                                                                 <span key={tag} className="tag-compact building-tag" title="From buildings">
@@ -2923,8 +2829,8 @@ export default function ClaimStakes() {
                                                         const archetype = gameData?.planetArchetypes?.find(
                                                             (a: any) => a.id === selectedPlanet.archetype
                                                         );
-                                                        const rent = archetype?.rent?.[sharedState.starbaseLevel]?.[selectedTier] ||
-                                                            selectedPlanet.rentCost ||
+                                                        const rent = archetype?.rent?.[sharedState.starbaseLevel]?.[selectedTier]?.toFixed(2) ||
+                                                            selectedPlanet.rentCost?.toFixed(2) ||
                                                             '0.5';
                                                         return rent;
                                                     })()} ATLAS
@@ -3129,9 +3035,10 @@ export default function ClaimStakes() {
                                                     const archetype = gameData?.planetArchetypes?.find(
                                                         (a: any) => a.id === selectedPlanet.archetype
                                                     );
-                                                    const rent = archetype?.rent?.[sharedState.starbaseLevel]?.[selectedTier] ||
-                                                        selectedPlanet.rentCost ||
+                                                    const rent = archetype?.rent?.[sharedState.starbaseLevel]?.[selectedTier]?.toFixed(2) ||
+                                                        selectedPlanet.rentCost?.toFixed(2) ||
                                                         '0.5';
+
                                                     return rent;
                                                 })()} ATLAS
                                             </strong>
