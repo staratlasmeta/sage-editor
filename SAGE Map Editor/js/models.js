@@ -142,17 +142,16 @@ const RESOURCE_TYPES = [
     { type: 27, name: "Diamond", richness: 3, planetTypes: ["Volcanic", "Barren", "Dark"] },
     { type: 28, name: "Dodiline Crystals", richness: 4, planetTypes: ["Volcanic"] },
     { type: 29, name: "Drywater", richness: 3, planetTypes: ["Ice Giant", "Barren"] },
-    { type: 30, name: "Dysprosium", richness: 4, planetTypes: ["Terrestrial"] },
+    { type: 30, name: "Dysprosium Ore", richness: 4, planetTypes: ["Terrestrial"] },
     { type: 31, name: "Emerald Crystals", richness: 3, planetTypes: ["Dark"] },
     { type: 32, name: "Fluorine Gas", richness: 2, planetTypes: ["Gas Giant", "Volcanic", "Ice Giant"] },
     { type: 33, name: "Fusion Catalyst Deposits", richness: 5, planetTypes: ["Dark"] },
     { type: 34, name: "Garnet Crystals", richness: 2, planetTypes: ["System Asteroid Belt", "Ice Giant"] },
-    { type: 35, name: "Germanium", richness: 4, planetTypes: ["System Asteroid Belt", "Ice Giant", "Gas Giant"] },
+    { type: 35, name: "Germanium Ore", richness: 4, planetTypes: ["System Asteroid Belt", "Ice Giant", "Gas Giant"] },
     { type: 36, name: "Gold Ore", richness: 3, planetTypes: ["Terrestrial"] },
     { type: 37, name: "Hafnium Ore", richness: 2, planetTypes: ["System Asteroid Belt", "Ice Giant", "Barren"] },
     { type: 38, name: "Hicenium Crystals", richness: 4, planetTypes: ["Ice Giant"] },
     { type: 39, name: "Hydrogen", richness: 1, planetTypes: ["Gas Giant", "Ice Giant", "Oceanic"] },
-    { type: 40, name: "Ink", richness: 1, planetTypes: [] },
     { type: 41, name: "Iridium Ore", richness: 4, planetTypes: ["Volcanic"] },
     { type: 42, name: "Iron Ore", richness: 1, planetTypes: ["Terrestrial", "System Asteroid Belt", "Barren"] },
     { type: 43, name: "Jasphorus Crystals", richness: 5, planetTypes: ["Barren"] },
@@ -164,7 +163,7 @@ const RESOURCE_TYPES = [
     { type: 49, name: "Manganese Ore", richness: 2, planetTypes: ["System Asteroid Belt", "Volcanic", "Gas Giant"] },
     { type: 50, name: "Methane", richness: 2, planetTypes: ["Gas Giant", "Ice Giant", "Dark"] },
     { type: 51, name: "Nanosil", richness: 3, planetTypes: ["System Asteroid Belt", "Dark"] },
-    { type: 52, name: "Neodymium", richness: 1, planetTypes: ["System Asteroid Belt", "Volcanic"] },
+    { type: 52, name: "Neodymium Ore", richness: 1, planetTypes: ["System Asteroid Belt", "Volcanic"] },
     { type: 53, name: "Neon", richness: 3, planetTypes: ["Dark", "Gas Giant"] },
     { type: 54, name: "Neural Coral Compounds", richness: 3, planetTypes: ["Oceanic"] },
     { type: 55, name: "Nitrogen", richness: 1, planetTypes: ["Terrestrial", "Gas Giant", "Ice Giant"] },
@@ -248,17 +247,16 @@ const RESOURCE_COLORS = {
     'diamond': '#B9F2FF',                        // Diamond Blue
     'dodiline crystals': '#9400D3',              // Dark Violet
     'drywater': '#87CEEB',                       // Sky Blue
-    'dysprosium': '#CD853F',                     // Peru
+    'dysprosium ore': '#CD853F',                 // Peru
     'emerald crystals': '#50C878',               // Emerald Green
     'fluorine gas': '#98FB98',                   // Pale Green
     'fusion catalyst deposits': '#FF00FF',       // Magenta
     'garnet crystals': '#800000',                // Maroon
-    'germanium': '#778899',                      // Light Slate Gray
+    'germanium ore': '#778899',                  // Light Slate Gray
     'gold ore': '#FFD700',                       // Gold
     'hafnium ore': '#B8860B',                    // Dark Goldenrod
     'hicenium crystals': '#00CED1',              // Dark Turquoise
     'hydrogen': '#E6F3FF',                       // Light Blue
-    'ink': '#000000',                            // Black
     'iridium ore': '#C0C0C0',                    // Silver
     'iron ore': '#A0522D',                       // Sienna
     'jasphorus crystals': '#FF69B4',             // Hot Pink
@@ -269,7 +267,7 @@ const RESOURCE_COLORS = {
     'manganese ore': '#800000',                  // Maroon
     'methane': '#F5FFFA',                        // Mint Cream
     'nanosil': '#A9A9A9',                        // Dark Gray
-    'neodymium': '#FF69B4',                      // Hot Pink
+    'neodymium ore': '#FF69B4',                  // Hot Pink
     'neon': '#FFE4E1',                           // Misty Rose
     'nitrogen': '#E6E6FA',                       // Lavender
     'osmium ore': '#2F4F4F',                     // Dark Slate Gray

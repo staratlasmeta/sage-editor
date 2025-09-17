@@ -1130,7 +1130,7 @@ function updateSystemCount() {
 function updateUndoRedoButtons() {
     if (typeof getHistoryInfo === 'function') {
         const historyInfo = getHistoryInfo();
-        
+
         if (undoBtn) {
             undoBtn.disabled = !historyInfo.canUndo;
         }
@@ -1154,22 +1154,22 @@ function updateUndoRedoButtons() {
 function updateHistoryPanel() {
     const historyList = document.getElementById('historyList');
     if (!historyList) return;
-    
+
     // Clear existing items
     historyList.innerHTML = '';
-    
+
     // Check if new history system is available
     if (typeof getHistoryInfo !== 'function') {
         // Fallback to old system
         updateHistoryPanelOld();
         return;
     }
-    
+
     // Get history info from new system
     const historyInfo = getHistoryInfo();
     const states = historyInfo.states;
     const currentIndex = historyInfo.currentIndex;
-    
+
     if (states.length === 0) {
         const li = document.createElement('li');
         li.textContent = 'No history yet';
@@ -1177,48 +1177,48 @@ function updateHistoryPanel() {
         historyList.appendChild(li);
         return;
     }
-    
+
     // Add history items from newest to oldest
     states.slice().reverse().forEach((snapshot, reverseIndex) => {
         const actualIndex = states.length - 1 - reverseIndex;
         const isCurrentState = actualIndex === currentIndex;
-        
+
         // Create list item
         const li = document.createElement('li');
         li.className = 'history-item';
-        
+
         if (isCurrentState) {
             li.classList.add('current-state');
         }
-        
+
         // Special styling for initial state
         if (actualIndex === 0) {
             li.classList.add('empty-base-state');
         }
-        
+
         // Get timestamp
         let timeStr = 'Unknown';
         if (snapshot.timestamp) {
-            timeStr = snapshot.timestamp.toLocaleTimeString([], { 
-                hour: '2-digit', 
-                minute: '2-digit', 
-                second: '2-digit' 
+            timeStr = snapshot.timestamp.toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
             });
         }
-        
+
         // Create timestamp element
         const timeElement = document.createElement('span');
         timeElement.className = 'history-time';
         timeElement.textContent = timeStr;
-        
+
         // Create description element
         const descElement = document.createElement('span');
         descElement.className = 'history-desc';
-        
+
         // Get system count and selected count
         const systemCount = snapshot.data.mapData ? snapshot.data.mapData.length : 0;
         const selectedCount = snapshot.data.selectedSystemKeys ? snapshot.data.selectedSystemKeys.length : 0;
-        
+
         // Build description with counts
         let description = snapshot.description;
         if (selectedCount > 0) {
@@ -1226,22 +1226,22 @@ function updateHistoryPanel() {
         } else {
             description += ` [${systemCount}]`;
         }
-        
+
         descElement.textContent = description;
-        
+
         // Add elements to list item
         li.appendChild(timeElement);
         li.appendChild(descElement);
-        
+
         // Add click event
-        li.addEventListener('click', function() {
+        li.addEventListener('click', function () {
             historyJumpTo(actualIndex);
         });
-        
+
         // Add to list
         historyList.appendChild(li);
     });
-    
+
     console.log(`History panel updated with ${states.length} items, current index: ${currentIndex}`);
 }
 
@@ -1249,7 +1249,7 @@ function updateHistoryPanel() {
 function updateHistoryPanelOld() {
     const historyList = document.getElementById('historyList');
     if (!historyList) return;
-    
+
     if (!historyStack || historyStack.length === 0) {
         const li = document.createElement('li');
         li.textContent = 'No history yet';
@@ -1257,22 +1257,22 @@ function updateHistoryPanelOld() {
         historyList.appendChild(li);
         return;
     }
-    
+
     // Simple list of history items
     historyStack.slice().reverse().forEach((item, index) => {
         const actualIndex = historyStack.length - 1 - index;
         const li = document.createElement('li');
         li.className = 'history-item';
-        
+
         if (actualIndex === historyStack.length - 1) {
             li.classList.add('current-state');
         }
-        
+
         li.textContent = item.description || `State ${actualIndex}`;
-        li.addEventListener('click', function() {
+        li.addEventListener('click', function () {
             restoreHistoryState(actualIndex);
         });
-        
+
         historyList.appendChild(li);
     });
 }
@@ -1312,7 +1312,7 @@ function restoreHistoryState(index) {
         // Handle old format for backward compatibility
         mapData = deepCopy(restoredState.mapData);
     }
-    
+
     // Restore region definitions
     if (restoredState.regionDefinitions) {
         regionDefinitions = deepCopy(restoredState.regionDefinitions);
@@ -1333,7 +1333,7 @@ function restoreHistoryState(index) {
 
     // Restore selection state from the saved state
     selectedSystems.length = 0; // Clear array without breaking window reference
-    
+
     // Use selectedSystemKeys from the restored state
     if (restoredState.selectedSystemKeys) {
         restoredState.selectedSystemKeys.forEach(key => {
@@ -1350,7 +1350,7 @@ function restoreHistoryState(index) {
     updateLockButtonsState();
     setupResourceFilter();
     displaySystemDetails(selectedSystems);
-    
+
     if (selectedSystems.length === 1) {
         drawSystemPreview(selectedSystems[0]);
     } else {
@@ -1461,17 +1461,43 @@ function setupResourceFilter() {
 
     // Resource category toggles
     // Define resourceCategories
+    const organicResources = [
+        'biomass', 'living metal symbionts', 'neural coral compounds', 'magmaroot',
+        'pyroclast energen', 'blazing snapdragon', 'tidal kelp', 'bioluminous algae',
+        'shadowmoss', 'spectral lichen', 'ironshell cactus', 'bastion agave',
+        'swiftvine', 'electric fern', 'temporal flux orchid', 'frostcore bryophyte',
+        'mind shade fungus', 'aegis barrier cactus'
+    ];
+
+    const syntheticResources = [
+        'arco', 'thermodyne', 'thermoplastic resin',
+        'quantum computational substrate', 'bathysphere pearls', 'nanosil',
+        'plasma containment minerals', 'raw chisenic', 'rochinol'
+    ];
+
+    const gasResources = ['hydrogen', 'nitrogen', 'methane', 'neon',
+        'argon', 'xenon', 'krypton', 'oxygen'];
+
     const resourceCategories = {
+        'Organics': RESOURCE_TYPES.filter(r =>
+            organicResources.includes(r.name.toLowerCase())),
+        'Synthetics': RESOURCE_TYPES.filter(r =>
+            syntheticResources.includes(r.name.toLowerCase())),
         'Gases': RESOURCE_TYPES.filter(r => r.name.toLowerCase().includes('gas') ||
-            ['hydrogen', 'nitrogen', 'methane', 'neon',
-                'argon', 'xenon', 'krypton', 'oxygen'].includes(r.name.toLowerCase())),
-        'Ores': RESOURCE_TYPES.filter(r => r.name.toLowerCase().includes('ore')),
-        'Crystals': RESOURCE_TYPES.filter(r => r.name.toLowerCase().includes('crystal')),
-        'Other': RESOURCE_TYPES.filter(r => !r.name.toLowerCase().includes('gas') &&
-            !r.name.toLowerCase().includes('ore') &&
-            !r.name.toLowerCase().includes('crystal') &&
-            !['hydrogen', 'nitrogen', 'methane', 'neon',
-                'argon', 'xenon', 'krypton', 'oxygen'].includes(r.name.toLowerCase()))
+            gasResources.includes(r.name.toLowerCase())),
+        'Ores': RESOURCE_TYPES.filter(r => r.name.toLowerCase().endsWith(' ore')),
+        'Crystals': RESOURCE_TYPES.filter(r => r.name.toLowerCase().includes('crystal') ||
+            r.name.toLowerCase() === 'diamond'),
+        'Other': RESOURCE_TYPES.filter(r => {
+            const name = r.name.toLowerCase();
+            return !organicResources.includes(name) &&
+                !syntheticResources.includes(name) &&
+                !name.includes('gas') &&
+                !gasResources.includes(name) &&
+                !name.endsWith(' ore') &&
+                !name.includes('crystal') &&
+                name !== 'diamond';
+        })
     };
 
     for (const category in resourceCategories) {
@@ -1623,7 +1649,31 @@ function setupResourceFilter() {
                 // Extract the category name from the ID (e.g., "gases-resources" -> "gases")
                 const category = groupId.split('-')[0]; // Get 'gases' from 'gases-resources'
                 // Resource category - use data from RESOURCE_TYPES to reliably identify resources
-                if (category === 'gases') {
+                if (category === 'organics') {
+                    // Find all checkboxes for organic resources
+                    const organicResources = [
+                        'biomass', 'living metal symbionts', 'neural coral compounds', 'magmaroot',
+                        'pyroclast energen', 'blazing snapdragon', 'tidal kelp', 'bioluminous algae',
+                        'shadowmoss', 'spectral lichen', 'ironshell cactus', 'bastion agave',
+                        'swiftvine', 'electric fern', 'temporal flux orchid', 'frostcore bryophyte',
+                        'mind shade fungus', 'aegis barrier cactus'
+                    ];
+                    itemsToUpdate = Array.from(resourceFilter.querySelectorAll('input[type="checkbox"]')).filter(checkbox => {
+                        const resourceName = checkbox.id.replace('filter-', '').toLowerCase();
+                        return organicResources.includes(resourceName);
+                    });
+                } else if (category === 'synthetics') {
+                    // Find all checkboxes for synthetic resources
+                    const syntheticResources = [
+                        'arco', 'thermodyne', 'thermoplastic resin',
+                        'quantum computational substrate', 'bathysphere pearls', 'nanosil',
+                        'plasma containment minerals', 'raw chisenic', 'rochinol'
+                    ];
+                    itemsToUpdate = Array.from(resourceFilter.querySelectorAll('input[type="checkbox"]')).filter(checkbox => {
+                        const resourceName = checkbox.id.replace('filter-', '').toLowerCase();
+                        return syntheticResources.includes(resourceName);
+                    });
+                } else if (category === 'gases') {
                     // Find all checkboxes for gas resources
                     const gasResources = ['hydrogen', 'nitrogen', 'methane', 'neon', 'argon', 'xenon', 'krypton', 'fluorine gas', 'tenon gas', 'oxygen'];
                     itemsToUpdate = Array.from(resourceFilter.querySelectorAll('input[type="checkbox"]')).filter(checkbox => {
@@ -1634,25 +1684,40 @@ function setupResourceFilter() {
                     // Find all checkboxes for ore resources
                     itemsToUpdate = Array.from(resourceFilter.querySelectorAll('input[type="checkbox"]')).filter(checkbox => {
                         const resourceName = checkbox.id.replace('filter-', '').toLowerCase();
-                        return resourceName.includes('ore');
+                        return resourceName.endsWith(' ore');
                     });
                 } else if (category === 'crystals') {
                     // Find all checkboxes for crystal resources
                     itemsToUpdate = Array.from(resourceFilter.querySelectorAll('input[type="checkbox"]')).filter(checkbox => {
                         const resourceName = checkbox.id.replace('filter-', '').toLowerCase();
-                        return resourceName.includes('crystal');
+                        return resourceName.includes('crystal') || resourceName === 'diamond';
                     });
                 } else if (category === 'other') {
-                    // Find all other resources that aren't gases, ores, or crystals
+                    // Find all other resources that aren't in the defined categories
+                    const organicResources = [
+                        'biomass', 'living metal symbionts', 'neural coral compounds', 'magmaroot',
+                        'pyroclast energen', 'blazing snapdragon', 'tidal kelp', 'bioluminous algae',
+                        'shadowmoss', 'spectral lichen', 'ironshell cactus', 'bastion agave',
+                        'swiftvine', 'electric fern', 'temporal flux orchid', 'frostcore bryophyte',
+                        'mind shade fungus', 'aegis barrier cactus'
+                    ];
+                    const syntheticResources = [
+                        'arco', 'thermodyne', 'thermoplastic resin',
+                        'quantum computational substrate', 'bathysphere pearls', 'nanosil',
+                        'plasma containment minerals', 'raw chisenic', 'rochinol'
+                    ];
                     const gasResources = ['hydrogen', 'nitrogen', 'methane', 'neon', 'argon', 'xenon', 'krypton', 'fluorine gas', 'tenon gas', 'oxygen'];
                     itemsToUpdate = Array.from(resourceFilter.querySelectorAll('input[type="checkbox"]')).filter(checkbox => {
                         const resourceName = checkbox.id.replace('filter-', '').toLowerCase();
                         const name = resourceName.toLowerCase();
                         return name.indexOf('group-') !== 0 &&
+                            !organicResources.includes(name) &&
+                            !syntheticResources.includes(name) &&
                             !gasResources.includes(name) &&
                             !name.includes('gas') &&
-                            !name.includes('ore') &&
+                            !name.endsWith(' ore') &&
                             !name.includes('crystal') &&
+                            name !== 'diamond' &&
                             !name.includes('system') &&
                             !name.includes('faction') &&
                             !name.includes('planet') &&
@@ -2076,7 +2141,7 @@ function initKeyboardShortcuts() {
 
         // Determine if Ctrl key is pressed
         const ctrlPressed = event.ctrlKey || event.metaKey;
-        
+
         // Debug logging for Ctrl+Shift+Z issue
         if (ctrlPressed && (event.key === 'z' || event.key === 'Z')) {
             console.log('Key event:', {
@@ -2087,7 +2152,7 @@ function initKeyboardShortcuts() {
                 metaKey: event.metaKey
             });
         }
-        
+
         // Handle Ctrl+Shift+Z using event.code for better reliability
         if (ctrlPressed && event.shiftKey && event.code === 'KeyZ') {
             event.preventDefault();
@@ -2664,13 +2729,13 @@ function showHelpModal() {
     // Set up tab switching
     const tabs = helpModalDialog.querySelectorAll('.help-tab');
     const contents = helpModalDialog.querySelectorAll('.tab-content');
-    
+
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
             // Remove active class from all tabs and contents
             tabs.forEach(t => t.classList.remove('active'));
             contents.forEach(c => c.classList.remove('active'));
-            
+
             // Add active class to clicked tab and corresponding content
             tab.classList.add('active');
             const contentId = tab.dataset.tab + '-content';
@@ -2683,7 +2748,7 @@ function showHelpModal() {
         document.body.removeChild(helpModalDialog);
         helpModalDialog = null;
     });
-    
+
     // Close on click outside
     helpModalDialog.addEventListener('click', (e) => {
         if (e.target === helpModalDialog) {
@@ -2691,7 +2756,7 @@ function showHelpModal() {
             helpModalDialog = null;
         }
     });
-    
+
     // Also close on Escape key
     const escapeHandler = (e) => {
         if (e.key === 'Escape' && helpModalDialog) {
@@ -2786,7 +2851,7 @@ function showResourceRichnessModal() {
             alert('Minimum richness cannot be greater than maximum richness');
             return;
         }
-        
+
         if (isNaN(asteroidMultiplier) || asteroidMultiplier <= 0) {
             alert('Please enter a valid asteroid belt multiplier');
             return;
@@ -2879,7 +2944,7 @@ function applyResourceRichnessFalloff(systems, minRichness, maxRichness, falloff
         // Update resources on planets
         system.planets.forEach(planet => {
             if (!planet.resources) return;
-            
+
             // Check if this planet is an asteroid belt
             const planetName = window.getPlanetTypeName ? window.getPlanetTypeName(planet.type) : '';
             const isAsteroidBelt = planetName && planetName.includes('System Asteroid Belt');
@@ -2892,7 +2957,7 @@ function applyResourceRichnessFalloff(systems, minRichness, maxRichness, falloff
 
                 // Calculate final richness value
                 let finalRichness = richnessValue;
-                
+
                 // Apply asteroid multiplier if this is an asteroid belt
                 if (isAsteroidBelt && asteroidMultiplier !== 1.0) {
                     finalRichness = richnessValue * asteroidMultiplier;
