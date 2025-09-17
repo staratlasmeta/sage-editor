@@ -1470,7 +1470,7 @@ function setupResourceFilter() {
     ];
 
     const syntheticResources = [
-        'drywater', 'arco', 'thermodyne', 'thermoplastic resin',
+        'arco', 'thermodyne', 'thermoplastic resin',
         'quantum computational substrate', 'bathysphere pearls', 'nanosil',
         'plasma containment minerals', 'raw chisenic', 'rochinol'
     ];
@@ -1665,7 +1665,7 @@ function setupResourceFilter() {
                 } else if (category === 'synthetics') {
                     // Find all checkboxes for synthetic resources
                     const syntheticResources = [
-                        'drywater', 'arco', 'thermodyne', 'thermoplastic resin',
+                        'arco', 'thermodyne', 'thermoplastic resin',
                         'quantum computational substrate', 'bathysphere pearls', 'nanosil',
                         'plasma containment minerals', 'raw chisenic', 'rochinol'
                     ];
@@ -1702,7 +1702,7 @@ function setupResourceFilter() {
                         'mind shade fungus', 'aegis barrier cactus'
                     ];
                     const syntheticResources = [
-                        'drywater', 'arco', 'thermodyne', 'thermoplastic resin',
+                        'arco', 'thermodyne', 'thermoplastic resin',
                         'quantum computational substrate', 'bathysphere pearls', 'nanosil',
                         'plasma containment minerals', 'raw chisenic', 'rochinol'
                     ];
