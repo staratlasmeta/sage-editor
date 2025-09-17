@@ -1,0 +1,3855 @@
+{
+  "resourceTypes": [
+    {
+      "type": 0,
+      "id": "magmaroot",
+      "name": "Magmaroot",
+      "tier": 1,
+      "planetTypes": [
+        "Volcanic Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": true
+    },
+    {
+      "type": 1,
+      "id": "pyroclast-energen",
+      "name": "Pyroclast Energen",
+      "tier": 1,
+      "planetTypes": [
+        "Volcanic Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": true
+    },
+    {
+      "type": 2,
+      "id": "blazing-snapdragon",
+      "name": "Blazing Snapdragon",
+      "tier": 2,
+      "planetTypes": [
+        "Volcanic Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": true
+    },
+    {
+      "type": 3,
+      "id": "tidal-kelp",
+      "name": "Tidal Kelp",
+      "tier": 1,
+      "planetTypes": [
+        "Oceanic Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": true
+    },
+    {
+      "type": 4,
+      "id": "bioluminous-algae",
+      "name": "Bioluminous Algae",
+      "tier": 2,
+      "planetTypes": [
+        "Oceanic Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": true
+    },
+    {
+      "type": 5,
+      "id": "shadowmoss",
+      "name": "Shadowmoss",
+      "tier": 1,
+      "planetTypes": [
+        "Dark Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": true
+    },
+    {
+      "type": 6,
+      "id": "spectral-lichen",
+      "name": "Spectral Lichen",
+      "tier": 2,
+      "planetTypes": [
+        "Dark Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": true
+    },
+    {
+      "type": 7,
+      "id": "ironshell-cactus",
+      "name": "Ironshell Cactus",
+      "tier": 1,
+      "planetTypes": [
+        "Barren Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": true
+    },
+    {
+      "type": 8,
+      "id": "bastion-agave",
+      "name": "Bastion Agave",
+      "tier": 2,
+      "planetTypes": [
+        "Barren Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": true
+    },
+    {
+      "type": 9,
+      "id": "swiftvine",
+      "name": "Swiftvine",
+      "tier": 2,
+      "planetTypes": [
+        "Terrestrial Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": true
+    },
+    {
+      "type": 10,
+      "id": "electric-fern",
+      "name": "Electric Fern",
+      "tier": 2,
+      "planetTypes": [
+        "Terrestrial Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": true
+    },
+    {
+      "type": 11,
+      "id": "temporal-flux-orchid",
+      "name": "Temporal Flux Orchid",
+      "tier": 2,
+      "planetTypes": [
+        "Terrestrial Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": true
+    },
+    {
+      "type": 12,
+      "id": "frostcore-bryophyte",
+      "name": "Frostcore Bryophyte",
+      "tier": 3,
+      "planetTypes": [
+        "Ice Giant"
+      ],
+      "factions": [
+        "MUD"
+      ],
+      "isOrganic": true
+    },
+    {
+      "type": 13,
+      "id": "mind-shade-fungus",
+      "name": "Mind Shade Fungus",
+      "tier": 3,
+      "planetTypes": [
+        "Dark Planet"
+      ],
+      "factions": [
+        "ONI"
+      ],
+      "isOrganic": true
+    },
+    {
+      "type": 14,
+      "id": "aegis-barrier-cactus",
+      "name": "Aegis Barrier Cactus",
+      "tier": 3,
+      "planetTypes": [
+        "Barren Planet"
+      ],
+      "factions": [
+        "USTUR"
+      ],
+      "isOrganic": true
+    },
+    {
+      "type": 15,
+      "id": "abyssal-energy-crystals",
+      "name": "Abyssal Energy Crystals",
+      "tier": 4,
+      "planetTypes": [
+        "Oceanic Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 16,
+      "id": "aluminum-ore",
+      "name": "Aluminum Ore",
+      "tier": 2,
+      "planetTypes": [
+        "System Asteroid Belt",
+        "Ice Giant",
+        "Barren Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 17,
+      "id": "arco",
+      "name": "Arco",
+      "tier": 1,
+      "planetTypes": [
+        "Terrestrial Planet",
+        "Barren Planet",
+        "Gas Giant"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 18,
+      "id": "argon",
+      "name": "Argon",
+      "tier": 2,
+      "planetTypes": [
+        "Gas Giant",
+        "Dark Planet",
+        "Ice Giant"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 19,
+      "id": "bathysphere-pearls",
+      "name": "Bathysphere Pearls",
+      "tier": 3,
+      "planetTypes": [
+        "Oceanic Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 20,
+      "id": "beryllium-crystals",
+      "name": "Beryllium Crystals",
+      "tier": 5,
+      "planetTypes": [
+        "Dark Planet",
+        "Ice Giant"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 21,
+      "id": "biomass",
+      "name": "Biomass",
+      "tier": 1,
+      "planetTypes": [
+        "Terrestrial Planet",
+        "Oceanic Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 22,
+      "id": "boron-ore",
+      "name": "Boron Ore",
+      "tier": 2,
+      "planetTypes": [
+        "Barren Planet",
+        "Gas Giant"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 23,
+      "id": "carbon",
+      "name": "Carbon",
+      "tier": 1,
+      "planetTypes": [
+        "System Asteroid Belt",
+        "Volcanic Planet",
+        "Dark Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 24,
+      "id": "chromite-ore",
+      "name": "Chromite Ore",
+      "tier": 1,
+      "planetTypes": [
+        "Oceanic Planet",
+        "Ice Giant",
+        "Dark Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 25,
+      "id": "copper-ore",
+      "name": "Copper Ore",
+      "tier": 1,
+      "planetTypes": [
+        "Terrestrial Planet",
+        "System Asteroid Belt",
+        "Oceanic Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 26,
+      "id": "cryo-formation-crystals",
+      "name": "Cryo Formation Crystals",
+      "tier": 3,
+      "planetTypes": [
+        "Ice Giant"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 27,
+      "id": "diamond",
+      "name": "Diamond",
+      "tier": 3,
+      "planetTypes": [
+        "Volcanic Planet",
+        "Barren Planet",
+        "Dark Planet"
+      ],
+      "factions": [
+        "MUD"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 28,
+      "id": "dodiline-crystals",
+      "name": "Dodiline Crystals",
+      "tier": 4,
+      "planetTypes": [
+        "Volcanic Planet"
+      ],
+      "factions": [
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 29,
+      "id": "drywater",
+      "name": "Drywater",
+      "tier": 3,
+      "planetTypes": [
+        "Ice Giant",
+        "Barren Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 30,
+      "id": "dysprosium",
+      "name": "Dysprosium",
+      "tier": 4,
+      "planetTypes": [
+        "Terrestrial Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 31,
+      "id": "emerald-crystals",
+      "name": "Emerald Crystals",
+      "tier": 3,
+      "planetTypes": [
+        "Dark Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 32,
+      "id": "fluorine-gas",
+      "name": "Fluorine Gas",
+      "tier": 2,
+      "planetTypes": [
+        "Gas Giant",
+        "Volcanic Planet",
+        "Ice Giant"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 33,
+      "id": "fusion-catalyst-deposits",
+      "name": "Fusion Catalyst Deposits",
+      "tier": 5,
+      "planetTypes": [
+        "Dark Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 34,
+      "id": "garnet-crystals",
+      "name": "Garnet Crystals",
+      "tier": 2,
+      "planetTypes": [
+        "System Asteroid Belt",
+        "Ice Giant"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 35,
+      "id": "germanium",
+      "name": "Germanium",
+      "tier": 4,
+      "planetTypes": [
+        "System Asteroid Belt",
+        "Ice Giant",
+        "Gas Giant"
+      ],
+      "factions": [
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 36,
+      "id": "gold-ore",
+      "name": "Gold Ore",
+      "tier": 3,
+      "planetTypes": [
+        "Terrestrial Planet"
+      ],
+      "factions": [
+        "ONI"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 37,
+      "id": "hafnium-ore",
+      "name": "Hafnium Ore",
+      "tier": 2,
+      "planetTypes": [
+        "System Asteroid Belt",
+        "Ice Giant",
+        "Barren Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 38,
+      "id": "hicenium-crystals",
+      "name": "Hicenium Crystals",
+      "tier": 4,
+      "planetTypes": [
+        "Ice Giant"
+      ],
+      "factions": [
+        "MUD"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 39,
+      "id": "hydrogen",
+      "name": "Hydrogen",
+      "tier": 1,
+      "planetTypes": [
+        "Gas Giant",
+        "Ice Giant",
+        "Oceanic Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 40,
+      "id": "ink",
+      "name": "Ink",
+      "tier": 1,
+      "planetTypes": [],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 41,
+      "id": "iridium-ore",
+      "name": "Iridium Ore",
+      "tier": 4,
+      "planetTypes": [
+        "Volcanic Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 42,
+      "id": "iron-ore",
+      "name": "Iron Ore",
+      "tier": 1,
+      "planetTypes": [
+        "Terrestrial Planet",
+        "System Asteroid Belt",
+        "Barren Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 43,
+      "id": "jasphorus-crystals",
+      "name": "Jasphorus Crystals",
+      "tier": 5,
+      "planetTypes": [
+        "Barren Planet"
+      ],
+      "factions": [
+        "ONI"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 44,
+      "id": "krypton",
+      "name": "Krypton",
+      "tier": 1,
+      "planetTypes": [
+        "Gas Giant",
+        "Ice Giant"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 45,
+      "id": "lithium-ore",
+      "name": "Lithium Ore",
+      "tier": 2,
+      "planetTypes": [
+        "Barren Planet",
+        "Dark Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 46,
+      "id": "living-metal-symbionts",
+      "name": "Living Metal Symbionts",
+      "tier": 5,
+      "planetTypes": [
+        "Dark Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 47,
+      "id": "lumanite",
+      "name": "Lumanite",
+      "tier": 1,
+      "planetTypes": [
+        "Volcanic Planet",
+        "Dark Planet",
+        "Ice Giant"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 48,
+      "id": "lunar-echo-crystals",
+      "name": "Lunar Echo Crystals",
+      "tier": 5,
+      "planetTypes": [
+        "Oceanic Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 49,
+      "id": "manganese-ore",
+      "name": "Manganese Ore",
+      "tier": 2,
+      "planetTypes": [
+        "System Asteroid Belt",
+        "Volcanic Planet",
+        "Gas Giant"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 50,
+      "id": "methane",
+      "name": "Methane",
+      "tier": 2,
+      "planetTypes": [
+        "Gas Giant",
+        "Ice Giant",
+        "Dark Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 51,
+      "id": "nanosil",
+      "name": "Nanosil",
+      "tier": 3,
+      "planetTypes": [
+        "System Asteroid Belt",
+        "Dark Planet"
+      ],
+      "factions": [
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 52,
+      "id": "neodymium",
+      "name": "Neodymium",
+      "tier": 1,
+      "planetTypes": [
+        "System Asteroid Belt",
+        "Volcanic Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 53,
+      "id": "neon",
+      "name": "Neon",
+      "tier": 3,
+      "planetTypes": [
+        "Dark Planet",
+        "Gas Giant"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 54,
+      "id": "neural-coral-compounds",
+      "name": "Neural Coral Compounds",
+      "tier": 3,
+      "planetTypes": [
+        "Oceanic Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 55,
+      "id": "nitrogen",
+      "name": "Nitrogen",
+      "tier": 1,
+      "planetTypes": [
+        "Terrestrial Planet",
+        "Gas Giant",
+        "Ice Giant"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 56,
+      "id": "osmium-ore",
+      "name": "Osmium Ore",
+      "tier": 1,
+      "planetTypes": [
+        "System Asteroid Belt",
+        "Dark Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 57,
+      "id": "oxygen",
+      "name": "Oxygen",
+      "tier": 2,
+      "planetTypes": [
+        "Terrestrial Planet",
+        "Oceanic Planet",
+        "Ice Giant"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 58,
+      "id": "palladium-ore",
+      "name": "Palladium Ore",
+      "tier": 3,
+      "planetTypes": [
+        "Volcanic Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 59,
+      "id": "peridot-crystals",
+      "name": "Peridot Crystals",
+      "tier": 2,
+      "planetTypes": [
+        "Ice Giant",
+        "Volcanic Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 60,
+      "id": "phase-shift-crystals",
+      "name": "Phase Shift Crystals",
+      "tier": 3,
+      "planetTypes": [
+        "Oceanic Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 61,
+      "id": "plasma-containment-minerals",
+      "name": "Plasma Containment Minerals",
+      "tier": 3,
+      "planetTypes": [
+        "Volcanic Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 62,
+      "id": "platinum-ore",
+      "name": "Platinum Ore",
+      "tier": 3,
+      "planetTypes": [
+        "Volcanic Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 63,
+      "id": "quantum-computational-substrate",
+      "name": "Quantum Computational Substrate",
+      "tier": 4,
+      "planetTypes": [
+        "Dark Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 64,
+      "id": "quantum-particle",
+      "name": "Quantum Particle",
+      "tier": 5,
+      "planetTypes": [
+        "Dark Planet",
+        "Ice Giant"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 65,
+      "id": "quartz-crystals",
+      "name": "Quartz Crystals",
+      "tier": 1,
+      "planetTypes": [
+        "Terrestrial Planet",
+        "Oceanic Planet",
+        "Ice Giant"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 66,
+      "id": "raw-chisenic",
+      "name": "Raw Chisenic",
+      "tier": 3,
+      "planetTypes": [
+        "Dark Planet"
+      ],
+      "factions": [
+        "ONI"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 67,
+      "id": "resonium-ore",
+      "name": "Resonium Ore",
+      "tier": 5,
+      "planetTypes": [
+        "Barren Planet"
+      ],
+      "factions": [
+        "MUD"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 68,
+      "id": "rhenium-ore",
+      "name": "Rhenium Ore",
+      "tier": 1,
+      "planetTypes": [
+        "Volcanic Planet",
+        "Barren Planet",
+        "Gas Giant"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 69,
+      "id": "rhodium-ore",
+      "name": "Rhodium Ore",
+      "tier": 4,
+      "planetTypes": [
+        "Volcanic Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 70,
+      "id": "rochinol",
+      "name": "Rochinol",
+      "tier": 2,
+      "planetTypes": [
+        "Volcanic Planet",
+        "Ice Giant",
+        "Gas Giant"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 71,
+      "id": "ruby-crystals",
+      "name": "Ruby Crystals",
+      "tier": 2,
+      "planetTypes": [
+        "Ice Giant",
+        "Dark Planet",
+        "Barren Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 72,
+      "id": "sapphire-crystals",
+      "name": "Sapphire Crystals",
+      "tier": 3,
+      "planetTypes": [
+        "Ice Giant"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 73,
+      "id": "scandium-ore",
+      "name": "Scandium Ore",
+      "tier": 2,
+      "planetTypes": [
+        "System Asteroid Belt",
+        "Gas Giant"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 74,
+      "id": "silica",
+      "name": "Silica",
+      "tier": 1,
+      "planetTypes": [
+        "Terrestrial Planet",
+        "System Asteroid Belt",
+        "Volcanic Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 75,
+      "id": "silicon-crystal",
+      "name": "Silicon Crystal",
+      "tier": 1,
+      "planetTypes": [
+        "Oceanic Planet",
+        "Ice Giant"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 76,
+      "id": "silver-ore",
+      "name": "Silver Ore",
+      "tier": 2,
+      "planetTypes": [
+        "Dark Planet",
+        "Barren Planet",
+        "Gas Giant"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 77,
+      "id": "sodium-crystals",
+      "name": "Sodium Crystals",
+      "tier": 1,
+      "planetTypes": [
+        "Volcanic Planet",
+        "Barren Planet",
+        "Gas Giant"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 78,
+      "id": "strontium-crystals",
+      "name": "Strontium Crystals",
+      "tier": 5,
+      "planetTypes": [
+        "System Asteroid Belt"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 79,
+      "id": "tantalum-ore",
+      "name": "Tantalum Ore",
+      "tier": 1,
+      "planetTypes": [
+        "Volcanic Planet",
+        "Barren Planet",
+        "Dark Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 80,
+      "id": "tenon-gas",
+      "name": "Tenon Gas",
+      "tier": 3,
+      "planetTypes": [
+        "Gas Giant"
+      ],
+      "factions": [
+        "MUD"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 81,
+      "id": "thermal-regulator-stone",
+      "name": "Thermal Regulator Stone",
+      "tier": 1,
+      "planetTypes": [
+        "Volcanic Planet",
+        "Barren Planet",
+        "Terrestrial Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 82,
+      "id": "thermodyne",
+      "name": "Thermodyne",
+      "tier": 2,
+      "planetTypes": [
+        "Oceanic Planet",
+        "Volcanic Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 83,
+      "id": "thermoplastic-resin",
+      "name": "Thermoplastic Resin",
+      "tier": 3,
+      "planetTypes": [
+        "Terrestrial Planet",
+        "Volcanic Planet"
+      ],
+      "factions": [
+        "ONI"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 84,
+      "id": "tin-ore",
+      "name": "Tin Ore",
+      "tier": 1,
+      "planetTypes": [
+        "Terrestrial Planet",
+        "Oceanic Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 85,
+      "id": "titanium-ore",
+      "name": "Titanium Ore",
+      "tier": 3,
+      "planetTypes": [
+        "System Asteroid Belt"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 86,
+      "id": "topaz-crystals",
+      "name": "Topaz Crystals",
+      "tier": 2,
+      "planetTypes": [
+        "Dark Planet",
+        "Ice Giant",
+        "Barren Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 87,
+      "id": "tritium-ore",
+      "name": "Tritium Ore",
+      "tier": 1,
+      "planetTypes": [
+        "System Asteroid Belt",
+        "Oceanic Planet",
+        "Ice Giant"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 88,
+      "id": "tungsten-ore",
+      "name": "Tungsten Ore",
+      "tier": 3,
+      "planetTypes": [
+        "Barren Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 89,
+      "id": "vanadium-ore",
+      "name": "Vanadium Ore",
+      "tier": 3,
+      "planetTypes": [
+        "Barren Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 90,
+      "id": "viscovite-crystals",
+      "name": "Viscovite Crystals",
+      "tier": 3,
+      "planetTypes": [
+        "Dark Planet"
+      ],
+      "factions": [
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 91,
+      "id": "xenon",
+      "name": "Xenon",
+      "tier": 2,
+      "planetTypes": [
+        "Gas Giant",
+        "Ice Giant",
+        "Dark Planet"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 92,
+      "id": "zinc-ore",
+      "name": "Zinc Ore",
+      "tier": 1,
+      "planetTypes": [
+        "Terrestrial Planet",
+        "System Asteroid Belt"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    },
+    {
+      "type": 93,
+      "id": "zirconium-ore",
+      "name": "Zirconium Ore",
+      "tier": 4,
+      "planetTypes": [
+        "Ice Giant"
+      ],
+      "factions": [
+        "MUD",
+        "ONI",
+        "USTUR"
+      ],
+      "isOrganic": false
+    }
+  ],
+  "planetArchetypeResources": {
+    "MUD": {
+      "Terrestrial": [
+        {
+          "type": 9,
+          "name": "Swiftvine",
+          "richness": 2
+        },
+        {
+          "type": 10,
+          "name": "Electric Fern",
+          "richness": 2
+        },
+        {
+          "type": 11,
+          "name": "Temporal Flux Orchid",
+          "richness": 2
+        },
+        {
+          "type": 17,
+          "name": "Arco",
+          "richness": 1
+        },
+        {
+          "type": 21,
+          "name": "Biomass",
+          "richness": 1
+        },
+        {
+          "type": 25,
+          "name": "Copper Ore",
+          "richness": 1
+        },
+        {
+          "type": 30,
+          "name": "Dysprosium",
+          "richness": 4
+        },
+        {
+          "type": 42,
+          "name": "Iron Ore",
+          "richness": 1
+        },
+        {
+          "type": 55,
+          "name": "Nitrogen",
+          "richness": 1
+        },
+        {
+          "type": 57,
+          "name": "Oxygen",
+          "richness": 2
+        },
+        {
+          "type": 65,
+          "name": "Quartz Crystals",
+          "richness": 1
+        },
+        {
+          "type": 74,
+          "name": "Silica",
+          "richness": 1
+        },
+        {
+          "type": 81,
+          "name": "Thermal Regulator Stone",
+          "richness": 1
+        },
+        {
+          "type": 84,
+          "name": "Tin Ore",
+          "richness": 1
+        },
+        {
+          "type": 92,
+          "name": "Zinc Ore",
+          "richness": 1
+        }
+      ],
+      "Volcanic": [
+        {
+          "type": 0,
+          "name": "Magmaroot",
+          "richness": 1
+        },
+        {
+          "type": 1,
+          "name": "Pyroclast Energen",
+          "richness": 1
+        },
+        {
+          "type": 2,
+          "name": "Blazing Snapdragon",
+          "richness": 2
+        },
+        {
+          "type": 23,
+          "name": "Carbon",
+          "richness": 1
+        },
+        {
+          "type": 27,
+          "name": "Diamond",
+          "richness": 3
+        },
+        {
+          "type": 32,
+          "name": "Fluorine Gas",
+          "richness": 2
+        },
+        {
+          "type": 41,
+          "name": "Iridium Ore",
+          "richness": 4
+        },
+        {
+          "type": 47,
+          "name": "Lumanite",
+          "richness": 1
+        },
+        {
+          "type": 49,
+          "name": "Manganese Ore",
+          "richness": 2
+        },
+        {
+          "type": 52,
+          "name": "Neodymium",
+          "richness": 1
+        },
+        {
+          "type": 58,
+          "name": "Palladium Ore",
+          "richness": 3
+        },
+        {
+          "type": 59,
+          "name": "Peridot Crystals",
+          "richness": 2
+        },
+        {
+          "type": 61,
+          "name": "Plasma Containment Minerals",
+          "richness": 3
+        },
+        {
+          "type": 62,
+          "name": "Platinum Ore",
+          "richness": 3
+        },
+        {
+          "type": 68,
+          "name": "Rhenium Ore",
+          "richness": 1
+        },
+        {
+          "type": 69,
+          "name": "Rhodium Ore",
+          "richness": 4
+        },
+        {
+          "type": 70,
+          "name": "Rochinol",
+          "richness": 2
+        },
+        {
+          "type": 74,
+          "name": "Silica",
+          "richness": 1
+        },
+        {
+          "type": 77,
+          "name": "Sodium Crystals",
+          "richness": 1
+        },
+        {
+          "type": 79,
+          "name": "Tantalum Ore",
+          "richness": 1
+        },
+        {
+          "type": 81,
+          "name": "Thermal Regulator Stone",
+          "richness": 1
+        },
+        {
+          "type": 82,
+          "name": "Thermodyne",
+          "richness": 2
+        }
+      ],
+      "Barren": [
+        {
+          "type": 7,
+          "name": "Ironshell Cactus",
+          "richness": 1
+        },
+        {
+          "type": 8,
+          "name": "Bastion Agave",
+          "richness": 2
+        },
+        {
+          "type": 16,
+          "name": "Aluminum Ore",
+          "richness": 2
+        },
+        {
+          "type": 17,
+          "name": "Arco",
+          "richness": 1
+        },
+        {
+          "type": 22,
+          "name": "Boron Ore",
+          "richness": 2
+        },
+        {
+          "type": 27,
+          "name": "Diamond",
+          "richness": 3
+        },
+        {
+          "type": 29,
+          "name": "Drywater",
+          "richness": 3
+        },
+        {
+          "type": 37,
+          "name": "Hafnium Ore",
+          "richness": 2
+        },
+        {
+          "type": 42,
+          "name": "Iron Ore",
+          "richness": 1
+        },
+        {
+          "type": 45,
+          "name": "Lithium Ore",
+          "richness": 2
+        },
+        {
+          "type": 67,
+          "name": "Resonium Ore",
+          "richness": 5
+        },
+        {
+          "type": 68,
+          "name": "Rhenium Ore",
+          "richness": 1
+        },
+        {
+          "type": 71,
+          "name": "Ruby Crystals",
+          "richness": 2
+        },
+        {
+          "type": 76,
+          "name": "Silver Ore",
+          "richness": 2
+        },
+        {
+          "type": 77,
+          "name": "Sodium Crystals",
+          "richness": 1
+        },
+        {
+          "type": 79,
+          "name": "Tantalum Ore",
+          "richness": 1
+        },
+        {
+          "type": 81,
+          "name": "Thermal Regulator Stone",
+          "richness": 1
+        },
+        {
+          "type": 86,
+          "name": "Topaz Crystals",
+          "richness": 2
+        },
+        {
+          "type": 88,
+          "name": "Tungsten Ore",
+          "richness": 3
+        },
+        {
+          "type": 89,
+          "name": "Vanadium Ore",
+          "richness": 3
+        }
+      ],
+      "Asteroid Belt": [
+        {
+          "type": 16,
+          "name": "Aluminum Ore",
+          "richness": 2
+        },
+        {
+          "type": 23,
+          "name": "Carbon",
+          "richness": 1
+        },
+        {
+          "type": 25,
+          "name": "Copper Ore",
+          "richness": 1
+        },
+        {
+          "type": 34,
+          "name": "Garnet Crystals",
+          "richness": 2
+        },
+        {
+          "type": 37,
+          "name": "Hafnium Ore",
+          "richness": 2
+        },
+        {
+          "type": 42,
+          "name": "Iron Ore",
+          "richness": 1
+        },
+        {
+          "type": 49,
+          "name": "Manganese Ore",
+          "richness": 2
+        },
+        {
+          "type": 52,
+          "name": "Neodymium",
+          "richness": 1
+        },
+        {
+          "type": 56,
+          "name": "Osmium Ore",
+          "richness": 1
+        },
+        {
+          "type": 73,
+          "name": "Scandium Ore",
+          "richness": 2
+        },
+        {
+          "type": 74,
+          "name": "Silica",
+          "richness": 1
+        },
+        {
+          "type": 78,
+          "name": "Strontium Crystals",
+          "richness": 5
+        },
+        {
+          "type": 85,
+          "name": "Titanium Ore",
+          "richness": 3
+        },
+        {
+          "type": 87,
+          "name": "Tritium Ore",
+          "richness": 1
+        },
+        {
+          "type": 92,
+          "name": "Zinc Ore",
+          "richness": 1
+        }
+      ],
+      "Gas Giant": [
+        {
+          "type": 17,
+          "name": "Arco",
+          "richness": 1
+        },
+        {
+          "type": 18,
+          "name": "Argon",
+          "richness": 2
+        },
+        {
+          "type": 22,
+          "name": "Boron Ore",
+          "richness": 2
+        },
+        {
+          "type": 32,
+          "name": "Fluorine Gas",
+          "richness": 2
+        },
+        {
+          "type": 39,
+          "name": "Hydrogen",
+          "richness": 1
+        },
+        {
+          "type": 44,
+          "name": "Krypton",
+          "richness": 1
+        },
+        {
+          "type": 49,
+          "name": "Manganese Ore",
+          "richness": 2
+        },
+        {
+          "type": 50,
+          "name": "Methane",
+          "richness": 2
+        },
+        {
+          "type": 53,
+          "name": "Neon",
+          "richness": 3
+        },
+        {
+          "type": 55,
+          "name": "Nitrogen",
+          "richness": 1
+        },
+        {
+          "type": 68,
+          "name": "Rhenium Ore",
+          "richness": 1
+        },
+        {
+          "type": 70,
+          "name": "Rochinol",
+          "richness": 2
+        },
+        {
+          "type": 73,
+          "name": "Scandium Ore",
+          "richness": 2
+        },
+        {
+          "type": 76,
+          "name": "Silver Ore",
+          "richness": 2
+        },
+        {
+          "type": 77,
+          "name": "Sodium Crystals",
+          "richness": 1
+        },
+        {
+          "type": 80,
+          "name": "Tenon Gas",
+          "richness": 3
+        },
+        {
+          "type": 91,
+          "name": "Xenon",
+          "richness": 2
+        }
+      ],
+      "Ice Giant": [
+        {
+          "type": 12,
+          "name": "Frostcore Bryophyte",
+          "richness": 3
+        },
+        {
+          "type": 16,
+          "name": "Aluminum Ore",
+          "richness": 2
+        },
+        {
+          "type": 18,
+          "name": "Argon",
+          "richness": 2
+        },
+        {
+          "type": 20,
+          "name": "Beryllium Crystals",
+          "richness": 5
+        },
+        {
+          "type": 24,
+          "name": "Chromite Ore",
+          "richness": 1
+        },
+        {
+          "type": 26,
+          "name": "Cryo Formation Crystals",
+          "richness": 3
+        },
+        {
+          "type": 29,
+          "name": "Drywater",
+          "richness": 3
+        },
+        {
+          "type": 32,
+          "name": "Fluorine Gas",
+          "richness": 2
+        },
+        {
+          "type": 34,
+          "name": "Garnet Crystals",
+          "richness": 2
+        },
+        {
+          "type": 37,
+          "name": "Hafnium Ore",
+          "richness": 2
+        },
+        {
+          "type": 38,
+          "name": "Hicenium Crystals",
+          "richness": 4
+        },
+        {
+          "type": 39,
+          "name": "Hydrogen",
+          "richness": 1
+        },
+        {
+          "type": 44,
+          "name": "Krypton",
+          "richness": 1
+        },
+        {
+          "type": 47,
+          "name": "Lumanite",
+          "richness": 1
+        },
+        {
+          "type": 50,
+          "name": "Methane",
+          "richness": 2
+        },
+        {
+          "type": 55,
+          "name": "Nitrogen",
+          "richness": 1
+        },
+        {
+          "type": 57,
+          "name": "Oxygen",
+          "richness": 2
+        },
+        {
+          "type": 59,
+          "name": "Peridot Crystals",
+          "richness": 2
+        },
+        {
+          "type": 64,
+          "name": "Quantum Particle",
+          "richness": 5
+        },
+        {
+          "type": 65,
+          "name": "Quartz Crystals",
+          "richness": 1
+        },
+        {
+          "type": 70,
+          "name": "Rochinol",
+          "richness": 2
+        },
+        {
+          "type": 71,
+          "name": "Ruby Crystals",
+          "richness": 2
+        },
+        {
+          "type": 72,
+          "name": "Sapphire Crystals",
+          "richness": 3
+        },
+        {
+          "type": 75,
+          "name": "Silicon Crystal",
+          "richness": 1
+        },
+        {
+          "type": 86,
+          "name": "Topaz Crystals",
+          "richness": 2
+        },
+        {
+          "type": 87,
+          "name": "Tritium Ore",
+          "richness": 1
+        },
+        {
+          "type": 91,
+          "name": "Xenon",
+          "richness": 2
+        },
+        {
+          "type": 93,
+          "name": "Zirconium Ore",
+          "richness": 4
+        }
+      ],
+      "Dark": [
+        {
+          "type": 5,
+          "name": "Shadowmoss",
+          "richness": 1
+        },
+        {
+          "type": 6,
+          "name": "Spectral Lichen",
+          "richness": 2
+        },
+        {
+          "type": 18,
+          "name": "Argon",
+          "richness": 2
+        },
+        {
+          "type": 20,
+          "name": "Beryllium Crystals",
+          "richness": 5
+        },
+        {
+          "type": 23,
+          "name": "Carbon",
+          "richness": 1
+        },
+        {
+          "type": 24,
+          "name": "Chromite Ore",
+          "richness": 1
+        },
+        {
+          "type": 27,
+          "name": "Diamond",
+          "richness": 3
+        },
+        {
+          "type": 31,
+          "name": "Emerald Crystals",
+          "richness": 3
+        },
+        {
+          "type": 33,
+          "name": "Fusion Catalyst Deposits",
+          "richness": 5
+        },
+        {
+          "type": 45,
+          "name": "Lithium Ore",
+          "richness": 2
+        },
+        {
+          "type": 46,
+          "name": "Living Metal Symbionts",
+          "richness": 5
+        },
+        {
+          "type": 47,
+          "name": "Lumanite",
+          "richness": 1
+        },
+        {
+          "type": 50,
+          "name": "Methane",
+          "richness": 2
+        },
+        {
+          "type": 53,
+          "name": "Neon",
+          "richness": 3
+        },
+        {
+          "type": 56,
+          "name": "Osmium Ore",
+          "richness": 1
+        },
+        {
+          "type": 63,
+          "name": "Quantum Computational Substrate",
+          "richness": 4
+        },
+        {
+          "type": 64,
+          "name": "Quantum Particle",
+          "richness": 5
+        },
+        {
+          "type": 71,
+          "name": "Ruby Crystals",
+          "richness": 2
+        },
+        {
+          "type": 76,
+          "name": "Silver Ore",
+          "richness": 2
+        },
+        {
+          "type": 79,
+          "name": "Tantalum Ore",
+          "richness": 1
+        },
+        {
+          "type": 86,
+          "name": "Topaz Crystals",
+          "richness": 2
+        },
+        {
+          "type": 91,
+          "name": "Xenon",
+          "richness": 2
+        }
+      ],
+      "Oceanic": [
+        {
+          "type": 3,
+          "name": "Tidal Kelp",
+          "richness": 1
+        },
+        {
+          "type": 4,
+          "name": "Bioluminous Algae",
+          "richness": 2
+        },
+        {
+          "type": 15,
+          "name": "Abyssal Energy Crystals",
+          "richness": 4
+        },
+        {
+          "type": 19,
+          "name": "Bathysphere Pearls",
+          "richness": 3
+        },
+        {
+          "type": 21,
+          "name": "Biomass",
+          "richness": 1
+        },
+        {
+          "type": 24,
+          "name": "Chromite Ore",
+          "richness": 1
+        },
+        {
+          "type": 25,
+          "name": "Copper Ore",
+          "richness": 1
+        },
+        {
+          "type": 39,
+          "name": "Hydrogen",
+          "richness": 1
+        },
+        {
+          "type": 48,
+          "name": "Lunar Echo Crystals",
+          "richness": 5
+        },
+        {
+          "type": 54,
+          "name": "Neural Coral Compounds",
+          "richness": 3
+        },
+        {
+          "type": 57,
+          "name": "Oxygen",
+          "richness": 2
+        },
+        {
+          "type": 60,
+          "name": "Phase Shift Crystals",
+          "richness": 3
+        },
+        {
+          "type": 65,
+          "name": "Quartz Crystals",
+          "richness": 1
+        },
+        {
+          "type": 75,
+          "name": "Silicon Crystal",
+          "richness": 1
+        },
+        {
+          "type": 82,
+          "name": "Thermodyne",
+          "richness": 2
+        },
+        {
+          "type": 84,
+          "name": "Tin Ore",
+          "richness": 1
+        },
+        {
+          "type": 87,
+          "name": "Tritium Ore",
+          "richness": 1
+        }
+      ]
+    },
+    "ONI": {
+      "Terrestrial": [
+        {
+          "type": 9,
+          "name": "Swiftvine",
+          "richness": 2
+        },
+        {
+          "type": 10,
+          "name": "Electric Fern",
+          "richness": 2
+        },
+        {
+          "type": 11,
+          "name": "Temporal Flux Orchid",
+          "richness": 2
+        },
+        {
+          "type": 17,
+          "name": "Arco",
+          "richness": 1
+        },
+        {
+          "type": 21,
+          "name": "Biomass",
+          "richness": 1
+        },
+        {
+          "type": 25,
+          "name": "Copper Ore",
+          "richness": 1
+        },
+        {
+          "type": 30,
+          "name": "Dysprosium",
+          "richness": 4
+        },
+        {
+          "type": 36,
+          "name": "Gold Ore",
+          "richness": 3
+        },
+        {
+          "type": 42,
+          "name": "Iron Ore",
+          "richness": 1
+        },
+        {
+          "type": 55,
+          "name": "Nitrogen",
+          "richness": 1
+        },
+        {
+          "type": 57,
+          "name": "Oxygen",
+          "richness": 2
+        },
+        {
+          "type": 65,
+          "name": "Quartz Crystals",
+          "richness": 1
+        },
+        {
+          "type": 74,
+          "name": "Silica",
+          "richness": 1
+        },
+        {
+          "type": 81,
+          "name": "Thermal Regulator Stone",
+          "richness": 1
+        },
+        {
+          "type": 83,
+          "name": "Thermoplastic Resin",
+          "richness": 3
+        },
+        {
+          "type": 84,
+          "name": "Tin Ore",
+          "richness": 1
+        },
+        {
+          "type": 92,
+          "name": "Zinc Ore",
+          "richness": 1
+        }
+      ],
+      "Volcanic": [
+        {
+          "type": 0,
+          "name": "Magmaroot",
+          "richness": 1
+        },
+        {
+          "type": 1,
+          "name": "Pyroclast Energen",
+          "richness": 1
+        },
+        {
+          "type": 2,
+          "name": "Blazing Snapdragon",
+          "richness": 2
+        },
+        {
+          "type": 23,
+          "name": "Carbon",
+          "richness": 1
+        },
+        {
+          "type": 32,
+          "name": "Fluorine Gas",
+          "richness": 2
+        },
+        {
+          "type": 41,
+          "name": "Iridium Ore",
+          "richness": 4
+        },
+        {
+          "type": 47,
+          "name": "Lumanite",
+          "richness": 1
+        },
+        {
+          "type": 49,
+          "name": "Manganese Ore",
+          "richness": 2
+        },
+        {
+          "type": 52,
+          "name": "Neodymium",
+          "richness": 1
+        },
+        {
+          "type": 58,
+          "name": "Palladium Ore",
+          "richness": 3
+        },
+        {
+          "type": 59,
+          "name": "Peridot Crystals",
+          "richness": 2
+        },
+        {
+          "type": 61,
+          "name": "Plasma Containment Minerals",
+          "richness": 3
+        },
+        {
+          "type": 62,
+          "name": "Platinum Ore",
+          "richness": 3
+        },
+        {
+          "type": 68,
+          "name": "Rhenium Ore",
+          "richness": 1
+        },
+        {
+          "type": 69,
+          "name": "Rhodium Ore",
+          "richness": 4
+        },
+        {
+          "type": 70,
+          "name": "Rochinol",
+          "richness": 2
+        },
+        {
+          "type": 74,
+          "name": "Silica",
+          "richness": 1
+        },
+        {
+          "type": 77,
+          "name": "Sodium Crystals",
+          "richness": 1
+        },
+        {
+          "type": 79,
+          "name": "Tantalum Ore",
+          "richness": 1
+        },
+        {
+          "type": 81,
+          "name": "Thermal Regulator Stone",
+          "richness": 1
+        },
+        {
+          "type": 82,
+          "name": "Thermodyne",
+          "richness": 2
+        },
+        {
+          "type": 83,
+          "name": "Thermoplastic Resin",
+          "richness": 3
+        }
+      ],
+      "Barren": [
+        {
+          "type": 7,
+          "name": "Ironshell Cactus",
+          "richness": 1
+        },
+        {
+          "type": 8,
+          "name": "Bastion Agave",
+          "richness": 2
+        },
+        {
+          "type": 16,
+          "name": "Aluminum Ore",
+          "richness": 2
+        },
+        {
+          "type": 17,
+          "name": "Arco",
+          "richness": 1
+        },
+        {
+          "type": 22,
+          "name": "Boron Ore",
+          "richness": 2
+        },
+        {
+          "type": 29,
+          "name": "Drywater",
+          "richness": 3
+        },
+        {
+          "type": 37,
+          "name": "Hafnium Ore",
+          "richness": 2
+        },
+        {
+          "type": 42,
+          "name": "Iron Ore",
+          "richness": 1
+        },
+        {
+          "type": 43,
+          "name": "Jasphorus Crystals",
+          "richness": 5
+        },
+        {
+          "type": 45,
+          "name": "Lithium Ore",
+          "richness": 2
+        },
+        {
+          "type": 68,
+          "name": "Rhenium Ore",
+          "richness": 1
+        },
+        {
+          "type": 71,
+          "name": "Ruby Crystals",
+          "richness": 2
+        },
+        {
+          "type": 76,
+          "name": "Silver Ore",
+          "richness": 2
+        },
+        {
+          "type": 77,
+          "name": "Sodium Crystals",
+          "richness": 1
+        },
+        {
+          "type": 79,
+          "name": "Tantalum Ore",
+          "richness": 1
+        },
+        {
+          "type": 81,
+          "name": "Thermal Regulator Stone",
+          "richness": 1
+        },
+        {
+          "type": 86,
+          "name": "Topaz Crystals",
+          "richness": 2
+        },
+        {
+          "type": 88,
+          "name": "Tungsten Ore",
+          "richness": 3
+        },
+        {
+          "type": 89,
+          "name": "Vanadium Ore",
+          "richness": 3
+        }
+      ],
+      "Asteroid Belt": [
+        {
+          "type": 16,
+          "name": "Aluminum Ore",
+          "richness": 2
+        },
+        {
+          "type": 23,
+          "name": "Carbon",
+          "richness": 1
+        },
+        {
+          "type": 25,
+          "name": "Copper Ore",
+          "richness": 1
+        },
+        {
+          "type": 34,
+          "name": "Garnet Crystals",
+          "richness": 2
+        },
+        {
+          "type": 37,
+          "name": "Hafnium Ore",
+          "richness": 2
+        },
+        {
+          "type": 42,
+          "name": "Iron Ore",
+          "richness": 1
+        },
+        {
+          "type": 49,
+          "name": "Manganese Ore",
+          "richness": 2
+        },
+        {
+          "type": 52,
+          "name": "Neodymium",
+          "richness": 1
+        },
+        {
+          "type": 56,
+          "name": "Osmium Ore",
+          "richness": 1
+        },
+        {
+          "type": 73,
+          "name": "Scandium Ore",
+          "richness": 2
+        },
+        {
+          "type": 74,
+          "name": "Silica",
+          "richness": 1
+        },
+        {
+          "type": 78,
+          "name": "Strontium Crystals",
+          "richness": 5
+        },
+        {
+          "type": 85,
+          "name": "Titanium Ore",
+          "richness": 3
+        },
+        {
+          "type": 87,
+          "name": "Tritium Ore",
+          "richness": 1
+        },
+        {
+          "type": 92,
+          "name": "Zinc Ore",
+          "richness": 1
+        }
+      ],
+      "Gas Giant": [
+        {
+          "type": 17,
+          "name": "Arco",
+          "richness": 1
+        },
+        {
+          "type": 18,
+          "name": "Argon",
+          "richness": 2
+        },
+        {
+          "type": 22,
+          "name": "Boron Ore",
+          "richness": 2
+        },
+        {
+          "type": 32,
+          "name": "Fluorine Gas",
+          "richness": 2
+        },
+        {
+          "type": 39,
+          "name": "Hydrogen",
+          "richness": 1
+        },
+        {
+          "type": 44,
+          "name": "Krypton",
+          "richness": 1
+        },
+        {
+          "type": 49,
+          "name": "Manganese Ore",
+          "richness": 2
+        },
+        {
+          "type": 50,
+          "name": "Methane",
+          "richness": 2
+        },
+        {
+          "type": 53,
+          "name": "Neon",
+          "richness": 3
+        },
+        {
+          "type": 55,
+          "name": "Nitrogen",
+          "richness": 1
+        },
+        {
+          "type": 68,
+          "name": "Rhenium Ore",
+          "richness": 1
+        },
+        {
+          "type": 70,
+          "name": "Rochinol",
+          "richness": 2
+        },
+        {
+          "type": 73,
+          "name": "Scandium Ore",
+          "richness": 2
+        },
+        {
+          "type": 76,
+          "name": "Silver Ore",
+          "richness": 2
+        },
+        {
+          "type": 77,
+          "name": "Sodium Crystals",
+          "richness": 1
+        },
+        {
+          "type": 91,
+          "name": "Xenon",
+          "richness": 2
+        }
+      ],
+      "Ice Giant": [
+        {
+          "type": 16,
+          "name": "Aluminum Ore",
+          "richness": 2
+        },
+        {
+          "type": 18,
+          "name": "Argon",
+          "richness": 2
+        },
+        {
+          "type": 20,
+          "name": "Beryllium Crystals",
+          "richness": 5
+        },
+        {
+          "type": 24,
+          "name": "Chromite Ore",
+          "richness": 1
+        },
+        {
+          "type": 26,
+          "name": "Cryo Formation Crystals",
+          "richness": 3
+        },
+        {
+          "type": 29,
+          "name": "Drywater",
+          "richness": 3
+        },
+        {
+          "type": 32,
+          "name": "Fluorine Gas",
+          "richness": 2
+        },
+        {
+          "type": 34,
+          "name": "Garnet Crystals",
+          "richness": 2
+        },
+        {
+          "type": 37,
+          "name": "Hafnium Ore",
+          "richness": 2
+        },
+        {
+          "type": 39,
+          "name": "Hydrogen",
+          "richness": 1
+        },
+        {
+          "type": 44,
+          "name": "Krypton",
+          "richness": 1
+        },
+        {
+          "type": 47,
+          "name": "Lumanite",
+          "richness": 1
+        },
+        {
+          "type": 50,
+          "name": "Methane",
+          "richness": 2
+        },
+        {
+          "type": 55,
+          "name": "Nitrogen",
+          "richness": 1
+        },
+        {
+          "type": 57,
+          "name": "Oxygen",
+          "richness": 2
+        },
+        {
+          "type": 59,
+          "name": "Peridot Crystals",
+          "richness": 2
+        },
+        {
+          "type": 64,
+          "name": "Quantum Particle",
+          "richness": 5
+        },
+        {
+          "type": 65,
+          "name": "Quartz Crystals",
+          "richness": 1
+        },
+        {
+          "type": 70,
+          "name": "Rochinol",
+          "richness": 2
+        },
+        {
+          "type": 71,
+          "name": "Ruby Crystals",
+          "richness": 2
+        },
+        {
+          "type": 72,
+          "name": "Sapphire Crystals",
+          "richness": 3
+        },
+        {
+          "type": 75,
+          "name": "Silicon Crystal",
+          "richness": 1
+        },
+        {
+          "type": 86,
+          "name": "Topaz Crystals",
+          "richness": 2
+        },
+        {
+          "type": 87,
+          "name": "Tritium Ore",
+          "richness": 1
+        },
+        {
+          "type": 91,
+          "name": "Xenon",
+          "richness": 2
+        },
+        {
+          "type": 93,
+          "name": "Zirconium Ore",
+          "richness": 4
+        }
+      ],
+      "Dark": [
+        {
+          "type": 5,
+          "name": "Shadowmoss",
+          "richness": 1
+        },
+        {
+          "type": 6,
+          "name": "Spectral Lichen",
+          "richness": 2
+        },
+        {
+          "type": 13,
+          "name": "Mind Shade Fungus",
+          "richness": 3
+        },
+        {
+          "type": 18,
+          "name": "Argon",
+          "richness": 2
+        },
+        {
+          "type": 20,
+          "name": "Beryllium Crystals",
+          "richness": 5
+        },
+        {
+          "type": 23,
+          "name": "Carbon",
+          "richness": 1
+        },
+        {
+          "type": 24,
+          "name": "Chromite Ore",
+          "richness": 1
+        },
+        {
+          "type": 31,
+          "name": "Emerald Crystals",
+          "richness": 3
+        },
+        {
+          "type": 33,
+          "name": "Fusion Catalyst Deposits",
+          "richness": 5
+        },
+        {
+          "type": 45,
+          "name": "Lithium Ore",
+          "richness": 2
+        },
+        {
+          "type": 46,
+          "name": "Living Metal Symbionts",
+          "richness": 5
+        },
+        {
+          "type": 47,
+          "name": "Lumanite",
+          "richness": 1
+        },
+        {
+          "type": 50,
+          "name": "Methane",
+          "richness": 2
+        },
+        {
+          "type": 53,
+          "name": "Neon",
+          "richness": 3
+        },
+        {
+          "type": 56,
+          "name": "Osmium Ore",
+          "richness": 1
+        },
+        {
+          "type": 63,
+          "name": "Quantum Computational Substrate",
+          "richness": 4
+        },
+        {
+          "type": 64,
+          "name": "Quantum Particle",
+          "richness": 5
+        },
+        {
+          "type": 66,
+          "name": "Raw Chisenic",
+          "richness": 3
+        },
+        {
+          "type": 71,
+          "name": "Ruby Crystals",
+          "richness": 2
+        },
+        {
+          "type": 76,
+          "name": "Silver Ore",
+          "richness": 2
+        },
+        {
+          "type": 79,
+          "name": "Tantalum Ore",
+          "richness": 1
+        },
+        {
+          "type": 86,
+          "name": "Topaz Crystals",
+          "richness": 2
+        },
+        {
+          "type": 91,
+          "name": "Xenon",
+          "richness": 2
+        }
+      ],
+      "Oceanic": [
+        {
+          "type": 3,
+          "name": "Tidal Kelp",
+          "richness": 1
+        },
+        {
+          "type": 4,
+          "name": "Bioluminous Algae",
+          "richness": 2
+        },
+        {
+          "type": 15,
+          "name": "Abyssal Energy Crystals",
+          "richness": 4
+        },
+        {
+          "type": 19,
+          "name": "Bathysphere Pearls",
+          "richness": 3
+        },
+        {
+          "type": 21,
+          "name": "Biomass",
+          "richness": 1
+        },
+        {
+          "type": 24,
+          "name": "Chromite Ore",
+          "richness": 1
+        },
+        {
+          "type": 25,
+          "name": "Copper Ore",
+          "richness": 1
+        },
+        {
+          "type": 39,
+          "name": "Hydrogen",
+          "richness": 1
+        },
+        {
+          "type": 48,
+          "name": "Lunar Echo Crystals",
+          "richness": 5
+        },
+        {
+          "type": 54,
+          "name": "Neural Coral Compounds",
+          "richness": 3
+        },
+        {
+          "type": 57,
+          "name": "Oxygen",
+          "richness": 2
+        },
+        {
+          "type": 60,
+          "name": "Phase Shift Crystals",
+          "richness": 3
+        },
+        {
+          "type": 65,
+          "name": "Quartz Crystals",
+          "richness": 1
+        },
+        {
+          "type": 75,
+          "name": "Silicon Crystal",
+          "richness": 1
+        },
+        {
+          "type": 82,
+          "name": "Thermodyne",
+          "richness": 2
+        },
+        {
+          "type": 84,
+          "name": "Tin Ore",
+          "richness": 1
+        },
+        {
+          "type": 87,
+          "name": "Tritium Ore",
+          "richness": 1
+        }
+      ]
+    },
+    "USTUR": {
+      "Terrestrial": [
+        {
+          "type": 9,
+          "name": "Swiftvine",
+          "richness": 2
+        },
+        {
+          "type": 10,
+          "name": "Electric Fern",
+          "richness": 2
+        },
+        {
+          "type": 11,
+          "name": "Temporal Flux Orchid",
+          "richness": 2
+        },
+        {
+          "type": 17,
+          "name": "Arco",
+          "richness": 1
+        },
+        {
+          "type": 21,
+          "name": "Biomass",
+          "richness": 1
+        },
+        {
+          "type": 25,
+          "name": "Copper Ore",
+          "richness": 1
+        },
+        {
+          "type": 30,
+          "name": "Dysprosium",
+          "richness": 4
+        },
+        {
+          "type": 42,
+          "name": "Iron Ore",
+          "richness": 1
+        },
+        {
+          "type": 55,
+          "name": "Nitrogen",
+          "richness": 1
+        },
+        {
+          "type": 57,
+          "name": "Oxygen",
+          "richness": 2
+        },
+        {
+          "type": 65,
+          "name": "Quartz Crystals",
+          "richness": 1
+        },
+        {
+          "type": 74,
+          "name": "Silica",
+          "richness": 1
+        },
+        {
+          "type": 81,
+          "name": "Thermal Regulator Stone",
+          "richness": 1
+        },
+        {
+          "type": 84,
+          "name": "Tin Ore",
+          "richness": 1
+        },
+        {
+          "type": 92,
+          "name": "Zinc Ore",
+          "richness": 1
+        }
+      ],
+      "Volcanic": [
+        {
+          "type": 0,
+          "name": "Magmaroot",
+          "richness": 1
+        },
+        {
+          "type": 1,
+          "name": "Pyroclast Energen",
+          "richness": 1
+        },
+        {
+          "type": 2,
+          "name": "Blazing Snapdragon",
+          "richness": 2
+        },
+        {
+          "type": 23,
+          "name": "Carbon",
+          "richness": 1
+        },
+        {
+          "type": 28,
+          "name": "Dodiline Crystals",
+          "richness": 4
+        },
+        {
+          "type": 32,
+          "name": "Fluorine Gas",
+          "richness": 2
+        },
+        {
+          "type": 41,
+          "name": "Iridium Ore",
+          "richness": 4
+        },
+        {
+          "type": 47,
+          "name": "Lumanite",
+          "richness": 1
+        },
+        {
+          "type": 49,
+          "name": "Manganese Ore",
+          "richness": 2
+        },
+        {
+          "type": 52,
+          "name": "Neodymium",
+          "richness": 1
+        },
+        {
+          "type": 58,
+          "name": "Palladium Ore",
+          "richness": 3
+        },
+        {
+          "type": 59,
+          "name": "Peridot Crystals",
+          "richness": 2
+        },
+        {
+          "type": 61,
+          "name": "Plasma Containment Minerals",
+          "richness": 3
+        },
+        {
+          "type": 62,
+          "name": "Platinum Ore",
+          "richness": 3
+        },
+        {
+          "type": 68,
+          "name": "Rhenium Ore",
+          "richness": 1
+        },
+        {
+          "type": 69,
+          "name": "Rhodium Ore",
+          "richness": 4
+        },
+        {
+          "type": 70,
+          "name": "Rochinol",
+          "richness": 2
+        },
+        {
+          "type": 74,
+          "name": "Silica",
+          "richness": 1
+        },
+        {
+          "type": 77,
+          "name": "Sodium Crystals",
+          "richness": 1
+        },
+        {
+          "type": 79,
+          "name": "Tantalum Ore",
+          "richness": 1
+        },
+        {
+          "type": 81,
+          "name": "Thermal Regulator Stone",
+          "richness": 1
+        },
+        {
+          "type": 82,
+          "name": "Thermodyne",
+          "richness": 2
+        }
+      ],
+      "Barren": [
+        {
+          "type": 7,
+          "name": "Ironshell Cactus",
+          "richness": 1
+        },
+        {
+          "type": 8,
+          "name": "Bastion Agave",
+          "richness": 2
+        },
+        {
+          "type": 14,
+          "name": "Aegis Barrier Cactus",
+          "richness": 3
+        },
+        {
+          "type": 16,
+          "name": "Aluminum Ore",
+          "richness": 2
+        },
+        {
+          "type": 17,
+          "name": "Arco",
+          "richness": 1
+        },
+        {
+          "type": 22,
+          "name": "Boron Ore",
+          "richness": 2
+        },
+        {
+          "type": 29,
+          "name": "Drywater",
+          "richness": 3
+        },
+        {
+          "type": 37,
+          "name": "Hafnium Ore",
+          "richness": 2
+        },
+        {
+          "type": 42,
+          "name": "Iron Ore",
+          "richness": 1
+        },
+        {
+          "type": 45,
+          "name": "Lithium Ore",
+          "richness": 2
+        },
+        {
+          "type": 68,
+          "name": "Rhenium Ore",
+          "richness": 1
+        },
+        {
+          "type": 71,
+          "name": "Ruby Crystals",
+          "richness": 2
+        },
+        {
+          "type": 76,
+          "name": "Silver Ore",
+          "richness": 2
+        },
+        {
+          "type": 77,
+          "name": "Sodium Crystals",
+          "richness": 1
+        },
+        {
+          "type": 79,
+          "name": "Tantalum Ore",
+          "richness": 1
+        },
+        {
+          "type": 81,
+          "name": "Thermal Regulator Stone",
+          "richness": 1
+        },
+        {
+          "type": 86,
+          "name": "Topaz Crystals",
+          "richness": 2
+        },
+        {
+          "type": 88,
+          "name": "Tungsten Ore",
+          "richness": 3
+        },
+        {
+          "type": 89,
+          "name": "Vanadium Ore",
+          "richness": 3
+        }
+      ],
+      "Asteroid Belt": [
+        {
+          "type": 16,
+          "name": "Aluminum Ore",
+          "richness": 2
+        },
+        {
+          "type": 23,
+          "name": "Carbon",
+          "richness": 1
+        },
+        {
+          "type": 25,
+          "name": "Copper Ore",
+          "richness": 1
+        },
+        {
+          "type": 34,
+          "name": "Garnet Crystals",
+          "richness": 2
+        },
+        {
+          "type": 35,
+          "name": "Germanium",
+          "richness": 4
+        },
+        {
+          "type": 37,
+          "name": "Hafnium Ore",
+          "richness": 2
+        },
+        {
+          "type": 42,
+          "name": "Iron Ore",
+          "richness": 1
+        },
+        {
+          "type": 49,
+          "name": "Manganese Ore",
+          "richness": 2
+        },
+        {
+          "type": 51,
+          "name": "Nanosil",
+          "richness": 3
+        },
+        {
+          "type": 52,
+          "name": "Neodymium",
+          "richness": 1
+        },
+        {
+          "type": 56,
+          "name": "Osmium Ore",
+          "richness": 1
+        },
+        {
+          "type": 73,
+          "name": "Scandium Ore",
+          "richness": 2
+        },
+        {
+          "type": 74,
+          "name": "Silica",
+          "richness": 1
+        },
+        {
+          "type": 78,
+          "name": "Strontium Crystals",
+          "richness": 5
+        },
+        {
+          "type": 85,
+          "name": "Titanium Ore",
+          "richness": 3
+        },
+        {
+          "type": 87,
+          "name": "Tritium Ore",
+          "richness": 1
+        },
+        {
+          "type": 92,
+          "name": "Zinc Ore",
+          "richness": 1
+        }
+      ],
+      "Gas Giant": [
+        {
+          "type": 17,
+          "name": "Arco",
+          "richness": 1
+        },
+        {
+          "type": 18,
+          "name": "Argon",
+          "richness": 2
+        },
+        {
+          "type": 22,
+          "name": "Boron Ore",
+          "richness": 2
+        },
+        {
+          "type": 32,
+          "name": "Fluorine Gas",
+          "richness": 2
+        },
+        {
+          "type": 35,
+          "name": "Germanium",
+          "richness": 4
+        },
+        {
+          "type": 39,
+          "name": "Hydrogen",
+          "richness": 1
+        },
+        {
+          "type": 44,
+          "name": "Krypton",
+          "richness": 1
+        },
+        {
+          "type": 49,
+          "name": "Manganese Ore",
+          "richness": 2
+        },
+        {
+          "type": 50,
+          "name": "Methane",
+          "richness": 2
+        },
+        {
+          "type": 53,
+          "name": "Neon",
+          "richness": 3
+        },
+        {
+          "type": 55,
+          "name": "Nitrogen",
+          "richness": 1
+        },
+        {
+          "type": 68,
+          "name": "Rhenium Ore",
+          "richness": 1
+        },
+        {
+          "type": 70,
+          "name": "Rochinol",
+          "richness": 2
+        },
+        {
+          "type": 73,
+          "name": "Scandium Ore",
+          "richness": 2
+        },
+        {
+          "type": 76,
+          "name": "Silver Ore",
+          "richness": 2
+        },
+        {
+          "type": 77,
+          "name": "Sodium Crystals",
+          "richness": 1
+        },
+        {
+          "type": 91,
+          "name": "Xenon",
+          "richness": 2
+        }
+      ],
+      "Ice Giant": [
+        {
+          "type": 16,
+          "name": "Aluminum Ore",
+          "richness": 2
+        },
+        {
+          "type": 18,
+          "name": "Argon",
+          "richness": 2
+        },
+        {
+          "type": 20,
+          "name": "Beryllium Crystals",
+          "richness": 5
+        },
+        {
+          "type": 24,
+          "name": "Chromite Ore",
+          "richness": 1
+        },
+        {
+          "type": 26,
+          "name": "Cryo Formation Crystals",
+          "richness": 3
+        },
+        {
+          "type": 29,
+          "name": "Drywater",
+          "richness": 3
+        },
+        {
+          "type": 32,
+          "name": "Fluorine Gas",
+          "richness": 2
+        },
+        {
+          "type": 34,
+          "name": "Garnet Crystals",
+          "richness": 2
+        },
+        {
+          "type": 35,
+          "name": "Germanium",
+          "richness": 4
+        },
+        {
+          "type": 37,
+          "name": "Hafnium Ore",
+          "richness": 2
+        },
+        {
+          "type": 39,
+          "name": "Hydrogen",
+          "richness": 1
+        },
+        {
+          "type": 44,
+          "name": "Krypton",
+          "richness": 1
+        },
+        {
+          "type": 47,
+          "name": "Lumanite",
+          "richness": 1
+        },
+        {
+          "type": 50,
+          "name": "Methane",
+          "richness": 2
+        },
+        {
+          "type": 55,
+          "name": "Nitrogen",
+          "richness": 1
+        },
+        {
+          "type": 57,
+          "name": "Oxygen",
+          "richness": 2
+        },
+        {
+          "type": 59,
+          "name": "Peridot Crystals",
+          "richness": 2
+        },
+        {
+          "type": 64,
+          "name": "Quantum Particle",
+          "richness": 5
+        },
+        {
+          "type": 65,
+          "name": "Quartz Crystals",
+          "richness": 1
+        },
+        {
+          "type": 70,
+          "name": "Rochinol",
+          "richness": 2
+        },
+        {
+          "type": 71,
+          "name": "Ruby Crystals",
+          "richness": 2
+        },
+        {
+          "type": 72,
+          "name": "Sapphire Crystals",
+          "richness": 3
+        },
+        {
+          "type": 75,
+          "name": "Silicon Crystal",
+          "richness": 1
+        },
+        {
+          "type": 86,
+          "name": "Topaz Crystals",
+          "richness": 2
+        },
+        {
+          "type": 87,
+          "name": "Tritium Ore",
+          "richness": 1
+        },
+        {
+          "type": 91,
+          "name": "Xenon",
+          "richness": 2
+        },
+        {
+          "type": 93,
+          "name": "Zirconium Ore",
+          "richness": 4
+        }
+      ],
+      "Dark": [
+        {
+          "type": 5,
+          "name": "Shadowmoss",
+          "richness": 1
+        },
+        {
+          "type": 6,
+          "name": "Spectral Lichen",
+          "richness": 2
+        },
+        {
+          "type": 18,
+          "name": "Argon",
+          "richness": 2
+        },
+        {
+          "type": 20,
+          "name": "Beryllium Crystals",
+          "richness": 5
+        },
+        {
+          "type": 23,
+          "name": "Carbon",
+          "richness": 1
+        },
+        {
+          "type": 24,
+          "name": "Chromite Ore",
+          "richness": 1
+        },
+        {
+          "type": 31,
+          "name": "Emerald Crystals",
+          "richness": 3
+        },
+        {
+          "type": 33,
+          "name": "Fusion Catalyst Deposits",
+          "richness": 5
+        },
+        {
+          "type": 45,
+          "name": "Lithium Ore",
+          "richness": 2
+        },
+        {
+          "type": 46,
+          "name": "Living Metal Symbionts",
+          "richness": 5
+        },
+        {
+          "type": 47,
+          "name": "Lumanite",
+          "richness": 1
+        },
+        {
+          "type": 50,
+          "name": "Methane",
+          "richness": 2
+        },
+        {
+          "type": 51,
+          "name": "Nanosil",
+          "richness": 3
+        },
+        {
+          "type": 53,
+          "name": "Neon",
+          "richness": 3
+        },
+        {
+          "type": 56,
+          "name": "Osmium Ore",
+          "richness": 1
+        },
+        {
+          "type": 63,
+          "name": "Quantum Computational Substrate",
+          "richness": 4
+        },
+        {
+          "type": 64,
+          "name": "Quantum Particle",
+          "richness": 5
+        },
+        {
+          "type": 71,
+          "name": "Ruby Crystals",
+          "richness": 2
+        },
+        {
+          "type": 76,
+          "name": "Silver Ore",
+          "richness": 2
+        },
+        {
+          "type": 79,
+          "name": "Tantalum Ore",
+          "richness": 1
+        },
+        {
+          "type": 86,
+          "name": "Topaz Crystals",
+          "richness": 2
+        },
+        {
+          "type": 90,
+          "name": "Viscovite Crystals",
+          "richness": 3
+        },
+        {
+          "type": 91,
+          "name": "Xenon",
+          "richness": 2
+        }
+      ],
+      "Oceanic": [
+        {
+          "type": 3,
+          "name": "Tidal Kelp",
+          "richness": 1
+        },
+        {
+          "type": 4,
+          "name": "Bioluminous Algae",
+          "richness": 2
+        },
+        {
+          "type": 15,
+          "name": "Abyssal Energy Crystals",
+          "richness": 4
+        },
+        {
+          "type": 19,
+          "name": "Bathysphere Pearls",
+          "richness": 3
+        },
+        {
+          "type": 21,
+          "name": "Biomass",
+          "richness": 1
+        },
+        {
+          "type": 24,
+          "name": "Chromite Ore",
+          "richness": 1
+        },
+        {
+          "type": 25,
+          "name": "Copper Ore",
+          "richness": 1
+        },
+        {
+          "type": 39,
+          "name": "Hydrogen",
+          "richness": 1
+        },
+        {
+          "type": 48,
+          "name": "Lunar Echo Crystals",
+          "richness": 5
+        },
+        {
+          "type": 54,
+          "name": "Neural Coral Compounds",
+          "richness": 3
+        },
+        {
+          "type": 57,
+          "name": "Oxygen",
+          "richness": 2
+        },
+        {
+          "type": 60,
+          "name": "Phase Shift Crystals",
+          "richness": 3
+        },
+        {
+          "type": 65,
+          "name": "Quartz Crystals",
+          "richness": 1
+        },
+        {
+          "type": 75,
+          "name": "Silicon Crystal",
+          "richness": 1
+        },
+        {
+          "type": 82,
+          "name": "Thermodyne",
+          "richness": 2
+        },
+        {
+          "type": 84,
+          "name": "Tin Ore",
+          "richness": 1
+        },
+        {
+          "type": 87,
+          "name": "Tritium Ore",
+          "richness": 1
+        }
+      ]
+    }
+  }
+}

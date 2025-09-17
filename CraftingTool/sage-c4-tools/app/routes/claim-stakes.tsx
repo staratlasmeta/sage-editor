@@ -84,6 +84,7 @@ interface ClaimStakeInstance {
     maxStorage: number;
     currentStorage: number;
     maxSlots: number;  // Added for slot management
+    stakeDefinitionId?: string;  // Store which stake definition was used
 }
 
 interface PlacedBuilding {
@@ -111,6 +112,30 @@ export default function ClaimStakes() {
     const { gameData, loading } = useGameData();
     const { state: sharedState, dispatch, updateStatistic, unlockAchievement, updateAchievementProgress, addToInventory, consumeFromInventory } = useSharedState();
     const { notifications, showNotification, dismissNotification } = useNotifications();
+
+    // Debug gameData structure
+    React.useEffect(() => {
+        if (gameData && !loading) {
+            console.log('🔍 GameData loaded:', {
+                hasClaimStakeDefinitions: !!gameData.claimStakeDefinitions,
+                claimStakeDefinitionsCount: gameData.claimStakeDefinitions?.length || 0,
+                hasPlanetArchetypes: !!gameData.planetArchetypes,
+                planetArchetypesCount: gameData.planetArchetypes?.length || 0
+            });
+
+            // Sample a few cultivation stake definitions
+            if (gameData.claimStakeDefinitions) {
+                const cultivationDefs = gameData.claimStakeDefinitions.filter((def: any) =>
+                    def.addedTags?.includes('cultivation-stake-only')
+                );
+                console.log('🌱 Found cultivation definitions:', cultivationDefs.length);
+                if (cultivationDefs.length > 0) {
+                    console.log('Sample cultivation def:', cultivationDefs[0]);
+                    console.log('First few definitions:', gameData.claimStakeDefinitions.slice(0, 3).map((d: any) => ({ id: d.id, addedTags: d.addedTags })));
+                }
+            }
+        }
+    }, [gameData, loading]);
 
     // State
     const [selectedPlanet, setSelectedPlanet] = useState<Planet | null>(null);
@@ -204,8 +229,11 @@ export default function ClaimStakes() {
     const [currentDesign, setCurrentDesign] = useState<PlacedBuilding[]>([]);
     const [showStarbaseControl, setShowStarbaseControl] = useState(false);
     const [factionFilter, setFactionFilter] = useState('all');
+    const [planetTypeFilter, setPlanetTypeFilter] = useState('all');
+    const [cultivationFilter, setCultivationFilter] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [buildingCategoryFilter, setBuildingCategoryFilter] = useState('all');
+    const [tagsCollapsed, setTagsCollapsed] = useState(true);
 
     // Real-time simulation
     const simulationRef = useRef<NodeJS.Timeout | null>(null);
@@ -415,147 +443,6 @@ export default function ClaimStakes() {
             });
         }
 
-        // Generate extractors for each raw resource on the planet
-        if (selectedPlanet && planetResources.length > 0) {
-            planetResources.forEach(resource => {
-                // Check if this is a raw material
-                const isRawResource = gameData?.resources?.find((r: any) =>
-                    r.id === resource && r.category === 'raw'
-                );
-
-                if (isRawResource || resource.includes('-ore') || resource.includes('crystal')) {
-                    const resourceName = resource.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
-
-                    // Create extractor buildings for this resource (T1-T5)
-                    for (let tier = 1; tier <= 5; tier++) {
-                        const extractorBuilding: Building = {
-                            id: `${resource}-extractor-t${tier}`,
-                            name: `${resourceName} Extractor T${tier}`,
-                            category: 'extraction',
-                            tier: tier,
-                            slots: 8 + (tier - 1) * 2, // 8, 10, 12, 14, 16 slots
-                            power: -25 - (tier - 1) * 10, // Power consumption increases
-                            crew: 5 + (tier - 1) * 2, // 5, 7, 9, 11, 13 crew
-                            extractionRate: {
-                                [resource]: 0.01 * (1 + (tier - 1) * 0.5) // Scales with tier
-                            },
-                            constructionCost: {
-                                'chromite-ore': 25 * Math.pow(1.5, tier - 1),
-                                'copper': 20 * Math.pow(1.5, tier - 1),
-                                'copper-ore': tier === 1 ? 15 : 0 // Only T1 uses ore
-                            },
-                            constructionTime: 60 + (tier - 1) * 30,
-                            requiredTags: [`extraction-hub`], // Requires extraction hub
-                            upgradeFamily: `${resource}-extractor`,
-                            description: `${resourceName} Extractor - extractor building`
-                        };
-
-                        processedBuildings.push(extractorBuilding);
-                    }
-                }
-            });
-
-            // Add processing buildings
-            for (let tier = 1; tier <= 5; tier++) {
-                const processorBuilding: Building = {
-                    id: `terrestrial-processor-t${tier}`,
-                    name: `Terrestrial Processor T${tier}`,
-                    category: 'processing',
-                    tier: tier,
-                    slots: 4 + (tier - 1) * 2,
-                    power: -35 - (tier - 1) * 15,
-                    crew: 8 + (tier - 1) * 3,
-                    resourceProduction: {
-                        'arco': 0.005 * (1 + (tier - 1) * 0.5)
-                    },
-                    resourceUsage: {
-                        'arco': 0.01 * (1 + (tier - 1) * 0.3),
-                        'framework': 0.005 * (1 + (tier - 1) * 0.3)
-                    },
-                    constructionCost: {
-                        'arco': 25 * Math.pow(1.5, tier - 1),
-                        'framework': 20 * Math.pow(1.5, tier - 1),
-                        'copper-ore': tier === 1 ? 15 : 0
-                    },
-                    constructionTime: 90 + (tier - 1) * 30,
-                    requiredTags: [`processing-hub`],
-                    upgradeFamily: 'terrestrial-processor',
-                    description: 'Terrestrial Processor - processing building'
-                };
-                processedBuildings.push(processorBuilding);
-            }
-
-            // Add power buildings
-            for (let tier = 1; tier <= 5; tier++) {
-                const powerBuilding: Building = {
-                    id: `solar-array-t${tier}`,
-                    name: `Solar Array T${tier}`,
-                    category: 'power',
-                    tier: tier,
-                    slots: 6 + (tier - 1) * 2,
-                    power: 50 + (tier - 1) * 25, // Generates power
-                    crew: 2 + tier,
-                    constructionCost: {
-                        'electronics': 30 * Math.pow(1.5, tier - 1),
-                        'arco': 20 * Math.pow(1.5, tier - 1)
-                    },
-                    constructionTime: 75 + (tier - 1) * 30,
-                    requiredTags: [],
-                    upgradeFamily: 'solar-array',
-                    description: 'Solar Array - power generation building'
-                };
-                processedBuildings.push(powerBuilding);
-            }
-
-            // Add storage buildings
-            for (let tier = 1; tier <= 5; tier++) {
-                const storageBuilding: Building = {
-                    id: `warehouse-t${tier}`,
-                    name: `Warehouse T${tier}`,
-                    category: 'storage',
-                    tier: tier,
-                    slots: 10 + (tier - 1) * 5,
-                    power: -10,
-                    crew: 3 + tier,
-                    storage: 1000 * Math.pow(2, tier - 1), // 1000, 2000, 4000, 8000, 16000
-                    constructionCost: {
-                        'steel': 40 * Math.pow(1.5, tier - 1),
-                        'arco': 25 * Math.pow(1.5, tier - 1)
-                    },
-                    constructionTime: 60 + (tier - 1) * 30,
-                    requiredTags: [`storage-hub`],
-                    upgradeFamily: 'warehouse',
-                    description: 'Warehouse - storage building'
-                };
-                processedBuildings.push(storageBuilding);
-            }
-
-            // Add farm buildings
-            for (let tier = 1; tier <= 5; tier++) {
-                const farmBuilding: Building = {
-                    id: `hydroponic-farm-t${tier}`,
-                    name: `Hydroponic Farm T${tier}`,
-                    category: 'farm',
-                    tier: tier,
-                    slots: 12 + (tier - 1) * 3,
-                    power: -20 - (tier - 1) * 10,
-                    crew: 6 + (tier - 1) * 2,
-                    extractionRate: {
-                        'biomass': 0.008 * (1 + (tier - 1) * 0.5)
-                    },
-                    constructionCost: {
-                        'framework': 35 * Math.pow(1.5, tier - 1),
-                        'electronics': 20 * Math.pow(1.5, tier - 1)
-                    },
-                    constructionTime: 80 + (tier - 1) * 30,
-                    requiredTags: [`farm-hub`],
-                    upgradeFamily: 'hydroponic-farm',
-                    description: 'Hydroponic Farm - farm building'
-                };
-                processedBuildings.push(farmBuilding);
-            }
-        }
-
         // First, process ALL buildings from raw data to ensure they have upgradeFamily
         rawBuildings.forEach(building => {
             // Derive upgradeFamily from building ID by removing tier suffix
@@ -571,37 +458,36 @@ export default function ClaimStakes() {
                 const name = building.name.toLowerCase();
                 const id = building.id.toLowerCase();
 
-                // Check tags and name for categorization
-                // Check for processing first (using tags)
-                if (tags.includes('processing-hub') || tags.includes('enables-processors')) {
-                    category = 'processing';
-                } else if (tags.includes('extraction-hub') || tags.includes('enables-extractors')) {
+                // Infrastructure: ONLY Central Hub and Crew Quarters
+                if (name.includes('central hub') || name.includes('crew quarters') || tags.includes('central-hub')) {
+                    category = 'infrastructure';
+                }
+                // Power: Power plants and solar arrays
+                else if (name.includes('power plant') || name.includes('solar array') || name.includes('power')) {
+                    category = 'power';
+                }
+                // Extraction: Extraction Hub and all extractor buildings
+                else if (name.includes('extraction hub') || name.includes('extractor') ||
+                    tags.includes('extraction-hub') || tags.includes('enables-extractors')) {
                     category = 'extraction';
-                } else if (tags.includes('storage-hub') || tags.includes('enables-storage-hub')) {
-                    category = 'storage';
-                } else if (tags.includes('farm-hub') || tags.includes('enables-farm-hub')) {
+                }
+                // Processing: Processing Hub and all processor buildings
+                else if (name.includes('processing hub') || name.includes('processor') ||
+                    tags.includes('processing-hub') || tags.includes('enables-processors')) {
+                    category = 'processing';
+                }
+                // Farm: Farm Hub and all buildings with "farm" in the name
+                else if (name.includes('farm') || name.includes('cultivation hub') ||
+                    tags.includes('farm-hub') || tags.includes('enables-farm-hub')) {
                     category = 'farm';
                 }
-                // Then check by name patterns
-                else if (name.includes('processing hub')) {
-                    category = 'processing';
-                } else if (name.includes('extraction hub')) {
-                    category = 'extraction';
-                } else if (name.includes('storage hub')) {
+                // Storage: Storage Hub and storage buildings
+                else if (name.includes('storage hub') || name.includes('storage') ||
+                    tags.includes('storage-hub') || tags.includes('enables-storage-hub')) {
                     category = 'storage';
-                } else if (name.includes('cultivation hub') || name.includes('farm')) {
-                    category = 'farm';
-                } else if (name.includes('power plant') || name.includes('solar array')) {
-                    category = 'power';
-                } else if (name.includes('extractor')) {
-                    category = 'extraction';
-                } else if (name.includes('processor')) {
-                    category = 'processing';
-                } else if (name.includes('crew quarters') || tags.includes('central-hub') ||
-                    (name.includes('central hub') || (name.includes('hub') && !name.includes('processing') &&
-                        !name.includes('extraction') && !name.includes('storage') && !name.includes('cultivation')))) {
-                    category = 'infrastructure';
-                } else {
+                }
+                // Default fallback
+                else {
                     category = 'general';
                 }
             }
@@ -716,6 +602,39 @@ export default function ClaimStakes() {
 
         return processedBuildings;
     }, [rawBuildings, selectedPlanet, planets]);
+
+    // Helper function to get cumulative tags from entire upgrade family
+    const getCumulativeFamilyTags = (building: Building, buildings: Building[]): string[] => {
+        if (!building.upgradeFamily) return building.addedTags || [];
+
+        // Get all buildings in this upgrade family
+        const familyBuildings = buildings.filter(b => b.upgradeFamily === building.upgradeFamily);
+
+        // Get all buildings from T1 up to current tier
+        const cumulativeTags = new Set<string>();
+
+        for (let tier = 1; tier <= building.tier; tier++) {
+            const tierBuilding = familyBuildings.find(b => b.tier === tier);
+            if (tierBuilding?.addedTags) {
+                tierBuilding.addedTags.forEach(tag => cumulativeTags.add(tag));
+            }
+        }
+
+        return Array.from(cumulativeTags);
+    };
+
+    // Helper function to get all tags currently provided by a design (for validation)
+    const getAllProvidedTags = (design: PlacedBuilding[]): string[] => {
+        const allTags = new Set<string>();
+        design.forEach(pb => {
+            const building = buildings.find(b => b.id === pb.buildingId);
+            if (building) {
+                const cumulativeTags = getCumulativeFamilyTags(building, buildings);
+                cumulativeTags.forEach(tag => allTags.add(tag));
+            }
+        });
+        return Array.from(allTags);
+    };
 
     const starbaseInventory = sharedState.starbaseInventory;
 
@@ -1247,9 +1166,22 @@ export default function ClaimStakes() {
         const stakeDefinition = claimStakeDefinitions.find((def: any) => {
             if (def.tier !== selectedTier) return false;
             if (def.requiredTags && def.requiredTags.length > 0) {
-                return def.requiredTags.every((tag: string) => planetTags.includes(tag));
+                if (!def.requiredTags.every((tag: string) => planetTags.includes(tag))) {
+                    return false;
+                }
             }
-            return true;
+
+            // Filter by cultivation preference
+            const isCultivationStake = def.addedTags?.includes('cultivation-stake-only');
+            const isStandardStake = def.addedTags?.includes('standard-stake-only');
+
+            if (cultivationFilter) {
+                // When cultivation filter is on, prefer cultivation stakes
+                return isCultivationStake;
+            } else {
+                // When cultivation filter is off, prefer standard stakes
+                return isStandardStake || (!isCultivationStake && !isStandardStake);
+            }
         });
         const maxSlots = stakeDefinition?.slots || (selectedTier * 100);
 
@@ -1318,15 +1250,66 @@ export default function ClaimStakes() {
         // Get all available tags
         const planetTags = [...(selectedPlanet?.tags || []), ...archetypeTags];
 
+        // Debug logging
+        console.log('🔍 Purchase Debug Info:', {
+            planetName: selectedPlanet.name,
+            planetArchetype: selectedPlanet.archetype,
+            planetTags: planetTags,
+            selectedTier: selectedTier,
+            cultivationFilter: cultivationFilter
+        });
+
         // Find matching stake definition
-        const stakeDefinition = claimStakeDefinitions.find((def: any) => {
+        const allMatchingDefs = claimStakeDefinitions.filter((def: any) => {
             if (def.tier !== selectedTier) return false;
 
             // Check if required tags match
             if (def.requiredTags && def.requiredTags.length > 0) {
-                return def.requiredTags.every((tag: string) => planetTags.includes(tag));
+                if (!def.requiredTags.every((tag: string) => planetTags.includes(tag))) {
+                    return false;
+                }
             }
             return true;
+        });
+
+        console.log('🔍 All matching definitions for tier', selectedTier, ':', allMatchingDefs.map(d => ({
+            id: d.id,
+            name: d.name,
+            requiredTags: d.requiredTags,
+            isCultivation: d.addedTags?.includes('cultivation-stake-only'),
+            isStandard: d.addedTags?.includes('standard-stake-only')
+        })));
+
+        // Check if this planet supports cultivation stakes
+        const planetSupportsCultivation = allMatchingDefs.some((def: any) =>
+            def.addedTags?.includes('cultivation-stake-only')
+        );
+
+        console.log('🌱 Planet cultivation support:', {
+            planetName: selectedPlanet.name,
+            supportsCultivation: planetSupportsCultivation,
+            cultivationFilterOn: cultivationFilter,
+            availableDefinitions: allMatchingDefs.map(d => ({
+                id: d.id,
+                isCultivation: d.addedTags?.includes('cultivation-stake-only'),
+                isStandard: d.addedTags?.includes('standard-stake-only')
+            }))
+        });
+
+        const stakeDefinition = allMatchingDefs.find((def: any) => {
+            // Filter by cultivation preference
+            const isCultivationStake = def.addedTags?.includes('cultivation-stake-only');
+            const isStandardStake = def.addedTags?.includes('standard-stake-only');
+
+            // If this planet supports cultivation stakes, automatically prefer cultivation stakes
+            // regardless of the filter checkbox (the filter is just for planet list filtering)
+            if (planetSupportsCultivation) {
+                // On cultivation planets, always prefer cultivation stakes
+                return isCultivationStake;
+            } else {
+                // On non-cultivation planets, prefer standard stakes
+                return isStandardStake || (!isCultivationStake && !isStandardStake);
+            }
         });
 
         // Use slots from definition or fallback to formula
@@ -1346,8 +1329,18 @@ export default function ClaimStakes() {
             lastUpdate: Date.now(),
             maxStorage: 1000 * selectedTier, // Base storage scales with tier
             currentStorage: 100, // Just the initial fuel
-            maxSlots: maxSlots
+            maxSlots: maxSlots,
+            stakeDefinitionId: stakeDefinition?.id // Store which stake definition was used
         };
+
+        // Debug logging
+        console.log('🛠️ Creating claim stake instance:', {
+            tier: selectedTier,
+            cultivationFilter,
+            stakeDefinitionId: stakeDefinition?.id,
+            stakeDefinitionName: stakeDefinition?.name,
+            stakeType: stakeDefinition?.addedTags?.includes('cultivation-stake-only') ? 'CULTIVATION' : 'STANDARD'
+        });
 
         setClaimStakeInstances([...claimStakeInstances, newInstance]);
         setActiveInstanceId(newInstance.id);
@@ -1463,12 +1456,35 @@ export default function ClaimStakes() {
 
         // If this is the first finalization (no existing buildings), charge for all non-free buildings
         if (activeInstance.buildings.length === 0) {
+            // Get the default building ID from the stake definition to exclude it from costs
+            const claimStakeDefinitions = gameData?.claimStakeDefinitions || [];
+            const stakeDefinition = claimStakeDefinitions.find((def: any) =>
+                def.id === activeInstance.stakeDefinitionId
+            );
+            const defaultBuildingId = stakeDefinition?.defaultBuilding;
+
             currentDesign.forEach((pb: PlacedBuilding) => {
                 const building = buildings.find((b: Building) => b.id === pb.buildingId);
-                // Only charge for buildings that don't come with stake
-                if (building && !building.comesWithStake && building.constructionCost) {
-                    Object.entries(building.constructionCost).forEach(([material, amount]) => {
-                        totalCost[material] = (totalCost[material] || 0) + amount;
+
+                // Exclude buildings that:
+                // 1. Come with stake (comesWithStake property)
+                // 2. Are the default building from the stake definition
+                const isDefaultBuilding = building?.id === defaultBuildingId;
+                const shouldCharge = building &&
+                    !building.comesWithStake &&
+                    !isDefaultBuilding &&
+                    building.constructionCost;
+
+                if (shouldCharge) {
+                    console.log('💰 Charging for building:', building.name, building.constructionCost);
+                    Object.entries(building.constructionCost || {}).forEach(([material, amount]) => {
+                        totalCost[material] = (totalCost[material] || 0) + (amount as number);
+                    });
+                } else if (building && (building.comesWithStake || isDefaultBuilding)) {
+                    console.log('🆓 Free building (comes with stake):', building.name, {
+                        comesWithStake: building.comesWithStake,
+                        isDefaultBuilding: isDefaultBuilding,
+                        defaultBuildingId: defaultBuildingId
                     });
                 }
             });
@@ -1641,14 +1657,16 @@ export default function ClaimStakes() {
                 }
             }
 
-            // Collect tags provided by existing buildings
+            // Collect tags provided by existing buildings (with cumulative family tags)
             const buildingProvidedTags = new Set<string>();
             const currentBuildings = designMode ? currentDesign : (activeInstance?.buildings || []);
             currentBuildings.forEach(pb => {
                 const placedBuilding = buildings.find(b => b.id === pb.buildingId);
-                // Check both providedTags and addedTags (JSON uses addedTags)
-                const tags = placedBuilding?.providedTags || placedBuilding?.addedTags || [];
-                tags.forEach(tag => buildingProvidedTags.add(tag));
+                if (placedBuilding) {
+                    // Get cumulative tags from entire upgrade family
+                    const cumulativeTags = getCumulativeFamilyTags(placedBuilding, buildings);
+                    cumulativeTags.forEach(tag => buildingProvidedTags.add(tag));
+                }
             });
 
             // Combine all tags: planet, archetype, stake definition, and building-provided tags
@@ -2134,6 +2152,38 @@ export default function ClaimStakes() {
                                 <option value="UST">UST</option>
                             </select>
 
+                            <select
+                                value={planetTypeFilter}
+                                onChange={(e) => setPlanetTypeFilter(e.target.value)}
+                                className="filter-select"
+                            >
+                                <option value="all">All Planet Types</option>
+                                <option value="terrestrial">Terrestrial</option>
+                                <option value="volcanic">Volcanic</option>
+                                <option value="oceanic">Oceanic</option>
+                                <option value="barren">Barren</option>
+                                <option value="ice-giant">Ice Giant</option>
+                                <option value="gas-giant">Gas Giant</option>
+                                <option value="dark">Dark</option>
+                                <option value="asteroid-belt">Asteroid Belt</option>
+                            </select>
+
+                            <div className="cultivation-filter">
+                                <label className="cultivation-filter-label">
+                                    <input
+                                        type="checkbox"
+                                        checked={cultivationFilter}
+                                        onChange={(e) => {
+                                            console.log('🌱 Cultivation filter changed:', e.target.checked);
+                                            setCultivationFilter(e.target.checked);
+                                        }}
+                                        className="cultivation-checkbox"
+                                    />
+                                    <span className="checkmark">🌱</span>
+                                    <span className="filter-text">Cultivation Stakes Only</span>
+                                </label>
+                            </div>
+
                             <input
                                 type="text"
                                 placeholder="Search planets..."
@@ -2148,54 +2198,131 @@ export default function ClaimStakes() {
                         {/* Planet List */}
                         <div className="planet-list">
                             {planets
-                                .filter(planet =>
-                                    (factionFilter === 'all' || planet.faction === factionFilter) &&
-                                    planet.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-                                    !claimStakeInstances.some(stake => stake.planetId === planet.id)
-                                )
-                                .map(planet => (
-                                    <div
-                                        key={planet.id}
-                                        className={`planet-card ${selectedPlanet?.id === planet.id ? 'selected' : ''}`}
-                                        onClick={() => {
-                                            console.log('Selected planet:', planet);
-                                            console.log('Planet resources:', planet.resources);
-                                            setSelectedPlanet(planet);
-                                            setActiveInstanceId(null); // Clear active instance to show purchase screen
+                                .filter(planet => {
+                                    // Faction filter
+                                    const factionMatch = factionFilter === 'all' || planet.faction === factionFilter;
 
-                                            // Auto-select the first available tier
-                                            const availableTiersForLevel = [1, 2, 3, 4, 5].filter(tier =>
-                                                canPlaceClaimStake(sharedState.starbaseLevel, tier)
+                                    // Planet type filter
+                                    let planetTypeMatch = true;
+                                    if (planetTypeFilter !== 'all') {
+                                        const archetype = gameData?.planetArchetypes?.find(
+                                            (a: any) => a.id === planet.archetype
+                                        );
+                                        const planetTypeName = archetype?.name?.toLowerCase().replace(' planet', '').replace('system ', '') || '';
+                                        const filterType = planetTypeFilter.toLowerCase().replace('-', ' ');
+                                        planetTypeMatch = planetTypeName.includes(filterType);
+                                    }
+
+                                    // Cultivation stakes filter
+                                    let cultivationMatch = true;
+                                    if (cultivationFilter) {
+                                        const claimStakeDefinitions = gameData?.claimStakeDefinitions || [];
+                                        const archetypeTags: string[] = [];
+                                        if (planet?.archetype) {
+                                            const archetype = gameData?.planetArchetypes?.find(
+                                                (a: any) => a.id === planet.archetype
                                             );
-                                            if (availableTiersForLevel.length > 0 && !availableTiersForLevel.includes(selectedTier)) {
-                                                setSelectedTier(availableTiersForLevel[0]);
+                                            if (archetype?.tags) {
+                                                archetypeTags.push(...archetype.tags);
                                             }
-                                        }}
-                                    >
-                                        <div className="planet-icon">🌍</div>
-                                        <div className="planet-info">
-                                            <h4>{planet.name}</h4>
-                                            <div className="planet-stats">
-                                                <span className={`faction-badge faction-${planet.faction.toLowerCase()}`}>
-                                                    {planet.faction}
-                                                </span>
-                                                <span className="rent-cost">
-                                                    💰 {planet.rentCost}/day
-                                                </span>
-                                            </div>
-                                            <div className="resource-badges">
-                                                {(Array.isArray(planet.resources) ? planet.resources : Object.keys(planet.resources || {})).slice(0, 3).map((resource: string) => (
-                                                    <span key={resource} className="resource-badge">
-                                                        {gameData?.resources?.find?.((r: any) => r.id === resource)?.name || resource}
-                                                    </span>
-                                                ))}
-                                                {planet.resources && (Array.isArray(planet.resources) ? planet.resources.length : Object.keys(planet.resources).length) > 3 && (
-                                                    <span className="resource-badge">+{(Array.isArray(planet.resources) ? planet.resources.length : Object.keys(planet.resources).length) - 3}</span>
+                                        }
+                                        const planetTags = [...(planet?.tags || []), ...archetypeTags];
+
+                                        cultivationMatch = claimStakeDefinitions.some((def: any) => {
+                                            // Check if this definition matches the planet's tags
+                                            const tagsMatch = !def.requiredTags || def.requiredTags.length === 0 ||
+                                                def.requiredTags.every((tag: string) => planetTags.includes(tag));
+                                            // Check if it's a cultivation stake
+                                            const isCultivation = def.addedTags?.includes('cultivation-stake-only');
+                                            return tagsMatch && isCultivation;
+                                        });
+                                    }
+
+                                    // Search term and claim stake exclusion
+                                    const searchMatch = planet.name.toLowerCase().includes(searchTerm.toLowerCase());
+                                    const notClaimed = !claimStakeInstances.some(stake => stake.planetId === planet.id);
+
+                                    return factionMatch && planetTypeMatch && cultivationMatch && searchMatch && notClaimed;
+                                })
+                                .map(planet => {
+                                    // Check if this planet has cultivation stakes available
+                                    const claimStakeDefinitions = gameData?.claimStakeDefinitions || [];
+                                    const archetypeTags: string[] = [];
+                                    if (planet?.archetype) {
+                                        const archetype = gameData?.planetArchetypes?.find(
+                                            (a: any) => a.id === planet.archetype
+                                        );
+                                        if (archetype?.tags) {
+                                            archetypeTags.push(...archetype.tags);
+                                        }
+                                    }
+                                    const planetTags = [...(planet?.tags || []), ...archetypeTags];
+                                    const hasCultivationStakes = claimStakeDefinitions.some((def: any) => {
+                                        // Check if this definition matches the planet's tags
+                                        const tagsMatch = !def.requiredTags || def.requiredTags.length === 0 ||
+                                            def.requiredTags.every((tag: string) => planetTags.includes(tag));
+                                        // Check if it's a cultivation stake
+                                        const isCultivation = def.addedTags?.includes('cultivation-stake-only');
+                                        return tagsMatch && isCultivation;
+                                    });
+
+
+                                    return (
+                                        <div
+                                            key={planet.id}
+                                            className={`planet-card ${selectedPlanet?.id === planet.id ? 'selected' : ''} ${hasCultivationStakes ? 'has-cultivation-stakes' : ''}`}
+                                            onClick={() => {
+                                                console.log('Selected planet:', planet);
+                                                console.log('Planet resources:', planet.resources);
+                                                setSelectedPlanet(planet);
+                                                setActiveInstanceId(null); // Clear active instance to show purchase screen
+
+                                                // Auto-select the first available tier
+                                                const availableTiersForLevel = [1, 2, 3, 4, 5].filter(tier =>
+                                                    canPlaceClaimStake(sharedState.starbaseLevel, tier)
+                                                );
+                                                if (availableTiersForLevel.length > 0 && !availableTiersForLevel.includes(selectedTier)) {
+                                                    setSelectedTier(availableTiersForLevel[0]);
+                                                }
+                                            }}
+                                        >
+                                            <div className="planet-icon-container">
+                                                <div className="planet-icon">
+                                                    🌍
+                                                </div>
+                                                {hasCultivationStakes && (
+                                                    <div className="cultivation-planet-indicator">
+                                                        🌱
+                                                    </div>
                                                 )}
                                             </div>
+                                            <div className="planet-info">
+                                                <h4>
+                                                    {planet.name}
+                                                    {hasCultivationStakes && <span className="cultivation-available-label">Cultivation Available</span>}
+                                                </h4>
+                                                <div className="planet-stats">
+                                                    <span className={`faction-badge faction-${planet.faction.toLowerCase()}`}>
+                                                        {planet.faction}
+                                                    </span>
+                                                    <span className="rent-cost">
+                                                        💰 {planet.rentCost}/day
+                                                    </span>
+                                                </div>
+                                                <div className="resource-badges">
+                                                    {(Array.isArray(planet.resources) ? planet.resources : Object.keys(planet.resources || {})).slice(0, 3).map((resource: string) => (
+                                                        <span key={resource} className="resource-badge">
+                                                            {gameData?.resources?.find?.((r: any) => r.id === resource)?.name || resource}
+                                                        </span>
+                                                    ))}
+                                                    {planet.resources && (Array.isArray(planet.resources) ? planet.resources.length : Object.keys(planet.resources).length) > 3 && (
+                                                        <span className="resource-badge">+{(Array.isArray(planet.resources) ? planet.resources.length : Object.keys(planet.resources).length) - 3}</span>
+                                                    )}
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                ))}
+                                    );
+                                })}
                         </div>
 
                         {/* Claim Stake Instances */}
@@ -2537,14 +2664,32 @@ export default function ClaimStakes() {
                                                     )}
 
                                                     {/* Construction Cost (in design mode) */}
-                                                    {designMode && building.constructionCost && Object.keys(building.constructionCost).length > 0 && (
+                                                    {designMode && (
                                                         <div className="construction-cost">
                                                             <strong>Cost:</strong>
-                                                            {Object.entries(building.constructionCost).map(([res, amt]) => (
-                                                                <span key={res} className="cost-item">
-                                                                    {res}: {amt}
-                                                                </span>
-                                                            ))}
+                                                            {(() => {
+                                                                // Check if this is the default building from stake definition
+                                                                const claimStakeDefinitions = gameData?.claimStakeDefinitions || [];
+                                                                const stakeDefinition = claimStakeDefinitions.find((def: any) =>
+                                                                    def.id === activeInstance?.stakeDefinitionId
+                                                                );
+                                                                const defaultBuildingId = stakeDefinition?.defaultBuilding;
+                                                                const isDefaultBuilding = building.id === defaultBuildingId;
+
+                                                                if (building.comesWithStake || isDefaultBuilding) {
+                                                                    return <span className="cost-item free">FREE (comes with stake)</span>;
+                                                                }
+
+                                                                if (!building.constructionCost || Object.keys(building.constructionCost).length === 0) {
+                                                                    return <span className="cost-item free">FREE</span>;
+                                                                }
+
+                                                                return Object.entries(building.constructionCost).map(([res, amt]) => (
+                                                                    <span key={res} className="cost-item">
+                                                                        {res}: {amt}
+                                                                    </span>
+                                                                ));
+                                                            })()}
                                                         </div>
                                                     )}
 
@@ -2559,6 +2704,17 @@ export default function ClaimStakes() {
                                                                         ...pb,
                                                                         buildingId: upgradeInfo.nextTier.id
                                                                     };
+
+                                                                    // Debug logging for tag persistence
+                                                                    console.log('Building Upgrade - Tag Persistence Check:', {
+                                                                        oldBuilding: building.name,
+                                                                        oldTier: building.tier,
+                                                                        oldTags: building.addedTags || [],
+                                                                        newBuilding: upgradeInfo.nextTier.name,
+                                                                        newTier: upgradeInfo.nextTier.tier,
+                                                                        newTags: upgradeInfo.nextTier.addedTags || [],
+                                                                        cumulativeTags: getCumulativeFamilyTags(upgradeInfo.nextTier, buildings)
+                                                                    });
 
                                                                     if (designMode) {
                                                                         setCurrentDesign(prev =>
@@ -2635,8 +2791,13 @@ export default function ClaimStakes() {
 
                                             {/* Show available tags - compact */}
                                             <div className="available-tags-compact">
-                                                <div className="tags-header">
+                                                <div className="tags-header" onClick={() => setTagsCollapsed(!tagsCollapsed)}>
                                                     <span className="tags-label">Tags:</span>
+                                                    <button className="collapse-toggle">
+                                                        {tagsCollapsed ? '▶' : '▼'}
+                                                    </button>
+                                                </div>
+                                                {!tagsCollapsed && (
                                                     <div className="tag-list-inline">
                                                         {/* Planet tags */}
                                                         {selectedPlanet?.tags?.map(tag => (
@@ -2660,21 +2821,54 @@ export default function ClaimStakes() {
                                                         })()}
                                                         {/* Claim stake tags */}
                                                         {(() => {
-                                                            const instanceTier = activeInstance?.tier || selectedTier;
                                                             const claimStakeDefinitions = gameData?.claimStakeDefinitions || [];
-                                                            const stakeDefinition = claimStakeDefinitions.find((def: any) => {
-                                                                if (def.tier !== instanceTier) return false;
-                                                                if (def.requiredTags && def.requiredTags.length > 0) {
-                                                                    const allPlanetTags = [...(selectedPlanet?.tags || []), ...((() => {
-                                                                        const archetype = gameData?.planetArchetypes?.find(
-                                                                            (a: any) => a.id === selectedPlanet?.archetype
-                                                                        );
-                                                                        return archetype?.tags || [];
-                                                                    })())];
-                                                                    return def.requiredTags.every((tag: string) => allPlanetTags.includes(tag));
-                                                                }
-                                                                return true;
-                                                            });
+                                                            let stakeDefinition;
+
+                                                            // If we have an active instance with a stored stake definition ID, use that
+                                                            if (activeInstance?.stakeDefinitionId) {
+                                                                stakeDefinition = claimStakeDefinitions.find((def: any) =>
+                                                                    def.id === activeInstance.stakeDefinitionId
+                                                                );
+                                                            }
+
+                                                            // If no stored ID or definition not found, fall back to tier-based lookup
+                                                            if (!stakeDefinition) {
+                                                                const instanceTier = activeInstance?.tier || selectedTier;
+
+                                                                // Get all planet tags for matching
+                                                                const allPlanetTags = [...(selectedPlanet?.tags || []), ...((() => {
+                                                                    const archetype = gameData?.planetArchetypes?.find(
+                                                                        (a: any) => a.id === selectedPlanet?.archetype
+                                                                    );
+                                                                    return archetype?.tags || [];
+                                                                })())];
+
+                                                                // Find the appropriate stake definition based on cultivation filter
+                                                                stakeDefinition = claimStakeDefinitions.find((def: any) => {
+                                                                    // Match tier
+                                                                    if (def.tier !== instanceTier) return false;
+
+                                                                    // Match required tags
+                                                                    if (def.requiredTags && def.requiredTags.length > 0) {
+                                                                        if (!def.requiredTags.every((tag: string) => allPlanetTags.includes(tag))) {
+                                                                            return false;
+                                                                        }
+                                                                    }
+
+                                                                    // Filter by cultivation preference
+                                                                    const isCultivationStake = def.addedTags?.includes('cultivation-stake-only');
+                                                                    const isStandardStake = def.addedTags?.includes('standard-stake-only');
+
+                                                                    if (cultivationFilter) {
+                                                                        // When cultivation filter is on, prefer cultivation stakes
+                                                                        return isCultivationStake;
+                                                                    } else {
+                                                                        // When cultivation filter is off, prefer standard stakes
+                                                                        return isStandardStake || (!isCultivationStake && !isStandardStake);
+                                                                    }
+                                                                });
+                                                            }
+
                                                             return stakeDefinition?.addedTags?.map((tag: string) => (
                                                                 <span key={`stake-${tag}`} className="tag-compact stake-tag" title="From claim stake">
                                                                     {tag}
@@ -2686,9 +2880,11 @@ export default function ClaimStakes() {
                                                             const providedTags = new Set<string>();
                                                             currentDesign.forEach(pb => {
                                                                 const building = buildings.find(b => b.id === pb.buildingId);
-                                                                // Check both providedTags and addedTags (JSON uses addedTags)
-                                                                const tags = building?.providedTags || building?.addedTags || [];
-                                                                tags.forEach(tag => providedTags.add(tag));
+                                                                if (building) {
+                                                                    // Get cumulative tags from entire upgrade family
+                                                                    const cumulativeTags = getCumulativeFamilyTags(building, buildings);
+                                                                    cumulativeTags.forEach(tag => providedTags.add(tag));
+                                                                }
                                                             });
                                                             return Array.from(providedTags).map(tag => (
                                                                 <span key={tag} className="tag-compact building-tag" title="From buildings">
@@ -2701,7 +2897,7 @@ export default function ClaimStakes() {
                                                             💡 Build hubs to unlock modules
                                                         </span>
                                                     </div>
-                                                </div>
+                                                )}
                                             </div>
 
                                             <div className="building-categories">
@@ -2879,7 +3075,19 @@ export default function ClaimStakes() {
                             <div className="planet-purchase-header">
                                 <div className="planet-visual">
                                     <div className="planet-sphere">
-                                        <div className="planet-surface" data-type={selectedPlanet.archetype?.toLowerCase() || selectedPlanet.type?.toLowerCase() || 'terrestrial'}></div>
+                                        <div className="planet-surface" data-type={(() => {
+                                            const archetype = selectedPlanet.archetype?.toLowerCase() || selectedPlanet.type?.toLowerCase() || 'terrestrial';
+                                            // Extract planet type from archetype (e.g., "oceanic-oni" -> "oceanic")
+                                            if (archetype.includes('oceanic')) return 'oceanic';
+                                            if (archetype.includes('volcanic')) return 'volcanic';
+                                            if (archetype.includes('terrestrial')) return 'terrestrial';
+                                            if (archetype.includes('barren')) return 'barren';
+                                            if (archetype.includes('dark')) return 'dark';
+                                            if (archetype.includes('ice')) return 'ice';
+                                            if (archetype.includes('gas')) return 'gas';
+                                            if (archetype.includes('asteroid')) return 'asteroid-belt';
+                                            return 'terrestrial'; // fallback
+                                        })()}></div>
                                         <div className="planet-atmosphere"></div>
                                     </div>
                                     <div className="planet-glow"></div>
@@ -2891,7 +3099,15 @@ export default function ClaimStakes() {
                                             {selectedPlanet.faction || 'Neutral'}
                                         </span>
                                         <span className="separator">•</span>
-                                        <span className="planet-type">{selectedPlanet.archetype || selectedPlanet.type || 'Unknown'}</span>
+                                        <span className="planet-type">
+                                            {(() => {
+                                                const archetype = gameData?.planetArchetypes?.find(
+                                                    (a: any) => a.id === selectedPlanet.archetype
+                                                );
+                                                const name = archetype?.name || selectedPlanet.type || 'Unknown';
+                                                return name.replace(' Planet', '').replace('System ', '');
+                                            })()}
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -2913,7 +3129,15 @@ export default function ClaimStakes() {
                                             </div>
                                             <div className="detail-row">
                                                 <span className="detail-label">Environment Type</span>
-                                                <span className="detail-value">{selectedPlanet.archetype || selectedPlanet.type || 'Unknown'}</span>
+                                                <span className="detail-value">
+                                                    {(() => {
+                                                        const archetype = gameData?.planetArchetypes?.find(
+                                                            (a: any) => a.id === selectedPlanet.archetype
+                                                        );
+                                                        const name = archetype?.name || selectedPlanet.type || 'Unknown';
+                                                        return name.replace(' Planet', '').replace('System ', '');
+                                                    })()}
+                                                </span>
                                             </div>
                                             <div className="detail-row">
                                                 <span className="detail-label">Daily Rent</span>
@@ -2923,8 +3147,8 @@ export default function ClaimStakes() {
                                                         const archetype = gameData?.planetArchetypes?.find(
                                                             (a: any) => a.id === selectedPlanet.archetype
                                                         );
-                                                        const rent = archetype?.rent?.[sharedState.starbaseLevel]?.[selectedTier] ||
-                                                            selectedPlanet.rentCost ||
+                                                        const rent = archetype?.rent?.[sharedState.starbaseLevel]?.[selectedTier]?.toFixed(2) ||
+                                                            selectedPlanet.rentCost?.toFixed(2) ||
                                                             '0.5';
                                                         return rent;
                                                     })()} ATLAS
@@ -3047,15 +3271,69 @@ export default function ClaimStakes() {
                                     <div className="tier-options">
                                         {[1, 2, 3, 4, 5].map(tier => {
                                             const isAvailable = canPlaceClaimStake(sharedState.starbaseLevel, tier);
+
+                                            // Check if this tier has cultivation stakes available
+                                            const claimStakeDefinitions = gameData?.claimStakeDefinitions || [];
+                                            const archetypeTags: string[] = [];
+                                            if (selectedPlanet?.archetype) {
+                                                const archetype = gameData?.planetArchetypes?.find(
+                                                    (a: any) => a.id === selectedPlanet.archetype
+                                                );
+                                                if (archetype?.tags) {
+                                                    archetypeTags.push(...archetype.tags);
+                                                }
+                                            }
+                                            const planetTags = [...(selectedPlanet?.tags || []), ...archetypeTags];
+                                            const stakeDefinition = claimStakeDefinitions.find((def: any) => {
+                                                if (def.tier !== tier) return false;
+                                                if (def.requiredTags && def.requiredTags.length > 0) {
+                                                    return def.requiredTags.every((tag: string) => planetTags.includes(tag));
+                                                }
+                                                return true;
+                                            });
+                                            const isCultivationStake = stakeDefinition?.addedTags?.includes('cultivation-stake-only');
+
+
+                                            // Check if THIS SPECIFIC TIER has a cultivation stake definition
+                                            const tierHasCultivationStake = (() => {
+                                                const claimStakeDefinitions = gameData?.claimStakeDefinitions || [];
+                                                const archetypeTags: string[] = [];
+                                                if (selectedPlanet?.archetype) {
+                                                    const archetype = gameData?.planetArchetypes?.find(
+                                                        (a: any) => a.id === selectedPlanet.archetype
+                                                    );
+                                                    if (archetype?.tags) {
+                                                        archetypeTags.push(...archetype.tags);
+                                                    }
+                                                }
+                                                const planetTags = [...(selectedPlanet?.tags || []), ...archetypeTags];
+
+                                                // Find cultivation stake definition for this specific tier
+                                                const cultivationStakeForTier = claimStakeDefinitions.find((def: any) => {
+                                                    const tierMatch = def.tier === tier;
+                                                    const tagsMatch = !def.requiredTags || def.requiredTags.length === 0 ||
+                                                        def.requiredTags.every((tag: string) => planetTags.includes(tag));
+                                                    const isCultivation = def.addedTags?.includes('cultivation-stake-only');
+                                                    return tierMatch && tagsMatch && isCultivation;
+                                                });
+
+                                                return !!cultivationStakeForTier;
+                                            })();
+
+                                            const showCultivation = tierHasCultivationStake;
+
                                             return (
                                                 <button
                                                     key={tier}
-                                                    className={`tier-option ${selectedTier === tier ? 'selected' : ''} ${!isAvailable ? 'locked' : ''}`}
+                                                    className={`tier-option ${selectedTier === tier ? 'selected' : ''} ${!isAvailable ? 'locked' : ''} ${showCultivation ? 'cultivation-stake' : ''}`}
                                                     onClick={() => isAvailable && setSelectedTier(tier)}
                                                     disabled={!isAvailable}
-                                                    title={!isAvailable ? `Requires higher Starbase Level` : ''}
+                                                    title={!isAvailable ? `Requires higher Starbase Level` : (showCultivation ? 'Cultivation Claim Stake - Specialized for organic production' : '')}
                                                 >
-                                                    <div className="tier-number">T{tier}</div>
+                                                    <div className="tier-number">
+                                                        T{tier}
+                                                        {showCultivation && <span className="cultivation-indicator">🌱</span>}
+                                                    </div>
                                                     <div className="tier-info">
                                                         <span className="slots">{(() => {
                                                             const claimStakeDefinitions = gameData?.claimStakeDefinitions || [];
@@ -3072,13 +3350,27 @@ export default function ClaimStakes() {
                                                             const stakeDefinition = claimStakeDefinitions.find((def: any) => {
                                                                 if (def.tier !== tier) return false;
                                                                 if (def.requiredTags && def.requiredTags.length > 0) {
-                                                                    return def.requiredTags.every((tag: string) => planetTags.includes(tag));
+                                                                    if (!def.requiredTags.every((tag: string) => planetTags.includes(tag))) {
+                                                                        return false;
+                                                                    }
                                                                 }
-                                                                return true;
+
+                                                                // Filter by cultivation preference
+                                                                const isCultivationStake = def.addedTags?.includes('cultivation-stake-only');
+                                                                const isStandardStake = def.addedTags?.includes('standard-stake-only');
+
+                                                                if (cultivationFilter) {
+                                                                    // When cultivation filter is on, prefer cultivation stakes
+                                                                    return isCultivationStake;
+                                                                } else {
+                                                                    // When cultivation filter is off, prefer standard stakes
+                                                                    return isStandardStake || (!isCultivationStake && !isStandardStake);
+                                                                }
                                                             });
                                                             return stakeDefinition?.slots || (tier * 100);
                                                         })()} slots</span>
                                                         <span className="storage">{tier * 1000} storage</span>
+                                                        {showCultivation && <span className="cultivation-label">Cultivation</span>}
                                                     </div>
                                                     {!isAvailable && <div className="lock-overlay">🔒</div>}
                                                 </button>
@@ -3091,7 +3383,31 @@ export default function ClaimStakes() {
                                     <div className="purchase-summary">
                                         <div className="summary-row">
                                             <span>Claim Stake Tier</span>
-                                            <strong>Tier {selectedTier}</strong>
+                                            <strong>
+                                                Tier {selectedTier}
+                                                {(() => {
+                                                    const claimStakeDefinitions = gameData?.claimStakeDefinitions || [];
+                                                    const archetypeTags: string[] = [];
+                                                    if (selectedPlanet?.archetype) {
+                                                        const archetype = gameData?.planetArchetypes?.find(
+                                                            (a: any) => a.id === selectedPlanet.archetype
+                                                        );
+                                                        if (archetype?.tags) {
+                                                            archetypeTags.push(...archetype.tags);
+                                                        }
+                                                    }
+                                                    const planetTags = [...(selectedPlanet?.tags || []), ...archetypeTags];
+                                                    const stakeDefinition = claimStakeDefinitions.find((def: any) => {
+                                                        if (def.tier !== selectedTier) return false;
+                                                        if (def.requiredTags && def.requiredTags.length > 0) {
+                                                            return def.requiredTags.every((tag: string) => planetTags.includes(tag));
+                                                        }
+                                                        return true;
+                                                    });
+                                                    const isCultivationStake = stakeDefinition?.addedTags?.includes('cultivation-stake-only');
+                                                    return isCultivationStake ? ' 🌱 Cultivation' : '';
+                                                })()}
+                                            </strong>
                                         </div>
                                         <div className="summary-row">
                                             <span>Building Slots</span>
@@ -3129,9 +3445,10 @@ export default function ClaimStakes() {
                                                     const archetype = gameData?.planetArchetypes?.find(
                                                         (a: any) => a.id === selectedPlanet.archetype
                                                     );
-                                                    const rent = archetype?.rent?.[sharedState.starbaseLevel]?.[selectedTier] ||
-                                                        selectedPlanet.rentCost ||
+                                                    const rent = archetype?.rent?.[sharedState.starbaseLevel]?.[selectedTier]?.toFixed(2) ||
+                                                        selectedPlanet.rentCost?.toFixed(2) ||
                                                         '0.5';
+
                                                     return rent;
                                                 })()} ATLAS
                                             </strong>
@@ -3184,9 +3501,20 @@ export default function ClaimStakes() {
                                 totalCrewNeeded += building.neededCrew || building.crew || 0;
 
                                 if (designMode && building.constructionCost) {
-                                    Object.entries(building.constructionCost).forEach(([resource, amount]) => {
-                                        totalCost[resource] = (totalCost[resource] || 0) + (amount as number);
-                                    });
+                                    // Get the default building ID from the stake definition to exclude it from costs
+                                    const claimStakeDefinitions = gameData?.claimStakeDefinitions || [];
+                                    const stakeDefinition = claimStakeDefinitions.find((def: any) =>
+                                        def.id === activeInstance.stakeDefinitionId
+                                    );
+                                    const defaultBuildingId = stakeDefinition?.defaultBuilding;
+                                    const isDefaultBuilding = building.id === defaultBuildingId;
+
+                                    // Only add cost if it's not the default building and doesn't come with stake
+                                    if (!building.comesWithStake && !isDefaultBuilding) {
+                                        Object.entries(building.constructionCost).forEach(([resource, amount]) => {
+                                            totalCost[resource] = (totalCost[resource] || 0) + (amount as number);
+                                        });
+                                    }
                                 }
                             }
                         });
