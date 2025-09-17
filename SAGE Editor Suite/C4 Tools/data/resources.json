@@ -496,11 +496,11 @@
       "baseValue": 30
     },
     {
-      "id": "dysprosium",
-      "name": "Dysprosium",
+      "id": "dysprosium-ore",
+      "name": "Dysprosium Ore",
       "category": "raw",
       "tier": 4,
-      "description": "Dysprosium - Tier 4 raw",
+      "description": "Dysprosium Ore - Tier 4 raw",
       "stackSize": 100,
       "baseValue": 40
     },
@@ -541,11 +541,11 @@
       "baseValue": 20
     },
     {
-      "id": "germanium",
-      "name": "Germanium",
+      "id": "germanium-ore",
+      "name": "Germanium Ore",
       "category": "raw",
       "tier": 4,
-      "description": "Germanium - Tier 4 raw",
+      "description": "Germanium Ore - Tier 4 raw",
       "stackSize": 100,
       "baseValue": 40
     },
@@ -694,11 +694,11 @@
       "baseValue": 30
     },
     {
-      "id": "neodymium",
-      "name": "Neodymium",
+      "id": "neodymium-ore",
+      "name": "Neodymium Ore",
       "category": "raw",
       "tier": 1,
-      "description": "Neodymium - Tier 1 raw",
+      "description": "Neodymium Ore - Tier 1 raw",
       "stackSize": 100,
       "baseValue": 10
     },
@@ -1167,6 +1167,15 @@
       "category": "advanced",
       "tier": 4,
       "description": "Advanced Weapon Core - Tier 4 advanced",
+      "stackSize": 100,
+      "baseValue": 40
+    },
+    {
+      "id": "dysprosium",
+      "name": "Dysprosium",
+      "category": "advanced",
+      "tier": 4,
+      "description": "Dysprosium - Tier 4 advanced",
       "stackSize": 100,
       "baseValue": 40
     },
@@ -2940,6 +2949,15 @@
       "category": "processed",
       "tier": 1,
       "description": "Nanomaterial Base - Tier 1 processed",
+      "stackSize": 100,
+      "baseValue": 10
+    },
+    {
+      "id": "neodymium",
+      "name": "Neodymium",
+      "category": "processed",
+      "tier": 1,
+      "description": "Neodymium - Tier 1 processed",
       "stackSize": 100,
       "baseValue": 10
     },
