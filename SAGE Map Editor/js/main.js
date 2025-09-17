@@ -16,63 +16,63 @@ window.MAX_HISTORY_SIZE = MAX_HISTORY_SIZE;
 // Main initialization function
 function initApp() {
     console.log('Initializing Star Atlas Map Editor...');
-    
+
     // Get device pixel ratio for high DPI displays
     window.devicePixelRatio = window.devicePixelRatio || 1;
     console.log(`Device Pixel Ratio: ${window.devicePixelRatio}`);
-    
+
     // Initialize canvas and context
     initCanvas();
-    
+
     // Initialize UI components
     initUI();
-    
+
     // Initialize canvas event handlers
     initCanvasHandlers();
-    
+
     // Initialize app state
     initAppState();
-    
+
     // Initialize tooltips
     setupTooltips();
-    
+
     // Update UI elements
     updateUndoRedoButtons();
     updateTopBarInfo();
     updateHistoryPanel();
-    
+
     // Force an initial resize of the canvas to fill the available space
-    setTimeout(function() {
+    setTimeout(function () {
         updateCanvasSize();
-        
+
         // Ensure high DPI canvases are properly set up
         if (typeof setupHighDPICanvas === 'function') {
             const galaxyCanvas = document.getElementById('galaxyView');
             const galaxyContext = galaxyCanvas.getContext('2d');
             setupHighDPICanvas(galaxyCanvas, galaxyContext);
-            
+
             const previewCanvas = document.getElementById('systemPreview');
             if (previewCanvas) {
                 const previewContext = previewCanvas.getContext('2d');
                 setupHighDPICanvas(previewCanvas, previewContext);
             }
         }
-        
+
         // Draw initial view
         drawGalaxyMap();
-        
+
         // Create test data for empty maps
         if (mapData.length === 0) {
             createTestData();
         }
-        
+
         // Automatically trigger the Select All button to ensure all filters are properly applied
-        setTimeout(function() {
+        setTimeout(function () {
             const selectAllBtn = document.getElementById('select-all-resources');
             if (selectAllBtn) {
                 selectAllBtn.click();
                 console.log('Automatically triggered Select All Filters');
-                
+
                 // Manually check all resource group toggles
                 const resourceGroupToggles = [
                     document.getElementById('filter-group-gases-resources'),
@@ -80,7 +80,7 @@ function initApp() {
                     document.getElementById('filter-group-crystals-resources'),
                     document.getElementById('filter-group-other-resources')
                 ];
-                
+
                 resourceGroupToggles.forEach(toggle => {
                     if (toggle && !toggle.checked) {
                         toggle.checked = true;
@@ -92,13 +92,13 @@ function initApp() {
                 });
             }
         }, 500);
-        
+
         // Auto-load the map file after filters are set up
         setTimeout(() => {
             autoLoadMapFile();
         }, 600);
     }, 100);
-    
+
     console.log('Application initialized successfully');
 }
 
@@ -107,43 +107,43 @@ function initApp() {
  */
 async function autoLoadMapFile() {
     console.log('Starting automatic map file loading...');
-    
+
     try {
-        // Load the 69regions-v8.json file from SAGE Editor Suite
-        const mapUrl = '../SAGE Editor Suite/Map Editor/69regions-v8.json';
+        // Load the 69regions-v9.json file from SAGE Editor Suite
+        const mapUrl = '../SAGE Editor Suite/Map Editor/69regions-v9.json';
         console.log('Loading map file:', mapUrl);
-        
+
         const response = await fetch(mapUrl);
         if (response.ok) {
             const mapData = await response.json();
             console.log('Successfully loaded map file');
-            
+
             // Show import loader
             createImportLoader();
             updateImportProgress(5, 'LOADING MAP DATA...');
-            
+
             // Set the filename
-            currentFilename = '69regions-v8.json';
-            
+            currentFilename = '69regions-v9.json';
+
             // Load the map data with progress tracking
             setTimeout(() => {
                 loadMapData(mapData, () => {
                     // After data is loaded, configure filters
                     configureFiltersForRegionalView();
-                    
+
                     // Draw the galaxy
                     updateImportProgress(80, 'RENDERING GALAXY MAP...');
-                    
+
                     setTimeout(() => {
                         drawGalaxyMap();
                         unsavedChanges = false;
-                        
+
                         // Update the filename display in the UI
                         updateTopBarInfo();
-                        
+
                         // Show completion
                         showImportComplete();
-                        
+
                         // Show notification
                         const notification = document.createElement('div');
                         notification.textContent = 'Map loaded - Regional view active';
@@ -157,7 +157,7 @@ async function autoLoadMapFile() {
                         notification.style.borderRadius = '5px';
                         notification.style.zIndex = '9999';
                         document.body.appendChild(notification);
-                        
+
                         setTimeout(() => {
                             if (document.body.contains(notification)) {
                                 document.body.removeChild(notification);
@@ -166,14 +166,14 @@ async function autoLoadMapFile() {
                     }, 100);
                 });
             }, 100);
-            
+
         } else {
             console.error('Failed to load map file:', response.status);
             console.log('You can manually load map files using the Import button.');
         }
     } catch (error) {
         console.error('Error loading map file:', error);
-        
+
         // Check if this is a CORS error from file:// protocol
         if (window.location.protocol === 'file:') {
             console.log('⚠️ CORS Error: Cannot load files when running from file:// protocol');
@@ -193,17 +193,17 @@ async function autoLoadMapFile() {
  */
 function configureFiltersForRegionalView() {
     console.log('Configuring filters for regional view...');
-    
+
     // Turn off all filters first
     Object.keys(resourceFilterState).forEach(key => {
         resourceFilterState[key] = false;
     });
-    
+
     // Enable only the regional filters shown in the screenshot
     resourceFilterState["RegionalPolygon"] = true;    // Regional polygon
     resourceFilterState["RegionalName"] = true;       // Regional name
     resourceFilterState["RegionalIndicator"] = true;  // Region membership circles
-    
+
     // Redraw the filter UI if it exists
     if (typeof setupResourceFilter === 'function') {
         setupResourceFilter();
@@ -217,14 +217,14 @@ window.initApp = initApp;
 function initAppState() {
     // Initialize resource filter state
     initResourceFilterState();
-    
+
     // Reset selection and interaction states
     selectedSystems.length = 0;
     hoveredSystem = null;
     draggedSystem = null;
     isPanning = false;
     isLinking = false;
-    
+
     // Initialize the new history system
     if (typeof initializeHistory === 'function') {
         initializeHistory();
@@ -240,7 +240,7 @@ function initAppState() {
 // Create test data for development
 function createTestData() {
     console.log('Creating test data...');
-    
+
     // Create test systems
     const testSystems = [
         {
@@ -375,7 +375,7 @@ function createTestData() {
             links: ['sys-2']
         }
     ];
-    
+
     // Sample region definition
     const testRegions = [
         {
@@ -389,31 +389,31 @@ function createTestData() {
             color: '#4682B4'
         }
     ];
-    
+
     // Assign regions to systems
     testSystems[0].regionId = 'region-1'; // Alpha to Central
     testSystems[1].regionId = 'region-1'; // Beta to Central
     testSystems[2].regionId = 'region-2'; // Gamma to Outer Rim
     testSystems[3].regionId = 'region-2'; // Delta to Outer Rim
-    
+
     // Add test data to application state
     mapData = testSystems;
     regionDefinitions = testRegions;
-    
+
     // Build system lookup
     systemLookup = {};
     mapData.forEach(system => {
         systemLookup[system.key] = system;
     });
-    
+
     // Set system counter based on test data
     systemCounter = 5;
 }
 
 // Execute when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     console.log('DOM Content loaded in main.js, but waiting for explicit initialization call');
-    
+
     // Immediately clean up any existing tooltip elements
     const existingTooltips = document.querySelectorAll('.tooltip');
     existingTooltips.forEach(tooltip => {
@@ -421,21 +421,21 @@ document.addEventListener('DOMContentLoaded', function() {
             tooltip.parentNode.removeChild(tooltip);
         }
     });
-    
+
     // Add event capture for mouseenter/mouseleave on tooltip elements to prevent
     // any tooltip creation from happening
-    document.addEventListener('mouseenter', function(e) {
+    document.addEventListener('mouseenter', function (e) {
         if (e.target.hasAttribute && e.target.hasAttribute('data-tooltip')) {
             e.stopPropagation();
         }
     }, true);
-    
-    document.addEventListener('mouseleave', function(e) {
+
+    document.addEventListener('mouseleave', function (e) {
         if (e.target.hasAttribute && e.target.hasAttribute('data-tooltip')) {
             e.stopPropagation();
         }
     }, true);
-    
+
     // We don't automatically call initApp() here anymore
     // It will be called explicitly from the startup script in index.html
 });
@@ -450,16 +450,16 @@ try {
     // These should be defined in system-operations.js
     if (typeof addStar === 'function') window.addStar = addStar;
     if (typeof deleteStar === 'function') window.deleteStar = deleteStar;
-    
+
     // This should be defined in ui-handlers.js
     if (typeof updateStarHeaders === 'function') window.updateStarHeaders = updateStarHeaders;
-    
+
     // These should be defined in canvas-drawing.js
     if (typeof drawGalaxyMap === 'function') window.drawGalaxyMap = drawGalaxyMap;
     if (typeof drawSystemPreview === 'function') window.drawSystemPreview = drawSystemPreview;
     if (typeof centerMapView === 'function') window.centerMapView = centerMapView;
     if (typeof initCanvas === 'function') window.initCanvas = initCanvas;
-    
+
     // This should be defined in ui-handlers.js
     if (typeof initUI === 'function') window.initUI = initUI;
     if (typeof initCanvasHandlers === 'function') window.initCanvasHandlers = initCanvasHandlers;

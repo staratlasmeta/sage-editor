@@ -378,48 +378,54 @@ export class StandaloneDataLoader {
                     return building;
                 });
 
+                // Extract arrays from the JSON structure
+                const resources = resourcesData.resources || [];
+                const planets = planetsData.planets || [];
+                const planetArchetypes = archetypesData?.archetypes || [];
+                const buildings = buildingsData.buildings || [];
+                const claimStakeDefinitions = buildingsData.claimStakeDefinitions || [];
+                const recipes = recipesData || [];
+                const starbases = starbasesData?.starbases || [];
+
                 // Log what we loaded
                 console.log('✅ Game data loaded successfully:', {
-                    resources: (resourcesData.resources || resourcesData || []).length,
-                    planets: (planetsData.planets || planetsData || []).length,
-                    planetArchetypes: (archetypesData?.archetypes || archetypesData || []).length,
+                    resources: resources.length,
+                    planets: planets.length,
+                    planetArchetypes: planetArchetypes.length,
                     buildings: claimStakeBuildings.length,
-                    claimStakeDefinitions: (buildingsData.claimStakeDefinitions || []).length,
+                    claimStakeDefinitions: claimStakeDefinitions.length,
                     craftingHabs: (craftingBuildingsData?.habs || []).length,
                     craftingStations: (craftingBuildingsData?.craftingStations || []).length,
                     cargoStorage: (craftingBuildingsData?.cargoStorage || []).length,
-                    recipes: (recipesData || []).length,
-                    starbases: (starbasesData?.starbases || starbasesData || []).length
+                    recipes: recipes.length,
+                    starbases: starbases.length
                 });
 
                 return {
-                    resources: resourcesData.resources || resourcesData || [],
+                    resources: resources,
                     resourceCategories: resourcesData.categories || {},
-                    planets: planetsData.planets || planetsData || [],
-                    planetArchetypes: archetypesData?.archetypes || archetypesData || [],
+                    planets: planets,
+                    planetArchetypes: planetArchetypes,
                     buildings: claimStakeBuildings,
-                    claimStakeDefinitions: buildingsData.claimStakeDefinitions || [],
+                    claimStakeDefinitions: claimStakeDefinitions,
                     craftingHabBuildings: craftingBuildingsData || {
                         habs: [],
                         craftingStations: [],
                         cargoStorage: []
                     },
-                    recipes: recipesData || [],
-                    craftingRecipes: recipesData || [],
-                    starbases: starbasesData?.starbases || starbasesData || [],
+                    recipes: recipes,
+                    craftingRecipes: recipes,
+                    starbases: starbases,
 
                     // Helper methods
                     getResourceById: (id: string) => {
-                        const resources = resourcesData.resources || resourcesData || [];
                         return resources.find((r: any) => r.id === id);
                     },
                     getResourceCategory: (resourceId: string) => {
-                        const resources = resourcesData.resources || resourcesData || [];
                         const resource = resources.find((r: any) => r.id === resourceId);
                         return resource ? resource.category : 'unknown';
                     },
                     getResourceName: (resourceId: string) => {
-                        const resources = resourcesData.resources || resourcesData || [];
                         const resource = resources.find((r: any) => r.id === resourceId);
                         return resource ? resource.name : resourceId;
                     }

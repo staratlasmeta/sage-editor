@@ -110,189 +110,207 @@ const PLANET_TIERS = {
     "Neutral Oceanic Planet": 3
 };
 
-// Resource types - updated to match exact data specification (excluding Ink)
+// Resource types - updated to match exact data from recipes.json
 const RESOURCE_TYPES = [
-    { type: 0, name: "Abyssal Chromite", richness: 1, planetTypes: ["Oceanic Planet"] },
-    { type: 1, name: "Abyssal Energy Crystals", richness: 4, planetTypes: ["Oceanic Planet"] },
-    { type: 2, name: "Aluminum Ore", richness: 2, planetTypes: ["System Asteroid Belt", "Terrestrial Planet"] },
-    { type: 3, name: "Amber Resin", richness: 2, planetTypes: ["Terrestrial Planet"] },
-    { type: 4, name: "Arco", richness: 1, planetTypes: ["Barren Planet", "Dark Planet", "Ice Giant", "Volcanic Planet"] },
-    { type: 5, name: "Argon", richness: 2, planetTypes: ["Gas Giant", "Terrestrial Planet", "Oceanic Planet"] },
-    { type: 6, name: "Bathysphere Pearls", richness: 3, planetTypes: ["Oceanic Planet"] },
-    { type: 7, name: "Beryllium Crystals", richness: 5, planetTypes: ["Dark Planet", "Ice Giant"] },
-    { type: 8, name: "Biolumite", richness: 5, planetTypes: ["Ice Giant"] },
-    { type: 9, name: "Biomass", richness: 1, planetTypes: ["Terrestrial Planet", "Oceanic Planet"] },
-    { type: 10, name: "Black Opal", richness: 5, planetTypes: ["Barren Planet"] },
-    { type: 11, name: "Boron Ore", richness: 2, planetTypes: ["System Asteroid Belt"] },
-    { type: 12, name: "Carbon", richness: 1, planetTypes: ["Gas Giant", "Terrestrial Planet"] },
-    { type: 13, name: "Cinnabar Crystals", richness: 3, planetTypes: ["Volcanic Planet"] },
-    { type: 14, name: "Cobalt Ore", richness: 2, planetTypes: ["Ice Giant", "Oceanic Planet"] },
-    { type: 15, name: "Copper Ore", richness: 1, planetTypes: ["Barren Planet", "System Asteroid Belt"] },
-    { type: 16, name: "Cryo Formation Crystals", richness: 3, planetTypes: ["Ice Giant"] },
-    { type: 17, name: "Diamond", richness: 2, planetTypes: ["Dark Planet", "Ice Giant", "Volcanic Planet"] },
-    { type: 18, name: "Dodiline Crystals", richness: 4, planetTypes: ["Volcanic Planet"] },
-    { type: 19, name: "Drywater", richness: 3, planetTypes: ["Ice Giant", "Barren Planet"] },
-    { type: 20, name: "Dysprosium", richness: 4, planetTypes: ["Terrestrial Planet"] },
-    { type: 21, name: "Emerald Crystals", richness: 3, planetTypes: ["Dark Planet"] },
-    { type: 22, name: "Fluorine Gas", richness: 2, planetTypes: ["Gas Giant", "Volcanic Planet", "Oceanic Planet"] },
-    { type: 23, name: "Fusion Catalyst Deposits", richness: 5, planetTypes: ["Dark Planet"] },
-    { type: 24, name: "Garnet Crystals", richness: 2, planetTypes: ["Ice Giant", "Volcanic Planet"] },
-    { type: 25, name: "Germanium", richness: 1, planetTypes: ["Dark Planet", "Ice Giant"] },
-    { type: 26, name: "Glowstone Crystals", richness: 3, planetTypes: ["Volcanic Planet"] },
-    { type: 27, name: "Gold Ore", richness: 3, planetTypes: ["Terrestrial Planet"] },
-    { type: 28, name: "Hafnium Ore", richness: 2, planetTypes: ["Volcanic Planet"] },
-    { type: 29, name: "Hicenium Crystals", richness: 4, planetTypes: ["Ice Giant"] },
-    { type: 30, name: "Hydrogen", richness: 1, planetTypes: ["Gas Giant", "Terrestrial Planet", "Oceanic Planet"] },
-    { type: 31, name: "Iridium Ore", richness: 4, planetTypes: ["Volcanic Planet"] },
-    { type: 32, name: "Iron Ore", richness: 1, planetTypes: ["Terrestrial Planet"] },
-    { type: 33, name: "Jasphorus Crystals", richness: 5, planetTypes: ["Barren Planet"] },
-    { type: 34, name: "Krypton", richness: 1, planetTypes: ["Barren Planet", "Gas Giant", "Ice Giant"] },
-    { type: 35, name: "Lithium Ore", richness: 2, planetTypes: ["Barren Planet", "System Asteroid Belt"] },
-    { type: 36, name: "Living Metal Symbionts", richness: 5, planetTypes: ["Dark Planet"] },
-    { type: 37, name: "Lumanite", richness: 1, planetTypes: ["Volcanic Planet"] },
-    { type: 38, name: "Lunar Echo Crystals", richness: 5, planetTypes: ["Oceanic Planet"] },
-    { type: 39, name: "Manganese Ore", richness: 2, planetTypes: ["Barren Planet", "Oceanic Planet"] },
-    { type: 40, name: "Methane", richness: 2, planetTypes: ["Dark Planet", "System Asteroid Belt"] },
-    { type: 41, name: "Neodymium", richness: 1, planetTypes: ["Dark Planet", "Terrestrial Planet"] },
-    { type: 42, name: "Neon", richness: 3, planetTypes: ["Dark Planet", "Gas Giant"] },
-    { type: 43, name: "Neural Coral Compounds", richness: 3, planetTypes: ["Oceanic Planet"] },
-    { type: 44, name: "Nitrogen", richness: 1, planetTypes: ["Gas Giant", "Terrestrial Planet", "Oceanic Planet"] },
-    { type: 45, name: "Ochre Ore", richness: 4, planetTypes: ["Terrestrial Planet"] },
-    { type: 46, name: "Opal Fragments", richness: 5, planetTypes: ["Dark Planet"] },
-    { type: 47, name: "Osmium Ore", richness: 1, planetTypes: ["Volcanic Planet"] },
-    { type: 48, name: "Oxygen", richness: 2, planetTypes: ["Terrestrial Planet", "Oceanic Planet"] },
-    { type: 49, name: "Palladium Ore", richness: 3, planetTypes: ["Volcanic Planet"] },
-    { type: 50, name: "Peridot Crystals", richness: 2, planetTypes: ["Ice Giant"] },
-    { type: 51, name: "Phase Shift Crystals", richness: 3, planetTypes: ["Oceanic Planet"] },
-    { type: 52, name: "Plasma Containment Minerals", richness: 3, planetTypes: ["Volcanic Planet"] },
-    { type: 53, name: "Platinum Ore", richness: 3, planetTypes: ["Volcanic Planet"] },
-    { type: 54, name: "Quantum Computational Substrate", richness: 4, planetTypes: ["Dark Planet"] },
-    { type: 55, name: "Quantum Particle", richness: 5, planetTypes: ["Dark Planet", "Ice Giant"] },
-    { type: 56, name: "Quartz Crystals", richness: 1, planetTypes: ["System Asteroid Belt"] },
-    { type: 57, name: "Radiant Dust", richness: 2, planetTypes: ["Dark Planet"] },
-    { type: 58, name: "Raw Chisenic", richness: 3, planetTypes: ["Dark Planet"] },
-    { type: 59, name: "Resonium Ore", richness: 5, planetTypes: ["Barren Planet"] },
-    { type: 60, name: "Rhenium Ore", richness: 1, planetTypes: ["System Asteroid Belt", "Volcanic Planet"] },
-    { type: 61, name: "Rhodium Ore", richness: 4, planetTypes: ["Volcanic Planet"] },
-    { type: 62, name: "Rochinol", richness: 2, planetTypes: ["Barren Planet", "Dark Planet", "Ice Giant", "Volcanic Planet"] },
-    { type: 63, name: "Ruby Crystals", richness: 2, planetTypes: ["Ice Giant"] },
-    { type: 64, name: "Sapphire Crystals", richness: 3, planetTypes: ["Ice Giant"] },
-    { type: 65, name: "Scandium Ore", richness: 2, planetTypes: ["System Asteroid Belt"] },
-    { type: 66, name: "Silica", richness: 1, planetTypes: ["System Asteroid Belt", "Terrestrial Planet"] },
-    { type: 67, name: "Silicon Crystal", richness: 1, planetTypes: ["Dark Planet", "System Asteroid Belt"] },
-    { type: 68, name: "Silver Ore", richness: 2, planetTypes: ["Dark Planet"] },
-    { type: 69, name: "Sodium Crystals", richness: 1, planetTypes: ["System Asteroid Belt"] },
-    { type: 70, name: "Strontium Crystals", richness: 5, planetTypes: ["System Asteroid Belt"] },
-    { type: 71, name: "Tantalum Ore", richness: 1, planetTypes: ["Volcanic Planet"] },
-    { type: 72, name: "Tenon Gas", richness: 3, planetTypes: ["Gas Giant"] },
-    { type: 73, name: "Thermal Bloom Sediment", richness: 2, planetTypes: ["Oceanic Planet"] },
-    { type: 74, name: "Thermal Regulator Stone", richness: 1, planetTypes: ["Volcanic Planet"] },
-    { type: 75, name: "Thermoplastic Resin", richness: 1, planetTypes: ["Terrestrial Planet", "Gas Giant"] },
-    { type: 76, name: "Tin Ore", richness: 1, planetTypes: ["Barren Planet"] },
-    { type: 77, name: "Titanium Ore", richness: 3, planetTypes: ["System Asteroid Belt"] },
-    { type: 78, name: "Topaz Crystals", richness: 2, planetTypes: ["Dark Planet", "Ice Giant"] },
-    { type: 79, name: "Tritium Ore", richness: 1, planetTypes: ["System Asteroid Belt"] },
-    { type: 80, name: "Tungsten Ore", richness: 3, planetTypes: ["Barren Planet"] },
-    { type: 81, name: "Vanadium Ore", richness: 3, planetTypes: ["Barren Planet"] },
-    { type: 82, name: "Viscovite Crystals", richness: 3, planetTypes: ["Dark Planet"] },
-    { type: 83, name: "Xenon", richness: 2, planetTypes: ["Dark Planet", "Gas Giant", "Ice Giant"] },
-    { type: 84, name: "Zinc Ore", richness: 1, planetTypes: ["Barren Planet"] },
-    { type: 85, name: "Zirconium Ore", richness: 4, planetTypes: ["Ice Giant"] }
+    { type: 0, name: "Magmaroot", richness: 1, planetTypes: ["Volcanic"] },
+    { type: 1, name: "Pyroclast Energen", richness: 1, planetTypes: ["Volcanic"] },
+    { type: 2, name: "Blazing Snapdragon", richness: 2, planetTypes: ["Volcanic"] },
+    { type: 3, name: "Tidal Kelp", richness: 1, planetTypes: ["Oceanic"] },
+    { type: 4, name: "Bioluminous Algae", richness: 2, planetTypes: ["Oceanic"] },
+    { type: 5, name: "Shadowmoss", richness: 1, planetTypes: ["Dark"] },
+    { type: 6, name: "Spectral Lichen", richness: 2, planetTypes: ["Dark"] },
+    { type: 7, name: "Ironshell Cactus", richness: 1, planetTypes: ["Barren"] },
+    { type: 8, name: "Bastion Agave", richness: 2, planetTypes: ["Barren"] },
+    { type: 9, name: "Swiftvine", richness: 2, planetTypes: ["Terrestrial"] },
+    { type: 10, name: "Electric Fern", richness: 2, planetTypes: ["Terrestrial"] },
+    { type: 11, name: "Temporal Flux Orchid", richness: 2, planetTypes: ["Terrestrial"] },
+    { type: 12, name: "Frostcore Bryophyte", richness: 3, planetTypes: ["Ice Giant"] },
+    { type: 13, name: "Mind Shade Fungus", richness: 3, planetTypes: ["Dark"] },
+    { type: 14, name: "Aegis Barrier Cactus", richness: 3, planetTypes: ["Barren"] },
+    { type: 15, name: "Abyssal Energy Crystals", richness: 4, planetTypes: ["Oceanic"] },
+    { type: 16, name: "Aluminum Ore", richness: 2, planetTypes: ["System Asteroid Belt", "Ice Giant", "Barren"] },
+    { type: 17, name: "Arco", richness: 1, planetTypes: ["Terrestrial", "Barren", "Gas Giant"] },
+    { type: 18, name: "Argon", richness: 2, planetTypes: ["Gas Giant", "Dark", "Ice Giant"] },
+    { type: 19, name: "Bathysphere Pearls", richness: 3, planetTypes: ["Oceanic"] },
+    { type: 20, name: "Beryllium Crystals", richness: 5, planetTypes: ["Dark", "Ice Giant"] },
+    { type: 21, name: "Biomass", richness: 1, planetTypes: ["Terrestrial", "Oceanic"] },
+    { type: 22, name: "Boron Ore", richness: 2, planetTypes: ["Barren", "Gas Giant"] },
+    { type: 23, name: "Carbon", richness: 1, planetTypes: ["System Asteroid Belt", "Volcanic", "Dark"] },
+    { type: 24, name: "Chromite Ore", richness: 1, planetTypes: ["Oceanic", "Ice Giant", "Dark"] },
+    { type: 25, name: "Copper Ore", richness: 1, planetTypes: ["Terrestrial", "System Asteroid Belt", "Oceanic"] },
+    { type: 26, name: "Cryo Formation Crystals", richness: 3, planetTypes: ["Ice Giant"] },
+    { type: 27, name: "Diamond", richness: 3, planetTypes: ["Volcanic", "Barren", "Dark"] },
+    { type: 28, name: "Dodiline Crystals", richness: 4, planetTypes: ["Volcanic"] },
+    { type: 29, name: "Drywater", richness: 3, planetTypes: ["Ice Giant", "Barren"] },
+    { type: 30, name: "Dysprosium", richness: 4, planetTypes: ["Terrestrial"] },
+    { type: 31, name: "Emerald Crystals", richness: 3, planetTypes: ["Dark"] },
+    { type: 32, name: "Fluorine Gas", richness: 2, planetTypes: ["Gas Giant", "Volcanic", "Ice Giant"] },
+    { type: 33, name: "Fusion Catalyst Deposits", richness: 5, planetTypes: ["Dark"] },
+    { type: 34, name: "Garnet Crystals", richness: 2, planetTypes: ["System Asteroid Belt", "Ice Giant"] },
+    { type: 35, name: "Germanium", richness: 4, planetTypes: ["System Asteroid Belt", "Ice Giant", "Gas Giant"] },
+    { type: 36, name: "Gold Ore", richness: 3, planetTypes: ["Terrestrial"] },
+    { type: 37, name: "Hafnium Ore", richness: 2, planetTypes: ["System Asteroid Belt", "Ice Giant", "Barren"] },
+    { type: 38, name: "Hicenium Crystals", richness: 4, planetTypes: ["Ice Giant"] },
+    { type: 39, name: "Hydrogen", richness: 1, planetTypes: ["Gas Giant", "Ice Giant", "Oceanic"] },
+    { type: 40, name: "Ink", richness: 1, planetTypes: [] },
+    { type: 41, name: "Iridium Ore", richness: 4, planetTypes: ["Volcanic"] },
+    { type: 42, name: "Iron Ore", richness: 1, planetTypes: ["Terrestrial", "System Asteroid Belt", "Barren"] },
+    { type: 43, name: "Jasphorus Crystals", richness: 5, planetTypes: ["Barren"] },
+    { type: 44, name: "Krypton", richness: 1, planetTypes: ["Gas Giant", "Ice Giant"] },
+    { type: 45, name: "Lithium Ore", richness: 2, planetTypes: ["Barren", "Dark"] },
+    { type: 46, name: "Living Metal Symbionts", richness: 5, planetTypes: ["Dark"] },
+    { type: 47, name: "Lumanite", richness: 1, planetTypes: ["Volcanic", "Dark", "Ice Giant"] },
+    { type: 48, name: "Lunar Echo Crystals", richness: 5, planetTypes: ["Oceanic"] },
+    { type: 49, name: "Manganese Ore", richness: 2, planetTypes: ["System Asteroid Belt", "Volcanic", "Gas Giant"] },
+    { type: 50, name: "Methane", richness: 2, planetTypes: ["Gas Giant", "Ice Giant", "Dark"] },
+    { type: 51, name: "Nanosil", richness: 3, planetTypes: ["System Asteroid Belt", "Dark"] },
+    { type: 52, name: "Neodymium", richness: 1, planetTypes: ["System Asteroid Belt", "Volcanic"] },
+    { type: 53, name: "Neon", richness: 3, planetTypes: ["Dark", "Gas Giant"] },
+    { type: 54, name: "Neural Coral Compounds", richness: 3, planetTypes: ["Oceanic"] },
+    { type: 55, name: "Nitrogen", richness: 1, planetTypes: ["Terrestrial", "Gas Giant", "Ice Giant"] },
+    { type: 56, name: "Osmium Ore", richness: 1, planetTypes: ["System Asteroid Belt", "Dark"] },
+    { type: 57, name: "Oxygen", richness: 2, planetTypes: ["Terrestrial", "Oceanic", "Ice Giant"] },
+    { type: 58, name: "Palladium Ore", richness: 3, planetTypes: ["Volcanic"] },
+    { type: 59, name: "Peridot Crystals", richness: 2, planetTypes: ["Ice Giant", "Volcanic"] },
+    { type: 60, name: "Phase Shift Crystals", richness: 3, planetTypes: ["Oceanic"] },
+    { type: 61, name: "Plasma Containment Minerals", richness: 3, planetTypes: ["Volcanic"] },
+    { type: 62, name: "Platinum Ore", richness: 3, planetTypes: ["Volcanic"] },
+    { type: 63, name: "Quantum Computational Substrate", richness: 4, planetTypes: ["Dark"] },
+    { type: 64, name: "Quantum Particle", richness: 5, planetTypes: ["Dark", "Ice Giant"] },
+    { type: 65, name: "Quartz Crystals", richness: 1, planetTypes: ["Terrestrial", "Oceanic", "Ice Giant"] },
+    { type: 66, name: "Raw Chisenic", richness: 3, planetTypes: ["Dark"] },
+    { type: 67, name: "Resonium Ore", richness: 5, planetTypes: ["Barren"] },
+    { type: 68, name: "Rhenium Ore", richness: 1, planetTypes: ["Volcanic", "Barren", "Gas Giant"] },
+    { type: 69, name: "Rhodium Ore", richness: 4, planetTypes: ["Volcanic"] },
+    { type: 70, name: "Rochinol", richness: 2, planetTypes: ["Volcanic", "Ice Giant", "Gas Giant"] },
+    { type: 71, name: "Ruby Crystals", richness: 2, planetTypes: ["Ice Giant", "Dark", "Barren"] },
+    { type: 72, name: "Sapphire Crystals", richness: 3, planetTypes: ["Ice Giant"] },
+    { type: 73, name: "Scandium Ore", richness: 2, planetTypes: ["System Asteroid Belt", "Gas Giant"] },
+    { type: 74, name: "Silica", richness: 1, planetTypes: ["Terrestrial", "System Asteroid Belt", "Volcanic"] },
+    { type: 75, name: "Silicon Crystal", richness: 1, planetTypes: ["Oceanic", "Ice Giant"] },
+    { type: 76, name: "Silver Ore", richness: 2, planetTypes: ["Dark", "Barren", "Gas Giant"] },
+    { type: 77, name: "Sodium Crystals", richness: 1, planetTypes: ["Volcanic", "Barren", "Gas Giant"] },
+    { type: 78, name: "Strontium Crystals", richness: 5, planetTypes: ["System Asteroid Belt"] },
+    { type: 79, name: "Tantalum Ore", richness: 1, planetTypes: ["Volcanic", "Barren", "Dark"] },
+    { type: 80, name: "Tenon Gas", richness: 3, planetTypes: ["Gas Giant"] },
+    { type: 81, name: "Thermal Regulator Stone", richness: 1, planetTypes: ["Volcanic", "Barren", "Terrestrial"] },
+    { type: 82, name: "Thermodyne", richness: 2, planetTypes: ["Oceanic", "Volcanic"] },
+    { type: 83, name: "Thermoplastic Resin", richness: 3, planetTypes: ["Terrestrial", "Volcanic"] },
+    { type: 84, name: "Tin Ore", richness: 1, planetTypes: ["Terrestrial", "Oceanic"] },
+    { type: 85, name: "Titanium Ore", richness: 3, planetTypes: ["System Asteroid Belt"] },
+    { type: 86, name: "Topaz Crystals", richness: 2, planetTypes: ["Dark", "Ice Giant", "Barren"] },
+    { type: 87, name: "Tritium Ore", richness: 1, planetTypes: ["System Asteroid Belt", "Oceanic", "Ice Giant"] },
+    { type: 88, name: "Tungsten Ore", richness: 3, planetTypes: ["Barren"] },
+    { type: 89, name: "Vanadium Ore", richness: 3, planetTypes: ["Barren"] },
+    { type: 90, name: "Viscovite Crystals", richness: 3, planetTypes: ["Dark"] },
+    { type: 91, name: "Xenon", richness: 2, planetTypes: ["Gas Giant", "Ice Giant", "Dark"] },
+    { type: 92, name: "Zinc Ore", richness: 1, planetTypes: ["Terrestrial", "System Asteroid Belt"] },
+    { type: 93, name: "Zirconium Ore", richness: 4, planetTypes: ["Ice Giant"] }
 ];
 
 // Resource color mapping - updated with all resources from specification
 const RESOURCE_COLORS = {
+    // Organic Resources
+    'magmaroot': '#FF4500',                      // Orange Red
+    'pyroclast energen': '#DC143C',              // Crimson
+    'blazing snapdragon': '#FF6347',             // Tomato
+    'tidal kelp': '#008B8B',                     // Dark Cyan
+    'bioluminous algae': '#00CED1',              // Dark Turquoise
+    'shadowmoss': '#2F4F4F',                     // Dark Slate Gray
+    'spectral lichen': '#9370DB',                // Medium Purple
+    'ironshell cactus': '#8B4513',               // Saddle Brown
+    'bastion agave': '#228B22',                  // Forest Green
+    'swiftvine': '#32CD32',                      // Lime Green
+    'electric fern': '#7FFF00',                  // Chartreuse
+    'temporal flux orchid': '#9932CC',           // Dark Orchid
+    'frostcore bryophyte': '#87CEEB',            // Sky Blue
+    'mind shade fungus': '#4B0082',              // Indigo
+    'aegis barrier cactus': '#556B2F',           // Dark Olive Green
+
     // Oceanic Resources
-    'abyssal chromite': '#2F4F4F',           // Dark Slate Gray
-    'abyssal energy crystals': '#00CED1',    // Dark Turquoise
-    'bathysphere pearls': '#F0F8FF',         // Alice Blue
-    'lunar echo crystals': '#E6E6FA',        // Lavender
-    'neural coral compounds': '#FF7F50',     // Coral
-    'phase shift crystals': '#9370DB',       // Medium Purple
-    'thermal bloom sediment': '#8B4513',     // Saddle Brown
+    'abyssal energy crystals': '#00CED1',        // Dark Turquoise
+    'bathysphere pearls': '#F0F8FF',             // Alice Blue
+    'lunar echo crystals': '#E6E6FA',            // Lavender
+    'neural coral compounds': '#FF7F50',         // Coral
+    'phase shift crystals': '#9370DB',           // Medium Purple
 
     // Basic Resources
-    'aluminum ore': '#848482',               // Gray
-    'amber resin': '#FFA500',                // Orange
-    'arco': '#FF6347',                       // Tomato
-    'argon': '#F0F8FF',                      // Alice Blue
-    'beryllium crystals': '#6A5ACD',         // Slate Blue
-    'biolumite': '#7FFF00',                  // Chartreuse
-    'biomass': '#228B22',                    // Forest Green
-    'black opal': '#708090',                 // Slate Gray
-    'boron ore': '#556B2F',                  // Dark Olive Green
-    'carbon': '#696969',                     // Dim Gray
-    'cinnabar crystals': '#DC143C',          // Crimson
-    'cobalt ore': '#4169E1',                 // Royal Blue
-    'copper ore': '#B87333',                 // Copper
-    'cryo formation crystals': '#87CEEB',    // Sky Blue
-    'diamond': '#B9F2FF',                    // Diamond Blue
-    'dodiline crystals': '#9400D3',          // Dark Violet
-    'drywater': '#87CEEB',                   // Sky Blue
-    'dysprosium': '#CD853F',                 // Peru
-    'emerald crystals': '#50C878',           // Emerald Green
-    'fluorine gas': '#98FB98',               // Pale Green
-    'fusion catalyst deposits': '#FF00FF',   // Magenta
-    'garnet crystals': '#800000',            // Maroon
-    'germanium': '#778899',                  // Light Slate Gray
-    'glowstone crystals': '#FFD700',         // Gold
-    'gold ore': '#FFD700',                   // Gold
-    'hafnium ore': '#B8860B',                // Dark Goldenrod
-    'hicenium crystals': '#00CED1',          // Dark Turquoise
-    'hydrogen': '#E6F3FF',                   // Light Blue
-    'iridium ore': '#C0C0C0',                // Silver
-    'iron ore': '#A0522D',                   // Sienna
-    'jasphorus crystals': '#FF69B4',         // Hot Pink
-    'krypton': '#F8F8FF',                    // Ghost White
-    'lithium ore': '#FF69B4',                // Hot Pink
-    'living metal symbionts': '#00FF00',     // Lime
-    'lumanite': '#DAA520',                   // Goldenrod
-    'manganese ore': '#800000',              // Maroon
-    'methane': '#F5FFFA',                    // Mint Cream
-    'neodymium': '#FF69B4',                  // Hot Pink
-    'neon': '#FFE4E1',                       // Misty Rose
-    'nitrogen': '#E6E6FA',                   // Lavender
-    'ochre ore': '#CD853F',                  // Peru
-    'opal fragments': '#B0E0E6',             // Powder Blue
-    'osmium ore': '#2F4F4F',                 // Dark Slate Gray
-    'oxygen': '#E6F3FF',                     // Light Blue
-    'palladium ore': '#C0C0C0',              // Silver
-    'peridot crystals': '#98FB98',           // Pale Green
-    'plasma containment minerals': '#FF4500', // Orange Red
-    'platinum ore': '#E5E4E2',               // Platinum
+    'aluminum ore': '#848482',                   // Gray
+    'arco': '#FF6347',                           // Tomato
+    'argon': '#F0F8FF',                          // Alice Blue
+    'beryllium crystals': '#6A5ACD',             // Slate Blue
+    'biomass': '#228B22',                        // Forest Green
+    'boron ore': '#556B2F',                      // Dark Olive Green
+    'carbon': '#696969',                         // Dim Gray
+    'chromite ore': '#2F4F4F',                   // Dark Slate Gray
+    'copper ore': '#B87333',                     // Copper
+    'cryo formation crystals': '#87CEEB',        // Sky Blue
+    'diamond': '#B9F2FF',                        // Diamond Blue
+    'dodiline crystals': '#9400D3',              // Dark Violet
+    'drywater': '#87CEEB',                       // Sky Blue
+    'dysprosium': '#CD853F',                     // Peru
+    'emerald crystals': '#50C878',               // Emerald Green
+    'fluorine gas': '#98FB98',                   // Pale Green
+    'fusion catalyst deposits': '#FF00FF',       // Magenta
+    'garnet crystals': '#800000',                // Maroon
+    'germanium': '#778899',                      // Light Slate Gray
+    'gold ore': '#FFD700',                       // Gold
+    'hafnium ore': '#B8860B',                    // Dark Goldenrod
+    'hicenium crystals': '#00CED1',              // Dark Turquoise
+    'hydrogen': '#E6F3FF',                       // Light Blue
+    'ink': '#000000',                            // Black
+    'iridium ore': '#C0C0C0',                    // Silver
+    'iron ore': '#A0522D',                       // Sienna
+    'jasphorus crystals': '#FF69B4',             // Hot Pink
+    'krypton': '#F8F8FF',                        // Ghost White
+    'lithium ore': '#FF69B4',                    // Hot Pink
+    'living metal symbionts': '#00FF00',         // Lime
+    'lumanite': '#DAA520',                       // Goldenrod
+    'manganese ore': '#800000',                  // Maroon
+    'methane': '#F5FFFA',                        // Mint Cream
+    'nanosil': '#A9A9A9',                        // Dark Gray
+    'neodymium': '#FF69B4',                      // Hot Pink
+    'neon': '#FFE4E1',                           // Misty Rose
+    'nitrogen': '#E6E6FA',                       // Lavender
+    'osmium ore': '#2F4F4F',                     // Dark Slate Gray
+    'oxygen': '#E6F3FF',                         // Light Blue
+    'palladium ore': '#C0C0C0',                  // Silver
+    'peridot crystals': '#98FB98',               // Pale Green
+    'plasma containment minerals': '#FF4500',    // Orange Red
+    'platinum ore': '#E5E4E2',                   // Platinum
     'quantum computational substrate': '#9932CC', // Dark Orchid
-    'quantum particle': '#8A2BE2',           // Blue Violet
-    'quartz crystals': '#F0FFFF',            // Azure
-    'radiant dust': '#FFD700',               // Gold
-    'raw chisenic': '#8B4513',               // Saddle Brown
-    'resonium ore': '#9370DB',               // Medium Purple
-    'rhenium ore': '#708090',                // Slate Gray
-    'rhodium ore': '#CD7F32',                // Bronze
-    'rochinol': '#8B4513',                   // Saddle Brown
-    'ruby crystals': '#FF0000',              // Red
-    'sapphire crystals': '#0000FF',          // Blue
-    'scandium ore': '#4682B4',               // Steel Blue
-    'silica': '#F5F5F5',                     // White Smoke
-    'silicon crystal': '#A9A9A9',            // Dark Gray
-    'silver ore': '#C0C0C0',                 // Silver
-    'sodium crystals': '#FFB6C1',            // Light Pink
-    'strontium crystals': '#FF69B4',         // Hot Pink
-    'tantalum ore': '#2F4F4F',               // Dark Slate Gray
-    'tenon gas': '#E6E6FA',                  // Lavender
-    'thermal regulator stone': '#696969',    // Dim Gray
-    'thermoplastic resin': '#DAA520',        // Goldenrod
-    'tin ore': '#B8860B',                    // Dark Goldenrod
-    'titanium ore': '#778899',               // Light Slate Gray
-    'topaz crystals': '#FFD700',             // Gold
-    'tritium ore': '#008080',                // Teal
-    'tungsten ore': '#4A4A4A',               // Dark Gray
-    'vanadium ore': '#6B8E23',               // Olive Drab
-    'viscovite crystals': '#9932CC',         // Dark Orchid
-    'xenon': '#F5F5F5',                      // White Smoke
-    'zinc ore': '#C0C0C0',                   // Silver
-    'zirconium ore': '#B8860B',              // Dark Goldenrod
+    'quantum particle': '#8A2BE2',               // Blue Violet
+    'quartz crystals': '#F0FFFF',                // Azure
+    'raw chisenic': '#8B4513',                   // Saddle Brown
+    'resonium ore': '#9370DB',                   // Medium Purple
+    'rhenium ore': '#708090',                    // Slate Gray
+    'rhodium ore': '#CD7F32',                    // Bronze
+    'rochinol': '#8B4513',                       // Saddle Brown
+    'ruby crystals': '#FF0000',                  // Red
+    'sapphire crystals': '#0000FF',              // Blue
+    'scandium ore': '#4682B4',                   // Steel Blue
+    'silica': '#F5F5F5',                         // White Smoke
+    'silicon crystal': '#A9A9A9',                // Dark Gray
+    'silver ore': '#C0C0C0',                     // Silver
+    'sodium crystals': '#FFB6C1',                // Light Pink
+    'strontium crystals': '#FF69B4',             // Hot Pink
+    'tantalum ore': '#2F4F4F',                   // Dark Slate Gray
+    'tenon gas': '#E6E6FA',                      // Lavender
+    'thermal regulator stone': '#696969',        // Dim Gray
+    'thermodyne': '#DAA520',                     // Goldenrod
+    'thermoplastic resin': '#DAA520',            // Goldenrod
+    'tin ore': '#B8860B',                        // Dark Goldenrod
+    'titanium ore': '#778899',                   // Light Slate Gray
+    'topaz crystals': '#FFD700',                 // Gold
+    'tritium ore': '#008080',                    // Teal
+    'tungsten ore': '#4A4A4A',                   // Dark Gray
+    'vanadium ore': '#6B8E23',                   // Olive Drab
+    'viscovite crystals': '#9932CC',             // Dark Orchid
+    'xenon': '#F5F5F5',                          // White Smoke
+    'zinc ore': '#C0C0C0',                       // Silver
+    'zirconium ore': '#B8860B',                  // Dark Goldenrod
 
-    'default': '#CCCCCC'                     // Default grey if not found
+    'default': '#CCCCCC'                         // Default grey if not found
 };
 
 // Region display state
@@ -316,4 +334,4 @@ const REGION_COLORS = [
 const GALAXY_GRID_SPACING = 1; // Changed from 10 to 1
 
 // Export RESOURCE_COLORS globally for canvas drawing
-window.RESOURCE_COLORS = RESOURCE_COLORS; 
+window.RESOURCE_COLORS = RESOURCE_COLORS;

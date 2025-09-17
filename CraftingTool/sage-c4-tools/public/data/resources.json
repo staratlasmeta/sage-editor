@@ -10,67 +10,13 @@
       "baseValue": 10
     },
     {
-      "id": "aegis-barrier-cactus",
-      "name": "Aegis Barrier Cactus",
-      "category": "raw",
-      "tier": 2,
-      "description": "Aegis Barrier Cactus - Tier 2 raw",
-      "stackSize": 100,
-      "baseValue": 20
-    },
-    {
-      "id": "bioluminous-algae",
-      "name": "Bioluminous Algae",
-      "category": "raw",
-      "tier": 2,
-      "description": "Bioluminous Algae - Tier 2 raw",
-      "stackSize": 100,
-      "baseValue": 20
-    },
-    {
-      "id": "cinder-crown-blossom",
-      "name": "Cinder-Crown Blossom",
-      "category": "raw",
-      "tier": 2,
-      "description": "Cinder-Crown Blossom - Tier 2 raw",
-      "stackSize": 100,
-      "baseValue": 20
-    },
-    {
-      "id": "magma-heart-bryophyte",
-      "name": "Magma-Heart Bryophyte",
+      "id": "magmaroot",
+      "name": "Magmaroot",
       "category": "raw",
       "tier": 1,
-      "description": "Magma-Heart Bryophyte - Tier 1 raw",
+      "description": "Magmaroot - Tier 1 raw",
       "stackSize": 100,
       "baseValue": 10
-    },
-    {
-      "id": "marine-bio-extract",
-      "name": "Marine Bio Extract",
-      "category": "raw",
-      "tier": 1,
-      "description": "Marine Bio Extract - Tier 1 raw",
-      "stackSize": 100,
-      "baseValue": 10
-    },
-    {
-      "id": "obsidian-shell-tuber",
-      "name": "Obsidian Shell Tuber",
-      "category": "raw",
-      "tier": 1,
-      "description": "Obsidian Shell Tuber - Tier 1 raw",
-      "stackSize": 100,
-      "baseValue": 10
-    },
-    {
-      "id": "plasma-burn-lichen",
-      "name": "Plasma-Burn Lichen",
-      "category": "raw",
-      "tier": 3,
-      "description": "Plasma-Burn Lichen - Tier 3 raw",
-      "stackSize": 100,
-      "baseValue": 30
     },
     {
       "id": "pyroclast-energen",
@@ -82,40 +28,337 @@
       "baseValue": 10
     },
     {
-      "id": "shadow-sight-fronds",
-      "name": "Shadow-Sight Fronds",
+      "id": "blazing-snapdragon",
+      "name": "Blazing Snapdragon",
+      "category": "raw",
+      "tier": 2,
+      "description": "Blazing Snapdragon - Tier 2 raw",
+      "stackSize": 100,
+      "baseValue": 20
+    },
+    {
+      "id": "tidal-kelp",
+      "name": "Tidal Kelp",
       "category": "raw",
       "tier": 1,
-      "description": "Shadow-Sight Fronds - Tier 1 raw",
+      "description": "Tidal Kelp - Tier 1 raw",
       "stackSize": 100,
       "baseValue": 10
     },
     {
-      "id": "spectral-shade-moss",
-      "name": "Spectral Shade Moss",
+      "id": "bioluminous-algae",
+      "name": "Bioluminous Algae",
       "category": "raw",
-      "tier": 3,
-      "description": "Spectral Shade Moss - Tier 3 raw",
+      "tier": 2,
+      "description": "Bioluminous Algae - Tier 2 raw",
       "stackSize": 100,
-      "baseValue": 30
+      "baseValue": 20
+    },
+    {
+      "id": "shadowmoss",
+      "name": "Shadowmoss",
+      "category": "raw",
+      "tier": 1,
+      "description": "Shadowmoss - Tier 1 raw",
+      "stackSize": 100,
+      "baseValue": 10
+    },
+    {
+      "id": "spectral-lichen",
+      "name": "Spectral Lichen",
+      "category": "raw",
+      "tier": 2,
+      "description": "Spectral Lichen - Tier 2 raw",
+      "stackSize": 100,
+      "baseValue": 20
+    },
+    {
+      "id": "ironshell-cactus",
+      "name": "Ironshell Cactus",
+      "category": "raw",
+      "tier": 1,
+      "description": "Ironshell Cactus - Tier 1 raw",
+      "stackSize": 100,
+      "baseValue": 10
+    },
+    {
+      "id": "bastion-agave",
+      "name": "Bastion Agave",
+      "category": "raw",
+      "tier": 2,
+      "description": "Bastion Agave - Tier 2 raw",
+      "stackSize": 100,
+      "baseValue": 20
+    },
+    {
+      "id": "swiftvine",
+      "name": "Swiftvine",
+      "category": "raw",
+      "tier": 2,
+      "description": "Swiftvine - Tier 2 raw",
+      "stackSize": 100,
+      "baseValue": 20
+    },
+    {
+      "id": "electric-fern",
+      "name": "Electric Fern",
+      "category": "raw",
+      "tier": 2,
+      "description": "Electric Fern - Tier 2 raw",
+      "stackSize": 100,
+      "baseValue": 20
     },
     {
       "id": "temporal-flux-orchid",
       "name": "Temporal Flux Orchid",
       "category": "raw",
+      "tier": 2,
+      "description": "Temporal Flux Orchid - Tier 2 raw",
+      "stackSize": 100,
+      "baseValue": 20
+    },
+    {
+      "id": "frostcore-bryophyte",
+      "name": "Frostcore Bryophyte",
+      "category": "raw",
       "tier": 3,
-      "description": "Temporal Flux Orchid - Tier 3 raw",
+      "description": "Frostcore Bryophyte - Tier 3 raw",
       "stackSize": 100,
       "baseValue": 30
     },
     {
-      "id": "umbral-rush-tendril",
-      "name": "Umbral Rush Tendril",
+      "id": "mind-shade-fungus",
+      "name": "Mind Shade Fungus",
       "category": "raw",
+      "tier": 3,
+      "description": "Mind Shade Fungus - Tier 3 raw",
+      "stackSize": 100,
+      "baseValue": 30
+    },
+    {
+      "id": "aegis-barrier-cactus",
+      "name": "Aegis Barrier Cactus",
+      "category": "raw",
+      "tier": 3,
+      "description": "Aegis Barrier Cactus - Tier 3 raw",
+      "stackSize": 100,
+      "baseValue": 30
+    },
+    {
+      "id": "adrenoline",
+      "name": "Adrenoline",
+      "category": "processed",
+      "tier": 1,
+      "description": "Adrenoline - Tier 1 processed",
+      "stackSize": 100,
+      "baseValue": 10
+    },
+    {
+      "id": "thermogenin",
+      "name": "Thermogenin",
+      "category": "processed",
+      "tier": 1,
+      "description": "Thermogenin - Tier 1 processed",
+      "stackSize": 100,
+      "baseValue": 10
+    },
+    {
+      "id": "ignisol",
+      "name": "Ignisol",
+      "category": "component",
       "tier": 2,
-      "description": "Umbral Rush Tendril - Tier 2 raw",
+      "description": "Ignisol - Tier 2 component",
       "stackSize": 100,
       "baseValue": 20
+    },
+    {
+      "id": "aquastim",
+      "name": "Aquastim",
+      "category": "processed",
+      "tier": 1,
+      "description": "Aquastim - Tier 1 processed",
+      "stackSize": 100,
+      "baseValue": 10
+    },
+    {
+      "id": "thalassine",
+      "name": "Thalassine",
+      "category": "component",
+      "tier": 2,
+      "description": "Thalassine - Tier 2 component",
+      "stackSize": 100,
+      "baseValue": 20
+    },
+    {
+      "id": "nocturine",
+      "name": "Nocturine",
+      "category": "processed",
+      "tier": 1,
+      "description": "Nocturine - Tier 1 processed",
+      "stackSize": 100,
+      "baseValue": 10
+    },
+    {
+      "id": "phasmine",
+      "name": "Phasmine",
+      "category": "component",
+      "tier": 2,
+      "description": "Phasmine - Tier 2 component",
+      "stackSize": 100,
+      "baseValue": 20
+    },
+    {
+      "id": "carapaxin",
+      "name": "Carapaxin",
+      "category": "processed",
+      "tier": 1,
+      "description": "Carapaxin - Tier 1 processed",
+      "stackSize": 100,
+      "baseValue": 10
+    },
+    {
+      "id": "fortisine",
+      "name": "Fortisine",
+      "category": "component",
+      "tier": 2,
+      "description": "Fortisine - Tier 2 component",
+      "stackSize": 100,
+      "baseValue": 20
+    },
+    {
+      "id": "velocitene",
+      "name": "Velocitene",
+      "category": "component",
+      "tier": 2,
+      "description": "Velocitene - Tier 2 component",
+      "stackSize": 100,
+      "baseValue": 20
+    },
+    {
+      "id": "ionophore",
+      "name": "Ionophore",
+      "category": "component",
+      "tier": 2,
+      "description": "Ionophore - Tier 2 component",
+      "stackSize": 100,
+      "baseValue": 20
+    },
+    {
+      "id": "chronolex",
+      "name": "Chronolex",
+      "category": "component",
+      "tier": 2,
+      "description": "Chronolex - Tier 2 component",
+      "stackSize": 100,
+      "baseValue": 20
+    },
+    {
+      "id": "cryostabilin",
+      "name": "Cryostabilin",
+      "category": "component",
+      "tier": 3,
+      "description": "Cryostabilin - Tier 3 component",
+      "stackSize": 100,
+      "baseValue": 30
+    },
+    {
+      "id": "psyconine",
+      "name": "Psyconine",
+      "category": "component",
+      "tier": 3,
+      "description": "Psyconine - Tier 3 component",
+      "stackSize": 100,
+      "baseValue": 30
+    },
+    {
+      "id": "ballistene",
+      "name": "Ballistene",
+      "category": "component",
+      "tier": 3,
+      "description": "Ballistene - Tier 3 component",
+      "stackSize": 100,
+      "baseValue": 30
+    },
+    {
+      "id": "focus-booster",
+      "name": "Focus Booster",
+      "category": "component",
+      "tier": 2,
+      "description": "Focus Booster - Tier 2 component",
+      "stackSize": 100,
+      "baseValue": 20
+    },
+    {
+      "id": "shield-synchronizer",
+      "name": "Shield Synchronizer",
+      "category": "component",
+      "tier": 2,
+      "description": "Shield Synchronizer - Tier 2 component",
+      "stackSize": 100,
+      "baseValue": 20
+    },
+    {
+      "id": "reflex-enhancer",
+      "name": "Reflex Enhancer",
+      "category": "component",
+      "tier": 2,
+      "description": "Reflex Enhancer - Tier 2 component",
+      "stackSize": 100,
+      "baseValue": 20
+    },
+    {
+      "id": "alpha-strike-serum",
+      "name": "Alpha Strike Serum",
+      "category": "component",
+      "tier": 2,
+      "description": "Alpha Strike Serum - Tier 2 component",
+      "stackSize": 100,
+      "baseValue": 20
+    },
+    {
+      "id": "phantom-protocol",
+      "name": "Phantom Protocol",
+      "category": "component",
+      "tier": 2,
+      "description": "Phantom Protocol - Tier 2 component",
+      "stackSize": 100,
+      "baseValue": 20
+    },
+    {
+      "id": "temporal-accelerant",
+      "name": "Temporal Accelerant",
+      "category": "component",
+      "tier": 2,
+      "description": "Temporal Accelerant - Tier 2 component",
+      "stackSize": 100,
+      "baseValue": 20
+    },
+    {
+      "id": "mineral-metabolizer",
+      "name": "Mineral Metabolizer",
+      "category": "component",
+      "tier": 3,
+      "description": "Mineral Metabolizer - Tier 3 component",
+      "stackSize": 100,
+      "baseValue": 30
+    },
+    {
+      "id": "neural-harmonizer",
+      "name": "Neural Harmonizer",
+      "category": "component",
+      "tier": 3,
+      "description": "Neural Harmonizer - Tier 3 component",
+      "stackSize": 100,
+      "baseValue": 30
+    },
+    {
+      "id": "kinetic-amplifier",
+      "name": "Kinetic Amplifier",
+      "category": "component",
+      "tier": 3,
+      "description": "Kinetic Amplifier - Tier 3 component",
+      "stackSize": 100,
+      "baseValue": 30
     },
     {
       "id": "abyssal-energy-crystals",
@@ -132,15 +375,6 @@
       "category": "raw",
       "tier": 2,
       "description": "Aluminum Ore - Tier 2 raw",
-      "stackSize": 100,
-      "baseValue": 20
-    },
-    {
-      "id": "amber-resin",
-      "name": "Amber Resin",
-      "category": "raw",
-      "tier": 2,
-      "description": "Amber Resin - Tier 2 raw",
       "stackSize": 100,
       "baseValue": 20
     },
@@ -181,15 +415,6 @@
       "baseValue": 50
     },
     {
-      "id": "biolumite",
-      "name": "Biolumite",
-      "category": "raw",
-      "tier": 5,
-      "description": "Biolumite - Tier 5 raw",
-      "stackSize": 100,
-      "baseValue": 50
-    },
-    {
       "id": "biomass",
       "name": "Biomass",
       "category": "raw",
@@ -197,15 +422,6 @@
       "description": "Biomass - Tier 1 raw",
       "stackSize": 100,
       "baseValue": 10
-    },
-    {
-      "id": "black-opal",
-      "name": "Black Opal",
-      "category": "raw",
-      "tier": 5,
-      "description": "Black Opal - Tier 5 raw",
-      "stackSize": 100,
-      "baseValue": 50
     },
     {
       "id": "boron-ore",
@@ -235,24 +451,6 @@
       "baseValue": 10
     },
     {
-      "id": "cinnabar-crystals",
-      "name": "Cinnabar Crystals",
-      "category": "raw",
-      "tier": 3,
-      "description": "Cinnabar Crystals - Tier 3 raw",
-      "stackSize": 100,
-      "baseValue": 30
-    },
-    {
-      "id": "cobalt-ore",
-      "name": "Cobalt Ore",
-      "category": "raw",
-      "tier": 2,
-      "description": "Cobalt Ore - Tier 2 raw",
-      "stackSize": 100,
-      "baseValue": 20
-    },
-    {
       "id": "copper-ore",
       "name": "Copper Ore",
       "category": "raw",
@@ -274,10 +472,10 @@
       "id": "diamond",
       "name": "Diamond",
       "category": "raw",
-      "tier": 2,
-      "description": "Diamond - Tier 2 raw",
+      "tier": 3,
+      "description": "Diamond - Tier 3 raw",
       "stackSize": 100,
-      "baseValue": 20
+      "baseValue": 30
     },
     {
       "id": "dodiline-crystals",
@@ -346,19 +544,10 @@
       "id": "germanium",
       "name": "Germanium",
       "category": "raw",
-      "tier": 1,
-      "description": "Germanium - Tier 1 raw",
+      "tier": 4,
+      "description": "Germanium - Tier 4 raw",
       "stackSize": 100,
-      "baseValue": 10
-    },
-    {
-      "id": "glowstone-crystals",
-      "name": "Glowstone Crystals",
-      "category": "raw",
-      "tier": 3,
-      "description": "Glowstone Crystals - Tier 3 raw",
-      "stackSize": 100,
-      "baseValue": 30
+      "baseValue": 40
     },
     {
       "id": "gold-ore",
@@ -541,24 +730,6 @@
       "baseValue": 10
     },
     {
-      "id": "ochre-ore",
-      "name": "Ochre Ore",
-      "category": "raw",
-      "tier": 4,
-      "description": "Ochre Ore - Tier 4 raw",
-      "stackSize": 100,
-      "baseValue": 40
-    },
-    {
-      "id": "opal-fragments",
-      "name": "Opal Fragments",
-      "category": "raw",
-      "tier": 5,
-      "description": "Opal Fragments - Tier 5 raw",
-      "stackSize": 100,
-      "baseValue": 50
-    },
-    {
       "id": "osmium-ore",
       "name": "Osmium Ore",
       "category": "raw",
@@ -647,15 +818,6 @@
       "description": "Quartz Crystals - Tier 1 raw",
       "stackSize": 100,
       "baseValue": 10
-    },
-    {
-      "id": "radiant-dust",
-      "name": "Radiant Dust",
-      "category": "raw",
-      "tier": 2,
-      "description": "Radiant Dust - Tier 2 raw",
-      "stackSize": 100,
-      "baseValue": 20
     },
     {
       "id": "raw-chisenic",
@@ -814,10 +976,10 @@
       "id": "thermoplastic-resin",
       "name": "Thermoplastic Resin",
       "category": "raw",
-      "tier": 1,
-      "description": "Thermoplastic Resin - Tier 1 raw",
+      "tier": 3,
+      "description": "Thermoplastic Resin - Tier 3 raw",
       "stackSize": 100,
-      "baseValue": 10
+      "baseValue": 30
     },
     {
       "id": "tin-ore",
@@ -955,11 +1117,11 @@
       "baseValue": 50
     },
     {
-      "id": "opal-defense-matrix",
-      "name": "Opal Defense Matrix",
+      "id": "fusion-defense-matrix",
+      "name": "Fusion Defense Matrix",
       "category": "advanced",
       "tier": 5,
-      "description": "Opal Defense Matrix - Tier 5 advanced",
+      "description": "Fusion Defense Matrix - Tier 5 advanced",
       "stackSize": 100,
       "baseValue": 50
     },
@@ -1083,11 +1245,11 @@
     {
       "id": "vanadium-alloy",
       "name": "Vanadium Alloy",
-      "category": "component",
-      "tier": 3,
-      "description": "Vanadium Alloy - Tier 3 component",
+      "category": "advanced",
+      "tier": 4,
+      "description": "Vanadium Alloy - Tier 4 advanced",
       "stackSize": 100,
-      "baseValue": 30
+      "baseValue": 40
     },
     {
       "id": "assembly-control-matrix",
@@ -1207,6 +1369,15 @@
       "baseValue": 20
     },
     {
+      "id": "lithium",
+      "name": "Lithium",
+      "category": "component",
+      "tier": 2,
+      "description": "Lithium - Tier 2 component",
+      "stackSize": 100,
+      "baseValue": 20
+    },
+    {
       "id": "bioluminescent-interface",
       "name": "Bioluminescent Interface",
       "category": "advanced",
@@ -1234,11 +1405,11 @@
       "baseValue": 10
     },
     {
-      "id": "germanium-ingot",
-      "name": "Germanium Ingot",
+      "id": "tritium",
+      "name": "Tritium",
       "category": "processed",
       "tier": 1,
-      "description": "Germanium Ingot - Tier 1 processed",
+      "description": "Tritium - Tier 1 processed",
       "stackSize": 100,
       "baseValue": 10
     },
@@ -1320,15 +1491,6 @@
       "category": "component",
       "tier": 2,
       "description": "Climate Controller - Tier 2 component",
-      "stackSize": 100,
-      "baseValue": 20
-    },
-    {
-      "id": "cobalt",
-      "name": "Cobalt",
-      "category": "component",
-      "tier": 2,
-      "description": "Cobalt - Tier 2 component",
       "stackSize": 100,
       "baseValue": 20
     },
@@ -1524,11 +1686,11 @@
     {
       "id": "titanium-framework",
       "name": "Titanium Framework",
-      "category": "component",
-      "tier": 3,
-      "description": "Titanium Framework - Tier 3 component",
+      "category": "advanced",
+      "tier": 4,
+      "description": "Titanium Framework - Tier 4 advanced",
       "stackSize": 100,
-      "baseValue": 30
+      "baseValue": 40
     },
     {
       "id": "coupling-interface",
@@ -1536,15 +1698,6 @@
       "category": "component",
       "tier": 2,
       "description": "Coupling Interface - Tier 2 component",
-      "stackSize": 100,
-      "baseValue": 20
-    },
-    {
-      "id": "lithium",
-      "name": "Lithium",
-      "category": "component",
-      "tier": 2,
-      "description": "Lithium - Tier 2 component",
       "stackSize": 100,
       "baseValue": 20
     },
@@ -1693,15 +1846,6 @@
       "baseValue": 10
     },
     {
-      "id": "tritium",
-      "name": "Tritium",
-      "category": "processed",
-      "tier": 1,
-      "description": "Tritium - Tier 1 processed",
-      "stackSize": 100,
-      "baseValue": 10
-    },
-    {
       "id": "dispersal-gas-mix",
       "name": "Dispersal Gas Mix",
       "category": "processed",
@@ -1837,6 +1981,15 @@
       "baseValue": 30
     },
     {
+      "id": "platinum",
+      "name": "Platinum",
+      "category": "component",
+      "tier": 3,
+      "description": "Platinum - Tier 3 component",
+      "stackSize": 100,
+      "baseValue": 30
+    },
+    {
       "id": "emergency-matrix-core",
       "name": "Emergency Matrix Core",
       "category": "component",
@@ -1927,15 +2080,6 @@
       "baseValue": 20
     },
     {
-      "id": "platinum",
-      "name": "Platinum",
-      "category": "component",
-      "tier": 3,
-      "description": "Platinum - Tier 3 component",
-      "stackSize": 100,
-      "baseValue": 30
-    },
-    {
       "id": "energy-focuser",
       "name": "Energy Focuser",
       "category": "processed",
@@ -1947,11 +2091,11 @@
     {
       "id": "optical-components",
       "name": "Optical Components",
-      "category": "processed",
-      "tier": 1,
-      "description": "Optical Components - Tier 1 processed",
+      "category": "component",
+      "tier": 2,
+      "description": "Optical Components - Tier 2 component",
       "stackSize": 100,
-      "baseValue": 10
+      "baseValue": 20
     },
     {
       "id": "energy-management-hub",
@@ -2082,11 +2226,11 @@
     {
       "id": "field-stabilizer",
       "name": "Field Stabilizer",
-      "category": "processed",
-      "tier": 1,
-      "description": "Field Stabilizer - Tier 1 processed",
+      "category": "component",
+      "tier": 3,
+      "description": "Field Stabilizer - Tier 3 component",
       "stackSize": 100,
-      "baseValue": 10
+      "baseValue": 30
     },
     {
       "id": "crystal-lattice",
@@ -2116,11 +2260,11 @@
       "baseValue": 40
     },
     {
-      "id": "ochre-ingot",
-      "name": "Ochre Ingot",
+      "id": "iridium",
+      "name": "Iridium",
       "category": "advanced",
       "tier": 4,
-      "description": "Ochre Ingot - Tier 4 advanced",
+      "description": "Iridium - Tier 4 advanced",
       "stackSize": 100,
       "baseValue": 40
     },
@@ -2269,6 +2413,15 @@
       "baseValue": 10
     },
     {
+      "id": "germanium-ingot",
+      "name": "Germanium Ingot",
+      "category": "advanced",
+      "tier": 4,
+      "description": "Germanium Ingot - Tier 4 advanced",
+      "stackSize": 100,
+      "baseValue": 40
+    },
+    {
       "id": "grid-controller",
       "name": "Grid Controller",
       "category": "component",
@@ -2406,11 +2559,11 @@
     {
       "id": "incendiary-mix",
       "name": "Incendiary Mix",
-      "category": "processed",
-      "tier": 1,
-      "description": "Incendiary Mix - Tier 1 processed",
+      "category": "component",
+      "tier": 2,
+      "description": "Incendiary Mix - Tier 2 component",
       "stackSize": 100,
-      "baseValue": 10
+      "baseValue": 20
     },
     {
       "id": "industrial-processor",
@@ -2424,11 +2577,11 @@
     {
       "id": "inert-gas-canisters",
       "name": "Inert Gas Canisters",
-      "category": "processed",
-      "tier": 1,
-      "description": "Inert Gas Canisters - Tier 1 processed",
+      "category": "component",
+      "tier": 2,
+      "description": "Inert Gas Canisters - Tier 2 component",
       "stackSize": 100,
-      "baseValue": 10
+      "baseValue": 20
     },
     {
       "id": "injection-controller",
@@ -2476,15 +2629,6 @@
       "baseValue": 20
     },
     {
-      "id": "iridium",
-      "name": "Iridium",
-      "category": "advanced",
-      "tier": 4,
-      "description": "Iridium - Tier 4 advanced",
-      "stackSize": 100,
-      "baseValue": 40
-    },
-    {
       "id": "phase-drive-core",
       "name": "Phase Drive Core",
       "category": "component",
@@ -2512,11 +2656,11 @@
       "baseValue": 10
     },
     {
-      "id": "kinetic-amplifier",
-      "name": "Kinetic Amplifier",
+      "id": "kinetic-force-matrix",
+      "name": "Kinetic Force Matrix",
       "category": "advanced",
       "tier": 4,
-      "description": "Kinetic Amplifier - Tier 4 advanced",
+      "description": "Kinetic Force Matrix - Tier 4 advanced",
       "stackSize": 100,
       "baseValue": 40
     },
@@ -2530,11 +2674,11 @@
       "baseValue": 50
     },
     {
-      "id": "kinetic-opal-core",
-      "name": "Kinetic Opal Core",
+      "id": "kinetic-resonance-core",
+      "name": "Kinetic Resonance Core",
       "category": "advanced",
       "tier": 5,
-      "description": "Kinetic Opal Core - Tier 5 advanced",
+      "description": "Kinetic Resonance Core - Tier 5 advanced",
       "stackSize": 100,
       "baseValue": 50
     },
@@ -2593,11 +2737,11 @@
       "baseValue": 40
     },
     {
-      "id": "ochre-weapon-frame",
-      "name": "Ochre Weapon Frame",
+      "id": "advanced-weapon-frame",
+      "name": "Advanced Weapon Frame",
       "category": "advanced",
       "tier": 4,
-      "description": "Ochre Weapon Frame - Tier 4 advanced",
+      "description": "Advanced Weapon Frame - Tier 4 advanced",
       "stackSize": 100,
       "baseValue": 40
     },
@@ -2809,20 +2953,20 @@
       "baseValue": 30
     },
     {
-      "id": "opal-utility-matrix",
-      "name": "Opal Utility Matrix",
+      "id": "resonance-utility-matrix",
+      "name": "Resonance Utility Matrix",
       "category": "advanced",
       "tier": 5,
-      "description": "Opal Utility Matrix - Tier 5 advanced",
+      "description": "Resonance Utility Matrix - Tier 5 advanced",
       "stackSize": 100,
       "baseValue": 50
     },
     {
-      "id": "opal-weapon-core",
-      "name": "Opal Weapon Core",
+      "id": "quantum-weapon-core",
+      "name": "Quantum Weapon Core",
       "category": "advanced",
       "tier": 5,
-      "description": "Opal Weapon Core - Tier 5 advanced",
+      "description": "Quantum Weapon Core - Tier 5 advanced",
       "stackSize": 100,
       "baseValue": 50
     },
@@ -3225,11 +3369,11 @@
     {
       "id": "scatter-pattern-generator",
       "name": "Scatter Pattern Generator",
-      "category": "processed",
-      "tier": 1,
-      "description": "Scatter Pattern Generator - Tier 1 processed",
+      "category": "component",
+      "tier": 2,
+      "description": "Scatter Pattern Generator - Tier 2 component",
       "stackSize": 100,
-      "baseValue": 10
+      "baseValue": 20
     },
     {
       "id": "security-lock",
@@ -3415,10 +3559,10 @@
       "id": "structural-brace",
       "name": "Structural Brace",
       "category": "component",
-      "tier": 2,
-      "description": "Structural Brace - Tier 2 component",
+      "tier": 3,
+      "description": "Structural Brace - Tier 3 component",
       "stackSize": 100,
-      "baseValue": 20
+      "baseValue": 30
     },
     {
       "id": "structural-control-array",
@@ -3792,11 +3936,11 @@
     {
       "id": "defense-integration-system",
       "name": "Defense Integration System",
-      "category": "component",
-      "tier": 3,
-      "description": "Defense Integration System - Tier 3 component",
+      "category": "advanced",
+      "tier": 4,
+      "description": "Defense Integration System - Tier 4 advanced",
       "stackSize": 100,
-      "baseValue": 30
+      "baseValue": 40
     },
     {
       "id": "advanced-defense-matrix",
@@ -6213,11 +6357,11 @@
     {
       "id": "bio-monitor",
       "name": "Bio Monitor",
-      "category": "processed",
-      "tier": 1,
-      "description": "Bio Monitor - Tier 1 processed",
+      "category": "component",
+      "tier": 2,
+      "description": "Bio Monitor - Tier 2 component",
       "stackSize": 100,
-      "baseValue": 10
+      "baseValue": 20
     },
     {
       "id": "healing-protocol",
@@ -7203,11 +7347,11 @@
     {
       "id": "radiation-control-system",
       "name": "Radiation Control System",
-      "category": "component",
-      "tier": 3,
-      "description": "Radiation Control System - Tier 3 component",
+      "category": "advanced",
+      "tier": 4,
+      "description": "Radiation Control System - Tier 4 advanced",
       "stackSize": 100,
-      "baseValue": 30
+      "baseValue": 40
     },
     {
       "id": "negative-rem-plating-cap-t2",
@@ -8283,11 +8427,11 @@
     {
       "id": "sensor-module",
       "name": "Sensor Module",
-      "category": "processed",
-      "tier": 1,
-      "description": "Sensor Module - Tier 1 processed",
+      "category": "component",
+      "tier": 2,
+      "description": "Sensor Module - Tier 2 component",
       "stackSize": 100,
-      "baseValue": 10
+      "baseValue": 20
     },
     {
       "id": "advanced-control-matrix",
@@ -8544,11 +8688,11 @@
     {
       "id": "heat-payload-kit",
       "name": "Heat Payload Kit",
-      "category": "processed",
-      "tier": 1,
-      "description": "Heat Payload Kit - Tier 1 processed",
+      "category": "component",
+      "tier": 2,
+      "description": "Heat Payload Kit - Tier 2 component",
       "stackSize": 100,
-      "baseValue": 10
+      "baseValue": 20
     },
     {
       "id": "vzus-fixif",
@@ -8724,11 +8868,11 @@
     {
       "id": "beam-focusing-array",
       "name": "Beam Focusing Array",
-      "category": "processed",
-      "tier": 1,
-      "description": "Beam Focusing Array - Tier 1 processed",
+      "category": "component",
+      "tier": 2,
+      "description": "Beam Focusing Array - Tier 2 component",
       "stackSize": 100,
-      "baseValue": 10
+      "baseValue": 20
     },
     {
       "id": "burst-actuator",
@@ -8832,11 +8976,11 @@
     {
       "id": "energy-regulator",
       "name": "Energy Regulator",
-      "category": "processed",
-      "tier": 1,
-      "description": "Energy Regulator - Tier 1 processed",
+      "category": "component",
+      "tier": 2,
+      "description": "Energy Regulator - Tier 2 component",
       "stackSize": 100,
-      "baseValue": 10
+      "baseValue": 20
     },
     {
       "id": "engine-manifold",
@@ -8994,11 +9138,11 @@
     {
       "id": "maneuver-control-system",
       "name": "Maneuver Control System",
-      "category": "component",
-      "tier": 3,
-      "description": "Maneuver Control System - Tier 3 component",
+      "category": "advanced",
+      "tier": 4,
+      "description": "Maneuver Control System - Tier 4 advanced",
       "stackSize": 100,
-      "baseValue": 30
+      "baseValue": 40
     },
     {
       "id": "thrust-vectoring-array",
@@ -9031,10 +9175,10 @@
       "id": "reinforcement-matrix",
       "name": "Reinforcement Matrix",
       "category": "component",
-      "tier": 2,
-      "description": "Reinforcement Matrix - Tier 2 component",
+      "tier": 3,
+      "description": "Reinforcement Matrix - Tier 3 component",
       "stackSize": 100,
-      "baseValue": 20
+      "baseValue": 30
     },
     {
       "id": "missile-guidance-core",
@@ -9138,11 +9282,11 @@
     {
       "id": "scatterfire-controller",
       "name": "Scatterfire Controller",
-      "category": "processed",
-      "tier": 1,
-      "description": "Scatterfire Controller - Tier 1 processed",
+      "category": "component",
+      "tier": 2,
+      "description": "Scatterfire Controller - Tier 2 component",
       "stackSize": 100,
-      "baseValue": 10
+      "baseValue": 20
     },
     {
       "id": "storage-management-system",
@@ -31800,29 +31944,38 @@
     {
       "id": "hab-cargo-storage-t2",
       "name": "Hab Cargo Storage T2",
-      "category": "processed",
-      "tier": 1,
-      "description": "Hab Cargo Storage T2 - Tier 1 processed",
+      "category": "component",
+      "tier": 2,
+      "description": "Hab Cargo Storage T2 - Tier 2 component",
       "stackSize": 100,
-      "baseValue": 10
+      "baseValue": 20
     },
     {
       "id": "hab-cargo-storage-t3",
       "name": "Hab Cargo Storage T3",
-      "category": "processed",
-      "tier": 1,
-      "description": "Hab Cargo Storage T3 - Tier 1 processed",
+      "category": "component",
+      "tier": 3,
+      "description": "Hab Cargo Storage T3 - Tier 3 component",
       "stackSize": 100,
-      "baseValue": 10
+      "baseValue": 30
     },
     {
       "id": "hab-cargo-storage-t4",
       "name": "Hab Cargo Storage T4",
-      "category": "processed",
-      "tier": 1,
-      "description": "Hab Cargo Storage T4 - Tier 1 processed",
+      "category": "advanced",
+      "tier": 4,
+      "description": "Hab Cargo Storage T4 - Tier 4 advanced",
       "stackSize": 100,
-      "baseValue": 10
+      "baseValue": 40
+    },
+    {
+      "id": "hab-cargo-storage-t5",
+      "name": "Hab Cargo Storage T5",
+      "category": "advanced",
+      "tier": 5,
+      "description": "Hab Cargo Storage T5 - Tier 5 advanced",
+      "stackSize": 100,
+      "baseValue": 50
     },
     {
       "id": "hab-t1",
@@ -31836,29 +31989,38 @@
     {
       "id": "hab-t2",
       "name": "Hab T2",
-      "category": "processed",
-      "tier": 1,
-      "description": "Hab T2 - Tier 1 processed",
+      "category": "component",
+      "tier": 2,
+      "description": "Hab T2 - Tier 2 component",
       "stackSize": 100,
-      "baseValue": 10
+      "baseValue": 20
     },
     {
       "id": "hab-t3",
       "name": "Hab T3",
-      "category": "processed",
-      "tier": 1,
-      "description": "Hab T3 - Tier 1 processed",
+      "category": "component",
+      "tier": 3,
+      "description": "Hab T3 - Tier 3 component",
       "stackSize": 100,
-      "baseValue": 10
+      "baseValue": 30
     },
     {
       "id": "hab-t4",
       "name": "Hab T4",
-      "category": "processed",
-      "tier": 1,
-      "description": "Hab T4 - Tier 1 processed",
+      "category": "advanced",
+      "tier": 4,
+      "description": "Hab T4 - Tier 4 advanced",
       "stackSize": 100,
-      "baseValue": 10
+      "baseValue": 40
+    },
+    {
+      "id": "hab-t5",
+      "name": "Hab T5",
+      "category": "advanced",
+      "tier": 5,
+      "description": "Hab T5 - Tier 5 advanced",
+      "stackSize": 100,
+      "baseValue": 50
     },
     {
       "id": "hab-crafting-station-xxs",
@@ -31888,6 +32050,15 @@
       "baseValue": 10
     },
     {
+      "id": "hab-crafting-station-m",
+      "name": "Hab Crafting Station M",
+      "category": "processed",
+      "tier": 1,
+      "description": "Hab Crafting Station M - Tier 1 processed",
+      "stackSize": 100,
+      "baseValue": 10
+    },
+    {
       "id": "hab-landing-pad-xxs",
       "name": "Hab Landing Pad XXS",
       "category": "processed",
@@ -31911,6 +32082,51 @@
       "category": "processed",
       "tier": 1,
       "description": "Hab Landing Pad S - Tier 1 processed",
+      "stackSize": 100,
+      "baseValue": 10
+    },
+    {
+      "id": "hab-landing-pad-m",
+      "name": "Hab Landing Pad M",
+      "category": "processed",
+      "tier": 1,
+      "description": "Hab Landing Pad M - Tier 1 processed",
+      "stackSize": 100,
+      "baseValue": 10
+    },
+    {
+      "id": "hab-interior-paint",
+      "name": "Hab Interior Paint",
+      "category": "processed",
+      "tier": 1,
+      "description": "Hab Interior Paint - Tier 1 processed",
+      "stackSize": 100,
+      "baseValue": 10
+    },
+    {
+      "id": "hab-exterior-paint",
+      "name": "Hab Exterior Paint",
+      "category": "processed",
+      "tier": 1,
+      "description": "Hab Exterior Paint - Tier 1 processed",
+      "stackSize": 100,
+      "baseValue": 10
+    },
+    {
+      "id": "hab-pet-house",
+      "name": "Hab Pet House",
+      "category": "processed",
+      "tier": 1,
+      "description": "Hab Pet House - Tier 1 processed",
+      "stackSize": 100,
+      "baseValue": 10
+    },
+    {
+      "id": "cobalt",
+      "name": "Cobalt",
+      "category": "processed",
+      "tier": 1,
+      "description": "Cobalt - Tier 1 processed",
       "stackSize": 100,
       "baseValue": 10
     }
